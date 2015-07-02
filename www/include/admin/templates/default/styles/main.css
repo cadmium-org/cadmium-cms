@@ -1,0 +1,10 @@
+
+/* Admin Main CSS */
+
+@charset "UTF-8";
+
+.wrapper { margin:0 !important; padding-top:55px !important; }
+
+.breadcrumb .divider:last-child { display:none; }
+
+#captcha { background-color:#FFF !important; }
