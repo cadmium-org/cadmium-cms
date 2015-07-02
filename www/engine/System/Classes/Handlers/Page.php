@@ -40,34 +40,7 @@ namespace System\Handlers {
 			
 			return $path;
 		}
-		
-		# Get page
-		
-		private function getPage() {
-			
-			# Select page
-			
-			$selection = array('id', 'name', 'title', 'contents');
-			
-			$condition = array('id' => ($this->path ? end($this->path)['id'] : 1));
-			
-			if (!(DB::select(TABLE_PAGES, $selection, $condition, false, 1) && (DB::last()->rows === 1))) return false;
-			
-			$page = DB::last()->row();
-			
-			# Validate page
-			
-			$id = Number::unsigned($page['id']); $name = String::validate($page['name']);
-			
-			$title = String::validate($page['title']); $contents = String::validate($page['contents']);
-			
-			$page = array('id' => $id, 'name' => $name, 'title' => $title, 'contents' => $contents);
-			
-			# ------------------------
-			
-			return $page;
-		}
-		
+				
 		# Get contents
 		
 		private function getContents() {
@@ -82,7 +55,7 @@ namespace System\Handlers {
 			
 			# Set contents
 			
-			$contents->contents = new Template\Utils\Block($this->page['contents']);
+			$contents->contents = new Template\Utils\Block($this->page->contents());
 			
 			# ------------------------
 			
@@ -95,13 +68,29 @@ namespace System\Handlers {
 			
 			if (false === ($this->path = $this->getPath())) return false;
 			
-			if (false === ($this->page = $this->getPage())) return false;
+			# Create page
+			
+			$this->page = new Entity\Page();
+			
+			if (false === $this->page->init($this->path ? end($this->path)['id'] : 1)) return false;
+			
+			$description = $this->page->description(); $keywords = $this->page->keywords();
 			
 			# Fill template
 			
-			if ($this->page['id'] !== 1) $this->setTitle($this->page['title']);
+			if ($this->page->id() !== 1) $this->setTitle($this->page->title());
 			
 			$this->setContents($this->getContents());
+			
+			# Set SEO data
+			
+			Template::description	((false !== $description) ? $description : CONFIG_SITE_DESCRIPTION);
+			
+			Template::keywords		((false !== $keywords) ? $keywords : CONFIG_SITE_KEYWORDS);
+			
+			Template::robots		($this->page->robotsIndex(), $this->page->robotsFollow());
+			
+			Template::canonical		(CONFIG_SYSTEM_URL, $this->page->canonical());
 			
 			# ------------------------
 			

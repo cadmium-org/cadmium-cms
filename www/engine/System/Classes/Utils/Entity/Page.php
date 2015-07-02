@@ -371,7 +371,7 @@ namespace System\Utils\Entity {
 			
 			if (false === $this->page) return false;
 			
-			return $this->page['robots_index'];
+			return ($this->page['robots_index'] ? ROBOTS_INDEX : ROBOTS_NOINDEX);
 		}
 		
 		# Check if robots allowed to follow
@@ -380,7 +380,7 @@ namespace System\Utils\Entity {
 			
 			if (false === $this->page) return false;
 			
-			return $this->page['robots_follow'];
+			return ($this->page['robots_follow'] ? ROBOTS_FOLLOW : ROBOTS_NOFOLLOW);
 		}
 		
 		# Return time created

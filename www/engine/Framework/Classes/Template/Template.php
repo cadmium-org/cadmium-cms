@@ -189,9 +189,9 @@ namespace {
 			
 			$host = String::validate($host); $link = String::validate($link);
 			
-			$url = new Url($link); if (!$url->parsed()) return false;
+			$url = new Url($link);
 			
-			self::$link = ('http://' . $host . '/' . $url->get());
+			self::$link = ($host . $url->get());
 			
 			# ------------------------
 			
