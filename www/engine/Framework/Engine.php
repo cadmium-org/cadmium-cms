@@ -41,7 +41,9 @@ namespace {
 
 			define('ENGINE_CLIENT_IP', $this->getIP());
 
-			define('ENGINE_TIME', time()); define('ENGINE_MICRO_TIME', microtime(true));
+			define('ENGINE_TIME', $_SERVER['REQUEST_TIME']);
+
+			define('ENGINE_MICRO_TIME', $_SERVER['REQUEST_TIME_FLOAT']);
 
 			# ------------------------
 
