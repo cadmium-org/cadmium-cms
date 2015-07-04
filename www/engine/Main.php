@@ -38,26 +38,26 @@ require_once (DIR_FRAMEWORK . 'Error.php');
 # Define classes autoloader
 
 function __autoload($class_name) {
-	
+
 	$path = explode("\\", $class_name);
-	
+
 	if (0 === strcmp($path[0], 'System')) { $dir_name = DIR_SYSTEM_CLASSES; $path = array_slice($path, 1); }
-	
+
 	else if (0 === strcmp($path[0], 'Plugins')) { $dir_name = DIR_SYSTEM_PLUGINS; $path = array_slice($path, 1); }
-	
+
 	else { $dir_name = DIR_CLASSES; if (count($path) === 1) $path[] = $path[0]; }
-	
+
 	for ($i = 0; $i < ($count = count($path)); $i++) {
-		
+
 		if (($i < ($count - 1)) && @file_exists($dir_name .= $path[$i]) && @is_dir($dir_name)) { $dir_name .= '/'; continue; }
-		
+
 		if (@file_exists($file_name = ($dir_name . $path[$i] . '.php')) && @is_file($file_name)) require_once $file_name;
-		
+
 		break;
 	}
-	
+
 	if (!class_exists($class_name) && !interface_exists($class_name)) throw new Error\ClassLoad($class_name);
-	
+
 	if (method_exists($class_name, '__autoload')) $class_name::__autoload();
 }
 

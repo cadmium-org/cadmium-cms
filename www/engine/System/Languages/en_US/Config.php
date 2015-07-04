@@ -1,7 +1,7 @@
 <?php
 
 return array (
-	
+
 	'code'		=> 'en_US',
 	'iso'		=> 'en',
 	'country'	=> 'us',

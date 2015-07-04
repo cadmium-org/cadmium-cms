@@ -1,7 +1,7 @@
 <?php
 
 return array (
-	
+
 	'code'		=> 'ru_RU',
 	'iso'		=> 'ru',
 	'country'	=> 'ru',

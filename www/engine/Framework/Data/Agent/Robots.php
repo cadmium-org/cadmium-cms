@@ -3,7 +3,7 @@
 # Robots list
 
 return array (
-	
+
 	'1c+enterprise',
 	'aihitbot',
 	'airmail',

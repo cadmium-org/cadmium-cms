@@ -3,7 +3,7 @@
 # Counties list
 
 return array (
-	
+
 	'ad' => 'Andorra',
 	'ae' => 'United Arab Emirates',
 	'af' => 'Afghanistan',

@@ -3,7 +3,7 @@
 # Mobiles list
 
 return array (
-	
+
 	'android',
 	'avantgo',
 	'blackberry',

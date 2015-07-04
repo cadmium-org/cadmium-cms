@@ -3,7 +3,7 @@
 # Timezones list
 
 return array (
-	
+
 	'UTC' => '(UTC+00:00) UTC',
 	'Pacific/Midway' => '(UTC-11:00) Pacific/Midway',
 	'Pacific/Niue' => '(UTC-11:00) Pacific/Niue',

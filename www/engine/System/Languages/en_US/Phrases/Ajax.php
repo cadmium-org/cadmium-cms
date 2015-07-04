@@ -1,7 +1,7 @@
 <?php
 
 return array (
-	
+
 	'AJAX_RESPONSE_ERROR_400'				=> 'Invalid request format',
 	'AJAX_RESPONSE_ERROR_404'				=> 'Handler not found',
 	'AJAX_RESPONSE_ERROR_500'				=> 'Internal server error',

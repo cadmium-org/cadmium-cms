@@ -1,7 +1,7 @@
 <map>
-	
+
 	<!-- Admin section -->
-	
+
 	<item>
 		<path>/admin/login</path>
 		<handler>/Admin/Auth/Login</handler>
@@ -18,7 +18,7 @@
 		<path>/admin/register</path>
 		<handler>/Admin/Auth/Register</handler>
 	</item>
-	
+
 	<item>
 		<path>/admin/content/pages</path>
 		<handler>/Admin/Content/Pages</handler>
@@ -31,7 +31,7 @@
 		<path>/admin/content/filemanager</path>
 		<handler>/Admin/Content/Filemanager</handler>
 	</item>
-	
+
 	<item>
 		<path>/admin/extend/languages</path>
 		<handler>/Admin/Extend/Languages</handler>
@@ -40,7 +40,7 @@
 		<path>/admin/extend/templates</path>
 		<handler>/Admin/Extend/Templates</handler>
 	</item>
-	
+
 	<item>
 		<path>/admin/system/settings</path>
 		<handler>/Admin/System/Settings</handler>
@@ -53,7 +53,7 @@
 		<path>/admin/system/info</path>
 		<handler>/Admin/System/Info</handler>
 	</item>
-	
+
 	<item>
 		<path>/admin/logout</path>
 		<handler>/Admin/Logout</handler>
@@ -62,9 +62,9 @@
 		<path>/admin</path>
 		<handler>/Admin/Overview</handler>
 	</item>
-	
+
 	<!-- Profile section -->
-	
+
 	<item>
 		<path>/profile/login</path>
 		<handler>/Profile/Auth/Login</handler>
@@ -81,7 +81,7 @@
 		<path>/profile/register</path>
 		<handler>/Profile/Auth/Register</handler>
 	</item>
-	
+
 	<item>
 		<path>/profile/edit</path>
 		<handler>/Profile/Edit</handler>
@@ -94,9 +94,9 @@
 		<path>/profile</path>
 		<handler>/Profile/Overview</handler>
 	</item>
-	
+
 	<!-- Tools -->
-	
+
 	<item>
 		<path>/captcha.png</path>
 		<handler>/Tools/Captcha</handler>
@@ -105,5 +105,5 @@
 		<path>/sitemap.xml</path>
 		<handler>/Tools/Sitemap</handler>
 	</item>
-	
+
 </map>

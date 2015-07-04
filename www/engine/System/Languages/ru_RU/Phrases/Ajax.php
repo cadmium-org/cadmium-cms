@@ -1,7 +1,7 @@
 <?php
 
 return array (
-	
+
 	'AJAX_RESPONSE_ERROR_400'				=> 'Неверный формат запроса',
 	'AJAX_RESPONSE_ERROR_404'				=> 'Обработчик не найден',
 	'AJAX_RESPONSE_ERROR_500'				=> 'Внутренняя ошибка сервера',
