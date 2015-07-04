@@ -1,5 +1,5 @@
  /*
- * # Semantic UI - 2.0.0
+ * # Semantic UI - x.x
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -9,7 +9,7 @@
  *
  */
 /*!
- * # Semantic UI 2.0.0 - Site
+ * # Semantic UI x.x - Site
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -496,7 +496,7 @@ $.extend($.expr[ ":" ], {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.0 - Form Validation
+ * # Semantic UI x.x - Form Validation
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -1753,7 +1753,7 @@ $.fn.form.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Accordion
+ * # Semantic UI x.x - Accordion
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -2346,7 +2346,7 @@ $.extend( $.easing, {
 
 
 /*!
- * # Semantic UI 2.0.0 - Checkbox
+ * # Semantic UI x.x - Checkbox
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -3053,7 +3053,7 @@ $.fn.checkbox.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Dimmer
+ * # Semantic UI x.x - Dimmer
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -3136,28 +3136,8 @@ $.fn.dimmer = function(parameters) {
 
         initialize: function() {
           module.debug('Initializing dimmer', settings);
-          if(settings.on == 'hover') {
-            $dimmable
-              .on('mouseenter' + eventNamespace, module.show)
-              .on('mouseleave' + eventNamespace, module.hide)
-            ;
-          }
-          else if(settings.on == 'click') {
-            $dimmable
-              .on(clickEvent + eventNamespace, module.toggle)
-            ;
-          }
-          if( module.is.page() ) {
-            module.debug('Setting as a page dimmer', $dimmable);
-            module.set.pageDimmer();
-          }
 
-          if( module.is.closable() ) {
-            module.verbose('Adding dimmer close event', $dimmer);
-            $dimmable
-              .on(clickEvent + eventNamespace, selector.dimmer, module.event.click)
-            ;
-          }
+          module.bind.events();
           module.set.dimmable();
           module.instantiate();
         },
@@ -3172,12 +3152,46 @@ $.fn.dimmer = function(parameters) {
 
         destroy: function() {
           module.verbose('Destroying previous module', $dimmer);
-          $module
-            .removeData(moduleNamespace)
-          ;
+          module.unbind.events();
+          module.remove.variation();
           $dimmable
             .off(eventNamespace)
           ;
+        },
+
+        bind: {
+          events: function() {
+            if(settings.on == 'hover') {
+              $dimmable
+                .on('mouseenter' + eventNamespace, module.show)
+                .on('mouseleave' + eventNamespace, module.hide)
+              ;
+            }
+            else if(settings.on == 'click') {
+              $dimmable
+                .on(clickEvent + eventNamespace, module.toggle)
+              ;
+            }
+            if( module.is.page() ) {
+              module.debug('Setting as a page dimmer', $dimmable);
+              module.set.pageDimmer();
+            }
+
+            if( module.is.closable() ) {
+              module.verbose('Adding dimmer close event', $dimmer);
+              $dimmable
+                .on(clickEvent + eventNamespace, selector.dimmer, module.event.click)
+              ;
+            }
+          }
+        },
+
+        unbind: {
+          events: function() {
+            $module
+              .removeData(moduleNamespace)
+            ;
+          }
         },
 
         event: {
@@ -3421,11 +3435,11 @@ $.fn.dimmer = function(parameters) {
         set: {
           opacity: function(opacity) {
             var
-              opacity    = settings.opacity || opacity,
               color      = $dimmer.css('background-color'),
               colorArray = color.split(','),
               isRGBA     = (colorArray && colorArray.length == 4)
             ;
+            opacity    = settings.opacity || opacity;
             if(isRGBA) {
               colorArray[3] = opacity + ')';
               color         = colorArray.join(',');
@@ -3450,6 +3464,12 @@ $.fn.dimmer = function(parameters) {
           },
           disabled: function() {
             $dimmer.addClass(className.disabled);
+          },
+          variation: function(variation) {
+            variation = variation || settings.variation;
+            if(variation) {
+              $dimmer.addClass(variation);
+            }
           }
         },
 
@@ -3464,6 +3484,12 @@ $.fn.dimmer = function(parameters) {
           },
           disabled: function() {
             $dimmer.removeClass(className.disabled);
+          },
+          variation: function(variation) {
+            variation = variation || settings.variation;
+            if(variation) {
+              $dimmer.removeClass(variation);
+            }
           }
         },
 
@@ -3720,7 +3746,7 @@ $.fn.dimmer.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.0 - Dropdown
+ * # Semantic UI x.x - Dropdown
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -3988,7 +4014,6 @@ $.fn.dropdown = function(parameters) {
             if( $module.is('select') ) {
               module.setup.select();
               module.setup.returnedObject();
-              console.log($module);
             }
             if( module.is.search() && !module.has.search() ) {
               module.verbose('Adding search input');
@@ -4036,7 +4061,6 @@ $.fn.dropdown = function(parameters) {
                 .detach()
                 .prependTo($module)
               ;
-              console.log($module);
             }
             if($input.is('[multiple]')) {
               module.set.multiple();
@@ -5398,6 +5422,7 @@ $.fn.dropdown = function(parameters) {
 
         restore: {
           defaults: function() {
+            module.clear();
             module.restore.defaultText();
             module.restore.defaultValue();
           },
@@ -6944,7 +6969,7 @@ $.fn.dropdown.settings.templates = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Video
+ * # Semantic UI x.x - Video
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -7607,7 +7632,7 @@ $.fn.embed.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Modal
+ * # Semantic UI x.x - Modal
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -8495,7 +8520,7 @@ $.fn.modal.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Nag
+ * # Semantic UI x.x - Nag
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -8972,7 +8997,7 @@ $.fn.nag.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Popup
+ * # Semantic UI x.x - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -10326,7 +10351,7 @@ $.fn.popup.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Progress
+ * # Semantic UI x.x - Progress
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -11119,7 +11144,7 @@ $.fn.progress.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.0 - Rating
+ * # Semantic UI x.x - Rating
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -11595,7 +11620,7 @@ $.fn.rating.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Search
+ * # Semantic UI x.x - Search
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -12874,7 +12899,7 @@ $.fn.search.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Shape
+ * # Semantic UI x.x - Shape
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -13750,7 +13775,7 @@ $.fn.shape.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.0 - Sidebar
+ * # Semantic UI x.x - Sidebar
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -14774,7 +14799,7 @@ $.fn.sidebar.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Sticky
+ * # Semantic UI x.x - Sticky
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -15656,7 +15681,7 @@ $.fn.sticky.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.0 - Tab
+ * # Semantic UI x.x - Tab
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -16553,7 +16578,7 @@ $.fn.tab.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.0 - Transition
+ * # Semantic UI x.x - Transition
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -17623,7 +17648,7 @@ $.fn.transition.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - API
+ * # Semantic UI x.x - API
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -18701,7 +18726,7 @@ $.api.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - State
+ * # Semantic UI x.x - State
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -19397,7 +19422,7 @@ $.fn.state.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.0 - Visibility
+ * # Semantic UI x.x - Visibility
  * http://github.com/semantic-org/semantic-ui/
  *
  *

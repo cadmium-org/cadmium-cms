@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.0.0 - Label
+ * # Semantic UI x.x - Label
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -1086,19 +1086,19 @@ a.ui.black.label:hover:before {
 }
 .ui.large.labels .label,
 .ui.large.label {
-  font-size: 0.85714286rem;
+  font-size: 1rem;
 }
 .ui.big.labels .label,
 .ui.big.label {
-  font-size: 0.85714286rem;
+  font-size: 1.28571429rem;
 }
 .ui.huge.labels .label,
 .ui.huge.label {
-  font-size: 0.85714286rem;
+  font-size: 1.42857143rem;
 }
 .ui.massive.labels .label,
 .ui.massive.label {
-  font-size: 0.85714286rem;
+  font-size: 1.71428571rem;
 }
 
 
