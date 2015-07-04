@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Jul 01, 2015 at 02:27 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -94,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
 --
 
 INSERT INTO `pages` (`id`, `parent_id`, `access`, `name`, `title`, `contents`, `description`, `keywords`, `robots_index`, `robots_follow`, `user_id`, `time_created`, `time_modified`) VALUES
-(1, 0, 0, 'main', 'Главная', '<p>Welcome! This is demo site, powered by <strong>Cadmium CMS</strong>.</p>\n\n<p>Admin panel is <a href="/admin">here</a>.</p>\n\n<p><a href="http://cadmium-cms.com" target="_blank">Cadmium CMS official website</a></p>\n\n<p><a href="http://cadmium-cms.com/documentation" target="_blank">Official documentation</a></p>', '', '', 1, 1, 1, 4294967295, 1435679918),
+(1, 0, 0, 'index', 'Главная', '<p>Welcome! This is demo site, powered by <strong>Cadmium CMS</strong>.</p>\n\n<p>Admin panel is <a href="/admin">here</a>.</p>\n\n<p><a href="http://cadmium-cms.com" target="_blank">Cadmium CMS official website</a></p>\n\n<p><a href="http://cadmium-cms.com/documentation" target="_blank">Official documentation</a></p>', '', '', 1, 1, 1, 4294967295, 1435679918),
 (2, 0, 0, 'page-1', 'Page 1', '<p>This is demo page.</p>', '', '', 1, 1, 1, 4294967295, 1435586070),
 (3, 0, 0, 'page-2', 'Page 2', '<p>This is demo page.</p>', '', '', 1, 1, 1, 4294967295, 4294967295),
 (4, 0, 0, 'page-3', 'Page 3', '<p>This is demo page.</p>', '', '', 1, 1, 1, 4294967295, 4294967295);
