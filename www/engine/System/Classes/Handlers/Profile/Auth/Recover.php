@@ -42,9 +42,9 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->password		('password_new', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
-			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
 			# Post form
 

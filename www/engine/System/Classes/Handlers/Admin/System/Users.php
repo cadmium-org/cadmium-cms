@@ -85,9 +85,9 @@ namespace System\Handlers\Admin\System {
 
 			$fieldset->select		('timezone', $this->user->timezone(), Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
 
-			$fieldset->password		('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
-			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
 			# Post form
 

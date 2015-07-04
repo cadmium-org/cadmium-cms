@@ -36,15 +36,15 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'));
+			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'));
 
-			$fieldset->password		('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD'));
+			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD'));
 
-			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'));
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'));
 
-			$fieldset->text			('email', '', CONFIG_USER_EMAIL_MAX_LENGTH, Language::get('USER_FIELD_EMAIL'));
+			$fieldset->text			('email', false, CONFIG_USER_EMAIL_MAX_LENGTH, Language::get('USER_FIELD_EMAIL'));
 
-			$fieldset->captcha		('captcha', '', CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'));
+			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'));
 
 			# Post form
 

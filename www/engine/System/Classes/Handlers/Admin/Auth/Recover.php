@@ -42,9 +42,9 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->password		('password_new', '', CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_NEW'));
+			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_NEW'));
 
-			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'));
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'));
 
 			# Post form
 

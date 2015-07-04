@@ -50,7 +50,7 @@ namespace Form\Field {
 
 			if ($this->error) $attributes['data-error'] = 'error';
 
-			$attributes['value'] = '';
+			$attributes['value'] = false;
 
 			$tag = new Tag('input', $attributes); $block = $tag->block();
 

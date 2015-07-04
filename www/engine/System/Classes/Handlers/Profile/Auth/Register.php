@@ -36,15 +36,15 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH);
+			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH);
 
-			$fieldset->password		('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
-			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
-			$fieldset->text			('email', '', CONFIG_USER_EMAIL_MAX_LENGTH);
+			$fieldset->text			('email', false, CONFIG_USER_EMAIL_MAX_LENGTH);
 
-			$fieldset->captcha		('captcha', '', CONFIG_CAPTCHA_LENGTH);
+			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH);
 
 			# Post form
 

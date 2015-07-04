@@ -21,7 +21,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Select pages
 
-			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_PAGES_DISPLAY) . ", " . CONFIG_ADMIN_PAGES_DISPLAY) : '');
+			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_PAGES_DISPLAY) . ", " . CONFIG_ADMIN_PAGES_DISPLAY) : false);
 
 			$query = ("SELECT SQL_CALC_FOUND_ROWS pag.id, pag.access, pag.name, pag.title, COUNT(chd.id) as children ") .
 

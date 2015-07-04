@@ -2,9 +2,9 @@
 
 return array (
 
-	'name' => 'Default',
-	'title' => 'Default',
-	'author' => 'Anton Romanov'
+	'name'		=> 'Default',
+	'title'		=> 'Default',
+	'author'	=> 'Anton Romanov'
 );
 
 ?>

@@ -36,9 +36,9 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH);
+			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH);
 
-			$fieldset->password		('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
 			# Post form
 

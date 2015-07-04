@@ -21,7 +21,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Select menuitems
 
-			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_MENUITEMS_DISPLAY) . ", " . CONFIG_ADMIN_MENUITEMS_DISPLAY) : '');
+			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_MENUITEMS_DISPLAY) . ", " . CONFIG_ADMIN_MENUITEMS_DISPLAY) : false);
 
 			$query = ("SELECT SQL_CALC_FOUND_ROWS men.id, men.position, men.link, men.text, COUNT(chd.id) as children ") .
 

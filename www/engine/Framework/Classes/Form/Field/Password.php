@@ -54,7 +54,7 @@ namespace Form\Field {
 
 			if ($this->disabled) $attributes['disabled'] = 'disabled';
 
-			$attributes['value'] = '';
+			$attributes['value'] = false;
 
 			$tag = new Tag('input', $attributes); $block = $tag->block();
 

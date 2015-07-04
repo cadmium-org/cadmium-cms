@@ -46,11 +46,11 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->password		('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
-			$fieldset->password		('password_new', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
-			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
 
 			# ------------------------
 

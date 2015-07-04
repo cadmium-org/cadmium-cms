@@ -14,10 +14,6 @@
 		<path>/admin/recover</path>
 		<handler>/Admin/Auth/Recover</handler>
 	</item>
-	<item>
-		<path>/admin/register</path>
-		<handler>/Admin/Auth/Register</handler>
-	</item>
 
 	<item>
 		<path>/admin/content/pages</path>

@@ -36,9 +36,9 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'));
+			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'));
 
-			$fieldset->password		('captcha', '', CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'));
+			$fieldset->password		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'));
 
 			# Post form
 

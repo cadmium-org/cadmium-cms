@@ -12,7 +12,7 @@ namespace System {
 
 			# Check installation
 
-			if (!Explorer::isFile(DIR_SYSTEM_INCLUDES . 'Install.php')) Request::redirect('/install.php');
+			if (Explorer::isFile(DIR_SYSTEM_INCLUDES . 'Install.php')) Request::redirect('/');
 		}
 	}
 }
