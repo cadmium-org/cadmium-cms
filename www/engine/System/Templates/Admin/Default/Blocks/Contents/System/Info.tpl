@@ -18,6 +18,14 @@
 
 		</tr>
 
+		<tr>
+
+			<td class="four wide">%INFO_MYSQL_VERSION%</td>
+
+			<td>$mysql_version$</td>
+
+		</tr>
+
 	</tbody>
 
 </table>

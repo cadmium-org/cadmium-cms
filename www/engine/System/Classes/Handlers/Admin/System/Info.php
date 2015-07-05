@@ -9,6 +9,15 @@ namespace System\Handlers\Admin\System {
 
 	class Info extends System\Frames\Admin\Handler {
 
+		# Get MySQL version
+
+		private function getMySQLVersion() {
+
+			if (!(DB::send("SELECT VERSION() as version") && DB::last()->status)) return false;
+
+			return String::validate(DB::last()->row()['version']);
+		}
+
 		# Get contents
 
 		private function getContents() {
@@ -18,6 +27,8 @@ namespace System\Handlers\Admin\System {
 			$contents->system_version = CADMIUM_VERSION;
 
 			$contents->php_version = phpversion();
+
+			$contents->mysql_version = $this->getMySQLVersion();
 
 			# ------------------------
 
