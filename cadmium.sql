@@ -1,22 +1,11 @@
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `cadmium_dist`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `config`
---
 
 CREATE TABLE IF NOT EXISTS `config` (
   `name` varchar(32) NOT NULL,
@@ -24,11 +13,8 @@ CREATE TABLE IF NOT EXISTS `config` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `menu`
---
+INSERT INTO `config` (`name`, `value`) VALUES
+('site_title', 'Cadmium CMS');
 
 CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -42,20 +28,10 @@ CREATE TABLE IF NOT EXISTS `menu` (
   KEY `position` (`position`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
---
--- Dumping data for table `menu`
---
-
 INSERT INTO `menu` (`id`, `parent_id`, `position`, `link`, `text`, `target`) VALUES
 (1, 0, 0, '/page-1', 'Page 1', 0),
 (2, 0, 1, '/page-2', 'Page 2', 0),
-(3, 0, 2, '/page-3', 'page 3', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pages`
---
+(3, 0, 2, '/page-3', 'Page 3', 0);
 
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -81,21 +57,11 @@ CREATE TABLE IF NOT EXISTS `pages` (
   KEY `time_modified` (`time_modified`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
---
--- Dumping data for table `pages`
---
-
 INSERT INTO `pages` (`id`, `parent_id`, `access`, `name`, `title`, `contents`, `description`, `keywords`, `robots_index`, `robots_follow`, `user_id`, `time_created`, `time_modified`) VALUES
-(1, 0, 0, 'index', 'Главная', '<p>Welcome! This is demo site, powered by <strong>Cadmium CMS</strong>.</p>\n\n<p>Admin panel is <a href="/admin">here</a>.</p>\n\n<p><a href="http://cadmium-cms.com" target="_blank">Cadmium CMS official website</a></p>\n\n<p><a href="http://cadmium-cms.com/documentation" target="_blank">Official documentation</a></p>', '', '', 1, 1, 1, 4294967295, 1435679918),
+(1, 0, 0, 'index', 'Home', '<p>Welcome! This is demo site, powered by <strong>Cadmium CMS</strong>.</p>\n\n<p>Admin panel is <a href="/admin">here</a>.</p>\n\n<p><a href="http://cadmium-cms.com" target="_blank">Cadmium CMS official website</a></p>\n\n<p><a href="http://cadmium-cms.com/documentation" target="_blank">Official documentation</a></p>', '', '', 1, 1, 1, 4294967295, 1435679918),
 (2, 0, 0, 'page-1', 'Page 1', '<p>This is demo page.</p>', '', '', 1, 1, 1, 4294967295, 1435586070),
 (3, 0, 0, 'page-2', 'Page 2', '<p>This is demo page.</p>', '', '', 1, 1, 1, 4294967295, 4294967295),
 (4, 0, 0, 'page-3', 'Page 3', '<p>This is demo page.</p>', '', '', 1, 1, 1, 4294967295, 4294967295);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -119,18 +85,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `time_logged` (`time_logged`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `users`
---
-
 INSERT INTO `users` (`id`, `rank`, `name`, `email`, `auth_key`, `password`, `first_name`, `last_name`, `sex`, `city`, `country`, `timezone`, `time_registered`, `time_logged`) VALUES
 (1, 2, 'admin', 'admin@site.com', 's7Okny74UtQvHrXD5FS8cbOpmrNAMk4q2HA9B1QY', 'b7bb1b6a7245dcf54d44e1c6bba69fb6aef2454f', '', '', 0, '', '', '', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users_secrets`
---
 
 CREATE TABLE IF NOT EXISTS `users_secrets` (
   `id` int(10) unsigned NOT NULL,
@@ -142,12 +98,6 @@ CREATE TABLE IF NOT EXISTS `users_secrets` (
   KEY `ip` (`ip`),
   KEY `time` (`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users_sessions`
---
 
 CREATE TABLE IF NOT EXISTS `users_sessions` (
   `id` int(10) unsigned NOT NULL,
