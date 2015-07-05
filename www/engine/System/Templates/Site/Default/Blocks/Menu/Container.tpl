@@ -1,4 +1,4 @@
-<div class="ui dropdown item" style="display:none">
+<div class="ui dropdown item">
 
 	$text$
 

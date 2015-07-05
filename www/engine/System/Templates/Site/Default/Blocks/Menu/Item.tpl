@@ -1,1 +1,1 @@
-<a class="item" href="$link$" style="display:none">$text$</a>
+<a class="item" href="$link$">$text$</a>

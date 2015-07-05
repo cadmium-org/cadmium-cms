@@ -40,15 +40,17 @@ var Main = {
 
 		var width = $(window).width(), sidebar = $('.sidebar');
 
-		var brand = $('#menu-brand'), launcher = $('#menu-launcher');
+		var menu = $('.ui.main.menu');
 
-		var items = $('.ui.main.menu').find('.item').not('#menu-brand, #menu-launcher');
+		var brand = menu.find('#menu-brand'), launcher = menu.find('#menu-launcher');
+
+		var items = menu.find('#menu-items');
 
 		if (sidebar.children().length == 0) {
 
-			sidebar.append(items.clone().show());
+			sidebar.append(items.children().clone());
 
-			sidebar.find('.dropdown').removeClass('dropdown');
+			sidebar.find('.ui.dropdown').removeClass('ui dropdown');
 		}
 
 		if (width < 768) { items.hide(); launcher.show(); }

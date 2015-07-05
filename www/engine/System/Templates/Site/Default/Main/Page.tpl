@@ -51,7 +51,11 @@
 
 				<a class="item" id="menu-launcher" style="display:none;"><i class="bars icon"></i></a>
 
-				{ block:menu / }
+				<div class="menu" id="menu-items" style="display:none; padding:0;">
+
+					{ block:menu / }
+
+				</div>
 
 				{ ! block:user }
 

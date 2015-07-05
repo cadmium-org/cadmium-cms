@@ -1,4 +1,4 @@
-<div class="ui dropdown item" style="display:none;">
+<div class="ui dropdown item">
 
 	<i class="file icon"></i>%GROUP_CONTENT%
 
@@ -14,7 +14,7 @@
 
 </div>
 
-<div class="ui dropdown item" style="display:none;">
+<div class="ui dropdown item">
 
 	<i class="cube icon"></i>%GROUP_EXTEND%
 
@@ -28,7 +28,7 @@
 
 </div>
 
-<div class="ui dropdown item" style="display:none;">
+<div class="ui dropdown item">
 
 	<i class="setting icon"></i>%GROUP_SYSTEM%
 
