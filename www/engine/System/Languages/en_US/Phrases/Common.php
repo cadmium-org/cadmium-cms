@@ -58,7 +58,7 @@ return array (
 	'STATUS_LINK_MAIN'						=> 'Main page',
 	'STATUS_LINK_RELOAD'					=> 'Reload page',
 
-	'FEATURE_NOT_AVAILABLE'					=> 'Feature is currenctly in development'
+	'FEATURE_NOT_AVAILABLE'					=> 'Feature is currently in development'
 );
 
 ?>
