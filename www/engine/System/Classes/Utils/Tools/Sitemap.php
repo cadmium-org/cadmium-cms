@@ -2,23 +2,24 @@
 
 namespace System\Utils\Tools {
 
-	use System\Utils\Lister, DOMDocument, Date, Headers, Number, Validate;
+	use System\Utils\Lister, Date, Headers, Number, Validate;
 
 	class Sitemap {
 
-		private $sitemap = false, $urlset = false;
+		private $sitemap = false;
 
 		# Constructor
 
 		public function __construct() {
 
-			$this->sitemap = new DOMDocument('1.0', CONFIG_FRAMEWORK_DEFAULT_CHARSET);
+			$version = '1.0'; $encoding = CONFIG_FRAMEWORK_DEFAULT_CHARSET;
 
-			$this->sitemap->formatOutput = true;
+			$this->sitemap = simplexml_load_string (
 
-			$this->sitemap->appendChild($this->urlset = $this->sitemap->createElement('urlset'));
+				'<?xml version="' . $version .'" encoding="' . $encoding . '" ?>' .
 
-			$this->urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />'
+			);
 		}
 
 		# Add item
@@ -31,15 +32,15 @@ namespace System\Utils\Tools {
 
 			if (false !== $priority) $priority = Number::priority($priority);
 
-			$this->urlset->appendChild($url = $this->sitemap->createElement('url'));
+			# Append data
 
-			$url->appendChild($this->sitemap->createElement('loc', $loc));
+			$url = $this->sitemap->addChild('url'); $url->addChild('loc', $loc);
 
-			if (false !== $lastmod) $url->appendChild($this->sitemap->createElement('lastmod', $lastmod));
+			if (false !== $lastmod) $url->addChild('lastmod', $lastmod);
 
-			if (false !== $changefreq) $url->appendChild($this->sitemap->createElement('changefreq', $changefreq));
+			if (false !== $changefreq) $url->addChild('changefreq', $changefreq);
 
-			if (false !== $priority) $url->appendChild($this->sitemap->createElement('priority', $priority));
+			if (false !== $priority) $url->addChild('priority', $priority);
 
 			# ------------------------
 
@@ -52,7 +53,7 @@ namespace System\Utils\Tools {
 
 			Headers::nocache(); Headers::content(MIME_TYPE_XML);
 
-			echo $this->sitemap->saveXML();
+			echo $this->sitemap->asXML();
 
 			# ------------------------
 
