@@ -8,11 +8,11 @@ namespace {
 
 		# Constructor
 
-		public function __construct($name) {
+		public function __construct($name = null) {
 
 			$name = String::validate($name);
 
-			if (preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
+			if ((false !== $name) && preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
 
 			$this->fieldset = new Form\Utils\Fieldset($this);
 		}
@@ -21,7 +21,7 @@ namespace {
 
 		public function add($field) {
 
-			if ((false === $this->name) || $this->posted) return false;
+			if ($this->posted) return false;
 
 			if (!($field instanceof Form\Utils\Field)) return false;
 
@@ -38,13 +38,15 @@ namespace {
 
 		public function post() {
 
-			if ((false === $this->name) || $this->posted) return false;
+			if ($this->posted) return false;
 
 			foreach ($this->fields as $name => $field) {
 
 				if ($field->disabled()) continue;
 
-				if (null === ($value = Request::post($this->name . '_' . $name))) return false;
+				$name = ((false !== $this->name) ? ($this->name . '_' . $name) : $name);
+
+				if (null === ($value = Request::post($name))) return false;
 			}
 
 			foreach ($this->fields as $field) $field->post();
