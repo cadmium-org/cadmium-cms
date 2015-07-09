@@ -140,6 +140,19 @@ namespace {
 			return include $file_name;
 		}
 
+		# Get JSON file data
+
+		public static function json($file_name) {
+
+			$file_name = String::validate($file_name); $extension = self::extension($file_name);
+
+			if ((null === $extension) || (false === $extension) || mb_strtolower($extension) !== 'json') return false;
+
+			# ------------------------
+
+			return json_decode(@file_get_contents($file_name), true);
+		}
+
 		# Get XML file data
 
 		public static function xml($file_name) {
