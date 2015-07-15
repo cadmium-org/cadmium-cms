@@ -11,6 +11,24 @@ namespace {
 			return (is_array($array) ? $array : array());
 		}
 
+		# Get array value by path
+
+		public static function get($array, $path) {
+
+			if (array() === ($array = self::force($array))) return null;
+
+			if (array() === ($path = self::force($path))) return null;
+
+			foreach ($path as $item) {
+
+				if (!isset($array[$item])) return null;
+
+				$value = ($array = $array[$item]);
+			}
+
+			return $value;
+		}
+
 		# Transform associative array to indexed
 
 		public static function index($array, $key_name, $value_name) {

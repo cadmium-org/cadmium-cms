@@ -236,7 +236,7 @@ namespace Template\Utils {
 
 			# ------------------------
 
-			return ($format ? preg_replace('/[\n\r\t]+/', ' ', $contents) : $contents);
+			return ($format ? preg_replace('/[\n\r\t\s]+/', ' ', $contents) : $contents);
 		}
 
 		# Disable block

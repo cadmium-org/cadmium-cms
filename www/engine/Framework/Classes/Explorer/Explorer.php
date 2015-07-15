@@ -165,6 +165,21 @@ namespace {
 
 			return @simplexml_load_file($file_name);
 		}
+
+		# Save data to file
+
+		public static function save($file_name, $contents, $force = false) {
+
+			$file_name = String::validate($file_name); $contents = String::validate($contents);
+
+			$force = Validate::boolean($force);
+
+			if (self::isFile($file_name)) if (!$force) return false; else if (!@unlink($file_name)) return false;
+
+			# ------------------------
+
+			return file_put_contents($file_name, $contents);
+		}
 	}
 }
 

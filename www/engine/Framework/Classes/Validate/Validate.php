@@ -37,7 +37,7 @@ namespace {
 
 			$value = filter_var($value, FILTER_VALIDATE_URL);
 
-			return preg_replace('/\/*$/', '', $value);
+			return ((false !== $value) ? preg_replace('/\/*$/', '', $value) : false);
 		}
 
 		# Validate boolean

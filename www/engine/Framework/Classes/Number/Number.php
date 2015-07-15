@@ -33,18 +33,22 @@ namespace {
 
 		# Format number as positive
 
-		public static function positive($number) {
+		public static function positive($number, $max = null) {
 
 			$number = self::validate($number);
+
+			if ((null !== $max) && ($number > ($max = self::positive($max)))) return $max;
 
 			return (($number >= 1) ? $number : 1);
 		}
 
 		# Format number as unsigned
 
-		public static function unsigned($number) {
+		public static function unsigned($number, $max = null) {
 
 			$number = self::validate($number);
+
+			if ((null !== $max) && ($number > ($max = self::unsigned($max)))) return $max;
 
 			return (($number >= 0) ? $number : 0);
 		}
