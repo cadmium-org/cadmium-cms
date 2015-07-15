@@ -13,13 +13,15 @@ var Main = {
 
 		items.filter('textarea').css({ 'height' : '6em', 'min-height' : '6em' });
 
-		items.filter('select').not(':disabled').addClass('ui dropdown').filter('[data-type=search]').addClass('search');
+		items.filter('select').not(':disabled').addClass('ui dropdown').filter('[data-search=search]').addClass('search');
 
 		items.filter('[data-error=error]').closest('div.field').addClass('error');
 
 		items.filter(':disabled').closest('div.field').addClass('disabled');
 
-		$('.ui.dropdown').dropdown({ 'duration' : 0 });
+		var onChange = function() { if ($(this).is('select[data-auto=auto]')) $(this).closest('form').submit(); };
+
+		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange });
 
 		$('.ui.accordion').accordion();
 

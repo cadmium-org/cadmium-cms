@@ -48,7 +48,9 @@ namespace Form\Field {
 
 			if ($this->disabled) $attributes['disabled'] = 'disabled';
 
-			if ($this->search) $attributes['data-type'] = 'search';
+			if ($this->search) $attributes['data-search'] = 'search';
+
+			if ($this->auto) $attributes['data-auto'] = 'auto';
 
 			$options = new Template\Utils\Group();
 

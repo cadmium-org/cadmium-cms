@@ -8,7 +8,7 @@ namespace Form\Utils {
 
 		protected $posted = false, $form = false, $name = false, $value = false;
 
-		protected $readonly = false, $disabled = false, $search = false, $error = false;
+		protected $readonly = false, $disabled = false, $search = false, $auto = false, $error = false;
 
 		# Validate name
 
@@ -34,6 +34,8 @@ namespace Form\Utils {
 				if ($value === FORM_FIELD_DISABLED) $this->disabled = true;
 
 				if ($value === FORM_FIELD_SEARCH) $this->search = true;
+
+				if ($value === FORM_FIELD_AUTO) $this->auto = true;
 
 				if ($value === FORM_FIELD_ERROR) $this->error = true;
 			}
