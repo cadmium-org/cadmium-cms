@@ -8,21 +8,44 @@ namespace {
 
 		# Connect to database
 
-		public static function connect($server, $user, $password, $name) {
+		public static function connect($server, $user, $password, $name, $throw = false) {
 
 			$server = String::validate($server); $user = String::validate($user);
 
 			$password = String::validate($password); $name = String::validate($name);
 
-			if (!($link = @mysqli_connect($server, $user, $password))) throw new Error\DBConnect();
+			$throw = Validate::boolean($throw);
 
-			if (!@mysqli_select_db($link, $name)) throw new Error\DBSelect();
+			# Establish connection
 
-			if (!@mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Error\DBCharset();
+			if (false === ($link = @mysqli_connect($server, $user, $password))) {
 
-			if (!@mysqli_query($link, "SET character_set_results = 'utf8'")) throw new Error\DBCharset();
+				if ($throw) throw new Error\DBConnect(); else return false;
+			}
 
-			if (!@mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) throw new Error\DBCharset();
+			# Select database
+
+			if (!@mysqli_select_db($link, $name)) {
+
+				if ($throw) throw new Error\DBSelect(); else return false;
+			}
+
+			# Set encoding
+
+			if (!@mysqli_query($link, "SET character_set_client = 'utf8'")) {
+
+				 if ($throw) throw new Error\DBCharset(); else return false;
+			 }
+
+			if (!@mysqli_query($link, "SET character_set_results = 'utf8'")) {
+
+				if ($throw) throw new Error\DBCharset(); else return false;
+			}
+
+			if (!@mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) {
+
+				if ($throw) throw new Error\DBCharset(); else return false;
+			}
 
 			# ------------------------
 
@@ -32,6 +55,8 @@ namespace {
 		# Send new query
 
 		public static function send($query) {
+
+			if (false === self::$link) return false;
 
 			$query = String::validate($query);
 
@@ -54,7 +79,11 @@ namespace {
 
 		public static function select($table, $selection, $condition = false, $order = false, $limit = false, $group = false) {
 
+			if (false === self::$link) return false;
+
 			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit, $group);
+
+			# ------------------------
 
 			return self::send($query->query());
 		}
@@ -63,7 +92,11 @@ namespace {
 
 		public static function insert($table, $dataset, $multiple = false) {
 
+			if (false === self::$link) return false;
+
 			$query = new DB\Query\Insert($table, $dataset, $multiple);
+
+			# ------------------------
 
 			return self::send($query->query());
 		}
@@ -72,7 +105,11 @@ namespace {
 
 		public static function update($table, $dataset, $condition = false) {
 
+			if (false === self::$link) return false;
+
 			$query = new DB\Query\Update($table, $dataset, $condition);
+
+			# ------------------------
 
 			return self::send($query->query());
 		}
@@ -81,7 +118,11 @@ namespace {
 
 		public static function delete($table, $condition = false) {
 
+			if (false === self::$link) return false;
+
 			$query = new DB\Query\Delete($table, $condition);
+
+			# ------------------------
 
 			return self::send($query->query());
 		}
@@ -114,13 +155,11 @@ namespace {
 
 			foreach (self::$log as $result) {
 
-				$id = $result->id; $query = $result->query; $time = number_format($result->time, 10);
+				$status = $result->status; $query = $result->query; $time = number_format($result->time, 10);
 
-				$status = ($result->status ? 'ok' : 'error');
+				$summary = ($status ? ($result->rows . ' row(s)') : ('(' . $result->errno . ') ' . $result->error));
 
-				$summary = ($result->status ? ($result->rows . ' row(s)') : ('(' . $result->errno . ') ' . $result->error));
-
-				$log[] = array('id' => $id, 'query' => $query, 'time' => $time, 'status' => $status, 'summary' => $summary);
+				$log[] = array('status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary);
 			}
 
 			return $log;
