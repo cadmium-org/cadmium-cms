@@ -19,10 +19,11 @@ namespace {
 
 		public static function isRobot() {
 
-			if (is_array(self::$robots) && isset($_SERVER['HTTP_USER_AGENT'])) {
+			if (!is_array(self::$robots) || !($agent = getenv('HTTP_USER_AGENT'))) return false;
 
-				foreach (self::$robots as $robot) if (false !== stripos($_SERVER['HTTP_USER_AGENT'], $robot)) return true;
-			}
+			foreach (self::$robots as $robot) if (false !== stripos($agent, $robot)) return true;
+
+			# ------------------------
 
 			return false;
 		}
@@ -31,10 +32,11 @@ namespace {
 
 		public static function isMobile() {
 
-			if (is_array(self::$mobiles) && isset($_SERVER['HTTP_USER_AGENT'])) {
+			if (!is_array(self::$mobiles) || !($agent = getenv('HTTP_USER_AGENT'))) return false;
 
-				foreach (self::$mobiles as $mobile) if (false !== stripos($_SERVER['HTTP_USER_AGENT'], $mobile)) return true;
-			}
+			foreach (self::$mobiles as $mobile) if (false !== stripos($agent, $mobile)) return true;
+
+			# ------------------------
 
 			return false;
 		}

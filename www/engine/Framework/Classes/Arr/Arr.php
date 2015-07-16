@@ -15,16 +15,13 @@ namespace {
 
 		public static function get($array, $path) {
 
-			if (array() === ($array = self::force($array))) return null;
+			if (array() === ($array = self::force($array))) return false;
 
-			if (array() === ($path = self::force($path))) return null;
+			if (array() === ($path = self::force($path))) return false;
 
-			foreach ($path as $item) {
+			foreach ($path as $item) if (isset($array[$item])) $value = ($array = $array[$item]); else return false;
 
-				if (!isset($array[$item])) return null;
-
-				$value = ($array = $array[$item]);
-			}
+			# ------------------------
 
 			return $value;
 		}

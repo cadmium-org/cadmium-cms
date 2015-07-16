@@ -21,7 +21,7 @@ namespace DB\Utils {
 
 			$name = String::validate($name);
 
-			return mb_strtolower(self::sanitizeName($name));
+			return strtolower(self::sanitizeName($name));
 		}
 
 		# Get alias name
@@ -30,7 +30,7 @@ namespace DB\Utils {
 
 			$name = String::validate($name);
 
-			return mb_strtolower(self::sanitizeName($name));
+			return strtolower(self::sanitizeName($name));
 		}
 
 		# Get field name
@@ -41,14 +41,14 @@ namespace DB\Utils {
 
 			if (preg_match('/^([^\(]+)[ ]*\([ ]*(.+)[ ]*\)$/', trim($name), $matches)) {
 
-				$function = mb_strtoupper(self::sanitizeName($matches[1]));
+				$function = strtoupper(self::sanitizeName($matches[1]));
 
-				$param = (($matches[2] === '*') ? '*' : mb_strtolower(self::sanitizeName($matches[2])));
+				$param = (($matches[2] === '*') ? '*' : strtolower(self::sanitizeName($matches[2])));
 
 				return ($function . '(' . $param . ')');
 			}
 
-			return mb_strtolower(self::sanitizeName($name));
+			return strtolower(self::sanitizeName($name));
 		}
 
 		# Get field value
@@ -66,7 +66,7 @@ namespace DB\Utils {
 
 			$sort = String::validate($sort);
 
-			return ((mb_strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
+			return ((strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
 		}
 
 		# Return query

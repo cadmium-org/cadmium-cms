@@ -110,7 +110,7 @@ namespace {
 
 		public static function text($number, $variant_1, $variant_3, $variant_5) {
 
-			$number = self::unsigned($number); $length = mb_strlen($number);
+			$number = self::unsigned($number); $length = strlen($number);
 
 			$variant_1 = String::validate($variant_1); $variant_3 = String::validate($variant_3); $variant_5 = String::validate($variant_5);
 

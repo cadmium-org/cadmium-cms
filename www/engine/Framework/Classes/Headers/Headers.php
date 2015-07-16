@@ -113,7 +113,7 @@ namespace {
 
 		public static function status($code) {
 
-			if (self::isStatusCode($code)) header($_SERVER['SERVER_PROTOCOL'] . ' ' . self::$status_codes[$code]);
+			if (self::isStatusCode($code)) header(getenv('SERVER_PROTOCOL') . ' ' . self::$status_codes[$code]);
 		}
 
 		# Send content header

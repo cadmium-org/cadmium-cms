@@ -8,9 +8,7 @@ namespace {
 
 		public static function isAjax() {
 
-			if (!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) return false;
-
-			return (0 === strcmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'XMLHttpRequest'));
+			return (0 === strcmp(getenv('HTTP_X_REQUESTED_WITH'), 'XMLHttpRequest'));
 		}
 
 		# Return GET variable by name

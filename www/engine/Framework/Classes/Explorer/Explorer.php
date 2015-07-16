@@ -133,7 +133,7 @@ namespace {
 
 			$file_name = String::validate($file_name); $extension = self::extension($file_name);
 
-			if ((null === $extension) || (false === $extension) || mb_strtolower($extension) !== 'php') return false;
+			if ((null === $extension) || (false === $extension) || strtolower($extension) !== 'php') return false;
 
 			# ------------------------
 
@@ -146,7 +146,7 @@ namespace {
 
 			$file_name = String::validate($file_name); $extension = self::extension($file_name);
 
-			if ((null === $extension) || (false === $extension) || mb_strtolower($extension) !== 'json') return false;
+			if ((null === $extension) || (false === $extension) || strtolower($extension) !== 'json') return false;
 
 			# ------------------------
 
@@ -159,7 +159,7 @@ namespace {
 
 			$file_name = String::validate($file_name); $extension = self::extension($file_name);
 
-			if ((null === $extension) || (false === $extension) || mb_strtolower($extension) !== 'xml') return false;
+			if ((null === $extension) || (false === $extension) || strtolower($extension) !== 'xml') return false;
 
 			# ------------------------
 

@@ -83,9 +83,13 @@ namespace {
 
 			$string = self::validate($string); $maxlength = Number::unsigned($maxlength); $ellipsis = Validate::boolean($ellipsis);
 
-			if ((0 === $maxlength) || (($length = mb_strlen($string)) <= $maxlength)) return $string;
+			$length = (function_exists('mb_strlen') ? mb_strlen($string) : strlen($string));
 
-			$string = (trim(mb_substr($string, 0, $maxlength)) . ($ellipsis ? '...' : ''));
+			if ((0 === $maxlength) || ($length <= $maxlength)) return $string;
+
+			$string = (function_exists('mb_substr') ? mb_substr($string, 0, $maxlength) : substr($string, 0, $maxlength));
+
+			$string = (trim($string) . ($ellipsis ? '...' : ''));
 
 			# ------------------------
 
@@ -96,7 +100,7 @@ namespace {
 
 		public static function random($length, $pool = STRING_POOL_DEFAULT) {
 
-			$length = Number::unsigned($length); $pool = self::validate($pool); $pool_length = mb_strlen($pool);
+			$length = Number::unsigned($length); $pool = self::validate($pool); $pool_length = strlen($pool);
 
 			$string = ''; for ($i = 0; $i < $length; $i++) $string .= substr($pool, mt_rand(0, ($pool_length - 1)), 1);
 
