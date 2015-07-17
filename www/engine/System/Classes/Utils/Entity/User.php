@@ -177,11 +177,11 @@ namespace System\Utils\Entity {
 
 			$rank = Number::unsigned(Lister::rank($rank, true));
 
-			$first_name = String::validate($data['first_name']); $last_name = String::validate($data['last_name']);
+			$first_name = String::validate($first_name); $last_name = String::validate($last_name);
 
-			$sex = Number::unsigned(Lister::sex($data['sex'], true)); $city = String::validate($data['city']);
+			$sex = Number::unsigned(Lister::sex($sex, true)); $city = String::validate($city);
 
-			$country = Country::validate($data['country']); $timezone = Timezone::validate($data['timezone']);
+			$country = Country::validate($country); $timezone = Timezone::validate($timezone);
 
 			if (false === ($password = self::validatePassword($password))) return self::ERROR_INPUT_PASSWORD_INVALID;
 
@@ -264,11 +264,11 @@ namespace System\Utils\Entity {
 
 			$rank = Number::unsigned(Lister::rank($rank, true));
 
-			$first_name = String::validate($data['first_name']); $last_name = String::validate($data['last_name']);
+			$first_name = String::validate($first_name); $last_name = String::validate($last_name);
 
-			$sex = Number::unsigned(Lister::sex($data['sex'], true)); $city = String::validate($data['city']);
+			$sex = Number::unsigned(Lister::sex($sex, true)); $city = String::validate($city);
 
-			$country = Country::validate($data['country']); $timezone = Timezone::validate($data['timezone']);
+			$country = Country::validate($country); $timezone = Timezone::validate($timezone);
 
 			$password = String::validate($password); $password_retype = String::validate($password_retype);
 
