@@ -6,7 +6,9 @@ namespace {
 
 		private static $init = false, $dir_name = false, $main = false, $blocks = false, $status = false;
 
-		private static $title = false, $description = false, $keywords = false, $robots = false, $meta = array(), $link = false;
+		private static $language = false, $title = false;
+
+		private static $description = false, $keywords = false, $robots = false, $meta = array(), $link = false;
 
 		# Init template
 
@@ -92,6 +94,23 @@ namespace {
 			if (null === $status) return self::$status;
 
 			if (Headers::isStatusCode($status)) self::$status = $status;
+
+			# ------------------------
+
+			return true;
+		}
+
+		# Get/set language
+
+		public static function language($language = null) {
+
+			if (!self::$init) return false;
+
+			if (null === $language) return self::$language;
+
+			$language = strtolower(String::validate($language));
+
+			if (preg_match(REGEX_TEMPLATE_LANGUAGE, $language)) self::$language = $language;
 
 			# ------------------------
 
@@ -208,6 +227,8 @@ namespace {
 
 				$status = ((false !== self::$status) ? self::$status : STATUS_CODE_200);
 			}
+
+			self::$main->language		= self::$language;
 
 			self::$main->head_title 	= ((false !== self::$title) ? self::$title : 'UNTITLED');
 

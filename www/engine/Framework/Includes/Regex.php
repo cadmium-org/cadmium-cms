@@ -11,4 +11,6 @@ define('REGEX_LANGUAGE_PHRASE_NAME',				'/^(?![0-9_])(?!.*_$)(?!.*_{2,})[a-zA-Z0
 define('REGEX_TEMPLATE_FILE_NAME',					'/^[A-Z0-9][a-zA-Z0-9]*$/');
 define('REGEX_TEMPLATE_ITEM_NAME',					'/^(?![0-9_])(?!.*_$)(?!.*_{2,})[a-zA-Z0-9_]+$/');
 
+define('REGEX_TEMPLATE_LANGUAGE',                   '/^[a-z][a-z](-[a-z][a-z])?$/');
+
 ?>
