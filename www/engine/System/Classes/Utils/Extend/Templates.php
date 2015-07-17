@@ -2,24 +2,24 @@
 
 namespace System\Utils\Extend {
 
-	use System\Utils\Utils, Error, Explorer, Template, String;
+	use System\Utils\Utils, Error, Explorer, Cookie, Template, Request, String, Validate;
 
 	class Templates {
 
 		const ERROR_DIRECTORY	= 'Templates directory does not exist';
 		const ERROR_SELECT		= 'Templates not found';
 
-		private static $loaded = false, $section = false, $items = array(), $active = false;
+		private static $dir_name = false, $section = false, $items = array(), $active = false;
 
 		# Get items
 
-		private static function getItems($section) {
+		private static function getItems($dir_name) {
 
-			$items = array(); $section = ((false !== $section) ? ($section . '/') : '');
+			$items = array();
 
-			foreach (Explorer::listDirs(DIR_SYSTEM_TEMPLATES . $section) as $name) {
+			foreach (Explorer::listDirs($dir_name) as $name) {
 
-				$config_file = (DIR_SYSTEM_TEMPLATES . $section . $name . '/Config.php');
+				$config_file = ($dir_name . $name . '/Config.php');
 
 				$config_values = array('name', 'title', 'author');
 
@@ -31,6 +31,23 @@ namespace System\Utils\Extend {
 			}
 
 			ksort($items); return $items;
+		}
+
+		# Get user template
+
+		private static function getUserTemplate($section) {
+
+			$name = false; $section = strtolower($section);
+
+			if (self::exists($name_get = Request::get('template'))) $name = $name_get;
+
+			else if (self::exists($name_cookie = Cookie::get($section . '_template'))) $name = $name_cookie;
+
+			if (false !== $name) Cookie::set($section . '_template', $name, CONFIG_TEMPLATE_COOKIE_EXPIRES);
+
+			# ------------------------
+
+			return $name;
 		}
 
 		# Check if name valid
@@ -66,30 +83,38 @@ namespace System\Utils\Extend {
 
 		# Load template
 
-		public static function load($section, $name, $default) {
+		public static function load($section, $name, $default, $selectable = false) {
 
-			if (false !== self::$loaded) return;
+			$section = String::validate($section); $name = String::validate($name);
 
-			$section = String::validate($section); $name = String::validate($name); $default = String::validate($default);
+			$default = String::validate($default); $selectable = Validate::boolean($selectable);
 
-			if (!Explorer::isDir(DIR_SYSTEM_TEMPLATES . $section)) throw new Error\General(self::ERROR_DIRECTORY);
+			$dir_name = (DIR_SYSTEM_TEMPLATES . $section . '/');
 
-			self::$loaded = true; self::$section = $section; self::$items = self::getItems($section);
+			if (!Explorer::isDir($dir_name)) throw new Error\General(self::ERROR_DIRECTORY);
 
-			$name_valid = (self::exists($name) || self::exists($name = $default));
+			self::$dir_name = $dir_name; self::$section = $section; self::$items = self::getItems($dir_name);
+
+			if ($selectable && (false !== ($name = self::getUserTemplate($section)))) $name_valid = true;
+
+			else $name_valid = (self::exists($name) || self::exists($name = $default));
 
 			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Error\General(self::ERROR_SELECT);
 
 			# ------------------------
 
-			Template::init(DIR_SYSTEM_TEMPLATES . ((false !== self::$section) ? (self::$section . '/') : '') . (self::$active = $name));
+			Template::init($dir_name . (self::$active = $name));
 		}
 
 		# Return items
 
-		public static function items($section) {
+		public static function items($section = null) {
 
-			return (((false === self::$section) || ($section === self::$section)) ? self::$items : self::getItems($section));
+			if (false === ($section = String::validate($section))) return self::$items;
+
+			$dir_name = (DIR_SYSTEM_TEMPLATES . $section . '/');
+
+			return (($dir_name === self::$dir_name) ? self::$items : self::getItems($dir_name));
 		}
 
 		# Return active templates name
@@ -101,13 +126,11 @@ namespace System\Utils\Extend {
 
 		# Return active templates data
 
-		public static function data($name) {
+		public static function data($name = null) {
 
 			if (false === self::$active) return false;
 
-			if (null === $name) return self::$items[self::$active];
-
-			$name = String::validate($name);
+			if (false === ($name = String::validate($name))) return self::$items[self::$active];
 
 			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : false);
 		}

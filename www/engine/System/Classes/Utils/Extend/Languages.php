@@ -2,24 +2,24 @@
 
 namespace System\Utils\Extend {
 
-	use System\Utils\Utils, Error, Explorer, Language, String;
+	use System\Utils\Utils, Error, Explorer, Cookie, Language, Request, String, Validate;
 
 	class Languages {
 
 		const ERROR_DIRECTORY	= 'Languages directory does not exist';
 		const ERROR_SELECT		= 'Languages not found';
 
-		private static $loaded = false, $section = false, $items = array(), $active = false;
+		private static $dir_name = false, $section = false, $items = array(), $active = false;
 
 		# Get items
 
-		private static function getItems($section) {
+		private static function getItems($dir_name) {
 
-			$items = array(); $section = ((false !== $section) ? ($section . '/') : '');
+			$items = array();
 
-			foreach (Explorer::listDirs(DIR_SYSTEM_LANGUAGES . $section) as $code) {
+			foreach (Explorer::listDirs($dir_name) as $code) {
 
-				$config_file = (DIR_SYSTEM_LANGUAGES . $section . $code . '/Config.php');
+				$config_file = ($dir_name . $code . '/Config.php');
 
 				$config_values = array('code', 'iso', 'country', 'title', 'author');
 
@@ -31,6 +31,23 @@ namespace System\Utils\Extend {
 			}
 
 			ksort($items); return $items;
+		}
+
+		# Get user language
+
+		private static function getUserLanguage($section) {
+
+			$code = false; $section = strtolower($section);
+
+			if (self::exists($code_get = Request::get('language'))) $code = $code_get;
+
+			else if (self::exists($code_cookie = Cookie::get($section . '_language'))) $code = $code_cookie;
+
+			if (false !== $code) Cookie::set($section . '_language', $code, CONFIG_LANGUAGE_COOKIE_EXPIRES);
+
+			# ------------------------
+
+			return $code;
 		}
 
 		# Check if code valid
@@ -66,30 +83,38 @@ namespace System\Utils\Extend {
 
 		# Load language
 
-		public static function load($section, $code, $default) {
+		public static function load($section, $code, $default, $selectable = false) {
 
-			if (false !== self::$loaded) return;
+			$section = String::validate($section); $code = String::validate($code);
 
-			$section = String::validate($section); $code = String::validate($code); $default = String::validate($default);
+			$default = String::validate($default); $selectable = Validate::boolean($selectable);
 
-			if (!Explorer::isDir(DIR_SYSTEM_LANGUAGES . $section)) throw new Error\General(self::ERROR_DIRECTORY);
+			$dir_name = DIR_SYSTEM_LANGUAGES;
 
-			self::$loaded = true; self::$section = $section; self::$items = self::getItems($section);
+			if (!Explorer::isDir($dir_name)) throw new Error\General(self::ERROR_DIRECTORY);
 
-			$code_valid = (self::exists($code) || self::exists($code = $default));
+			self::$dir_name = $dir_name; self::$section = $section; self::$items = self::getItems($dir_name);
+
+			if ($selectable && (false !== ($code = self::getUserLanguage($section)))) $code_valid = true;
+
+			else $code_valid = (self::exists($code) || self::exists($code = $default));
 
 			if (!($code_valid || (null !== ($code = key(self::$items))))) throw new Error\General(self::ERROR_SELECT);
 
 			# ------------------------
 
-			Language::init(DIR_SYSTEM_LANGUAGES . ((false !== self::$section) ? (self::$section . '/') : '') . (self::$active = $code));
+			Language::init($dir_name . (self::$active = $code));
 		}
 
 		# Return items
 
-		public static function items($section) {
+		public static function items($section = null) {
 
-			return (((false === self::$section) || ($section === self::$section)) ? self::$items : self::getItems($section));
+			if (false === ($section = String::validate($section))) return self::$items;
+
+			$dir_name = DIR_SYSTEM_LANGUAGES;
+
+			return (($dir_name === self::$dir_name) ? self::$items : self::getItems($dir_name));
 		}
 
 		# Return active languages code
@@ -101,13 +126,11 @@ namespace System\Utils\Extend {
 
 		# Return active languages data
 
-		public static function data($name) {
+		public static function data($name = null) {
 
 			if (false === self::$active) return false;
 
-			if (null === $name) return self::$items[self::$active];
-
-			$name = String::validate($name);
+			if (false === ($name = String::validate($name))) return self::$items[self::$active];
 
 			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : false);
 		}
