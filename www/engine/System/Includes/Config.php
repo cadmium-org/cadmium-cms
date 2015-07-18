@@ -6,8 +6,16 @@ define('CONFIG_ADMIN_IP',							'');
 
 # Session
 
-define('CONFIG_SESSION_NAME',						'sessid');
+define('CONFIG_SESSION_NAME',						'_sessid');
 define('CONFIG_SESSION_LIFETIME',					2592000);		# 30 days
+
+# Language
+
+define('CONFIG_LANGUAGE_COOKIE_EXPIRES',		    30758400);      # 356 days
+
+# Template
+
+define('CONFIG_TEMPLATE_COOKIE_EXPIRES',		    30758400);      # 356 days
 
 # Page
 
@@ -62,8 +70,6 @@ define('CONFIG_ADMIN_PAGES_DISPLAY',				50);
 define('CONFIG_ADMIN_MENUITEMS_DISPLAY',			50);
 define('CONFIG_ADMIN_USERS_DISPLAY',				50);
 
-define('CONFIG_ADMIN_EMAIL_MAX_LENGTH',				128);
-
 # Site
 
 define('CONFIG_SITE_LANGUAGE_DEFAULT',				'en_US');
@@ -76,5 +82,6 @@ define('CONFIG_SITE_KEYWORDS_MAX_LENGTH',			512);
 # System
 
 define('CONFIG_SYSTEM_URL_MAX_LENGTH',				128);
+define('CONFIG_SYSTEM_EMAIL_MAX_LENGTH',			128);
 
 ?>
