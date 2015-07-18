@@ -1,4 +1,5 @@
 /node_modules
 /semantic
 /semantic.json
-/www/engine/System/Includes/Install.php
+/www/engine/System/Data/Config.json
+/www/engine/System/Data/System.json
