@@ -2,9 +2,9 @@
 
 namespace System {
 
-	use Engine, System\Utils\Map\Map, Explorer, Url;
+	use System, System\Utils\Map\Map, DB, Request, Url;
 
-	class Dispatcher extends Engine {
+	class Dispatcher extends System {
 
 		# Dispatcher main method
 
@@ -12,21 +12,20 @@ namespace System {
 
 			# Check installation
 
-			//if (!Explorer::isFile(DIR_SYSTEM_INCLUDES . 'Install.php')) Request::redirect('/install.php');
+			if (!$this->installed) Request::redirect('/install.php');
 
-			if (!Explorer::isFile(DIR_SYSTEM_INCLUDES . 'Install.php')) exit('DB settings not configured.');
+			# Connect to database
 
-			# Include constants
+			DB::connect (
 
-			require_once (DIR_SYSTEM_INCLUDES . 'Install.php');
-			require_once (DIR_SYSTEM_INCLUDES . 'Config.php');
-			require_once (DIR_SYSTEM_INCLUDES . 'Constants.php');
-			require_once (DIR_SYSTEM_INCLUDES . 'Regex.php');
-			require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
+				$this->database['server'], $this->database['user'],
+
+				$this->database['password'], $this->database['name']
+			);
 
 			# Handle request
 
-			$url = new Url($_SERVER['REQUEST_URI']);
+			$url = new Url(getenv('REQUEST_URI'));
 
 			$map = new Map(); $map->handle($url->path());
 		}

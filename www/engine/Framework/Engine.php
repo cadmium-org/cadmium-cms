@@ -2,22 +2,28 @@
 
 namespace {
 
-	class Engine {
+	abstract class Engine {
 
 		# Get client IP
 
 		private function getIP() {
 
-			if (($value = getenv('HTTP_CLIENT_IP')) && strcasecmp($value, 'unknown')) return $value;
+			if (!empty(getenv('HTTP_CLIENT_IP')))           return getenv('HTTP_CLIENT_IP');
 
-			else if (($value = getenv('REMOTE_ADDR')) && strcasecmp($value, 'unknown')) return $value;
+			if (!empty(getenv('HTTP_X_FORWARDED_FOR')))     return getenv('HTTP_X_FORWARDED_FOR');
 
-			else if (($value = getenv('HTTP_X_FORWARDED_FOR')) && strcasecmp($value, 'unknown')) return $value;
+			if (!empty(getenv('HTTP_X_FORWARDED')))         return getenv('HTTP_X_FORWARDED');
 
-			else if (isset($_SERVER['REMOTE_ADDR']) && ($value = $_SERVER['REMOTE_ADDR']) && strcasecmp($value, 'unknown'))
+			if (!empty(getenv('HTTP_FORWARDED_FOR')))       return getenv('HTTP_FORWARDED_FOR');
 
-				return $_SERVER['REMOTE_ADDR']; else return 'Unknown';
-			}
+			if (!empty(getenv('HTTP_FORWARDED')))           return getenv('HTTP_FORWARDED');
+
+			if (!empty(getenv('REMOTE_ADDR')))              return getenv('REMOTE_ADDR');
+
+			# ------------------------
+
+			return 'unknown';
+		}
 
 		# Engine constructor
 
@@ -33,7 +39,7 @@ namespace {
 
 			# Set engine defaults
 
-			mb_internal_encoding(CONFIG_FRAMEWORK_DEFAULT_CHARSET);
+			if (function_exists('mb_internal_encoding')) mb_internal_encoding(CONFIG_FRAMEWORK_DEFAULT_CHARSET);
 
 			date_default_timezone_set(CONFIG_FRAMEWORK_DEFAULT_TIMEZONE);
 
@@ -47,16 +53,18 @@ namespace {
 
 			# ------------------------
 
-			$this->main();
+			$this->init();
 		}
 
 		# Display error screen
 
-		public static function error($message) {
+		public static function error($message = false) {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine error: ' . $message) : 'Unknown error');
 
-			$file_exists = (@file_exists($file_name = (DIR_TEMPLATES . 'Error.tpl')) && (false != ($contents = @file_get_contents($file_name))));
+			$file_name = (DIR_TEMPLATES . 'Error.tpl');
+
+			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
 
 			$contents = ($file_exists ? str_replace('$message$', $message, $contents) : $message);
 
@@ -70,7 +78,38 @@ namespace {
 
 			header('Pragma: no-cache');
 
-			header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+			header(getenv('SERVER_PROTOCOL') . ' 500 Internal Server Error', true, 500);
+
+			header('Content-type: text/html; charset=UTF-8');
+
+			# ------------------------
+
+			exit ($contents);
+		}
+
+		# Display warning screen
+
+		public static function warning($message = false) {
+
+			$message = (('' !== ($message = strval($message))) ? ('Engine warning: ' . $message) : 'Unknown warning');
+
+			$file_name = (DIR_TEMPLATES . 'Warning.tpl');
+
+			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
+
+			$contents = ($file_exists ? str_replace('$message$', $message, $contents) : $message);
+
+			# Set headers
+
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+
+			header('Cache-Control: post-check=0, pre-check=0', false);
+
+			header('Pragma: no-cache');
+
+			header(getenv('SERVER_PROTOCOL') . ' 500 Internal Server Error', true, 500);
 
 			header('Content-type: text/html; charset=UTF-8');
 

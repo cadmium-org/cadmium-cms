@@ -2,12 +2,12 @@
 
 namespace System\Utils\Extend {
 
-	use System\Utils\Utils, Error, Explorer, Cookie, Language, Request, String, Validate;
+	use Warning, System\Utils\Utils, Explorer, Cookie, Language, Request, String, Validate;
 
 	class Languages {
 
-		const ERROR_DIRECTORY	= 'Languages directory does not exist';
-		const ERROR_SELECT		= 'Languages not found';
+		const ERROR_DIRECTORY   = 'Languages directory does not exist';
+		const ERROR_SELECT      = 'Languages not found';
 
 		private static $dir_name = false, $section = false, $items = array(), $active = false;
 
@@ -91,7 +91,7 @@ namespace System\Utils\Extend {
 
 			$dir_name = DIR_SYSTEM_LANGUAGES;
 
-			if (!Explorer::isDir($dir_name)) throw new Error\General(self::ERROR_DIRECTORY);
+			if (!Explorer::isDir($dir_name)) throw new Warning\General(self::ERROR_DIRECTORY);
 
 			self::$dir_name = $dir_name; self::$section = $section; self::$items = self::getItems($dir_name);
 
@@ -99,7 +99,7 @@ namespace System\Utils\Extend {
 
 			else $code_valid = (self::exists($code) || self::exists($code = $default));
 
-			if (!($code_valid || (null !== ($code = key(self::$items))))) throw new Error\General(self::ERROR_SELECT);
+			if (!($code_valid || (null !== ($code = key(self::$items))))) throw new Warning\General(self::ERROR_SELECT);
 
 			# ------------------------
 

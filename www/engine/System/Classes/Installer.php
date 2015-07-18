@@ -2,9 +2,9 @@
 
 namespace System {
 
-	use Engine, Explorer;
+	use System, System\Handlers, Request, Validate;
 
-	class Installer extends Engine {
+	class Installer extends System {
 
 		# Installer main method
 
@@ -12,7 +12,7 @@ namespace System {
 
 			# Check installation
 
-			if (Explorer::isFile(DIR_SYSTEM_INCLUDES . 'Install.php')) Request::redirect('/');
+			if ($this->installed) return new Handlers\Page();
 		}
 	}
 }

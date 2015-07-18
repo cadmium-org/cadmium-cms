@@ -18,7 +18,7 @@ namespace {
 
 			$dir_name = String::validate($dir_name);
 
-			if (!Explorer::isDir($dir_name)) throw new Error\TemplateInit($dir_name);
+			if (!Explorer::isDir($dir_name)) throw new Warning\TemplateInit($dir_name);
 
 			self::$init = true; self::$dir_name = $dir_name;
 		}

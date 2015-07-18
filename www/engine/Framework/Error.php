@@ -4,16 +4,22 @@ namespace Error {
 
 	use Exception;
 
-	class Error extends Exception {
+	# Error parent class
 
-		protected $message = "Default exception thrown";
+	abstract class Error extends Exception {
 
-		public function __construct($value = '') {
+		protected $message = 'Default error exception thrown';
+
+		# Constructor
+
+		public function __construct($value = false) {
 
 			$value = htmlspecialchars($value);
 
-			$this->message = str_replace('%value%', $value, $this->message);
+			$this->message = str_replace('$value$', $value, $this->message);
 		}
+
+		# Return message
 
 		public function message() {
 
@@ -21,42 +27,44 @@ namespace Error {
 		}
 	}
 
+	# General error
+
 	class General extends Error {
 
-		public function __construct($message = '') {
+		# Constructor override
+
+		public function __construct($message = false) {
 
 			if ('' !== ($message = strval($message))) $this->message = $message;
 		}
 	}
 
+	# Class load error
+
 	class ClassLoad extends Error  {
 
-		protected $message = "Class '%value%' not found";
+		protected $message = 'Class \'$value$\' not found';
 	}
 
-	class DBCharset extends Error  {
-
-		protected $message = "Unable to set database charset";
-	}
+	# Database connect error
 
 	class DBConnect extends Error  {
 
-		protected $message = "Unable to connect to database";
+		protected $message = 'Unable to connect to database';
 	}
+
+	# Database select error
 
 	class DBSelect extends Error  {
 
-		protected $message = "Unable to select database";
+		protected $message = 'Unable to select database';
 	}
 
-	class LanguageInit extends Error {
+	# Database charset error
 
-		protected $message = "Unable to init language '%value%'";
-	}
+	class DBCharset extends Error  {
 
-	class TemplateInit extends Error {
-
-		protected $message = "Unable to init template '%value%'";
+		protected $message = 'Unable to set database charset';
 	}
 }
 

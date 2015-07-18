@@ -2,12 +2,12 @@
 
 namespace System\Utils\Extend {
 
-	use System\Utils\Utils, Error, Explorer, Cookie, Template, Request, String, Validate;
+	use Warning, System\Utils\Utils, Explorer, Cookie, Template, Request, String, Validate;
 
 	class Templates {
 
-		const ERROR_DIRECTORY	= 'Templates directory does not exist';
-		const ERROR_SELECT		= 'Templates not found';
+		const ERROR_DIRECTORY   = 'Templates directory does not exist';
+		const ERROR_SELECT      = 'Templates not found';
 
 		private static $dir_name = false, $section = false, $items = array(), $active = false;
 
@@ -91,7 +91,7 @@ namespace System\Utils\Extend {
 
 			$dir_name = (DIR_SYSTEM_TEMPLATES . $section . '/');
 
-			if (!Explorer::isDir($dir_name)) throw new Error\General(self::ERROR_DIRECTORY);
+			if (!Explorer::isDir($dir_name)) throw new Warning\General(self::ERROR_DIRECTORY);
 
 			self::$dir_name = $dir_name; self::$section = $section; self::$items = self::getItems($dir_name);
 
@@ -99,7 +99,7 @@ namespace System\Utils\Extend {
 
 			else $name_valid = (self::exists($name) || self::exists($name = $default));
 
-			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Error\General(self::ERROR_SELECT);
+			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Warning\General(self::ERROR_SELECT);
 
 			# ------------------------
 

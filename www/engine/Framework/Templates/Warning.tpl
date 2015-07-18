@@ -6,7 +6,7 @@
 
 		<meta charset="UTF-8" />
 
-		<title>Error</title>
+		<title>Warning</title>
 
 		<style type="text/css">
 
@@ -29,17 +29,11 @@
 
 			div.icon { position:absolute; top:0; left:0; width:32px; height:32px; }
 
-			div.icon div { position:absolute; top:0; left:12px; width:8px; height:32px; background:#C55500; border-radius:2px; }
+			div.icon div { position:absolute; left:12px; width:8px; background:#D96D00; border-radius:2px; }
 
-			div.icon div.e1 {
-				-webkit-transform:rotate(45deg); -moz-transform:rotate(45deg); -ms-transform:rotate(45deg);
-				-o-transform:rotate(45deg); transform:rotate(45deg);
-			}
+			div.icon div.w1 { top:0; height:20px; }
 
-			div.icon div.e2 {
-				-webkit-transform:rotate(-45deg); -moz-transform:rotate(-45deg); -ms-transform:rotate(-45deg);
-				-o-transform:rotate(-45deg); transform:rotate(-45deg);
-			}
+			div.icon div.w2 { top:24px; height:8px; }
 
 			div.text { position:relative; width:auto; height:16px; padding:8px 0 8px 42px; }
 
@@ -53,7 +47,7 @@
 
 			<div class="text">
 
-				<div class="icon"><div class="e1"></div><div class="e2"></div></div>$message$
+				<div class="icon"><div class="w1"></div><div class="w2"></div></div>$message$
 
 			</div>
 
