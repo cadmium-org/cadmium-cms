@@ -8,44 +8,27 @@ namespace {
 
 		# Connect to database
 
-		public static function connect($server, $user, $password, $name, $throw = false) {
+		public static function connect($server, $user, $password, $name) {
 
 			$server = String::validate($server); $user = String::validate($user);
 
 			$password = String::validate($password); $name = String::validate($name);
 
-			$throw = Validate::boolean($throw);
-
 			# Establish connection
 
-			if (false === ($link = @mysqli_connect($server, $user, $password))) {
-
-				if ($throw) throw new Error\DBConnect(); else return false;
-			}
+			if (false === ($link = @mysqli_connect($server, $user, $password))) throw new Error\DBConnect();
 
 			# Select database
 
-			if (!@mysqli_select_db($link, $name)) {
-
-				if ($throw) throw new Error\DBSelect(); else return false;
-			}
+			if (!@mysqli_select_db($link, $name)) throw new Error\DBSelect();
 
 			# Set encoding
 
-			if (!@mysqli_query($link, "SET character_set_client = 'utf8'")) {
+			if (!@mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Error\DBCharset();
 
-				 if ($throw) throw new Error\DBCharset(); else return false;
-			 }
+			if (!@mysqli_query($link, "SET character_set_results = 'utf8'")) throw new Error\DBCharset();
 
-			if (!@mysqli_query($link, "SET character_set_results = 'utf8'")) {
-
-				if ($throw) throw new Error\DBCharset(); else return false;
-			}
-
-			if (!@mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) {
-
-				if ($throw) throw new Error\DBCharset(); else return false;
-			}
+			if (!@mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) throw new Error\DBCharset();
 
 			# ------------------------
 
