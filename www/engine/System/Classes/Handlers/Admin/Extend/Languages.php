@@ -58,7 +58,7 @@ namespace System\Handlers\Admin\Extend {
 
 				$class = (($name === $this->section) ? 'active item' : 'item');
 
-				$loop[] = array('name' => mb_strtolower($name), 'title' => $title, 'class' => $class);
+				$loop[] = array('name' => strtolower($name), 'title' => $title, 'class' => $class);
 			}
 
 			return $loop;
