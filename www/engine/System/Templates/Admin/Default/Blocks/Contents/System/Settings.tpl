@@ -62,9 +62,9 @@
 
 			<div class="field">
 
-				<label for="settings-admin-email">%SETTINGS_FIELD_ADMIN_EMAIL%</label>
+				<label for="settings-admin-email">%SETTINGS_FIELD_SYSTEM_EMAIL%</label>
 
-				{ block:field_admin_email / }
+				{ block:field_system_email / }
 
 			</div>
 

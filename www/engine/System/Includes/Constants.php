@@ -17,7 +17,6 @@ define('SECTION_SITE',								'Site');
 
 define('CONFIG_PARAM_ADMIN_LANGUAGE',				'admin_language');
 define('CONFIG_PARAM_ADMIN_TEMPLATE',				'admin_template');
-define('CONFIG_PARAM_ADMIN_EMAIL',					'admin_email');
 
 define('CONFIG_PARAM_SITE_LANGUAGE',				'site_language');
 define('CONFIG_PARAM_SITE_TEMPLATE',				'site_template');
@@ -26,8 +25,9 @@ define('CONFIG_PARAM_SITE_STATUS',					'site_status');
 define('CONFIG_PARAM_SITE_DESCRIPTION',				'site_description');
 define('CONFIG_PARAM_SITE_KEYWORDS',				'site_keywords');
 
-define('CONFIG_PARAM_SYSTEM_TIMEZONE',				'system_timezone');
 define('CONFIG_PARAM_SYSTEM_URL',					'system_url');
+define('CONFIG_PARAM_SYSTEM_TIMEZONE',				'system_timezone');
+define('CONFIG_PARAM_SYSTEM_EMAIL',					'system_email');
 
 define('CONFIG_PARAM_USERS_REGISTRATION',			'users_registration');
 

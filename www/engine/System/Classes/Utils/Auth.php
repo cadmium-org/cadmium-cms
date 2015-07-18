@@ -51,7 +51,7 @@ namespace System\Utils {
 
 			$message->link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
 
-			$message->admin_email = CONFIG_ADMIN_EMAIL; $message->copyright = Date::year();
+			$message->system_email = CONFIG_SYSTEM_EMAIL; $message->copyright = Date::year();
 
 			# ------------------------
 
@@ -59,7 +59,7 @@ namespace System\Utils {
 
 			$from = ((false !== ($host = parse_url(CONFIG_SYSTEM_URL, PHP_URL_HOST))) ? ('noreply@' . $host) : false);
 
-			$reply_to = CONFIG_ADMIN_EMAIL; $subject = Language::get('MAIL_SUBJECT_RESET');
+			$reply_to = CONFIG_SYSTEM_EMAIL; $subject = Language::get('MAIL_SUBJECT_RESET');
 
 			return Mailer::send($email, $sender, $from, $reply_to, $subject, $message->contents(), true);
 		}
@@ -76,7 +76,7 @@ namespace System\Utils {
 
 			$message->link = (CONFIG_SYSTEM_URL . '/profile');
 
-			$message->admin_email = CONFIG_ADMIN_EMAIL; $message->copyright = Date::year();
+			$message->system_email = CONFIG_SYSTEM_EMAIL; $message->copyright = Date::year();
 
 			# ------------------------
 
@@ -84,7 +84,7 @@ namespace System\Utils {
 
 			$from = ((false !== ($host = parse_url(CONFIG_SYSTEM_URL, PHP_URL_HOST))) ? ('noreply@' . $host) : false);
 
-			$reply_to = CONFIG_ADMIN_EMAIL; $subject = Language::get('MAIL_SUBJECT_REGISTER');
+			$reply_to = CONFIG_SYSTEM_EMAIL; $subject = Language::get('MAIL_SUBJECT_REGISTER');
 
 			return Mailer::send($email, $sender, $from, $reply_to, $subject, $message->contents(), true);
 		}
