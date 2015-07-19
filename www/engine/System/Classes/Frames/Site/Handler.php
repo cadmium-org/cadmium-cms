@@ -2,7 +2,7 @@
 
 namespace System\Frames\Site {
 
-	use System, System\Utils\Auth, System\Utils\Extend, System\Utils\Menu, System\Utils\Messages;
+	use System, System\Utils\Auth, System\Utils\Menu, System\Utils\Messages;
 	use Date, Language, Request, String, Template;
 
 	abstract class Handler extends System\Frames\Main {
@@ -18,8 +18,6 @@ namespace System\Frames\Site {
 			Template::main('404');
 
 			Template::title(Language::get('STATUS_TITLE_404'));
-
-			Template::main()->language = Extend\Languages::data('iso');
 
 			Template::main()->system_url = CONFIG_SYSTEM_URL;
 
@@ -42,8 +40,6 @@ namespace System\Frames\Site {
 
 			Template::title(Language::get('STATUS_TITLE_MAINTENANCE'));
 
-			Template::main()->language = Extend\Languages::data('iso');
-
 			Template::main()->system_url = CONFIG_SYSTEM_URL;
 
 			Template::main()->site_title = CONFIG_SITE_TITLE;
@@ -64,8 +60,6 @@ namespace System\Frames\Site {
 			Template::main('Update');
 
 			Template::title(Language::get('STATUS_TITLE_UPDATE'));
-
-			Template::main()->language = Extend\Languages::data('iso');
 
 			Template::main()->system_url = CONFIG_SYSTEM_URL;
 
@@ -89,10 +83,6 @@ namespace System\Frames\Site {
 			Template::main('Page');
 
 			Template::title((false === $this->title) ? CONFIG_SITE_TITLE : ($this->title . ' | ' . CONFIG_SITE_TITLE));
-
-			# Set language
-
-			Template::main()->language = Extend\Languages::data('iso');
 
 			# Set menu
 
