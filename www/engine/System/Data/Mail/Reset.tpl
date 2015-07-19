@@ -34,7 +34,7 @@
 
 				<p>%MAIL_TEXT_FOOTER_NOREPLY%.<br />%MAIL_TEXT_FOOTER_REPLY_TO%:
 
-				<a href="mailto:$admin_email$" style="color:#666; text-decoration:underline;">$admin_email$</a></p>
+				<a href="mailto:$system_email$" style="color:#666; text-decoration:underline;">$system_email$</a></p>
 
 				<p><a href="$system_url$" style="color:#666; text-decoration:underline;">$site_title$</a> &copy; $copyright$</p>
 
