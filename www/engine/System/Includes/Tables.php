@@ -2,7 +2,6 @@
 
 # Database tables
 
-define('TABLE_CONFIG',								'config');
 define('TABLE_MENU',								'menu');
 define('TABLE_PAGES',								'pages');
 
