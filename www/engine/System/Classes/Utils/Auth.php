@@ -37,7 +37,7 @@ namespace System\Utils {
 		const ERROR_INPUT_CAPTCHA 					= 'USER_ERROR_INPUT_CAPTCHA';
 		const ERROR_INPUT_CAPTCHA_INCORRECT 		= 'USER_ERROR_INPUT_CAPTCHA_INCORRECT';
 
-		private static $user = false, $init = false, $admin = false;
+		private static $user = false, $admin = false, $init = false;
 
 		# Send reset mail
 
@@ -74,7 +74,7 @@ namespace System\Utils {
 
 			$message->site_title = CONFIG_SITE_TITLE; $message->system_url = CONFIG_SYSTEM_URL; $message->name = $name;
 
-			$message->link = (CONFIG_SYSTEM_URL . '/profile');
+			$message->link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin' : '/profile'));
 
 			$message->system_email = CONFIG_SYSTEM_EMAIL; $message->copyright = Date::year();
 
@@ -155,13 +155,13 @@ namespace System\Utils {
 
 			if (false !== self::$user->id()) return true;
 
-			$admin = Validate::boolean($admin);
+			self::$admin = Validate::boolean($admin);
 
 			if (false === ($code = self::validateCode(Session::get(USER_SESSION_PARAM_CODE)))) return false;
 
 			# Select user from DB
 
-			$rank = ($admin ? RANK_ADMINISTRATOR : RANK_USER);
+			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
 
 			$ip = addslashes(ENGINE_CLIENT_IP); $time = (ENGINE_TIME - CONFIG_USER_SESSION_LIFETIME);
 
@@ -185,9 +185,7 @@ namespace System\Utils {
 
 			# ------------------------
 
-			self::$init = true; self::$admin = $admin;
-
-			return true;
+			return (self::$init = true);
 		}
 
 		# Authorize with secret code
@@ -196,13 +194,13 @@ namespace System\Utils {
 
 			if (false !== self::$user->id()) return true;
 
-			$admin = Validate::boolean($admin);
+			self::$admin = Validate::boolean($admin);
 
 			if (false === ($code = self::validateCode(Request::get(USER_SECRET_PARAM_CODE)))) return false;
 
 			# Select user from DB
 
-			$rank = ($admin ? RANK_ADMINISTRATOR : RANK_USER);
+			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
 
 			$ip = addslashes(ENGINE_CLIENT_IP); $time = (ENGINE_TIME - CONFIG_USER_SECRET_LIFETIME);
 
