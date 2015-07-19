@@ -2,8 +2,8 @@
 
 namespace System\Frames\Admin {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend, System\Utils\Messages;
-	use Date, DB, Debug, Request, String, Template;
+	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Messages;
+	use Date, DB, Debug, Language, Request, String, Template;
 
 	abstract class Handler extends System\Frames\Main {
 
@@ -19,8 +19,6 @@ namespace System\Frames\Admin {
 
 			Template::title(Language::get('STATUS_TITLE_404'));
 
-			Template::main()->language = Extend\Languages::data('iso');
-
 			Template::main()->system_url = CONFIG_SYSTEM_URL;
 
 			Template::main()->site_title = CONFIG_SITE_TITLE;
@@ -32,6 +30,29 @@ namespace System\Frames\Admin {
 			Template::output(STATUS_CODE_404, true);
 		}
 
+		# Display install
+
+		private function displayInstall() {
+
+			# Process template
+
+			Template::main('Install');
+
+			Template::title((false === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
+
+			# Set messages
+
+			Template::main()->messages = Messages::block();
+
+			# Set contents
+
+			Template::main()->contents = $this->contents;
+
+			# ------------------------
+
+			Template::output(STATUS_CODE_200, true);
+		}
+
 		# Display auth
 
 		private function displayAuth() {
@@ -41,10 +62,6 @@ namespace System\Frames\Admin {
 			Template::main('Auth');
 
 			Template::title((false === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
-
-			# Set language
-
-			Template::main()->language = Extend\Languages::data('iso');
 
 			# Set messages
 
@@ -59,6 +76,8 @@ namespace System\Frames\Admin {
 			Template::output(STATUS_CODE_401, true);
 		}
 
+		# Display page
+
 		private function displayPage() {
 
 			# Process template
@@ -66,10 +85,6 @@ namespace System\Frames\Admin {
 			Template::main('Page');
 
 			Template::title((false === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
-
-			# Set language
-
-			Template::main()->language = Extend\Languages::data('iso');
 
 			# Set menu
 
@@ -137,15 +152,31 @@ namespace System\Frames\Admin {
 
 			# Handle request
 
+			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Install')) {
+
+				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayInstall() : $this->display404());
+			}
+
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Auth')) {
 
 				if (Auth::check()) return Request::redirect('/admin');
 
+				DB::select(TABLE_USERS, 'id', array('id' => 1), false, 1);
+
+				if (!(DB::last() && DB::last()->status)) return $this->display404();
+
+				$extra_registration = (DB::last()->rows === 0);
+
+				if ($this instanceof System\Handlers\Admin\Auth\Register) { if (!$extra_registration) return $this->display404(); }
+
+				else { if ($extra_registration) return Request::redirect('/admin/register'); }
+
 				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayAuth() : $this->display404());
+			}
 
-			} else if (0 === strpos(get_class($this), 'System\\Handlers\\Admin')) {
+			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin')) {
 
-				if (!Auth::check()) Request::redirect('/admin/login');
+				if (!Auth::check()) return Request::redirect('/admin/login');
 
 				if (Request::isAjax() && method_exists($this, 'handleAjax')) return Ajax::output($this->handleAjax());
 
