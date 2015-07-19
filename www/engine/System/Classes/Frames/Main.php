@@ -2,60 +2,18 @@
 
 namespace System\Frames {
 
-	use System, System\Utils\Auth, System\Utils\Config, System\Utils\Extend, Arr, DB, Language, Template, Session;
+	use System\Utils\Auth, System\Utils\Config, System\Utils\Extend, System\Utils\Requirements;
+	use Arr, Language, Template, Session;
 
 	abstract class Main {
 
-		protected $path = false, $requirements = false, $checked = false;
-
-		private function getRequirements() {
-
-			# Check if mysqli extension loaded
-
-			$requirements['mysqli'] = extension_loaded('mysqli');
-
-			# Check if mbstring extension loaded
-
-			$requirements['mbstring'] = extension_loaded('mbstring');
-
-			# Check if gd extension loaded
-
-			$requirements['gd'] = extension_loaded('gd');
-
-			# Check if simplexml extension loaded
-
-			$requirements['simplexml'] = extension_loaded('simplexml');
-
-			# Check if mod_rewrite enabled
-
-			$requirements['rewrite'] = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
-
-			# Check if data directory is writable
-
-			$requirements['data'] = is_writable(DIR_SYSTEM_DATA);
-
-			# Check if uploads directory is writable
-
-			$requirements['uploads'] = is_writable(DIR_UPLOADS);
-
-			# ------------------------
-
-			return $requirements;
-		}
+		protected $path = false;
 
 		# Constructor
 
 		public function __construct($path = false) {
 
 			$this->path = Arr::force($path);
-
-			# Get requirements list
-
-			$this->requirements = $this->getRequirements();
-
-			# Determine checking status
-
-			$this->checked = !in_array(false, $this->requirements);
 
 			# Init configuration
 
