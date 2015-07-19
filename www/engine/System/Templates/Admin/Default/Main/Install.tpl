@@ -47,7 +47,7 @@
 
 				<h1 class="image header">
 
-					<a href="/admin/login"><img class="image" src="/include/admin/templates/default/images/logo.png" /></a>
+					<a href="/"><img class="image" src="/include/admin/templates/default/images/logo.png" /></a>
 
 				</h1>
 
