@@ -22,7 +22,7 @@ namespace System\Utils\Entity\Type\User {
             $this->params->range            ('sex');
             $this->params->varchar          ('city');
             $this->params->varchar          ('country', 2);
-            $this->params->varchar          ('timezone', 64);
+            $this->params->varchar          ('timezone', 40);
             $this->params->time             ('time_registered');
             $this->params->time             ('time_logged');
         }
