@@ -228,13 +228,13 @@ namespace {
 				$status = ((false !== self::$status) ? self::$status : STATUS_CODE_200);
 			}
 
-			self::$main->language		= self::$language;
+			self::$main->language       = self::$language;
 
-			self::$main->head_title 	= ((false !== self::$title) ? self::$title : 'UNTITLED');
+			self::$main->head_title     = ((false !== self::$title) ? self::$title : 'UNTITLED');
 
-			self::$main->description 	= self::$description;
-			self::$main->keywords 		= self::$keywords;
-			self::$main->robots			= self::$robots;
+			self::$main->description    = self::$description;
+			self::$main->keywords       = self::$keywords;
+			self::$main->robots         = self::$robots;
 
 			self::$main->loop('meta', Arr::index(self::$meta, 'name', 'content'));
 

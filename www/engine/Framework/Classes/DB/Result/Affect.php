@@ -12,17 +12,17 @@ namespace DB\Result {
 
 		public function __construct($link, $query, $time) {
 
-			$this->status 		= true;
+			$this->status       = true;
 
-			$this->query 		= $query;
+			$this->query        = $query;
 
-			$this->result		= true;
+			$this->result       = true;
 
-			$this->time			= $time;
+			$this->time         = $time;
 
-			$this->rows			= mysqli_affected_rows($link);
+			$this->rows         = mysqli_affected_rows($link);
 
-			$this->id			= mysqli_insert_id($link);
+			$this->id           = mysqli_insert_id($link);
 		}
 	}
 }

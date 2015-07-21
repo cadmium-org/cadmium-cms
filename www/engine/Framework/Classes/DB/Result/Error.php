@@ -12,19 +12,19 @@ namespace DB\Result {
 
 		public function __construct($link, $query, $time) {
 
-			$this->status 		= false;
+			$this->status       = false;
 
-			$this->query 		= $query;
+			$this->query        = $query;
 
-			$this->result 		= false;
+			$this->result       = false;
 
-			$this->time			= $time;
+			$this->time         = $time;
 
-			$this->rows			= 0;
+			$this->rows         = 0;
 
-			$this->error 		= mysqli_error($link);
+			$this->error        = mysqli_error($link);
 
-			$this->errno 		= mysqli_errno($link);
+			$this->errno        = mysqli_errno($link);
 		}
 	}
 }

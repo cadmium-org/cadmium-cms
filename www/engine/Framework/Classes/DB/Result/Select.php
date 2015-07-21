@@ -10,15 +10,15 @@ namespace DB\Result {
 
 		public function __construct($query, $result, $time) {
 
-			$this->status 		= true;
+			$this->status       = true;
 
-			$this->query 		= $query;
+			$this->query        = $query;
 
-			$this->result		= $result;
+			$this->result       = $result;
 
-			$this->time			= $time;
+			$this->time         = $time;
 
-			$this->rows			= mysqli_num_rows($result);
+			$this->rows         = mysqli_num_rows($result);
 		}
 
 		# Get next row
