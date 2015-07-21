@@ -2,8 +2,10 @@
 
 namespace System\Handlers\Admin\Install {
 
-    use Error, Warning, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity, System\Utils\Extend;
-	use System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils;
+	use Error, Warning, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
+	use System\Utils\Requirements, System\Utils\Utils;
+
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
