@@ -32,171 +32,21 @@ namespace System\Handlers\Admin\Install {
         const ERROR_INPUT_DATABASE_PASSWORD         = 'INSTALL_ERROR_INPUT_DATABASE_PASSWORD';
         const ERROR_INPUT_DATABASE_NAME             = 'INSTALL_ERROR_INPUT_DATABASE_NAME';
 
-        # Get pages table
-
-        private function getPagesTable() {
-
-            $table = new System\Utils\Table\Table(TABLE_PAGES);
-
-            # Add fields
-
-            $table->fieldset()->id          ('id', true);
-            $table->fieldset()->id          ('parent_id');
-            $table->fieldset()->range       ('access');
-            $table->fieldset()->varchar     ('name', CONFIG_PAGE_NAME_MAX_LENGTH);
-            $table->fieldset()->varchar     ('title', CONFIG_PAGE_TITLE_MAX_LENGTH);
-            $table->fieldset()->text        ('contents');
-            $table->fieldset()->varchar     ('description', CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
-            $table->fieldset()->varchar     ('keywords', CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
-            $table->fieldset()->boolean     ('robots_index', true);
-            $table->fieldset()->boolean     ('robots_follow', true);
-            $table->fieldset()->id          ('user_id');
-            $table->fieldset()->time        ('time_created');
-            $table->fieldset()->time        ('time_modified');
-
-            # Add keys
-
-            $table->keyset()->primary       ('id');
-            $table->keyset()->index         ('parent_id');
-            $table->keyset()->index         ('access');
-            $table->keyset()->index         ('name');
-            $table->keyset()->index         ('title');
-            $table->keyset()->index         ('user_id');
-            $table->keyset()->index         ('time_created');
-            $table->keyset()->index         ('time_modified');
-
-            # ------------------------
-
-            return $table;
-        }
-
-        # Get menu table
-
-        private function getMenuTable() {
-
-            $table = new System\Utils\Table\Table(TABLE_MENU);
-
-            # Add fields
-
-            $table->fieldset()->id          ('id', true);
-            $table->fieldset()->id          ('parent_id');
-            $table->fieldset()->range       ('position');
-            $table->fieldset()->varchar     ('link', CONFIG_MENUITEM_LINK_MAX_LENGTH);
-            $table->fieldset()->varchar     ('text', CONFIG_MENUITEM_TEXT_MAX_LENGTH);
-            $table->fieldset()->range       ('target');
-
-            # Add keys
-
-            $table->keyset()->primary       ('id');
-            $table->keyset()->index         ('parent_id');
-            $table->keyset()->index         ('position');
-
-            # ------------------------
-
-            return $table;
-        }
-
-        # Get users table
-
-        private function getUsersTable() {
-
-            $table = new System\Utils\Table\Table(TABLE_USERS);
-
-            # Add fields
-
-            $table->fieldset()->id          ('id', true);
-            $table->fieldset()->range       ('rank', RANK_USER);
-            $table->fieldset()->varchar     ('name', CONFIG_USER_NAME_MAX_LENGTH);
-            $table->fieldset()->varchar     ('email', CONFIG_USER_EMAIL_MAX_LENGTH);
-            $table->fieldset()->hash        ('auth_key');
-            $table->fieldset()->hash        ('password');
-            $table->fieldset()->varchar     ('first_name', CONFIG_USER_FIRST_NAME_MAX_LENGTH);
-            $table->fieldset()->varchar     ('last_name', CONFIG_USER_LAST_NAME_MAX_LENGTH);
-            $table->fieldset()->range       ('sex');
-            $table->fieldset()->varchar     ('city', CONFIG_USER_CITY_MAX_LENGTH);
-            $table->fieldset()->varchar     ('country', 2);
-            $table->fieldset()->varchar     ('timezone', 64);
-            $table->fieldset()->time        ('time_registered');
-            $table->fieldset()->time        ('time_logged');
-
-            # Add keys
-
-            $table->keyset()->primary       ('id');
-            $table->keyset()->unique        ('name');
-            $table->keyset()->unique        ('email');
-            $table->keyset()->index         ('time_registered');
-            $table->keyset()->index         ('time_logged');
-
-            # ------------------------
-
-            return $table;
-        }
-
-        # Get users secrets table
-
-        private function getUsersSecretsTable() {
-
-            $table = new System\Utils\Table\Table(TABLE_USERS_SECRETS);
-
-            # Add fields
-
-            $table->fieldset()->id          ('id', true);
-            $table->fieldset()->hash        ('code');
-            $table->fieldset()->varchar     ('ip', 64);
-            $table->fieldset()->time        ('time');
-
-            # Add keys
-
-            $table->keyset()->primary       ('id');
-            $table->keyset()->unique        ('code');
-            $table->keyset()->index         ('ip');
-            $table->keyset()->index         ('time');
-
-            # ------------------------
-
-            return $table;
-        }
-
-        # Get users sessions table
-
-        private function getUsersSessionsTable() {
-
-            $table = new System\Utils\Table\Table(TABLE_USERS_SESSIONS);
-
-            # Add fields
-
-            $table->fieldset()->id          ('id', true);
-            $table->fieldset()->hash        ('code');
-            $table->fieldset()->varchar     ('ip', 64);
-            $table->fieldset()->time        ('time');
-
-            # Add keys
-
-            $table->keyset()->primary       ('id');
-            $table->keyset()->unique        ('code');
-            $table->keyset()->index         ('ip');
-            $table->keyset()->index         ('time');
-
-            # ------------------------
-
-            return $table;
-        }
-
         # Create database tables
 
         private function createTables() {
 
-            $tables[] = $this->getMenuTable();
+            $entities[] = new Entity\Type\Page\Definition();
 
-            $tables[] = $this->getPagesTable();
+            $entities[] = new Entity\Type\Menuitem\Definition();
 
-            $tables[] = $this->getUsersTable();
+            $entities[] = new Entity\Type\User\Definition();
 
-            $tables[] = $this->getUsersSecretsTable();
+            $entities[] = new Entity\Type\User\Secret\Definition();
 
-            $tables[] = $this->getUsersSessionsTable();
+            $entities[] = new Entity\Type\User\Session\Definition();
 
-            foreach ($tables as $table) if (!$table->create()) return false;
+            foreach ($entities as $entity) if (!$entity->createTable()) return false;
 
             # ------------------------
 
@@ -322,6 +172,8 @@ namespace System\Handlers\Admin\Install {
 
             if (!Config::save()) return self::ERROR_CONFIG;
 
+            # Save system file
+
             $system['database']['server']       = $database_server;
             $system['database']['user']         = $database_user;
             $system['database']['password']     = $database_password;
@@ -369,13 +221,13 @@ namespace System\Handlers\Admin\Install {
 
 			$fieldset->text          ('system_email', CONFIG_SYSTEM_EMAIL, CONFIG_SYSTEM_EMAIL_MAX_LENGTH);
 
-			$fieldset->text          ('database_server', 'localhost', CONFIG_INSTALL_DATABASE_SERVER_MAX_LENGTH);
+			$fieldset->text          ('database_server', 'localhost', CONFIG_DATABASE_SERVER_MAX_LENGTH);
 
-			$fieldset->text          ('database_user', false, CONFIG_INSTALL_DATABASE_USER_MAX_LENGTH);
+			$fieldset->text          ('database_user', false, CONFIG_DATABASE_USER_MAX_LENGTH);
 
-			$fieldset->password      ('database_password', false, CONFIG_INSTALL_DATABASE_PASSWORD_MAX_LENGTH);
+			$fieldset->password      ('database_password', false, CONFIG_DATABASE_PASSWORD_MAX_LENGTH);
 
-			$fieldset->text          ('database_name', false, CONFIG_INSTALL_DATABASE_NAME_MAX_LENGTH);
+			$fieldset->text          ('database_name', false, CONFIG_DATABASE_NAME_MAX_LENGTH);
 
 			# Post form
 
