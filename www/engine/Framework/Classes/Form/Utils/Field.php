@@ -8,7 +8,9 @@ namespace Form\Utils {
 
 		protected $posted = false, $form = false, $name = false, $value = false;
 
-		protected $readonly = false, $disabled = false, $search = false, $auto = false, $error = false;
+		protected $readonly = false, $disabled = false, $search = false;
+
+		protected $auto = false, $translit = false, $error = false;
 
 		# Validate name
 
@@ -31,13 +33,15 @@ namespace Form\Utils {
 
 				if ($value === FORM_FIELD_READONLY) $this->readonly = true;
 
-				if ($value === FORM_FIELD_DISABLED) $this->disabled = true;
+				else if ($value === FORM_FIELD_DISABLED) $this->disabled = true;
 
-				if ($value === FORM_FIELD_SEARCH) $this->search = true;
+				else if ($value === FORM_FIELD_SEARCH) $this->search = true;
 
-				if ($value === FORM_FIELD_AUTO) $this->auto = true;
+				else if ($value === FORM_FIELD_AUTO) $this->auto = true;
 
-				if ($value === FORM_FIELD_ERROR) $this->error = true;
+				else if ($value === FORM_FIELD_TRANSLIT) $this->translit = true;
+
+				else if ($value === FORM_FIELD_ERROR) $this->error = true;
 			}
 		}
 

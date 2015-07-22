@@ -18,6 +18,7 @@ define('FORM_FIELD_ERROR',                          'error');
 define('FORM_FIELD_READONLY',                       'readonly');
 define('FORM_FIELD_DISABLED',                       'disabled');
 define('FORM_FIELD_SEARCH',                         'search');
+define('FORM_FIELD_TRANSLIT',                       'translit');
 define('FORM_FIELD_AUTO',                           'auto');
 
 # Robots
