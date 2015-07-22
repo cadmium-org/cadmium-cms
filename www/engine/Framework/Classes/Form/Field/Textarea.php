@@ -33,6 +33,8 @@ namespace Form\Field {
 
 			$this->value = String::input($value, true, $this->maxlength);
 
+			if ($this->required && (false === $this->value)) $this->error = true;
+
 			# ------------------------
 
 			return ($this->posted = true);

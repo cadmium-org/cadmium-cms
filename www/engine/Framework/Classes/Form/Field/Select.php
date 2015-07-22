@@ -33,6 +33,8 @@ namespace Form\Field {
 
 			$this->value = (isset($this->options[$value]) ? $value : key($this->options));
 
+			if ($this->required && !Validate::boolean($this->value)) $this->error = true;
+
 			# ------------------------
 
 			return ($this->posted = true);

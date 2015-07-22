@@ -29,9 +29,11 @@ namespace Form\Field {
 
 			if (null === ($value = Request::post($name))) return false;
 
-			$value = String::input($value, false, $this->maxlength);
+			$this->value = String::input($value, false, $this->maxlength);
 
-			$this->value = ($this->translit ? String::translit($value) : $value);
+			if ($this->translit) $this->value = String::translit($this->value);
+
+			if ($this->required && (false === $this->value)) $this->error = true;
 
 			# ------------------------
 

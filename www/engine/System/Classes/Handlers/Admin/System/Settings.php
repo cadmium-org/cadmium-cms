@@ -19,7 +19,7 @@ namespace System\Handlers\Admin\System {
 
 			foreach ($data as $field) if (false === Config::set($field->name(), $field->value())) {
 
-				$field->error(); Messages::error(Language::get('SETTINGS_ERROR_PARAM'));
+				$field->error(true); Messages::error(Language::get('SETTINGS_ERROR_PARAM'));
 			}
 
 			return ((false === Messages::error()) && (true === Config::save()));

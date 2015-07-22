@@ -15,6 +15,7 @@ define('DATE_FORMAT_W3C',                           'Y-m-d\TH:i:sP');
 # Form field options
 
 define('FORM_FIELD_ERROR',                          'error');
+define('FORM_FIELD_REQUIRED',                       'required');
 define('FORM_FIELD_READONLY',                       'readonly');
 define('FORM_FIELD_DISABLED',                       'disabled');
 define('FORM_FIELD_SEARCH',                         'search');

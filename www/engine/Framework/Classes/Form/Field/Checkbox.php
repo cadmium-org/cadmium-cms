@@ -25,6 +25,8 @@ namespace Form\Field {
 
 			$this->value = Validate::boolean($value);
 
+			if ($this->required && (false === $this->value)) $this->error = true;
+
 			# ------------------------
 
 			return ($this->posted = true);

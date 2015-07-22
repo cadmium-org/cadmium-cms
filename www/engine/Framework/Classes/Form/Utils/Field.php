@@ -8,9 +8,9 @@ namespace Form\Utils {
 
 		protected $posted = false, $form = false, $name = false, $value = false;
 
-		protected $readonly = false, $disabled = false, $search = false;
+		protected $required = false, $readonly = false, $disabled = false, $search = false;
 
-		protected $auto = false, $translit = false, $error = false;
+		protected $translit = false, $auto = false, $error = false;
 
 		# Validate name
 
@@ -31,15 +31,17 @@ namespace Form\Utils {
 
 			foreach ($options as $value) {
 
-				if ($value === FORM_FIELD_READONLY) $this->readonly = true;
+				if ($value === FORM_FIELD_REQUIRED) $this->required = true;
+
+				else if ($value === FORM_FIELD_READONLY) $this->readonly = true;
 
 				else if ($value === FORM_FIELD_DISABLED) $this->disabled = true;
 
 				else if ($value === FORM_FIELD_SEARCH) $this->search = true;
 
-				else if ($value === FORM_FIELD_AUTO) $this->auto = true;
-
 				else if ($value === FORM_FIELD_TRANSLIT) $this->translit = true;
+
+				else if ($value === FORM_FIELD_AUTO) $this->auto = true;
 
 				else if ($value === FORM_FIELD_ERROR) $this->error = true;
 			}
@@ -75,7 +77,7 @@ namespace Form\Utils {
 			return $this->name;
 		}
 
-		# Return value
+		# Return/set value
 
 		public function value($value = null) {
 
@@ -84,11 +86,13 @@ namespace Form\Utils {
 			$this->value = String::validate($value);
 		}
 
-		# Set error
+		# Return/set error
 
-		public function error() {
+		public function error($value = null) {
 
-			$this->error = true;
+			if (null === $value) return $this->error;
+
+			if (Validate::boolean($value)) $this->error = true;
 		}
 
 		# Check if field disabled

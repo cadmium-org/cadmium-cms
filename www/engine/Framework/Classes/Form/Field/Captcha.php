@@ -31,6 +31,8 @@ namespace Form\Field {
 
 			$this->value = String::input($value, false, $this->maxlength);
 
+			if (false === $this->value) $this->error = true;
+
 			# ------------------------
 
 			return ($this->posted = true);

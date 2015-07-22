@@ -4,7 +4,7 @@ namespace {
 
 	class Form {
 
-		private $name = false, $fieldset = false, $posted = false, $fields = array();
+		private $name = false, $fieldset = false, $posted = false, $errors = false, $fields = array();
 
 		# Constructor
 
@@ -49,9 +49,14 @@ namespace {
 				if (null === ($value = Request::post($name))) return false;
 			}
 
-			foreach ($this->fields as $field) $field->post();
+			$errors = false;
 
-			$this->posted = true;
+			foreach ($this->fields as $field) {
+
+				if ($field->post() && $field->error()) $errors = true;
+			}
+
+			$this->posted = true; $this->errors = $errors;
 
 			# ------------------------
 
@@ -77,6 +82,13 @@ namespace {
 		public function posted() {
 
 			return $this->posted;
+		}
+
+		# Check for errors
+
+		public function errors() {
+
+			return $this->errors;
 		}
 
 		# Get fields

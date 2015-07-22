@@ -29,7 +29,9 @@ namespace Form\Field {
 
 			if (null === ($value = Request::post($name))) return false;
 
-			$this->value = $value;
+			$this->value = String::validate($value);
+
+			if ($this->required && (false === $this->value)) $this->error = true;
 
 			# ------------------------
 
