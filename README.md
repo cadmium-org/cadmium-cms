@@ -19,6 +19,7 @@ Cadmium CMS is currently in active development. We're planning to add a lot of n
  - Publications.
  - Full-featured multi-language system.
  - Plugins system.
+ - Widgets.
  - File manager.
 
 ## System requirments
