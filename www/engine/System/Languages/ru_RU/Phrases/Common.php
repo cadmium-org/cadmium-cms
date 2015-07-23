@@ -33,6 +33,10 @@ return array (
 	'SECTION_ADMIN'                             => 'Панель управления',
 	'SECTION_SITE'                              => 'Сайт',
 
+	# Forms
+
+	'FORM_ERROR_REQUIRED'						=> 'Необходимо заполнить все обязательные поля',
+
 	# Modals
 
 	'MODAL_HEADER_CONFIRM'                      => 'Подтверждение действия',

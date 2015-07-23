@@ -38,15 +38,17 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH);
+			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('captcha', false, CONFIG_CAPTCHA_LENGTH);
+			$fieldset->password		('captcha', false, CONFIG_CAPTCHA_LENGTH, false, FORM_FIELD_REQUIRED);
 
 			# Post form
 
 			if (false !== ($post = $this->form->post())) {
 
-				if (true !== ($result = Auth::reset($post))) Messages::error(Language::get($result));
+				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+
+				else if (true !== ($result = Auth::reset($post))) Messages::error(Language::get($result));
 
 				else Request::redirect('/profile/reset?submitted');
 

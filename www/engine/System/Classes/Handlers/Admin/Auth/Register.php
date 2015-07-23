@@ -38,21 +38,23 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'));
+			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD'));
+			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD'), FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'));
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'), FORM_FIELD_REQUIRED);
 
-			$fieldset->text			('email', false, CONFIG_USER_EMAIL_MAX_LENGTH, Language::get('USER_FIELD_EMAIL'));
+			$fieldset->text			('email', false, CONFIG_USER_EMAIL_MAX_LENGTH, Language::get('USER_FIELD_EMAIL'), FORM_FIELD_REQUIRED);
 
-			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'));
+			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
 
 			# Post form
 
 			if (false !== ($post = $this->form->post())) {
 
-				if (true !== ($result = Auth::register($post))) Messages::error(Language::get($result));
+				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+
+				else if (true !== ($result = Auth::register($post))) Messages::error(Language::get($result));
 
 				else Request::redirect('/admin/login?submitted=register');
 			}

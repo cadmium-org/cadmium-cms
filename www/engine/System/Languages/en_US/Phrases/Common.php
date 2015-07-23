@@ -33,6 +33,10 @@ return array (
 	'SECTION_ADMIN'                             => 'Admin panel',
 	'SECTION_SITE'                              => 'Site',
 
+	# Forms
+
+	'FORM_ERROR_REQUIRED'						=> 'Please fill in all required fields',
+
 	# Modals
 
 	'MODAL_HEADER_CONFIRM'                      => 'Action confirmation',

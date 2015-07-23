@@ -44,15 +44,17 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_NEW'));
+			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_NEW'), FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'));
+			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD_RETYPE'), FORM_FIELD_REQUIRED);
 
 			# Post form
 
 			if (false !== ($post = $this->form->post())) {
 
-				if (true !== ($result = Auth::recover($post))) Messages::error(Language::get($result));
+				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+
+				else if (true !== ($result = Auth::recover($post))) Messages::error(Language::get($result));
 
 				else Request::redirect('/admin/login?submitted=recover');
 			}
