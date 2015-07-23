@@ -69,11 +69,11 @@ namespace Form\Utils {
 
 		# Add select field
 
-		public function select($name, $value, $options, $default = false, $search = false, $config = false) {
+		public function select($name, $value, $options, $default = false, $config = false) {
 
 			if (false === $this->form) return false;
 
-			$field = new Form\Field\Select($this->form, $name, $value, $options, $default, $search, $config);
+			$field = new Form\Field\Select($this->form, $name, $value, $options, $default, $config);
 
 			# ------------------------
 

@@ -31,7 +31,7 @@ namespace Form\Field {
 
 			$this->value = String::input($value, false, $this->maxlength);
 
-			if (false === $this->value) $this->error = true;
+			if ($this->required && (false === $this->value)) $this->error = true;
 
 			# ------------------------
 
