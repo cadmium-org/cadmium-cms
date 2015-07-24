@@ -29,9 +29,13 @@ namespace Form\Field {
 
 			if ($this->posted || $this->disabled || (false === ($name = $this->getName()))) return false;
 
+			if (array() === $this->options) return false;
+
 			if (null === ($value = Request::post($name))) return false;
 
-			$this->value = (isset($this->options[$value]) ? $value : key($this->options));
+			$key = array_search($value, ($range = array_keys($this->options)));
+
+			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
 
 			if ($this->required && !Validate::boolean($this->value)) $this->error = true;
 
