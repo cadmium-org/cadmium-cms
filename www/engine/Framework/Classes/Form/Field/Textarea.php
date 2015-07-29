@@ -44,7 +44,11 @@ namespace Form\Field {
 
 		public function block() {
 
-			$attributes['name'] = $this->getName(); $attributes['id'] = $this->getId();
+			$attributes = array();
+
+			$attributes['name'] = $this->getName();
+
+			$attributes['id'] = $this->getId();
 
 			if (0 !== $this->maxlength) $attributes['maxlength'] = $this->maxlength;
 
@@ -66,5 +70,3 @@ namespace Form\Field {
 		}
 	}
 }
-
-?>

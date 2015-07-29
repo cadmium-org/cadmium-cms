@@ -120,5 +120,3 @@ namespace Form\Utils {
 		}
 	}
 }
-
-?>

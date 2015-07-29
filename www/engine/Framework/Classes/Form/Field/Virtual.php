@@ -31,5 +31,3 @@ namespace Form\Field {
 		}
 	}
 }
-
-?>

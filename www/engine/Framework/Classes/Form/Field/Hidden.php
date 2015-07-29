@@ -34,9 +34,13 @@ namespace Form\Field {
 
 		public function block() {
 
+			$attributes = array();
+
 			$attributes['type'] = 'hidden';
 
-			$attributes['name'] = $this->getName(); $attributes['id'] = $this->getId();
+			$attributes['name'] = $this->getName();
+
+			$attributes['id'] = $this->getId();
 
 			$attributes['value'] = $this->value;
 
@@ -48,5 +52,3 @@ namespace Form\Field {
 		}
 	}
 }
-
-?>

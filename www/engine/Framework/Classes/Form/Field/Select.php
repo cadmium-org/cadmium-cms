@@ -48,7 +48,11 @@ namespace Form\Field {
 
 		public function block() {
 
-			$attributes['name'] = $this->getName(); $attributes['id'] = $this->getId();
+			$attributes = array();
+
+			$attributes['name'] = $this->getName();
+
+			$attributes['id'] = $this->getId();
 
 			if ($this->error) $attributes['data-error'] = 'error';
 
@@ -81,5 +85,3 @@ namespace Form\Field {
 		}
 	}
 }
-
-?>

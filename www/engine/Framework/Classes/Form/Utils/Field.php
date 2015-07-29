@@ -103,5 +103,3 @@ namespace Form\Utils {
 		}
 	}
 }
-
-?>

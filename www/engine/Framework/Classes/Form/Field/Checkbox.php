@@ -38,6 +38,8 @@ namespace Form\Field {
 
 		public function block() {
 
+			$attributes = array();
+
 			$block = new Template\Utils\Group();
 
 			# Create hidden field
@@ -70,5 +72,3 @@ namespace Form\Field {
 		}
 	}
 }
-
-?>
