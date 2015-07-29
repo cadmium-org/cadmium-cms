@@ -6,11 +6,13 @@ namespace System\Utils\Entity\Type\User {
 
 	class Definition extends Entity\Entity {
 
-        protected $table = TABLE_USERS, $super = true;
+		const TYPE = 'User', TABLE = TABLE_USERS, SUPER = true;
 
-		# Define params
+		# Define presets
 
         protected function define() {
+
+			# Add params
 
             $this->params->range            ('rank', RANK_USER);
             $this->params->unique           ('name');
@@ -25,6 +27,11 @@ namespace System\Utils\Entity\Type\User {
             $this->params->varchar          ('timezone', 40);
             $this->params->time             ('time_registered');
             $this->params->time             ('time_logged');
+
+			# Add foreign relations
+
+			$this->addForeign('User\Secret',   'id');
+			$this->addForeign('User\Session',  'id');
         }
     }
 }

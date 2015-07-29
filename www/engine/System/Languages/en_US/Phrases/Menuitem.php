@@ -4,15 +4,8 @@ return array (
 
 	# Process errors
 
-	'MENUITEM_ERROR_PARENT'                         => 'Parent item does not exist',
-
 	'MENUITEM_ERROR_CREATE'                         => 'Error creating item',
-	'MENUITEM_ERROR_SAVE'                           => 'Error saving item data',
-
-	# Input errors
-
-	'MENUITEM_ERROR_INPUT_TEXT'                     => 'Please enter item text',
-	'MENUITEM_ERROR_INPUT_LINK'                     => 'Please enter link',
+	'MENUITEM_ERROR_EDIT'                           => 'Error saving item data',
 
 	# Success messages
 

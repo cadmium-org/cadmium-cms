@@ -2,11 +2,11 @@
 
 namespace System\Utils\Entity\Param {
 
-    use Number, String, Validate;
+    use System\Utils\Entity, Number, String, Validate;
 
-	class Varchar {
+	class Varchar extends Entity\Param {
 
-        protected $name = false, $value = false, $maxlength = false, $index = false;
+        protected $maxlength = false, $index = false;
 
         # Constructor
 
@@ -23,7 +23,7 @@ namespace System\Utils\Entity\Param {
 
         public function set($value) {
 
-            $this->value = String::validate($value);
+            return ($this->value = String::validate($value));
         }
 
         # Get field statement

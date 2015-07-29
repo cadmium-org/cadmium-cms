@@ -4,6 +4,7 @@ return array (
 
 	'BROWSE'                                    => 'Browse',
 	'CONTINUE'                                  => 'Continue',
+	'DEFAULT'									=> 'Default',
 	'EDIT'                                      => 'Edit',
 	'LOGIN'                                     => 'Log in',
 	'LOGOUT'                                    => 'Log out',

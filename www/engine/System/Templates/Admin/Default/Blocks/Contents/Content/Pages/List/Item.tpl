@@ -6,7 +6,11 @@
 
 	<td class="right aligned">
 
-		<a class="ui mini icon button" href="$link$" title="%PAGES_ITEM_BROWSE%" target="_blank"><i class="external icon"></i></a>
+		{ block:browse }
+
+		<a class="ui mini $class$ icon button" href="$link$" title="%PAGES_ITEM_BROWSE%" target="_blank"><i class="external icon"></i></a>
+
+		{ / block:browse }
 
 		<a class="ui mini positive icon button" href="/admin/content/pages?id=$id$" title="%PAGES_ITEM_EDIT%"><i class="edit icon"></i></a>
 

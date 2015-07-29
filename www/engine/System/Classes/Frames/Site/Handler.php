@@ -94,11 +94,11 @@ namespace System\Frames\Site {
 
 				Template::main()->block('user')->enable();
 
-				Template::main()->block('user')->gravatar = md5(strtolower(Auth::user()->email()));
+				Template::main()->block('user')->gravatar = md5(strtolower(Auth::user()->email));
 
-				Template::main()->block('user')->name = Auth::user()->name();
+				Template::main()->block('user')->name = Auth::user()->name;
 
-				if (Auth::user()->rank() === RANK_ADMINISTRATOR) Template::main()->block('user')->block('admin')->enable();
+				if (Auth::user()->rank === RANK_ADMINISTRATOR) Template::main()->block('user')->block('admin')->enable();
 			}
 
 			# Set title
@@ -163,7 +163,7 @@ namespace System\Frames\Site {
 				if (!Auth::check()) Request::redirect('/profile/login');
 			}
 
-			// if (isset($this->_access) && (Auth::user()->rank() < $this->_access)) Request::redirect('/profile/login');
+			// if (isset($this->_access) && (Auth::user()->rank < $this->_access)) Request::redirect('/profile/login');
 
 			return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : $this->display404());
 		}

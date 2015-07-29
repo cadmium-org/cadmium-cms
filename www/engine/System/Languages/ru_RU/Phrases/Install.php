@@ -50,11 +50,6 @@ return array (
 	'INSTALL_ERROR_INPUT_SYSTEM_TIMEZONE'       => 'Необходимо выбрать часовую зону',
 	'INSTALL_ERROR_INPUT_SYSTEM_EMAIL'          => 'Неверный формат email',
 
-	'INSTALL_ERROR_INPUT_DATABASE_SERVER'       => 'Необходимо ввести сервер базы данных',
-	'INSTALL_ERROR_INPUT_DATABASE_USER'         => 'Необходимо ввести имя пользователя базы данных',
-	'INSTALL_ERROR_INPUT_DATABASE_PASSWORD'     => 'Необходимо ввести пароль пользователя базы данных',
-	'INSTALL_ERROR_INPUT_DATABASE_NAME'         => 'Необходимо ввести название базы данных',
-
 	# Fields
 
 	'INSTALL_FIELD_LANGUAGE'                    => 'Язык',

@@ -4,7 +4,7 @@
 
 	<td class="right aligned">
 
-		<a class="ui mini icon button" data-checker="is-active" data-value="$is_active$"><i class="icon checkmark"></i></a>
+		<a class="ui mini icon button" data-checker="is-active" data-value="$is_active$" title="%DEFAULT%"><i class="icon checkmark"></i></a>
 
 	</td>
 

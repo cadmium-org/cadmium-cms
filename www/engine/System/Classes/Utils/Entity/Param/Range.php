@@ -2,11 +2,11 @@
 
 namespace System\Utils\Entity\Param {
 
-    use Number, String, Validate;
+    use System\Utils\Entity, Number, String, Validate;
 
-	class Range {
+	class Range extends Entity\Param {
 
-        private $name = false, $value = false, $default = false, $index = false;
+        private $default = false, $index = false;
 
         # Constructor
 
@@ -21,7 +21,7 @@ namespace System\Utils\Entity\Param {
 
         public function set($value) {
 
-            $this->value = Number::unsigned($value);
+            return ($this->value = Number::unsigned($value));
         }
 
         # Get field statement

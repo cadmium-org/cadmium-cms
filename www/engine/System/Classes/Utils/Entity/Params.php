@@ -6,76 +6,85 @@ namespace System\Utils\Entity {
 
 	class Params {
 
-		private $params = false;
+		private $id = false, $params = false;
+
+		# Add param to set
+
+		private function add($param) {
+
+			if ((false === $param->name()) || isset($this->params[$param->name()])) return false;
+
+			$this->params[$param->name()] = $param;
+		}
 
 		# Constructor
 
 		public function __construct() {
 
-            $this->params['id'] = new Param\Id('id');
+            $this->id = new Param\Id('id');
 		}
 
 		# Add relation param
 
-        public function relation($name) {
+        public function relation($name, $type) {
 
-			$this->params[$name] = new Param\Relation($name);
+			$this->add(new Param\Relation($name, $type));
         }
 
 		# Add boolean param
 
         public function boolean($name, $default = false, $index = false) {
 
-			$this->params[$name] = new Param\Boolean($name, $default, $index);
+			$this->add(new Param\Boolean($name, $default, $index));
         }
 
 		# Add range param
 
         public function range($name, $default = false, $index = false) {
 
-            $this->params[$name] = new Param\Range($name, $default, $index);
+            $this->add(new Param\Range($name, $default, $index));
         }
 
 		# Add varchar param
 
         public function varchar($name, $maxlength = null, $index = false) {
 
-            $this->params[$name] = new Param\Varchar($name, $maxlength, $index);
+            $this->add(new Param\Varchar($name, $maxlength, $index));
         }
 
 		# Add unique param
 
         public function unique($name, $maxlength = null) {
 
-            $this->params[$name] = new Param\Unique($name, $maxlength);
+            $this->add(new Param\Unique($name, $maxlength));
         }
 
 		# Add hash param
 
         public function hash($name) {
 
-            $this->params[$name] = new Param\Hash($name);
+            $this->add(new Param\Hash($name));
         }
 
 		# Add text param
 
         public function text($name) {
 
-            $this->params[$name] = new Param\Text($name);
+            $this->add(new Param\Text($name));
         }
 
 		# Add time param
 
         public function time($name) {
 
-            $this->params[$name] = new Param\Time($name);
+            $this->add(new Param\Time($name));
         }
 
 		# Get fieldset
 
 		public function fieldset() {
 
-			$fieldset = array();
+			$fieldset = array($this->id->getFieldStatement());
 
 			foreach ($this->params as $param) {
 
@@ -89,7 +98,7 @@ namespace System\Utils\Entity {
 
 		public function keyset() {
 
-			$keyset = array();
+			$keyset = array($this->id->getKeyStatement());
 
 			foreach ($this->params as $param) {
 
@@ -99,11 +108,22 @@ namespace System\Utils\Entity {
 			return $keyset;
 		}
 
+		# Return id
+
+		public function id() {
+
+			return $this->id;
+		}
+
 		# Return array
 
-        public function get() {
+        public function get($name = null) {
 
-            return $this->params;
+            if (null === $name) return $this->params;
+
+			$name = String::validate($name);
+
+			return (isset($this->params[$name]) ? $this->params[$name] : false);
         }
     }
 }

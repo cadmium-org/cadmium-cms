@@ -12,7 +12,7 @@ namespace System\Frames\Tools {
 
 			$pages = array();
 
-			$condition = array('access' => ACCESS_PUBLIC);
+			$condition = array('visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC);
 
 			if (!(DB::select(TABLE_PAGES, 'id', $condition) && DB::last()->status)) return false;
 
@@ -20,9 +20,9 @@ namespace System\Frames\Tools {
 
 			foreach ($pages as $key => $id) {
 
-				$page = new Entity\Page(); $page->init($id);
+				$page = Entity\Factory::page($id);
 
-				$pages[$key] = array('canonical' => $page->canonical(), 'modified' => $page->timeModified());
+				$pages[$key] = array('canonical' => $page->canonical, 'modified' => $page->time_modified);
 			}
 
 			return Arr::subvalSort($pages, 'canonical');

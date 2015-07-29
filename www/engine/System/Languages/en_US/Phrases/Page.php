@@ -4,12 +4,10 @@ return array (
 
 	# Process errors
 
-	'PAGE_ERROR_NAME'                               => 'Page URL is already in use',
-
-	'PAGE_ERROR_PARENT'                             => 'Parent page does not exist',
-
 	'PAGE_ERROR_CREATE'                             => 'Error creating page',
-	'PAGE_ERROR_SAVE'                               => 'Error saving page data',
+	'PAGE_ERROR_EDIT'                               => 'Error saving page data',
+
+	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Page URL is already in use',
 
 	# Input errors
 
@@ -26,6 +24,7 @@ return array (
 	'PAGE_FIELD_PARENT'                             => 'Parent page',
 	'PAGE_FIELD_TITLE'                              => 'Page title',
 	'PAGE_FIELD_NAME'                               => 'Page URL',
+	'PAGE_FIELD_VISIBILITY'                         => 'Visibility',
 	'PAGE_FIELD_ACCESS'                             => 'Access',
 	'PAGE_FIELD_DESCRIPTION'                        => 'Description',
 	'PAGE_FIELD_KEYWORDS'                           => 'Keywords',

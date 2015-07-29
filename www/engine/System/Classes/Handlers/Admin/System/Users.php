@@ -21,9 +21,9 @@ namespace System\Handlers\Admin\System {
 
 			# Set general
 
-			$contents->link = ('/admin/system/users?' . ($this->create ? 'create' : ('id=' . $this->user->id())));
+			$contents->link = ('/admin/system/users?' . ($this->create ? 'create' : ('id=' . $this->user->id)));
 
-			$contents->title = ($this->create ? Language::get('USERS_ITEM_NEW') : $this->user->name());
+			$contents->title = ($this->create ? Language::get('USERS_ITEM_NEW') : $this->user->name);
 
 			# Set form
 
@@ -33,9 +33,9 @@ namespace System\Handlers\Admin\System {
 
 			if ($this->create) $contents->block('info')->disable(); else {
 
-				$contents->block('info')->time_registered = Date::get(DATE_FORMAT_DATETIME, $this->user->timeRegistered());
+				$contents->block('info')->time_registered = Date::get(DATE_FORMAT_DATETIME, $this->user->time_registered);
 
-				$contents->block('info')->time_logged = Date::get(DATE_FORMAT_DATETIME,$this->user->timeLogged());
+				$contents->block('info')->time_logged = Date::get(DATE_FORMAT_DATETIME,$this->user->time_logged);
 			}
 
 			# ------------------------
@@ -49,17 +49,15 @@ namespace System\Handlers\Admin\System {
 
 			# Create user
 
-			$this->user = new Entity\User();
-
 			if (!($this->create = (null !== Request::get('create')))) {
 
-				if ((null !== ($id = Request::get('id'))) && !$this->user->init($id)) {
+				if (null === ($id = Request::get('id'))) return $this->handleList();
 
-					Messages::error(Language::get('USERS_ITEM_NOT_FOUND'));
-				}
+				$this->user = new Entity\Type\User\Manager($id);
 
-				if (false === $this->user->id()) return $this->handleList();
-			}
+				if (false === $this->user->id) return $this->handleList(true);
+
+			} else $this->user = Entity\Factory::user();
 
 			# Create form
 
@@ -67,39 +65,46 @@ namespace System\Handlers\Admin\System {
 
 			# Add form fields
 
-			$fieldset->text			('name', $this->user->name(), CONFIG_USER_NAME_MAX_LENGTH);
+			$fieldset->text         ('name', $this->user->name, CONFIG_USER_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text			('email', $this->user->email(), CONFIG_USER_EMAIL_MAX_LENGTH);
+			$fieldset->text         ('email', $this->user->email, CONFIG_USER_EMAIL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->select		('rank', $this->user->rank(), Lister::rank(), false,
+			$fieldset->select       ('rank', $this->user->rank, Lister::rank(), false,
 
-									(($this->user->id() === Auth::user()->id()) ? FORM_FIELD_DISABLED : false));
+			                        ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : false));
 
-			$fieldset->text			('first_name', $this->user->firstName(), CONFIG_USER_FIRST_NAME_MAX_LENGTH);
+			$fieldset->text         ('first_name', $this->user->first_name, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
-			$fieldset->text			('last_name', $this->user->lastName(), CONFIG_USER_LAST_NAME_MAX_LENGTH);
+			$fieldset->text         ('last_name', $this->user->last_name, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$fieldset->select		('sex', $this->user->sex(), Lister::sex());
+			$fieldset->select       ('sex', $this->user->sex, Lister::sex());
 
-			$fieldset->text			('city', $this->user->city(), CONFIG_USER_CITY_MAX_LENGTH);
+			$fieldset->text         ('city', $this->user->city, CONFIG_USER_CITY_MAX_LENGTH);
 
-			$fieldset->select		('country', $this->user->country(), Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
+			$fieldset->select       ('country', $this->user->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
 
-			$fieldset->select		('timezone', $this->user->timezone(), Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
+			$fieldset->select       ('timezone', $this->user->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
 
-			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password     ('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false,
 
-			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
+			                        ($this->create ? FORM_FIELD_REQUIRED : false));
+
+			$fieldset->password     ('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false,
+
+			                        ($this->create ? FORM_FIELD_REQUIRED : false));
 
 			# Post form
 
 			if (false !== ($post = $this->form->post())) {
 
-				$result = ($this->create ? $this->user->create($post) : $this->user->edit($post));
+				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED')); else {
 
-				if (true !== $result) Messages::error(Language::get($result));
+					$result = ($this->create ? $this->user->create($post) : $this->user->edit($post));
 
-				else Request::redirect('/admin/system/users?id=' . $this->user->id() . '&submitted');
+					if (true !== $result) Messages::error(Language::get($result));
+
+					else Request::redirect('/admin/system/users?id=' . $this->user->id . '&submitted');
+				}
 
 			} else if (null !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_SAVE'));
 
@@ -128,13 +133,13 @@ namespace System\Handlers\Admin\System {
 
 			# Create user
 
-			$this->user = new Entity\User(); $this->user->init($post['id']);
+			$this->user = Entity\Factory::user($post['id']);
 
 			# Process remove
 
 			if ($post['action'] == 'remove') {
 
-				if (false === $this->user->id()) return Ajax::error(Language::get('USERS_ITEM_NOT_FOUND'));
+				if (false === $this->user->id) return Ajax::error(Language::get('USERS_ITEM_NOT_FOUND'));
 
 				return $this->user->remove();
 			}

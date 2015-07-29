@@ -4,15 +4,8 @@ return array (
 
 	# Process errors
 
-	'MENUITEM_ERROR_PARENT'                         => 'Родительский элемент не существует',
-
 	'MENUITEM_ERROR_CREATE'                         => 'Ошибка создания элемента',
-	'MENUITEM_ERROR_SAVE'                           => 'Ошибка сохранения данных элемента',
-
-	# Input errors
-
-	'MENUITEM_ERROR_INPUT_TEXT'                     => 'Необходимо ввести текст элемента',
-	'MENUITEM_ERROR_INPUT_LINK'                     => 'Необходимо ввести ссылку',
+	'MENUITEM_ERROR_EDIT'                           => 'Ошибка сохранения данных элемента',
 
 	# Success messages
 

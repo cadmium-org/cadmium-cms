@@ -2,8 +2,10 @@
 
 namespace System\Frames\Admin\Listview {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
-	use System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination, System\Utils\Utils;
+	use Error, Warning, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
+	use System\Utils\Requirements, System\Utils\Utils;
+
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
@@ -17,7 +19,7 @@ namespace System\Frames\Admin\Listview {
 
 			$children = array('items' => array(), 'total' => 0);
 
-			$parent_id = ($this->menuitem->id() ? $this->menuitem->id() : 0);
+			$parent_id = ($this->menuitem->id ? $this->menuitem->id : 0);
 
 			# Select menuitems
 
@@ -37,15 +39,15 @@ namespace System\Frames\Admin\Listview {
 
 			while (null !== ($menuitem = DB::last()->row())) $children['items'][] = array (
 
-				'id'			=> Number::unsigned($menuitem['id']),
+				'id'            => Number::unsigned($menuitem['id']),
 
-				'position'		=> Number::unsigned($menuitem['position']),
+				'position'      => Number::unsigned($menuitem['position']),
 
-				'link'			=> String::validate($menuitem['link']),
+				'link'          => String::validate($menuitem['link']),
 
-				'text'			=> String::validate($menuitem['text']),
+				'text'          => String::validate($menuitem['text']),
 
-				'children'		=> Number::unsigned($menuitem['children'])
+				'children'      => Number::unsigned($menuitem['children'])
 			);
 
 			# Count menuitems total
@@ -64,7 +66,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getPath() {
 
-			if (false === ($path = $this->menuitem->path())) return array();
+			if (false === ($path = $this->menuitem->path)) return array();
 
 			$count = count($path);
 
@@ -84,9 +86,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Set general
 
-			$contents->id = ((false !== $this->menuitem->id()) ? $this->menuitem->id() : 0);
+			$contents->id = ((false !== $this->menuitem->id) ? $this->menuitem->id : 0);
 
-			$contents->text = ((false !== $this->menuitem->text()) ? $this->menuitem->text() : ('- ' . Language::get('NONE')));
+			$contents->text = ((false !== $this->menuitem->text) ? $this->menuitem->text : ('- ' . Language::get('NONE')));
 
 			# Set path
 
@@ -94,20 +96,20 @@ namespace System\Frames\Admin\Listview {
 
 			# Set actions
 
-			if (false === $this->menuitem->id()) $contents->block('actions')->disable(); else {
+			if (false === $this->menuitem->id) $contents->block('actions')->disable(); else {
 
-				$contents->block('actions')->link = $this->menuitem->link();
+				$contents->block('actions')->link = $this->menuitem->link;
 
-				$contents->block('actions')->id = $this->menuitem->id();
+				$contents->block('actions')->id = $this->menuitem->id;
 			}
 
 			# Set form
 
 			if (!$ajax) {
 
-				if (false === $this->menuitem->id()) $contents->block('parent')->disable();
+				if (false === $this->menuitem->id) $contents->block('parent')->disable();
 
-				else $contents->block('parent')->text = $this->menuitem->text();
+				else $contents->block('parent')->text = $this->menuitem->text;
 
 				foreach ($this->form->fields() as $name => $block) $contents->block(('field_' . $name), $block);
 			}
@@ -124,7 +126,11 @@ namespace System\Frames\Admin\Listview {
 
 				$item->icon = ((0 === $menuitem['children']) ? 'file text outline' : 'folder');
 
-				$item->position = $menuitem['position']; $item->link = $menuitem['link'];
+				$item->position = $menuitem['position'];
+
+				$item->block('browse')->class = ((false !== $menuitem['link']) ? 'primary' : 'disabled');
+
+				$item->block('browse')->link = $menuitem['link'];
 
 				if (!$ajax) $item->block('remove')->class = (($menuitem['children'] === 0) ? 'negative' : 'disabled');
 			}
@@ -135,7 +141,7 @@ namespace System\Frames\Admin\Listview {
 
 			if (!$ajax) {
 
-				$display = CONFIG_ADMIN_MENUITEMS_DISPLAY; $url = new Url('/admin/content/menuitems?parent_id=' . $this->menuitem->id());
+				$display = CONFIG_ADMIN_MENUITEMS_DISPLAY; $url = new Url('/admin/content/menuitems?parent_id=' . $this->menuitem->id);
 
 				$contents->pagination = Pagination::block($this->index, $display, $this->children['total'], $url);
 			}
@@ -147,15 +153,15 @@ namespace System\Frames\Admin\Listview {
 
 		# Handle list
 
-		protected function handleList() {
+		protected function handleList($error = false) {
+
+			if (Validate::boolean($error)) Messages::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
 
 			$this->index = Number::index(Request::get('index'));
 
 			# Create parent menuitem
 
-			$parent_id = Number::unsigned(Request::get('parent_id'));
-
-			$this->menuitem = new Entity\Menuitem(); $this->menuitem->init($parent_id);
+			$this->menuitem = new Entity\Type\Menuitem\Manager(Request::get('parent_id'));
 
 			# Create form
 
@@ -163,17 +169,17 @@ namespace System\Frames\Admin\Listview {
 
 			# Add form fields
 
-			$fieldset->text		('text', false, CONFIG_MENUITEM_TEXT_MAX_LENGTH);
+			$fieldset->text     ('text', false, CONFIG_MENUITEM_TEXT_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text		('link', false, CONFIG_MENUITEM_LINK_MAX_LENGTH);
+			$fieldset->text     ('link', false, CONFIG_MENUITEM_LINK_MAX_LENGTH);
 
 			# Post form
 
-			if (false !== ($post = $this->form->post())) {
+			if (false !== ($post = $this->form->post()) && !$this->form->errors()) {
 
 				if (true !== ($result = $this->menuitem->create($post))) Messages::error(Language::get($result));
 
-				else Request::redirect('/admin/content/menuitems?id=' . $this->menuitem->createdId() . '&submitted=create');
+				else Request::redirect('/admin/content/menuitems?id=' . $this->menuitem->created_id . '&submitted=create');
 			}
 
 			# Get children menuitems
@@ -199,9 +205,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create parent menuitem
 
-			$parent_id = Number::unsigned(Request::get('parent_id'));
-
-			$this->menuitem = new Entity\Menuitem(); $this->menuitem->init($parent_id);
+			$this->menuitem = Entity\Factory::menuitem(Request::get('parent_id'));
 
 			# Get children menuitems
 

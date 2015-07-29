@@ -7,7 +7,9 @@ var Main = {
 
 		/* Semantic UI settings */
 
-		$('#section-button, .icon.button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
+		$('#section-button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
+
+		$('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
 
 		var items = $('.ui.form').find('input, textarea, select');
 
@@ -217,7 +219,7 @@ var Main = {
 
 					selector.click(function() { handler.select(id, title); });
 
-				}).find('.icon.button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
+				}).find('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
 
 				content.removeClass('loading'); modal.modal('show');
 			}
@@ -331,7 +333,7 @@ var Main = {
 
 					selector.click(function() { handler.select(id, text); });
 
-				}).find('.icon.button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
+				}).find('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
 
 				content.removeClass('loading'); modal.modal('show');
 			}

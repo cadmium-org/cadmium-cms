@@ -113,9 +113,69 @@
 
 					{ block:contents / }
 
-					<div class="ui basic segment">
+					<div class="ui hidden divider"></div>
 
-						$cadmium_copy$ &copy; <a class="copy" href="$cadmium_home$" target="_blank">$cadmium_name$</a> - $cadmium_version$
+					<div class="ui two column stackable grid">
+
+						<div class="nine wide column">
+
+							<a class="ui small basic labeled icon button" href="$cadmium_home$" target="_blank">
+
+								<i class="copyright icon"></i>
+
+								Copyright $cadmium_copy$ <b>$cadmium_name$</b>
+
+							</a>
+
+							<a class="ui small disabled button">ver. $cadmium_version$</a>
+
+						</div>
+
+						<div class="seven wide right aligned column">
+
+							{ block:language }
+
+							<div class="ui left bottom pointing dropdown small button">
+
+								<div class="text"><i class="$country$ flag"></i>$title$</div>
+
+								<div class="menu">
+
+									{ for:items }
+
+									<a class="item" href="?language=$code$"><i class="$country$ flag"></i>$title$</a>
+
+									{ / for:items }
+
+								</div>
+
+							</div>
+
+							{ / block:language }
+
+							{ block:template }
+
+							<div class="ui left bottom pointing dropdown small button">
+
+								<div class="text"><i class="theme icon"></i>$title$</div>
+
+								<div class="menu">
+
+									{ for:items }
+
+									<a class="item" href="?template=$name$"><i class="theme icon"></i>$title$</a>
+
+									{ / for:items }
+
+								</div>
+
+							</div>
+
+							{ / block:template }
+
+						</div>
+
+
 
 					</div>
 

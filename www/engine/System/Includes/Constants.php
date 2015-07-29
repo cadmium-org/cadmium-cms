@@ -5,7 +5,7 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.1 (beta)');
+define('CADMIUM_VERSION',                           '0.1');
 define('CADMIUM_COPY',                              '2015');
 
 # Sections
@@ -76,5 +76,10 @@ define('STATUS_UPDATE',                             2);
 
 define('TARGET_SELF',                               0);
 define('TARGET_BLANK',                              1);
+
+# Visibility
+
+define('VISIBILITY_DRAFT',                          0);
+define('VISIBILITY_PUBLISHED',                      1);
 
 ?>

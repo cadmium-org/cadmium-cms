@@ -21,19 +21,19 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->text			('email', Auth::user()->email(), CONFIG_USER_EMAIL_MAX_LENGTH);
+			$fieldset->text         ('email', Auth::user()->email, CONFIG_USER_EMAIL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text			('first_name', Auth::user()->firstName(), CONFIG_USER_FIRST_NAME_MAX_LENGTH);
+			$fieldset->text         ('first_name', Auth::user()->first_name, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
-			$fieldset->text			('last_name', Auth::user()->lastName(), CONFIG_USER_LAST_NAME_MAX_LENGTH);
+			$fieldset->text         ('last_name', Auth::user()->last_name, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$fieldset->select		('sex', Auth::user()->sex(), Lister::sex());
+			$fieldset->select       ('sex', Auth::user()->sex, Lister::sex());
 
-			$fieldset->text			('city', Auth::user()->city(), CONFIG_USER_CITY_MAX_LENGTH);
+			$fieldset->text         ('city', Auth::user()->city, CONFIG_USER_CITY_MAX_LENGTH);
 
-			$fieldset->select		('country', Auth::user()->country(), Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
+			$fieldset->select       ('country', Auth::user()->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
 
-			$fieldset->select		('timezone', Auth::user()->timezone(), Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
+			$fieldset->select       ('timezone', Auth::user()->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
 
 			# ------------------------
 
@@ -48,11 +48,11 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->password		('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password     ('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password     ('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH);
+			$fieldset->password     ('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
 			# ------------------------
 
@@ -90,13 +90,17 @@ namespace System\Handlers\Profile {
 
 			if (false !== ($post_personal = $this->form_personal->post())) {
 
-				if (true !== ($result = Auth::editPersonal($post_personal))) Messages::error(Language::get($result));
+				if ($this->form_personal->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+
+				else if (true !== ($result = Auth::editPersonal($post_personal))) Messages::error(Language::get($result));
 
 				else Request::redirect('/profile/edit?submitted');
 
 			} else if (false !== ($post_password = $this->form_password->post())) {
 
-				if (true !== ($result = Auth::editPassword($post_password))) Messages::error(Language::get($result));
+				if ($this->form_password->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+
+				else if (true !== ($result = Auth::editPassword($post_password))) Messages::error(Language::get($result));
 
 				else Request::redirect('/profile/edit?submitted');
 

@@ -39,7 +39,12 @@ return array (
 	# Target
 
 	'TARGET_SELF'                               => 'Текущее окно',
-	'TARGET_BLANK'                              => 'Новое окно'
+	'TARGET_BLANK'                              => 'Новое окно',
+
+	# Visibility
+
+	'VISIBILITY_DRAFT'                          => 'Черновик',
+	'VISIBILITY_PUBLISHED'                      => 'Опубликовано'
 );
 
 ?>

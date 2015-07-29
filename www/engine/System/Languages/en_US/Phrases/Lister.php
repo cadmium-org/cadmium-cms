@@ -39,7 +39,12 @@ return array (
 	# Target
 
 	'TARGET_SELF'                               => 'Current window',
-	'TARGET_BLANK'                              => 'New window'
+	'TARGET_BLANK'                              => 'New window',
+
+	# Visibility
+
+	'VISIBILITY_DRAFT'                          => 'Draft',
+	'VISIBILITY_PUBLISHED'                      => 'Published'
 );
 
 ?>

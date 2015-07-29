@@ -6,7 +6,11 @@
 
 	<td class="right aligned">
 
-		<a class="ui mini icon button" href="$link$" title="%MENUITEMS_ITEM_BROWSE%" target="_blank"><i class="external icon"></i></a>
+		{ block:browse }
+
+		<a class="ui mini $class$ icon button" href="$link$" title="%MENUITEMS_ITEM_BROWSE%" target="_blank"><i class="external icon"></i></a>
+
+		{ / block:browse }
 
 		<a class="ui mini icon button" data-action="select" title="%MENUITEMS_ITEM_SELECT%"><i class="checkmark icon"></i></a>
 

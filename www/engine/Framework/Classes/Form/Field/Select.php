@@ -37,7 +37,7 @@ namespace Form\Field {
 
 			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
 
-			if ($this->required && !Validate::boolean($this->value)) $this->error = true;
+			if ($this->required && !$this->value) $this->error = true;
 
 			# ------------------------
 

@@ -2,8 +2,10 @@
 
 namespace System\Frames\Admin\Listview {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
-	use System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination, System\Utils\Utils;
+	use Error, Warning, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
+	use System\Utils\Requirements, System\Utils\Utils;
+
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
@@ -31,11 +33,11 @@ namespace System\Frames\Admin\Listview {
 
 			while (null !== ($user = DB::last()->row())) $users['items'][] = array (
 
-				'id'		=> Number::unsigned($user['id']),
+				'id'        => Number::unsigned($user['id']),
 
-				'rank'		=> Number::unsigned($user['rank']),
+				'rank'      => Number::unsigned($user['rank']),
 
-				'name'		=> String::validate($user['name'])
+				'name'      => String::validate($user['name'])
 			);
 
 			# Count users total
@@ -66,7 +68,7 @@ namespace System\Frames\Admin\Listview {
 
 				$item->id = $user['id']; $item->name = $user['name']; $item->rank = Lister::rank($user['rank']);
 
-				$item->block('remove')->class = (($user['id'] !== Auth::user()->id()) ? 'negative' : 'disabled');
+				$item->block('remove')->class = (($user['id'] !== Auth::user()->id) ? 'negative' : 'disabled');
 			}
 
 			if ($list->count() > 0) $contents->list = $list;
@@ -84,7 +86,9 @@ namespace System\Frames\Admin\Listview {
 
 		# Handle list
 
-		protected function handleList() {
+		protected function handleList($error = false) {
+
+			if (Validate::boolean($error)) Messages::error(Language::get('USERS_ITEM_NOT_FOUND'));
 
 			$this->index = Number::index(Request::get('index'));
 

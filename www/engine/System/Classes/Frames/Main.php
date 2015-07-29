@@ -27,7 +27,7 @@ namespace System\Frames {
 
 			if ($this instanceof Admin\Handler) {
 
-				Auth::init(true);
+				Auth::session(true);
 
 				Extend\Languages::load(SECTION_ADMIN, CONFIG_ADMIN_LANGUAGE, CONFIG_ADMIN_LANGUAGE_DEFAULT, true);
 
@@ -40,7 +40,7 @@ namespace System\Frames {
 
 			if ($this instanceof Site\Handler) {
 
-				Auth::init();
+				Auth::session();
 
 				Extend\Languages::load(SECTION_SITE, CONFIG_SITE_LANGUAGE, CONFIG_SITE_LANGUAGE_DEFAULT);
 
@@ -55,7 +55,7 @@ namespace System\Frames {
 
 			# Set timezone
 
-			if (false !== ($timezone = Auth::user()->timezone())) date_default_timezone_set($timezone);
+			if (false !== ($timezone = Auth::user()->timezone)) date_default_timezone_set($timezone);
 
 			else if (false !== CONFIG_SYSTEM_TIMEZONE) date_default_timezone_set(CONFIG_SYSTEM_TIMEZONE);
 

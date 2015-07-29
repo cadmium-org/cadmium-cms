@@ -2,8 +2,10 @@
 
 namespace System\Frames\Admin\Listview {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
-	use System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination, System\Utils\Utils;
+	use Error, Warning, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
+	use System\Utils\Requirements, System\Utils\Utils;
+
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
@@ -17,13 +19,13 @@ namespace System\Frames\Admin\Listview {
 
 			$children = array('items' => array(), 'total' => 0);
 
-			$parent_id = ($this->page->id() ? $this->page->id() : 0);
+			$parent_id = ($this->page->id ? $this->page->id : 0);
 
 			# Select pages
 
 			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_PAGES_DISPLAY) . ", " . CONFIG_ADMIN_PAGES_DISPLAY) : false);
 
-			$query = ("SELECT SQL_CALC_FOUND_ROWS pag.id, pag.access, pag.name, pag.title, COUNT(chd.id) as children ") .
+			$query = ("SELECT SQL_CALC_FOUND_ROWS pag.id, pag.visibility, pag.access, pag.name, pag.title, COUNT(chd.id) as children ") .
 
 					 ("FROM " . TABLE_PAGES . " pag LEFT JOIN " . TABLE_PAGES . " chd ON chd.parent_id = pag.id ") .
 
@@ -37,15 +39,17 @@ namespace System\Frames\Admin\Listview {
 
 			while (null !== ($page = DB::last()->row())) $children['items'][] = array (
 
-				'id'			=> Number::unsigned($page['id']),
+				'id'            => Number::unsigned($page['id']),
 
-				'access'		=> Number::unsigned($page['access']),
+				'visibility'    => Number::binary($page['visibility']),
 
-				'name'			=> String::validate($page['name']),
+				'access'        => Number::unsigned($page['access']),
 
-				'title'			=> String::validate($page['title']),
+				'name'          => String::validate($page['name']),
 
-				'children'		=> Number::unsigned($page['children'])
+				'title'         => String::validate($page['title']),
+
+				'children'      => Number::unsigned($page['children'])
 			);
 
 			# Count pages total
@@ -64,7 +68,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getPath() {
 
-			if (false === ($path = $this->page->path())) return array();
+			if (false === ($path = $this->page->path)) return array();
 
 			$count = count($path);
 
@@ -84,9 +88,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Set general
 
-			$contents->id = ((false !== $this->page->id()) ? $this->page->id() : 0);
+			$contents->id = ((false !== $this->page->id) ? $this->page->id : 0);
 
-			$contents->title = ((false !== $this->page->title()) ? $this->page->title() : ('- ' . Language::get('NONE')));
+			$contents->title = ((false !== $this->page->title) ? $this->page->title : ('- ' . Language::get('NONE')));
 
 			# Set path
 
@@ -94,20 +98,20 @@ namespace System\Frames\Admin\Listview {
 
 			# Set actions
 
-			if (false === $this->page->id()) $contents->block('actions')->disable(); else {
+			if (false === $this->page->id) $contents->block('actions')->disable(); else {
 
-				$contents->block('actions')->link = $this->page->link();
+				$contents->block('actions')->link = $this->page->link;
 
-				$contents->block('actions')->id = $this->page->id();
+				$contents->block('actions')->id = $this->page->id;
 			}
 
 			# Set form
 
 			if (!$ajax) {
 
-				if (false === $this->page->id()) $contents->block('parent')->disable();
+				if (false === $this->page->id) $contents->block('parent')->disable();
 
-				else $contents->block('parent')->title = $this->page->title();
+				else $contents->block('parent')->title = $this->page->title;
 
 				foreach ($this->form->fields() as $name => $block) $contents->block(('field_' . $name), $block);
 			}
@@ -124,7 +128,11 @@ namespace System\Frames\Admin\Listview {
 
 				$item->icon = ((0 === $page['children']) ? 'file text outline' : 'folder');
 
-				$item->access = Lister::access($page['access']); $item->link = ($this->page->link() . '/' . $page['name']);
+				$item->access = Lister::access($page['access']);
+
+				$item->block('browse')->class = ($page['visibility'] ? 'primary' : 'disabled');
+
+				$item->block('browse')->link = ($this->page->link . '/' . $page['name']);
 
 				if (!$ajax) $item->block('remove')->class = (($page['id'] !== 1) && ($page['children'] === 0) ? 'negative' : 'disabled');
 			}
@@ -135,7 +143,7 @@ namespace System\Frames\Admin\Listview {
 
 			if (!$ajax) {
 
-				$display = CONFIG_ADMIN_PAGES_DISPLAY; $url = new Url('/admin/content/pages?parent_id=' . $this->page->id());
+				$display = CONFIG_ADMIN_PAGES_DISPLAY; $url = new Url('/admin/content/pages?parent_id=' . $this->page->id);
 
 				$contents->pagination = Pagination::block($this->index, $display, $this->children['total'], $url);
 			}
@@ -147,15 +155,15 @@ namespace System\Frames\Admin\Listview {
 
 		# Handle list
 
-		protected function handleList() {
+		protected function handleList($error = false) {
+
+			if (Validate::boolean($error)) Messages::error(Language::get('PAGES_ITEM_NOT_FOUND'));
 
 			$this->index = Number::index(Request::get('index'));
 
 			# Create parent page
 
-			$parent_id = Number::unsigned(Request::get('parent_id'));
-
-			$this->page = new Entity\Page(); $this->page->init($parent_id);
+			$this->page = new Entity\Type\Page\Manager(Request::get('parent_id'));
 
 			# Create form
 
@@ -163,17 +171,17 @@ namespace System\Frames\Admin\Listview {
 
 			# Add form fields
 
-			$fieldset->text		('title', false, CONFIG_PAGE_TITLE_MAX_LENGTH);
+			$fieldset->text     ('title', false, CONFIG_PAGE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text		('name', false, CONFIG_PAGE_NAME_MAX_LENGTH);
+			$fieldset->text     ('name', false, CONFIG_PAGE_NAME_MAX_LENGTH, false, array(FORM_FIELD_TRANSLIT, FORM_FIELD_REQUIRED));
 
 			# Post form
 
-			if (false !== ($post = $this->form->post())) {
+			if (false !== ($post = $this->form->post()) && !$this->form->errors()) {
 
 				if (true !== ($result = $this->page->create($post))) Messages::error(Language::get($result));
 
-				else Request::redirect('/admin/content/pages?id=' . $this->page->createdId() . '&submitted=create');
+				else Request::redirect('/admin/content/pages?id=' . $this->page->created_id . '&submitted=create');
 			}
 
 			# Get children pages
@@ -199,9 +207,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create parent page
 
-			$parent_id = Number::unsigned(Request::get('parent_id'));
-
-			$this->page = new Entity\Page(); $this->page->init($parent_id);
+			$this->page = Entity\Factory::page(Request::get('parent_id'));
 
 			# Get children pages
 

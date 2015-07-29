@@ -2,12 +2,10 @@
 
 return array (
 
-	# Process errors
+	# Errors
 
-	'USER_ERROR_NAME'                               => 'User name is already in use',
-	'USER_ERROR_EMAIL'                              => 'User e-mail is already in use',
-
-	'USER_ERROR_SAVE'                               => 'Error saving user data',
+	'USER_ERROR_CREATE'                             => 'Error creating user',
+	'USER_ERROR_EDIT'                               => 'Error saving user data',
 
 	'USER_ERROR_AUTH_LOGIN'                         => 'Authorization error',
 	'USER_ERROR_AUTH_RESET'                         => 'Error resetting password',
@@ -17,25 +15,18 @@ return array (
 	'USER_ERROR_EDIT_PERSONAL'                      => 'Error saving personal data',
 	'USER_ERROR_EDIT_PASSWORD'                      => 'Error changing password',
 
+	'USER_ERROR_NAME_INVALID'                 		=> 'Invalid user name',
+	'USER_ERROR_NAME_INCORRECT'                     => 'User name not found',
+	'USER_ERROR_NAME_DUPLICATE'                     => 'User name is already in use',
+	'USER_ERROR_EMAIL_INVALID'                      => 'Invalid e-mail',
+	'USER_ERROR_EMAIL_DUPLICATE'                    => 'User e-mail is already in use',
+	'USER_ERROR_PASSWORD_INVALID'                   => 'Invalid password',
+	'USER_ERROR_PASSWORD_INCORRECT'                 => 'Incorrect password',
+	'USER_ERROR_PASSWORD_MISMATCH'                  => 'Passwords do not match',
+	'USER_ERROR_PASSWORD_NEW_INVALID'               => 'Invalid new password',
+	'USER_ERROR_CAPTCHA_INCORRECT'                  => 'Incorrect captcha',
+
 	'USER_ERROR_ACCESS'                             => 'Your account is blocked by administration',
-
-	# Inputs errors
-
-	'USER_ERROR_INPUT_NAME'                         => 'Please enter user name',
-	'USER_ERROR_INPUT_NAME_INCORRECT'               => 'User name not found',
-	'USER_ERROR_INPUT_NAME_INVALID'                 => 'Invalid user name',
-	'USER_ERROR_INPUT_EMAIL'                        => 'Please enter e-mail',
-	'USER_ERROR_INPUT_EMAIL_INVALID'                => 'Invalid e-mail',
-	'USER_ERROR_INPUT_PASSWORD'                     => 'Please enter password',
-	'USER_ERROR_INPUT_PASSWORD_CURRENT'             => 'Please enter current password',
-	'USER_ERROR_INPUT_PASSWORD_INCORRECT'           => 'Incorrect password',
-	'USER_ERROR_INPUT_PASSWORD_INVALID'             => 'Invalid password',
-	'USER_ERROR_INPUT_PASSWORD_MISMATCH'            => 'Passwords do not match',
-	'USER_ERROR_INPUT_PASSWORD_NEW'                 => 'Please enter new password',
-	'USER_ERROR_INPUT_PASSWORD_NEW_INVALID'         => 'Invalid new password',
-	'USER_ERROR_INPUT_PASSWORD_RETYPE'              => 'Please enter password verification',
-	'USER_ERROR_INPUT_CAPTCHA'                      => 'Please enter captcha',
-	'USER_ERROR_INPUT_CAPTCHA_INCORRECT'            => 'Incorrect captcha',
 
 	# Success messages
 

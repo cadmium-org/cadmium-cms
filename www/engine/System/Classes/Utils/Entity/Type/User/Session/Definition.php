@@ -6,11 +6,13 @@ namespace System\Utils\Entity\Type\User\Session {
 
 	class Definition extends Entity\Entity {
 
-		protected $table = TABLE_USERS_SESSIONS;
+		const TYPE = 'User\Session', TABLE = TABLE_USERS_SESSIONS;
 
-		# Define params
+		# Define presets
 
         protected function define() {
+
+			# Add params
 
             $this->params->hash             ('code');
             $this->params->varchar          ('ip', null, true);

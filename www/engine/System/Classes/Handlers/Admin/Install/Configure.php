@@ -24,16 +24,6 @@ namespace System\Handlers\Admin\Install {
         const ERROR_DATABASE_TABLES_CREATE          = 'INSTALL_ERROR_DATABASE_TABLES_CREATE';
         const ERROR_DATABASE_TABLES_FILL            = 'INSTALL_ERROR_DATABASE_TABLES_FILL';
 
-        const ERROR_INPUT_SITE_TITLE				= 'INSTALL_ERROR_INPUT_SITE_TITLE';
-        const ERROR_INPUT_SYSTEM_URL				= 'INSTALL_ERROR_INPUT_SYSTEM_URL';
-        const ERROR_INPUT_SYSTEM_TIMEZONE			= 'INSTALL_ERROR_INPUT_SYSTEM_TIMEZONE';
-        const ERROR_INPUT_SYSTEM_EMAIL				= 'INSTALL_ERROR_INPUT_SYSTEM_EMAIL';
-
-        const ERROR_INPUT_DATABASE_SERVER			= 'INSTALL_ERROR_INPUT_DATABASE_SERVER';
-        const ERROR_INPUT_DATABASE_USER             = 'INSTALL_ERROR_INPUT_DATABASE_USER';
-        const ERROR_INPUT_DATABASE_PASSWORD         = 'INSTALL_ERROR_INPUT_DATABASE_PASSWORD';
-        const ERROR_INPUT_DATABASE_NAME             = 'INSTALL_ERROR_INPUT_DATABASE_NAME';
-
         # Create database tables
 
         private function createTables() {
@@ -67,13 +57,15 @@ namespace System\Handlers\Admin\Install {
 
             # Insert initial pages
 
-            $pages[] = array('name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
+            $pages[] = array('visibility' => VISIBILITY_PUBLISHED,
+
+				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
                 'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
 
                 'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
 
-            for ($i = 1; $i <= 3; $i++) $pages[] = array (
+            for ($i = 1; $i <= 3; $i++) $pages[] = array ('visibility' => VISIBILITY_PUBLISHED,
 
                 'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
 
@@ -114,15 +106,17 @@ namespace System\Handlers\Admin\Install {
 
         # Install CMS
 
-        private function install($data) {
+        private function install($fieldset) {
 
-			# Check dataset
+			# Check fieldset
 
-			$dataset = array('site_title', 'system_url', 'system_timezone', 'system_email',
+			$fields = array('site_title', 'system_url', 'system_timezone', 'system_email',
 
-							 'database_server', 'database_user', 'database_password', 'database_name');
+							'database_server', 'database_user', 'database_password', 'database_name');
 
-			foreach ($dataset as $var) if (isset($data[$var])) $$var = $data[$var]; else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
+
+				$$field = $fieldset[$field]->value(); else return false;
 
             # Set language/template values
 
@@ -141,16 +135,6 @@ namespace System\Handlers\Admin\Install {
             if (false === Config::set(CONFIG_PARAM_SYSTEM_TIMEZONE, $system_timezone)) return self::ERROR_INPUT_SYSTEM_TIMEZONE;
 
             if (false === Config::set(CONFIG_PARAM_SYSTEM_EMAIL, $system_email)) return self::ERROR_INPUT_SYSTEM_EMAIL;
-
-            # Check database values
-
-			if (false === ($database_server = String::validate($database_server))) return self::ERROR_INPUT_DATABASE_SERVER;
-
-			if (false === ($database_user = String::validate($database_user))) return self::ERROR_INPUT_DATABASE_USER;
-
-			if (false === ($database_password = String::validate($database_password))) return self::ERROR_INPUT_DATABASE_PASSWORD;
-
-			if (false === ($database_name = String::validate($database_name))) return self::ERROR_INPUT_DATABASE_NAME;
 
             # Connect to DB
 
@@ -215,25 +199,25 @@ namespace System\Handlers\Admin\Install {
 
 			# Add form fields
 
-			$fieldset->text          ('site_title', CONFIG_SITE_TITLE, CONFIG_SITE_TITLE_MAX_LENGTH);
+			$fieldset->text          ('site_title', CONFIG_SITE_TITLE, CONFIG_SITE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('system_url', CONFIG_SYSTEM_URL, CONFIG_SYSTEM_URL_MAX_LENGTH);
+			$fieldset->text          ('system_url', CONFIG_SYSTEM_URL, CONFIG_SYSTEM_URL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->select        ('system_timezone', CONFIG_SYSTEM_TIMEZONE, Timezone::range(), Language::get('SELECT_TIMEZONE'));
+			$fieldset->select        ('system_timezone', CONFIG_SYSTEM_TIMEZONE, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('system_email', CONFIG_SYSTEM_EMAIL, CONFIG_SYSTEM_EMAIL_MAX_LENGTH);
+			$fieldset->text          ('system_email', CONFIG_SYSTEM_EMAIL, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_server', 'localhost', CONFIG_DATABASE_SERVER_MAX_LENGTH);
+			$fieldset->text          ('database_server', 'localhost', CONFIG_DATABASE_SERVER_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_user', false, CONFIG_DATABASE_USER_MAX_LENGTH);
+			$fieldset->text          ('database_user', false, CONFIG_DATABASE_USER_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->password      ('database_password', false, CONFIG_DATABASE_PASSWORD_MAX_LENGTH);
+			$fieldset->text          ('database_password', false, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_name', false, CONFIG_DATABASE_NAME_MAX_LENGTH);
+			$fieldset->text          ('database_name', false, CONFIG_DATABASE_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
 			# Post form
 
-			if (false !== ($post = $this->form->post())) {
+			if (false !== ($post = $this->form->post()) && !$this->form->errors()) {
 
 				if (true !== ($result = $this->install($post))) Messages::error(Language::get($result));
 

@@ -19,35 +19,35 @@ namespace System\Handlers\Profile {
 
 			# Set general
 
-			$contents->name = Auth::user()->name();
+			$contents->name = Auth::user()->name;
 
-			$contents->email = Auth::user()->email();
+			$contents->email = Auth::user()->email;
 
-			$contents->rank = Lister::rank(Auth::user()->rank());
+			$contents->rank = Lister::rank(Auth::user()->rank);
 
-			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->timeRegistered());
+			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->time_registered);
 
 			# Set full name
 
-			if (false == ($full_name = Auth::user()->fullName())) $contents->block('full_name')->disable();
+			if (false == ($full_name = Auth::user()->full_name)) $contents->block('full_name')->disable();
 
 			else $contents->block('full_name')->text = $full_name;
 
 			# Set sex
 
-			if (false == ($sex = Auth::user()->sex())) $contents->block('sex')->disable();
+			if (false == ($sex = Auth::user()->sex)) $contents->block('sex')->disable();
 
 			else $contents->block('sex')->text = Lister::sex($sex);
 
 			# Set city
 
-			if (false == ($city = Auth::user()->city())) $contents->block('city')->disable();
+			if (false == ($city = Auth::user()->city)) $contents->block('city')->disable();
 
 			else $contents->block('city')->text = $city;
 
 			# Set country
 
-			if (false == ($country = Auth::user()->country())) $contents->block('country')->disable(); else {
+			if (false == ($country = Auth::user()->country)) $contents->block('country')->disable(); else {
 
 				$contents->block('country')->code = $country;
 

@@ -170,11 +170,9 @@ namespace {
 
 			if ((null === $index) && (null === $follow)) return self::$robots;
 
-			$index = (($index === ROBOTS_INDEX) ? ROBOTS_INDEX : ROBOTS_NOINDEX);
+			$index = Validate::boolean($index); $follow = Validate::boolean($follow);
 
-			$follow = (($follow === ROBOTS_FOLLOW) ? ROBOTS_FOLLOW : ROBOTS_NOFOLLOW);
-
-			self::$robots = ($index . ',' . $follow);
+			self::$robots = (($index ? 'INDEX' : 'NOINDEX') . ',' . ($follow ? 'FOLLOW' : 'NOFOLLOW'));
 
 			# ------------------------
 

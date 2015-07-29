@@ -17,7 +17,7 @@ namespace System\Handlers\Admin\Content {
 
 		private function getPath() {
 
-			$path = $this->menuitem->path(); $count = count($path);
+			$path = $this->menuitem->path; $count = count($path);
 
 			foreach (array_keys($path) as $key) {
 
@@ -35,9 +35,9 @@ namespace System\Handlers\Admin\Content {
 
 			# Set general
 
-			$contents->id = $this->menuitem->id();
+			$contents->id = $this->menuitem->id;
 
-			$contents->parent_id = $this->menuitem->parentId();
+			$contents->parent_id = $this->menuitem->parent_id;
 
 			# Set path
 
@@ -45,7 +45,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Set parent text
 
-			$parent_text = (($this->menuitem->parentId() !== 0) ? $path[count($path) - 2]['text'] : ('- ' . Language::get('NONE')));
+			$parent_text = (($this->menuitem->parent_id !== 0) ? $path[count($path) - 2]['text'] : ('- ' . Language::get('NONE')));
 
 			$contents->block('parent')->text = $parent_text;
 
@@ -62,16 +62,13 @@ namespace System\Handlers\Admin\Content {
 
 		protected function handle() {
 
+			if (null === ($id = Request::get('id'))) return $this->handleList();
+
 			# Create menuitem
 
-			$this->menuitem = new Entity\Menuitem();
+			$this->menuitem = new Entity\Type\Menuitem\Manager($id);
 
-			if ((null !== ($id = Request::get('id'))) && (false === $this->menuitem->init($id))) {
-
-				Messages::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
-			}
-
-			if (false === $this->menuitem->id()) return $this->handleList();
+			if (false === $this->menuitem->id) return $this->handleList(true);
 
 			# Create form
 
@@ -79,23 +76,25 @@ namespace System\Handlers\Admin\Content {
 
 			# Add form fields
 
-			$fieldset->hidden		('parent_id', $this->menuitem->parentId());
+			$fieldset->hidden       ('parent_id', $this->menuitem->parent_id);
 
-			$fieldset->text			('text', $this->menuitem->text(), CONFIG_MENUITEM_TEXT_MAX_LENGTH);
+			$fieldset->text         ('text', $this->menuitem->text, CONFIG_MENUITEM_TEXT_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text			('link', $this->menuitem->link(), CONFIG_MENUITEM_LINK_MAX_LENGTH);
+			$fieldset->text         ('link', $this->menuitem->link, CONFIG_MENUITEM_LINK_MAX_LENGTH, false);
 
-			$fieldset->select		('target', $this->menuitem->target(), Lister::target());
+			$fieldset->select       ('target', $this->menuitem->target, Lister::target());
 
-			$fieldset->text			('position', $this->menuitem->position(), CONFIG_MENUITEM_POSITION_MAX_LENGTH);
+			$fieldset->text         ('position', $this->menuitem->position, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
 
 			# Post form
 
 			if (false !== ($post = $this->form->post())) {
 
-				if (true !== ($result = $this->menuitem->edit($post))) Messages::error(Language::get($result));
+				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
-				else Request::redirect('/admin/content/menuitems?id=' . $this->menuitem->id() . '&submitted');
+				else if (true !== ($result = $this->menuitem->edit($post))) Messages::error(Language::get($result));
+
+				else Request::redirect('/admin/content/menuitems?id=' . $this->menuitem->id . '&submitted');
 
 			} else if (null !== ($submitted = Request::get('submitted'))) {
 
@@ -129,17 +128,17 @@ namespace System\Handlers\Admin\Content {
 
 			# Create menuitem
 
-			$this->menuitem = new Entity\Menuitem(); $this->menuitem->init($post['id']);
+			$this->menuitem = Entity\Factory::menuitem($post['id']);
 
 			# Process list
 
-			if ($post['action'] == 'list') return $this->handleListAjax($this->menuitem->id());
+			if ($post['action'] == 'list') return $this->handleListAjax($this->menuitem->id);
 
 			# Process remove
 
 			if ($post['action'] == 'remove') {
 
-				if (false === $this->menuitem->id()) return Ajax::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
+				if (false === $this->menuitem->id) return Ajax::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
 
 				return $this->menuitem->remove();
 			}

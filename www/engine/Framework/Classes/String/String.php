@@ -8,9 +8,11 @@ namespace {
 
 		public static function validate($string) {
 
+			/*
 			if (is_array($string) || is_resource($string)) return false;
 
 			if (is_object($string) && !method_exists($string, '__toString')) return false;
+			*/
 
 			# ------------------------
 
@@ -120,9 +122,9 @@ namespace {
 
 		# Translit string
 
-		public static function translit($string) {
+		public static function translit($string, $maxlength) {
 
-			$string = self::validate($string);
+			$string = self::validate($string); $maxlength = Number::unsigned($maxlength);
 
 			$pattern = array (
 
@@ -153,7 +155,7 @@ namespace {
 
 			# ------------------------
 
-			return (('' !== $string) ? $string : false);
+			return self::cut($string, $maxlength);
 		}
 	}
 }

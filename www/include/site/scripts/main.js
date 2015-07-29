@@ -7,7 +7,9 @@ var Main = {
 
 		/* Semantic UI settings */
 
-		$('#section-button, .icon.button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
+		$('#section-button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
+
+		$('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
 
 		var items = $('.ui.form').find('input, textarea, select');
 

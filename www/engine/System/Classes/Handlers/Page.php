@@ -25,7 +25,11 @@ namespace System\Handlers {
 
 				$selection = array('id', 'name', 'title');
 
-				$condition = ("parent_id = " . $id . " AND access <= " . Auth::user()->rank() . " AND name = '" . addslashes($name) . "'");
+				$access = (Auth::check() ? Auth::user()->rank : RANK_GUEST);
+
+				$condition = ("parent_id = " . $id . " AND visibility = " . VISIBILITY_PUBLISHED . " ") .
+
+				             ("AND access <= " . $access . " AND name = '" . addslashes($name) . "'");
 
 				if (!(DB::select(TABLE_PAGES, $selection, $condition, false, 1) && (DB::last()->rows === 1))) return false;
 
@@ -57,7 +61,7 @@ namespace System\Handlers {
 
 			# Set contents
 
-			$contents->contents = new Template\Utils\Block($this->page->contents());
+			$contents->contents = new Template\Utils\Block($this->page->contents);
 
 			# ------------------------
 
@@ -72,27 +76,27 @@ namespace System\Handlers {
 
 			# Create page
 
-			$this->page = new Entity\Page();
+			$this->page = Entity\Factory::page($this->path ? end($this->path)['id'] : 1);
 
-			if (false === $this->page->init($this->path ? end($this->path)['id'] : 1)) return false;
+			if (false === $this->page->id) return false;
 
-			$description = $this->page->description(); $keywords = $this->page->keywords();
+			$description = $this->page->description; $keywords = $this->page->keywords;
 
 			# Fill template
 
-			if ($this->page->id() !== 1) $this->setTitle($this->page->title());
+			if ($this->page->id !== 1) $this->setTitle($this->page->title);
 
 			$this->setContents($this->getContents());
 
 			# Set SEO data
 
-			Template::description	((false !== $description) ? $description : CONFIG_SITE_DESCRIPTION);
+			Template::description   ((false !== $description) ? $description : CONFIG_SITE_DESCRIPTION);
 
-			Template::keywords		((false !== $keywords) ? $keywords : CONFIG_SITE_KEYWORDS);
+			Template::keywords      ((false !== $keywords) ? $keywords : CONFIG_SITE_KEYWORDS);
 
-			Template::robots		($this->page->robotsIndex(), $this->page->robotsFollow());
+			Template::robots        ($this->page->robots_index, $this->page->robots_follow);
 
-			Template::canonical		(CONFIG_SYSTEM_URL, $this->page->canonical());
+			Template::canonical     (CONFIG_SYSTEM_URL, $this->page->canonical);
 
 			# ------------------------
 

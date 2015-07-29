@@ -8,47 +8,53 @@ namespace System\Utils {
 
 		private static $access = array (
 
-			ACCESS_PUBLIC				=> 'ACCESS_PUBLIC',
-			ACCESS_REGISTERED			=> 'ACCESS_REGISTERED',
-			ACCESS_ADMINISTRATOR		=> 'ACCESS_ADMINISTRATOR'
+			ACCESS_PUBLIC               => 'ACCESS_PUBLIC',
+			ACCESS_REGISTERED           => 'ACCESS_REGISTERED',
+			ACCESS_ADMINISTRATOR        => 'ACCESS_ADMINISTRATOR'
 		);
 
 		private static $frequency = array (
 
-			FREQUENCY_ALWAYS			=> 'FREQUENCY_ALWAYS',
-			FREQUENCY_HOURLY			=> 'FREQUENCY_HOURLY',
-			FREQUENCY_DAILY				=> 'FREQUENCY_DAILY',
-			FREQUENCY_WEEKLY			=> 'FREQUENCY_WEEKLY',
-			FREQUENCY_MONTHLY			=> 'FREQUENCY_MONTHLY',
-			FREQUENCY_YEARLY			=> 'FREQUENCY_YEARLY',
-			FREQUENCY_NEVER				=> 'FREQUENCY_NEVER'
+			FREQUENCY_ALWAYS            => 'FREQUENCY_ALWAYS',
+			FREQUENCY_HOURLY            => 'FREQUENCY_HOURLY',
+			FREQUENCY_DAILY             => 'FREQUENCY_DAILY',
+			FREQUENCY_WEEKLY            => 'FREQUENCY_WEEKLY',
+			FREQUENCY_MONTHLY           => 'FREQUENCY_MONTHLY',
+			FREQUENCY_YEARLY            => 'FREQUENCY_YEARLY',
+			FREQUENCY_NEVER             => 'FREQUENCY_NEVER'
 		);
 
 		private static $rank = array (
 
-			RANK_GUEST					=> 'RANK_GUEST',
-			RANK_USER					=> 'RANK_USER',
-			RANK_ADMINISTRATOR			=> 'RANK_ADMINISTRATOR'
+			RANK_GUEST                  => 'RANK_GUEST',
+			RANK_USER                   => 'RANK_USER',
+			RANK_ADMINISTRATOR          => 'RANK_ADMINISTRATOR'
 		);
 
 		private static $sex = array (
 
-			SEX_NOT_SELECTED			=> 'SEX_NOT_SELECTED',
-			SEX_MALE					=> 'SEX_MALE',
-			SEX_FEMALE					=> 'SEX_FEMALE'
+			SEX_NOT_SELECTED            => 'SEX_NOT_SELECTED',
+			SEX_MALE                    => 'SEX_MALE',
+			SEX_FEMALE                  => 'SEX_FEMALE'
 		);
 
 		private static $status = array (
 
-			STATUS_ONLINE				=> 'STATUS_ONLINE',
-			STATUS_MAINTENANCE			=> 'STATUS_MAINTENANCE',
-			STATUS_UPDATE				=> 'STATUS_UPDATE'
+			STATUS_ONLINE               => 'STATUS_ONLINE',
+			STATUS_MAINTENANCE          => 'STATUS_MAINTENANCE',
+			STATUS_UPDATE               => 'STATUS_UPDATE'
 		);
 
 		private static $target = array (
 
-			TARGET_SELF					=> 'TARGET_SELF',
-			TARGET_BLANK				=> 'TARGET_BLANK'
+			TARGET_SELF                 => 'TARGET_SELF',
+			TARGET_BLANK                => 'TARGET_BLANK'
+		);
+
+		private static $visibility = array (
+
+			VISIBILITY_DRAFT            => 'VISIBILITY_DRAFT',
+			VISIBILITY_PUBLISHED        => 'VISIBILITY_PUBLISHED'
 		);
 
 		# Get list
@@ -137,6 +143,17 @@ namespace System\Utils {
 			$value = Number::unsigned($value);
 
 			return self::getValue(self::$target, $value, $validate);
+		}
+
+		# Process visibility list
+
+		public static function visibility($value = null, $validate = false) {
+
+			if (null === $value) return self::getList(self::$visibility);
+
+			$value = Number::unsigned($value);
+
+			return self::getValue(self::$visibility, $value, $validate);
 		}
 	}
 }

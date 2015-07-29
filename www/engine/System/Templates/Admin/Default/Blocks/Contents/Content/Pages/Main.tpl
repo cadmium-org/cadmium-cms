@@ -66,6 +66,14 @@
 
 			</div>
 
+            <div class="field">
+
+				<label for="page-visibility">%PAGE_FIELD_VISIBILITY%</label>
+
+				{ block:field_visibility / }
+
+			</div>
+
 			<div class="field">
 
 				<label for="page-access">%PAGE_FIELD_ACCESS%</label>

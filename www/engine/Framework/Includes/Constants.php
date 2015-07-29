@@ -22,13 +22,6 @@ define('FORM_FIELD_SEARCH',                         'search');
 define('FORM_FIELD_TRANSLIT',                       'translit');
 define('FORM_FIELD_AUTO',                           'auto');
 
-# Robots
-
-define('ROBOTS_FOLLOW',                             'FOLLOW');
-define('ROBOTS_INDEX',                              'INDEX');
-define('ROBOTS_NOFOLLOW',                           'NOFOLLOW');
-define('ROBOTS_NOINDEX',                            'NOINDEX');
-
 # String pools
 
 define('STRING_POOL_DEFAULT',                       'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');

@@ -8,3 +8,8 @@
 .breadcrumb .divider:last-child { display:none; }
 
 #captcha { background-color:#FFF !important; }
+
+@media only screen and (max-width: 767px) {
+
+    .table:not(.unstackable) td.right.aligned, .right.aligned.column { text-align:left !important; }
+}

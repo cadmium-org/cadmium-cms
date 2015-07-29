@@ -6,11 +6,13 @@ namespace System\Utils\Entity\Type\User\Secret {
 
 	class Definition extends Entity\Entity {
 
-		protected $table = TABLE_USERS_SECRETS;
+		const TYPE = 'User\Secret', TABLE = TABLE_USERS_SECRETS;
 
-		# Define params
+		# Define presets
 
         protected function define() {
+
+			# Add params
 
             $this->params->hash             ('code');
             $this->params->varchar          ('ip', null, true);

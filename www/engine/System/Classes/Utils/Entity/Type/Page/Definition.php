@@ -6,13 +6,15 @@ namespace System\Utils\Entity\Type\Page {
 
 	class Definition extends Entity\Entity {
 
-		protected $table = TABLE_PAGES, $nesting = true, $super = true;
+		const TYPE = 'Page', TABLE = TABLE_PAGES, SUPER = true, NESTING = true;
 
-        # Define params
+        # Define presets
 
         protected function define() {
 
-            $this->params->relation         ('parent_id');
+			# Add params
+
+			$this->params->range            ('visibility', VISIBILITY_DRAFT, true);
             $this->params->range            ('access', ACCESS_PUBLIC, true);
             $this->params->varchar          ('name', null, true);
             $this->params->varchar          ('title', null, true);
@@ -21,9 +23,8 @@ namespace System\Utils\Entity\Type\Page {
             $this->params->text             ('keywords');
             $this->params->boolean          ('robots_index', true);
             $this->params->boolean          ('robots_follow', true);
-            $this->params->relation         ('user_id');
-            $this->params->time             ('time_created');
-            $this->params->time             ('time_modified');
+			$this->params->time             ('time_created');
+			$this->params->time             ('time_modified');
         }
     }
 }

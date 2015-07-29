@@ -2,11 +2,9 @@
 
 namespace System\Utils\Entity\Param {
 
-    use String;
+    use System\Utils\Entity, String;
 
-	class Text {
-
-        private $name = false, $value = false;
+	class Text extends Entity\Param {
 
         # Constructor
 
@@ -19,7 +17,7 @@ namespace System\Utils\Entity\Param {
 
         public function set($value) {
 
-            $this->value = String::validate($value);
+            return ($this->value = String::validate($value));
         }
 
         # Get field statement

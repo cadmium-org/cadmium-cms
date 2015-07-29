@@ -17,7 +17,7 @@ namespace System\Handlers\Admin\Content {
 
 		private function getPath() {
 
-			$path = $this->page->path(); $count = count($path);
+			$path = $this->page->path; $count = count($path);
 
 			foreach (array_keys($path) as $key) {
 
@@ -35,9 +35,9 @@ namespace System\Handlers\Admin\Content {
 
 			# Set general
 
-			$contents->id = $this->page->id();
+			$contents->id = $this->page->id;
 
-			$contents->parent_id = $this->page->parentId();
+			$contents->parent_id = $this->page->parent_id;
 
 			# Set path
 
@@ -45,7 +45,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Set parent title
 
-			$parent_title = (($this->page->parentId() !== 0) ? $path[count($path) - 2]['title'] : ('- ' . Language::get('NONE')));
+			$parent_title = (($this->page->parent_id !== 0) ? $path[count($path) - 2]['title'] : ('- ' . Language::get('NONE')));
 
 			$contents->block('parent')->title = $parent_title;
 
@@ -62,16 +62,13 @@ namespace System\Handlers\Admin\Content {
 
 		protected function handle() {
 
+			if (null === ($id = Request::get('id'))) return $this->handleList();
+
 			# Create page
 
-			$this->page = new Entity\Page();
+			$this->page = new Entity\Type\Page\Manager($id);
 
-			if ((null !== ($id = Request::get('id'))) && (false === $this->page->init($id))) {
-
-				Messages::error(Language::get('PAGES_ITEM_NOT_FOUND'));
-			}
-
-			if (false === $this->page->id()) return $this->handleList();
+			if (false === $this->page->id) return $this->handleList(true);
 
 			# Create form
 
@@ -79,31 +76,35 @@ namespace System\Handlers\Admin\Content {
 
 			# Add form fields
 
-			$fieldset->hidden		('parent_id', $this->page->parentId());
+			$fieldset->hidden       ('parent_id', $this->page->parent_id);
 
-			$fieldset->text			('title', $this->page->title(), CONFIG_PAGE_TITLE_MAX_LENGTH);
+			$fieldset->text         ('title', $this->page->title, CONFIG_PAGE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text			('name', $this->page->name(), CONFIG_PAGE_NAME_MAX_LENGTH);
+			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, false, array(FORM_FIELD_TRANSLIT, FORM_FIELD_REQUIRED));
 
-			$fieldset->select		('access', $this->page->access(), Lister::access());
+			$fieldset->select       ('visibility', $this->page->visibility, Lister::visibility());
 
-			$fieldset->textarea		('description', $this->page->description(), CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
+			$fieldset->select       ('access', $this->page->access, Lister::access());
 
-			$fieldset->text			('keywords', $this->page->keywords(), CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
+			$fieldset->textarea     ('description', $this->page->description, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
 
-			$fieldset->checkbox		('robots_index', $this->page->robotsIndex());
+			$fieldset->text         ('keywords', $this->page->keywords, CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
 
-			$fieldset->checkbox		('robots_follow', $this->page->robotsFollow());
+			$fieldset->checkbox     ('robots_index', $this->page->robots_index);
 
-			$fieldset->textarea		('contents', $this->page->contents());
+			$fieldset->checkbox     ('robots_follow', $this->page->robots_follow);
+
+			$fieldset->textarea     ('contents', $this->page->contents);
 
 			# Post form
 
 			if (false !== ($post = $this->form->post())) {
 
-				if (true !== ($result = $this->page->edit($post))) Messages::error(Language::get($result));
+				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
-				else Request::redirect('/admin/content/pages?id=' . $this->page->id() . '&submitted');
+				else if (true !== ($result = $this->page->edit($post))) Messages::error(Language::get($result));
+
+				else Request::redirect('/admin/content/pages?id=' . $this->page->id . '&submitted');
 
 			} else if (null !== ($submitted = Request::get('submitted'))) {
 
@@ -137,17 +138,17 @@ namespace System\Handlers\Admin\Content {
 
 			# Create page
 
-			$this->page = new Entity\Page(); $this->page->init($post['id']);
+			$this->page = Entity\Factory::page($post['id']);
 
 			# Process list
 
-			if ($post['action'] == 'list') return $this->handleListAjax($this->page->id());
+			if ($post['action'] == 'list') return $this->handleListAjax($this->page->id);
 
 			# Process remove
 
 			if ($post['action'] == 'remove') {
 
-				if (false === $this->page->id()) return Ajax::error(Language::get('PAGES_ITEM_NOT_FOUND'));
+				if (false === $this->page->id) return Ajax::error(Language::get('PAGES_ITEM_NOT_FOUND'));
 
 				return $this->page->remove();
 			}

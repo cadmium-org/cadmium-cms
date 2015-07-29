@@ -2,24 +2,35 @@
 
 namespace System\Utils\Entity\Param {
 
-    use Number, String;
+    use System\Utils\Entity, Number, String;
 
-	class Relation {
+	class Relation extends Entity\Param {
 
-        private $name = false, $value = false;
+        private $entity = false;
 
         # Constructor
 
-        public function __construct($name) {
+        public function __construct($name, $type) {
 
-            $this->name = String::validate($name);
+            $this->name = String::validate($name); $this->type = String::validate($type);
         }
 
         # Set value
 
         public function set($value) {
 
-            $this->value = Number::unsigned($value);
+            return ($this->value = Number::unsigned($value));
+        }
+
+        # Get entity
+
+        public function entity() {
+
+            if (0 === $this->value) return true;
+
+            $this->entity = Entity\Factory::create($this->type, $this->value);
+
+            return ((false !== $this->entity->id) ? $this->entity : false);
         }
 
         # Get field statement

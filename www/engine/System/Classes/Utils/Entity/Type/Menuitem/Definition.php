@@ -6,13 +6,14 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 	class Definition extends Entity\Entity {
 
-        protected $table = TABLE_MENU, $nesting = true;
+        const TYPE = 'Menuitem', TABLE = TABLE_MENU, NESTING = true;
 
-        # Define params
+        # Define presets
 
         protected function define() {
 
-            $this->params->relation         ('parent_id');
+			# Add params
+
             $this->params->range            ('position', 0, true);
             $this->params->varchar          ('link');
             $this->params->varchar          ('text');

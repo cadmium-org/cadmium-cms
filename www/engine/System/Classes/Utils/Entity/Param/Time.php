@@ -2,11 +2,9 @@
 
 namespace System\Utils\Entity\Param {
 
-    use Number, String;
+    use System\Utils\Entity, Number, String;
 
-	class Time {
-
-        private $name = false, $value = false;
+	class Time extends Entity\Param {
 
         # Constructor
 
@@ -19,7 +17,7 @@ namespace System\Utils\Entity\Param {
 
         public function set($value) {
 
-            $this->value = Number::unsigned($value);
+            return ($this->value = Number::unsigned($value));
         }
 
         # Get field statement

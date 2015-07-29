@@ -40,7 +40,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
+			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
 
 			# Post form
 

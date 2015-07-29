@@ -31,7 +31,7 @@ namespace Form\Field {
 
 			$this->value = String::input($value, false, $this->maxlength);
 
-			if ($this->translit) $this->value = String::translit($this->value);
+			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
 
 			if ($this->required && (false === $this->value)) $this->error = true;
 

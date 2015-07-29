@@ -50,11 +50,6 @@ return array (
 	'INSTALL_ERROR_INPUT_SYSTEM_TIMEZONE'       => 'Please select timezone',
 	'INSTALL_ERROR_INPUT_SYSTEM_EMAIL'          => 'Invalid email format',
 
-	'INSTALL_ERROR_INPUT_DATABASE_SERVER'       => 'Please enter database server',
-	'INSTALL_ERROR_INPUT_DATABASE_USER'         => 'Please enter database user name',
-	'INSTALL_ERROR_INPUT_DATABASE_PASSWORD'     => 'Please enter database user password',
-	'INSTALL_ERROR_INPUT_DATABASE_NAME'         => 'Please enter database name',
-
 	# Fields
 
 	'INSTALL_FIELD_LANGUAGE'                    => 'Language',

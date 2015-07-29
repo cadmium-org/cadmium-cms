@@ -2,7 +2,7 @@
 
 namespace System\Frames\Admin {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Messages;
+	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend, System\Utils\Messages;
 	use Date, DB, Debug, Language, Request, String, Template;
 
 	abstract class Handler extends System\Frames\Main {
@@ -92,11 +92,11 @@ namespace System\Frames\Admin {
 
 			# Set user
 
-			Template::main()->block('user')->gravatar = md5(strtolower(Auth::user()->email()));
+			Template::main()->block('user')->gravatar = md5(strtolower(Auth::user()->email));
 
-			Template::main()->block('user')->name = Auth::user()->name();
+			Template::main()->block('user')->name = Auth::user()->name;
 
-			Template::main()->block('user')->id = Auth::user()->id();
+			Template::main()->block('user')->id = Auth::user()->id;
 
 			# Set title
 
@@ -112,10 +112,24 @@ namespace System\Frames\Admin {
 
 			# Set footer
 
-			Template::main()->cadmium_copy			= CADMIUM_COPY;
 			Template::main()->cadmium_home			= CADMIUM_HOME;
+			Template::main()->cadmium_copy			= CADMIUM_COPY;
 			Template::main()->cadmium_name			= CADMIUM_NAME;
 			Template::main()->cadmium_version		= CADMIUM_VERSION;
+
+			# Set language selector
+
+			Template::main()->block('language')->country = Extend\Languages::data('country');
+
+			Template::main()->block('language')->title = Extend\Languages::data('title');
+
+			Template::main()->block('language')->items = Extend\Languages::items();
+
+			# Set template selector
+
+			Template::main()->block('template')->title = Extend\Templates::data('title');
+
+			Template::main()->block('template')->items = Extend\Templates::items();
 
 			# Set report
 
@@ -167,9 +181,11 @@ namespace System\Frames\Admin {
 
 				$extra_registration = (DB::last()->rows === 0);
 
-				if ($this instanceof System\Handlers\Admin\Auth\Register) { if (!$extra_registration) return $this->display404(); }
+				if ($this instanceof System\Handlers\Admin\Auth\Register) {
 
-				else { if ($extra_registration) return Request::redirect('/admin/register'); }
+					if (!$extra_registration) return Request::redirect('/admin/login');
+
+				} else if ($extra_registration) return Request::redirect('/admin/register');
 
 				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayAuth() : $this->display404());
 			}

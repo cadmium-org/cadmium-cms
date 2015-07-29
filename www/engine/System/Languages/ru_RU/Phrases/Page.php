@@ -4,12 +4,10 @@ return array (
 
 	# Process errors
 
-	'PAGE_ERROR_NAME'                               => 'Страница с таким URL уже существует',
-
-	'PAGE_ERROR_PARENT'                             => 'Родительская страница не существует',
-
 	'PAGE_ERROR_CREATE'                             => 'Ошибка создания страницы',
-	'PAGE_ERROR_SAVE'                               => 'Ошибка сохранения данных страницы',
+	'PAGE_ERROR_EDIT'                               => 'Ошибка сохранения данных страницы',
+
+	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Страница с таким URL уже существует',
 
 	# Input errors
 
@@ -26,6 +24,7 @@ return array (
 	'PAGE_FIELD_PARENT'                             => 'Родительская страница',
 	'PAGE_FIELD_TITLE'                              => 'Заголовок страницы',
 	'PAGE_FIELD_NAME'                               => 'URL страницы',
+	'PAGE_FIELD_VISIBILITY'                         => 'Видимость',
 	'PAGE_FIELD_ACCESS'                             => 'Доступ',
 	'PAGE_FIELD_DESCRIPTION'                        => 'Описание',
 	'PAGE_FIELD_KEYWORDS'                           => 'Ключевые слова',
