@@ -42,5 +42,3 @@ namespace Template\Utils {
 		}
 	}
 }
-
-?>
