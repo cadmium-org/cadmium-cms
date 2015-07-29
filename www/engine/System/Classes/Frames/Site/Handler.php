@@ -163,8 +163,6 @@ namespace System\Frames\Site {
 				if (!Auth::check()) Request::redirect('/profile/login');
 			}
 
-			// if (isset($this->_access) && (Auth::user()->rank < $this->_access)) Request::redirect('/profile/login');
-
 			return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : $this->display404());
 		}
 	}

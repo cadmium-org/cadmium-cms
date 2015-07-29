@@ -82,7 +82,7 @@ namespace System\Handlers\Admin\Extend {
 
 			$list = Template::group();
 
-			foreach ($this->list as $code => $language) {
+			foreach ($this->items as $code => $language) {
 
 				$list->add($item = Template::block('Contents/Extend/Languages/Item'));
 
@@ -108,7 +108,7 @@ namespace System\Handlers\Admin\Extend {
 
 				array(SECTION_SITE, CONFIG_SITE_LANGUAGE, CONFIG_SITE_LANGUAGE_DEFAULT);
 
-			$this->list = $this->getItems($code, $default);
+			$this->items = $this->getItems($code, $default);
 
 			# Fill template
 
@@ -131,7 +131,7 @@ namespace System\Handlers\Admin\Extend {
 
 				array(SECTION_SITE, CONFIG_SITE_LANGUAGE, CONFIG_SITE_LANGUAGE_DEFAULT);
 
-			$this->list = $this->getItems($code, $default);
+			$this->items = $this->getItems($code, $default);
 
 			# Process form
 

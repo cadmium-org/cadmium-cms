@@ -8,14 +8,6 @@ namespace {
 
 		public static function validate($string) {
 
-			/*
-			if (is_array($string) || is_resource($string)) return false;
-
-			if (is_object($string) && !method_exists($string, '__toString')) return false;
-			*/
-
-			# ------------------------
-
 			return (('' !== ($string = strval($string))) ? $string : false);
 		}
 

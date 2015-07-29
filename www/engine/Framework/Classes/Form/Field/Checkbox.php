@@ -13,6 +13,8 @@ namespace Form\Field {
 			if ($form instanceof Form) $this->form = $form;
 
 			$this->name = $this->validateName($name); $this->value = Validate::boolean($value);
+
+			$this->setConfig($config);
 		}
 
 		# Catch POST value

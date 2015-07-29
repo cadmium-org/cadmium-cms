@@ -21,14 +21,14 @@ namespace {
 
 		# Validate day
 
-		public static function validateDay($year) {
+		public static function validateDay($day) {
 
 			return ((false !== ($day = self::validate($day, 'd'))) ? $day : false);
 		}
 
 		# Validate month
 
-		public static function validateMonth($year) {
+		public static function validateMonth($month) {
 
 			return ((false !== ($month = self::validate($month, 'm'))) ? $month : false);
 		}

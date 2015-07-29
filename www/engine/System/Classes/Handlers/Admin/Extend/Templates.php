@@ -82,7 +82,7 @@ namespace System\Handlers\Admin\Extend {
 
 			$list = Template::group();
 
-			foreach ($this->list as $name => $template) {
+			foreach ($this->items as $name => $template) {
 
 				$list->add($item = Template::block('Contents/Extend/Templates/Item'));
 
@@ -108,7 +108,7 @@ namespace System\Handlers\Admin\Extend {
 
 				array(SECTION_SITE, CONFIG_SITE_TEMPLATE, CONFIG_SITE_TEMPLATE_DEFAULT);
 
-			$this->list = $this->getItems($name, $default);
+			$this->items = $this->getItems($name, $default);
 
 			# Fill template
 
@@ -131,7 +131,7 @@ namespace System\Handlers\Admin\Extend {
 
 				array(SECTION_SITE, CONFIG_SITE_TEMPLATE, CONFIG_SITE_TEMPLATE_DEFAULT);
 
-			$this->list = $this->getItems($name, $default);
+			$this->items = $this->getItems($name, $default);
 
 			# Process form
 
