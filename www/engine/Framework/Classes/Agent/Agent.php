@@ -6,6 +6,19 @@ namespace {
 
 		private static $robots = false, $mobiles = false;
 
+		# Process agents array
+
+		private static function processArray(&$array) {
+
+			if (!is_array($array) || !($agent = getenv('HTTP_USER_AGENT'))) return false;
+
+			foreach ($array as $item) if (false !== stripos($agent, $item)) return true;
+
+			# ------------------------
+
+			return false;
+		}
+
 		# Autoloader
 
 		public static function __autoload() {
@@ -19,28 +32,14 @@ namespace {
 
 		public static function isRobot() {
 
-			if (!is_array(self::$robots) || !($agent = getenv('HTTP_USER_AGENT'))) return false;
-
-			foreach (self::$robots as $robot) if (false !== stripos($agent, $robot)) return true;
-
-			# ------------------------
-
-			return false;
+			return self::processArray(self::$robots);
 		}
 
 		# Check if user agent is mobile
 
 		public static function isMobile() {
 
-			if (!is_array(self::$mobiles) || !($agent = getenv('HTTP_USER_AGENT'))) return false;
-
-			foreach (self::$mobiles as $mobile) if (false !== stripos($agent, $mobile)) return true;
-
-			# ------------------------
-
-			return false;
+			return self::processArray(self::$mobiles);
 		}
 	}
 }
-
-?>
