@@ -19,6 +19,8 @@ namespace {
 
 			if (array() === ($path = self::force($path))) return false;
 
+			$value = false;
+
 			foreach ($path as $item) if (isset($array[$item])) $value = ($array = $array[$item]); else return false;
 
 			# ------------------------
@@ -92,5 +94,3 @@ namespace {
 		}
 	}
 }
-
-?>
