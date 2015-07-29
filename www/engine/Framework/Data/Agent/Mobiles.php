@@ -35,5 +35,3 @@ return array (
 	'windows phone',
 	'xiino'
 );
-
-?>

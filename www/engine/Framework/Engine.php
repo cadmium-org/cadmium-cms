@@ -62,7 +62,7 @@ namespace {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine error: ' . $message) : 'Unknown error');
 
-			$file_name = (DIR_TEMPLATES . 'Error.tpl');
+			$file_name = (DIR_TEMPLATES . 'Error.tpl'); $contents = false;
 
 			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
 
@@ -93,7 +93,7 @@ namespace {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine warning: ' . $message) : 'Unknown warning');
 
-			$file_name = (DIR_TEMPLATES . 'Warning.tpl');
+			$file_name = (DIR_TEMPLATES . 'Warning.tpl'); $contents = false;
 
 			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
 
@@ -119,5 +119,3 @@ namespace {
 		}
 	}
 }
-
-?>

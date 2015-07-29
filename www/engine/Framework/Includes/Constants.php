@@ -29,5 +29,3 @@ define('STRING_POOL_LATIN',                         'abcdefghijklmnopqrstuvwxyzA
 define('STRING_POOL_LATIN_LOWER',                   'abcdefghijklmnopqrstuvwxyz');
 define('STRING_POOL_LATIN_UPPER',                   'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 define('STRING_POOL_NUMERIC',                       '0123456789');
-
-?>

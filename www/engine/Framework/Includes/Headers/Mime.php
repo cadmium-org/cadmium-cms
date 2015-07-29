@@ -9,5 +9,3 @@ define('MIME_TYPE_JSON',        'json');
 define('MIME_TYPE_GIF',         'gif');
 define('MIME_TYPE_JPEG',        'jpeg');
 define('MIME_TYPE_PNG',         'png');
-
-?>

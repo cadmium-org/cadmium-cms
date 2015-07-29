@@ -255,5 +255,3 @@ return array (
 	'zm' => 'Zambia',
 	'zw' => 'Zimbabwe'
 );
-
-?>

@@ -62,5 +62,3 @@ function __autoload($class_name) {
 
 	if (method_exists($class_name, '__autoload')) $class_name::__autoload();
 }
-
-?>

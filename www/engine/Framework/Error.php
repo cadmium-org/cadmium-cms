@@ -67,5 +67,3 @@ namespace Error {
 		protected $message = 'Unable to set database charset';
 	}
 }
-
-?>

@@ -10,7 +10,7 @@ return array (
 	'ahrefsbot',
 	'apache-httpclient',
 	'archive.org',
-	'askjeeves'
+	'askjeeves',
 	'bingbot',
 	'bot/0.1',
 	'browsershots',
@@ -48,5 +48,3 @@ return array (
 	'yahoo',
 	'yandex'
 );
-
-?>

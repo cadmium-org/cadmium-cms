@@ -53,5 +53,3 @@ namespace Warning {
 		protected $message = 'Unable to init template \'$value$\'';
 	}
 }
-
-?>

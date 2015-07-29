@@ -59,5 +59,3 @@ define('STATUS_CODE_506',       '506');
 define('STATUS_CODE_507',       '507');
 define('STATUS_CODE_509',       '509');
 define('STATUS_CODE_510',       '510');
-
-?>

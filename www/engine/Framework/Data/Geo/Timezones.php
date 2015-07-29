@@ -422,5 +422,3 @@ return array (
 	'Pacific/Apia' => '(UTC+14:00) Pacific/Apia',
 	'Pacific/Kiritimati' => '(UTC+14:00) Pacific/Kiritimati'
 );
-
-?>
