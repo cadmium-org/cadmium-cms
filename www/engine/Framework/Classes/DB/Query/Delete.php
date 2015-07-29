@@ -6,21 +6,6 @@ namespace DB\Query {
 
 	class Delete extends Utils\Query {
 
-		# Get condition
-
-		private function getCondition($source) {
-
-			if (!is_array($source)) return String::validate($source);
-
-			$condition = array();
-
-			foreach ($source as $name => $value) $condition[] = ($this->getFieldName($name) . ' = ' . $this->getFieldValue($value));
-
-			# ------------------------
-
-			return implode(' AND ', $condition);
-		}
-
 		# Constructor
 
 		public function __construct($table, $condition = false) {
@@ -31,5 +16,3 @@ namespace DB\Query {
 		}
 	}
 }
-
-?>

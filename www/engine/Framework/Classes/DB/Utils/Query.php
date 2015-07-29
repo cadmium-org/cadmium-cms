@@ -69,6 +69,21 @@ namespace DB\Utils {
 			return ((strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
 		}
 
+		# Get condition
+
+		protected function getCondition($source) {
+
+			if (!is_array($source)) return String::validate($source);
+
+			$condition = array();
+
+			foreach ($source as $name => $value) $condition[] = ($this->getFieldName($name) . ' = ' . $this->getFieldValue($value));
+
+			# ------------------------
+
+			return implode(' AND ', $condition);
+		}
+
 		# Return query
 
 		public function query() {
@@ -77,5 +92,3 @@ namespace DB\Utils {
 		}
 	}
 }
-
-?>

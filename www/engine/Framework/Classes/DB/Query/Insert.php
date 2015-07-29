@@ -55,5 +55,3 @@ namespace DB\Query {
 		}
 	}
 }
-
-?>

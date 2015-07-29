@@ -26,21 +26,6 @@ namespace DB\Query {
 			return implode(', ', $selection);
 		}
 
-		# Get condition
-
-		private function getCondition($source) {
-
-			if (!is_array($source)) return String::validate($source);
-
-			$condition = array();
-
-			foreach ($source as $name => $value) $condition[] = ($this->getFieldName($name) . ' = ' . $this->getFieldValue($value));
-
-			# ------------------------
-
-			return implode(' AND ', $condition);
-		}
-
 		# Get order
 
 		private function getOrder($source) {
@@ -85,5 +70,3 @@ namespace DB\Query {
 		}
 	}
 }
-
-?>

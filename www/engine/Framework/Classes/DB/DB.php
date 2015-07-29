@@ -45,6 +45,8 @@ namespace {
 
 			$time = microtime(true); $result = mysqli_query(self::$link, $query); $time = (microtime(true) - $time);
 
+			$holder = false;
+
 			if (is_object($result)) $holder = new DB\Result\Select($query, $result, $time);
 
 			else if (true === $result) $holder = new DB\Result\Affect(self::$link, $query, $time);
@@ -62,8 +64,6 @@ namespace {
 
 		public static function select($table, $selection, $condition = false, $order = false, $limit = false, $group = false) {
 
-			if (false === self::$link) return false;
-
 			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit, $group);
 
 			# ------------------------
@@ -74,8 +74,6 @@ namespace {
 		# Generate & send insert query
 
 		public static function insert($table, $dataset, $multiple = false) {
-
-			if (false === self::$link) return false;
 
 			$query = new DB\Query\Insert($table, $dataset, $multiple);
 
@@ -88,8 +86,6 @@ namespace {
 
 		public static function update($table, $dataset, $condition = false) {
 
-			if (false === self::$link) return false;
-
 			$query = new DB\Query\Update($table, $dataset, $condition);
 
 			# ------------------------
@@ -100,8 +96,6 @@ namespace {
 		# Generate & send delete query
 
 		public static function delete($table, $condition = false) {
-
-			if (false === self::$link) return false;
 
 			$query = new DB\Query\Delete($table, $condition);
 
@@ -156,5 +150,3 @@ namespace {
 		}
 	}
 }
-
-?>

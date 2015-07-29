@@ -19,21 +19,6 @@ namespace DB\Query {
 			return implode(', ', $dataset);
 		}
 
-		# Get condition
-
-		private function getCondition($source) {
-
-			if (!is_array($source)) return String::validate($source);
-
-			$condition = array();
-
-			foreach ($source as $name => $value) $condition[] = ($this->getFieldName($name) . ' = ' . $this->getFieldValue($value));
-
-			# ------------------------
-
-			return implode(' AND ', $condition);
-		}
-
 		# Constructor
 
 		function __construct($table, $set, $condition = false) {
@@ -44,5 +29,3 @@ namespace DB\Query {
 		}
 	}
 }
-
-?>
