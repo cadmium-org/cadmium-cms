@@ -11,7 +11,7 @@ namespace System\Frames {
 
 		# Constructor
 
-		public function __construct(array $path) {
+		public function __construct(array $path = array()) {
 
 			$this->path = $path;
 

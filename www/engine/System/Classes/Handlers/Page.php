@@ -72,7 +72,9 @@ namespace System\Handlers {
 
 		protected function handle() {
 
-			if (false === ($this->path = $this->getPath())) return false;
+			if (false === ($path = $this->getPath())) return false;
+
+			$this->path = $path;
 
 			# Create page
 
