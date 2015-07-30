@@ -236,5 +236,3 @@ namespace System\Handlers\Admin\Install {
 		}
 	}
 }
-
-?>

@@ -167,5 +167,3 @@ namespace System\Frames\Site {
 		}
 	}
 }
-
-?>

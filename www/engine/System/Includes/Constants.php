@@ -81,5 +81,3 @@ define('TARGET_BLANK',                              1);
 
 define('VISIBILITY_DRAFT',                          0);
 define('VISIBILITY_PUBLISHED',                      1);
-
-?>

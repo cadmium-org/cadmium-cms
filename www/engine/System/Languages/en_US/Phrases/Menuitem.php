@@ -20,5 +20,3 @@ return array (
 	'MENUITEM_FIELD_TARGET'                         => 'Target',
 	'MENUITEM_FIELD_POSITION'                       => 'Position'
 );
-
-?>

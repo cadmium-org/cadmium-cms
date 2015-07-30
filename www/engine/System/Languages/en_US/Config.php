@@ -8,5 +8,3 @@ return array (
 	'title'		=> 'English',
 	'author'	=> 'Anton Romanov'
 );
-
-?>

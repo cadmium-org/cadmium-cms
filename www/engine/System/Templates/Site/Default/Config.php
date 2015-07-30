@@ -6,5 +6,3 @@ return array (
 	'title'		=> 'Default',
 	'author'	=> 'Anton Romanov'
 );
-
-?>

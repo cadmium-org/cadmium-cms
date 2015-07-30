@@ -46,5 +46,3 @@ return array (
 	'VISIBILITY_DRAFT'                          => 'Черновик',
 	'VISIBILITY_PUBLISHED'                      => 'Опубликовано'
 );
-
-?>

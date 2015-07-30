@@ -153,5 +153,3 @@ return array (
 	'INFO_PHP_VERSION'                          => 'Версия PHP',
 	'INFO_MYSQL_VERSION'                        => 'Версия MySQL'
 );
-
-?>

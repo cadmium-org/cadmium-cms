@@ -517,5 +517,3 @@ namespace System\Utils {
 		}
 	}
 }
-
-?>

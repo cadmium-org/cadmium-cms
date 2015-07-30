@@ -223,5 +223,3 @@ namespace System\Frames\Admin\Listview {
 		}
 	}
 }
-
-?>

@@ -78,5 +78,3 @@ namespace System\Handlers\Admin {
 		}
 	}
 }
-
-?>

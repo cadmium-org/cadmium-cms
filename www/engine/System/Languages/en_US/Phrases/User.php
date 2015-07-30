@@ -64,5 +64,3 @@ return array (
 
 	'USER_UNKNOWN'                                  => 'Unknown user'
 );
-
-?>

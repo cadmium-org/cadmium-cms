@@ -6,5 +6,3 @@ namespace System\Handlers\Tools {
 
 	class Captcha extends System\Frames\Tools\Captcha {}
 }
-
-?>

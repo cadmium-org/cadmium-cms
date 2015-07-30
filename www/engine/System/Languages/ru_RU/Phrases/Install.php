@@ -76,5 +76,3 @@ return array (
 	'INSTALL_PAGE_DEMO_TITLE'                   => 'Страница',
 	'INSTALL_PAGE_DEMO_CONTENTS'                => '<p>Это демонстрационная страница.</p>'
 );
-
-?>

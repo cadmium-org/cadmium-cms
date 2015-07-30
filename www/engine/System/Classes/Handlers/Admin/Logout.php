@@ -23,5 +23,3 @@ namespace System\Handlers\Admin {
 		}
 	}
 }
-
-?>

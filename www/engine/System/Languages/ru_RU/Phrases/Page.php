@@ -35,5 +35,3 @@ return array (
 
 	'PAGE_GROUP_ADDITIONAL'                         => 'Дополнительные настройки'
 );
-
-?>

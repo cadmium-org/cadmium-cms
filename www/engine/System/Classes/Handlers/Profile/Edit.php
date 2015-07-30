@@ -118,5 +118,3 @@ namespace System\Handlers\Profile {
 		}
 	}
 }
-
-?>

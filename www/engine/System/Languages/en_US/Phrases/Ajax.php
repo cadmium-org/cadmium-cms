@@ -13,5 +13,3 @@ return array (
 	'AJAX_RESPONSE_ERROR_TIMEOUT'               => 'Waiting for response has timed out',
 	'AJAX_RESPONSE_ERROR_UNKNOWN'               => 'Unknown error'
 );
-
-?>

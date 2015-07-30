@@ -47,5 +47,3 @@ namespace System\Frames\Tools {
 		}
 	}
 }
-
-?>

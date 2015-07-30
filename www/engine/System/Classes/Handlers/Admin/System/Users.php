@@ -150,5 +150,3 @@ namespace System\Handlers\Admin\System {
 		}
 	}
 }
-
-?>

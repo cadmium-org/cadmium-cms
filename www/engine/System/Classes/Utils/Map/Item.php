@@ -86,5 +86,3 @@ namespace System\Utils\Map {
 		}
 	}
 }
-
-?>

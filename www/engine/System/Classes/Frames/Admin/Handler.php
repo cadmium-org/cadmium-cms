@@ -201,5 +201,3 @@ namespace System\Frames\Admin {
 		}
 	}
 }
-
-?>

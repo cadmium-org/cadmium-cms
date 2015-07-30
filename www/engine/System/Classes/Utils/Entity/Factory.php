@@ -70,5 +70,3 @@ namespace System\Utils\Entity {
 		}
     }
 }
-
-?>

@@ -27,5 +27,3 @@ return array (
 	'PROFILE_EDIT_GROUP_PERSONAL'               => 'Персональная информация',
 	'PROFILE_EDIT_GROUP_PASSWORD'               => 'Изменение пароля'
 );
-
-?>

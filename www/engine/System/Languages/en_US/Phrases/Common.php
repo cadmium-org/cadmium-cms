@@ -67,5 +67,3 @@ return array (
 
 	'FEATURE_NOT_AVAILABLE'                     => 'Feature is currently in development'
 );
-
-?>

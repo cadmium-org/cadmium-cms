@@ -127,5 +127,3 @@ namespace System\Utils\Entity {
         }
     }
 }
-
-?>

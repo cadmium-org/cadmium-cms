@@ -61,5 +61,3 @@ namespace System\Utils\Tools {
 		}
 	}
 }
-
-?>

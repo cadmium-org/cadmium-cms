@@ -73,5 +73,3 @@ namespace System\Handlers\Profile\Auth {
 		}
 	}
 }
-
-?>

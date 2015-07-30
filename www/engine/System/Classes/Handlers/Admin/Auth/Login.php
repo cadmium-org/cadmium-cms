@@ -73,5 +73,3 @@ namespace System\Handlers\Admin\Auth {
 		}
 	}
 }
-
-?>

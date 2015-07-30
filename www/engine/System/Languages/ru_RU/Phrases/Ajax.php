@@ -13,5 +13,3 @@ return array (
 	'AJAX_RESPONSE_ERROR_TIMEOUT'               => 'Время ожидания ответа истекло',
 	'AJAX_RESPONSE_ERROR_UNKNOWN'               => 'Неизвестная ошибка'
 );
-
-?>

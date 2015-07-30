@@ -171,5 +171,3 @@ namespace System\Utils\Entity\Type\User {
 		}
 	}
 }
-
-?>

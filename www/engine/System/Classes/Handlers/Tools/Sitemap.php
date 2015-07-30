@@ -6,5 +6,3 @@ namespace System\Handlers\Tools {
 
 	class Sitemap extends System\Frames\Tools\Sitemap {}
 }
-
-?>

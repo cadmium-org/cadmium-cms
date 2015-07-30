@@ -75,5 +75,3 @@ namespace System\Handlers\Profile {
 		}
 	}
 }
-
-?>

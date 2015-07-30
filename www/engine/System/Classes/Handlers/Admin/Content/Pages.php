@@ -159,5 +159,3 @@ namespace System\Handlers\Admin\Content {
 		}
 	}
 }
-
-?>

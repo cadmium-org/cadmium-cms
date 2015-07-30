@@ -56,5 +56,3 @@ namespace System\Utils\Entity\Type\Page {
 		}
     }
 }
-
-?>

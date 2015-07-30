@@ -41,5 +41,3 @@ namespace System\Utils\Entity\Param {
         }
     }
 }
-
-?>

@@ -136,5 +136,3 @@ namespace System\Utils\Extend {
 		}
 	}
 }
-
-?>

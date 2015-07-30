@@ -159,5 +159,3 @@ namespace System\Utils\Tools {
 		}
 	}
 }
-
-?>

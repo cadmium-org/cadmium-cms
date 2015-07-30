@@ -141,5 +141,3 @@ namespace System\Handlers\Admin\Extend {
 		}
 	}
 }
-
-?>

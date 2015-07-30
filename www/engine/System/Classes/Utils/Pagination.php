@@ -75,5 +75,3 @@ namespace System\Utils {
 		}
 	}
 }
-
-?>

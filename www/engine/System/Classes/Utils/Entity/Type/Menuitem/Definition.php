@@ -21,5 +21,3 @@ namespace System\Utils\Entity\Type\Menuitem {
         }
     }
 }
-
-?>

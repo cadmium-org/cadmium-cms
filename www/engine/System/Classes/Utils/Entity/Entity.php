@@ -312,5 +312,3 @@ namespace System\Utils\Entity {
 		}
 	}
 }
-
-?>
