@@ -21,7 +21,7 @@ namespace DB\Query {
 
 		# Constructor
 
-		function __construct($table, $set, $condition = false) {
+		public function __construct($table, $set, $condition = false) {
 
 			$table = $this->getTableName($table); $set = $this->getDataset($set); $condition = $this->getCondition($condition);
 
