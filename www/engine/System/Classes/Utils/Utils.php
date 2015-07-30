@@ -2,15 +2,15 @@
 
 namespace System\Utils {
 
-	use Arr, Date, Explorer, String;
+	use Date, Explorer, String;
 
 	class Utils {
 
 		# Parse configuration file
 
-		public static function config($file_name, $params) {
+		public static function config($file_name, array $params) {
 
-			$file_name = String::validate($file_name); $params = Arr::force($params);
+			$file_name = String::validate($file_name);
 
 			if (!is_array($include = Explorer::php($file_name))) return false;
 

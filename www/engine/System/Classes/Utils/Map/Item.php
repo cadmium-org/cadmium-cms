@@ -67,9 +67,9 @@ namespace System\Utils\Map {
 
 		# Get handler by path
 
-		public function handler($path) {
+		public function handler(array $path) {
 
-			if (!$this->status || !is_array($path)) return false;
+			if (!$this->status) return false;
 
 			if ($path !== $this->path) return false;
 

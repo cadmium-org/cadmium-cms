@@ -2,7 +2,7 @@
 
 namespace System\Utils\Map {
 
-	use Warning, System, Arr, Explorer;
+	use Warning, System, Explorer;
 
 	class Map {
 
@@ -33,7 +33,7 @@ namespace System\Utils\Map {
 
 		# Get handler name by path
 
-		private function getHandler($path) {
+		private function getHandler(array $path) {
 
 			foreach ($this->map as $item) {
 
@@ -52,9 +52,7 @@ namespace System\Utils\Map {
 
 		# Get handler object by path
 
-		public function handle($path) {
-
-			$path = Arr::force($path);
+		public function handle(array $path) {
 
 			if (false !== ($handler = $this->getHandler($path))) {
 

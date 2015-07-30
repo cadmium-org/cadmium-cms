@@ -12,7 +12,9 @@ namespace Geo\Utils {
 
 		protected static function init($file_name) {
 
-			self::$list = Explorer::php(DIR_DATA . $file_name);
+			$file_name = (DIR_DATA . $file_name);
+
+			if (is_array($list = Explorer::php($file_name))) self::$list = $list;
 		}
 
 		# Check if item exists

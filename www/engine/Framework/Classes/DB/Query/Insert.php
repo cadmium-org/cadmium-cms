@@ -2,15 +2,15 @@
 
 namespace DB\Query {
 
-	use DB\Utils, Arr, Validate;
+	use DB\Utils, Validate;
 
 	class Insert extends Utils\Query {
 
 		# Get single dataset
 
-		private function getSingleDataset($source) {
+		private function getSingleDataset(array $source) {
 
-			$source = Arr::force($source); $names = array(); $values = array();
+			$names = array(); $values = array();
 
 			foreach ($source as $name => $value) {
 
@@ -22,9 +22,9 @@ namespace DB\Query {
 
 		# Get multiple dataset
 
-		private function getMultipleDataset($source) {
+		private function getMultipleDataset(array $source) {
 
-			$source = Arr::force($source); $names = array(); $values = array(); $count = 0;
+			$names = array(); $values = array(); $count = 0;
 
 			foreach ($source as $field) {
 

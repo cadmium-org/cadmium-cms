@@ -33,7 +33,7 @@ namespace {
 
 				$file_name = (self::$dir_name . '/Phrases/' . $name . '.php');
 
-				$phrases = Arr::force(Explorer::php($file_name));
+				if (!is_array($phrases = Explorer::php($file_name))) continue;
 
 				foreach ($phrases as $name => $value) {
 

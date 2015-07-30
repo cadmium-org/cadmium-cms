@@ -2,15 +2,15 @@
 
 namespace DB\Query {
 
-	use DB\Utils, Arr, String;
+	use DB\Utils, String;
 
 	class Update extends Utils\Query {
 
 		# Get dataset
 
-		private function getDataset($source) {
+		private function getDataset(array $source) {
 
-			$source = Arr::force($source); $dataset = array();
+			$dataset = array();
 
 			foreach ($source as $name => $value) $dataset[] = ($this->getFieldName($name) . ' = ' . $this->getFieldValue($value));
 

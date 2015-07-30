@@ -2,7 +2,7 @@
 
 namespace Template\Utils {
 
-	use Template, Arr, Language, Number, String, Validate;
+	use Template, Language, Number, String, Validate;
 
 	class Block {
 
@@ -162,13 +162,11 @@ namespace Template\Utils {
 
 		# Set loop
 
-		public function loop($name, $range, $separator = false) {
+		public function loop($name, array $range, $separator = false) {
 
-			$name = String::validate($name);
+			$name = String::validate($name); $separator = String::validate($separator);
 
 			if (!isset($this->loops[$name])) return false;
-
-			$range = Arr::force($range); $separator = String::validate($separator);
 
 			$this->loops[$name]['range'] = $range; $this->loops[$name]['separator'] = $separator;
 

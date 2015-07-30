@@ -4,13 +4,13 @@ namespace {
 
 	abstract class Agent {
 
-		private static $robots = false, $mobiles = false;
+		private static $robots = array(), $mobiles = array();
 
 		# Process agents array
 
-		private static function processArray(&$array) {
+		private static function processArray(array &$array) {
 
-			if (!is_array($array) || !($agent = getenv('HTTP_USER_AGENT'))) return false;
+			if (!($agent = getenv('HTTP_USER_AGENT'))) return false;
 
 			foreach ($array as $item) if (false !== stripos($agent, $item)) return true;
 
@@ -23,9 +23,13 @@ namespace {
 
 		public static function __autoload() {
 
-			self::$robots = Explorer::php(DIR_DATA . 'Agent/Robots.php');
+			$file_robots = (DIR_DATA . 'Agent/Robots.php');
 
-			self::$mobiles = Explorer::php(DIR_DATA . 'Agent/Mobiles.php');
+			$file_mobiles = (DIR_DATA . 'Agent/Mobiles.php');
+
+			if (is_array($robots = Explorer::php($file_robots))) self::$robots = $robots;
+
+			if (is_array($mobiles = Explorer::php($file_mobiles))) self::$mobiles = $mobiles;
 		}
 
 		# Check if user agent is robot

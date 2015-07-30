@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form, Form\Utils, Arr, String, Request, Tag, Template, Validate;
+	use Form, Form\Utils, String, Request, Tag, Template, Validate;
 
 	class Select extends Utils\Field {
 
@@ -10,7 +10,7 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value, $options, $default = false, $config = false) {
+		public function __construct($form, $name, $value, array $options, $default = false, $config = false) {
 
 			if ($form instanceof Form) $this->form = $form;
 
@@ -18,7 +18,7 @@ namespace Form\Field {
 
 			$default = ((false !== ($default = String::validate($default))) ? array('' => $default) : array());
 
-			$this->options = array_merge($default, Arr::force($options));
+			$this->options = array_merge($default, $options);
 
 			$this->setConfig($config);
 		}

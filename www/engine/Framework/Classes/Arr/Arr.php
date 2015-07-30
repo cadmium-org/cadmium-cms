@@ -4,20 +4,9 @@ namespace {
 
 	abstract class Arr {
 
-		# Force variable convert to array
-
-		public static function force($array) {
-
-			return (is_array($array) ? $array : array());
-		}
-
 		# Get array value by path
 
-		public static function get($array, $path) {
-
-			if (array() === ($array = self::force($array))) return false;
-
-			if (array() === ($path = self::force($path))) return false;
+		public static function get(array $array, array $path) {
 
 			$value = false;
 
@@ -30,9 +19,7 @@ namespace {
 
 		# Transform associative array to indexed
 
-		public static function index($array, $key_name, $value_name) {
-
-			if (array() === ($array = self::force($array))) return array();
+		public static function index(array $array, $key_name, $value_name) {
 
 			$key_name = String::validate($key_name); $value_name = String::validate($value_name);
 
@@ -47,9 +34,7 @@ namespace {
 
 		# Extract subvalue
 
-		public static function subvalExtract($array, $sub_key) {
-
-			if (array() === ($array = self::force($array))) return array();
+		public static function subvalExtract(array $array, $sub_key) {
 
 			$sub_key = String::validate($sub_key);
 
@@ -67,15 +52,13 @@ namespace {
 
 		# Sort by subvalue
 
-		public static function subvalSort($array, $sub_key, $desc = false) {
+		public static function subvalSort(array $array, $sub_key, $descending = false) {
 
-			if (array() === ($array = self::force($array))) return array();
-
-			$sub_key = String::validate($sub_key); $desc = Validate::boolean($desc);
+			$sub_key = String::validate($sub_key); $descending = Validate::boolean($descending);
 
 			$array_extracted = self::subvalExtract($array, $sub_key); $array_sorted = array();
 
-			if (!$desc) asort($array_extracted); else arsort($array_extracted);
+			if (!$descending) asort($array_extracted); else arsort($array_extracted);
 
 			foreach (array_keys($array_extracted) as $key) $array_sorted[$key] = $array[$key];
 
@@ -86,9 +69,7 @@ namespace {
 
 		# Get random value
 
-		public static function random($array) {
-
-			if (array() === ($array = self::force($array))) return false;
+		public static function random(array $array) {
 
 		    return $array[array_rand($array)];
 		}

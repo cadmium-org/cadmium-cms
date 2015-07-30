@@ -3,17 +3,17 @@
 namespace System\Frames {
 
 	use System\Utils\Auth, System\Utils\Config, System\Utils\Extend, System\Utils\Requirements;
-	use Arr, Language, Template, Session;
+	use Language, Template, Session;
 
 	abstract class Main {
 
-		protected $path = false;
+		protected $path = array();
 
 		# Constructor
 
-		public function __construct($path = false) {
+		public function __construct(array $path) {
 
-			$this->path = Arr::force($path);
+			$this->path = $path;
 
 			# Init configuration
 
