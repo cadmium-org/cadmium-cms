@@ -14,7 +14,7 @@ namespace DB\Query {
 
 			foreach ($source as $name => $value) {
 
-				$names[] = $this->getFieldName($name); $values[] = $this->getFieldValue($value);
+				$names[] = $this->getName($name); $values[] = $this->getValue($value);
 			}
 
 			return ('(' . implode(', ', $names) . ') VALUES (' . implode(', ', $values) . ')');
@@ -32,9 +32,9 @@ namespace DB\Query {
 
 				foreach ($field as $name => $value) {
 
-					if ($count === 0) $names[] = $this->getFieldName($name);
+					if ($count === 0) $names[] = $this->getName($name);
 
-					$values[$count][] = $this->getFieldValue($value);
+					$values[$count][] = $this->getValue($value);
 				}
 
 				$values[$count] = ('(' .  implode(', ', $values[$count]) . ')'); $count++;
@@ -49,7 +49,7 @@ namespace DB\Query {
 
 			# Process arguments
 
-			$table = $this->getTableName($table); $multiple = Validate::boolean($multiple);
+			$table = $this->getName($table); $multiple = Validate::boolean($multiple);
 
 			$dataset = (!$multiple ? $this->getSingleDataset($dataset) : $this->getMultipleDataset($dataset));
 

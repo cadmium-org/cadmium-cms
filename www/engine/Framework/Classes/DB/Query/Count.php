@@ -4,7 +4,7 @@ namespace DB\Query {
 
 	use DB\Utils;
 
-	class Delete extends Utils\Query {
+	class Count extends Utils\Query {
 
 		# Constructor
 
@@ -18,7 +18,7 @@ namespace DB\Query {
 
 			# Build query
 
-			$this->query = ('DELETE FROM ' . $table . ($condition ? (' WHERE (' .  $condition . ')') : ''));
+			$this->query = ('SELECT COUNT(*) FROM ' . $table . ($condition ? (' WHERE (' .  $condition . ')') : ''));
 		}
 	}
 }

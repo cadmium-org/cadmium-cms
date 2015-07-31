@@ -4,7 +4,7 @@ namespace {
 
 	abstract class DB {
 
-		private static $link = false, $last = false, $log = array(), $time = 0;
+		private static $link = false, $last, $log = array(), $time = 0;
 
 		# Connect to database
 
@@ -47,7 +47,7 @@ namespace {
 
 			$holder = new DB\Utils\Result(self::$link, $result, $query, $time);
 
-			self::$last = $holder; self::$log[] = $holder; self::$time += $holder->time;
+			self::$last = $holder; self::$log[] = $holder; self::$time += $time;
 
 			# ------------------------
 
@@ -92,6 +92,17 @@ namespace {
 		public static function delete($table, $condition = false) {
 
 			$query = new DB\Query\Delete($table, $condition);
+
+			# ------------------------
+
+			return self::send($query->query());
+		}
+
+		# Generate & send count query
+
+		public static function count($table, $condition = false) {
+
+			$query = new DB\Query\Count($table, $condition);
 
 			# ------------------------
 

@@ -8,52 +8,18 @@ namespace DB\Utils {
 
 		protected $query;
 
-		# Sanitize name
+		# Get field/table name
 
-		private function sanitizeName($name) {
+		protected function getName($name) {
+
+			$name = String::validate($name);
 
 			return trim(preg_replace('/[^a-zA-Z0-9_]/', '_', $name));
 		}
 
-		# Get table name
-
-		protected function getTableName($name) {
-
-			$name = String::validate($name);
-
-			return strtolower(self::sanitizeName($name));
-		}
-
-		# Get alias name
-
-		protected function getAliasName($name) {
-
-			$name = String::validate($name);
-
-			return strtolower(self::sanitizeName($name));
-		}
-
-		# Get field name
-
-		protected function getFieldName($name) {
-
-			$name = String::validate($name);
-
-			if (preg_match('/^([^\(]+)[ ]*\([ ]*(.+)[ ]*\)$/', trim($name), $matches)) {
-
-				$function = strtoupper(self::sanitizeName($matches[1]));
-
-				$param = (($matches[2] === '*') ? '*' : strtolower(self::sanitizeName($matches[2])));
-
-				return ($function . '(' . $param . ')');
-			}
-
-			return strtolower(self::sanitizeName($name));
-		}
-
 		# Get field value
 
-		protected function getFieldValue($value) {
+		protected function getValue($value) {
 
 			$value = String::validate($value);
 
@@ -62,7 +28,7 @@ namespace DB\Utils {
 
 		# Get field sort
 
-		protected function getFieldSort($sort) {
+		protected function getSort($sort) {
 
 			$sort = String::validate($sort);
 
@@ -75,15 +41,11 @@ namespace DB\Utils {
 
 			if (!is_array($source)) return String::validate($source);
 
-			$key_parser = String::validate($key_parser); $value_parser = String::validate($value_parser);
+			$parsers = array('name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort');
 
-			$concat = String::validate($concat); $separator = String::validate($separator);
+			if ((false !== $key_parser) && !isset($parsers[$key_parser])) return '';
 
-			$parsers = array('name' => 'getFieldName', 'value' => 'getFieldValue', 'sort' => 'getFieldSort');
-
-			if ((false !== $key_parser) && !isset($parsers[$key_parser])) return false;
-
-			if ((false !== $value_parser) && !isset($parsers[$value_parser])) return false;
+			if ((false !== $value_parser) && !isset($parsers[$value_parser])) return '';
 
 			$output = array();
 

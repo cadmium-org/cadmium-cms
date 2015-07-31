@@ -12,7 +12,7 @@ namespace DB\Query {
 
 			# Process arguments
 
-			$table = $this->getTableName($table);
+			$table = $this->getName($table);
 
 			$set = $this->getFieldset($set, 'name', 'value', ' = ', ', ');
 

@@ -12,7 +12,7 @@ namespace DB\Query {
 
 			# Process arguments
 
-			$table = $this->getTableName($table);
+			$table = $this->getName($table);
 
 			$selection = $this->getFieldset($selection, false, 'name', '', ', ');
 
