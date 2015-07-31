@@ -45,13 +45,7 @@ namespace {
 
 			$time = microtime(true); $result = mysqli_query(self::$link, $query); $time = (microtime(true) - $time);
 
-			$holder = false;
-
-			if (is_object($result)) $holder = new DB\Result\Select($query, $result, $time);
-
-			else if (true === $result) $holder = new DB\Result\Affect(self::$link, $query, $time);
-
-			else if (false === $result) $holder = new DB\Result\Error(self::$link, $query, $time);
+			$holder = new DB\Utils\Result(self::$link, $result, $query, $time);
 
 			self::$last = $holder; self::$log[] = $holder; self::$time += $holder->time;
 

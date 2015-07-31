@@ -47,9 +47,13 @@ namespace DB\Query {
 
 		public function __construct($table, $dataset, $multiple = false) {
 
+			# Process arguments
+
 			$table = $this->getTableName($table); $multiple = Validate::boolean($multiple);
 
 			$dataset = (!$multiple ? $this->getSingleDataset($dataset) : $this->getMultipleDataset($dataset));
+
+			# Build query
 
 			$this->query = ('INSERT INTO ' . $table . ' ' . $dataset);
 		}

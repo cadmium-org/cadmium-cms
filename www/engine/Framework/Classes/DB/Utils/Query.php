@@ -6,7 +6,7 @@ namespace DB\Utils {
 
 	abstract class Query {
 
-		protected $query = false;
+		protected $query;
 
 		# Sanitize name
 
@@ -69,19 +69,36 @@ namespace DB\Utils {
 			return ((strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
 		}
 
-		# Get condition
+		# Get fieldset
 
-		protected function getCondition($source) {
+		protected function getFieldset($source, $key_parser, $value_parser, $concat, $separator) {
 
 			if (!is_array($source)) return String::validate($source);
 
-			$condition = array();
+			$key_parser = String::validate($key_parser); $value_parser = String::validate($value_parser);
 
-			foreach ($source as $name => $value) $condition[] = ($this->getFieldName($name) . ' = ' . $this->getFieldValue($value));
+			$concat = String::validate($concat); $separator = String::validate($separator);
+
+			$parsers = array('name' => 'getFieldName', 'value' => 'getFieldValue', 'sort' => 'getFieldSort');
+
+			if ((false !== $key_parser) && !isset($parsers[$key_parser])) return false;
+
+			if ((false !== $value_parser) && !isset($parsers[$value_parser])) return false;
+
+			$output = array();
+
+			foreach ($source as $key => $value) {
+
+				$key = ((false !== $key_parser) ? call_user_func(array($this, $parsers[$key_parser]), $key) : '');
+
+				$value = ((false !== $value_parser) ? call_user_func(array($this, $parsers[$value_parser]), $value) : '');
+
+				$output[] = trim($key . $concat . $value);
+			}
 
 			# ------------------------
 
-			return implode(' AND ', $condition);
+			return implode($separator, $output);
 		}
 
 		# Return query

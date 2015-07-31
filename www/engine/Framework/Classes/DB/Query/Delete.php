@@ -2,7 +2,7 @@
 
 namespace DB\Query {
 
-	use DB\Utils, String;
+	use DB\Utils;
 
 	class Delete extends Utils\Query {
 
@@ -10,7 +10,13 @@ namespace DB\Query {
 
 		public function __construct($table, $condition = false) {
 
-			$table = $this->getTableName($table); $condition = $this->getCondition($condition);
+			# Process arguments
+
+			$table = $this->getTableName($table);
+
+			$condition = $this->getFieldset($condition, 'name', 'value', ' = ', ' AND ');
+
+			# Build query
 
 			$this->query = ('DELETE FROM ' . $table . ($condition ? (' WHERE (' .  $condition . ')') : ''));
 		}
