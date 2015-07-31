@@ -2,6 +2,17 @@
 
 namespace DB\Utils {
 
+	/**
+	 * @property-read boolean $status
+	 * @property-read mixed $result
+	 * @property-read string $query
+	 * @property-read int $time
+	 * @property-read int $rows
+	 * @property-read int $id
+	 * @property-read string $error
+	 * @property-read int $errno
+	 */
+
 	class Result {
 
 		private $status, $result, $query, $time, $rows, $id, $error, $errno;

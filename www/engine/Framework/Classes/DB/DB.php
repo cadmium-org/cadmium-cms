@@ -98,17 +98,6 @@ namespace {
 			return self::send($query->query());
 		}
 
-		# Generate & send count query
-
-		public static function count($table, $condition = false) {
-
-			$query = new DB\Query\Count($table, $condition);
-
-			# ------------------------
-
-			return self::send($query->query());
-		}
-
 		# Return last query holder
 
 		public static function last() {
