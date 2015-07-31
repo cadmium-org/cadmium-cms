@@ -35,9 +35,9 @@ namespace DB\Utils {
 			return ((strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
 		}
 
-		# Get fieldset
+		# Convert data array to string
 
-		protected function getFieldset($source, $key_parser, $value_parser, $concat, $separator) {
+		protected function getString($source, $key_parser, $value_parser, $concat, $separator) {
 
 			if (!is_array($source)) return String::validate($source);
 

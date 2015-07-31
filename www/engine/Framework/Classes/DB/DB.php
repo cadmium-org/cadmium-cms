@@ -56,9 +56,9 @@ namespace {
 
 		# Generate & send select query
 
-		public static function select($table, $selection, $condition = false, $order = false, $limit = false, $group = false) {
+		public static function select($table, $selection, $condition = false, $order = false, $limit = false) {
 
-			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit, $group);
+			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit);
 
 			# ------------------------
 
@@ -67,7 +67,7 @@ namespace {
 
 		# Generate & send insert query
 
-		public static function insert($table, $dataset, $multiple = false) {
+		public static function insert($table, array $dataset, $multiple = false) {
 
 			$query = new DB\Query\Insert($table, $dataset, $multiple);
 
