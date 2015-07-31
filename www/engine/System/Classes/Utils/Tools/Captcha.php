@@ -20,7 +20,7 @@ namespace System\Utils\Tools {
 
 			# ------------------------
 
-			return @imagecolorallocate($this->captcha, $color[0], $color[1], $color[2]);
+			return imagecolorallocate($this->captcha, $color[0], $color[1], $color[2]);
 		}
 
 		# Constructor
@@ -29,13 +29,13 @@ namespace System\Utils\Tools {
 
 			$width = Number::positive($width); $height = Number::positive($height);
 
-			if (false !== ($this->captcha = @imagecreatetruecolor($width, $height))) {
+			if (false !== ($this->captcha = imagecreatetruecolor($width, $height))) {
 
 				$this->width = $width; $this->height = $height;
 
 				if (false !== ($bg_color = $this->allocateColor($bg_color))) {
 
-					@imagefilledrectangle($this->captcha, 0, 0, ($width - 1), ($height - 1), $bg_color);
+					imagefilledrectangle($this->captcha, 0, 0, ($width - 1), ($height - 1), $bg_color);
 				}
 			}
 		}
@@ -60,7 +60,7 @@ namespace System\Utils\Tools {
 
 				$angle = mt_rand(-10, 10); $x = ($indent + ($index * $step)); $y = mt_rand(($base - 5), ($base + 5));
 
-				@imagettftext($this->captcha, $size, $angle, $x, $y, $color, $font, $character);
+				imagettftext($this->captcha, $size, $angle, $x, $y, $color, $font, $character);
 			}
 
 			return true;
@@ -80,7 +80,7 @@ namespace System\Utils\Tools {
 
 				for ($y = 0; $y < $this->height; $y++) {
 
-					if (mt_rand(1, $rate) === 1) @imagesetpixel($this->captcha, $x, $y, $color);
+					if (mt_rand(1, $rate) === 1) imagesetpixel($this->captcha, $x, $y, $color);
 				}
 			}
 
@@ -103,7 +103,7 @@ namespace System\Utils\Tools {
 
 				$point_1 = array(($this->width - 1), mt_rand(0, ($this->height - 1)));
 
-				@imageline($this->captcha, $point_0[0], $point_0[1], $point_1[0], $point_1[1], $color);
+				imageline($this->captcha, $point_0[0], $point_0[1], $point_1[0], $point_1[1], $color);
 			}
 
 			return true;
@@ -117,7 +117,7 @@ namespace System\Utils\Tools {
 
 			Headers::nocache(); Headers::content(MIME_TYPE_GIF);
 
-			@imagegif($this->captcha); @imagedestroy($this->captcha);
+			imagegif($this->captcha); imagedestroy($this->captcha);
 
 			# ------------------------
 
@@ -134,7 +134,7 @@ namespace System\Utils\Tools {
 
 			Headers::nocache(); Headers::content(MIME_TYPE_JPEG);
 
-			@imagejpeg($this->captcha, null, $quality); @imagedestroy($this->captcha);
+			imagejpeg($this->captcha, null, $quality); imagedestroy($this->captcha);
 
 			# ------------------------
 
@@ -151,7 +151,7 @@ namespace System\Utils\Tools {
 
 			Headers::nocache(); Headers::content(MIME_TYPE_PNG);
 
-			@imagepng($this->captcha, null, $quality); @imagedestroy($this->captcha);
+			imagepng($this->captcha, null, $quality); imagedestroy($this->captcha);
 
 			# ------------------------
 
