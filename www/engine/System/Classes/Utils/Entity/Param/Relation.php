@@ -6,7 +6,7 @@ namespace System\Utils\Entity\Param {
 
 	class Relation extends Entity\Param {
 
-        private $entity = false;
+        private $entity = false, $type = false;
 
         # Constructor
 
