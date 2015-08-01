@@ -53,8 +53,8 @@ namespace System\Handlers\Admin\Extend {
 
 			$loop = array();
 
-			$sections[SECTION_SITE]		= Language::get('SECTION_SITE');
-			$sections[SECTION_ADMIN]	= Language::get('SECTION_ADMIN');
+			$sections[SECTION_SITE]     = Language::get('SECTION_SITE');
+			$sections[SECTION_ADMIN]    = Language::get('SECTION_ADMIN');
 
 			foreach ($sections as $name => $title) {
 

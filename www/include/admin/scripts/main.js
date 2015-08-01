@@ -423,7 +423,7 @@ var Main = {
 
 			$('table#templates-list tbody tr').each(function() {
 
-				var row = $(this), index = handler.list.length, name = row.data('code');
+				var row = $(this), index = handler.list.length, name = row.data('name');
 
 				var checker = row.find('a[data-checker=is-active]').click(function() { handler.submit(index, $(this)); });
 
