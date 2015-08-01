@@ -11,193 +11,195 @@ namespace System\Handlers\Admin\Install {
 
 	class Configure extends System\Frames\Admin\Handler {
 
-        private $form = false;
+		private $form = false;
 
-        # Errors
+		# Errors
 
-        const ERROR_CONFIG                          = 'INSTALL_ERROR_CONFIG';
-        const ERROR_SYSTEM                          = 'INSTALL_ERROR_SYSTEM';
+		const ERROR_CONFIG                          = 'INSTALL_ERROR_CONFIG';
+		const ERROR_SYSTEM                          = 'INSTALL_ERROR_SYSTEM';
 
-        const ERROR_DATABASE_CONNECT                = 'INSTALL_ERROR_DATABASE_CONNECT';
-        const ERROR_DATABASE_SELECT                 = 'INSTALL_ERROR_DATABASE_SELECT';
-        const ERROR_DATABASE_CHARSET                = 'INSTALL_ERROR_DATABASE_CHARSET';
-        const ERROR_DATABASE_TABLES_CREATE          = 'INSTALL_ERROR_DATABASE_TABLES_CREATE';
-        const ERROR_DATABASE_TABLES_FILL            = 'INSTALL_ERROR_DATABASE_TABLES_FILL';
+		const ERROR_DATABASE_CONNECT                = 'INSTALL_ERROR_DATABASE_CONNECT';
+		const ERROR_DATABASE_SELECT                 = 'INSTALL_ERROR_DATABASE_SELECT';
+		const ERROR_DATABASE_CHARSET                = 'INSTALL_ERROR_DATABASE_CHARSET';
+		const ERROR_DATABASE_TABLES_CREATE          = 'INSTALL_ERROR_DATABASE_TABLES_CREATE';
+		const ERROR_DATABASE_TABLES_FILL            = 'INSTALL_ERROR_DATABASE_TABLES_FILL';
 
-        # Create database tables
+		# Create database tables
 
-        private function createTables() {
+		private function createTables() {
+			
+			$entities = array();
+			
+			$entities[] = new Entity\Type\Page\Definition();
 
-            $entities[] = new Entity\Type\Page\Definition();
+			$entities[] = new Entity\Type\Menuitem\Definition();
 
-            $entities[] = new Entity\Type\Menuitem\Definition();
+			$entities[] = new Entity\Type\User\Definition();
 
-            $entities[] = new Entity\Type\User\Definition();
+			$entities[] = new Entity\Type\User\Secret\Definition();
 
-            $entities[] = new Entity\Type\User\Secret\Definition();
+			$entities[] = new Entity\Type\User\Session\Definition();
 
-            $entities[] = new Entity\Type\User\Session\Definition();
+			foreach ($entities as $entity) if (!$entity->createTable()) return false;
 
-            foreach ($entities as $entity) if (!$entity->createTable()) return false;
+			# ------------------------
 
-            # ------------------------
+			return true;
+		}
 
-            return true;
-        }
+		# Fill pages table
 
-        # Fill pages table
+		private function fillPagesTable() {
 
-        private function fillPagesTable() {
+			# Count pages
 
-            # Count pages
+			if (!(DB::select(TABLE_PAGES, "COUNT(*) as count") && (DB::last()->rows === 1))) return false;
 
-            if (!(DB::select(TABLE_PAGES, "COUNT(*) as count") && (DB::last()->rows === 1))) return false;
+			if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
 
-            if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
-
-            # Insert initial pages
+			# Insert initial pages
 
 			$pages = array();
 
-            $pages[] = array('visibility' => VISIBILITY_PUBLISHED,
+			$pages[] = array('visibility' => VISIBILITY_PUBLISHED,
 
 				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
-                'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
+				'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
 
-                'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
+				'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
 
-            for ($i = 1; $i <= 3; $i++) $pages[] = array ('visibility' => VISIBILITY_PUBLISHED,
+			for ($i = 1; $i <= 3; $i++) $pages[] = array ('visibility' => VISIBILITY_PUBLISHED,
 
-                'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
+				'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
 
-                'contents' => Language::get('INSTALL_PAGE_DEMO_CONTENTS'),
+				'contents' => Language::get('INSTALL_PAGE_DEMO_CONTENTS'),
 
-                'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
+				'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
 
-            return (DB::insert(TABLE_PAGES, $pages, true) && DB::last()->status);
-        }
+			return (DB::insert(TABLE_PAGES, $pages, true) && DB::last()->status);
+		}
 
-        # Fill menu table
+		# Fill menu table
 
-        private function fillMenuTable() {
+		private function fillMenuTable() {
 
-            # Count menuitems
+			# Count menuitems
 
-            if (!(DB::select(TABLE_MENU, "COUNT(*) as count") && (DB::last()->rows === 1))) return false;
+			if (!(DB::select(TABLE_MENU, "COUNT(*) as count") && (DB::last()->rows === 1))) return false;
 
-            if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
+			if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
 
-            # Insert initial menuitems
+			# Insert initial menuitems
 
 			$menu = array();
 
-            for ($i = 1; $i <= 3; $i++) $menu[] = array (
+			for ($i = 1; $i <= 3; $i++) $menu[] = array (
 
-                'position' => ($i - 1), 'link' => ('/page-' . $i),
+				'position' => ($i - 1), 'link' => ('/page-' . $i),
 
-                'text' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i));
+				'text' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i));
 
-            return (DB::insert(TABLE_MENU, $menu, true) && DB::last()->status);
-        }
+			return (DB::insert(TABLE_MENU, $menu, true) && DB::last()->status);
+		}
 
-        # Fill tables
+		# Fill tables
 
-        private function fillTables() {
+		private function fillTables() {
 
-            return ($this->fillPagesTable() && $this->fillMenuTable());
-        }
+			return ($this->fillPagesTable() && $this->fillMenuTable());
+		}
 
-        # Install CMS
+		# Install CMS
 
-        private function install($fieldset) {
+		private function install($fieldset) {
 
 			# Check fieldset
 
 			$fields = array('site_title', 'system_url', 'system_timezone', 'system_email',
 
-							'database_server', 'database_user', 'database_password', 'database_name');
+			                'database_server', 'database_user', 'database_password', 'database_name');
 
 			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
 
 				$$field = $fieldset[$field]->value(); else return false;
 
-            # Set language/template values
+			# Set language/template values
 
-            Config::set(CONFIG_PARAM_ADMIN_LANGUAGE,    Extend\Languages::active());
-            Config::set(CONFIG_PARAM_ADMIN_TEMPLATE,    Extend\Templates::active());
+			Config::set(CONFIG_PARAM_ADMIN_LANGUAGE,    Extend\Languages::active());
+			Config::set(CONFIG_PARAM_ADMIN_TEMPLATE,    Extend\Templates::active());
 
-            Config::set(CONFIG_PARAM_SITE_LANGUAGE,     Extend\Languages::active());
-            Config::set(CONFIG_PARAM_SITE_TEMPLATE,     Extend\Templates::active());
+			Config::set(CONFIG_PARAM_SITE_LANGUAGE,     Extend\Languages::active());
+			Config::set(CONFIG_PARAM_SITE_TEMPLATE,     Extend\Templates::active());
 
 			# Validate configuration values
 
-            if (false === Config::set(CONFIG_PARAM_SITE_TITLE, $site_title)) return self::ERROR_INPUT_SITE_TITLE;
+			if (false === Config::set(CONFIG_PARAM_SITE_TITLE, $site_title)) return self::ERROR_INPUT_SITE_TITLE;
 
-            if (false === Config::set(CONFIG_PARAM_SYSTEM_URL, $system_url)) return self::ERROR_INPUT_SYSTEM_URL;
+			if (false === Config::set(CONFIG_PARAM_SYSTEM_URL, $system_url)) return self::ERROR_INPUT_SYSTEM_URL;
 
-            if (false === Config::set(CONFIG_PARAM_SYSTEM_TIMEZONE, $system_timezone)) return self::ERROR_INPUT_SYSTEM_TIMEZONE;
+			if (false === Config::set(CONFIG_PARAM_SYSTEM_TIMEZONE, $system_timezone)) return self::ERROR_INPUT_SYSTEM_TIMEZONE;
 
-            if (false === Config::set(CONFIG_PARAM_SYSTEM_EMAIL, $system_email)) return self::ERROR_INPUT_SYSTEM_EMAIL;
+			if (false === Config::set(CONFIG_PARAM_SYSTEM_EMAIL, $system_email)) return self::ERROR_INPUT_SYSTEM_EMAIL;
 
-            # Connect to DB
+			# Connect to DB
 
-            try { DB::connect($database_server, $database_user, $database_password, $database_name); }
+			try { DB::connect($database_server, $database_user, $database_password, $database_name); }
 
-            catch (Error\DBConnect $error) { return self::ERROR_DATABASE_CONNECT; }
+			catch (Error\DBConnect $error) { return self::ERROR_DATABASE_CONNECT; }
 
-            catch (Error\DBSelect $error) { return self::ERROR_DATABASE_SELECT; }
+			catch (Error\DBSelect $error) { return self::ERROR_DATABASE_SELECT; }
 
-            catch (Error\DBCharset $error) { return self::ERROR_DATABASE_CHARSET; }
+			catch (Error\DBCharset $error) { return self::ERROR_DATABASE_CHARSET; }
 
-            # Create tables
+			# Create tables
 
-            if (!$this->createTables()) return self::ERROR_DATABASE_TABLES_CREATE;
+			if (!$this->createTables()) return self::ERROR_DATABASE_TABLES_CREATE;
 
-            # Fill tables
+			# Fill tables
 
-            if (!$this->fillTables()) return self::ERROR_DATABASE_TABLES_FILL;
+			if (!$this->fillTables()) return self::ERROR_DATABASE_TABLES_FILL;
 
-            # Save configuration
+			# Save configuration
 
-            if (!Config::save()) return self::ERROR_CONFIG;
+			if (!Config::save()) return self::ERROR_CONFIG;
 
-            # Save system file
+			# Save system file
 
-            $system['database']['server']       = $database_server;
-            $system['database']['user']         = $database_user;
-            $system['database']['password']     = $database_password;
-            $system['database']['name']         = $database_name;
+			$system['database']['server']       = $database_server;
+			$system['database']['user']         = $database_user;
+			$system['database']['password']     = $database_password;
+			$system['database']['name']         = $database_name;
 
-            $system['time'] = ENGINE_TIME;
+			$system['time'] = ENGINE_TIME;
 
-            if (false === Explorer::save((DIR_SYSTEM_DATA . 'System.json'), json_encode($system, JSON_PRETTY_PRINT))) return self::ERROR_SYSTEM;
+			if (false === Explorer::save((DIR_SYSTEM_DATA . 'System.json'), json_encode($system, JSON_PRETTY_PRINT))) return self::ERROR_SYSTEM;
 
-            # ------------------------
+			# ------------------------
 
-            return true;
+			return true;
 		}
 
-        # Get contents
+		# Get contents
 
-        private function getContents() {
+		private function getContents() {
 
-            $contents = Template::block('Contents/Install/Configure');
+			$contents = Template::block('Contents/Install/Configure');
 
-            # Set form
+			# Set form
 
 			foreach ($this->form->fields() as $name => $field) $contents->block(('field_' . $name), $field);
 
 			# ------------------------
 
 			return $contents;
-        }
+		}
 
 		# Handle request
 
 		protected function handle() {
 
-            # Create form
+			# Create form
 
 			$this->form = new Form(); $fieldset = $this->form->fieldset();
 
@@ -228,13 +230,13 @@ namespace System\Handlers\Admin\Install {
 				else Request::redirect('/admin/register');
 			}
 
-            # Fill template
+			# Fill template
 
 			$this->setTitle(Language::get('INSTALL_TITLE_CONFIGURE'));
 
 			$this->setContents($this->getContents());
 
-            # ------------------------
+			# ------------------------
 
 			return true;
 		}
