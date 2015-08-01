@@ -6,7 +6,7 @@ namespace System\Utils\Entity\Type\Page {
 
 	class Definition extends Entity\Entity {
 
-		const TYPE = 'Page', TABLE = TABLE_PAGES, SUPER = true, NESTING = true;
+		const TYPE = 'Page', TABLE = TABLE_PAGES, NESTING = true, HAS_SUPER = true;
 
         # Define presets
 

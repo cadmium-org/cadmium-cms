@@ -6,7 +6,7 @@ namespace System\Utils\Entity {
 
 	abstract class Entity {
 
-		private $type = false, $table = false, $super = false, $nesting = false, $foreign = array();
+		private $type = false, $table = false, $nesting = false, $has_super = false, $foreign = array();
 
 		protected $params = false, $id = false, $data = false, $created_id = false, $path = false;
 
@@ -57,11 +57,11 @@ namespace System\Utils\Entity {
 
 			$this->table = String::validate(@constant($class_name . '::TABLE'));
 
-			$this->super = Validate::boolean(@constant($class_name . '::SUPER'));
-
 			$this->nesting = Validate::boolean(@constant($class_name . '::NESTING'));
 
-            $this->params = new Params();
+			$this->has_super = Validate::boolean(@constant($class_name . '::HAS_SUPER'));
+
+			$this->params = new Params();
 
 			if ($this->nesting) $this->params->relation('parent_id', $this->type);
 
@@ -263,7 +263,7 @@ namespace System\Utils\Entity {
 
 			if (false === $this->id) return false;
 
-			if ($this->super && ($this->id === 1)) return false;
+			if ($this->has_super && ($this->id === 1)) return false;
 
 			# Count children
 

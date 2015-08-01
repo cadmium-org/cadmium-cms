@@ -6,7 +6,7 @@ namespace System\Utils\Entity\Type\User {
 
 	class Definition extends Entity\Entity {
 
-		const TYPE = 'User', TABLE = TABLE_USERS, SUPER = true;
+		const TYPE = 'User', TABLE = TABLE_USERS, HAS_SUPER = true;
 
 		# Define presets
 
