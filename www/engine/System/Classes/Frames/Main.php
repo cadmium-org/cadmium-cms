@@ -61,7 +61,7 @@ namespace System\Frames {
 
 			# ------------------------
 
-			return $this->main();
+			$this->main();
 		}
 	}
 }
