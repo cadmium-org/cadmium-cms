@@ -57,6 +57,8 @@ namespace System\Handlers\Admin\Install {
 
             # Insert initial pages
 
+			$pages = array();
+
             $pages[] = array('visibility' => VISIBILITY_PUBLISHED,
 
 				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
@@ -87,6 +89,8 @@ namespace System\Handlers\Admin\Install {
             if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
 
             # Insert initial menuitems
+
+			$menu = array();
 
             for ($i = 1; $i <= 3; $i++) $menu[] = array (
 
@@ -167,7 +171,7 @@ namespace System\Handlers\Admin\Install {
 
             $system['time'] = ENGINE_TIME;
 
-            if (!Explorer::save((DIR_SYSTEM_DATA . 'System.json'), json_encode($system, JSON_PRETTY_PRINT))) return self::ERROR_SYSTEM;
+            if (false === Explorer::save((DIR_SYSTEM_DATA . 'System.json'), json_encode($system, JSON_PRETTY_PRINT))) return self::ERROR_SYSTEM;
 
             # ------------------------
 
