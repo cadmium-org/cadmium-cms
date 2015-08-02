@@ -6,7 +6,7 @@ namespace Form\Field {
 
 	class Select extends Utils\Field {
 
-		private $options = false;
+		private $options = array();
 
 		# Constructor
 
