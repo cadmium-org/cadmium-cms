@@ -2,17 +2,15 @@
 
 namespace DB\Utils {
 
-	use String;
-
 	abstract class Query {
 
-		protected $query;
+		protected $query = '';
 
 		# Get field/table name
 
 		protected function getName($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			return trim(preg_replace('/[^a-zA-Z0-9_]/', '_', $name));
 		}
@@ -21,7 +19,7 @@ namespace DB\Utils {
 
 		protected function getValue($value) {
 
-			$value = String::validate($value);
+			$value = strval($value);
 
 			return ("'" . addslashes($value) . "'");
 		}
@@ -30,7 +28,7 @@ namespace DB\Utils {
 
 		protected function getSort($sort) {
 
-			$sort = String::validate($sort);
+			$sort = strval($sort);
 
 			return ((strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
 		}
@@ -39,21 +37,23 @@ namespace DB\Utils {
 
 		protected function getString($source, $key_parser, $value_parser, $concat, $separator) {
 
-			if (!is_array($source)) return String::validate($source);
+			if (!is_array($source)) return strval($source);
 
 			$parsers = array('name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort');
 
-			if ((false !== $key_parser) && !isset($parsers[$key_parser])) return '';
+			if ((null !== $key_parser) && !isset($parsers[$key_parser = strval($key_parser)])) return '';
 
-			if ((false !== $value_parser) && !isset($parsers[$value_parser])) return '';
+			if ((null !== $value_parser) && !isset($parsers[$value_parser = strval($value_parser)])) return '';
+
+			$concat = strval($concat); $separator = strval($separator);
 
 			$output = array();
 
 			foreach ($source as $key => $value) {
 
-				$key = ((false !== $key_parser) ? call_user_func(array($this, $parsers[$key_parser]), $key) : '');
+				$key = ((null !== $key_parser) ? call_user_func(array($this, $parsers[$key_parser]), $key) : '');
 
-				$value = ((false !== $value_parser) ? call_user_func(array($this, $parsers[$value_parser]), $value) : '');
+				$value = ((null !== $value_parser) ? call_user_func(array($this, $parsers[$value_parser]), $value) : '');
 
 				$output[] = trim($key . $concat . $value);
 			}

@@ -15,7 +15,7 @@ namespace {
 
 		public static function input($string, $multiline = false, $maxlength = 0) {
 
-			$string = self::validate($string); $multiline = Validate::boolean($multiline); $maxlength = Number::unsigned($maxlength);
+			$string = strval($string); $multiline = Validate::boolean($multiline); $maxlength = Number::unsigned($maxlength);
 
 			foreach (($string = explode("\n", $string)) as $key => $line) {
 
@@ -36,7 +36,7 @@ namespace {
 
 		public static function output($string, $maxlength = 0) {
 
-			$string = self::validate($string); $maxlength = Number::unsigned($maxlength);
+			$string = strval($string); $maxlength = Number::unsigned($maxlength);
 
 			$string = str_replace("\r\n", "&#13;&#10;", htmlspecialchars(self::cut($string, $maxlength)));
 
@@ -49,7 +49,7 @@ namespace {
 
 		public static function stripSpaces($string) {
 
-			$string = self::validate($string);
+			$string = strval($string);
 
 			$string = preg_replace('/ */', '', $string);
 
@@ -62,7 +62,7 @@ namespace {
 
 		public static function singleSpaces($string) {
 
-			$string = self::validate($string);
+			$string = strval($string);
 
 			$string = preg_replace('/  +/', ' ', $string);
 
@@ -75,7 +75,7 @@ namespace {
 
 		public static function cut($string, $maxlength, $ellipsis = false) {
 
-			$string = self::validate($string); $maxlength = Number::unsigned($maxlength); $ellipsis = Validate::boolean($ellipsis);
+			$string = strval($string); $maxlength = Number::unsigned($maxlength); $ellipsis = Validate::boolean($ellipsis);
 
 			$length = (function_exists('mb_strlen') ? mb_strlen($string) : strlen($string));
 
@@ -94,7 +94,7 @@ namespace {
 
 		public static function random($length, $pool = STRING_POOL_DEFAULT) {
 
-			$length = Number::unsigned($length); $pool = self::validate($pool); $pool_length = strlen($pool);
+			$length = Number::unsigned($length); $pool = strval($pool); $pool_length = strlen($pool);
 
 			$string = ''; for ($i = 0; $i < $length; $i++) $string .= substr($pool, mt_rand(0, ($pool_length - 1)), 1);
 
@@ -107,7 +107,7 @@ namespace {
 
 		public static function encode($key, $string) {
 
-			$key = self::validate($key); $string = self::validate($string);
+			$key = strval($key); $string = strval($string);
 
 			return sha1($key . substr(sha1($string), 8, 32));
 		}
@@ -116,7 +116,7 @@ namespace {
 
 		public static function translit($string, $maxlength) {
 
-			$string = self::validate($string); $maxlength = Number::unsigned($maxlength);
+			$string = strval($string); $maxlength = Number::unsigned($maxlength);
 
 			$pattern = array (
 

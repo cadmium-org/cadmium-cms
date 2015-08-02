@@ -21,7 +21,7 @@ namespace {
 
 		public static function index(array $array, $key_name, $value_name) {
 
-			$key_name = String::validate($key_name); $value_name = String::validate($value_name);
+			$key_name = strval($key_name); $value_name = strval($value_name);
 
 			$array_indexed = array();
 
@@ -36,7 +36,7 @@ namespace {
 
 		public static function subvalExtract(array $array, $sub_key) {
 
-			$sub_key = String::validate($sub_key);
+			$sub_key = strval($sub_key);
 
 			$array_extracted = array();
 
@@ -54,7 +54,7 @@ namespace {
 
 		public static function subvalSort(array $array, $sub_key, $descending = false) {
 
-			$sub_key = String::validate($sub_key); $descending = Validate::boolean($descending);
+			$sub_key = strval($sub_key); $descending = Validate::boolean($descending);
 
 			$array_extracted = self::subvalExtract($array, $sub_key); $array_sorted = array();
 

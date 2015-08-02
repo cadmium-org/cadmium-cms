@@ -16,18 +16,18 @@ namespace DB\Query {
 
 			$dataset = (!$multiple ? array($dataset) : array_values($dataset));
 
-			$names = array(); $rows = array();
+			$names = array(); $values = array();
 
 			foreach ($dataset as $key => $row) {
 
-				if (0 === $key) $names = $this->getString(array_keys($row), false, 'name', '', ', ');
+				if (0 === $key) $names = $this->getString(array_keys($row), null, 'name', '', ', ');
 
-				$rows[] = ('(' . $this->getString(array_values($row), false, 'value', '', ', ') . ')');
+				$values[] = ('(' . $this->getString(array_values($row), null, 'value', '', ', ') . ')');
 			}
 
 			# Build query
 
-			$this->query = ('INSERT INTO ' . $table . ' (' . $names . ') VALUES ' . implode(', ', $rows));
+			$this->query = ('INSERT INTO ' . $table . ' (' . $names . ') VALUES ' . implode(', ', $values));
 		}
 	}
 }

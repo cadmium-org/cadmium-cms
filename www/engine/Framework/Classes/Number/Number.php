@@ -4,29 +4,11 @@ namespace {
 
 	abstract class Number {
 
-		# Validate number
-
-		public static function validate($number) {
-
-			if (is_object($number)) return (method_exists($number, '__toString') ? intval(strval($number)) : 1);
-
-			return intval($number);
-		}
-
-		# Validate float
-
-		public static function validateFloat($number) {
-
-			if (is_object($number)) return (method_exists($number, '__toString') ? floatval(strval($number)) : 1);
-
-			return floatval($number);
-		}
-
 		# Format number as binary
 
 		public static function binary($number) {
 
-			$number = self::validate($number);
+			$number = intval($number);
 
 			return (($number >= 1) ? true : false);
 		}
@@ -35,7 +17,7 @@ namespace {
 
 		public static function positive($number, $max = null) {
 
-			$number = self::validate($number);
+			$number = intval($number);
 
 			if ((null !== $max) && ($number > ($max = self::positive($max)))) return $max;
 
@@ -46,7 +28,7 @@ namespace {
 
 		public static function unsigned($number, $max = null) {
 
-			$number = self::validate($number);
+			$number = intval($number);
 
 			if ((null !== $max) && ($number > ($max = self::unsigned($max)))) return $max;
 
@@ -57,7 +39,7 @@ namespace {
 
 		public static function position($number) {
 
-			$number = self::validate($number);
+			$number = intval($number);
 
 			if ($number < 0) return 0; else if ($number > 99) return 99; else return $number;
 		}
@@ -66,7 +48,7 @@ namespace {
 
 		public static function color($number) {
 
-			$number = self::validate($number);
+			$number = intval($number);
 
 			if ($number < 0) return 0; else if ($number > 255) return 255; else return $number;
 		}
@@ -75,7 +57,7 @@ namespace {
 
 		public static function index($number) {
 
-			$number = self::validate($number);
+			$number = intval($number);
 
 			if ($number < 1) return 1; else if ($number > 999999) return 999999; else return $number;
 		}
@@ -84,7 +66,7 @@ namespace {
 
 		public static function price($number) {
 
-			$number = validateFloat($number);
+			$number = floatval($number);
 
 			if ($number < 0) $number = 0; else if ($number > 999999.99) $number = 999999.99;
 
@@ -97,7 +79,7 @@ namespace {
 
 		public static function priority($number) {
 
-			$number = self::validateFloat($number);
+			$number = floatval($number);
 
 			if ($number < 0) $number = 0; else if ($number > 1) $number = 1;
 
@@ -112,15 +94,15 @@ namespace {
 
 			$number = self::unsigned($number); $length = strlen($number);
 
-			$variant_1 = String::validate($variant_1); $variant_3 = String::validate($variant_3); $variant_5 = String::validate($variant_5);
+			$variant_1 = strval($variant_1); $variant_3 = strval($variant_3); $variant_5 = strval($variant_5);
 
 			if (substr($number, ($length - 2), 2) >= 11 && substr($number, ($length - 2), 2) <= 20) return $variant_5;
 
 			else if (substr($number, ($length - 1), 1) == 1) return $variant_1;
 
-			else if (substr($number, ($length - 1), 1) >= 2 && substr($number, ($length - 1), 1) <= 4) return $variant_3;
+			else if ((substr($number, ($length - 1), 1) >= 2) && (substr($number, ($length - 1), 1) <= 4)) return $variant_3;
 
-			else if (substr($number, ($length - 1), 1) >= 5 || substr($number, ($length - 1), 1) == 0) return $variant_5;
+			else if ((substr($number, ($length - 1), 1) >= 5) || (substr($number, ($length - 1), 1) == 0)) return $variant_5;
 		}
 	}
 }

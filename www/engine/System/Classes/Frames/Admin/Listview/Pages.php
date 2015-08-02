@@ -173,7 +173,7 @@ namespace System\Frames\Admin\Listview {
 
 			$fieldset->text     ('title', false, CONFIG_PAGE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text     ('name', false, CONFIG_PAGE_NAME_MAX_LENGTH, false, array(FORM_FIELD_TRANSLIT, FORM_FIELD_REQUIRED));
+			$fieldset->text     ('name', false, CONFIG_PAGE_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
 
 			# Post form
 

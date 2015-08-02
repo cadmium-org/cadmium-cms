@@ -6,7 +6,16 @@ namespace Form\Utils {
 
 	class Fieldset {
 
-		private $form = false;
+		private $form = null;
+
+		# Add field to form
+
+		private function add($field) {
+
+			if (null === $this->form) return false;
+
+			return $this->form->add($field);
+		}
 
 		# Constructor
 
@@ -17,106 +26,74 @@ namespace Form\Utils {
 
 		# Add captcha field
 
-		public function captcha($name, $value = false, $maxlength = 0, $placeholder = false, $config = false) {
-
-			if (false === $this->form) return false;
+		public function captcha($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
 			$field = new Form\Field\Captcha($this->form, $name, $value, $maxlength, $placeholder, $config);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add checkbox field
 
-		public function checkbox($name, $value = false, $config = false) {
-
-			if (false === $this->form) return false;
+		public function checkbox($name, $value = false, $config = 0) {
 
 			$field = new Form\Field\Checkbox($this->form, $name, $value, $config);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add hidden field
 
-		public function hidden($name, $value = false) {
-
-			if (false === $this->form) return false;
+		public function hidden($name, $value = '') {
 
 			$field = new Form\Field\Hidden($this->form, $name, $value);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add password field
 
-		public function password($name, $value = false, $maxlength = 0, $placeholder = false, $config = false) {
-
-			if (false === $this->form) return false;
+		public function password($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
 			$field = new Form\Field\Password($this->form, $name, $value, $maxlength, $placeholder, $config);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add select field
 
-		public function select($name, $value, array $options, $default = false, $config = false) {
-
-			if (false === $this->form) return false;
+		public function select($name, $value, array $options, $default = '', $config = 0) {
 
 			$field = new Form\Field\Select($this->form, $name, $value, $options, $default, $config);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add text field
 
-		public function text($name, $value = false, $maxlength = 0, $placeholder = false, $config = false) {
-
-			if (false === $this->form) return false;
+		public function text($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
 			$field = new Form\Field\Text($this->form, $name, $value, $maxlength, $placeholder, $config);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add textarea field
 
-		public function textarea($name, $value = false, $maxlength = 0, $rows = 0, $placeholder = false, $config = false) {
-
-			if (false === $this->form) return false;
+		public function textarea($name, $value = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
 
 			$field = new Form\Field\Textarea($this->form, $name, $value, $maxlength, $rows, $placeholder, $config);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 
 		# Add virtual field
 
-		public function virtual($name, $value = false) {
-
-			if (false === $this->form) return false;
+		public function virtual($name, $value = '') {
 
 			$field = new Form\Field\Virtual($this->form, $name, $value);
 
-			# ------------------------
-
-			return $this->form->add($field);
+			return $this->add($field);
 		}
 	}
 }

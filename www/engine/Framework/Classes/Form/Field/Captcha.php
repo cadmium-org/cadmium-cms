@@ -2,21 +2,19 @@
 
 namespace Form\Field {
 
-	use Form, Form\Utils, Number, Request, String, Tag;
+	use Form\Utils, Number, Request, String, Tag;
 
 	class Captcha extends Utils\Field {
 
-		private $maxlength = false, $placeholder = false;
+		private $maxlength = 0, $placeholder = '';
 
 		# Constructor
 
-		public function __construct($form, $name, $value = false, $maxlength = 0, $placeholder = false, $config = false) {
+		public function __construct($form, $name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
-			if ($form instanceof Form) $this->form = $form;
+			$this->setForm($form); $this->setName($name); $this->value = strval($value);
 
-			$this->name = $this->validateName($name); $this->value = String::validate($value);
-
-			$this->maxlength = Number::unsigned($maxlength); $this->placeholder = String::validate($placeholder);
+			$this->maxlength = Number::unsigned($maxlength); $this->placeholder = strval($placeholder);
 
 			$this->setConfig($config);
 		}
@@ -25,13 +23,13 @@ namespace Form\Field {
 
 		public function post() {
 
-			if ($this->posted || (false === ($name = $this->getName()))) return false;
+			if ($this->posted || ('' === ($name = $this->getName()))) return false;
 
 			if (null === ($value = Request::post($name))) return false;
 
 			$this->value = String::input($value, false, $this->maxlength);
 
-			if ($this->required && (false === $this->value)) $this->error = true;
+			if ($this->required && ('' === $this->value)) $this->error = true;
 
 			# ------------------------
 
@@ -52,7 +50,7 @@ namespace Form\Field {
 
 			if (0 !== $this->maxlength) $attributes['maxlength'] = $this->maxlength;
 
-			if (false !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
+			if ('' !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
 
 			if ($this->error) $attributes['data-error'] = 'error';
 

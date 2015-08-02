@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form, Form\Utils, String, Request, Tag, Template, Validate;
+	use Form\Utils, Request, Tag, Template, Validate;
 
 	class Select extends Utils\Field {
 
@@ -10,13 +10,11 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value, array $options, $default = false, $config = false) {
+		public function __construct($form, $name, $value, array $options, $default = '', $config = 0) {
 
-			if ($form instanceof Form) $this->form = $form;
+			$this->setForm($form); $this->setName($name); $this->value = strval($value);
 
-			$this->name = $this->validateName($name); $this->value = String::validate($value);
-
-			$default = ((false !== ($default = String::validate($default))) ? array('' => $default) : array());
+			$default = (('' !== ($default = strval($default))) ? array('' => $default) : array());
 
 			$this->options = array_merge($default, $options);
 
@@ -27,7 +25,7 @@ namespace Form\Field {
 
 		public function post() {
 
-			if ($this->posted || $this->disabled || (false === ($name = $this->getName()))) return false;
+			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
 
 			if (array() === $this->options) return false;
 
@@ -37,7 +35,7 @@ namespace Form\Field {
 
 			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
 
-			if ($this->required && !$this->value) $this->error = true;
+			if ($this->required && empty($this->value)) $this->error = true;
 
 			# ------------------------
 
@@ -66,7 +64,7 @@ namespace Form\Field {
 
 			foreach ($this->options as $value => $text) {
 
-				$value = String::validate($value); $text = String::validate($text);
+				$value = strval($value); $text = strval($text);
 
 				$attributes_o = array('value' => $value);
 

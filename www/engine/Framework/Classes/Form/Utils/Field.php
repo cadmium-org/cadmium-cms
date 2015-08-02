@@ -2,48 +2,43 @@
 
 namespace Form\Utils {
 
-	use String;
+	use Form;
 
 	abstract class Field {
 
-		protected $posted = false, $form = false, $name = false, $value = false;
+		protected $posted = false, $form = null, $name = '', $value = '';
 
-		protected $required = false, $readonly = false, $disabled = false, $search = false;
+		protected $error = false, $required = false, $readonly = false, $disabled = false;
 
-		protected $translit = false, $auto = false, $error = false;
+		protected $search = false, $translit = false, $auto = false;
+
+		# Validate form
+
+		protected function setForm($form) {
+
+			if ($form instanceof Form) $this->form = $form;
+		}
 
 		# Validate name
 
-		protected function validateName($name) {
+		protected function setName($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
-			return (preg_match(REGEX_FORM_FIELD_NAME, $name) ? $name : false);
+			if (preg_match(REGEX_FORM_FIELD_NAME, $name)) $this->name = $name;
 		}
 
 		# Set additional options
 
-		protected function setConfig($options) {
+		protected function setConfig($config) {
 
-			if (false === $options) return;
+			$config = array_reverse(str_split(decbin(intval($config))));
 
-			if (!is_array($options)) $options = array($options);
+			$options = array('error', 'required', 'readonly', 'disabled', 'search', 'translit', 'auto');
 
-			foreach ($options as $value) {
+			foreach ($config as $key => $value) {
 
-				if ($value === FORM_FIELD_REQUIRED) $this->required = true;
-
-				else if ($value === FORM_FIELD_READONLY) $this->readonly = true;
-
-				else if ($value === FORM_FIELD_DISABLED) $this->disabled = true;
-
-				else if ($value === FORM_FIELD_SEARCH) $this->search = true;
-
-				else if ($value === FORM_FIELD_TRANSLIT) $this->translit = true;
-
-				else if ($value === FORM_FIELD_AUTO) $this->auto = true;
-
-				else if ($value === FORM_FIELD_ERROR) $this->error = true;
+				if (($value === '1') && isset($options[$key])) $this->$options[$key] = true;
 			}
 		}
 
@@ -51,9 +46,9 @@ namespace Form\Utils {
 
 		protected function getName() {
 
-			if ((false === $this->form) || (false === ($prefix = $this->form->name()))) return $this->name;
+			if ((null === $this->form) || ('' === ($prefix = $this->form->name()))) return $this->name;
 
-			return ((false !== $this->name) ? ($prefix . '_' . $this->name) : false);
+			return (('' !== $this->name) ? ($prefix . '_' . $this->name) : '');
 		}
 
 		# Get id
@@ -63,13 +58,6 @@ namespace Form\Utils {
 			return str_replace('_', '-', $this->getName());
 		}
 
-		# Convert object to string
-
-		public function __toString() {
-
-			return strval($this->value);
-		}
-
 		# Return name
 
 		public function name() {
@@ -77,13 +65,11 @@ namespace Form\Utils {
 			return $this->name;
 		}
 
-		# Return/set value
+		# Return value
 
-		public function value($value = null) {
+		public function value() {
 
-			if (null === $value) return $this->value;
-
-			$this->value = String::validate($value);
+			return $this->value;
 		}
 
 		# Return/set error
@@ -95,7 +81,7 @@ namespace Form\Utils {
 			if (Validate::boolean($value)) $this->error = true;
 		}
 
-		# Check if field disabled
+		# Check if field is disabled
 
 		public function disabled() {
 

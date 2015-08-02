@@ -8,19 +8,19 @@ namespace DB\Query {
 
 		# Constructor
 
-		public function __construct($table, $set, $condition = false) {
+		public function __construct($table, array $dataset, $condition = null) {
 
 			# Process arguments
 
 			$table = $this->getName($table);
 
-			$set = $this->getString($set, 'name', 'value', ' = ', ', ');
+			$dataset = $this->getString($dataset, 'name', 'value', ' = ', ', ');
 
 			$condition = $this->getString($condition, 'name', 'value', ' = ', ' AND ');
 
 			# Build query
 
-			$this->query = ('UPDATE ' . $table . ' SET ' . $set . ($condition ? (' WHERE (' .  $condition . ')') : ''));
+			$this->query = ('UPDATE ' . $table . ' SET ' . $dataset . ($condition ? (' WHERE (' .  $condition . ')') : ''));
 		}
 	}
 }

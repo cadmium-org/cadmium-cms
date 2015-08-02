@@ -2,7 +2,7 @@
 
 namespace Geo\Utils {
 
-	use Explorer, String;
+	use Explorer;
 
 	abstract class Lister {
 
@@ -21,27 +21,27 @@ namespace Geo\Utils {
 
 		public static function exists($key) {
 
-			$key = String::validate($key);
+			$key = strval($key);
 
-			return (isset(self::$list[$key]));
+			return isset(self::$list[$key]);
 		}
 
 		# Validate key
 
 		public static function validate($key) {
 
-			$key = String::validate($key);
+			$key = strval($key);
 
-			return (self::exists($key) ? $key : false);
+			return (isset(self::$list[$key]) ? $key : false);
 		}
 
 		# Get item by key
 
 		public static function get($key) {
 
-			$key = String::validate($key);
+			$key = strval($key);
 
-			return (self::exists($key) ? self::$list[$key] : false);
+			return (isset(self::$list[$key]) ? self::$list[$key] : false);
 		}
 
 		# Get list

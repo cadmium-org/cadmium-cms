@@ -8,11 +8,9 @@ namespace {
 
 		public static function send($to, $sender, $from, $reply_to, $subject, $message, $is_html = false) {
 
-			$to = String::validate($to); $sender = String::validate($sender);
+			$to = strval($to); $sender = strval($sender); $from = strval($from); $reply_to = strval($reply_to);
 
-			$from = String::validate($from); $reply_to = String::validate($reply_to);
-
-			$subject = String::validate($subject); $message = String::validate($message); $is_html = Validate::boolean($is_html);
+			$subject = strval($subject); $message = strval($message); $is_html = Validate::boolean($is_html);
 
 			# Set headers
 

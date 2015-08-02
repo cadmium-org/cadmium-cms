@@ -6,7 +6,7 @@ namespace Template\Utils {
 
 	class Block {
 
-		private $contents = false, $enabled = true;
+		private $contents = '', $enabled = true;
 
 		private $blocks = array(), $loops = array(), $variables = array(), $phrases = array();
 
@@ -64,7 +64,7 @@ namespace Template\Utils {
 
 				$this->contents = str_replace($matches[0][$key], ('{ for:' . $name . ' / }'), $this->contents);
 
-				$this->loops[$name] = array('block' => new Block($matches[2][$key]), 'range' => false, 'separator' => false);
+				$this->loops[$name] = array('block' => new Block($matches[2][$key]), 'range' => array(), 'separator' => '');
 			}
 		}
 
@@ -118,9 +118,11 @@ namespace Template\Utils {
 
 		# Constructor
 
-		public function __construct($contents = false, $parse = true) {
+		public function __construct($contents = '', $parse = true) {
 
-			$this->contents = String::validate($contents); if (!Validate::boolean($parse)) return;
+			$this->contents = strval($contents);
+
+			if (!Validate::boolean($parse)) return;
 
 			$this->parseCollapsedBlocks(); $this->parseExpandedBlocks();
 
@@ -147,7 +149,7 @@ namespace Template\Utils {
 
 		public function block($name, $block = null) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if (!isset($this->blocks[$name])) return ((null === $block) ? new Block() : false);
 
@@ -162,9 +164,9 @@ namespace Template\Utils {
 
 		# Set loop
 
-		public function loop($name, array $range, $separator = false) {
+		public function loop($name, array $range, $separator = '') {
 
-			$name = String::validate($name); $separator = String::validate($separator);
+			$name = strval($name); $separator = strval($separator);
 
 			if (!isset($this->loops[$name])) return false;
 
@@ -179,11 +181,11 @@ namespace Template\Utils {
 
 		public function set($name, $value, $raw = false, $maxlength = 0) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if (!array_key_exists($name, $this->variables)) return false;
 
-			$value = String::validate($value); $raw = Validate::boolean($raw); $maxlength = Number::unsigned($maxlength);
+			$value = strval($value); $raw = Validate::boolean($raw); $maxlength = Number::unsigned($maxlength);
 
 			$this->variables[$name] = ($raw ? $value : String::output($value, $maxlength));
 
@@ -218,7 +220,7 @@ namespace Template\Utils {
 
 			foreach ($this->loops as $name => $loop) {
 
-				$replace = ((false !== $loop['range']) ? $this->getLoopContents($loop['block'], $loop['range']) : '');
+				$replace = ((array() !== $loop['range']) ? $this->getLoopContents($loop['block'], $loop['range']) : '');
 
 				$contents = str_replace('{ for:' . $name . ' / }', $replace, $contents);
 			}

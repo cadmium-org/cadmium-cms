@@ -80,7 +80,7 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->text         ('title', $this->page->title, CONFIG_PAGE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, false, array(FORM_FIELD_TRANSLIT, FORM_FIELD_REQUIRED));
+			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, false, FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
 
 			$fieldset->select       ('visibility', $this->page->visibility, Lister::visibility());
 

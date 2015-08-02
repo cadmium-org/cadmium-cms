@@ -15,7 +15,7 @@ namespace {
 
 		public static function ip($value) {
 
-			$value = String::validate($value);
+			$value = strval($value);
 
 			return filter_var($value, FILTER_VALIDATE_IP);
 		}
@@ -24,7 +24,7 @@ namespace {
 
 		public static function email($value) {
 
-			$value = String::validate($value);
+			$value = strval($value);
 
 			return filter_var($value, FILTER_VALIDATE_EMAIL);
 		}
@@ -33,7 +33,7 @@ namespace {
 
 		public static function url($value) {
 
-			$value = String::validate($value);
+			$value = strval($value);
 
 			$value = filter_var($value, FILTER_VALIDATE_URL);
 

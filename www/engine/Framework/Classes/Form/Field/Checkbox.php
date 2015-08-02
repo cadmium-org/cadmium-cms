@@ -2,17 +2,15 @@
 
 namespace Form\Field {
 
-	use Form, Form\Utils, Request, Tag, Template, Validate;
+	use Form\Utils, Request, Tag, Template, Validate;
 
 	class Checkbox extends Utils\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value = false, $config = false) {
+		public function __construct($form, $name, $value = false, $config = 0) {
 
-			if ($form instanceof Form) $this->form = $form;
-
-			$this->name = $this->validateName($name); $this->value = Validate::boolean($value);
+			$this->setForm($form); $this->setName($name); $this->value = Validate::boolean($value);
 
 			$this->setConfig($config);
 		}
@@ -21,13 +19,13 @@ namespace Form\Field {
 
 		public function post() {
 
-			if ($this->posted || $this->disabled || (false === ($name = $this->getName()))) return false;
+			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
 
 			if (null === ($value = Request::post($name))) return false;
 
 			$this->value = Validate::boolean($value);
 
-			if ($this->required && (false === $this->value)) $this->error = true;
+			if ($this->required && ('' === $this->value)) $this->error = true;
 
 			# ------------------------
 

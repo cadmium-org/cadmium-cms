@@ -12,7 +12,7 @@ namespace Warning {
 
 		# Constructor
 
-		public function __construct($value = false) {
+		public function __construct($value = '') {
 
 			$value = htmlspecialchars($value);
 
@@ -33,7 +33,7 @@ namespace Warning {
 
 		# Constructor override
 
-		public function __construct($message = false) {
+		public function __construct($message = '') {
 
 			if ('' !== ($message = strval($message))) $this->message = $message;
 		}

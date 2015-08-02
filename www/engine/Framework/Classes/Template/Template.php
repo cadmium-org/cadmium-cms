@@ -4,11 +4,9 @@ namespace {
 
 	abstract class Template {
 
-		private static $init = false, $dir_name = false, $main = false, $blocks = false, $status = false;
+		private static $init = false, $dir_name = '', $main = null, $blocks = array(), $status = STATUS_CODE_200;
 
-		private static $language = false, $title = false;
-
-		private static $description = false, $keywords = false, $robots = false, $meta = array(), $link = false;
+		private static $language = '', $title = '', $description = '', $keywords = '', $robots = '', $meta = array(), $link = '';
 
 		# Init template
 
@@ -16,7 +14,7 @@ namespace {
 
 			if (self::$init) return;
 
-			$dir_name = String::validate($dir_name);
+			$dir_name = strval($dir_name);
 
 			if (!Explorer::isDir($dir_name)) throw new Warning\TemplateInit($dir_name);
 
@@ -34,11 +32,11 @@ namespace {
 
 		public static function main($name = null) {
 
-			if (!self::$init) return false;
+			if (!self::$init) return new Template\Utils\Block();
 
-			if (null === $name) return self::$main;
+			if (null === $name) return (null !== self::$main) ? self::$main : new Template\Utils\Block();
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			foreach (explode('/', $name) as $item) {
 
@@ -56,11 +54,9 @@ namespace {
 
 		public static function block($name = null) {
 
-			if (!self::$init) return false;
+			if (!self::$init || (null === $name)) return new Template\Utils\Block();
 
-			if (null === $name) return new Template\Utils\Block();
-
-			$name = String::validate($name);
+			$name = strval($name);
 
 			foreach (explode('/', $name) as $item) {
 
@@ -79,8 +75,6 @@ namespace {
 		# Create group
 
 		public static function group() {
-
-			if (!self::$init) return false;
 
 			return new Template\Utils\Group();
 		}
@@ -108,7 +102,7 @@ namespace {
 
 			if (null === $language) return self::$language;
 
-			$language = strtolower(String::validate($language));
+			$language = strtolower(strval($language));
 
 			if (preg_match(REGEX_TEMPLATE_LANGUAGE, $language)) self::$language = $language;
 
@@ -125,7 +119,7 @@ namespace {
 
 			if (null === $title) return self::$title;
 
-			self::$title = String::validate($title);
+			self::$title = strval($title);
 
 			# ------------------------
 
@@ -140,7 +134,7 @@ namespace {
 
 			if (null === $description) return self::$description;
 
-			self::$description = String::validate($description);
+			self::$description = strval($description);
 
 			# ------------------------
 
@@ -155,7 +149,7 @@ namespace {
 
 			if (null === $keywords) return self::$keywords;
 
-			self::$keywords = String::validate($keywords);
+			self::$keywords = strval($keywords);
 
 			# ------------------------
 
@@ -185,11 +179,11 @@ namespace {
 
 			if (!self::$init) return false;
 
-			if (false === ($name = String::validate($name))) return false;
+			if ('' === ($name = strval($name))) return false;
 
-			if (null === $content) retutn ((false !== $name) && isset(self::$meta[$name]) ? self::$meta[$name] : false);
+			if (null === $content) return (isset(self::$meta[$name]) ? self::$meta[$name] : false);
 
-			self::$meta[$name] = String::validate($content);
+			self::$meta[$name] = strval($content);
 
 			# ------------------------
 
@@ -204,7 +198,7 @@ namespace {
 
 			if ((null === $host) && (null === $link)) return self::$link;
 
-			$host = String::validate($host); $link = String::validate($link);
+			$host = strval($host); $link = strval($link);
 
 			$url = new Url($link);
 
@@ -219,16 +213,13 @@ namespace {
 
 		public static function output($status = null, $format = false) {
 
-			if (!self::$init || (false === self::$main)) return false;
+			if (!self::$init || (null === self::$main)) return false;
 
-			if ((null === $status) || !Headers::isStatusCode($status)) {
-
-				$status = ((false !== self::$status) ? self::$status : STATUS_CODE_200);
-			}
+			if ((null === $status) || !Headers::isStatusCode($status)) $status = self::$status;
 
 			self::$main->language       = self::$language;
 
-			self::$main->head_title     = ((false !== self::$title) ? self::$title : 'UNTITLED');
+			self::$main->head_title     = (('' !== self::$title) ? self::$title : 'UNTITLED');
 
 			self::$main->description    = self::$description;
 			self::$main->keywords       = self::$keywords;
@@ -236,7 +227,7 @@ namespace {
 
 			self::$main->loop('meta', Arr::index(self::$meta, 'name', 'content'));
 
-			if (!self::$link) self::$main->block('canonical')->disable();
+			if ('' === self::$link) self::$main->block('canonical')->disable();
 
 			else self::$main->block('canonical')->link = self::$link;
 

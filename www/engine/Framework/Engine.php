@@ -58,7 +58,7 @@ namespace {
 
 		# Display error screen
 
-		public static function error($message = false) {
+		public static function error($message = '') {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine error: ' . $message) : 'Unknown error');
 
@@ -89,7 +89,7 @@ namespace {
 
 		# Display warning screen
 
-		public static function warning($message = false) {
+		public static function warning($message = '') {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine warning: ' . $message) : 'Unknown warning');
 

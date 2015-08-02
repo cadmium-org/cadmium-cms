@@ -8,7 +8,7 @@ namespace DB\Query {
 
 		# Constructor
 
-		public function __construct($table, $condition = false) {
+		public function __construct($table, $condition = null) {
 
 			# Process arguments
 

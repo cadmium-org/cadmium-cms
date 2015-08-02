@@ -85,12 +85,16 @@ namespace {
 
 		public static function isStatusCode($string) {
 
+			$string = strval($string);
+
 			return isset(self::$status_codes[$string]);
 		}
 
 		# Check if string is content type
 
 		public static function isContentType($string) {
+
+			$string = strval($string);
 
 			return (self::isContentTypeText($string) || self::isContentTypeMedia($string));
 		}
@@ -99,12 +103,16 @@ namespace {
 
 		public static function isContentTypeText($string) {
 
+			$string = strval($string);
+
 			return isset(self::$content_types_text[$string]);
 		}
 
 		# Check if string is media content type
 
 		public static function isContentTypeMedia($string) {
+
+			$string = strval($string);
 
 			return isset(self::$content_types_media[$string]);
 		}
@@ -113,12 +121,16 @@ namespace {
 
 		public static function status($code) {
 
+			$code = strval($code);
+
 			if (self::isStatusCode($code)) header(getenv('SERVER_PROTOCOL') . ' ' . self::$status_codes[$code]);
 		}
 
 		# Send content header
 
 		public static function content($type) {
+
+			$type = strval($type);
 
 			if (self::isContentTypeText($type)) {
 
@@ -137,7 +149,7 @@ namespace {
 
 			if (self::$cache_send) return;
 
-			$limiter = String::validate($limiter); $expires = Number::unsigned($expires);
+			$limiter = strval($limiter); $expires = Number::unsigned($expires);
 
 			if (!in_array($limiter, array(CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC), true)) return;
 

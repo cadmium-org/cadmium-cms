@@ -10,7 +10,7 @@ namespace {
 
 		public function __construct($url) {
 
-			$url = String::validate($url);
+			$url = strval($url);
 
 			if (false === ($url = parse_url($url))) return;
 
@@ -40,13 +40,9 @@ namespace {
 
 		public function set($name, $value) {
 
-			$name = String::validate($name); $value = String::validate($value);
+			$name = strval($name); $value = strval($value);
 
 			$this->query[$name] = $value;
-
-			# ------------------------
-
-			return true;
 		}
 
 		# Get url as string

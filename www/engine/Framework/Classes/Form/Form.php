@@ -4,15 +4,15 @@ namespace {
 
 	class Form {
 
-		private $name = false, $fieldset = false, $posted = false, $errors = false, $fields = array();
+		private $name = '', $fieldset = null, $posted = false, $errors = false, $fields = array();
 
 		# Constructor
 
-		public function __construct($name = null) {
+		public function __construct($name = '') {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
-			if ((false !== $name) && preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
+			if (('' === $name) || preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
 
 			$this->fieldset = new Form\Utils\Fieldset($this);
 		}
@@ -25,7 +25,7 @@ namespace {
 
 			if (!($field instanceof Form\Utils\Field)) return false;
 
-			if (false === ($name = $field->name())) return false;
+			if ('' === ($name = $field->name())) return false;
 
 			$this->fields[$name] = $field;
 
@@ -40,21 +40,22 @@ namespace {
 
 			if ($this->posted) return false;
 
+			# Check POST array
+
 			foreach ($this->fields as $name => $field) {
 
 				if ($field->disabled()) continue;
 
-				$name = ((false !== $this->name) ? ($this->name . '_' . $name) : $name);
+				$name = (('' !== $this->name) ? ($this->name . '_' . $name) : $name);
 
 				if (null === ($value = Request::post($name))) return false;
 			}
 
+			# Post fields values
+
 			$errors = false;
 
-			foreach ($this->fields as $field) {
-
-				if ($field->post() && $field->error()) $errors = true;
-			}
+			foreach ($this->fields as $field) if ($field->post() && $field->error()) $errors = true;
 
 			$this->posted = true; $this->errors = $errors;
 

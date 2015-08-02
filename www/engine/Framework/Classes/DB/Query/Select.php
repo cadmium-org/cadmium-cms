@@ -8,13 +8,13 @@ namespace DB\Query {
 
 		# Constructor
 
-		public function __construct($table, $selection, $condition = false, $order = false, $limit = false) {
+		public function __construct($table, $selection, $condition = null, $order = null, $limit = 0) {
 
 			# Process arguments
 
 			$table = $this->getName($table);
 
-			$selection = $this->getString($selection, false, 'name', '', ', ');
+			$selection = $this->getString($selection, null, 'name', '', ', ');
 
 			$condition = $this->getString($condition, 'name', 'value', ' = ', ' AND ');
 

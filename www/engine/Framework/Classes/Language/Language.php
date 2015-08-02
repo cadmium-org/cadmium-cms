@@ -4,7 +4,7 @@ namespace {
 
 	abstract class Language {
 
-		private static $init = false, $dir_name = false, $phrases = array();
+		private static $init = false, $dir_name = '', $phrases = array();
 
 		# Init language
 
@@ -12,7 +12,7 @@ namespace {
 
 			if (self::$init) return;
 
-			$dir_name = String::validate($dir_name);
+			$dir_name = strval($dir_name);
 
 			if (!Explorer::isDir($dir_name)) throw new Warning\LanguageInit($dir_name);
 
@@ -27,7 +27,7 @@ namespace {
 
 			foreach (func_get_args() as $name) {
 
-				$name = String::validate($name);
+				$name = strval($name);
 
 				if (!preg_match(REGEX_LANGUAGE_FILE_NAME, $name)) continue;
 
@@ -37,7 +37,7 @@ namespace {
 
 				foreach ($phrases as $name => $value) {
 
-					$name = String::validate($name); $value = String::validate($value);
+					$name = strval($name); $value = strval($value);
 
 					if (preg_match(REGEX_LANGUAGE_PHRASE_NAME, $name)) self::$phrases[$name] = $value;
 				}

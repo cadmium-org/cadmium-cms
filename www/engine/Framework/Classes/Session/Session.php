@@ -10,7 +10,7 @@ namespace {
 
 			if (session_id()) return true;
 
-			$name = String::validate($name); $lifetime = Number::unsigned($lifetime);
+			$name = strval($name); $lifetime = Number::unsigned($lifetime);
 
 			ini_set('session.gc_maxlifetime', $lifetime);
 
@@ -36,7 +36,7 @@ namespace {
 
 		public static function set($name, $value) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if (session_id()) $_SESSION[$name] = $value;
 		}
@@ -45,7 +45,7 @@ namespace {
 
 		public static function get($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			return ((session_id() && isset($_SESSION[$name])) ? $_SESSION[$name] : null);
 		}
@@ -54,16 +54,16 @@ namespace {
 
 		public static function exists($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
-			return ((session_id() && isset($_SESSION[$name])) ? true : false);
+			return (session_id() && isset($_SESSION[$name]));
 		}
 
 		# Delete variable
 
 		public static function delete($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if (session_id() && isset($_SESSION[$name])) unset($_SESSION[$name]);
 		}

@@ -14,13 +14,13 @@ define('DATE_FORMAT_W3C',                           'Y-m-d\TH:i:sP');
 
 # Form field options
 
-define('FORM_FIELD_ERROR',                          'error');
-define('FORM_FIELD_REQUIRED',                       'required');
-define('FORM_FIELD_READONLY',                       'readonly');
-define('FORM_FIELD_DISABLED',                       'disabled');
-define('FORM_FIELD_SEARCH',                         'search');
-define('FORM_FIELD_TRANSLIT',                       'translit');
-define('FORM_FIELD_AUTO',                           'auto');
+define('FORM_FIELD_ERROR',                          1);
+define('FORM_FIELD_REQUIRED',                       2);
+define('FORM_FIELD_READONLY',                       4);
+define('FORM_FIELD_DISABLED',                       8);
+define('FORM_FIELD_SEARCH',                         16);
+define('FORM_FIELD_TRANSLIT',                       32);
+define('FORM_FIELD_AUTO',                           64);
 
 # String pools
 

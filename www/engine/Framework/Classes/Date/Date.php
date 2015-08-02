@@ -8,7 +8,7 @@ namespace {
 
 		public static function validate($date, $format) {
 
-			$date = String::validate($date); $format = String::validate($format);
+			$date = strval($date); $format = strval($format);
 
 			if (false === ($dt_object = date_create_from_format($format, $date))) return false;
 
@@ -46,15 +46,15 @@ namespace {
 
 		public static function get($format = DATE_FORMAT_STANDART, $time = null) {
 
-			$format = String::validate($format); $time = ((null !== $time) ? Number::unsigned($time) : ENGINE_TIME);
+			$format = strval($format); $time = ((null !== $time) ? Number::unsigned($time) : ENGINE_TIME);
 
-			if ($format === DATE_FORMAT_STANDART) return @date(DATE_FORMAT_STANDART, $time);
+			if ($format === DATE_FORMAT_STANDART) return date(DATE_FORMAT_STANDART, $time);
 
-			if ($format === DATE_FORMAT_MYSQL) return @date(DATE_FORMAT_MYSQL, $time);
+			if ($format === DATE_FORMAT_MYSQL) return date(DATE_FORMAT_MYSQL, $time);
 
-			if ($format === DATE_FORMAT_DATETIME) return @date(DATE_FORMAT_DATETIME, $time);
+			if ($format === DATE_FORMAT_DATETIME) return date(DATE_FORMAT_DATETIME, $time);
 
-			if ($format === DATE_FORMAT_W3C) return @date(DATE_FORMAT_W3C, $time);
+			if ($format === DATE_FORMAT_W3C) return date(DATE_FORMAT_W3C, $time);
 
 			# ------------------------
 
@@ -67,7 +67,7 @@ namespace {
 
 			$time = ((null !== $time) ? Number::unsigned($time) : ENGINE_TIME);
 
-			return @date('d', $time);
+			return date('d', $time);
 		}
 
 		# Get month from timestamp
@@ -76,7 +76,7 @@ namespace {
 
 			$time = ((null !== $time) ? Number::unsigned($time) : ENGINE_TIME);
 
-			return @date('m', $time);
+			return date('m', $time);
 		}
 
 		# Get year from timestamp
@@ -85,7 +85,7 @@ namespace {
 
 			$time = ((null !== $time) ? Number::unsigned($time) : ENGINE_TIME);
 
-			return @date('Y', $time);
+			return date('Y', $time);
 		}
 	}
 }

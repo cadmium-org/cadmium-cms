@@ -4,15 +4,13 @@ namespace {
 
 	abstract class DB {
 
-		private static $link = false, $last, $log = array(), $time = 0;
+		private static $link = false, $last = null, $log = array(), $time = 0;
 
 		# Connect to database
 
 		public static function connect($server, $user, $password, $name) {
 
-			$server = String::validate($server); $user = String::validate($user);
-
-			$password = String::validate($password); $name = String::validate($name);
+			$server = strval($server); $user = strval($user); $password = strval($password); $name = strval($name);
 
 			# Establish connection
 
@@ -41,7 +39,7 @@ namespace {
 
 			if (false === self::$link) return false;
 
-			$query = String::validate($query);
+			$query = strval($query);
 
 			$time = microtime(true); $result = mysqli_query(self::$link, $query); $time = (microtime(true) - $time);
 
@@ -56,7 +54,7 @@ namespace {
 
 		# Generate & send select query
 
-		public static function select($table, $selection, $condition = false, $order = false, $limit = false) {
+		public static function select($table, $selection, $condition = null, $order = null, $limit = 0) {
 
 			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit);
 
@@ -78,7 +76,7 @@ namespace {
 
 		# Generate & send update query
 
-		public static function update($table, $dataset, $condition = false) {
+		public static function update($table, array $dataset, $condition = null) {
 
 			$query = new DB\Query\Update($table, $dataset, $condition);
 
@@ -89,7 +87,7 @@ namespace {
 
 		# Generate & send delete query
 
-		public static function delete($table, $condition = false) {
+		public static function delete($table, $condition = null) {
 
 			$query = new DB\Query\Delete($table, $condition);
 
@@ -109,7 +107,7 @@ namespace {
 
 		public static function encodeSearchValue($value, $add_slashes = true) {
 
-			$value = String::validate($value); $add_slashes = Validate::boolean($add_slashes);
+			$value = strval($value); $add_slashes = Validate::boolean($add_slashes);
 
 			$value_encoded = str_replace(' ', '%', str_replace(array('%', '_'), array('\%', '\_'), $value));
 

@@ -8,11 +8,11 @@ namespace {
 
 		public static function set($name, $value, $expire = 0, $path = '/', $domain = false, $secure = false, $http_only = false) {
 
-			$name = String::validate($name); $value = String::validate($value);
+			$name = strval($name); $value = strval($value);
 
 			$expire = (ENGINE_TIME + Number::unsigned($expire));
 
-			$path = String::validate($path); $domain = String::validate($domain);
+			$path = strval($path); $domain = strval($domain);
 
 			$secure = Validate::boolean($secure); $http_only = Validate::boolean($http_only);
 
@@ -21,29 +21,29 @@ namespace {
 			return setcookie($name, $value, $expire, $path, $domain, $secure, $http_only);
 		}
 
-		# Get variable
-
-		public static function get($name) {
-
-			$name = String::validate($name);
-
-			return (isset($_COOKIE[$name]) ? $_COOKIE[$name] : null);
-		}
-
 		# Check if variable exists
 
 		public static function exists($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
-			return (isset($_COOKIE[$name]) ? true : false);
+			return isset($_COOKIE[$name]);
+		}
+
+		# Get variable
+
+		public static function get($name) {
+
+			$name = strval($name);
+
+			return (isset($_COOKIE[$name]) ? $_COOKIE[$name] : null);
 		}
 
 		# Delete variable
 
 		public static function delete($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if (isset($_COOKIE[$name])) unset($_COOKIE[$name]);
 		}

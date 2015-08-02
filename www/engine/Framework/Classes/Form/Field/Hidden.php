@@ -2,24 +2,22 @@
 
 namespace Form\Field {
 
-	use Form, Form\Utils, Request, String, Tag;
+	use Form\Utils, Request, Tag;
 
 	class Hidden extends Utils\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value = false) {
+		public function __construct($form, $name, $value = '') {
 
-			if ($form instanceof Form) $this->form = $form;
-
-			$this->name = $this->validateName($name); $this->value = String::validate($value);
+			$this->setForm($form); $this->setName($name); $this->value = strval($value);
 		}
 
 		# Catch POST value
 
 		public function post() {
 
-			if ($this->posted || (false === ($name = $this->getName()))) return false;
+			if ($this->posted || ('' === ($name = $this->getName()))) return false;
 
 			if (null === ($value = Request::post($name))) return false;
 
