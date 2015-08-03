@@ -11,18 +11,18 @@ namespace System\Handlers\Admin\System {
 
 	class Settings extends System\Frames\Admin\Handler {
 
-		private $form = false;
+		private $form = null;
 
 		# Save configuration
 
 		private function setData($data) {
 
-			foreach ($data as $field) if (false === Config::set($field->name(), $field->value())) {
+			foreach ($data as $name => $value) if (false === Config::set($name, $value)) {
 
-				$field->error(true); Messages::error(Language::get('SETTINGS_ERROR_PARAM'));
+				Messages::error(Language::get('SETTINGS_ERROR_PARAM'));
 			}
 
-			return ((false === Messages::error()) && (true === Config::save()));
+			return ((null === Messages::error()) && (true === Config::save()));
 		}
 
 		# Get contents

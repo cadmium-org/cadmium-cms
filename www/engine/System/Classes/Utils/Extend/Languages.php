@@ -2,14 +2,14 @@
 
 namespace System\Utils\Extend {
 
-	use Warning, System\Utils\Utils, Explorer, Cookie, Language, Request, String, Validate;
+	use Warning, System\Utils\Utils, Explorer, Cookie, Language, Request;
 
 	class Languages {
 
 		const ERROR_DIRECTORY   = 'Languages directory does not exist';
 		const ERROR_SELECT      = 'Languages not found';
 
-		private static $dir_name = false, $section = false, $items = array(), $active = false;
+		private static $dir_name = '', $section = '', $items = array(), $active = false;
 
 		# Get items
 
@@ -54,7 +54,7 @@ namespace System\Utils\Extend {
 
 		public static function valid($code) {
 
-			$code = String::validate($code);
+			$code = strval($code);
 
 			return (preg_match(REGEX_LANGUAGE_CODE, $code) ? true : false);
 		}
@@ -63,7 +63,7 @@ namespace System\Utils\Extend {
 
 		public static function validate($code) {
 
-			$code = String::validate($code);
+			$code = strval($code);
 
 			return (self::valid($code) ? $code : false);
 		}
@@ -72,11 +72,7 @@ namespace System\Utils\Extend {
 
 		public static function exists($code) {
 
-			if (array() === self::$items) return false;
-
-			$code = String::validate($code);
-
-			# ------------------------
+			$code = strval($code);
 
 			return (self::valid($code) && isset(self::$items[$code]));
 		}
@@ -85,9 +81,9 @@ namespace System\Utils\Extend {
 
 		public static function load($section, $code, $default, $selectable = false) {
 
-			$section = String::validate($section); $code = String::validate($code);
+			$section = strval($section); $code = strval($code); $default = strval($default);
 
-			$default = String::validate($default); $selectable = Validate::boolean($selectable);
+			$selectable = boolval($selectable);
 
 			$dir_name = DIR_SYSTEM_LANGUAGES;
 
@@ -110,7 +106,7 @@ namespace System\Utils\Extend {
 
 		public static function items($section = null) {
 
-			if (false === ($section = String::validate($section))) return self::$items;
+			if ((null === $section) || ('' === ($section = strval($section)))) return self::$items;
 
 			$dir_name = DIR_SYSTEM_LANGUAGES;
 
@@ -130,7 +126,7 @@ namespace System\Utils\Extend {
 
 			if (false === self::$active) return false;
 
-			if (false === ($name = String::validate($name))) return self::$items[self::$active];
+			if ((null === $name) || ('' === ($name = strval($name)))) return self::$items[self::$active];
 
 			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : false);
 		}

@@ -10,7 +10,7 @@ namespace System\Utils {
 
 		public static function config($file_name, array $params) {
 
-			$file_name = String::validate($file_name);
+			$file_name = strval($file_name);
 
 			if (!is_array($include = Explorer::php($file_name))) return false;
 
@@ -18,7 +18,7 @@ namespace System\Utils {
 
 			foreach ($params as $name) {
 
-				$name = String::validate($name);
+				$name = strval($name);
 
 				if (isset($include[$name])) $config[$name] = $include[$name];
 			}

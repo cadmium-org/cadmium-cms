@@ -154,7 +154,7 @@ namespace System\Frames\Admin {
 
 				if (Auth::check()) return Request::redirect('/admin');
 
-				DB::select(TABLE_USERS, 'id', array('id' => 1), false, 1);
+				DB::select(TABLE_USERS, 'id', array('id' => 1), null, 1);
 
 				if (!(DB::last() && DB::last()->status)) return Status::error404();
 

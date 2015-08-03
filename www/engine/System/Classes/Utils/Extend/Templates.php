@@ -2,14 +2,14 @@
 
 namespace System\Utils\Extend {
 
-	use Warning, System\Utils\Utils, Explorer, Cookie, Template, Request, String, Validate;
+	use Warning, System\Utils\Utils, Explorer, Cookie, Template, Request;
 
 	class Templates {
 
 		const ERROR_DIRECTORY   = 'Templates directory does not exist';
 		const ERROR_SELECT      = 'Templates not found';
 
-		private static $dir_name = false, $section = false, $items = array(), $active = false;
+		private static $dir_name = '', $section = '', $items = array(), $active = false;
 
 		# Get items
 
@@ -54,7 +54,7 @@ namespace System\Utils\Extend {
 
 		public static function valid($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			return (preg_match(REGEX_TEMPLATE_NAME, $name) ? true : false);
 		}
@@ -63,7 +63,7 @@ namespace System\Utils\Extend {
 
 		public static function validate($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			return (self::valid($name) ? $name : false);
 		}
@@ -72,11 +72,7 @@ namespace System\Utils\Extend {
 
 		public static function exists($name) {
 
-			if (array() === self::$items) return false;
-
-			$name = String::validate($name);
-
-			# ------------------------
+			$name = strval($name);
 
 			return (self::valid($name) && isset(self::$items[$name]));
 		}
@@ -85,9 +81,9 @@ namespace System\Utils\Extend {
 
 		public static function load($section, $name, $default, $selectable = false) {
 
-			$section = String::validate($section); $name = String::validate($name);
+			$section = strval($section); $name = strval($name); $default = strval($default);
 
-			$default = String::validate($default); $selectable = Validate::boolean($selectable);
+			$selectable = boolval($selectable);
 
 			$dir_name = (DIR_SYSTEM_TEMPLATES . $section . '/');
 
@@ -110,7 +106,7 @@ namespace System\Utils\Extend {
 
 		public static function items($section = null) {
 
-			if (false === ($section = String::validate($section))) return self::$items;
+			if ((null === $section) || ('' === ($section = strval($section)))) return self::$items;
 
 			$dir_name = (DIR_SYSTEM_TEMPLATES . $section . '/');
 
@@ -130,7 +126,7 @@ namespace System\Utils\Extend {
 
 			if (false === self::$active) return false;
 
-			if (false === ($name = String::validate($name))) return self::$items[self::$active];
+			if ((null === $name) || ('' === ($name = strval($name)))) return self::$items[self::$active];
 
 			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : false);
 		}

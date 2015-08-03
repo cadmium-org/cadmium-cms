@@ -11,7 +11,7 @@ namespace System\Handlers\Admin\System {
 
 	class Users extends System\Frames\Admin\Listview\Users {
 
-		private $create = false, $user = false, $form = false;
+		private $create = false, $user = null, $form = null;
 
 		# Get contents
 
@@ -55,7 +55,7 @@ namespace System\Handlers\Admin\System {
 
 				$this->user = new Entity\Type\User\Manager($id);
 
-				if (false === $this->user->id) return $this->handleList(true);
+				if (0 === $this->user->id) return $this->handleList(true);
 
 			} else $this->user = Entity\Factory::user();
 
@@ -65,13 +65,13 @@ namespace System\Handlers\Admin\System {
 
 			# Add form fields
 
-			$fieldset->text         ('name', $this->user->name, CONFIG_USER_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text         ('name', $this->user->name, CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('email', $this->user->email, CONFIG_USER_EMAIL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text         ('email', $this->user->email, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->select       ('rank', $this->user->rank, Lister::rank(), false,
+			$fieldset->select       ('rank', $this->user->rank, Lister::rank(), '',
 
-			                        ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : false));
+			                        ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : 0));
 
 			$fieldset->text         ('first_name', $this->user->first_name, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
@@ -85,13 +85,13 @@ namespace System\Handlers\Admin\System {
 
 			$fieldset->select       ('timezone', $this->user->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
 
-			$fieldset->password     ('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false,
+			$fieldset->password     ('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '',
 
-			                        ($this->create ? FORM_FIELD_REQUIRED : false));
+			                        ($this->create ? FORM_FIELD_REQUIRED : 0));
 
-			$fieldset->password     ('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false,
+			$fieldset->password     ('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '',
 
-			                        ($this->create ? FORM_FIELD_REQUIRED : false));
+			                        ($this->create ? FORM_FIELD_REQUIRED : 0));
 
 			# Post form
 
@@ -139,7 +139,7 @@ namespace System\Handlers\Admin\System {
 
 			if ($post['action'] == 'remove') {
 
-				if (false === $this->user->id) return Ajax::error(Language::get('USERS_ITEM_NOT_FOUND'));
+				if (0 === $this->user->id) return Ajax::error(Language::get('USERS_ITEM_NOT_FOUND'));
 
 				return $this->user->remove();
 			}

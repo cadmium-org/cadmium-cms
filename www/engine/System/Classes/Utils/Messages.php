@@ -2,21 +2,19 @@
 
 namespace System\Utils {
 
-	use String, Template;
+	use Template;
 
 	abstract class Messages {
 
-		private static $messages = array('info' => false, 'warning' => false, 'error' => false, 'success' => false);
+		private static $messages = array('info' => null, 'warning' => null, 'error' => null, 'success' => null);
 
 		# Set message
 
 		private static function setMessage($type, $text, $header) {
 
-			if (false !== self::$messages[$type]) return;
+			if (null !== self::$messages[$type]) return;
 
-			if (false === ($text = String::validate($text))) return;
-
-			$header = String::validate($header);
+			$text = strval($text); $header = strval($header);
 
 			self::$messages[$type] = array('text' => $text, 'header' => $header);
 		}
@@ -65,13 +63,13 @@ namespace System\Utils {
 
 			foreach (self::$messages as $type => $message) {
 
-				if (false === $message) continue;
+				if (null === $message) continue;
 
 				$messages->add($block = Template::block('Utils/Message'));
 
 				$block->type = $type; $block->text = $message['text']; $header = $block->block('header');
 
-				if (false === $message['header']) $header->disable(); else $header->text = $message['header'];
+				if ('' !== $message['header']) $header->text = $message['header']; else $header->disable();
 			}
 
 			# ------------------------

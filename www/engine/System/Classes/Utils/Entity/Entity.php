@@ -2,19 +2,19 @@
 
 namespace System\Utils\Entity {
 
-	use DB, Number, String, Validate;
+	use DB;
 
 	abstract class Entity {
 
-		private $type = false, $table = false, $nesting = false, $has_super = false, $foreign = array();
+		private $type = '', $table = '', $nesting = false, $has_super = false, $foreign = array();
 
-		protected $params = false, $id = false, $data = false, $created_id = false, $path = false;
+		protected $params = null, $id = 0, $created_id = 0, $data = array(), $path = array();
 
 		# Get path
 
 		private function getPath() {
 
-			if (!$this->nesting) return false;
+			if (!$this->nesting) return array();
 
 			$entity = $this; $path = array($entity);
 
@@ -22,7 +22,7 @@ namespace System\Utils\Entity {
 
 				$entity = $entity->params->get('parent_id')->entity();
 
-				if (false !== $entity) $path[] = $entity; else return false;
+				if (false !== $entity) $path[] = $entity; else return array();
 			}
 
 			return array_reverse($path);
@@ -32,9 +32,9 @@ namespace System\Utils\Entity {
 
 		protected function addForeign($type, $field) {
 
-			if (false === ($type = String::validate($type))) return false;
+			if ('' === ($type = strval($type))) return false;
 
-			if (false === ($field = String::validate($field))) return false;
+			if ('' === ($field = strval($field))) return false;
 
 			$class_name = ('System\\Utils\\Entity\\Type\\' . $type . '\\Definition');
 
@@ -53,13 +53,13 @@ namespace System\Utils\Entity {
 
 			$class_name = get_class($this);
 
-			$this->type = String::validate(@constant($class_name . '::TYPE'));
+			$this->type = strval(@constant($class_name . '::TYPE'));
 
-			$this->table = String::validate(@constant($class_name . '::TABLE'));
+			$this->table = strval(@constant($class_name . '::TABLE'));
 
-			$this->nesting = Validate::boolean(@constant($class_name . '::NESTING'));
+			$this->nesting = boolval(@constant($class_name . '::NESTING'));
 
-			$this->has_super = Validate::boolean(@constant($class_name . '::HAS_SUPER'));
+			$this->has_super = boolval(@constant($class_name . '::HAS_SUPER'));
 
 			$this->params = new Params();
 
@@ -89,15 +89,15 @@ namespace System\Utils\Entity {
 
 		public function init($id) {
 
-			if (false !== $this->id) return true;
+			if (0 !== $this->id) return true;
 
-			if (0 === ($id = Number::unsigned($id))) return false;
+			if (0 === ($id = intabs($id))) return false;
 
 			# Select entity from DB
 
 			$selection = array_merge(array('id'), array_keys($this->params->get()));
 
-			DB::select($this->table, $selection, array('id' => $id), false, 1);
+			DB::select($this->table, $selection, array('id' => $id), null, 1);
 
 			if (!(DB::last() && (DB::last()->rows === 1))) return false;
 
@@ -109,7 +109,7 @@ namespace System\Utils\Entity {
 
 			foreach ($this->params->get() as $name => $param) $this->data[$name] = $param->set($data[$name]);
 
-			if ($this->nesting) $this->path = $this->getPath();
+			$this->path = $this->getPath();
 
 			# Implement entity
 
@@ -128,7 +128,7 @@ namespace System\Utils\Entity {
 
 		public function initBy($name, $value) {
 
-			if (false !== $this->id) return true;
+			if (0 !== $this->id) return true;
 
 			if (false === ($param = $this->params->get($name))) return false;
 
@@ -138,7 +138,7 @@ namespace System\Utils\Entity {
 
 			$selection = array_merge(array('id'), array_keys($this->params->get()));
 
-			DB::select($this->table, $selection, array($name => $value), false, 1);
+			DB::select($this->table, $selection, array($name => $value), null, 1);
 
 			if (!(DB::last() && (DB::last()->rows === 1))) return false;
 
@@ -149,6 +149,8 @@ namespace System\Utils\Entity {
 			$this->id = $this->params->id()->set($data['id']);
 
 			foreach ($this->params->get() as $name => $param) $this->data[$name] = $param->set($data[$name]);
+
+			$this->path = $this->getPath();
 
 			# Implement entity
 
@@ -167,7 +169,7 @@ namespace System\Utils\Entity {
 
 		public function create($data) {
 
-			if ((false !== $this->id) && !$this->nesting) return false;
+			if ((0 !== $this->id) && !$this->nesting) return false;
 
 			$set = array(); $params = clone $this->params;
 
@@ -183,7 +185,7 @@ namespace System\Utils\Entity {
 
 					if ($param->name() !== 'parent_id') return false;
 
-					$set['parent_id'] = $param->set(false);
+					$set['parent_id'] = $param->set(0);
 
 				} else $set[$name] = $param->value();
 			}
@@ -217,7 +219,7 @@ namespace System\Utils\Entity {
 
 		public function edit($data) {
 
-			if (false === $this->id) return false;
+			if (0 === $this->id) return false;
 
 			$set = array(); $params = clone $this->params;
 
@@ -231,7 +233,7 @@ namespace System\Utils\Entity {
 
 					if ($param->name() !== 'parent_id') return false;
 
-					$set['parent_id'] = $param->set(false);
+					$set['parent_id'] = $param->set(0);
 
 				} else $set[$name] = $param->value();
 			}
@@ -261,7 +263,7 @@ namespace System\Utils\Entity {
 
 		public function remove() {
 
-			if (false === $this->id) return false;
+			if (0 === $this->id) return false;
 
 			if ($this->has_super && ($this->id === 1)) return false;
 
@@ -273,7 +275,7 @@ namespace System\Utils\Entity {
 
 				if (!(DB::last() && DB::last()->status)) return false;
 
-				if (Number::unsigned(DB::last()->row()['count']) > 0) return false;
+				if (intabs(DB::last()->row()['count']) > 0) return false;
 			}
 
 			# Delete foreign related entries
@@ -291,7 +293,7 @@ namespace System\Utils\Entity {
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
-			$this->id = false; $this->data = false; $this->created_id = false; $this->path = false;
+			$this->id = 0; $this->created_id = 0; $this->data = array(); $this->path = array();
 
 			# ------------------------
 
@@ -302,7 +304,7 @@ namespace System\Utils\Entity {
 
 		public function __get($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if ($name === 'id') return $this->id;
 

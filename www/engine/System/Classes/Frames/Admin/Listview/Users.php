@@ -11,7 +11,7 @@ namespace System\Frames\Admin\Listview {
 
 	abstract class Users extends System\Frames\Admin\Handler {
 
-		private $index = false, $users = false;
+		private $index = 0, $users = null;
 
 		# Get users
 
@@ -33,18 +33,18 @@ namespace System\Frames\Admin\Listview {
 
 			while (null !== ($user = DB::last()->row())) $users['items'][] = array (
 
-				'id'        => Number::unsigned($user['id']),
+				'id'        => intabs($user['id']),
 
-				'rank'      => Number::unsigned($user['rank']),
+				'rank'      => intabs($user['rank']),
 
-				'name'      => String::validate($user['name'])
+				'name'      => $user['name']
 			);
 
 			# Count users total
 
 			if (DB::send('SELECT FOUND_ROWS() as total') && (DB::last()->rows === 1)) {
 
-				$users['total'] = Number::unsigned(DB::last()->row()['total']);
+				$users['total'] = intabs(DB::last()->row()['total']);
 			}
 
 			# ------------------------
@@ -88,9 +88,9 @@ namespace System\Frames\Admin\Listview {
 
 		protected function handleList($error = false) {
 
-			if (Validate::boolean($error)) Messages::error(Language::get('USERS_ITEM_NOT_FOUND'));
+			if (boolval($error)) Messages::error(Language::get('USERS_ITEM_NOT_FOUND'));
 
-			$this->index = Number::index(Request::get('index'));
+			$this->index = Number::format(Request::get('index'), 1, 999999);
 
 			# Get users
 

@@ -64,7 +64,7 @@ namespace System\Utils {
 
 		public static function set($name, $value) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			# Set admin language
 
@@ -98,28 +98,28 @@ namespace System\Utils {
 
 			if ($name === CONFIG_PARAM_SITE_TITLE) {
 
-				return (false !== (self::$config[$name] = String::validate($value)));
+				return ('' !== (self::$config[$name] = strval($value)));
 			}
 
 			# Set site status
 
 			if ($name === CONFIG_PARAM_SITE_STATUS) {
 
-				return (false !== (self::$config[$name] = Number::unsigned($value)));
+				return (null !== (self::$config[$name] = intabs($value)));
 			}
 
 			# Set site description
 
 			if ($name === CONFIG_PARAM_SITE_DESCRIPTION) {
 
-				return (null !== (self::$config[$name] = String::validate($value)));
+				return (null !== (self::$config[$name] = strval($value)));
 			}
 
 			# Set site keywords
 
 			if ($name === CONFIG_PARAM_SITE_KEYWORDS) {
 
-				return (null !== (self::$config[$name] = String::validate($value)));
+				return (null !== (self::$config[$name] = strval($value)));
 			}
 
 			# Set system url
@@ -147,7 +147,7 @@ namespace System\Utils {
 
 			if ($name === CONFIG_PARAM_USERS_REGISTRATION) {
 
-				return (null !== (self::$config[$name] = Validate::boolean($value)));
+				return (null !== (self::$config[$name] = boolval($value)));
 			}
 
 			# ------------------------
@@ -159,7 +159,7 @@ namespace System\Utils {
 
 		public static function get($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			return (isset(self::$config[$name]) ? self::$config[$name] : false);
 		}

@@ -11,7 +11,7 @@ namespace System\Handlers\Admin\Content {
 
 	class Pages extends System\Frames\Admin\Listview\Pages {
 
-		private $page = false, $form = false;
+		private $page = null, $form = null;
 
 		# Get path
 
@@ -68,7 +68,7 @@ namespace System\Handlers\Admin\Content {
 
 			$this->page = new Entity\Type\Page\Manager($id);
 
-			if (false === $this->page->id) return $this->handleList(true);
+			if (0 === $this->page->id) return $this->handleList(true);
 
 			# Create form
 
@@ -78,9 +78,9 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->hidden       ('parent_id', $this->page->parent_id);
 
-			$fieldset->text         ('title', $this->page->title, CONFIG_PAGE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text         ('title', $this->page->title, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, false, FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
+			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
 
 			$fieldset->select       ('visibility', $this->page->visibility, Lister::visibility());
 
@@ -148,7 +148,7 @@ namespace System\Handlers\Admin\Content {
 
 			if ($post['action'] == 'remove') {
 
-				if (false === $this->page->id) return Ajax::error(Language::get('PAGES_ITEM_NOT_FOUND'));
+				if (0 === $this->page->id) return Ajax::error(Language::get('PAGES_ITEM_NOT_FOUND'));
 
 				return $this->page->remove();
 			}

@@ -17,7 +17,7 @@ namespace System\Handlers\Admin\System {
 
 			if (!(DB::send("SELECT VERSION() as version") && DB::last()->status)) return false;
 
-			return String::validate(DB::last()->row()['version']);
+			return strval(DB::last()->row()['version']);
 		}
 
 		# Get contents

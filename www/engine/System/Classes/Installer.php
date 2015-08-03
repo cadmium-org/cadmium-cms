@@ -2,7 +2,7 @@
 
 namespace System {
 
-	use System, System\Handlers, System\Utils\Requirements, Request, Validate;
+	use System, System\Handlers, System\Utils\Requirements, Request;
 
 	class Installer extends System {
 
@@ -16,7 +16,7 @@ namespace System {
 
 			# Handle request
 
-			$checked = (Requirements::status() && Validate::boolean(Request::get('checked')));
+			$checked = (Requirements::status() && boolval(Request::get('checked')));
 
 			return (!$checked ? new Handlers\Admin\Install\Check() : new Handlers\Admin\Install\Configure());
 		}

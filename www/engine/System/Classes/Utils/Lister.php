@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use Language, Number, String, Validate;
+	use Language;
 
 	abstract class Lister {
 
@@ -70,7 +70,7 @@ namespace System\Utils {
 
 		private static function getValue(&$list, $value = null, $validate = false) {
 
-			$validate = Validate::boolean($validate);
+			$validate = boolval($validate);
 
 			if ($validate) return (isset($list[$value]) ? $value : false);
 
@@ -85,7 +85,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$access);
 
-			$value = Number::unsigned($value);
+			$value = intabs($value);
 
 			return self::getValue(self::$access, $value, $validate);
 		}
@@ -96,7 +96,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$frequency);
 
-			$value = String::validate($value);
+			$value = strval($value);
 
 			return self::getValue(self::$frequency, $value, $validate);
 		}
@@ -107,7 +107,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$rank);
 
-			$value = Number::unsigned($value);
+			$value = intabs($value);
 
 			return self::getValue(self::$rank, $value, $validate);
 		}
@@ -118,7 +118,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$sex);
 
-			$value = Number::unsigned($value);
+			$value = intabs($value);
 
 			return self::getValue(self::$sex, $value, $validate);
 		}
@@ -129,7 +129,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$status);
 
-			$value = Number::unsigned($value);
+			$value = intabs($value);
 
 			return self::getValue(self::$status, $value, $validate);
 		}
@@ -140,7 +140,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$target);
 
-			$value = Number::unsigned($value);
+			$value = intabs($value);
 
 			return self::getValue(self::$target, $value, $validate);
 		}
@@ -151,7 +151,7 @@ namespace System\Utils {
 
 			if (null === $value) return self::getList(self::$visibility);
 
-			$value = Number::unsigned($value);
+			$value = intabs($value);
 
 			return self::getValue(self::$visibility, $value, $validate);
 		}

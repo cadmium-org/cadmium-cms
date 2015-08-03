@@ -53,15 +53,20 @@ namespace {
 
 			# Post fields values
 
-			$errors = false;
+			$errors = false; $post = array();
 
-			foreach ($this->fields as $field) if ($field->post() && $field->error()) $errors = true;
+			foreach ($this->fields as $field) {
+
+				if ($field->post() && $field->error()) $errors = true;
+
+				$post[$field->name()] = $field->value();
+			}
 
 			$this->posted = true; $this->errors = $errors;
 
 			# ------------------------
 
-			return $this->fields;
+			return $post;
 		}
 
 		# Return name

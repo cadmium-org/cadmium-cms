@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use DB, Number, String, Template;
+	use DB, Template;
 
 	class Menu {
 
@@ -44,15 +44,15 @@ namespace System\Utils {
 
 			if (!(DB::send($query) && DB::last()->status)) return;
 
-			while (null !== ($item = DB::last()->row())) $this->items[Number::unsigned($item['id'])] = array (
+			while (null !== ($item = DB::last()->row())) $this->items[intabs($item['id'])] = array (
 
-				'parent_id'		=> Number::unsigned($item['parent_id']),
+				'parent_id'     => intabs($item['parent_id']),
 
-				'link'			=> String::validate($item['link']),
+				'link'          => strval($item['link']),
 
-				'text'			=> String::validate($item['text']),
+				'text'          => strval($item['text']),
 
-				'target'		=> Lister::target($item['target'], true)
+				'target'        => Lister::target($item['target'], true)
 			);
 
 			foreach ($this->items as $id => $item) if (0 === $item['parent_id']) $this->menu[] = $id;

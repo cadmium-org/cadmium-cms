@@ -11,13 +11,13 @@ namespace System\Handlers\Admin\Extend {
 
 	class Languages extends System\Frames\Admin\Handler {
 
-		private $section = false, $items = array();
+		private $section = null, $items = array();
 
 		# Get items
 
 		private function getItems($code, $default) {
 
-			$code = String::validate($code); $default = String::validate($default);
+			$code = strval($code); $default = strval($default);
 
 			$items = Arr::subvalSort(System\Utils\Extend\Languages::items($this->section), 'title');
 
@@ -51,7 +51,7 @@ namespace System\Handlers\Admin\Extend {
 
 		private function getSectionsLoop() {
 
-			$loop = array();
+			$loop = array(); $sections = array();
 
 			$sections[SECTION_SITE]     = Language::get('SECTION_SITE');
 			$sections[SECTION_ADMIN]    = Language::get('SECTION_ADMIN');
@@ -88,7 +88,7 @@ namespace System\Handlers\Admin\Extend {
 
 				$item->code = $code; $item->country = $language['country']; $item->title = $language['title'];
 
-				$item->is_active = Number::binary($language['active']);
+				$item->is_active = boolval($language['active']);
 			}
 
 			if ($list->count()) $contents->block('list', $list);

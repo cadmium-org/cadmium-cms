@@ -4,62 +4,19 @@ namespace {
 
 	abstract class Number {
 
-		# Format number as binary
+		# Format number
 
-		public static function binary($number) {
+		public static function format($number, $min = 0, $max = 0) {
 
-			$number = intval($number);
+			$number = intabs($number); $min = intabs($min); $max = intabs($max);
 
-			return (($number >= 1) ? true : false);
-		}
+			if (($min > 0) && ($number < $min)) return $min;
 
-		# Format number as positive
+			if (($max > 0) && ($number > $max)) return $max;
 
-		public static function positive($number, $max = null) {
+			# ------------------------
 
-			$number = intval($number);
-
-			if ((null !== $max) && ($number > ($max = self::positive($max)))) return $max;
-
-			return (($number >= 1) ? $number : 1);
-		}
-
-		# Format number as unsigned
-
-		public static function unsigned($number, $max = null) {
-
-			$number = intval($number);
-
-			if ((null !== $max) && ($number > ($max = self::unsigned($max)))) return $max;
-
-			return (($number >= 0) ? $number : 0);
-		}
-
-		# Format number as position
-
-		public static function position($number) {
-
-			$number = intval($number);
-
-			if ($number < 0) return 0; else if ($number > 99) return 99; else return $number;
-		}
-
-		# Format number as color
-
-		public static function color($number) {
-
-			$number = intval($number);
-
-			if ($number < 0) return 0; else if ($number > 255) return 255; else return $number;
-		}
-
-		# Format number as index
-
-		public static function index($number) {
-
-			$number = intval($number);
-
-			if ($number < 1) return 1; else if ($number > 999999) return 999999; else return $number;
+			return $number;
 		}
 
 		# Format number as price

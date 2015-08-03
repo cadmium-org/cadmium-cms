@@ -2,24 +2,20 @@
 
 namespace System\Utils\Entity\Type\User {
 
-	use String;
-
 	class Implementor extends Definition {
 
         # Implement entity
 
         protected function implement() {
 
-            $full_name = trim($this->data['first_name'] . ' ' . $this->data['last_name']);
-
-            $this->data['full_name'] = String::validate($full_name);
+            $this->data['full_name'] = trim($this->data['first_name'] . ' ' . $this->data['last_name']);
         }
 
 		# Validate name
 
 		public static function validateName($name) {
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			if (!preg_match(REGEX_USER_NAME, $name)) return false;
 
@@ -34,7 +30,7 @@ namespace System\Utils\Entity\Type\User {
 
 		public static function validatePassword($password) {
 
-			$password = String::validate($password);
+			$password = strval($password);
 
 			if (!preg_match(REGEX_USER_PASSWORD, $password)) return false;
 

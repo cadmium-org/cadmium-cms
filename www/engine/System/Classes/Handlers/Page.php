@@ -31,17 +31,15 @@ namespace System\Handlers {
 
 				             ("AND access <= " . $access . " AND name = '" . addslashes($name) . "'");
 
-				if (!(DB::select(TABLE_PAGES, $selection, $condition, false, 1) && (DB::last()->rows === 1))) return false;
+				if (!(DB::select(TABLE_PAGES, $selection, $condition, null, 1) && (DB::last()->rows === 1))) return false;
 
 				$page = DB::last()->row();
 
 				# Validate item
 
-				$id = Number::unsigned($page['id']); $name = String::validate($page['name']);
+				$id = intabs($page['id']); $link .= ('/' . strval($page['name'])); $title = strval($page['title']);
 
-				$link .= ('/' . $name); $title = String::validate($page['title']);
-
-				$path[] = array('id' => $id, 'name' => $name, 'link' => $link, 'title' => $title);
+				$path[] = array('id' => $id, 'link' => $link, 'title' => $title);
 			}
 
 			return $path;

@@ -11,7 +11,7 @@ namespace System\Handlers\Admin\Install {
 
 	class Check extends System\Frames\Admin\Handler {
 
-		private $form = false;
+		private $form = null;
 
 		# Get languages list
 
@@ -75,7 +75,7 @@ namespace System\Handlers\Admin\Install {
 
 			# Set button
 
-			$contents->block('button')->value = Number::unsigned(Requirements::status());
+			$contents->block('button')->value = intabs(Requirements::status());
 
 			$contents->block('button')->text = Language::get(Requirements::status() ? 'CONTINUE' : 'RECHECK');
 
@@ -94,9 +94,9 @@ namespace System\Handlers\Admin\Install {
 
 			# Add form fields
 
-            $fieldset->select('language', Extend\Languages::active(), $this->getLanguages(), false, FORM_FIELD_AUTO);
+            $fieldset->select('language', Extend\Languages::active(), $this->getLanguages(), '', FORM_FIELD_AUTO);
 
-			$fieldset->select('template', Extend\Templates::active(), $this->getTemplates(), false, FORM_FIELD_AUTO);
+			$fieldset->select('template', Extend\Templates::active(), $this->getTemplates(), '', FORM_FIELD_AUTO);
 
 			# Fill template
 

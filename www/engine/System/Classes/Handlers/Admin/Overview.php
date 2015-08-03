@@ -19,7 +19,7 @@ namespace System\Handlers\Admin {
 
 			if (!(DB::select(TABLE_PAGES, 'COUNT(id) as count') && (DB::last()->rows === 1))) return 0;
 
-			return Number::unsigned(DB::last()->row()['count']);
+			return intabs(DB::last()->row()['count']);
 		}
 
 		# Get users count
@@ -28,7 +28,7 @@ namespace System\Handlers\Admin {
 
 			if (!(DB::select(TABLE_USERS, 'COUNT(id) as count') && (DB::last()->rows === 1))) return 0;
 
-			return Number::unsigned(DB::last()->row()['count']);
+			return intabs(DB::last()->row()['count']);
 		}
 
 		# Get contents

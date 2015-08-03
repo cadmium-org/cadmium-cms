@@ -11,7 +11,7 @@ namespace System\Handlers\Admin\Content {
 
 	class Menuitems extends System\Frames\Admin\Listview\Menuitems {
 
-		private $menuitem = false, $form = false;
+		private $menuitem = null, $form = null;
 
 		# Get path
 
@@ -68,7 +68,7 @@ namespace System\Handlers\Admin\Content {
 
 			$this->menuitem = new Entity\Type\Menuitem\Manager($id);
 
-			if (false === $this->menuitem->id) return $this->handleList(true);
+			if (0 === $this->menuitem->id) return $this->handleList(true);
 
 			# Create form
 
@@ -78,9 +78,9 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->hidden       ('parent_id', $this->menuitem->parent_id);
 
-			$fieldset->text         ('text', $this->menuitem->text, CONFIG_MENUITEM_TEXT_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text         ('text', $this->menuitem->text, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('link', $this->menuitem->link, CONFIG_MENUITEM_LINK_MAX_LENGTH, false);
+			$fieldset->text         ('link', $this->menuitem->link, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
 
 			$fieldset->select       ('target', $this->menuitem->target, Lister::target());
 
@@ -138,7 +138,7 @@ namespace System\Handlers\Admin\Content {
 
 			if ($post['action'] == 'remove') {
 
-				if (false === $this->menuitem->id) return Ajax::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
+				if (0 === $this->menuitem->id) return Ajax::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
 
 				return $this->menuitem->remove();
 			}

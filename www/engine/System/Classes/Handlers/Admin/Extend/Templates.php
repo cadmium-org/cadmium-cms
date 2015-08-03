@@ -11,13 +11,13 @@ namespace System\Handlers\Admin\Extend {
 
 	class Templates extends System\Frames\Admin\Handler {
 
-		private $section = false, $items = array();
+		private $section = null, $items = array();
 
 		# Get items
 
 		private function getItems($name, $default) {
 
-			$name = String::validate($name); $default = String::validate($default);
+			$name = strval($name); $default = strval($default);
 
 			$items = Arr::subvalSort(System\Utils\Extend\Templates::items($this->section), 'title');
 
@@ -51,7 +51,7 @@ namespace System\Handlers\Admin\Extend {
 
 		private function getSectionsLoop() {
 
-			$loop = array();
+			$loop = array(); $sections = array();
 
 			$sections[SECTION_SITE]     = Language::get('SECTION_SITE');
 			$sections[SECTION_ADMIN]    = Language::get('SECTION_ADMIN');
@@ -88,7 +88,7 @@ namespace System\Handlers\Admin\Extend {
 
 				$item->name = $name; $item->title = $template['title'];
 
-				$item->is_active = Number::binary($template['active']);
+				$item->is_active = boolval($template['active']);
 			}
 
 			if ($list->count()) $contents->block('list', $list);

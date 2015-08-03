@@ -11,7 +11,7 @@ namespace System\Handlers\Profile\Auth {
 
 	class Recover extends System\Frames\Site\Handler {
 
-		private $code = false, $form = false;
+		private $code = false, $form = null;
 
 		# Get contents
 
@@ -44,9 +44,9 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->password		('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->password		('password_new', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->password		('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->password		('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# Post form
 

@@ -11,7 +11,7 @@ namespace System\Handlers\Admin\Auth {
 
 	class Reset extends System\Frames\Admin\Handler {
 
-		private $form = false;
+		private $form = null;
 
 		# Get contents
 
@@ -38,9 +38,9 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
+			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
 
-			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
+			$fieldset->captcha		('captcha', '', CONFIG_CAPTCHA_LENGTH, Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
 
 			# Post form
 

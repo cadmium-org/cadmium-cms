@@ -9,7 +9,7 @@ namespace System\Utils\Map {
 		const ERROR_FILE	= 'Unable to load map file';
 		const ERROR_PARSE	= 'Unable to parse map';
 
-		private $map = false;
+		private $map = null;
 
 		# Get parsed map
 

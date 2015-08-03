@@ -2,17 +2,15 @@
 
 namespace System\Utils\Entity {
 
-	use Number, String, Validate;
-
 	class Params {
 
-		private $id = false, $params = false;
+		private $id = 0, $params = array();
 
 		# Add param to set
 
 		private function add($param) {
 
-			if ((false === $param->name()) || isset($this->params[$param->name()])) return false;
+			if (('' === $param->name()) || isset($this->params[$param->name()])) return false;
 
 			$this->params[$param->name()] = $param;
 		}
@@ -33,14 +31,14 @@ namespace System\Utils\Entity {
 
 		# Add boolean param
 
-        public function boolean($name, $default = false, $index = false) {
+        public function boolean($name, $default = 0, $index = false) {
 
 			$this->add(new Param\Boolean($name, $default, $index));
         }
 
 		# Add range param
 
-        public function range($name, $default = false, $index = false) {
+        public function range($name, $default = 0, $index = false) {
 
             $this->add(new Param\Range($name, $default, $index));
         }
@@ -121,7 +119,7 @@ namespace System\Utils\Entity {
 
             if (null === $name) return $this->params;
 
-			$name = String::validate($name);
+			$name = strval($name);
 
 			return (isset($this->params[$name]) ? $this->params[$name] : false);
         }

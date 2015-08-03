@@ -2,17 +2,15 @@
 
 namespace System\Utils\Entity {
 
-    use Number, String;
-
     abstract class Manager {
 
-        protected $entity = false;
+        protected $entity = null;
 
         # Return entity data
 
         public function __get($name) {
 
-            if (false === $this->entity) return false;
+            if (null === $this->entity) return false;
 
             return $this->entity->$name;
         }

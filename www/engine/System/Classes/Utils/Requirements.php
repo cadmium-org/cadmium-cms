@@ -4,7 +4,7 @@ namespace System\Utils {
 
 	abstract class Requirements {
 
-        private static $requirements = false, $status = false;
+        private static $requirements = array(), $status = false;
 
         # Autoloader
 

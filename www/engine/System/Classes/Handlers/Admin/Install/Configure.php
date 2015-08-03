@@ -11,7 +11,7 @@ namespace System\Handlers\Admin\Install {
 
 	class Configure extends System\Frames\Admin\Handler {
 
-		private $form = false;
+		private $form = null;
 
 		# Errors
 
@@ -27,9 +27,9 @@ namespace System\Handlers\Admin\Install {
 		# Create database tables
 
 		private function createTables() {
-			
+
 			$entities = array();
-			
+
 			$entities[] = new Entity\Type\Page\Definition();
 
 			$entities[] = new Entity\Type\Menuitem\Definition();
@@ -53,9 +53,9 @@ namespace System\Handlers\Admin\Install {
 
 			# Count pages
 
-			if (!(DB::select(TABLE_PAGES, "COUNT(*) as count") && (DB::last()->rows === 1))) return false;
+			if (!(DB::select(TABLE_PAGES, 'COUNT(*) as count') && (DB::last()->rows === 1))) return false;
 
-			if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
+			if (intabs(DB::last()->row()['count']) > 0) return true;
 
 			# Insert initial pages
 
@@ -86,9 +86,9 @@ namespace System\Handlers\Admin\Install {
 
 			# Count menuitems
 
-			if (!(DB::select(TABLE_MENU, "COUNT(*) as count") && (DB::last()->rows === 1))) return false;
+			if (!(DB::select(TABLE_MENU, 'COUNT(*) as count') && (DB::last()->rows === 1))) return false;
 
-			if (Number::unsigned(DB::last()->row()['count']) > 0) return true;
+			if (intabs(DB::last()->row()['count']) > 0) return true;
 
 			# Insert initial menuitems
 
@@ -120,9 +120,7 @@ namespace System\Handlers\Admin\Install {
 
 			                'database_server', 'database_user', 'database_password', 'database_name');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				$$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Set language/template values
 
@@ -205,21 +203,21 @@ namespace System\Handlers\Admin\Install {
 
 			# Add form fields
 
-			$fieldset->text          ('site_title', CONFIG_SITE_TITLE, CONFIG_SITE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('site_title', CONFIG_SITE_TITLE, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('system_url', CONFIG_SYSTEM_URL, CONFIG_SYSTEM_URL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('system_url', CONFIG_SYSTEM_URL, CONFIG_SYSTEM_URL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$fieldset->select        ('system_timezone', CONFIG_SYSTEM_TIMEZONE, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('system_email', CONFIG_SYSTEM_EMAIL, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('system_email', CONFIG_SYSTEM_EMAIL, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_server', 'localhost', CONFIG_DATABASE_SERVER_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('database_server', 'localhost', CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_user', false, CONFIG_DATABASE_USER_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('database_user', '', CONFIG_DATABASE_USER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_password', false, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('database_password', '', CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_name', false, CONFIG_DATABASE_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text          ('database_name', '', CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# Post form
 

@@ -11,11 +11,11 @@ namespace System\Frames\Admin\Listview {
 
 	abstract class Pages extends System\Frames\Admin\Handler {
 
-		private $index = false, $page = false, $form = false, $children = false;
+		private $index = 0, $page = null, $form = null, $children = null;
 
 		# Get children pages
 
-		private function getChildren($disable_id = false) {
+		private function getChildren($disable_id = 0) {
 
 			$children = array('items' => array(), 'total' => 0);
 
@@ -23,7 +23,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Select pages
 
-			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_PAGES_DISPLAY) . ", " . CONFIG_ADMIN_PAGES_DISPLAY) : false);
+			$limit = (($this->index > 0) ? ((($this->index - 1) * CONFIG_ADMIN_PAGES_DISPLAY) . ", " . CONFIG_ADMIN_PAGES_DISPLAY) : '');
 
 			$query = ("SELECT SQL_CALC_FOUND_ROWS pag.id, pag.visibility, pag.access, pag.name, pag.title, COUNT(chd.id) as children ") .
 
@@ -39,24 +39,24 @@ namespace System\Frames\Admin\Listview {
 
 			while (null !== ($page = DB::last()->row())) $children['items'][] = array (
 
-				'id'            => Number::unsigned($page['id']),
+				'id'            => intabs($page['id']),
 
-				'visibility'    => Number::binary($page['visibility']),
+				'visibility'    => boolval($page['visibility']),
 
-				'access'        => Number::unsigned($page['access']),
+				'access'        => intabs($page['access']),
 
-				'name'          => String::validate($page['name']),
+				'name'          => strval($page['name']),
 
-				'title'         => String::validate($page['title']),
+				'title'         => strval($page['title']),
 
-				'children'      => Number::unsigned($page['children'])
+				'children'      => intabs($page['children'])
 			);
 
 			# Count pages total
 
 			if (DB::send('SELECT FOUND_ROWS() as total') && (DB::last()->rows === 1)) {
 
-				$children['total'] = Number::unsigned(DB::last()->row()['total']);
+				$children['total'] = intabs(DB::last()->row()['total']);
 			}
 
 			# ------------------------
@@ -68,7 +68,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getPath() {
 
-			if (false === ($path = $this->page->path)) return array();
+			if (!($path = $this->page->path)) return array();
 
 			$count = count($path);
 
@@ -88,9 +88,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Set general
 
-			$contents->id = ((false !== $this->page->id) ? $this->page->id : 0);
+			$contents->id = $this->page->id;
 
-			$contents->title = ((false !== $this->page->title) ? $this->page->title : ('- ' . Language::get('NONE')));
+			$contents->title = ($this->page->title ? $this->page->title : ('- ' . Language::get('NONE')));
 
 			# Set path
 
@@ -98,7 +98,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Set actions
 
-			if (false === $this->page->id) $contents->block('actions')->disable(); else {
+			if (0 === $this->page->id) $contents->block('actions')->disable(); else {
 
 				$contents->block('actions')->link = $this->page->link;
 
@@ -109,7 +109,7 @@ namespace System\Frames\Admin\Listview {
 
 			if (!$ajax) {
 
-				if (false === $this->page->id) $contents->block('parent')->disable();
+				if (0 === $this->page->id) $contents->block('parent')->disable();
 
 				else $contents->block('parent')->title = $this->page->title;
 
@@ -157,9 +157,9 @@ namespace System\Frames\Admin\Listview {
 
 		protected function handleList($error = false) {
 
-			if (Validate::boolean($error)) Messages::error(Language::get('PAGES_ITEM_NOT_FOUND'));
+			if (boolval($error)) Messages::error(Language::get('PAGES_ITEM_NOT_FOUND'));
 
-			$this->index = Number::index(Request::get('index'));
+			$this->index = Number::format(Request::get('index'), 1, 999999);
 
 			# Create parent page
 
@@ -171,9 +171,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Add form fields
 
-			$fieldset->text     ('title', false, CONFIG_PAGE_TITLE_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text     ('title', '', CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text     ('name', false, CONFIG_PAGE_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
+			$fieldset->text     ('name', '', CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
 
 			# Post form
 
@@ -203,7 +203,7 @@ namespace System\Frames\Admin\Listview {
 
 		protected function handleListAjax($active_id) {
 
-			$active_id = Number::unsigned($active_id);
+			$active_id = intabs($active_id);
 
 			# Create parent page
 

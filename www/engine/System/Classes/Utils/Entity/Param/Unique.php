@@ -2,26 +2,26 @@
 
 namespace System\Utils\Entity\Param {
 
-    use System\Utils\Entity, Number, String;
+    use System\Utils\Entity, Number;
 
 	class Unique extends Entity\Param {
 
-        protected $maxlength = false;
+        protected $maxlength = 0;
 
         # Constructor
 
-        public function __construct($name, $maxlength) {
+        public function __construct($name, $maxlength = null) {
 
-            $this->name = String::validate($name);
+            $this->name = strval($name); $this->value = '';
 
-            $this->maxlength = (($maxlength !== null) ? Number::unsigned($maxlength, 255) : 255);
+            $this->maxlength = (($maxlength !== null) ? Number::format($maxlength, 0, 255) : 255);
         }
 
         # Set value
 
         public function set($value) {
 
-            return ($this->value = String::validate($value));
+            return ($this->value = strval($value));
         }
 
         # Get field statement

@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entity\Param {
 
-    use System\Utils\Entity, Number, String;
+    use System\Utils\Entity;
 
 	class Id extends Entity\Param {
 
@@ -10,14 +10,14 @@ namespace System\Utils\Entity\Param {
 
         public function __construct($name) {
 
-            $this->name = String::validate($name);
+            $this->name = strval($name); $this->value = 0;
         }
 
         # Set value
 
         public function set($value) {
 
-            return ($this->value = Number::unsigned($value));
+            return ($this->value = intabs($value));
         }
 
         # Get field statement

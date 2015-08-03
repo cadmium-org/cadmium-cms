@@ -29,7 +29,7 @@ namespace System\Utils\Entity\Type\User {
 
 		public function create($fieldset) {
 
-			if (false !== $this->entity->id) return true;
+			if (0 !== $this->entity->id) return true;
 
 			# Check fieldset
 
@@ -37,9 +37,7 @@ namespace System\Utils\Entity\Type\User {
 
 			                'city', 'country', 'timezone', 'password', 'password_retype');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				$$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -53,7 +51,7 @@ namespace System\Utils\Entity\Type\User {
 
 			# Check name exists
 
-			DB::select(TABLE_USERS, 'id', array('name' => $name), false, 1);
+			DB::select(TABLE_USERS, 'id', array('name' => $name), null, 1);
 
 			if (!DB::last()->status) return self::ERROR_CREATE;
 
@@ -61,7 +59,7 @@ namespace System\Utils\Entity\Type\User {
 
 			# Check email exists
 
-			DB::select(TABLE_USERS, 'id', array('email' => $email), false, 1);
+			DB::select(TABLE_USERS, 'id', array('email' => $email), null, 1);
 
 			if (!DB::last()->status) return self::ERROR_CREATE;
 
@@ -98,7 +96,7 @@ namespace System\Utils\Entity\Type\User {
 
 		public function edit($fieldset) {
 
-			if (false === $this->entity->id) return false;
+			if (0 === $this->entity->id) return false;
 
 			# Check fieldset
 
@@ -106,9 +104,7 @@ namespace System\Utils\Entity\Type\User {
 
 			                'city', 'country', 'timezone', 'password', 'password_retype');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				$$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -116,7 +112,7 @@ namespace System\Utils\Entity\Type\User {
 
 			if (false === ($email = Validate::email($email))) return self::ERROR_EMAIL_INVALID;
 
-            if (false !== $password) {
+            if ('' !== $password) {
 
     			if (false === ($password = $this->entity->validatePassword($password))) return self::ERROR_PASSWORD_INVALID;
 
@@ -127,7 +123,7 @@ namespace System\Utils\Entity\Type\User {
 
 			$condition = ("name = '" . addslashes($name) . "' AND id != " . $this->entity->id);
 
-			DB::select(TABLE_USERS, 'id', $condition, false, 1);
+			DB::select(TABLE_USERS, 'id', $condition, null, 1);
 
 			if (!DB::last()->status) return self::ERROR_EDIT;
 
@@ -137,7 +133,7 @@ namespace System\Utils\Entity\Type\User {
 
 			$condition = ("email = '" . addslashes($email) . "' AND id != " . $this->entity->id);
 
-			DB::select(TABLE_USERS, 'id', $condition, false, 1);
+			DB::select(TABLE_USERS, 'id', $condition, null, 1);
 
 			if (!DB::last()->status) return self::ERROR_EDIT;
 
@@ -145,7 +141,7 @@ namespace System\Utils\Entity\Type\User {
 
 			# Encode password
 
-			if (false !== $password) { $auth_key = String::random(40); $password = String::encode($auth_key, $password); }
+			if ('' !== $password) { $auth_key = String::random(40); $password = String::encode($auth_key, $password); }
 
 			else { $auth_key = $this->entity->auth_key; $password = $this->entity->password; }
 

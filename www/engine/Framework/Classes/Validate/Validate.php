@@ -39,12 +39,5 @@ namespace {
 
 			return ((false !== $value) ? preg_replace('/\/*$/', '', $value) : false);
 		}
-
-		# Validate boolean
-
-		public static function boolean($value) {
-
-			return filter_var($value, FILTER_VALIDATE_BOOLEAN);
-		}
 	}
 }

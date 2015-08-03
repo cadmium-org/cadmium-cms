@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use Number, Template, Url;
+	use Template, Url;
 
 	abstract class Pagination {
 
@@ -12,7 +12,7 @@ namespace System\Utils {
 
 			$pagination = Template::block('Utils/Pagination');
 
-			$index = Number::positive($index); $display = Number::unsigned($display); $total = Number::unsigned($total);
+			$index = intabs($index); $display = intabs($display); $total = intabs($total);
 
 			$url = (($url instanceof Url) ? $url : new Url());
 

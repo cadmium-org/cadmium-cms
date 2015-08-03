@@ -2,26 +2,26 @@
 
 namespace System\Utils\Entity\Param {
 
-    use System\Utils\Entity, Number, String, Validate;
+    use System\Utils\Entity, Number;
 
 	class Boolean extends Entity\Param {
 
-        private $default = false, $index = false;
+        private $default = 0, $index = false;
 
         # Constructor
 
-        public function __construct($name, $default, $index) {
+        public function __construct($name, $default = 0, $index = false) {
 
-            $this->name = String::validate($name); $this->default = Number::unsigned($default, 1);
+            $this->name = strval($name); $this->value = 0;
 
-            $this->index = Validate::boolean($index);
+            $this->default = Number::format($default, 0, 1); $this->index = boolval($index);
         }
 
         # Set value
 
         public function set($value) {
 
-            return ($this->value = Number::unsigned($value));
+            return ($this->value = intabs($value));
         }
 
         # Get field statement

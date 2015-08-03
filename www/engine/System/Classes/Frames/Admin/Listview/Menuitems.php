@@ -11,11 +11,11 @@ namespace System\Frames\Admin\Listview {
 
 	abstract class Menuitems extends System\Frames\Admin\Handler {
 
-		private $index = false, $menuitem = false, $form = false, $children = false;
+		private $index = 0, $menuitem = null, $form = null, $children = null;
 
 		# Get children menuitems
 
-		private function getChildren($disable_id = false) {
+		private function getChildren($disable_id = 0) {
 
 			$children = array('items' => array(), 'total' => 0);
 
@@ -23,7 +23,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Select menuitems
 
-			$limit = ($this->index ? ((($this->index - 1) * CONFIG_ADMIN_MENUITEMS_DISPLAY) . ", " . CONFIG_ADMIN_MENUITEMS_DISPLAY) : false);
+			$limit = (($this->index > 0) ? ((($this->index - 1) * CONFIG_ADMIN_MENUITEMS_DISPLAY) . ", " . CONFIG_ADMIN_MENUITEMS_DISPLAY) : '');
 
 			$query = ("SELECT SQL_CALC_FOUND_ROWS men.id, men.position, men.link, men.text, COUNT(chd.id) as children ") .
 
@@ -39,22 +39,22 @@ namespace System\Frames\Admin\Listview {
 
 			while (null !== ($menuitem = DB::last()->row())) $children['items'][] = array (
 
-				'id'            => Number::unsigned($menuitem['id']),
+				'id'            => intabs($menuitem['id']),
 
-				'position'      => Number::unsigned($menuitem['position']),
+				'position'      => intabs($menuitem['position']),
 
-				'link'          => String::validate($menuitem['link']),
+				'link'          => strval($menuitem['link']),
 
-				'text'          => String::validate($menuitem['text']),
+				'text'          => strval($menuitem['text']),
 
-				'children'      => Number::unsigned($menuitem['children'])
+				'children'      => intabs($menuitem['children'])
 			);
 
 			# Count menuitems total
 
 			if (DB::send('SELECT FOUND_ROWS() as total') && (DB::last()->rows === 1)) {
 
-				$children['total'] = Number::unsigned(DB::last()->row()['total']);
+				$children['total'] = intabs(DB::last()->row()['total']);
 			}
 
 			# ------------------------
@@ -66,7 +66,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getPath() {
 
-			if (false === ($path = $this->menuitem->path)) return array();
+			if (!($path = $this->menuitem->path)) return array();
 
 			$count = count($path);
 
@@ -86,9 +86,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Set general
 
-			$contents->id = ((false !== $this->menuitem->id) ? $this->menuitem->id : 0);
+			$contents->id = $this->menuitem->id;
 
-			$contents->text = ((false !== $this->menuitem->text) ? $this->menuitem->text : ('- ' . Language::get('NONE')));
+			$contents->text = ($this->menuitem->text ? $this->menuitem->text : ('- ' . Language::get('NONE')));
 
 			# Set path
 
@@ -96,7 +96,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Set actions
 
-			if (false === $this->menuitem->id) $contents->block('actions')->disable(); else {
+			if (0 === $this->menuitem->id) $contents->block('actions')->disable(); else {
 
 				$contents->block('actions')->link = $this->menuitem->link;
 
@@ -107,7 +107,7 @@ namespace System\Frames\Admin\Listview {
 
 			if (!$ajax) {
 
-				if (false === $this->menuitem->id) $contents->block('parent')->disable();
+				if (0 === $this->menuitem->id) $contents->block('parent')->disable();
 
 				else $contents->block('parent')->text = $this->menuitem->text;
 
@@ -128,7 +128,7 @@ namespace System\Frames\Admin\Listview {
 
 				$item->position = $menuitem['position'];
 
-				$item->block('browse')->class = ((false !== $menuitem['link']) ? 'primary' : 'disabled');
+				$item->block('browse')->class = ($menuitem['link'] ? 'primary' : 'disabled');
 
 				$item->block('browse')->link = $menuitem['link'];
 
@@ -155,9 +155,9 @@ namespace System\Frames\Admin\Listview {
 
 		protected function handleList($error = false) {
 
-			if (Validate::boolean($error)) Messages::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
+			if (boolval($error)) Messages::error(Language::get('MENUITEMS_ITEM_NOT_FOUND'));
 
-			$this->index = Number::index(Request::get('index'));
+			$this->index = Number::format(Request::get('index'), 1, 999999);
 
 			# Create parent menuitem
 
@@ -169,9 +169,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Add form fields
 
-			$fieldset->text     ('text', false, CONFIG_MENUITEM_TEXT_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text     ('text', '', CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text     ('link', false, CONFIG_MENUITEM_LINK_MAX_LENGTH);
+			$fieldset->text     ('link', '', CONFIG_MENUITEM_LINK_MAX_LENGTH);
 
 			# Post form
 
@@ -201,7 +201,7 @@ namespace System\Frames\Admin\Listview {
 
 		protected function handleListAjax($active_id) {
 
-			$active_id = Number::unsigned($active_id);
+			$active_id = intabs($active_id);
 
 			# Create parent menuitem
 

@@ -2,19 +2,17 @@
 
 namespace System\Utils\Entity {
 
-    use Number, String;
-
     abstract class Factory {
 
         private static $cache = array();
 
         # Create new entity
 
-        public static function create($type, $id = false) {
+        public static function create($type, $id = 0) {
 
-            if (false === ($type = String::validate($type))) return false;
+            if ('' === ($type = strval($type))) return false;
 
-            $id = Number::unsigned($id);
+            $id = intabs($id);
 
             $class_name = ('System\\Utils\\Entity\\Type\\' . $type . '\\Implementor');
 
@@ -33,7 +31,7 @@ namespace System\Utils\Entity {
 
         public static function cache($type, $entity) {
 
-            if (false === ($type = String::validate($type))) return false;
+            if ('' === ($type = strval($type))) return false;
 
             if (!($entity instanceof Entity)) return false;
 
@@ -41,7 +39,7 @@ namespace System\Utils\Entity {
 
             if (!class_exists($class_name) || !($entity instanceof $class_name)) return false;
 
-            if (false !== $entity->id) self::$cache[$type][$entity->id] = $entity;
+            if (0 !== $entity->id) self::$cache[$type][$entity->id] = $entity;
 
             # ------------------------
 
@@ -50,21 +48,21 @@ namespace System\Utils\Entity {
 
         # Create new page entity
 
-        public static function page($id = false) {
+        public static function page($id = 0) {
 
             return self::create('Page', $id);
 		}
 
         # Create new menuitem entity
 
-		public static function menuitem($id = false) {
+		public static function menuitem($id = 0) {
 
             return self::create('Menuitem', $id);
 		}
 
         # Create new user entity
 
-		public static function user($id = false) {
+		public static function user($id = 0) {
 
             return self::create('User', $id);
 		}

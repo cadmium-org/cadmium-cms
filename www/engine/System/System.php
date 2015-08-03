@@ -4,9 +4,9 @@ namespace {
 
 	abstract class System extends Engine {
 
-		protected $installed = false, $time = false;
+		protected $installed = false, $time = 0;
 
-		protected $database = array('server' => false, 'user' => false, 'password' => false, 'name' => false);
+		protected $database = array('server' => '', 'user' => '', 'password' => '', 'name' => '');
 
 		# Parse system file
 
@@ -16,13 +16,13 @@ namespace {
 
 			# Parse installation details
 
-			$this->time = Number::unsigned(Arr::get($data, array('time')));
+			$this->time = intabs(Arr::get($data, array('time')));
 
 			# Parse database params
 
 			foreach (array_keys($this->database) as $key) {
 
-				$this->database[$key] = String::validate(Arr::get($data, array('database', $key)));
+				$this->database[$key] = strval(Arr::get($data, array('database', $key)));
 			}
 		}
 

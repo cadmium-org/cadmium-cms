@@ -11,7 +11,7 @@ namespace System\Handlers\Profile\Auth {
 
 	class Reset extends System\Frames\Site\Handler {
 
-		private $form = false;
+		private $form = null;
 
 		# Get contents
 
@@ -38,9 +38,9 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', false, CONFIG_USER_NAME_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->captcha		('captcha', false, CONFIG_CAPTCHA_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->captcha		('captcha', '', CONFIG_CAPTCHA_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# Post form
 

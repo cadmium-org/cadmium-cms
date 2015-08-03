@@ -2,24 +2,24 @@
 
 namespace System\Utils\Entity\Param {
 
-    use System\Utils\Entity, Number, String;
+    use System\Utils\Entity;
 
 	class Relation extends Entity\Param {
 
-        private $entity = false, $type = false;
+        private $type = '';
 
         # Constructor
 
         public function __construct($name, $type) {
 
-            $this->name = String::validate($name); $this->type = String::validate($type);
+            $this->name = strval($name); $this->value = 0; $this->type = strval($type);
         }
 
         # Set value
 
         public function set($value) {
 
-            return ($this->value = Number::unsigned($value));
+            return ($this->value = intabs($value));
         }
 
         # Get entity
@@ -28,9 +28,13 @@ namespace System\Utils\Entity\Param {
 
             if (0 === $this->value) return true;
 
-            $this->entity = Entity\Factory::create($this->type, $this->value);
+            $entity = Entity\Factory::create($this->type, $this->value);
 
-            return ((false !== $this->entity->id) ? $this->entity : false);
+            if ((false === $entity) || (0 === $entity->id)) return false;
+
+            # ------------------------
+
+            return $entity;
         }
 
         # Get field statement

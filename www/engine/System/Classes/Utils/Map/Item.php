@@ -2,8 +2,6 @@
 
 namespace System\Utils\Map {
 
-	use String;
-
 	class Item {
 
 		private $path = array(), $handler = array(), $status = false;
@@ -12,7 +10,7 @@ namespace System\Utils\Map {
 
 		private function parsePath($path) {
 
-			$path = String::validate($path);
+			$path = strval($path);
 
 			if (!preg_match('/^\/(.*)$/', $path, $matches)) return false;
 
@@ -36,7 +34,7 @@ namespace System\Utils\Map {
 
 		private function parseHandler($handler) {
 
-			$handler = String::validate($handler);
+			$handler = strval($handler);
 
 			if (!preg_match('/^\/(.*)$/', $handler, $matches)) return false;
 

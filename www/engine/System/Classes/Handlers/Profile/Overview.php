@@ -29,25 +29,25 @@ namespace System\Handlers\Profile {
 
 			# Set full name
 
-			if (false == ($full_name = Auth::user()->full_name)) $contents->block('full_name')->disable();
+			if (!($full_name = Auth::user()->full_name)) $contents->block('full_name')->disable();
 
 			else $contents->block('full_name')->text = $full_name;
 
 			# Set sex
 
-			if (false == ($sex = Auth::user()->sex)) $contents->block('sex')->disable();
+			if (!($sex = Auth::user()->sex)) $contents->block('sex')->disable();
 
 			else $contents->block('sex')->text = Lister::sex($sex);
 
 			# Set city
 
-			if (false == ($city = Auth::user()->city)) $contents->block('city')->disable();
+			if (!($city = Auth::user()->city)) $contents->block('city')->disable();
 
 			else $contents->block('city')->text = $city;
 
 			# Set country
 
-			if (false == ($country = Auth::user()->country)) $contents->block('country')->disable(); else {
+			if (!($country = Auth::user()->country)) $contents->block('country')->disable(); else {
 
 				$contents->block('country')->code = $country;
 

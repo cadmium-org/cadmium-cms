@@ -29,7 +29,7 @@ namespace System\Utils {
 
 		const ERROR_ACCESS                          = 'USER_ERROR_ACCESS';
 
-		private static $user = false, $admin = false, $init = false;
+		private static $user = null, $admin = false, $init = false;
 
 		# Send reset mail
 
@@ -85,7 +85,7 @@ namespace System\Utils {
 
 		private static function validateCode($code) {
 
-			$code = String::validate($code);
+			$code = strval($code);
 
 			return (preg_match(REGEX_USER_AUTH_CODE, $code) ? $code : false);
 		}
@@ -108,9 +108,9 @@ namespace System\Utils {
 
 		public static function session($admin = false) {
 
-			if (false !== self::$user->id) return true;
+			if (0 !== self::$user->id) return true;
 
-			self::$admin = Validate::boolean($admin);
+			self::$admin = boolval($admin);
 
 			if (false === ($code = self::validateCode(Session::get(USER_SESSION_PARAM_CODE)))) return false;
 
@@ -147,9 +147,9 @@ namespace System\Utils {
 
 		public static function secret($admin = false) {
 
-			if (false !== self::$user->id) return true;
+			if (0 !== self::$user->id) return true;
 
-			self::$admin = Validate::boolean($admin);
+			self::$admin = boolval($admin);
 
 			if (false === ($code = self::validateCode(Request::get(USER_SECRET_PARAM_CODE)))) return false;
 
@@ -191,15 +191,13 @@ namespace System\Utils {
 
 		public static function login($fieldset) {
 
-			if (false !== self::$user->id) return true;
+			if (0 !== self::$user->id) return true;
 
 			# Check fieldset
 
 			$fields = array('name', 'password');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-                $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -244,15 +242,13 @@ namespace System\Utils {
 
 		public static function reset($fieldset) {
 
-			if (false !== self::$user->id) return true;
+			if (0 !== self::$user->id) return true;
 
 			# Check fieldset
 
 			$fields = array('name', 'captcha');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-                $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -293,15 +289,13 @@ namespace System\Utils {
 
 		public static function recover($fieldset) {
 
-			if (false === self::$user->id) return false;
+			if (0 === self::$user->id) return false;
 
 			# Check fieldset
 
 			$fields = array('password_new', 'password_retype');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-                $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -333,15 +327,13 @@ namespace System\Utils {
 
 		public static function register($fieldset) {
 
-			if (false !== self::$user->id) return true;
+			if (0 !== self::$user->id) return true;
 
 			# Check fieldset
 
 			$fields = array('name', 'password', 'password_retype', 'email', 'captcha');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-                $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -357,7 +349,7 @@ namespace System\Utils {
 
 			# Check name exists
 
-			DB::select(TABLE_USERS, 'id', array('name' => $name), false, 1);
+			DB::select(TABLE_USERS, 'id', array('name' => $name), null, 1);
 
 			if (!DB::last()->status) return self::ERROR_AUTH_REGISTER;
 
@@ -365,7 +357,7 @@ namespace System\Utils {
 
 			# Check email exists
 
-			DB::select(TABLE_USERS, 'id', array('email' => $email), false, 1);
+			DB::select(TABLE_USERS, 'id', array('email' => $email), null, 1);
 
 			if (!DB::last()->status) return self::ERROR_AUTH_REGISTER;
 
@@ -402,15 +394,13 @@ namespace System\Utils {
 
 		public static function editPersonal($fieldset) {
 
-			if (false === self::$user->id) return false;
+			if (0 === self::$user->id) return false;
 
 			# Check fieldset
 
 			$fields = array('email', 'first_name', 'last_name', 'sex', 'city', 'country', 'timezone');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-                $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -420,7 +410,7 @@ namespace System\Utils {
 
 			$condition = ("email = '" . addslashes($email) . "' AND id != " . self::$user->id);
 
-			DB::select(TABLE_USERS, 'id', $condition, false, 1);
+			DB::select(TABLE_USERS, 'id', $condition, null, 1);
 
 			if (!DB::last()->status) return self::ERROR_EDIT_PERSONAL;
 
@@ -447,15 +437,13 @@ namespace System\Utils {
 
 		public static function editPassword($fieldset) {
 
-			if (false === self::$user->id) return false;
+			if (0 === self::$user->id) return false;
 
 			# Check fieldset
 
 			$fields = array('password', 'password_new', 'password_retype');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-                $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Validate values
 
@@ -491,7 +479,7 @@ namespace System\Utils {
 
 		public static function logout() {
 
-			if (false === self::$user->id) return false;
+			if (0 === self::$user->id) return false;
 
 			DB::delete(TABLE_USERS_SESSIONS, array('id' => self::$user->id));
 

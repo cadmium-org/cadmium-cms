@@ -4,7 +4,7 @@ namespace System\Utils\Entity {
 
 	abstract class Param {
 
-        protected $name = false, $value = false, $changed = false;
+        protected $name = '', $value = null;
 
 		# Return name
 
@@ -18,13 +18,6 @@ namespace System\Utils\Entity {
         public function value() {
 
             return $this->value;
-        }
-
-		# Check if value changed
-
-        public function changed() {
-
-            return $this->changed;
         }
     }
 }

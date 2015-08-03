@@ -55,7 +55,7 @@ namespace System\Frames {
 
 			# Set timezone
 
-			if (false !== ($timezone = Auth::user()->timezone)) date_default_timezone_set($timezone);
+			if (Auth::check() && ('' !== ($timezone = Auth::user()->timezone))) date_default_timezone_set($timezone);
 
 			else if (false !== CONFIG_SYSTEM_TIMEZONE) date_default_timezone_set(CONFIG_SYSTEM_TIMEZONE);
 

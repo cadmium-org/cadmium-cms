@@ -2,11 +2,11 @@
 
 namespace System\Utils\Tools {
 
-	use Explorer, Headers, Number, String;
+	use Explorer, Headers, Number;
 
 	class Captcha {
 
-		private $captcha = false, $width = false, $height = false;
+		private $captcha = false, $width = 0, $height = 0;
 
 		# Allocate color
 
@@ -16,7 +16,7 @@ namespace System\Utils\Tools {
 
 			if (null === $color) $color = array(0, 0, 0); else if (!is_array($color) || (count($color) !== 3)) return false;
 
-			foreach (array_values($color) as $key => $value) $color[$key] = Number::color($value);
+			foreach (array_values($color) as $key => $value) $color[$key] = Number::format($value, 0, 255);
 
 			# ------------------------
 
@@ -27,7 +27,7 @@ namespace System\Utils\Tools {
 
 		public function __construct($width, $height, $bg_color = null) {
 
-			$width = Number::positive($width); $height = Number::positive($height);
+			$width = intabs($width); $height = intabs($height);
 
 			if (false !== ($this->captcha = imagecreatetruecolor($width, $height))) {
 
@@ -46,9 +46,9 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			$font = String::validate($font); $size = ((($size = Number::unsigned($size)) < 8) ? 8 : $size);
+			$font = strval($font); $size = ((($size = intabs($size)) < 8) ? 8 : $size);
 
-			$indent = Number::unsigned($indent); $step = Number::unsigned($step); $text = String::validate($text);
+			$indent = intabs($indent); $step = intabs($step); $text = strval($text);
 
 			if (!Explorer::isFile($font)) return false;
 
@@ -72,7 +72,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			$rate = Number::positive($rate);
+			$rate = intabs($rate);
 
 			if (false === ($color = $this->allocateColor($color))) return false;
 
@@ -93,7 +93,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			$count = Number::positive($count);
+			$count = intabs($count);
 
 			if (false === ($color = $this->allocateColor($color))) return false;
 
@@ -130,7 +130,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			if (($quality = Number::unsigned($quality)) > 100) $quality = 100;
+			if (($quality = intabs($quality)) > 100) $quality = 100;
 
 			Headers::nocache(); Headers::content(MIME_TYPE_JPEG);
 
@@ -147,7 +147,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			if (($quality = Number::unsigned($quality)) > 9) $quality = 9;
+			if (($quality = intabs($quality)) > 9) $quality = 9;
 
 			Headers::nocache(); Headers::content(MIME_TYPE_PNG);
 

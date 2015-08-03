@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entity\Param {
 
-    use System\Utils\Entity, String;
+    use System\Utils\Entity;
 
 	class Text extends Entity\Param {
 
@@ -10,14 +10,14 @@ namespace System\Utils\Entity\Param {
 
         public function __construct($name) {
 
-            $this->name = String::validate($name);
+            $this->name = strval($name); $this->value = '';
         }
 
         # Set value
 
         public function set($value) {
 
-            return ($this->value = String::validate($value));
+            return ($this->value = strval($value));
         }
 
         # Get field statement

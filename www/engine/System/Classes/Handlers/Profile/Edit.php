@@ -11,7 +11,7 @@ namespace System\Handlers\Profile {
 
 	class Edit extends System\Frames\Site\Handler {
 
-		private $form_personal = false, $form_password = false;
+		private $form_personal = null, $form_password = null;
 
 		# Get personal form
 
@@ -21,7 +21,7 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->text         ('email', Auth::user()->email, CONFIG_USER_EMAIL_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->text         ('email', Auth::user()->email, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$fieldset->text         ('first_name', Auth::user()->first_name, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
@@ -48,11 +48,11 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->password     ('password', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->password     ('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->password     ('password_new', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->password     ('password_new', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->password     ('password_retype', false, CONFIG_USER_PASSWORD_MAX_LENGTH, false, FORM_FIELD_REQUIRED);
+			$fieldset->password     ('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# ------------------------
 

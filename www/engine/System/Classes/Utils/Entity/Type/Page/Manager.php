@@ -28,17 +28,13 @@ namespace System\Utils\Entity\Type\Page {
 
 			$fields = array('title', 'name');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				$$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Check name exists
 
-			$parent_id = ((false !== $this->entity->id) ? $this->entity->id : 0);
+			$condition = ("name = '" . addslashes($name) . "' AND parent_id = " . $this->entity->id);
 
-			$condition = ("name = '" . addslashes($name) . "' AND parent_id = " . $parent_id);
-
-			DB::select(TABLE_PAGES, 'id', $condition, false, 1);
+			DB::select(TABLE_PAGES, 'id', $condition, null, 1);
 
 			if (!DB::last()->status) return self::ERROR_CREATE;
 
@@ -60,7 +56,7 @@ namespace System\Utils\Entity\Type\Page {
 
 		public function edit($fieldset) {
 
-			if (false === $this->entity->id) return false;
+			if (0 === $this->entity->id) return false;
 
 			# Check fieldset
 
@@ -68,15 +64,13 @@ namespace System\Utils\Entity\Type\Page {
 
 			                'description', 'keywords', 'robots_index', 'robots_follow', 'contents');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				 $$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Check name exists
 
 			$condition = ("name = '" . addslashes($name) . "' AND parent_id = " . $parent_id . " AND id != " . $this->entity->id);
 
-			DB::select(TABLE_PAGES, 'id', $condition, false, 1);
+			DB::select(TABLE_PAGES, 'id', $condition, null, 1);
 
 			if (!DB::last()->status) return self::ERROR_EDIT;
 

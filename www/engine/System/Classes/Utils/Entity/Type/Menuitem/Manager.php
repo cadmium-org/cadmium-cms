@@ -26,19 +26,15 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 			$fields = array('text', 'link');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				$$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Get position
 
-			$parent_id = ((false !== $this->entity->id) ? $this->entity->id : 0);
-
-			DB::select(TABLE_MENU, '(MAX(position) + 1) as position', array('parent_id' => $parent_id));
+			DB::select(TABLE_MENU, '(MAX(position) + 1) as position', array('parent_id' => $this->entity->id));
 
 			if (!DB::last()->status) return self::ERROR_CREATE;
 
-			$position = Number::position(DB::last()->row()['position']);
+			$position = Number::format(DB::last()->row()['position'], 0, 99);
 
 			# Insert menuitem
 
@@ -57,15 +53,13 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 		public function edit($fieldset) {
 
-			if (false === $this->entity->id) return false;
+			if (0 === $this->entity->id) return false;
 
 			# Check fieldset
 
 			$fields = array('parent_id', 'text', 'link', 'target', 'position');
 
-			foreach ($fields as $field) if (isset($fieldset[$field]) && ($fieldset[$field] instanceof Form\Utils\Field))
-
-				$$field = $fieldset[$field]->value(); else return false;
+			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Update menuitem
 

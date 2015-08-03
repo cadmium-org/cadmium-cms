@@ -4,15 +4,9 @@ namespace {
 
 	# Cast variable to unsigned integer
 
-	function intabs($value, $max = null) {
+	function intabs($value) {
 
-		$value = (int) abs(intval($value));
-
-		if ((null !== $max) && ($value > ($max = (int) abs(intval($max))))) return $max;
-
-		# ------------------------
-
-		return $value;
+		return (int) abs(intval($value));
 	}
 
 	# Cast variable to boolean

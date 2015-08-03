@@ -12,7 +12,7 @@ namespace System\Utils\Entity\Type\Page {
 
 			$path = array();
 
-			if (false !== $this->path) foreach ($this->path as $entity) {
+			foreach ($this->path as $entity) {
 
 				$id = $entity->id; $parent_id = $entity->data['parent_id'];
 
