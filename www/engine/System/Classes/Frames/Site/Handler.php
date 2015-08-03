@@ -2,75 +2,12 @@
 
 namespace System\Frames\Site {
 
-	use System, System\Utils\Auth, System\Utils\Menu, System\Utils\Messages;
-	use Date, Language, Request, String, Template;
+	use System, System\Utils\Auth, System\Utils\Menu, System\Utils\Messages, System\Utils\Status;
+	use Date, Request, Template;
 
 	abstract class Handler extends System\Frames\Main {
 
-		private $title = false, $contents = false;
-
-		# Display 404 error
-
-		private function display404() {
-
-			# Process template
-
-			Template::main('404');
-
-			Template::title(Language::get('STATUS_TITLE_404'));
-
-			Template::main()->system_url = CONFIG_SYSTEM_URL;
-
-			Template::main()->site_title = CONFIG_SITE_TITLE;
-
-			Template::main()->copyright = Date::year();
-
-			# ------------------------
-
-			Template::output(STATUS_CODE_404, true);
-		}
-
-		# Display maintenance screen
-
-		private function displayMaintenance() {
-
-			# Process template
-
-			Template::main('Maintenance');
-
-			Template::title(Language::get('STATUS_TITLE_MAINTENANCE'));
-
-			Template::main()->system_url = CONFIG_SYSTEM_URL;
-
-			Template::main()->site_title = CONFIG_SITE_TITLE;
-
-			Template::main()->copyright = Date::year();
-
-			# ------------------------
-
-			Template::output(STATUS_CODE_503, true);
-		}
-
-		# Display update screen
-
-		private function displayUpdate() {
-
-			# Process template
-
-			Template::main('Update');
-
-			Template::title(Language::get('STATUS_TITLE_UPDATE'));
-
-			Template::main()->system_url = CONFIG_SYSTEM_URL;
-
-			Template::main()->site_title = CONFIG_SITE_TITLE;
-
-			Template::main()->copyright = Date::year();
-
-			# ------------------------
-
-			Template::output(STATUS_CODE_503, true);
-		}
+		private $title = '', $contents = '';
 
 		# Display site page
 
@@ -82,7 +19,7 @@ namespace System\Frames\Site {
 
 			Template::main('Page');
 
-			Template::title((false === $this->title) ? CONFIG_SITE_TITLE : ($this->title . ' | ' . CONFIG_SITE_TITLE));
+			Template::title(('' === $this->title) ? CONFIG_SITE_TITLE : ($this->title . ' | ' . CONFIG_SITE_TITLE));
 
 			# Set menu
 
@@ -103,7 +40,7 @@ namespace System\Frames\Site {
 
 			# Set title
 
-			Template::main()->title = ((false === $this->title) ? CONFIG_SITE_TITLE : $this->title);
+			Template::main()->title = (('' === $this->title) ? CONFIG_SITE_TITLE : $this->title);
 
 			# Set messages
 
@@ -130,7 +67,7 @@ namespace System\Frames\Site {
 
 		protected function setTitle($title) {
 
-			$this->title = String::validate($title);
+			$this->title = strval($title);
 		}
 
 		# Set contents
@@ -146,15 +83,15 @@ namespace System\Frames\Site {
 
 			# Display status screen
 
-			if (CONFIG_SITE_STATUS === STATUS_MAINTENANCE) return $this->displayMaintenance();
+			if (CONFIG_SITE_STATUS === STATUS_MAINTENANCE) return Status::maintenance();
 
-			if (CONFIG_SITE_STATUS === STATUS_UPDATE) return $this->displayUpdate();
+			if (CONFIG_SITE_STATUS === STATUS_UPDATE) return Status::update();
 
 			# Handle request
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Profile\\Auth')) {
 
-				if (!CONFIG_USERS_REGISTRATION) return $this->display404();
+				if (!CONFIG_USERS_REGISTRATION) return Status::error404();
 
 				if (Auth::check()) return Request::redirect('/profile');
 
@@ -163,7 +100,7 @@ namespace System\Frames\Site {
 				if (!Auth::check()) Request::redirect('/profile/login');
 			}
 
-			return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : $this->display404());
+			return ($this->handle() ? $this->displayPage() : Status::error404());
 		}
 	}
 }

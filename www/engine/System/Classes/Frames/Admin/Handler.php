@@ -2,33 +2,12 @@
 
 namespace System\Frames\Admin {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend, System\Utils\Messages;
-	use Date, DB, Debug, Language, Request, String, Template;
+	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend, System\Utils\Messages, System\Utils\Status;
+	use DB, Debug, Request, Template;
 
 	abstract class Handler extends System\Frames\Main {
 
-		private $title = false, $contents = false;
-
-		# Display 404 error
-
-		private function display404() {
-
-			# Process template
-
-			Template::main('404');
-
-			Template::title(Language::get('STATUS_TITLE_404'));
-
-			Template::main()->system_url = CONFIG_SYSTEM_URL;
-
-			Template::main()->site_title = CONFIG_SITE_TITLE;
-
-			Template::main()->copyright = Date::year();
-
-			# ------------------------
-
-			Template::output(STATUS_CODE_404, true);
-		}
+		private $title = '', $contents = '';
 
 		# Display install
 
@@ -38,7 +17,7 @@ namespace System\Frames\Admin {
 
 			Template::main('Install');
 
-			Template::title((false === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
+			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
 
 			# Set messages
 
@@ -61,7 +40,7 @@ namespace System\Frames\Admin {
 
 			Template::main('Auth');
 
-			Template::title((false === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
+			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
 
 			# Set messages
 
@@ -84,7 +63,7 @@ namespace System\Frames\Admin {
 
 			Template::main('Page');
 
-			Template::title((false === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
+			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
 
 			# Set menu
 
@@ -112,10 +91,10 @@ namespace System\Frames\Admin {
 
 			# Set footer
 
-			Template::main()->cadmium_home			= CADMIUM_HOME;
-			Template::main()->cadmium_copy			= CADMIUM_COPY;
-			Template::main()->cadmium_name			= CADMIUM_NAME;
-			Template::main()->cadmium_version		= CADMIUM_VERSION;
+			Template::main()->cadmium_home          = CADMIUM_HOME;
+			Template::main()->cadmium_copy          = CADMIUM_COPY;
+			Template::main()->cadmium_name          = CADMIUM_NAME;
+			Template::main()->cadmium_version       = CADMIUM_VERSION;
 
 			# Set language selector
 
@@ -146,7 +125,7 @@ namespace System\Frames\Admin {
 
 		protected function setTitle($title) {
 
-			$this->title = String::validate($title);
+			$this->title = strval($title);
 		}
 
 		# Set contents
@@ -162,13 +141,13 @@ namespace System\Frames\Admin {
 
 			# Check for restricted access
 
-			if (('' !== CONFIG_ADMIN_IP) && (false !== stripos(ENGINE_CLIENT_IP, CONFIG_ADMIN_IP))) return $this->display404();
+			if (('' !== CONFIG_ADMIN_IP) && (false !== stripos(ENGINE_CLIENT_IP, CONFIG_ADMIN_IP))) return Status::error404();
 
 			# Handle request
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Install')) {
 
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayInstall() : $this->display404());
+				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayInstall() : Status::error404());
 			}
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Auth')) {
@@ -177,7 +156,7 @@ namespace System\Frames\Admin {
 
 				DB::select(TABLE_USERS, 'id', array('id' => 1), false, 1);
 
-				if (!(DB::last() && DB::last()->status)) return $this->display404();
+				if (!(DB::last() && DB::last()->status)) return Status::error404();
 
 				$extra_registration = (DB::last()->rows === 0);
 
@@ -187,7 +166,7 @@ namespace System\Frames\Admin {
 
 				} else if ($extra_registration) return Request::redirect('/admin/register');
 
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayAuth() : $this->display404());
+				return ($this->handle() ? $this->displayAuth() : Status::error404());
 			}
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin')) {
@@ -196,7 +175,7 @@ namespace System\Frames\Admin {
 
 				if (Request::isAjax() && method_exists($this, 'handleAjax')) return Ajax::output($this->handleAjax());
 
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : $this->display404());
+				return ($this->handle() ? $this->displayPage() : Status::error404());
 			}
 		}
 	}
