@@ -6,7 +6,7 @@ namespace {
 
     function intabs($value) {
 
-        return abs(intval($value));
+        return (int) abs(intval($value));
     }
 
     # Cast variable to boolean
