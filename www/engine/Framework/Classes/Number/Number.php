@@ -49,7 +49,7 @@ namespace {
 
 		public static function text($number, $variant_1, $variant_3, $variant_5) {
 
-			$number = self::unsigned($number); $length = strlen($number);
+			$number = intabs($number); $length = strlen($number);
 
 			$variant_1 = strval($variant_1); $variant_3 = strval($variant_3); $variant_5 = strval($variant_5);
 

@@ -4,13 +4,6 @@ namespace {
 
 	abstract class String {
 
-		# Validate string
-
-		public static function validate($string) {
-
-			return (('' !== ($string = strval($string))) ? $string : false);
-		}
-
 		# Format input string
 
 		public static function input($string, $multiline = false, $maxlength = 0) {
@@ -29,7 +22,11 @@ namespace {
 				$string = preg_replace($pattern, $replacement, implode("\r\n", $string));
 			}
 
-			return self::cut($string, $maxlength);
+			$string = self::cut($string, $maxlength);
+
+			# ------------------------
+
+			return $string;
 		}
 
 		# Format output string
@@ -42,7 +39,7 @@ namespace {
 
 			# ------------------------
 
-			return (('' !== $string) ? $string : false);
+			return $string;
 		}
 
 		# Convert string to no spaces
@@ -51,11 +48,7 @@ namespace {
 
 			$string = strval($string);
 
-			$string = preg_replace('/ */', '', $string);
-
-			# ------------------------
-
-			return (('' !== $string) ? $string : false);
+			return preg_replace('/ */', '', $string);
 		}
 
 		# Convert string to single spaces
@@ -64,11 +57,7 @@ namespace {
 
 			$string = strval($string);
 
-			$string = preg_replace('/  +/', ' ', $string);
-
-			# ------------------------
-
-			return (('' !== $string) ? $string : false);
+			return preg_replace('/  +/', ' ', $string);
 		}
 
 		# Cut string
@@ -87,7 +76,7 @@ namespace {
 
 			# ------------------------
 
-			return (('' !== $string) ? $string : false);
+			return $string;
 		}
 
 		# Get random string
@@ -100,7 +89,7 @@ namespace {
 
 			# ------------------------
 
-			return (('' !== $string) ? $string : false);
+			return $string;
 		}
 
 		# Encode string
@@ -145,9 +134,11 @@ namespace {
 
 			$string = preg_replace(array('/^[\-]+/', '/[\-]+$/', '/[\-]{2,}/'), array('', '', '-'), $string);
 
+			$string = self::cut($string, $maxlength);
+
 			# ------------------------
 
-			return self::cut($string, $maxlength);
+			return $string;
 		}
 	}
 }
