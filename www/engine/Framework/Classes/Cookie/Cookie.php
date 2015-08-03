@@ -8,13 +8,9 @@ namespace {
 
 		public static function set($name, $value, $expire = 0, $path = '/', $domain = false, $secure = false, $http_only = false) {
 
-			$name = strval($name); $value = strval($value);
+			$name = strval($name); $value = strval($value); $expire = (ENGINE_TIME + intabs($expire));
 
-			$expire = (ENGINE_TIME + Number::unsigned($expire));
-
-			$path = strval($path); $domain = strval($domain);
-
-			$secure = Validate::boolean($secure); $http_only = Validate::boolean($http_only);
+			$path = strval($path); $domain = strval($domain); $secure = boolval($secure); $http_only = boolval($http_only);
 
 			# ------------------------
 

@@ -2,7 +2,7 @@
 
 namespace DB\Query {
 
-	use DB\Utils, Validate;
+	use DB\Utils;
 
 	class Insert extends Utils\Query {
 
@@ -12,7 +12,7 @@ namespace DB\Query {
 
 			# Process arguments
 
-			$table = $this->getName($table); $multiple = Validate::boolean($multiple);
+			$table = $this->getName($table); $multiple = boolval($multiple);
 
 			$dataset = (!$multiple ? array($dataset) : array_values($dataset));
 

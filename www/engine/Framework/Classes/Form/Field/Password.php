@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Number, Request, String, Tag;
+	use Form\Utils, Request, Tag;
 
 	class Password extends Utils\Field {
 
@@ -14,7 +14,7 @@ namespace Form\Field {
 
 			$this->setForm($form); $this->setName($name); $this->value = strval($value);
 
-			$this->maxlength = Number::unsigned($maxlength); $this->placeholder = strval($placeholder);
+			$this->maxlength = intabs($maxlength); $this->placeholder = strval($placeholder);
 
 			$this->setConfig($config);
 		}

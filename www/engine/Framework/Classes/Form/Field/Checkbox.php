@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Request, Tag, Template, Validate;
+	use Form\Utils, Request, Tag, Template;
 
 	class Checkbox extends Utils\Field {
 
@@ -10,7 +10,7 @@ namespace Form\Field {
 
 		public function __construct($form, $name, $value = false, $config = 0) {
 
-			$this->setForm($form); $this->setName($name); $this->value = Validate::boolean($value);
+			$this->setForm($form); $this->setName($name); $this->value = boolval($value);
 
 			$this->setConfig($config);
 		}
@@ -23,9 +23,9 @@ namespace Form\Field {
 
 			if (null === ($value = Request::post($name))) return false;
 
-			$this->value = Validate::boolean($value);
+			$this->value = boolval($value);
 
-			if ($this->required && ('' === $this->value)) $this->error = true;
+			if ($this->required && (false === $this->value)) $this->error = true;
 
 			# ------------------------
 

@@ -149,7 +149,7 @@ namespace {
 
 			if (self::$cache_send) return;
 
-			$limiter = strval($limiter); $expires = Number::unsigned($expires);
+			$limiter = strval($limiter); $expires = intabs($expires);
 
 			if (!in_array($limiter, array(CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC), true)) return;
 

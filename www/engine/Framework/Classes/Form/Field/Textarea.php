@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Number, Request, String, Tag;
+	use Form\Utils, Request, String, Tag;
 
 	class Textarea extends Utils\Field {
 
@@ -14,9 +14,7 @@ namespace Form\Field {
 
 			$this->setForm($form); $this->setName($name); $this->value = strval($value);
 
-			$this->maxlength = Number::unsigned($maxlength); $this->rows = Number::unsigned($rows);
-
-			$this->placeholder = strval($placeholder);
+			$this->maxlength = intabs($maxlength); $this->rows = intabs($rows); $this->placeholder = strval($placeholder);
 
 			$this->setConfig($config);
 		}

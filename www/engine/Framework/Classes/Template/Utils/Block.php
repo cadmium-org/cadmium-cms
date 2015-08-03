@@ -2,7 +2,7 @@
 
 namespace Template\Utils {
 
-	use Template, Language, Number, String, Validate;
+	use Template, Language, String;
 
 	class Block {
 
@@ -122,7 +122,7 @@ namespace Template\Utils {
 
 			$this->contents = strval($contents);
 
-			if (!Validate::boolean($parse)) return;
+			if (!boolval($parse)) return;
 
 			$this->parseCollapsedBlocks(); $this->parseExpandedBlocks();
 
@@ -185,7 +185,7 @@ namespace Template\Utils {
 
 			if (!array_key_exists($name, $this->variables)) return false;
 
-			$value = strval($value); $raw = Validate::boolean($raw); $maxlength = Number::unsigned($maxlength);
+			$value = strval($value); $raw = boolval($raw); $maxlength = intabs($maxlength);
 
 			$this->variables[$name] = ($raw ? $value : String::output($value, $maxlength));
 
@@ -200,7 +200,7 @@ namespace Template\Utils {
 
 			if (!$this->enabled) return '';
 
-			$format = Validate::boolean($format); $contents = $this->contents;
+			$format = boolval($format); $contents = $this->contents;
 
 			# Insert variables
 

@@ -2,7 +2,7 @@
 
 namespace DB\Query {
 
-	use DB\Utils, Number;
+	use DB\Utils;
 
 	class Select extends Utils\Query {
 
@@ -20,7 +20,7 @@ namespace DB\Query {
 
 			$order = $this->getString($order, 'name', 'sort', ' ', ', ');
 
-			$limit = Number::unsigned($limit);
+			$limit = intabs($limit);
 
 			# Build query
 

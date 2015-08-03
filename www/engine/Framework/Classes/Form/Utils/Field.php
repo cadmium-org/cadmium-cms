@@ -78,7 +78,7 @@ namespace Form\Utils {
 
 			if (null === $value) return $this->error;
 
-			if (Validate::boolean($value)) $this->error = true;
+			if (boolval($value)) $this->error = true;
 		}
 
 		# Check if field is disabled

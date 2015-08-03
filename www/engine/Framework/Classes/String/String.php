@@ -15,7 +15,7 @@ namespace {
 
 		public static function input($string, $multiline = false, $maxlength = 0) {
 
-			$string = strval($string); $multiline = Validate::boolean($multiline); $maxlength = Number::unsigned($maxlength);
+			$string = strval($string); $multiline = boolval($multiline); $maxlength = intabs($maxlength);
 
 			foreach (($string = explode("\n", $string)) as $key => $line) {
 
@@ -36,7 +36,7 @@ namespace {
 
 		public static function output($string, $maxlength = 0) {
 
-			$string = strval($string); $maxlength = Number::unsigned($maxlength);
+			$string = strval($string); $maxlength = intabs($maxlength);
 
 			$string = str_replace("\r\n", "&#13;&#10;", htmlspecialchars(self::cut($string, $maxlength)));
 
@@ -75,7 +75,7 @@ namespace {
 
 		public static function cut($string, $maxlength, $ellipsis = false) {
 
-			$string = strval($string); $maxlength = Number::unsigned($maxlength); $ellipsis = Validate::boolean($ellipsis);
+			$string = strval($string); $maxlength = intabs($maxlength); $ellipsis = boolval($ellipsis);
 
 			$length = (function_exists('mb_strlen') ? mb_strlen($string) : strlen($string));
 
@@ -94,7 +94,7 @@ namespace {
 
 		public static function random($length, $pool = STRING_POOL_DEFAULT) {
 
-			$length = Number::unsigned($length); $pool = strval($pool); $pool_length = strlen($pool);
+			$length = intabs($length); $pool = strval($pool); $pool_length = strlen($pool);
 
 			$string = ''; for ($i = 0; $i < $length; $i++) $string .= substr($pool, mt_rand(0, ($pool_length - 1)), 1);
 
@@ -116,7 +116,7 @@ namespace {
 
 		public static function translit($string, $maxlength) {
 
-			$string = strval($string); $maxlength = Number::unsigned($maxlength);
+			$string = strval($string); $maxlength = intabs($maxlength);
 
 			$pattern = array (
 

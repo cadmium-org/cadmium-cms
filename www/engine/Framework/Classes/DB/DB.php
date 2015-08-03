@@ -107,7 +107,7 @@ namespace {
 
 		public static function encodeSearchValue($value, $add_slashes = true) {
 
-			$value = strval($value); $add_slashes = Validate::boolean($add_slashes);
+			$value = strval($value); $add_slashes = boolval($add_slashes);
 
 			$value_encoded = str_replace(' ', '%', str_replace(array('%', '_'), array('\%', '\_'), $value));
 

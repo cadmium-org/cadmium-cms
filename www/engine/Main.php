@@ -34,6 +34,7 @@ define('DIR_SYSTEM_TEMPLATES',      (DIR_SYSTEM . 'Templates/'));
 require_once (DIR_FRAMEWORK . 'Engine.php');
 require_once (DIR_FRAMEWORK . 'Error.php');
 require_once (DIR_FRAMEWORK . 'Warning.php');
+require_once (DIR_FRAMEWORK . 'Functions.php');
 
 require_once (DIR_SYSTEM . 'System.php');
 

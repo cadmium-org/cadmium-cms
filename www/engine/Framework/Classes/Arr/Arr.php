@@ -54,7 +54,7 @@ namespace {
 
 		public static function subvalSort(array $array, $sub_key, $descending = false) {
 
-			$sub_key = strval($sub_key); $descending = Validate::boolean($descending);
+			$sub_key = strval($sub_key); $descending = boolval($descending);
 
 			$array_extracted = self::subvalExtract($array, $sub_key); $array_sorted = array();
 

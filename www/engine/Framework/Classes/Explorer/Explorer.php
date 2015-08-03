@@ -32,7 +32,7 @@ namespace {
 
 		private static function getInfo($file_name, $param, $check_exists = true) {
 
-			$file_name = strval($file_name); $check_exists = Validate::boolean($check_exists);
+			$file_name = strval($file_name); $check_exists = boolval($check_exists);
 
 			if ($check_exists && !self::isFile($file_name)) return false;
 
@@ -157,7 +157,7 @@ namespace {
 
 		public static function save($file_name, $contents, $force = false) {
 
-			$file_name = strval($file_name); $contents = strval($contents); $force = Validate::boolean($force);
+			$file_name = strval($file_name); $contents = strval($contents); $force = boolval($force);
 
 			if (self::isFile($file_name)) if (!$force) return false; else if (!@unlink($file_name)) return false;
 

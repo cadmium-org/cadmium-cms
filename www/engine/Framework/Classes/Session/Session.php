@@ -10,7 +10,7 @@ namespace {
 
 			if (session_id()) return true;
 
-			$name = strval($name); $lifetime = Number::unsigned($lifetime);
+			$name = strval($name); $lifetime = intabs($lifetime);
 
 			ini_set('session.gc_maxlifetime', $lifetime);
 

@@ -10,7 +10,7 @@ namespace {
 
 			$to = strval($to); $sender = strval($sender); $from = strval($from); $reply_to = strval($reply_to);
 
-			$subject = strval($subject); $message = strval($message); $is_html = Validate::boolean($is_html);
+			$subject = strval($subject); $message = strval($message); $is_html = boolval($is_html);
 
 			# Set headers
 
