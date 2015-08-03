@@ -2,20 +2,26 @@
 
 namespace {
 
-    # Cast variable to unsigned integer
+	# Cast variable to unsigned integer
 
-    function intabs($value) {
+	function intabs($value, $max = null) {
 
-        return (int) abs(intval($value));
-    }
+		$value = (int) abs(intval($value));
 
-    # Cast variable to boolean
+		if ((null !== $max) && ($value > ($max = (int) abs(intval($max))))) return $max;
 
-    if (!function_exists('boolval')) {
+		# ------------------------
 
-        function boolval($value) {
+		return $value;
+	}
 
-            return filter_var($value, FILTER_VALIDATE_BOOLEAN);
-        }
-    }
+	# Cast variable to boolean
+
+	if (!function_exists('boolval')) {
+
+		function boolval($value) {
+
+			return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+		}
+	}
 }
