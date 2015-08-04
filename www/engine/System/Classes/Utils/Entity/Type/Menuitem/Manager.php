@@ -4,6 +4,14 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 	use System\Utils\Entity, DB, Form, Number;
 
+	/**
+	 * @property-read int $position
+	 * @property-read string $link
+	 * @property-read string $text
+	 * @property-read int $target
+	 * @property-read array $path
+	 */
+
 	class Manager extends Entity\Manager {
 
 		# Errors

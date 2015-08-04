@@ -4,12 +4,6 @@ namespace System\Utils\Entity\Type\Page {
 
 	use Arr;
 
-	/**
-	 * @property-read array $path
-	 * @property-read string $link
-	 * @property-read string $canonical
-	 */
-
 	class Implementor extends Definition {
 
 		# Get path

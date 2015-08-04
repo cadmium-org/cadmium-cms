@@ -2,10 +2,6 @@
 
 namespace System\Utils\Entity\Type\Menuitem {
 
-	/**
-	 * @property-read array $path
-	 */
-
 	class Implementor extends Definition {
 
 		# Get path
