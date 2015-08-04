@@ -310,7 +310,7 @@ namespace System\Utils\Entity {
 
 			if ($name === 'created_id') return $this->created_id;
 
-			return (isset($this->data[$name]) ? $this->data[$name] : false);
+			return (isset($this->data[$name]) ? $this->data[$name] : null);
 		}
 	}
 }
