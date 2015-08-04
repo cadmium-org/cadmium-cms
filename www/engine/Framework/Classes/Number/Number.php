@@ -6,7 +6,22 @@ namespace {
 
 		# Format number
 
-		public static function format($number, $min = 0, $max = 0, $decimals = 0) {
+		public static function format($number, $min = 0, $max = 0) {
+
+			$number = intabs($number); $min = intabs($min); $max = intabs($max);
+
+			if (($min > 0) && ($number < $min)) return $min;
+
+			if (($max > 0) && ($number > $max)) return $max;
+
+			# ------------------------
+
+			return $number;
+		}
+
+		# Format number
+
+		public static function formatFloat($number, $min = 0, $max = 0, $decimals = 0) {
 
 			$number = floatabs($number); $min = floatabs($min); $max = floatabs($max);
 
@@ -14,9 +29,9 @@ namespace {
 
 			if (($min > 0) && ($number < $min)) $number = $min;
 
-			else if (($max > 0) && ($number > $max)) $number = $max;
+			if (($max > 0) && ($number > $max)) $number = $max;
 
-			$number = (($decimals > 0) ? floatval(number_format($number, $decimals, '.', '')) : intval($number));
+			$number = floatval(number_format($number, $decimals, '.', ''));
 
 			# ------------------------
 
