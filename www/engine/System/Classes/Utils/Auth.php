@@ -189,15 +189,17 @@ namespace System\Utils {
 
 		# Create new session
 
-		public static function login($fieldset) {
+		public static function login($post) {
 
 			if (0 !== self::$user->id) return true;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('name', 'password');
+			$name = null; $password = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 
@@ -240,15 +242,17 @@ namespace System\Utils {
 
 		# Create new secret
 
-		public static function reset($fieldset) {
+		public static function reset($post) {
 
 			if (0 !== self::$user->id) return true;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('name', 'captcha');
+			$name = null; $captcha = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 
@@ -287,15 +291,17 @@ namespace System\Utils {
 
 		# Recover password
 
-		public static function recover($fieldset) {
+		public static function recover($post) {
 
 			if (0 === self::$user->id) return false;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('password_new', 'password_retype');
+			$password_new = null; $password_retype = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 
@@ -327,15 +333,17 @@ namespace System\Utils {
 
 		# Create new user
 
-		public static function register($fieldset) {
+		public static function register($post) {
 
 			if (0 !== self::$user->id) return true;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('name', 'password', 'password_retype', 'email', 'captcha');
+			$name = null; $password = null; $password_retype = null; $email = null; $captcha = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 
@@ -398,15 +406,19 @@ namespace System\Utils {
 
 		# Edit personal data
 
-		public static function editPersonal($fieldset) {
+		public static function editPersonal($post) {
 
 			if (0 === self::$user->id) return false;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('email', 'first_name', 'last_name', 'sex', 'city', 'country', 'timezone');
+			$email = null; $first_name = null; $last_name = null; $sex = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			$city = null; $country = null; $timezone = null;
+
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 
@@ -443,15 +455,17 @@ namespace System\Utils {
 
 		# Edit password data
 
-		public static function editPassword($fieldset) {
+		public static function editPassword($post) {
 
 			if (0 === self::$user->id) return false;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('password', 'password_new', 'password_retype');
+			$password = null; $password_new = null; $password_retype = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 

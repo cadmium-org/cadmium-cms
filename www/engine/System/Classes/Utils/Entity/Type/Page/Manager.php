@@ -42,13 +42,15 @@ namespace System\Utils\Entity\Type\Page {
 
 		# Create child page
 
-		public function create($fieldset) {
+		public function create($post) {
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('title', 'name');
+			$title = null; $name = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Check name exists
 
@@ -76,17 +78,19 @@ namespace System\Utils\Entity\Type\Page {
 
 		# Edit page
 
-		public function edit($fieldset) {
+		public function edit($post) {
 
 			if (0 === $this->entity->id) return false;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('parent_id', 'title', 'name', 'visibility', 'access',
+			$parent_id = null; $title = null; $name = null; $visibility = null; $access = null;
 
-			                'description', 'keywords', 'robots_index', 'robots_follow', 'contents');
+			$description = null; $keywords = null; $robots_index = null; $robots_follow = null; $contents = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Check name exists
 

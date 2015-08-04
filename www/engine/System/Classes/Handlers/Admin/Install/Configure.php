@@ -112,15 +112,17 @@ namespace System\Handlers\Admin\Install {
 
 		# Install CMS
 
-		private function install($fieldset) {
+		private function install($post) {
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('site_title', 'system_url', 'system_timezone', 'system_email',
+			$site_title = null; $system_url = null; $system_timezone = null; $system_email = null;
 
-			                'database_server', 'database_user', 'database_password', 'database_name');
+			$database_server = null; $database_user = null; $database_password = null; $database_name = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Set language/template values
 

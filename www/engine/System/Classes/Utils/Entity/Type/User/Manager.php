@@ -45,17 +45,19 @@ namespace System\Utils\Entity\Type\User {
 
 		# Create user
 
-		public function create($fieldset) {
+		public function create($post) {
 
 			if (0 !== $this->entity->id) return true;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('name', 'email', 'rank', 'first_name', 'last_name', 'sex',
+			$name = null; $email = null; $rank = null; $first_name = null; $last_name = null; $sex = null;
 
-			                'city', 'country', 'timezone', 'password', 'password_retype');
+			$city = null; $country = null; $timezone = null; $password = null; $password_retype = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 
@@ -114,17 +116,19 @@ namespace System\Utils\Entity\Type\User {
 
 		# Edit user
 
-		public function edit($fieldset) {
+		public function edit($post) {
 
 			if (0 === $this->entity->id) return false;
 
-			# Check fieldset
+			# Declare variables
 
-            $fields = array('name', 'email', 'rank', 'first_name', 'last_name', 'sex',
+			$name = null; $email = null; $rank = null; $first_name = null; $last_name = null; $sex = null;
 
-			                'city', 'country', 'timezone', 'password', 'password_retype');
+			$city = null; $country = null; $timezone = null; $password = null; $password_retype = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Validate values
 

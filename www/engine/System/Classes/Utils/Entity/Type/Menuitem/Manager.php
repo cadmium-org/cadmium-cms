@@ -31,13 +31,15 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 		# Create child menuitem
 
-		public function create($fieldset) {
+		public function create($post) {
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('text', 'link');
+			$text = null; $link = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Get position
 
@@ -64,15 +66,17 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 		# Edit page
 
-		public function edit($fieldset) {
+		public function edit($post) {
 
 			if (0 === $this->entity->id) return false;
 
-			# Check fieldset
+			# Declare variables
 
-			$fields = array('parent_id', 'text', 'link', 'target', 'position');
+			$parent_id = null; $text = null; $link = null; $target = null; $position = null;
 
-			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
+			# Extract post array
+
+			extract($post);
 
 			# Update menuitem
 
