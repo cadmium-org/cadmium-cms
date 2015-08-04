@@ -10,9 +10,9 @@ namespace System\Utils\Entity {
 
 		protected $params = null, $id = 0, $created_id = 0, $data = array(), $path = array();
 
-		# Get path
+		# Init parent entities
 
-		private function getPath() {
+		private function initPath() {
 
 			if (!$this->nesting) return array();
 
@@ -109,7 +109,7 @@ namespace System\Utils\Entity {
 
 			foreach ($this->params->get() as $name => $param) $this->data[$name] = $param->set($data[$name]);
 
-			$this->path = $this->getPath();
+			$this->path = $this->initPath();
 
 			# Implement entity
 
@@ -150,7 +150,7 @@ namespace System\Utils\Entity {
 
 			foreach ($this->params->get() as $name => $param) $this->data[$name] = $param->set($data[$name]);
 
-			$this->path = $this->getPath();
+			$this->path = $this->initPath();
 
 			# Implement entity
 
