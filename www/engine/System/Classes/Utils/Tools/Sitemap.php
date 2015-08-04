@@ -6,7 +6,7 @@ namespace System\Utils\Tools {
 
 	class Sitemap {
 
-		private $sitemap = false;
+		private $sitemap = null;
 
 		# Constructor
 

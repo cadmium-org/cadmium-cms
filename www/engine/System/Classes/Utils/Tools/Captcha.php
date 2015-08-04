@@ -6,7 +6,7 @@ namespace System\Utils\Tools {
 
 	class Captcha {
 
-		private $captcha = false, $width = 0, $height = 0;
+		private $captcha = null, $width = 0, $height = 0;
 
 		# Allocate color
 
@@ -29,14 +29,13 @@ namespace System\Utils\Tools {
 
 			$width = intabs($width); $height = intabs($height);
 
-			if (false !== ($this->captcha = imagecreatetruecolor($width, $height))) {
+			if (false === ($captcha = imagecreatetruecolor($width, $height))) return;
 
-				$this->width = $width; $this->height = $height;
+			$this->captcha = $captcha; $this->width = $width; $this->height = $height;
 
-				if (false !== ($bg_color = $this->allocateColor($bg_color))) {
+			if (false !== ($bg_color = $this->allocateColor($bg_color))) {
 
-					imagefilledrectangle($this->captcha, 0, 0, ($width - 1), ($height - 1), $bg_color);
-				}
+				imagefilledrectangle($captcha, 0, 0, ($width - 1), ($height - 1), $bg_color);
 			}
 		}
 
