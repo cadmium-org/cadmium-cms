@@ -1,5 +1,8 @@
 # Cadmium CMS
 
+[![Build Status](https://scrutinizer-ci.com/g/junepaik/cadmium-cms/badges/build.png?b=master)](https://scrutinizer-ci.com/g/junepaik/cadmium-cms/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/junepaik/cadmium-cms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/junepaik/cadmium-cms/?branch=master)
+
 Cadmium CMS is PHP-based content management system for creating shiny and responsive websites!
 
 ## Features
