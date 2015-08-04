@@ -6,43 +6,21 @@ namespace {
 
 		# Format number
 
-		public static function format($number, $min = 0, $max = 0) {
+		public static function format($number, $min = 0, $max = 0, $decimals = 0) {
 
-			$number = intabs($number); $min = intabs($min); $max = intabs($max);
+			$number = floatabs($number); $min = floatabs($min); $max = floatabs($max);
 
-			if (($min > 0) && ($number < $min)) return $min;
+			$decimals = intabs($decimals);
 
-			if (($max > 0) && ($number > $max)) return $max;
+			if (($min > 0) && ($number < $min)) $number = $min;
+
+			else if (($max > 0) && ($number > $max)) $number = $max;
+
+			$number = (($decimals > 0) ? floatval(number_format($number, $decimals, '.', '')) : intval($number));
 
 			# ------------------------
 
 			return $number;
-		}
-
-		# Format number as price
-
-		public static function price($number) {
-
-			$number = floatval($number);
-
-			if ($number < 0) $number = 0; else if ($number > 999999.99) $number = 999999.99;
-
-			# ------------------------
-
-			return floatval(number_format($number, 2, '.', ''));
-		}
-
-		# Format number as priority
-
-		public static function priority($number) {
-
-			$number = floatval($number);
-
-			if ($number < 0) $number = 0; else if ($number > 1) $number = 1;
-
-			# ------------------------
-
-			return floatval(number_format($number, 1, '.', ''));
 		}
 
 		# Format text containing number (ukrainian/russian language only)

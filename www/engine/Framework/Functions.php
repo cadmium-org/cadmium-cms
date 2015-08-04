@@ -9,6 +9,13 @@ namespace {
 		return (int) abs(intval($value));
 	}
 
+	# Cast variable to unsigned float
+
+	function floatabs($value) {
+
+		return (float) abs(floatval($value));
+	}
+
 	# Cast variable to boolean
 
 	if (!function_exists('boolval')) {

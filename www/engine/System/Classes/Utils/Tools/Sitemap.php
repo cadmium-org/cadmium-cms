@@ -30,7 +30,7 @@ namespace System\Utils\Tools {
 
 			$lastmod = Date::validate($lastmod, DATE_FORMAT_W3C); $changefreq = Lister::frequency($changefreq, true);
 
-			$priority = ((null !== $priority) ? Number::priority($priority) : false);
+			$priority = ((null !== $priority) ? Number::format($priority, 0, 1, 1) : false);
 
 			# Append data
 
