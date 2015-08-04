@@ -11,7 +11,7 @@ namespace System\Handlers\Profile\Auth {
 
 	class Recover extends System\Frames\Site\Handler {
 
-		private $code = false, $form = null;
+		private $code = null, $form = null;
 
 		# Get contents
 
