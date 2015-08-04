@@ -4,7 +4,7 @@ namespace System\Utils\Entity {
 
 	class Params {
 
-		private $id = 0, $params = array();
+		private $id = null, $params = array();
 
 		# Add param to set
 
