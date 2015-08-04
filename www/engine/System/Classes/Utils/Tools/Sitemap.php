@@ -24,13 +24,13 @@ namespace System\Utils\Tools {
 
 		# Add item
 
-		public function add($loc, $lastmod = false, $changefreq = false, $priority = false) {
+		public function add($loc, $lastmod = null, $changefreq = null, $priority = null) {
 
 			if (false === ($loc = Validate::url($loc))) return false;
 
 			$lastmod = Date::validate($lastmod, DATE_FORMAT_W3C); $changefreq = Lister::frequency($changefreq, true);
 
-			if (false !== $priority) $priority = Number::priority($priority);
+			$priority = ((null !== $priority) ? Number::priority($priority) : false);
 
 			# Append data
 
