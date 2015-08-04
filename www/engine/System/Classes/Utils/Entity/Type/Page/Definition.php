@@ -4,6 +4,20 @@ namespace System\Utils\Entity\Type\Page {
 
 	use System\Utils\Entity;
 
+	/**
+	 * @property-read int $visibility
+	 * @property-read int $access
+	 * @property-read string $name
+	 * @property-read string $title
+	 * @property-read string $contents
+	 * @property-read string $description
+	 * @property-read string $keywords
+	 * @property-read int $robots_index
+	 * @property-read int $robots_follow
+	 * @property-read int $time_created
+	 * @property-read int $time_modified
+	 */
+
 	class Definition extends Entity\Entity {
 
 		const TYPE = 'Page', TABLE = TABLE_PAGES, NESTING = true, HAS_SUPER = true;

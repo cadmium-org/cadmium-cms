@@ -4,6 +4,12 @@ namespace System\Utils\Entity\Type\User\Secret {
 
 	use System\Utils\Entity;
 
+	/**
+	 * @property-read string $hash
+	 * @property-read string $ip
+	 * @property-read int $time
+	 */
+
 	class Definition extends Entity\Entity {
 
 		const TYPE = 'User\Secret', TABLE = TABLE_USERS_SECRETS;

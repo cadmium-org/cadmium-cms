@@ -2,6 +2,10 @@
 
 namespace System\Utils\Entity\Type\User {
 
+	/**
+	 * @property-read string $full_name
+	 */
+
 	class Implementor extends Definition {
 
         # Implement entity
