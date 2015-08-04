@@ -62,7 +62,7 @@ namespace System\Frames\Admin\Listview {
 
 		# Get path
 
-		private function getPath() {
+		private function getListPath() {
 
 			if (!($path = $this->parent->path)) return array();
 
@@ -90,7 +90,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Set path
 
-			$contents->path = $this->getPath();
+			$contents->path = $this->getListPath();
 
 			# Set actions
 
