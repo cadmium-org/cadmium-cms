@@ -19,7 +19,7 @@ namespace {
 			return $number;
 		}
 
-		# Format number
+		# Format float number
 
 		public static function formatFloat($number, $min = 0, $max = 0, $decimals = 0) {
 
