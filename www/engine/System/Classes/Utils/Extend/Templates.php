@@ -2,7 +2,7 @@
 
 namespace System\Utils\Extend {
 
-	use Warning, System\Utils\Utils, Explorer, Cookie, Template, Request;
+	use Error, System\Utils\Utils, Explorer, Cookie, Template, Request;
 
 	class Templates {
 
@@ -87,7 +87,7 @@ namespace System\Utils\Extend {
 
 			$dir_name = (DIR_SYSTEM_TEMPLATES . $section . '/');
 
-			if (!Explorer::isDir($dir_name)) throw new Warning\General(self::ERROR_DIRECTORY);
+			if (!Explorer::isDir($dir_name)) throw new Error\General(self::ERROR_DIRECTORY);
 
 			self::$dir_name = $dir_name; self::$section = $section; self::$items = self::getItems($dir_name);
 
@@ -95,7 +95,7 @@ namespace System\Utils\Extend {
 
 			else $name_valid = (self::exists($name) || self::exists($name = $default));
 
-			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Warning\General(self::ERROR_SELECT);
+			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Error\General(self::ERROR_SELECT);
 
 			# ------------------------
 

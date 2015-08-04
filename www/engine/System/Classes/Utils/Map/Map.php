@@ -2,7 +2,7 @@
 
 namespace System\Utils\Map {
 
-	use Warning, System, Explorer;
+	use Error, System, Explorer;
 
 	class Map {
 
@@ -17,7 +17,7 @@ namespace System\Utils\Map {
 
 			$file_name = (DIR_SYSTEM_DATA . 'Map.xml');
 
-			if (false === ($map_xml = Explorer::xml($file_name))) throw new Warning\General(self::ERROR_FILE);
+			if (false === ($map_xml = Explorer::xml($file_name))) throw new Error\General(self::ERROR_FILE);
 
 			$map = array();
 
@@ -25,7 +25,7 @@ namespace System\Utils\Map {
 
 				$item = new Item($item->path, $item->handler);
 
-				if ($item->status()) $map[] = $item; else throw new Warning\General(self::ERROR_PARSE);
+				if ($item->status()) $map[] = $item; else throw new Error\General(self::ERROR_PARSE);
 			}
 
 			return $map;

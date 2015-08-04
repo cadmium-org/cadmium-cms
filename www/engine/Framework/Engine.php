@@ -86,36 +86,5 @@ namespace {
 
 			exit ($contents);
 		}
-
-		# Display warning screen
-
-		public static function warning($message = '') {
-
-			$message = (('' !== ($message = strval($message))) ? ('Engine warning: ' . $message) : 'Unknown warning');
-
-			$file_name = (DIR_TEMPLATES . 'Warning.tpl'); $contents = false;
-
-			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
-
-			$contents = ($file_exists ? str_replace('$message$', $message, $contents) : $message);
-
-			# Set headers
-
-			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-
-			header('Cache-Control: no-store, no-cache, must-revalidate');
-
-			header('Cache-Control: post-check=0, pre-check=0', false);
-
-			header('Pragma: no-cache');
-
-			header(getenv('SERVER_PROTOCOL') . ' 500 Internal Server Error', true, 500);
-
-			header('Content-type: text/html; charset=UTF-8');
-
-			# ------------------------
-
-			exit ($contents);
-		}
 	}
 }

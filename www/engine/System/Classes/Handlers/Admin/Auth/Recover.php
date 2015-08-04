@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use Error, Warning, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use Error, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
 	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
 	use System\Utils\Requirements, System\Utils\Utils;
 
