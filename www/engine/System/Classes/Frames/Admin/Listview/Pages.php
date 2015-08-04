@@ -11,7 +11,7 @@ namespace System\Frames\Admin\Listview {
 
 	abstract class Pages extends System\Frames\Admin\Handler {
 
-		private $index = 0, $page = null, $form = null, $children = null;
+		private $index = 0, $parent = null, $form = null, $children = null;
 
 		# Get children pages
 
