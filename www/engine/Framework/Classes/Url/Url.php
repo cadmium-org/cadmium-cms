@@ -8,7 +8,7 @@ namespace {
 
 		# Consructor
 
-		public function __construct($url) {
+		public function __construct($url = '') {
 
 			$url = strval($url);
 
