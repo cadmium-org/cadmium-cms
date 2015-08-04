@@ -11,7 +11,7 @@ namespace System\Handlers\Admin {
 
 	class Overview extends System\Frames\Admin\Handler {
 
-		private $pages_count = false, $users_count = false;
+		private $pages_count = 0, $users_count = 0;
 
 		# Get pages count
 

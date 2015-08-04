@@ -78,7 +78,7 @@ namespace System\Handlers {
 
 			$this->page = Entity\Factory::page($this->path ? end($this->path)['id'] : 1);
 
-			if (false === $this->page->id) return false;
+			if (0 === $this->page->id) return false;
 
 			$description = $this->page->description; $keywords = $this->page->keywords;
 
