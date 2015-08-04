@@ -5,6 +5,9 @@ namespace System\Utils\Entity\Type\Page {
 	use System\Utils\Entity, DB, Form;
 
 	/**
+	 * @property-read int $id
+	 * @property-read int $created_id
+	 * @property-read int $parent_id
 	 * @property-read int $visibility
 	 * @property-read int $access
 	 * @property-read string $name

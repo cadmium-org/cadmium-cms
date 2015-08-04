@@ -5,6 +5,9 @@ namespace System\Utils\Entity\Type\Menuitem {
 	use System\Utils\Entity, DB, Form, Number;
 
 	/**
+	 * @property-read int $id
+	 * @property-read int $created_id
+	 * @property-read int $parent_id
 	 * @property-read int $position
 	 * @property-read string $link
 	 * @property-read string $text

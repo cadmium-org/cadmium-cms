@@ -5,6 +5,7 @@ namespace System\Utils\Entity\Type\User {
 	use System\Utils\Entity, DB, Form, String, Validate;
 
 	/**
+	 * @property-read int $id
 	 * @property-read int $rank
 	 * @property-read string $name
 	 * @property-read string $email
