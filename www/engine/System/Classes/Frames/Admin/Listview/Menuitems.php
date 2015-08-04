@@ -11,15 +11,13 @@ namespace System\Frames\Admin\Listview {
 
 	abstract class Menuitems extends System\Frames\Admin\Handler {
 
-		private $index = 0, $menuitem = null, $form = null, $children = null;
+		private $index = 0, $parent = null, $form = null, $children = null;
 
 		# Get children menuitems
 
 		private function getChildren($disable_id = 0) {
 
 			$children = array('items' => array(), 'total' => 0);
-
-			$parent_id = ($this->menuitem->id ? $this->menuitem->id : 0);
 
 			# Select menuitems
 
@@ -29,7 +27,7 @@ namespace System\Frames\Admin\Listview {
 
 					 ("FROM " . TABLE_MENU . " men LEFT JOIN " . TABLE_MENU . " chd ON chd.parent_id = men.id ") .
 
-					 ("WHERE men.parent_id = " . $parent_id . " " . ($disable_id ? ("AND men.id != " . $disable_id . " ") : "")) .
+					 ("WHERE men.parent_id = " . $this->parent->id . " " . ($disable_id ? ("AND men.id != " . $disable_id . " ") : "")) .
 
 					 ("GROUP BY men.id ORDER BY men.position ASC, men.id ASC" . ($limit ? (" LIMIT " . $limit) : ''));
 
@@ -66,7 +64,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getPath() {
 
-			if (!($path = $this->menuitem->path)) return array();
+			if (!($path = $this->parent->path)) return array();
 
 			$count = count($path);
 
@@ -80,15 +78,15 @@ namespace System\Frames\Admin\Listview {
 
 		# Get contents
 
-		private function getContents($ajax = false) {
+		private function getListContents($ajax = false) {
 
 			$contents = Template::block($ajax ? 'Contents/Content/Menuitems/Ajax/Main' : 'Contents/Content/Menuitems/List/Main');
 
 			# Set general
 
-			$contents->id = $this->menuitem->id;
+			$contents->id = $this->parent->id;
 
-			$contents->text = ($this->menuitem->text ? $this->menuitem->text : ('- ' . Language::get('NONE')));
+			$contents->text = ($this->parent->text ? $this->parent->text : ('- ' . Language::get('NONE')));
 
 			# Set path
 
@@ -96,20 +94,20 @@ namespace System\Frames\Admin\Listview {
 
 			# Set actions
 
-			if (0 === $this->menuitem->id) $contents->block('actions')->disable(); else {
+			if (0 === $this->parent->id) $contents->block('actions')->disable(); else {
 
-				$contents->block('actions')->link = $this->menuitem->link;
+				$contents->block('actions')->link = $this->parent->link;
 
-				$contents->block('actions')->id = $this->menuitem->id;
+				$contents->block('actions')->id = $this->parent->id;
 			}
 
 			# Set form
 
 			if (!$ajax) {
 
-				if (0 === $this->menuitem->id) $contents->block('parent')->disable();
+				if (0 === $this->parent->id) $contents->block('parent')->disable();
 
-				else $contents->block('parent')->text = $this->menuitem->text;
+				else $contents->block('parent')->text = $this->parent->text;
 
 				foreach ($this->form->fields() as $name => $block) $contents->block(('field_' . $name), $block);
 			}
@@ -141,7 +139,7 @@ namespace System\Frames\Admin\Listview {
 
 			if (!$ajax) {
 
-				$display = CONFIG_ADMIN_MENUITEMS_DISPLAY; $url = new Url('/admin/content/menuitems?parent_id=' . $this->menuitem->id);
+				$display = CONFIG_ADMIN_MENUITEMS_DISPLAY; $url = new Url('/admin/content/menuitems?parent_id=' . $this->parent->id);
 
 				$contents->pagination = Pagination::block($this->index, $display, $this->children['total'], $url);
 			}
@@ -161,7 +159,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create parent menuitem
 
-			$this->menuitem = new Entity\Type\Menuitem\Manager(Request::get('parent_id'));
+			$this->parent = new Entity\Type\Menuitem\Manager(Request::get('parent_id'));
 
 			# Create form
 
@@ -177,9 +175,9 @@ namespace System\Frames\Admin\Listview {
 
 			if (false !== ($post = $this->form->post()) && !$this->form->errors()) {
 
-				if (true !== ($result = $this->menuitem->create($post))) Messages::error(Language::get($result));
+				if (true !== ($result = $this->parent->create($post))) Messages::error(Language::get($result));
 
-				else Request::redirect('/admin/content/menuitems?id=' . $this->menuitem->created_id . '&submitted=create');
+				else Request::redirect('/admin/content/menuitems?id=' . $this->parent->created_id . '&submitted=create');
 			}
 
 			# Get children menuitems
@@ -190,7 +188,7 @@ namespace System\Frames\Admin\Listview {
 
 			$this->setTitle(Language::get('TITLE_CONTENT_MENUITEMS'));
 
-			$this->setContents($this->getContents());
+			$this->setContents($this->getListContents());
 
 			# ------------------------
 
@@ -205,7 +203,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create parent menuitem
 
-			$this->menuitem = Entity\Factory::menuitem(Request::get('parent_id'));
+			$this->parent = Entity\Factory::menuitem(Request::get('parent_id'));
 
 			# Get children menuitems
 
@@ -213,7 +211,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Set contents
 
-			Ajax::set('contents', $this->getContents(true)->contents(true));
+			Ajax::set('contents', $this->getListContents(true)->contents(true));
 
 			# ------------------------
 

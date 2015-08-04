@@ -54,7 +54,7 @@ namespace System\Frames\Admin\Listview {
 
 		# Get contents
 
-		private function getContents() {
+		private function getListContents() {
 
 			$contents = Template::block('Contents/System/Users/List/Main');
 
@@ -100,7 +100,7 @@ namespace System\Frames\Admin\Listview {
 
 			$this->setTitle(Language::get('TITLE_SYSTEM_USERS'));
 
-			$this->setContents($this->getContents());
+			$this->setContents($this->getListContents());
 
 			# ------------------------
 
