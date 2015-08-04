@@ -71,6 +71,8 @@ namespace System\Utils\Entity\Type\User {
 
 			# Create user
 
+			$data = array();
+
 			$data['name']               = $name;
 			$data['email']              = $email;
             $data['rank']               = $rank;
@@ -146,6 +148,8 @@ namespace System\Utils\Entity\Type\User {
 			else { $auth_key = $this->entity->auth_key; $password = $this->entity->password; }
 
 			# Edit user
+
+			$data = array();
 
             $data['name']               = $name;
 			$data['email']              = $email;

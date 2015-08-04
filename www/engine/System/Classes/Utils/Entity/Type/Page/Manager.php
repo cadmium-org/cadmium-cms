@@ -42,6 +42,8 @@ namespace System\Utils\Entity\Type\Page {
 
 			# Create page
 
+			$data = array();
+
 			$data['title']              = $title;
 			$data['name']               = $name;
 
@@ -77,6 +79,8 @@ namespace System\Utils\Entity\Type\Page {
 			if (DB::last()->rows === 1) return self::ERROR_NAME_DUPLICATE;
 
 			# Edit page
+
+			$data = array();
 
 			$data['parent_id']          = $parent_id;
 			$data['title']              = $title;

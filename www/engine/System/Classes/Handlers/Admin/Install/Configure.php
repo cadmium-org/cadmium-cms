@@ -164,6 +164,8 @@ namespace System\Handlers\Admin\Install {
 
 			# Save system file
 
+			$system = array();
+
 			$system['database']['server']       = $database_server;
 			$system['database']['user']         = $database_user;
 			$system['database']['password']     = $database_password;

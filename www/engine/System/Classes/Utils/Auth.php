@@ -309,6 +309,8 @@ namespace System\Utils {
 
 			# Update user
 
+			$data = array();
+
 			$data['auth_key']           = $auth_key;
 			$data['password']           = $password;
 
@@ -367,9 +369,13 @@ namespace System\Utils {
 
 			$auth_key = String::random(40); $password = String::encode($auth_key, $password);
 
-			# Create user
+			# Determine rank
 
 			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
+
+			# Create user
+
+			$data = array();
 
 			$data['name']               = $name;
 			$data['email']              = $email;
@@ -418,6 +424,8 @@ namespace System\Utils {
 
 			# Update user
 
+			$data = array();
+
 			$data['email']              = $email;
 			$data['first_name']         = $first_name;
 			$data['last_name']          = $last_name;
@@ -464,6 +472,8 @@ namespace System\Utils {
 			$auth_key = String::random(40); $password = String::encode($auth_key, $password_new);
 
 			# Update user
+
+			$data = array();
 
 			$data['auth_key']           = $auth_key;
 			$data['password']           = $password;

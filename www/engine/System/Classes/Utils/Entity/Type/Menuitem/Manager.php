@@ -38,6 +38,8 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 			# Insert menuitem
 
+			$data = array();
+
 			$data['text']               = $text;
 			$data['link']               = $link;
 			$data['position']           = $position;
@@ -62,6 +64,8 @@ namespace System\Utils\Entity\Type\Menuitem {
 			foreach ($fields as $field) if (isset($fieldset[$field])) $$field = $fieldset[$field]; else return false;
 
 			# Update menuitem
+
+			$data = array();
 
 			$data['parent_id']          = $parent_id;
 			$data['text']               = $text;
