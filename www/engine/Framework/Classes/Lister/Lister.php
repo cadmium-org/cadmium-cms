@@ -1,12 +1,10 @@
 <?php
 
-namespace Geo\Utils {
-
-	use Explorer;
+namespace {
 
 	abstract class Lister {
 
-		private static $list = array();
+		protected static $list = array();
 
 		# Load list
 

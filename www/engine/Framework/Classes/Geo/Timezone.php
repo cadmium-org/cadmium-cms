@@ -2,7 +2,9 @@
 
 namespace Geo {
 
-	abstract class Timezone extends Utils\Lister {
+	use Lister;
+
+	abstract class Timezone extends Lister {
 
 		# Autoloader
 

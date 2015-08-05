@@ -2,7 +2,9 @@
 
 namespace Geo {
 
-	abstract class Country extends Utils\Lister {
+	use Lister;
+
+	abstract class Country extends Lister {
 
 		# Autoloader
 
