@@ -31,54 +31,53 @@ namespace System\Utils {
 
 		private static $user = null, $admin = false, $init = false;
 
-		# Send reset mail
+		# Send mail
 
-		private static function sendResetMail($email, $name, $code) {
+		private function sendMail($template, $subject, $link) {
 
-			if (false === ($contents = Explorer::contents(DIR_SYSTEM_DATA . 'Mail/Reset.tpl'))) return false;
+			if (false === ($contents = Explorer::contents(DIR_SYSTEM_DATA . 'Mail/' . $template . '.tpl'))) return false;
 
 			$message = new Template\Utils\Block($contents);
 
-			$message->site_title = CONFIG_SITE_TITLE; $message->system_url = CONFIG_SYSTEM_URL; $message->name = $name;
+			$message->site_title = CONFIG_SITE_TITLE; $message->system_url = CONFIG_SYSTEM_URL;
 
-			$message->link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
+			$message->name = self::$user->name; $message->link = $link;
 
 			$message->system_email = CONFIG_SYSTEM_EMAIL; $message->copyright = Date::year();
 
 			# ------------------------
 
-			$sender = CONFIG_SITE_TITLE;
+			$to = self::$user->email; $sender = CONFIG_SITE_TITLE; $reply_to = CONFIG_SYSTEM_EMAIL;
 
 			$from = ((false !== ($host = parse_url(CONFIG_SYSTEM_URL, PHP_URL_HOST))) ? ('noreply@' . $host) : false);
 
-			$reply_to = CONFIG_SYSTEM_EMAIL; $subject = Language::get('MAIL_SUBJECT_RESET');
+			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(true), true);
+		}
 
-			return Mailer::send($email, $sender, $from, $reply_to, $subject, $message->contents(), true);
+		# Send reset mail
+
+		private static function sendResetMail($code) {
+
+			$template = 'Reset'; $subject = Language::get('MAIL_SUBJECT_RESET');
+
+			$link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
+
+			# ------------------------
+
+			return self::sendMail($template, $subject, $link);
 		}
 
 		# Send register mail
 
-		private static function sendRegisterMail($email, $name) {
+		private static function sendRegisterMail() {
 
-			if (false === ($contents = Explorer::contents(DIR_SYSTEM_DATA . 'Mail/Register.tpl'))) return false;
+			$template = 'Register'; $subject = Language::get('MAIL_SUBJECT_REGISTER');
 
-			$message = new Template\Utils\Block($contents);
-
-			$message->site_title = CONFIG_SITE_TITLE; $message->system_url = CONFIG_SYSTEM_URL; $message->name = $name;
-
-			$message->link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin' : '/profile'));
-
-			$message->system_email = CONFIG_SYSTEM_EMAIL; $message->copyright = Date::year();
+			$link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin' : '/profile'));
 
 			# ------------------------
 
-			$sender = CONFIG_SITE_TITLE;
-
-			$from = ((false !== ($host = parse_url(CONFIG_SYSTEM_URL, PHP_URL_HOST))) ? ('noreply@' . $host) : false);
-
-			$reply_to = CONFIG_SYSTEM_EMAIL; $subject = Language::get('MAIL_SUBJECT_REGISTER');
-
-			return Mailer::send($email, $sender, $from, $reply_to, $subject, $message->contents(), true);
+			return self::sendMail($template, $subject, $link);
 		}
 
 		# Validate auth code
@@ -282,7 +281,7 @@ namespace System\Utils {
 
 			# Send mail
 
-			self::sendResetMail(self::$user->email, self::$user->name, $code);
+			self::sendResetMail($code);
 
 			# ------------------------
 
@@ -397,7 +396,7 @@ namespace System\Utils {
 
 			# Send mail
 
-			self::sendRegisterMail(self::$user->email, self::$user->name);
+			self::sendRegisterMail();
 
 			# ------------------------
 
