@@ -52,7 +52,7 @@ namespace System\Utils {
 
 				'text'          => strval($item['text']),
 
-				'target'        => Lister::target($item['target'], true)
+				'target'        => intabs($item['target'])
 			);
 
 			foreach ($this->items as $id => $item) if (0 === $item['parent_id']) $this->menu[] = $id;
