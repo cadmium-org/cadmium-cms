@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity, Number;
 
-	class Varchar extends Entity\Param {
+	class Varchar extends Entity\Utils\Param {
 
         protected $maxlength = 0, $index = false;
 

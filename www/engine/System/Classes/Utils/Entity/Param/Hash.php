@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Hash extends Entity\Param {
+	class Hash extends Entity\Utils\Param {
 
         # Constructor
 

@@ -28,10 +28,10 @@ namespace System\Utils\Entity\Type\User {
             $this->params->time             ('time_registered');
             $this->params->time             ('time_logged');
 
-			# Add foreign relations
+			# Add foreigns
 
-			$this->addForeign('User\Secret',   'id');
-			$this->addForeign('User\Session',  'id');
+			$this->foreigns->add            ('User\Secret', 'id');
+			$this->foreigns->add            ('User\Session', 'id');
         }
     }
 }

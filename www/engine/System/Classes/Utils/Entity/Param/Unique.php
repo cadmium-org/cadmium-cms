@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity, Number;
 
-	class Unique extends Entity\Param {
+	class Unique extends Entity\Utils\Param {
 
         protected $maxlength = 0;
 

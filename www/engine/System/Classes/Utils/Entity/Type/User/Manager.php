@@ -22,7 +22,7 @@ namespace System\Utils\Entity\Type\User {
 	 * @property-read string $full_name
 	 */
 
-	class Manager extends Entity\Manager {
+	class Manager extends Entity\Utils\Manager {
 
 		# Errors
 

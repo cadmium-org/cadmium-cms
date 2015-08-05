@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity, Number;
 
-	class Range extends Entity\Param {
+	class Range extends Entity\Utils\Param {
 
         private $default = 0, $index = false;
 

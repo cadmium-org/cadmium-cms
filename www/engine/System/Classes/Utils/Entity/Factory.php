@@ -20,7 +20,7 @@ namespace System\Utils\Entity {
 
             if ((0 !== $id) && isset(self::$cache[$type][$id])) return self::$cache[$type][$id];
 
-            $entity = new $class_name; $entity->init($id);
+            $entity = new $class_name; $entity->initById($id);
 
             # ------------------------
 

@@ -128,7 +128,7 @@ namespace System\Utils {
 
 			if (!(DB::send($query) && (DB::last()->rows === 1))) return false;
 
-			if (!self::$user->init(DB::last()->row()['id'])) return false;
+			if (!self::$user->initById(DB::last()->row()['id'])) return false;
 
 			# Update session
 
@@ -167,7 +167,7 @@ namespace System\Utils {
 
 			if (!(DB::send($query) && (DB::last()->rows === 1))) return false;
 
-			if (!self::$user->init(DB::last()->row()['id'])) return false;
+			if (!self::$user->initById(DB::last()->row()['id'])) return false;
 
 			# ------------------------
 
@@ -209,7 +209,7 @@ namespace System\Utils {
 
 			# Select user from DB
 
-			if (!self::$user->initBy('name', $name)) return self::ERROR_NAME_INCORRECT;
+			if (!self::$user->initByUnique('name', $name)) return self::ERROR_NAME_INCORRECT;
 
 			if (self::$admin && (self::$user->rank < RANK_ADMINISTRATOR)) return self::ERROR_NAME_INCORRECT;
 
@@ -262,7 +262,7 @@ namespace System\Utils {
 
 			# Select user from DB
 
-			if (!self::$user->initBy('name', $name)) return self::ERROR_NAME_INCORRECT;
+			if (!self::$user->initByUnique('name', $name)) return self::ERROR_NAME_INCORRECT;
 
 			if (self::$admin && (self::$user->rank < RANK_ADMINISTRATOR)) return self::ERROR_NAME_INCORRECT;
 

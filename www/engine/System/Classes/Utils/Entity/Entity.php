@@ -6,9 +6,11 @@ namespace System\Utils\Entity {
 
 	abstract class Entity {
 
-		private $type = '', $table = '', $nesting = false, $has_super = false, $foreign = array();
+		private $type = '', $table = '', $nesting = false, $has_super = false;
 
-		protected $params = null, $id = 0, $created_id = 0, $data = array(), $path = array();
+		protected $params = null, $foreigns = null;
+
+		protected $id = 0, $created_id = 0, $data = array(), $path = array();
 
 		# Init parent entities
 
@@ -28,113 +30,9 @@ namespace System\Utils\Entity {
 			return array_reverse($path);
 		}
 
-		# Add foreign relation
+		# Init entity
 
-		protected function addForeign($type, $field) {
-
-			if ('' === ($type = strval($type))) return false;
-
-			if ('' === ($field = strval($field))) return false;
-
-			$class_name = ('System\\Utils\\Entity\\Type\\' . $type . '\\Definition');
-
-			$table = @constant($class_name . '::TABLE');
-
-			$this->foreign[$table] = $field;
-
-			# ------------------------
-
-			return true;
-		}
-
-        # Constructor
-
-        public function __construct() {
-
-			$class_name = get_class($this);
-
-			$this->type = strval(@constant($class_name . '::TYPE'));
-
-			$this->table = strval(@constant($class_name . '::TABLE'));
-
-			$this->nesting = boolval(@constant($class_name . '::NESTING'));
-
-			$this->has_super = boolval(@constant($class_name . '::HAS_SUPER'));
-
-			$this->params = new Params();
-
-			if ($this->nesting) $this->params->relation('parent_id', $this->type);
-
-            # Define entity presets
-
-            $this->define();
-        }
-
-		# Create table
-
-		public function createTable() {
-
-            $set = array_merge($this->params->fieldset(), $this->params->keyset());
-
-            $query = ("CREATE TABLE IF NOT EXISTS `" . $this->table . "`") .
-
-                     ("(" . implode(", ", $set) . ") ENGINE=InnoDB DEFAULT CHARSET=utf8");
-
-            # ------------------------
-
-            return (DB::send($query) && DB::last()->status);
-		}
-
-		# Init entity by id
-
-		public function init($id) {
-
-			if (0 !== $this->id) return true;
-
-			if (0 === ($id = intabs($id))) return false;
-
-			# Select entity from DB
-
-			$selection = array_merge(array('id'), array_keys($this->params->get()));
-
-			DB::select($this->table, $selection, array('id' => $id), null, 1);
-
-			if (!(DB::last() && (DB::last()->rows === 1))) return false;
-
-			$data = DB::last()->row();
-
-			# Validate data
-
-			$this->id = $this->params->id()->set($data['id']);
-
-			foreach ($this->params->get() as $name => $param) $this->data[$name] = $param->set($data[$name]);
-
-			$this->path = $this->initPath();
-
-			# Implement entity
-
-			$this->implement();
-
-			# Cache entity
-
-			Factory::cache($this->type, $this);
-
-			# ------------------------
-
-			return true;
-		}
-
-		# Init entity by unique param
-
-		public function initBy($name, $value) {
-
-			if (0 !== $this->id) return true;
-
-			if (false === ($param = $this->params->get($name))) return false;
-
-			if (!($param instanceof Param\Unique)) return false;
-
-			# Select entity from DB
+		private function init($name, $value) {
 
 			$selection = array_merge(array('id'), array_keys($this->params->get()));
 
@@ -165,17 +63,11 @@ namespace System\Utils\Entity {
 			return true;
 		}
 
-		# Create entity
+		# Get dataset
 
-		public function create($data) {
+		private function getDataset(&$params, array $data) {
 
-			if ((0 !== $this->id) && !$this->nesting) return false;
-
-			$set = array(); $params = clone $this->params;
-
-			# Set values
-
-			if ($this->nesting) $params->get('parent_id')->set($this->id);
+			$set = array();
 
 			foreach ($params->get() as $name => $param) {
 
@@ -189,6 +81,89 @@ namespace System\Utils\Entity {
 
 				} else $set[$name] = $param->value();
 			}
+
+			return $set;
+		}
+
+        # Constructor
+
+        public function __construct() {
+
+			$class_name = get_class($this);
+
+			$this->type = strval(@constant($class_name . '::TYPE'));
+
+			$this->table = strval(@constant($class_name . '::TABLE'));
+
+			$this->nesting = boolval(@constant($class_name . '::NESTING'));
+
+			$this->has_super = boolval(@constant($class_name . '::HAS_SUPER'));
+
+			$this->params = new Params(); $this->foreigns = new Foreigns();
+
+			if ($this->nesting) $this->params->relation('parent_id', $this->type);
+
+            # Define entity presets
+
+            $this->define();
+        }
+
+		# Create table
+
+		public function createTable() {
+
+            $set = array_merge($this->params->fieldset(), $this->params->keyset());
+
+            $query = ("CREATE TABLE IF NOT EXISTS `" . $this->table . "`") .
+
+                     ("(" . implode(", ", $set) . ") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+
+            # ------------------------
+
+            return (DB::send($query) && DB::last()->status);
+		}
+
+		# Init entity by id
+
+		public function initById($id) {
+
+			if (0 !== $this->id) return true;
+
+			if (0 === ($id = intabs($id))) return false;
+
+			# ------------------------
+
+			return $this->init('id', $id);
+		}
+
+		# Init entity by unique param
+
+		public function initByUnique($name, $value) {
+
+			if (0 !== $this->id) return true;
+
+			$name = strval($name); $value = strval($value);
+
+			if (false === ($param = $this->params->get($name))) return false;
+
+			if (!($param instanceof Param\Unique)) return false;
+
+			# ------------------------
+
+			return $this->init($name, $value);
+		}
+
+		# Create entity
+
+		public function create(array $data) {
+
+			if ((0 !== $this->id) && !$this->nesting) return false;
+
+			$params = clone $this->params;
+
+			if ($this->nesting) $params->get('parent_id')->set($this->id);
+
+			$set = $this->getDataset($params, $data);
 
 			# Insert entity
 
@@ -217,26 +192,13 @@ namespace System\Utils\Entity {
 
 		# Edit entity
 
-		public function edit($data) {
+		public function edit(array $data) {
 
 			if (0 === $this->id) return false;
 
-			$set = array(); $params = clone $this->params;
+			$params = clone $this->params;
 
-			# Set values
-
-			foreach ($params->get() as $name => $param) {
-
-				if (isset($data[$name])) $param->set($data[$name]);
-
-				if (($param instanceof Param\Relation) && (false === $param->entity())) {
-
-					if ($param->name() !== 'parent_id') return false;
-
-					$set['parent_id'] = $param->set(0);
-
-				} else $set[$name] = $param->value();
-			}
+			$set = $this->getDataset($params, $data);
 
 			# Update entity
 
@@ -280,7 +242,7 @@ namespace System\Utils\Entity {
 
 			# Delete foreign related entries
 
-			foreach ($this->foreign as $table => $field) {
+			foreach ($this->foreigns->get() as $table => $field) {
 
 				DB::delete($table, array($field => $this->id));
 

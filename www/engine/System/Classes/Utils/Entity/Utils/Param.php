@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Entity {
+namespace System\Utils\Entity\Utils {
 
 	abstract class Param {
 

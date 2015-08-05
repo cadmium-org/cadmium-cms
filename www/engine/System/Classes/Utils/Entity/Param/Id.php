@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Id extends Entity\Param {
+	class Id extends Entity\Utils\Param {
 
         # Constructor
 

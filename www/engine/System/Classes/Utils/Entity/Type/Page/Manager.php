@@ -24,7 +24,7 @@ namespace System\Utils\Entity\Type\Page {
 	 * @property-read string $canonical
 	 */
 
-	class Manager extends Entity\Manager {
+	class Manager extends Entity\Utils\Manager {
 
 		# Errors
 

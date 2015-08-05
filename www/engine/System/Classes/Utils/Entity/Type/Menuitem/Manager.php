@@ -15,7 +15,7 @@ namespace System\Utils\Entity\Type\Menuitem {
 	 * @property-read array $path
 	 */
 
-	class Manager extends Entity\Manager {
+	class Manager extends Entity\Utils\Manager {
 
 		# Errors
 

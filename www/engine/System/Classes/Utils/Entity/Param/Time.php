@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Time extends Entity\Param {
+	class Time extends Entity\Utils\Param {
 
         # Constructor
 

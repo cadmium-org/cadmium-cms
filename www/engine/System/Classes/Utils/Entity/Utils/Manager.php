@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Entity {
+namespace System\Utils\Entity\Utils {
 
     abstract class Manager {
 
@@ -10,7 +10,7 @@ namespace System\Utils\Entity {
 
         public function __get($name) {
 
-            if (null === $this->entity) return false;
+            if (null === $this->entity) return null;
 
             return $this->entity->$name;
         }

@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Text extends Entity\Param {
+	class Text extends Entity\Utils\Param {
 
         # Constructor
 
