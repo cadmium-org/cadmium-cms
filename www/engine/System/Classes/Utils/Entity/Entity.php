@@ -163,7 +163,7 @@ namespace System\Utils\Entity {
 
 			if ($this->nesting) $params->get('parent_id')->set($this->id);
 
-			$set = $this->getDataset($params, $data);
+			if (false === ($set = $this->getDataset($params, $data))) return false;
 
 			# Insert entity
 
@@ -198,7 +198,7 @@ namespace System\Utils\Entity {
 
 			$params = clone $this->params;
 
-			$set = $this->getDataset($params, $data);
+			if (false === ($set = $this->getDataset($params, $data))) return false;
 
 			# Update entity
 
