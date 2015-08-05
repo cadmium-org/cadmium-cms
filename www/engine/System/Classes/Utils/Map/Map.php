@@ -25,7 +25,7 @@ namespace System\Utils\Map {
 
 				$item = new Item($item->path, $item->handler);
 
-				if ($item->status()) $map[] = $item; else throw new Error\General(self::ERROR_PARSE);
+				if ($item->parsed()) $map[] = $item; else throw new Error\General(self::ERROR_PARSE);
 			}
 
 			return $map;
