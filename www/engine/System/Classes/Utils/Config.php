@@ -75,7 +75,7 @@ namespace System\Utils {
 
 			# Set admin template
 
-			if (($name === CONFIG_PARAM_ADMIN_TEMPLATE) || (($name === CONFIG_PARAM_SITE_TEMPLATE)) {
+			if (($name === CONFIG_PARAM_ADMIN_TEMPLATE) || ($name === CONFIG_PARAM_SITE_TEMPLATE)) {
 
 				return (false !== (self::$config[$name] = Extend\Templates::validate($value)));
 			}
