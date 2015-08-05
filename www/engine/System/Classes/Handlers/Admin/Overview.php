@@ -41,7 +41,7 @@ namespace System\Handlers\Admin {
 
 			$contents->site_title = CONFIG_SITE_TITLE;
 
-			$contents->site_status = Lister::status(CONFIG_SITE_STATUS);
+			$contents->site_status = Lister\Status::get(CONFIG_SITE_STATUS);
 
 			$contents->system_url = CONFIG_SYSTEM_URL;
 

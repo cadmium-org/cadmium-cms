@@ -126,7 +126,7 @@ namespace System\Frames\Admin\Listview {
 
 				$item->icon = ((0 === $page['children']) ? 'file text outline' : 'folder');
 
-				$item->access = Lister::access($page['access']);
+				$item->access = Lister\Access::get($page['access']);
 
 				$item->block('browse')->class = ($page['visibility'] ? 'primary' : 'disabled');
 

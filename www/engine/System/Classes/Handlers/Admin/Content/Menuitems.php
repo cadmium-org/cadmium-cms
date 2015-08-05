@@ -82,7 +82,7 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->text         ('link', $this->menuitem->link, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
 
-			$fieldset->select       ('target', $this->menuitem->target, Lister::target());
+			$fieldset->select       ('target', $this->menuitem->target, Lister\Target::range());
 
 			$fieldset->text         ('position', $this->menuitem->position, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
 

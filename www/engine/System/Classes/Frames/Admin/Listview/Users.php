@@ -66,7 +66,7 @@ namespace System\Frames\Admin\Listview {
 
 				$list->add($item = Template::block('Contents/System/Users/List/Item'));
 
-				$item->id = $user['id']; $item->name = $user['name']; $item->rank = Lister::rank($user['rank']);
+				$item->id = $user['id']; $item->name = $user['name']; $item->rank = Lister\Rank::get($user['rank']);
 
 				$item->block('remove')->class = (($user['id'] !== Auth::user()->id) ? 'negative' : 'disabled');
 			}

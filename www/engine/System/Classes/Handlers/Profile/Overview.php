@@ -23,7 +23,7 @@ namespace System\Handlers\Profile {
 
 			$contents->email = Auth::user()->email;
 
-			$contents->rank = Lister::rank(Auth::user()->rank);
+			$contents->rank = Lister\Rank::get(Auth::user()->rank);
 
 			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->time_registered);
 
@@ -37,7 +37,7 @@ namespace System\Handlers\Profile {
 
 			if (!($sex = Auth::user()->sex)) $contents->block('sex')->disable();
 
-			else $contents->block('sex')->text = Lister::sex($sex);
+			else $contents->block('sex')->text = Lister\Sex::get($sex);
 
 			# Set city
 

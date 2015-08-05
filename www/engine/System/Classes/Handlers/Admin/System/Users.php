@@ -69,7 +69,7 @@ namespace System\Handlers\Admin\System {
 
 			$fieldset->text         ('email', $this->user->email, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->select       ('rank', $this->user->rank, Lister::rank(), '',
+			$fieldset->select       ('rank', $this->user->rank, Lister\Rank::range(), '',
 
 			                        ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : 0));
 
@@ -77,7 +77,7 @@ namespace System\Handlers\Admin\System {
 
 			$fieldset->text         ('last_name', $this->user->last_name, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$fieldset->select       ('sex', $this->user->sex, Lister::sex());
+			$fieldset->select       ('sex', $this->user->sex, Lister\Sex::range());
 
 			$fieldset->text         ('city', $this->user->city, CONFIG_USER_CITY_MAX_LENGTH);
 

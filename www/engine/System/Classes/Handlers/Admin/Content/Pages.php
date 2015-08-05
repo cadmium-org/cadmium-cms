@@ -82,9 +82,9 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
 
-			$fieldset->select       ('visibility', $this->page->visibility, Lister::visibility());
+			$fieldset->select       ('visibility', $this->page->visibility, Lister\Visibility::range());
 
-			$fieldset->select       ('access', $this->page->access, Lister::access());
+			$fieldset->select       ('access', $this->page->access, Lister\Access::range());
 
 			$fieldset->textarea     ('description', $this->page->description, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
 

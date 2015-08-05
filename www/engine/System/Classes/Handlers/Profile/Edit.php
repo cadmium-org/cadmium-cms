@@ -27,7 +27,7 @@ namespace System\Handlers\Profile {
 
 			$fieldset->text         ('last_name', Auth::user()->last_name, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$fieldset->select       ('sex', Auth::user()->sex, Lister::sex());
+			$fieldset->select       ('sex', Auth::user()->sex, Lister\Sex::range());
 
 			$fieldset->text         ('city', Auth::user()->city, CONFIG_USER_CITY_MAX_LENGTH);
 

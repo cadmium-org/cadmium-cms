@@ -28,7 +28,9 @@ namespace System\Utils\Tools {
 
 			if (false === ($loc = Validate::url($loc))) return false;
 
-			$lastmod = Date::validate($lastmod, DATE_FORMAT_W3C); $changefreq = Lister::frequency($changefreq, true);
+			$lastmod = Date::validate($lastmod, DATE_FORMAT_W3C);
+
+			$changefreq = Lister\Frequency::validate($changefreq);
 
 			$priority = ((null !== $priority) ? Number::formatFloat($priority, 0, 1, 1) : false);
 
