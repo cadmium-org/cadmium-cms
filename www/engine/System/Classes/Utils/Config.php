@@ -68,28 +68,14 @@ namespace System\Utils {
 
 			# Set admin language
 
-			if ($name === CONFIG_PARAM_ADMIN_LANGUAGE) {
+			if (($name === CONFIG_PARAM_ADMIN_LANGUAGE) || ($name === CONFIG_PARAM_SITE_LANGUAGE)) {
 
 				return (false !== (self::$config[$name] = Extend\Languages::validate($value)));
 			}
 
 			# Set admin template
 
-			if ($name === CONFIG_PARAM_ADMIN_TEMPLATE) {
-
-				return (false !== (self::$config[$name] = Extend\Templates::validate($value)));
-			}
-
-			# Set site language
-
-			if ($name === CONFIG_PARAM_SITE_LANGUAGE) {
-
-				return (false !== (self::$config[$name] = Extend\Languages::validate($value)));
-			}
-
-			# Set site template
-
-			if ($name === CONFIG_PARAM_SITE_TEMPLATE) {
+			if (($name === CONFIG_PARAM_ADMIN_TEMPLATE) || (($name === CONFIG_PARAM_SITE_TEMPLATE)) {
 
 				return (false !== (self::$config[$name] = Extend\Templates::validate($value)));
 			}
