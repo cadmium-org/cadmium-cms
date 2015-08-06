@@ -4,7 +4,7 @@ namespace {
 
 	class Tag {
 
-		private static $block_default, $block_self_closing;
+		private static $block_regular, $block_self_closing;
 
 		private $name = '', $attributes = array(), $contents = null;
 
@@ -12,17 +12,9 @@ namespace {
 
 		public static function __autoload() {
 
-			# Create default block
+			self::$block_regular = new Tag\View\Regular();
 
-			$block_default = '<$name${ for:attributes } $name$="$value$"{ / for:attributes }>{ block:contents / }</$name$>';
-
-			self::$block_default = new Template\Utils\Block($block_default);
-
-			# Create self-closing block
-
-			$block_self_closing = '<$name${ for:attributes } $name$="$value$"{ / for:attributes } />';
-
-			self::$block_self_closing = new Template\Utils\Block($block_self_closing);
+			self::$block_self_closing = new Tag\View\SelfClosing();
 		}
 
 		# Constructor
@@ -40,7 +32,7 @@ namespace {
 
 		public function block() {
 
-			$block = ((null !== $this->contents) ? clone self::$block_default : clone self::$block_self_closing);
+			$block = ((null !== $this->contents) ? clone self::$block_regular : clone self::$block_self_closing);
 
 			$block->name = $this->name; $block->attributes = $this->attributes; $block->contents = $this->contents;
 
