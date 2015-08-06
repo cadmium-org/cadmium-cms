@@ -8,6 +8,20 @@ namespace Form\Field {
 
 		private $type = '', $maxlength = 0, $placeholder = '';
 
+        # Get type
+
+        private function getType() {
+
+            return (($this->type !== FORM_INPUT_TYPE_PASSWORD) ? 'text' : 'password');
+        }
+
+        # Get value
+
+        private function getValue() {
+
+            return (!in_array($this->type, array(FORM_INPUT_TYPE_PASSWORD, FORM_INPUT_TYPE_CAPTCHA)) ? $this->value : '');
+        }
+
 		# Constructor
 
 		public function __construct($form, $name, $value = '', $type = '', $maxlength = 0, $placeholder = '', $config = 0) {
@@ -54,7 +68,7 @@ namespace Form\Field {
 
             # Set type
 
-			$attributes['type'] = (($this->type !== FORM_INPUT_TYPE_PASSWORD) ? 'text' : 'password');
+			$attributes['type'] = $this->getType();
 
             # Set initial data
 
@@ -78,9 +92,7 @@ namespace Form\Field {
 
             # Set value
 
-            $reset = (($this->type === FORM_INPUT_TYPE_PASSWORD) || ($this->type === FORM_INPUT_TYPE_CAPTCHA));
-
-			$attributes['value'] = (!$reset ? $this->value : '');
+			$attributes['value'] = $this->getValue();
 
             # Create tag
 

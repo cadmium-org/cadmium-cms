@@ -8,6 +8,21 @@ namespace Form\Field {
 
 		private $options = array();
 
+		# Get option block
+
+		private function getOptions() {
+
+			$options = '';
+
+			foreach ($this->options as $value => $text) $options .= ('<option value="' . $value . '"' .
+
+				(($this->value === $value) ? ' selected="selected"' : '') . '>' . $text . '</option>');
+
+			# ------------------------
+
+			return new Template\Utils\Block($options);
+		}
+
 		# Constructor
 
 		public function __construct($form, $name, $value, array $options, $default = '', $config = 0) {
@@ -66,26 +81,9 @@ namespace Form\Field {
 
 			if ($this->auto) $attributes['data-auto'] = 'auto';
 
-			# Set selection options
-
-			$options = new Template\Utils\Group();
-
-			foreach ($this->options as $value => $text) {
-
-				$value = strval($value); $text = strval($text);
-
-				$attributes_o = array('value' => $value);
-
-				if ($this->value === $value) $attributes_o['selected'] = 'selected';
-
-				$option = new Tag('option', $attributes_o, $text);
-
-				$options->add($option->block());
-			}
-
 			# Create tag
 
-			$tag = new Tag('select', $attributes, $options); $block = $tag->block();
+			$tag = new Tag('select', $attributes, $this->getOptions()); $block = $tag->block();
 
 			# ------------------------
 
