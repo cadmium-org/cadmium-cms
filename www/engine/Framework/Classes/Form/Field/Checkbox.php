@@ -23,7 +23,11 @@ namespace Form\Field {
 
 			if (null === ($value = Request::post($name))) return false;
 
+			# Format value
+
 			$this->value = boolval($value);
+
+			# Check for errors
 
 			if ($this->required && (false === $this->value)) $this->error = true;
 

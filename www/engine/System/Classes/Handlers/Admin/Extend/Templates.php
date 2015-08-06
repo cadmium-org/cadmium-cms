@@ -135,7 +135,7 @@ namespace System\Handlers\Admin\Extend {
 
 			# Process form
 
-			$form = new Form('ajax'); $form->fieldset()->virtual('name');
+			$form = new Form('ajax'); $form->fieldset()->hidden('name');
 
 			return ((false !== ($post = $form->post())) ? $this->setData($post) : false);
 		}

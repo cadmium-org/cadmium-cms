@@ -12,6 +12,12 @@ define('DATE_FORMAT_MYSQL',                         'Y-m-d');
 define('DATE_FORMAT_DATETIME',                      'd.m.Y, H:i');
 define('DATE_FORMAT_W3C',                           'Y-m-d\TH:i:sP');
 
+# Form input types
+
+define('FORM_INPUT_TYPE_TEXT',                      'text');
+define('FORM_INPUT_TYPE_PASSWORD',                  'password');
+define('FORM_INPUT_TYPE_CAPTCHA',                   'captcha');
+
 # Form field options
 
 define('FORM_FIELD_ERROR',                          1);

@@ -24,11 +24,47 @@ namespace Form\Utils {
 			if ($form instanceof Form) $this->form = $form;
 		}
 
+		# Add text field
+
+		public function text($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
+
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_TEXT, $maxlength, $placeholder, $config);
+
+			return $this->add($field);
+		}
+
+		# Add password field
+
+		public function password($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
+
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_PASSWORD, $maxlength, $placeholder, $config);
+
+			return $this->add($field);
+		}
+
 		# Add captcha field
 
 		public function captcha($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Captcha($this->form, $name, $value, $maxlength, $placeholder, $config);
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_CAPTCHA, $maxlength, $placeholder, $config);
+
+			return $this->add($field);
+		}
+
+		# Add textarea field
+
+		public function textarea($name, $value = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
+
+			$field = new Form\Field\Textarea($this->form, $name, $value, $maxlength, $rows, $placeholder, $config);
+
+			return $this->add($field);
+		}
+
+		# Add select field
+
+		public function select($name, $value, array $options, $default = '', $config = 0) {
+
+			$field = new Form\Field\Select($this->form, $name, $value, $options, $default, $config);
 
 			return $this->add($field);
 		}
@@ -47,51 +83,6 @@ namespace Form\Utils {
 		public function hidden($name, $value = '') {
 
 			$field = new Form\Field\Hidden($this->form, $name, $value);
-
-			return $this->add($field);
-		}
-
-		# Add password field
-
-		public function password($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
-
-			$field = new Form\Field\Password($this->form, $name, $value, $maxlength, $placeholder, $config);
-
-			return $this->add($field);
-		}
-
-		# Add select field
-
-		public function select($name, $value, array $options, $default = '', $config = 0) {
-
-			$field = new Form\Field\Select($this->form, $name, $value, $options, $default, $config);
-
-			return $this->add($field);
-		}
-
-		# Add text field
-
-		public function text($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
-
-			$field = new Form\Field\Text($this->form, $name, $value, $maxlength, $placeholder, $config);
-
-			return $this->add($field);
-		}
-
-		# Add textarea field
-
-		public function textarea($name, $value = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
-
-			$field = new Form\Field\Textarea($this->form, $name, $value, $maxlength, $rows, $placeholder, $config);
-
-			return $this->add($field);
-		}
-
-		# Add virtual field
-
-		public function virtual($name, $value = '') {
-
-			$field = new Form\Field\Virtual($this->form, $name, $value);
 
 			return $this->add($field);
 		}

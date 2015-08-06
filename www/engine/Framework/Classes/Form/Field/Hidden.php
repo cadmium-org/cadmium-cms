@@ -21,7 +21,9 @@ namespace Form\Field {
 
 			if (null === ($value = Request::post($name))) return false;
 
-			$this->value = $value;
+			# Format value
+
+			$this->value = strval($value);
 
 			# ------------------------
 
@@ -34,13 +36,21 @@ namespace Form\Field {
 
 			$attributes = array();
 
+			# Set type
+
 			$attributes['type'] = 'hidden';
+
+			# Set initial data
 
 			$attributes['name'] = $this->getName();
 
 			$attributes['id'] = $this->getId();
 
+			# Set value
+
 			$attributes['value'] = $this->value;
+
+			# Create tag
 
 			$tag = new Tag('input', $attributes); $block = $tag->block();
 

@@ -27,13 +27,15 @@ namespace Form\Field {
 
 			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
 
-			if (array() === $this->options) return false;
+			if ((array() === $this->options) || (null === ($value = Request::post($name)))) return false;
 
-			if (null === ($value = Request::post($name))) return false;
+			# Format value
 
 			$key = array_search($value, ($range = array_keys($this->options)));
 
 			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
+
+			# Check for errors
 
 			if ($this->required && empty($this->value)) $this->error = true;
 
@@ -48,9 +50,13 @@ namespace Form\Field {
 
 			$attributes = array();
 
+			# Set initial data
+
 			$attributes['name'] = $this->getName();
 
 			$attributes['id'] = $this->getId();
+
+			# Set additional options
 
 			if ($this->error) $attributes['data-error'] = 'error';
 
@@ -59,6 +65,8 @@ namespace Form\Field {
 			if ($this->search) $attributes['data-search'] = 'search';
 
 			if ($this->auto) $attributes['data-auto'] = 'auto';
+
+			# Set selection options
 
 			$options = new Template\Utils\Group();
 
@@ -74,6 +82,8 @@ namespace Form\Field {
 
 				$options->add($option->block());
 			}
+
+			# Create tag
 
 			$tag = new Tag('select', $attributes, $options); $block = $tag->block();
 

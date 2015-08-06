@@ -27,9 +27,13 @@ namespace Form\Field {
 
 			if (null === ($value = Request::post($name))) return false;
 
+			# Format value
+
 			$this->value = String::input($value, true, $this->maxlength);
 
 			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
+
+			# Check for errors
 
 			if ($this->required && ('' === $this->value)) $this->error = true;
 
@@ -44,9 +48,13 @@ namespace Form\Field {
 
 			$attributes = array();
 
+			# Set initial data
+
 			$attributes['name'] = $this->getName();
 
 			$attributes['id'] = $this->getId();
+
+			# Set appearance
 
 			if (0 !== $this->maxlength) $attributes['maxlength'] = $this->maxlength;
 
@@ -54,11 +62,15 @@ namespace Form\Field {
 
 			if ('' !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
 
+			# Set additional options
+
 			if ($this->error) $attributes['data-error'] = 'error';
 
 			if ($this->readonly) $attributes['readonly'] = 'readonly';
 
 			if ($this->disabled) $attributes['disabled'] = 'disabled';
+
+			# Create tag
 
 			$tag = new Tag('textarea', $attributes, $this->value); $block = $tag->block();
 
