@@ -2,9 +2,40 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Request, Tag, Template;
+	use Form\Utils, Request, Tag;
 
 	class Checkbox extends Utils\Field {
+
+		# Get attributes
+
+		private function getAttributes() {
+
+			$attributes = array();
+
+			# Set type
+
+			$attributes['type'] = 'checkbox';
+
+			# Set name/id
+
+			$attributes['name'] = $this->getName();
+
+			$attributes['id'] = $this->getId();
+
+			# Set additional options
+
+			if ($this->error) $attributes['data-error'] = 'error';
+
+			if ($this->disabled) $attributes['disabled'] = 'disabled';
+
+			# Set value
+
+			if ($this->value) $attributes['checked'] = 'checked';
+
+			# ------------------------
+
+            return $attributes;
+		}
 
 		# Constructor
 
@@ -21,7 +52,7 @@ namespace Form\Field {
 
 			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
 
-			if (null === ($value = Request::post($name))) return false;
+			$value = Request::post($name);
 
 			# Format value
 
@@ -40,37 +71,9 @@ namespace Form\Field {
 
 		public function block() {
 
-			$attributes = array();
+			$tag = new Tag('input', $this->getAttributes());
 
-			$block = new Template\Utils\Group();
-
-			# Create hidden field
-
-			$attributes['type'] = 'hidden';
-
-			$attributes['name'] = $this->getName();
-
-			$tag = new Tag('input', $attributes); $block->add($tag->block());
-
-			# Create checkbox field
-
-			$attributes['type'] = 'checkbox';
-
-			$attributes['id'] = $this->getId();
-
-			if ($this->error) $attributes['data-error'] = 'error';
-
-			if ($this->readonly) $attributes['readonly'] = 'readonly';
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-			if ($this->value) $attributes['checked'] = 'checked';
-
-			$tag = new Tag('input', $attributes); $block->add($tag->block());
-
-			# ------------------------
-
-			return $block;
+			return $tag->block();
 		}
 	}
 }

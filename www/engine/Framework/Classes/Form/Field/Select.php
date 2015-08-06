@@ -8,7 +8,34 @@ namespace Form\Field {
 
 		private $options = array();
 
-		# Get option block
+		# Get attributes
+
+		private function getAttributes() {
+
+			$attributes = array();
+
+			# Set initial data
+
+			$attributes['name'] = $this->getName();
+
+			$attributes['id'] = $this->getId();
+
+			# Set additional options
+
+			if ($this->error) $attributes['data-error'] = 'error';
+
+			if ($this->disabled) $attributes['disabled'] = 'disabled';
+
+			if ($this->search) $attributes['data-search'] = 'search';
+
+			if ($this->auto) $attributes['data-auto'] = 'auto';
+
+			# ------------------------
+
+            return $attributes;
+		}
+
+		# Get options
 
 		private function getOptions() {
 
@@ -63,31 +90,9 @@ namespace Form\Field {
 
 		public function block() {
 
-			$attributes = array();
+			$tag = new Tag('select', $this->getAttributes(), $this->getOptions());
 
-			# Set initial data
-
-			$attributes['name'] = $this->getName();
-
-			$attributes['id'] = $this->getId();
-
-			# Set additional options
-
-			if ($this->error) $attributes['data-error'] = 'error';
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-			if ($this->search) $attributes['data-search'] = 'search';
-
-			if ($this->auto) $attributes['data-auto'] = 'auto';
-
-			# Create tag
-
-			$tag = new Tag('select', $attributes, $this->getOptions()); $block = $tag->block();
-
-			# ------------------------
-
-			return $block;
+			return $tag->block();
 		}
 	}
 }

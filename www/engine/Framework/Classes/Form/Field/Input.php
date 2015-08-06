@@ -6,29 +6,89 @@ namespace Form\Field {
 
 	class Input extends Utils\Field {
 
-		private $type = '', $maxlength = 0, $placeholder = '';
+		private $type = '', $maxlength = 0, $rows = 0, $placeholder = '';
 
         # Get type
 
         private function getType() {
 
-            return (($this->type !== FORM_INPUT_TYPE_PASSWORD) ? 'text' : 'password');
+            if ($this->type === FORM_INPUT_TYPE_TEXTAREA) return false;
+
+            $type = (($this->type !== FORM_INPUT_TYPE_PASSWORD) ? 'text' : 'password');
+
+            # ------------------------
+
+            return $type;
         }
 
         # Get value
 
         private function getValue() {
 
-            return (!in_array($this->type, array(FORM_INPUT_TYPE_PASSWORD, FORM_INPUT_TYPE_CAPTCHA)) ? $this->value : '');
+            if ($this->type === FORM_INPUT_TYPE_TEXTAREA) return false;
+
+            $value = (!in_array($this->type, array(FORM_INPUT_TYPE_PASSWORD, FORM_INPUT_TYPE_CAPTCHA)) ? $this->value : '');
+
+            # ------------------------
+
+            return $value;
+        }
+
+        # Get attributes
+
+        private function getAttributes() {
+
+            $attributes = array();
+
+            # Set type
+
+            if (false !== ($type = $this->getType())) $attributes['type'] = $type;
+
+            # Set initial data
+
+			$attributes['name'] = $this->getName();
+
+            $attributes['id'] = $this->getId();
+
+            # Set appearance
+
+			if (0 !== $this->maxlength) $attributes['maxlength'] = $this->maxlength;
+
+			if ('' !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
+
+            # Set additional options
+
+			if ($this->error) $attributes['data-error'] = 'error';
+
+			if ($this->readonly) $attributes['readonly'] = 'readonly';
+
+			if ($this->disabled) $attributes['disabled'] = 'disabled';
+
+            # Set value
+
+            if (false !== ($value = $this->getValue())) $attributes['value'] = $value;
+
+            # ------------------------
+
+            return $attributes;
+        }
+
+        # Get contents
+
+        private function getContents() {
+
+            return (($this->type === FORM_INPUT_TYPE_TEXTAREA) ? $this->value : null);
         }
 
 		# Constructor
 
-		public function __construct($form, $name, $value = '', $type = '', $maxlength = 0, $placeholder = '', $config = 0) {
+		public function __construct($form, $name, $value = '', $type = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
 
 			$this->setForm($form); $this->setName($name); $this->value = strval($value);
 
-			$this->type = strval($type); $this->maxlength = intabs($maxlength); $this->placeholder = strval($placeholder);
+			$this->type = strval($type); $this->maxlength = intabs($maxlength); $this->rows = intabs($rows);
+
+            $this->placeholder = strval($placeholder);
 
 			$this->setConfig($config);
 		}
@@ -64,43 +124,13 @@ namespace Form\Field {
 
 		public function block() {
 
-			$attributes = array();
+            $name = (($this->type !== FORM_INPUT_TYPE_TEXTAREA) ? 'input' : 'textarea');
 
-            # Set type
-
-			$attributes['type'] = $this->getType();
-
-            # Set initial data
-
-			$attributes['name'] = $this->getName();
-
-            $attributes['id'] = $this->getId();
-
-            # Set appearance
-
-			if (0 !== $this->maxlength) $attributes['maxlength'] = $this->maxlength;
-
-			if ('' !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
-
-            # Set additional options
-
-			if ($this->error) $attributes['data-error'] = 'error';
-
-			if ($this->readonly) $attributes['readonly'] = 'readonly';
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-            # Set value
-
-			$attributes['value'] = $this->getValue();
-
-            # Create tag
-
-			$tag = new Tag('input', $attributes); $block = $tag->block();
+			$tag = new Tag($name, $this->getAttributes(), $this->getContents());
 
 			# ------------------------
 
-			return $block;
+			return $tag->block();;
 		}
 	}
 }

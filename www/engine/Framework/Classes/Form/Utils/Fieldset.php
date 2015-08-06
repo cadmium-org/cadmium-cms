@@ -28,7 +28,7 @@ namespace Form\Utils {
 
 		public function text($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_TEXT, $maxlength, $placeholder, $config);
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_TEXT, $maxlength, 0, $placeholder, $config);
 
 			return $this->add($field);
 		}
@@ -37,7 +37,7 @@ namespace Form\Utils {
 
 		public function password($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_PASSWORD, $maxlength, $placeholder, $config);
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_PASSWORD, $maxlength, 0, $placeholder, $config);
 
 			return $this->add($field);
 		}
@@ -46,7 +46,7 @@ namespace Form\Utils {
 
 		public function captcha($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_CAPTCHA, $maxlength, $placeholder, $config);
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_CAPTCHA, $maxlength, 0, $placeholder, $config);
 
 			return $this->add($field);
 		}
@@ -55,7 +55,7 @@ namespace Form\Utils {
 
 		public function textarea($name, $value = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Textarea($this->form, $name, $value, $maxlength, $rows, $placeholder, $config);
+			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_TEXTAREA, $maxlength, $rows, $placeholder, $config);
 
 			return $this->add($field);
 		}

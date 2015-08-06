@@ -44,7 +44,7 @@ namespace {
 
 			foreach ($this->fields as $name => $field) {
 
-				if ($field->disabled()) continue;
+				if ($field->disabled() || ($field instanceof Form\Field\Checkbox)) continue;
 
 				$name = (('' !== $this->name) ? ($this->name . '_' . $name) : $name);
 
@@ -61,7 +61,7 @@ namespace {
 
 				$post[$field->name()] = $field->value();
 			}
-
+			
 			$this->posted = true; $this->errors = $errors;
 
 			# ------------------------

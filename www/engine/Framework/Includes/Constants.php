@@ -17,6 +17,7 @@ define('DATE_FORMAT_W3C',                           'Y-m-d\TH:i:sP');
 define('FORM_INPUT_TYPE_TEXT',                      'text');
 define('FORM_INPUT_TYPE_PASSWORD',                  'password');
 define('FORM_INPUT_TYPE_CAPTCHA',                   'captcha');
+define('FORM_INPUT_TYPE_TEXTAREA',                  'textarea');
 
 # Form field options
 
