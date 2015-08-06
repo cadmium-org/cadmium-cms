@@ -25,7 +25,7 @@ namespace {
 
 		public static function settable($object) {
 
-			return (($object instanceof Template\Utils\Block) || ($object instanceof Template\Utils\Group));
+			return ($object instanceof Template\Utils\Settable);
 		}
 
 		# Set main file

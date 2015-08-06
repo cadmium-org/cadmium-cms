@@ -2,9 +2,9 @@
 
 namespace Template\Utils {
 
-	use Template, Language, String;
+	use Language, String;
 
-	class Block {
+	class Block implements Settable {
 
 		private $contents = '', $enabled = true;
 
@@ -140,14 +140,14 @@ namespace Template\Utils {
 
 		public function __set($name, $value) {
 
-			if (Template::settable($value)) $this->block($name, $value);
+			if ($value instanceof Settable) $this->block($name, $value);
 
 			else if (is_array($value)) $this->loop($name, $value); else $this->set($name, $value);
 		}
 
 		# Set block
 
-		public function block($name, $block = null) {
+		public function block($name, Settable $block = null) {
 
 			$name = strval($name);
 
@@ -155,7 +155,7 @@ namespace Template\Utils {
 
 			if (null === $block) return $this->blocks[$name];
 
-			if (Template::settable($block)) $this->blocks[$name] = $block;
+			$this->blocks[$name] = $block;
 
 			# ------------------------
 

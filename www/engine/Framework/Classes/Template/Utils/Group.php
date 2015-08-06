@@ -2,17 +2,13 @@
 
 namespace Template\Utils {
 
-	use Template;
-
-	class Group {
+	class Group implements Settable {
 
 		private $blocks = array(), $count = 0;
 
 		# Add block
 
-		public function add($block) {
-
-			if (!Template::settable($block)) return false;
+		public function add(Settable $block) {
 
 			$this->blocks[] = $block; $this->count++;
 
@@ -23,11 +19,11 @@ namespace Template\Utils {
 
 		# Get contents
 
-		public function contents() {
+		public function contents($format = true) {
 
 			$contents = '';
 
-			foreach ($this->blocks as $block) $contents .= $block->contents();
+			foreach ($this->blocks as $block) $contents .= $block->contents($format);
 
 			# ------------------------
 
