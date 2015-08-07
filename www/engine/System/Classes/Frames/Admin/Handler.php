@@ -11,11 +11,11 @@ namespace System\Frames\Admin {
 
 		# Display install
 
-		private function displayInstall() {
+		private function displayForm() {
 
 			# Process template
 
-			Template::main('Install');
+			Template::main('Form');
 
 			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
 
@@ -30,29 +30,6 @@ namespace System\Frames\Admin {
 			# ------------------------
 
 			Template::output(STATUS_CODE_200, true);
-		}
-
-		# Display auth
-
-		private function displayAuth() {
-
-			# Process template
-
-			Template::main('Auth');
-
-			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
-
-			# Set messages
-
-			Template::main()->messages = Messages::block();
-
-			# Set contents
-
-			Template::main()->contents = $this->contents;
-
-			# ------------------------
-
-			Template::output(STATUS_CODE_401, true);
 		}
 
 		# Display page
@@ -147,7 +124,7 @@ namespace System\Frames\Admin {
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Install')) {
 
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayInstall() : Status::error404());
+				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
 			}
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Auth')) {
@@ -166,7 +143,7 @@ namespace System\Frames\Admin {
 
 				} else if ($extra_registration) return Request::redirect('/admin/register');
 
-				return ($this->handle() ? $this->displayAuth() : Status::error404());
+				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
 			}
 
 			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin')) {
@@ -175,7 +152,7 @@ namespace System\Frames\Admin {
 
 				if (Request::isAjax() && method_exists($this, 'handleAjax')) return Ajax::output($this->handleAjax());
 
-				return ($this->handle() ? $this->displayPage() : Status::error404());
+				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : Status::error404());
 			}
 		}
 	}
