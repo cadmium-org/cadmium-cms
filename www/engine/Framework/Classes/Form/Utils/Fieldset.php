@@ -62,15 +62,15 @@ namespace Form\Utils {
 
 			$config = $this->getConfig($config);
 
-			if ($config[FORM_FIELD_ERROR]) $field->error(true);
+			$field->error($config[FORM_FIELD_ERROR]);
 
-			if ($config[FORM_FIELD_DISABLED]) $field->disabled(true);
+			$field->disabled($config[FORM_FIELD_DISABLED]);
 
-			if ($config[FORM_FIELD_REQUIRED]) $field->required(true);
+			$field->required($config[FORM_FIELD_REQUIRED]);
 
-			if ($config[FORM_FIELD_READONLY]) $field->readonly(true);
+			$field->readonly($config[FORM_FIELD_READONLY]);
 
-			if ($config[FORM_FIELD_TRANSLIT]) $field->translit(true);
+			$field->translit($config[FORM_FIELD_TRANSLIT]);
 
 			# ------------------------
 
@@ -89,15 +89,15 @@ namespace Form\Utils {
 
 			$config = $this->getConfig($config);
 
-			if ($config[FORM_FIELD_ERROR]) $field->error(true);
+			$field->error($config[FORM_FIELD_ERROR]);
 
-			if ($config[FORM_FIELD_DISABLED]) $field->disabled(true);
+			$field->disabled($config[FORM_FIELD_DISABLED]);
 
-			if ($config[FORM_FIELD_REQUIRED]) $field->required(true);
+			$field->required($config[FORM_FIELD_REQUIRED]);
 
-			if ($config[FORM_FIELD_SEARCH]) $field->search(true);
+			$field->search($config[FORM_FIELD_SEARCH]);
 
-			if ($config[FORM_FIELD_AUTO]) $field->auto(true);
+			$field->auto($config[FORM_FIELD_AUTO]);
 
 			# ------------------------
 
@@ -114,11 +114,11 @@ namespace Form\Utils {
 
 			$config = $this->getConfig($config);
 
-			if ($config[FORM_FIELD_ERROR]) $field->error(true);
+			$field->error($config[FORM_FIELD_ERROR]);
 
-			if ($config[FORM_FIELD_DISABLED]) $field->disabled(true);
+			$field->disabled($config[FORM_FIELD_DISABLED]);
 
-			if ($config[FORM_FIELD_REQUIRED]) $field->required(true);
+			$field->required($config[FORM_FIELD_REQUIRED]);
 
 			# ------------------------
 
