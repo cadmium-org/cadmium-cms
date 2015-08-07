@@ -61,37 +61,37 @@ namespace System\Handlers\Admin\System {
 
 			# Create form
 
-			$this->form = new Form('user'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('user');
 
 			# Add form fields
 
-			$fieldset->input        ('name', $this->user->name, FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input        ('name', $this->user->name, FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input        ('email', $this->user->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input        ('email', $this->user->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->select       ('rank', $this->user->rank, Lister\Rank::range(), '',
+			$this->form->select       ('rank', $this->user->rank, Lister\Rank::range(), '',
 
-			                        ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : 0));
+			                    ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : 0));
 
-			$fieldset->input        ('first_name', $this->user->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
+			$this->form->input        ('first_name', $this->user->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
-			$fieldset->input        ('last_name', $this->user->last_name, FORM_INPUT_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
+			$this->form->input        ('last_name', $this->user->last_name, FORM_INPUT_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$fieldset->select       ('sex', $this->user->sex, Lister\Sex::range());
+			$this->form->select       ('sex', $this->user->sex, Lister\Sex::range());
 
-			$fieldset->input        ('city', $this->user->city, FORM_INPUT_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
+			$this->form->input        ('city', $this->user->city, FORM_INPUT_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
 
-			$fieldset->select       ('country', $this->user->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
+			$this->form->select       ('country', $this->user->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
 
-			$fieldset->select       ('timezone', $this->user->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
+			$this->form->select       ('timezone', $this->user->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
 
-			$fieldset->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
+			$this->form->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
 
-			                        ($this->create ? FORM_FIELD_REQUIRED : 0));
+			                    ($this->create ? FORM_FIELD_REQUIRED : 0));
 
-			$fieldset->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
+			$this->form->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
 
-			                        ($this->create ? FORM_FIELD_REQUIRED : 0));
+			                    ($this->create ? FORM_FIELD_REQUIRED : 0));
 
 			# Post form
 
@@ -127,7 +127,7 @@ namespace System\Handlers\Admin\System {
 
 			$form = new Form('ajax'); $fieldset = array('action', 'id');
 
-			foreach ($fieldset as $name) $form->fieldset()->hidden($name);
+			foreach ($fieldset as $name) $form->hidden($name);
 
 			if (false === ($post = $form->post())) return false;
 

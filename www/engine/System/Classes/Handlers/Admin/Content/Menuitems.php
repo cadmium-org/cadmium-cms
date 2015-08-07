@@ -72,19 +72,19 @@ namespace System\Handlers\Admin\Content {
 
 			# Create form
 
-			$this->form = new Form('menuitem'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('menuitem');
 
 			# Add form fields
 
-			$fieldset->hidden       ('parent_id', $this->menuitem->parent_id);
+			$form->hidden       ('parent_id', $this->menuitem->parent_id);
 
-			$fieldset->input        ('text', $this->menuitem->text, FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input        ('text', $this->menuitem->text, FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input        ('link', $this->menuitem->link, FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
+			$this->form->input        ('link', $this->menuitem->link, FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
 
-			$fieldset->select       ('target', $this->menuitem->target, Lister\Target::range());
+			$this->form->select       ('target', $this->menuitem->target, Lister\Target::range());
 
-			$fieldset->input        ('position', $this->menuitem->position, FORM_INPUT_TEXT, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
+			$this->form->input        ('position', $this->menuitem->position, FORM_INPUT_TEXT, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
 
 			# Post form
 
@@ -122,7 +122,7 @@ namespace System\Handlers\Admin\Content {
 
 			$form = new Form('ajax'); $fieldset = array('action', 'id');
 
-			foreach ($fieldset as $name) $form->fieldset()->hidden($name);
+			foreach ($fieldset as $name) $form->hidden($name);
 
 			if (false === ($post = $form->post())) return false;
 

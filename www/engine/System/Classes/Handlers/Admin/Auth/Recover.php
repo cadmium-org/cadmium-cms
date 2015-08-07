@@ -40,17 +40,17 @@ namespace System\Handlers\Admin\Auth {
 
 			# Create form
 
-			$this->form = new Form('recover'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('recover');
 
 			# Add form fields
 
-			$fieldset->input        ('password_new', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
+			$this->form->input        ('password_new', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
 
-			                         Language::get('USER_FIELD_PASSWORD_NEW'), FORM_FIELD_REQUIRED);
+			                     Language::get('USER_FIELD_PASSWORD_NEW'), FORM_FIELD_REQUIRED);
 
-			$fieldset->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
+			$this->form->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
 
-			                         Language::get('USER_FIELD_PASSWORD_RETYPE'), FORM_FIELD_REQUIRED);
+			                     Language::get('USER_FIELD_PASSWORD_RETYPE'), FORM_FIELD_REQUIRED);
 
 			# Post form
 

@@ -34,17 +34,17 @@ namespace System\Handlers\Admin\Auth {
 
 			# Create form
 
-			$this->form = new Form('reset'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('reset');
 
 			# Add form fields
 
-			$fieldset->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+			$this->form->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
-			                         Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
+			                     Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
 
-			$fieldset->input        ('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
+			$this->form->input        ('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
 
-			                         Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
+			                     Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
 
 			# Post form
 

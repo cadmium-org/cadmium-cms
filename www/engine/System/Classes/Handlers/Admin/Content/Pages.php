@@ -72,29 +72,29 @@ namespace System\Handlers\Admin\Content {
 
 			# Create form
 
-			$this->form = new Form('page'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('page');
 
 			# Add form fields
 
-			$fieldset->hidden       ('parent_id', $this->page->parent_id);
+			$form->hidden       ('parent_id', $this->page->parent_id);
 
-			$fieldset->input        ('title', $this->page->title, FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input        ('title', $this->page->title, FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input        ('name', $this->page->name, FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
+			$this->form->input        ('name', $this->page->name, FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
 
-			$fieldset->select       ('visibility', $this->page->visibility, Lister\Visibility::range());
+			$this->form->select       ('visibility', $this->page->visibility, Lister\Visibility::range());
 
-			$fieldset->select       ('access', $this->page->access, Lister\Access::range());
+			$this->form->select       ('access', $this->page->access, Lister\Access::range());
 
-			$fieldset->input        ('description', $this->page->description, FORM_INPUT_TEXTAREA, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
+			$this->form->input        ('description', $this->page->description, FORM_INPUT_TEXTAREA, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
 
-			$fieldset->input        ('keywords', $this->page->keywords, FORM_INPUT_TEXTAREA, CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
+			$this->form->input        ('keywords', $this->page->keywords, FORM_INPUT_TEXTAREA, CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
 
-			$fieldset->checkbox     ('robots_index', $this->page->robots_index);
+			$this->form->checkbox     ('robots_index', $this->page->robots_index);
 
-			$fieldset->checkbox     ('robots_follow', $this->page->robots_follow);
+			$this->form->checkbox     ('robots_follow', $this->page->robots_follow);
 
-			$fieldset->input        ('contents', $this->page->contents, FORM_INPUT_TEXTAREA);
+			$this->form->input        ('contents', $this->page->contents, FORM_INPUT_TEXTAREA);
 
 			# Post form
 
@@ -132,7 +132,7 @@ namespace System\Handlers\Admin\Content {
 
 			$form = new Form('ajax'); $fieldset = array('action', 'id');
 
-			foreach ($fieldset as $name) $form->fieldset()->hidden($name);
+			foreach ($fieldset as $name) $form->hidden($name);
 
 			if (false === ($post = $form->post())) return false;
 

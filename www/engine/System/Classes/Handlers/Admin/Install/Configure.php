@@ -203,25 +203,25 @@ namespace System\Handlers\Admin\Install {
 
 			# Create form
 
-			$this->form = new Form(); $fieldset = $this->form->fieldset();
+			$this->form = new Form();
 
 			# Add form fields
 
-			$fieldset->input         ('site_title', CONFIG_SITE_TITLE, FORM_INPUT_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('site_title', CONFIG_SITE_TITLE, FORM_INPUT_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input         ('system_url', CONFIG_SYSTEM_URL, FORM_INPUT_TEXT, CONFIG_SYSTEM_URL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('system_url', CONFIG_SYSTEM_URL, FORM_INPUT_TEXT, CONFIG_SYSTEM_URL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->select        ('system_timezone', CONFIG_SYSTEM_TIMEZONE, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_REQUIRED);
+			$this->form->select        ('system_timezone', CONFIG_SYSTEM_TIMEZONE, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_REQUIRED);
 
-			$fieldset->input         ('system_email', CONFIG_SYSTEM_EMAIL, FORM_INPUT_TEXT, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('system_email', CONFIG_SYSTEM_EMAIL, FORM_INPUT_TEXT, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input         ('database_server', 'localhost', FORM_INPUT_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('database_server', 'localhost', FORM_INPUT_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input         ('database_user', '', FORM_INPUT_TEXT, CONFIG_DATABASE_USER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('database_user', '', FORM_INPUT_TEXT, CONFIG_DATABASE_USER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input         ('database_password', '', FORM_INPUT_TEXT, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('database_password', '', FORM_INPUT_TEXT, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input         ('database_name', '', FORM_INPUT_TEXT, CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input         ('database_name', '', FORM_INPUT_TEXT, CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# Post form
 

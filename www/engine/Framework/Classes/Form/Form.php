@@ -4,7 +4,46 @@ namespace {
 
 	class Form {
 
-		private $name = '', $fieldset = null, $posted = false, $errors = false, $fields = array();
+		private $name = '', $posted = false, $errors = false, $fields = array();
+
+		# Get field configuration
+
+		private function getConfig($config) {
+
+			$config = array_reverse(str_split(decbin(intval($config))));
+
+			$options = array();
+
+			$options[FORM_FIELD_ERROR]          = false;
+			$options[FORM_FIELD_DISABLED]       = false;
+			$options[FORM_FIELD_REQUIRED]       = false;
+			$options[FORM_FIELD_READONLY]       = false;
+			$options[FORM_FIELD_TRANSLIT]       = false;
+			$options[FORM_FIELD_SEARCH]         = false;
+			$options[FORM_FIELD_AUTO]           = false;
+
+			foreach (array_keys($options) as $key => $value) {
+
+				if (isset($config[$key]) && ($config[$key] === '1')) $options[$value] = true;
+			}
+
+			return $options;
+		}
+
+		# Add field
+
+		private function addField(Form\Utils\Field $field) {
+
+			if ($this->posted) return false;
+
+			if ('' === ($name = $field->name())) return false;
+
+			$this->fields[$name] = $field;
+
+			# ------------------------
+
+			return true;
+		}
 
 		# Check POST data
 
@@ -29,25 +68,90 @@ namespace {
 			$name = strval($name);
 
 			if (('' === $name) || preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
-
-			$this->fieldset = new Form\Utils\Fieldset($this);
 		}
 
-		# Add field
+		# Add input field
 
-		public function add($field) {
+		public function input($name, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
 
-			if ($this->posted) return false;
+			$field = new Form\Field\Input($this, $name, $value);
 
-			if (!($field instanceof Form\Utils\Field)) return false;
+			$field->type($type); $field->maxlength($maxlength); $field->placeholder($placeholder);
 
-			if ('' === ($name = $field->name())) return false;
+			# Configure field
 
-			$this->fields[$name] = $field;
+			$config = $this->getConfig($config);
+
+			$field->error($config[FORM_FIELD_ERROR]);
+
+			$field->disabled($config[FORM_FIELD_DISABLED]);
+
+			$field->required($config[FORM_FIELD_REQUIRED]);
+
+			$field->readonly($config[FORM_FIELD_READONLY]);
+
+			$field->translit($config[FORM_FIELD_TRANSLIT]);
 
 			# ------------------------
 
-			return true;
+			return $this->addField($field);
+		}
+
+		# Add select field
+
+		public function select($name, $value, array $options, $default = '', $config = 0) {
+
+			$field = new Form\Field\Select($this, $name, $value);
+
+			$field->options($options, $default);
+
+			# Configure field
+
+			$config = $this->getConfig($config);
+
+			$field->error($config[FORM_FIELD_ERROR]);
+
+			$field->disabled($config[FORM_FIELD_DISABLED]);
+
+			$field->required($config[FORM_FIELD_REQUIRED]);
+
+			$field->search($config[FORM_FIELD_SEARCH]);
+
+			$field->auto($config[FORM_FIELD_AUTO]);
+
+			# ------------------------
+
+			return $this->addField($field);
+		}
+
+		# Add checkbox field
+
+		public function checkbox($name, $value = '', $config = 0) {
+
+			$field = new Form\Field\Checkbox($this, $name, $value);
+
+			# Configure field
+
+			$config = $this->getConfig($config);
+
+			$field->error($config[FORM_FIELD_ERROR]);
+
+			$field->disabled($config[FORM_FIELD_DISABLED]);
+
+			$field->required($config[FORM_FIELD_REQUIRED]);
+
+			# ------------------------
+
+			return $this->addField($field);
+		}
+
+		# Add hidden field
+
+		public function hidden($name, $value = '') {
+
+			$field = new Form\Field\Hidden($this, $name, $value);
+
+			return $this->addField($field);
 		}
 
 		# Catch POST data
@@ -77,13 +181,6 @@ namespace {
 		public function name() {
 
 			return $this->name;
-		}
-
-		# Return fieldset
-
-		public function fieldset() {
-
-			return $this->fieldset;
 		}
 
 		# Check if posted

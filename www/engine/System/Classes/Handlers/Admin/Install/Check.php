@@ -90,13 +90,13 @@ namespace System\Handlers\Admin\Install {
 
 			# Create form
 
-			$this->form = new Form(); $fieldset = $this->form->fieldset();
+			$this->form = new Form();
 
 			# Add form fields
 
-            $fieldset->select       ('language', Extend\Languages::active(), $this->getLanguages(), '', FORM_FIELD_AUTO);
+            $this->form->select       ('language', Extend\Languages::active(), $this->getLanguages(), '', FORM_FIELD_AUTO);
 
-			$fieldset->select       ('template', Extend\Templates::active(), $this->getTemplates(), '', FORM_FIELD_AUTO);
+			$this->form->select       ('template', Extend\Templates::active(), $this->getTemplates(), '', FORM_FIELD_AUTO);
 
 			# Fill template
 

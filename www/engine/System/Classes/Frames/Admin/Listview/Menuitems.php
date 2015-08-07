@@ -163,13 +163,13 @@ namespace System\Frames\Admin\Listview {
 
 			# Create form
 
-			$this->form = new Form('menuitem'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('menuitem');
 
 			# Add form fields
 
-			$fieldset->input    ('text', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form->input    ('text', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input    ('link', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH);
+			$this->form->input    ('link', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH);
 
 			# Post form
 

@@ -34,17 +34,17 @@ namespace System\Handlers\Profile\Auth {
 
 			# Create form
 
-			$this->form = new Form('login'); $fieldset = $this->form->fieldset();
+			$this->form = new Form('login');
 
 			# Add form fields
 
-			$fieldset->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+			$this->form->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
-			                         '', FORM_FIELD_REQUIRED);
+			                     '', FORM_FIELD_REQUIRED);
 
-			$fieldset->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
+			$this->form->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
 
-			                         '', FORM_FIELD_REQUIRED);
+			                     '', FORM_FIELD_REQUIRED);
 
 			# Post form
 
