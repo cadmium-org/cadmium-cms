@@ -6,6 +6,22 @@ namespace {
 
 		private $name = '', $fieldset = null, $posted = false, $errors = false, $fields = array();
 
+		# Check POST data
+
+		private function checkPostData() {
+
+			foreach ($this->fields as $name => $field) {
+
+				if ($field->disabled() || ($field instanceof Form\Field\Checkbox)) continue;
+
+				$name = (('' !== $this->name) ? ($this->name . '_' . $name) : $name);
+
+				if (null === ($value = Request::post($name))) return false;
+			}
+
+			return true;
+		}
+
 		# Constructor
 
 		public function __construct($name = '') {
@@ -38,20 +54,7 @@ namespace {
 
 		public function post() {
 
-			if ($this->posted) return false;
-
-			# Check POST array
-
-			foreach ($this->fields as $name => $field) {
-
-				if ($field->disabled() || ($field instanceof Form\Field\Checkbox)) continue;
-
-				$name = (('' !== $this->name) ? ($this->name . '_' . $name) : $name);
-
-				if (null === ($value = Request::post($name))) return false;
-			}
-
-			# Post fields values
+			if ($this->posted || !$this->checkPostData()) return false;
 
 			$errors = false; $post = array();
 
@@ -61,7 +64,7 @@ namespace {
 
 				$post[$field->name()] = $field->value();
 			}
-			
+
 			$this->posted = true; $this->errors = $errors;
 
 			# ------------------------

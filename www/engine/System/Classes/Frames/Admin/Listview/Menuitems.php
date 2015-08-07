@@ -167,9 +167,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Add form fields
 
-			$fieldset->text     ('text', '', CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input    ('text', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text     ('link', '', CONFIG_MENUITEM_LINK_MAX_LENGTH);
+			$fieldset->input    ('link', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH);
 
 			# Post form
 

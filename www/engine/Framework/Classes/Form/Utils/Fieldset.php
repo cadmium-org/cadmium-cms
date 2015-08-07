@@ -8,13 +8,30 @@ namespace Form\Utils {
 
 		private $form = null;
 
-		# Add field to form
+		# Get configuration
 
-		private function add($field) {
+		private function getConfig($config) {
 
-			if (null === $this->form) return false;
+			$config = array_reverse(str_split(decbin(intval($config))));
 
-			return $this->form->add($field);
+			$options = array();
+
+			$options[FORM_FIELD_ERROR]          = false;
+			$options[FORM_FIELD_DISABLED]       = false;
+			$options[FORM_FIELD_REQUIRED]       = false;
+			$options[FORM_FIELD_READONLY]       = false;
+			$options[FORM_FIELD_TRANSLIT]       = false;
+			$options[FORM_FIELD_SEARCH]         = false;
+			$options[FORM_FIELD_AUTO]           = false;
+
+			$range = array_keys($options);
+
+			foreach ($config as $key => $value) {
+
+				if (($value === '1') && isset($range[$key])) $options[$range[$key]] = true;
+			}
+
+			return $options;
 		}
 
 		# Constructor
@@ -24,38 +41,38 @@ namespace Form\Utils {
 			if ($form instanceof Form) $this->form = $form;
 		}
 
-		# Add text field
+		# Add field to form
 
-		public function text($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
+		private function add($field) {
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_TEXT, $maxlength, 0, $placeholder, $config);
+			if (null === $this->form) return false;
 
-			return $this->add($field);
+			return $this->form->add($field);
 		}
 
-		# Add password field
+		# Add input field
 
-		public function password($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
+		public function input($name, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_PASSWORD, $maxlength, 0, $placeholder, $config);
+			$field = new Form\Field\Input($this->form, $name, $value);
 
-			return $this->add($field);
-		}
+			$field->type($type); $field->maxlength($maxlength); $field->placeholder($placeholder);
 
-		# Add captcha field
+			# Configure field
 
-		public function captcha($name, $value = '', $maxlength = 0, $placeholder = '', $config = 0) {
+			$config = $this->getConfig($config);
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_CAPTCHA, $maxlength, 0, $placeholder, $config);
+			if ($config[FORM_FIELD_ERROR]) $field->error(true);
 
-			return $this->add($field);
-		}
+			if ($config[FORM_FIELD_DISABLED]) $field->disabled(true);
 
-		# Add textarea field
+			if ($config[FORM_FIELD_REQUIRED]) $field->required(true);
 
-		public function textarea($name, $value = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
+			if ($config[FORM_FIELD_READONLY]) $field->readonly(true);
 
-			$field = new Form\Field\Input($this->form, $name, $value, FORM_INPUT_TYPE_TEXTAREA, $maxlength, $rows, $placeholder, $config);
+			if ($config[FORM_FIELD_TRANSLIT]) $field->translit(true);
+
+			# ------------------------
 
 			return $this->add($field);
 		}
@@ -64,16 +81,46 @@ namespace Form\Utils {
 
 		public function select($name, $value, array $options, $default = '', $config = 0) {
 
-			$field = new Form\Field\Select($this->form, $name, $value, $options, $default, $config);
+			$field = new Form\Field\Select($this->form, $name, $value);
+
+			$field->options($options, $default);
+
+			# Configure field
+
+			$config = $this->getConfig($config);
+
+			if ($config[FORM_FIELD_ERROR]) $field->error(true);
+
+			if ($config[FORM_FIELD_DISABLED]) $field->disabled(true);
+
+			if ($config[FORM_FIELD_REQUIRED]) $field->required(true);
+
+			if ($config[FORM_FIELD_SEARCH]) $field->search(true);
+
+			if ($config[FORM_FIELD_AUTO]) $field->auto(true);
+
+			# ------------------------
 
 			return $this->add($field);
 		}
 
 		# Add checkbox field
 
-		public function checkbox($name, $value = false, $config = 0) {
+		public function checkbox($name, $value = '', $config = 0) {
 
-			$field = new Form\Field\Checkbox($this->form, $name, $value, $config);
+			$field = new Form\Field\Checkbox($this->form, $name, $value);
+
+			# Configure field
+
+			$config = $this->getConfig($config);
+
+			if ($config[FORM_FIELD_ERROR]) $field->error(true);
+
+			if ($config[FORM_FIELD_DISABLED]) $field->disabled(true);
+
+			if ($config[FORM_FIELD_REQUIRED]) $field->required(true);
+
+			# ------------------------
 
 			return $this->add($field);
 		}

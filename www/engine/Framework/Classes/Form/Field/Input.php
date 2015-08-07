@@ -6,15 +6,15 @@ namespace Form\Field {
 
 	class Input extends Utils\Field {
 
-		private $type = '', $maxlength = 0, $rows = 0, $placeholder = '';
+		private $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $readonly = false, $translit = false;
 
         # Get type
 
         private function getType() {
 
-            if ($this->type === FORM_INPUT_TYPE_TEXTAREA) return false;
+            if ($this->type === FORM_INPUT_TEXTAREA) return false;
 
-            $type = (($this->type !== FORM_INPUT_TYPE_PASSWORD) ? 'text' : 'password');
+            $type = (($this->type !== FORM_INPUT_PASSWORD) ? 'text' : 'password');
 
             # ------------------------
 
@@ -25,9 +25,9 @@ namespace Form\Field {
 
         private function getValue() {
 
-            if ($this->type === FORM_INPUT_TYPE_TEXTAREA) return false;
+            if ($this->type === FORM_INPUT_TEXTAREA) return false;
 
-            $value = (!in_array($this->type, array(FORM_INPUT_TYPE_PASSWORD, FORM_INPUT_TYPE_CAPTCHA)) ? $this->value : '');
+            $value = (!in_array($this->type, array(FORM_INPUT_PASSWORD, FORM_INPUT_CAPTCHA)) ? $this->value : '');
 
             # ------------------------
 
@@ -36,19 +36,17 @@ namespace Form\Field {
 
         # Get attributes
 
-        private function getAttributes() {
+        protected function getAttributes() {
 
-            $attributes = array();
+            $attributes = parent::getAttributes();
 
             # Set type
 
             if (false !== ($type = $this->getType())) $attributes['type'] = $type;
 
-            # Set initial data
+			# Set value
 
-			$attributes['name'] = $this->getName();
-
-            $attributes['id'] = $this->getId();
+            if (false !== ($value = $this->getValue())) $attributes['value'] = $value;
 
             # Set appearance
 
@@ -56,17 +54,7 @@ namespace Form\Field {
 
 			if ('' !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
 
-            # Set additional options
-
-			if ($this->error) $attributes['data-error'] = 'error';
-
 			if ($this->readonly) $attributes['readonly'] = 'readonly';
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-            # Set value
-
-            if (false !== ($value = $this->getValue())) $attributes['value'] = $value;
 
             # ------------------------
 
@@ -77,21 +65,43 @@ namespace Form\Field {
 
         private function getContents() {
 
-            return (($this->type === FORM_INPUT_TYPE_TEXTAREA) ? $this->value : null);
+            return (($this->type === FORM_INPUT_TEXTAREA) ? $this->value : null);
         }
 
-		# Constructor
+		# Set type
 
-		public function __construct($form, $name, $value = '', $type = '', $maxlength = 0, $rows = 0, $placeholder = '', $config = 0) {
+        public function type($type) {
 
-			$this->setForm($form); $this->setName($name); $this->value = strval($value);
+            $this->type = strval($type);
+        }
 
-			$this->type = strval($type); $this->maxlength = intabs($maxlength); $this->rows = intabs($rows);
+		# Set maxlength
 
-            $this->placeholder = strval($placeholder);
+        public function maxlength($maxlength) {
 
-			$this->setConfig($config);
-		}
+            $this->maxlength = intabs($maxlength);
+        }
+
+		# Set placeholder
+
+		public function placeholder($value) {
+
+            $this->placeholder = strval($value);
+        }
+
+		# Set readonly
+
+        public function readonly($value) {
+
+            $this->readonly = boolval($value);
+        }
+
+		# Set translit
+
+		public function translit($value) {
+
+            $this->translit = boolval($value);
+        }
 
 		# Catch POST value
 
@@ -103,7 +113,7 @@ namespace Form\Field {
 
             # Format value
 
-            if ($this->type !== FORM_INPUT_TYPE_PASSWORD) {
+            if ($this->type !== FORM_INPUT_PASSWORD) {
 
     			$this->value = String::input($value, false, $this->maxlength);
 
@@ -124,13 +134,13 @@ namespace Form\Field {
 
 		public function block() {
 
-            $name = (($this->type !== FORM_INPUT_TYPE_TEXTAREA) ? 'input' : 'textarea');
+            $name = (($this->type !== FORM_INPUT_TEXTAREA) ? 'input' : 'textarea');
 
 			$tag = new Tag($name, $this->getAttributes(), $this->getContents());
 
 			# ------------------------
 
-			return $tag->block();;
+			return $tag->block();
 		}
 	}
 }

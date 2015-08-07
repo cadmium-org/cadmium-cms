@@ -78,23 +78,23 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->hidden       ('parent_id', $this->page->parent_id);
 
-			$fieldset->text         ('title', $this->page->title, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('title', $this->page->title, FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('name', $this->page->name, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
+			$fieldset->input        ('name', $this->page->name, FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
 
 			$fieldset->select       ('visibility', $this->page->visibility, Lister\Visibility::range());
 
 			$fieldset->select       ('access', $this->page->access, Lister\Access::range());
 
-			$fieldset->textarea     ('description', $this->page->description, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
+			$fieldset->input        ('description', $this->page->description, FORM_INPUT_TEXTAREA, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
 
-			$fieldset->text         ('keywords', $this->page->keywords, CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
+			$fieldset->input        ('keywords', $this->page->keywords, FORM_INPUT_TEXTAREA, CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
 
 			$fieldset->checkbox     ('robots_index', $this->page->robots_index);
 
 			$fieldset->checkbox     ('robots_follow', $this->page->robots_follow);
 
-			$fieldset->textarea     ('contents', $this->page->contents);
+			$fieldset->input        ('contents', $this->page->contents, FORM_INPUT_TEXTAREA);
 
 			# Post form
 

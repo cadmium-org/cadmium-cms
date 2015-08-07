@@ -8,39 +8,7 @@ namespace Form\Utils {
 
 		protected $posted = false, $form = null, $name = '', $value = '';
 
-		protected $error = false, $required = false, $readonly = false, $disabled = false;
-
-		protected $search = false, $translit = false, $auto = false;
-
-		# Validate form
-
-		protected function setForm($form) {
-
-			if ($form instanceof Form) $this->form = $form;
-		}
-
-		# Validate name
-
-		protected function setName($name) {
-
-			$name = strval($name);
-
-			if (preg_match(REGEX_FORM_FIELD_NAME, $name)) $this->name = $name;
-		}
-
-		# Set additional options
-
-		protected function setConfig($config) {
-
-			$config = array_reverse(str_split(decbin(intval($config))));
-
-			$options = array('error', 'required', 'readonly', 'disabled', 'search', 'translit', 'auto');
-
-			foreach ($config as $key => $value) {
-
-				if (($value === '1') && isset($options[$key])) $this->$options[$key] = true;
-			}
-		}
+		protected $error = false, $disabled = false, $required = false;
 
 		# Get name
 
@@ -51,11 +19,40 @@ namespace Form\Utils {
 			return (('' !== $this->name) ? ($prefix . '_' . $this->name) : '');
 		}
 
-		# Get id
+		# Get attributes
 
-		protected function getId() {
+		protected function getAttributes() {
 
-			return str_replace('_', '-', $this->getName());
+			$attributes = array();
+
+			# Set name/id
+
+			$attributes['name'] = ($name = $this->getName());
+
+			$attributes['id'] = str_replace('_', '-', $name);
+
+			# Set config
+
+			if ($this->error) $attributes['data-error'] = 'error';
+
+			if ($this->disabled) $attributes['disabled'] = 'disabled';
+
+			# ------------------------
+
+            return $attributes;
+		}
+
+		# Validate form
+
+		public function __construct($form, $name, $value) {
+
+			if ($form instanceof Form) $this->form = $form;
+
+			$name = strval($name); $value = strval($value);
+
+			if (preg_match(REGEX_FORM_FIELD_NAME, $name)) $this->name = $name;
+
+			$this->value = $value;
 		}
 
 		# Return name
@@ -83,9 +80,20 @@ namespace Form\Utils {
 
 		# Check if field is disabled
 
-		public function disabled() {
+		public function disabled($value = null) {
 
-			return $this->disabled;
+			if (null === $value) return $this->disabled;
+
+			if (boolval($value)) $this->disabled = true;
+		}
+
+		# Check if field is disabled
+
+		public function required($value = null) {
+
+			if (null === $value) return $this->required;
+
+			if (boolval($value)) $this->required = true;
 		}
 	}
 }

@@ -78,13 +78,13 @@ namespace System\Handlers\Admin\Content {
 
 			$fieldset->hidden       ('parent_id', $this->menuitem->parent_id);
 
-			$fieldset->text         ('text', $this->menuitem->text, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('text', $this->menuitem->text, FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('link', $this->menuitem->link, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
+			$fieldset->input        ('link', $this->menuitem->link, FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
 
 			$fieldset->select       ('target', $this->menuitem->target, Lister\Target::range());
 
-			$fieldset->text         ('position', $this->menuitem->position, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
+			$fieldset->input        ('position', $this->menuitem->position, FORM_INPUT_TEXT, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
 
 			# Post form
 

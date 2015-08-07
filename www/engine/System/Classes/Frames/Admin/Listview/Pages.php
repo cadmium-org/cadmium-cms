@@ -169,9 +169,9 @@ namespace System\Frames\Admin\Listview {
 
 			# Add form fields
 
-			$fieldset->text     ('title', '', CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input    ('title', '', FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text     ('name', '', CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
+			$fieldset->input    ('name', '', FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
 
 			# Post form
 

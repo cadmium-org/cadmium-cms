@@ -38,9 +38,13 @@ namespace System\Handlers\Admin\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH, Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
+			$fieldset->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
-			$fieldset->password		('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH, Language::get('USER_FIELD_PASSWORD'), FORM_FIELD_REQUIRED);
+			                         Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
+
+			$fieldset->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
+
+			                         Language::get('USER_FIELD_PASSWORD'), FORM_FIELD_REQUIRED);
 
 			# Post form
 

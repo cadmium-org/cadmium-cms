@@ -94,9 +94,9 @@ namespace System\Handlers\Admin\Install {
 
 			# Add form fields
 
-            $fieldset->select('language', Extend\Languages::active(), $this->getLanguages(), '', FORM_FIELD_AUTO);
+            $fieldset->select       ('language', Extend\Languages::active(), $this->getLanguages(), '', FORM_FIELD_AUTO);
 
-			$fieldset->select('template', Extend\Templates::active(), $this->getTemplates(), '', FORM_FIELD_AUTO);
+			$fieldset->select       ('template', Extend\Templates::active(), $this->getTemplates(), '', FORM_FIELD_AUTO);
 
 			# Fill template
 

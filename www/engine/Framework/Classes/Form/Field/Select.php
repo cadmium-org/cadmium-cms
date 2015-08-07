@@ -2,66 +2,52 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Request, Tag, Template;
+	use Form\Utils, Request, Tag, Template, DOMDocument;
 
 	class Select extends Utils\Field {
 
-		private $options = array();
-
-		# Get attributes
-
-		private function getAttributes() {
-
-			$attributes = array();
-
-			# Set initial data
-
-			$attributes['name'] = $this->getName();
-
-			$attributes['id'] = $this->getId();
-
-			# Set additional options
-
-			if ($this->error) $attributes['data-error'] = 'error';
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-			if ($this->search) $attributes['data-search'] = 'search';
-
-			if ($this->auto) $attributes['data-auto'] = 'auto';
-
-			# ------------------------
-
-            return $attributes;
-		}
+		private $options = array(), $search = false, $auto = false;
 
 		# Get options
 
 		private function getOptions() {
 
-			$options = '';
+			$options = new DOMDocument('1.0', 'UTF-8');
 
-			foreach ($this->options as $value => $text) $options .= ('<option value="' . $value . '"' .
+			foreach ($this->options as $value => $text) {
 
-				(($this->value === $value) ? ' selected="selected"' : '') . '>' . $text . '</option>');
+				$options->appendChild($option = $options->createElement('option', $text));
+
+				if (($this->value === $value)) $option->setAttribute('selected', 'selected');
+			}
 
 			# ------------------------
 
-			return new Template\Utils\Block($options);
+			return new Template\Utils\Block($options->saveHTML(), false);
 		}
 
 		# Constructor
 
-		public function __construct($form, $name, $value, array $options, $default = '', $config = 0) {
-
-			$this->setForm($form); $this->setName($name); $this->value = strval($value);
+		public function options(array $options, $default = '') {
 
 			$default = (('' !== ($default = strval($default))) ? array('' => $default) : array());
 
 			$this->options = array_merge($default, $options);
-
-			$this->setConfig($config);
 		}
+
+		# Set search
+
+		public function search($value) {
+
+            $this->search = boolval($value);
+        }
+
+		# Set auto
+
+		public function auto($value) {
+
+            $this->auto = boolval($value);
+        }
 
 		# Catch POST value
 

@@ -65,31 +65,31 @@ namespace System\Handlers\Admin\System {
 
 			# Add form fields
 
-			$fieldset->text         ('name', $this->user->name, CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('name', $this->user->name, FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('email', $this->user->email, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('email', $this->user->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$fieldset->select       ('rank', $this->user->rank, Lister\Rank::range(), '',
 
 			                        ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : 0));
 
-			$fieldset->text         ('first_name', $this->user->first_name, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
+			$fieldset->input        ('first_name', $this->user->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
-			$fieldset->text         ('last_name', $this->user->last_name, CONFIG_USER_LAST_NAME_MAX_LENGTH);
+			$fieldset->input        ('last_name', $this->user->last_name, FORM_INPUT_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
 			$fieldset->select       ('sex', $this->user->sex, Lister\Sex::range());
 
-			$fieldset->text         ('city', $this->user->city, CONFIG_USER_CITY_MAX_LENGTH);
+			$fieldset->input        ('city', $this->user->city, FORM_INPUT_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
 
 			$fieldset->select       ('country', $this->user->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
 
 			$fieldset->select       ('timezone', $this->user->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
 
-			$fieldset->password     ('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '',
+			$fieldset->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
 
 			                        ($this->create ? FORM_FIELD_REQUIRED : 0));
 
-			$fieldset->password     ('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '',
+			$fieldset->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
 
 			                        ($this->create ? FORM_FIELD_REQUIRED : 0));
 

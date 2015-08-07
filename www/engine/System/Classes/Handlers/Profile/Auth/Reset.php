@@ -38,9 +38,13 @@ namespace System\Handlers\Profile\Auth {
 
 			# Add form fields
 
-			$fieldset->text			('name', '', CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
-			$fieldset->captcha		('captcha', '', CONFIG_CAPTCHA_LENGTH, '', FORM_FIELD_REQUIRED);
+			                         '', FORM_FIELD_REQUIRED);
+
+			$fieldset->input        ('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
+
+			                         '', FORM_FIELD_REQUIRED);
 
 			# Post form
 

@@ -21,15 +21,15 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->text         ('email', Auth::user()->email, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('email', Auth::user()->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text         ('first_name', Auth::user()->first_name, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
+			$fieldset->input        ('first_name', Auth::user()->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
-			$fieldset->text         ('last_name', Auth::user()->last_name, CONFIG_USER_LAST_NAME_MAX_LENGTH);
+			$fieldset->input        ('last_name', Auth::user()->last_name, FORM_INPUT_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
 			$fieldset->select       ('sex', Auth::user()->sex, Lister\Sex::range());
 
-			$fieldset->text         ('city', Auth::user()->city, CONFIG_USER_CITY_MAX_LENGTH);
+			$fieldset->input        ('city', Auth::user()->city, FORM_INPUT_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
 
 			$fieldset->select       ('country', Auth::user()->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
 
@@ -48,11 +48,11 @@ namespace System\Handlers\Profile {
 
 			# Add form fields
 
-			$fieldset->password     ('password', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->password     ('password_new', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('password_new', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->password     ('password_retype', '', CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# ------------------------
 

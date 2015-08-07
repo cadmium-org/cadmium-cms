@@ -8,42 +8,17 @@ namespace Form\Field {
 
 		# Get attributes
 
-		private function getAttributes() {
+		protected function getAttributes() {
 
-			$attributes = array();
-
-			# Set type
+			$attributes = parent::getAttributes();
 
 			$attributes['type'] = 'checkbox';
-
-			# Set name/id
-
-			$attributes['name'] = $this->getName();
-
-			$attributes['id'] = $this->getId();
-
-			# Set additional options
-
-			if ($this->error) $attributes['data-error'] = 'error';
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-			# Set value
 
 			if ($this->value) $attributes['checked'] = 'checked';
 
 			# ------------------------
 
             return $attributes;
-		}
-
-		# Constructor
-
-		public function __construct($form, $name, $value = false, $config = 0) {
-
-			$this->setForm($form); $this->setName($name); $this->value = boolval($value);
-
-			$this->setConfig($config);
 		}
 
 		# Catch POST value
@@ -56,7 +31,7 @@ namespace Form\Field {
 
 			# Format value
 
-			$this->value = boolval($value);
+			$this->value = strval($value);
 
 			# Check for errors
 

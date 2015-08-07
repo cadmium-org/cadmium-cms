@@ -207,21 +207,21 @@ namespace System\Handlers\Admin\Install {
 
 			# Add form fields
 
-			$fieldset->text          ('site_title', CONFIG_SITE_TITLE, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('site_title', CONFIG_SITE_TITLE, FORM_INPUT_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('system_url', CONFIG_SYSTEM_URL, CONFIG_SYSTEM_URL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('system_url', CONFIG_SYSTEM_URL, FORM_INPUT_TEXT, CONFIG_SYSTEM_URL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$fieldset->select        ('system_timezone', CONFIG_SYSTEM_TIMEZONE, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('system_email', CONFIG_SYSTEM_EMAIL, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('system_email', CONFIG_SYSTEM_EMAIL, FORM_INPUT_TEXT, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_server', 'localhost', CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('database_server', 'localhost', FORM_INPUT_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_user', '', CONFIG_DATABASE_USER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('database_user', '', FORM_INPUT_TEXT, CONFIG_DATABASE_USER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_password', '', CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('database_password', '', FORM_INPUT_TEXT, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$fieldset->text          ('database_name', '', CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$fieldset->input         ('database_name', '', FORM_INPUT_TEXT, CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			# Post form
 

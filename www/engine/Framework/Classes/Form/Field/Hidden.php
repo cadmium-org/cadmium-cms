@@ -8,40 +8,17 @@ namespace Form\Field {
 
 		# Get attributes
 
-		private function getAttributes() {
+		protected function getAttributes() {
 
-			$attributes = array();
-
-			# Set type
+			$attributes = parent::getAttributes();
 
 			$attributes['type'] = 'hidden';
-
-			# Set name/id
-
-			$attributes['name'] = $this->getName();
-
-			$attributes['id'] = $this->getId();
-
-			# Set additional options
-
-			if ($this->disabled) $attributes['disabled'] = 'disabled';
-
-			# Set value
 
 			$attributes['value'] = $this->value;
 
 			# ------------------------
 
             return $attributes;
-		}
-
-		# Constructor
-
-		public function __construct($form, $name, $value = '') {
-
-			$this->setForm($form); $this->setName($name); $this->value = strval($value);
-
-			$this->setConfig($config);
 		}
 
 		# Catch POST value
