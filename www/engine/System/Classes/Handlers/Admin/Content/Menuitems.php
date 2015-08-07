@@ -76,7 +76,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Add form fields
 
-			$form->hidden       ('parent_id', $this->menuitem->parent_id);
+			$this->form->hidden       ('parent_id', $this->menuitem->parent_id);
 
 			$this->form->input        ('text', $this->menuitem->text, FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 

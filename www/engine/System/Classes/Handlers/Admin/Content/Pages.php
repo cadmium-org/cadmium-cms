@@ -76,7 +76,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Add form fields
 
-			$form->hidden       ('parent_id', $this->page->parent_id);
+			$this->form->hidden       ('parent_id', $this->page->parent_id);
 
 			$this->form->input        ('title', $this->page->title, FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
