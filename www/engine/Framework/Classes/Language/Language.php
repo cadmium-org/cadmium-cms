@@ -52,6 +52,8 @@ namespace {
 
 			if (!self::$init) return false;
 
+			$name = strval($name);
+
 			return (isset(self::$phrases[$name]) ? self::$phrases[$name] : false);
 		}
 	}
