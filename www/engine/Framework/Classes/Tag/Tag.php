@@ -19,13 +19,33 @@ namespace {
 
 		# Constructor
 
-		public function __construct($name, array $attributes, $contents = null) {
+		public function __construct($name, array $attributes = array(), $contents = null) {
 
-			$this->name = strval($name); $this->attributes = Arr::index($attributes, 'name', 'value');
+			$this->name = strval($name);
 
-			if (null === $contents) return;
+			foreach ($attributes as $name => $value) $this->set($name, $value);
 
-			$this->contents = (Template::settable($contents) ? $contents : new Template\Utils\Block(String::output($contents), false));
+			$this->contents($contents);
+		}
+
+		# Set attribute
+
+		public function set($name, $value) {
+
+			$name = strval($name); $value = strval($value);
+
+			$this->attributes[$name] = $value;
+		}
+
+		# Set contents
+
+		public function contents($contents) {
+
+			if (null === $contents) $this->contents = null;
+
+			if (Template::settable($contents)) $this->contents = $contents;
+
+			else $this->contents = new Template\Utils\Block(String::output($contents), false);
 		}
 
 		# Get block
@@ -34,7 +54,11 @@ namespace {
 
 			$block = ((null !== $this->contents) ? clone self::$block_regular : clone self::$block_self_closing);
 
-			$block->name = $this->name; $block->attributes = $this->attributes; $block->contents = $this->contents;
+			$block->name = $this->name;
+
+			$block->attributes = Arr::index($this->attributes, 'name', 'value');
+
+			$block->contents = $this->contents;
 
 			# ------------------------
 
