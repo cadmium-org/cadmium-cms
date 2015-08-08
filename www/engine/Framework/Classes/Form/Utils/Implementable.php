@@ -46,7 +46,7 @@ namespace Form\Utils {
 
 		# Check if error
 
-		public function error($value = null) {
+		public function error() {
 
 			return $this->error;
 		}

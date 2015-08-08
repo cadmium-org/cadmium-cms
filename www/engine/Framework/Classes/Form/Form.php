@@ -116,9 +116,9 @@ namespace {
 
 		# Add virtual field
 
-		public function virtual($key, $value = '') {
+		public function virtual($key) {
 
-			$field = new Form\Utils\Field($this, $key, $value);
+			$field = new Form\Utils\Field($this, $key);
 
 			return $this->addField($field);
 		}
