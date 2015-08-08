@@ -2,92 +2,42 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Request, String, Tag;
+	use Form\Utils, String;
 
-	class Input extends Utils\Field {
+	class Input extends Utils\Implementable {
 
 		private $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $readonly = false, $translit = false;
 
-        # Get type
+		# Set value
 
-        private function getType() {
+        protected function set($value) {
 
-            if ($this->type === FORM_INPUT_TEXTAREA) return false;
+			$this->value = strval($value);
 
-            $type = (($this->type !== FORM_INPUT_PASSWORD) ? 'text' : 'password');
+			if ($this->type !== FORM_INPUT_PASSWORD) {
 
-            # ------------------------
+				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
 
-            return $type;
-        }
+    			$this->value = String::input($this->value, $multiline, $this->maxlength);
 
-        # Get value
+    			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
+            }
 
-        private function getValue() {
+            return (!($this->required && ('' === $this->value)));
+	    }
 
-            if ($this->type === FORM_INPUT_TEXTAREA) return false;
+		# Constructor
 
-            $value = (!in_array($this->type, array(FORM_INPUT_PASSWORD, FORM_INPUT_CAPTCHA)) ? $this->value : '');
+		public function __construct($form, $name, $value, $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '') {
 
-            # ------------------------
+			parent::__construct($form, $name);
 
-            return $value;
-        }
+			$this->type = strval($type); $this->maxlength = intabs($maxlength);
 
-        # Get attributes
+			$this->placeholder = strval($placeholder);
 
-        protected function getAttributes() {
-
-            $attributes = parent::getAttributes();
-
-            # Set type
-
-            if (false !== ($type = $this->getType())) $attributes['type'] = $type;
-
-			# Set value
-
-            if (false !== ($value = $this->getValue())) $attributes['value'] = $value;
-
-            # Set appearance
-
-			if (0 !== $this->maxlength) $attributes['maxlength'] = $this->maxlength;
-
-			if ('' !== $this->placeholder) $attributes['placeholder'] = $this->placeholder;
-
-			if ($this->readonly) $attributes['readonly'] = 'readonly';
-
-            # ------------------------
-
-            return $attributes;
-        }
-
-        # Get contents
-
-        private function getContents() {
-
-            return (($this->type === FORM_INPUT_TEXTAREA) ? $this->value : null);
-        }
-
-		# Set type
-
-        public function type($type) {
-
-            $this->type = strval($type);
-        }
-
-		# Set maxlength
-
-        public function maxlength($maxlength) {
-
-            $this->maxlength = intabs($maxlength);
-        }
-
-		# Set placeholder
-
-		public function placeholder($value) {
-
-            $this->placeholder = strval($value);
-        }
+			$this->set($value);
+		}
 
 		# Set readonly
 
@@ -103,40 +53,62 @@ namespace Form\Field {
             $this->translit = boolval($value);
         }
 
-		# Catch POST value
+		# Get type
 
-		public function post() {
+        private function getType() {
 
-			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
+			if ($this->type === FORM_INPUT_PASSWORD) return 'password';
 
-			if (null === ($value = Request::post($name))) return false;
+			if ($this->type === FORM_INPUT_HIDDEN) return 'hidden';
 
-            # Format value
+			if ($this->type === FORM_INPUT_TEXTAREA) return false;
 
-            if ($this->type !== FORM_INPUT_PASSWORD) {
+            # ------------------------
 
-    			$this->value = String::input($value, false, $this->maxlength);
+            return 'text';
+        }
 
-    			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
+		# Get value
 
-            } else $this->value = strval($value);
+		private function getValue() {
 
-            # Check for errors
+			if (in_array($this->type, array(FORM_INPUT_CAPTCHA, FORM_INPUT_PASSWORD))) return '';
 
-            if ($this->required && ('' === $this->value)) $this->error = true;
+			if ($this->type === FORM_INPUT_TEXTAREA) return false;
 
-			# ------------------------
+            # ------------------------
 
-			return ($this->posted = true);
-		}
+            return $this->value;
+        }
 
 		# Get block
 
 		public function block() {
 
-            $name = (($this->type !== FORM_INPUT_TEXTAREA) ? 'input' : 'textarea');
+            $tag = $this->getTag(($this->type === FORM_INPUT_TEXTAREA) ? 'textarea' : 'input');
 
-			$tag = new Tag($name, $this->getAttributes(), $this->getContents());
+			# Set type
+
+            if (false !== ($type = $this->getType())) $tag->set('type', $type);
+
+			# Set value
+
+			if (false !== ($value = $this->getValue())) $tag->set('value', $value);
+
+            # Set appearance
+
+			if ($this->type !== FORM_INPUT_HIDDEN) {
+
+				if (0 !== $this->maxlength) $tag->set('maxlength', $this->maxlength);
+
+				if ('' !== $this->placeholder) $tag->set('placeholder', $this->placeholder);
+
+				if ($this->readonly) $tag->set('readonly', 'readonly');
+			}
+
+			# Set contents
+
+			if ($this->type === FORM_INPUT_TEXTAREA) $tag->contents($this->value);
 
 			# ------------------------
 

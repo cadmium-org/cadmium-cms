@@ -6,7 +6,7 @@
 
 			<label for="reset-name">%USER_FIELD_NAME%</label>
 
-			{ block:field_name / }
+			{ block:field_reset_name / }
 
 		</div>
 
@@ -14,7 +14,7 @@
 
 			<label for="reset-captcha">%USER_FIELD_CAPTCHA%</label>
 
-			{ block:field_captcha / }
+			{ block:field_reset_captcha / }
 
 		</div>
 

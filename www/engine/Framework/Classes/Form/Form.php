@@ -14,9 +14,8 @@ namespace {
 
 			$options = array();
 
-			$options[FORM_FIELD_ERROR]          = false;
-			$options[FORM_FIELD_DISABLED]       = false;
 			$options[FORM_FIELD_REQUIRED]       = false;
+			$options[FORM_FIELD_DISABLED]       = false;
 			$options[FORM_FIELD_READONLY]       = false;
 			$options[FORM_FIELD_TRANSLIT]       = false;
 			$options[FORM_FIELD_SEARCH]         = false;
@@ -30,33 +29,15 @@ namespace {
 			return $options;
 		}
 
-		# Add field
+		# Add field to form
 
 		private function addField(Form\Utils\Field $field) {
 
-			if ($this->posted) return false;
+			if ($this->posted || ('' === ($key = $field->key()))) return false;
 
-			if ('' === ($name = $field->name())) return false;
-
-			$this->fields[$name] = $field;
+			$this->fields[$key] = $field;
 
 			# ------------------------
-
-			return true;
-		}
-
-		# Check POST data
-
-		private function checkPostData() {
-
-			foreach ($this->fields as $name => $field) {
-
-				if ($field->disabled() || ($field instanceof Form\Field\Checkbox)) continue;
-
-				$name = (('' !== $this->name) ? ($this->name . '_' . $name) : $name);
-
-				if (null === ($value = Request::post($name))) return false;
-			}
 
 			return true;
 		}
@@ -67,30 +48,26 @@ namespace {
 
 			$name = strval($name);
 
-			if (('' === $name) || preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
+			if (preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
 		}
 
 		# Add input field
 
-		public function input($name, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
+		public function input($key, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
 
-			$field = new Form\Field\Input($this, $name, $value);
-
-			$field->type($type); $field->maxlength($maxlength); $field->placeholder($placeholder);
+			$field = new Form\Field\Input($this, $key, $value, $type, $maxlength, $placeholder);
 
 			# Configure field
 
 			$config = $this->getConfig($config);
 
-			$field->error($config[FORM_FIELD_ERROR]);
+			$field->required    ($config[FORM_FIELD_REQUIRED]);
 
-			$field->disabled($config[FORM_FIELD_DISABLED]);
+			$field->disabled    ($config[FORM_FIELD_DISABLED]);
 
-			$field->required($config[FORM_FIELD_REQUIRED]);
+			$field->readonly    ($config[FORM_FIELD_READONLY]);
 
-			$field->readonly($config[FORM_FIELD_READONLY]);
-
-			$field->translit($config[FORM_FIELD_TRANSLIT]);
+			$field->translit    ($config[FORM_FIELD_TRANSLIT]);
 
 			# ------------------------
 
@@ -99,75 +76,86 @@ namespace {
 
 		# Add select field
 
-		public function select($name, $value, array $options, $default = '', $config = 0) {
+		public function select($key, $value, array $options, $default = '', $config = 0) {
 
-			$field = new Form\Field\Select($this, $name, $value);
-
-			$field->options($options, $default);
+			$field = new Form\Field\Select($this, $key, $value, $options, $default);
 
 			# Configure field
 
 			$config = $this->getConfig($config);
 
-			$field->error($config[FORM_FIELD_ERROR]);
+			$field->required    ($config[FORM_FIELD_REQUIRED]);
 
-			$field->disabled($config[FORM_FIELD_DISABLED]);
+			$field->disabled    ($config[FORM_FIELD_DISABLED]);
 
-			$field->required($config[FORM_FIELD_REQUIRED]);
+			$field->search      ($config[FORM_FIELD_SEARCH]);
 
-			$field->search($config[FORM_FIELD_SEARCH]);
-
-			$field->auto($config[FORM_FIELD_AUTO]);
+			$field->auto        ($config[FORM_FIELD_AUTO]);
 
 			# ------------------------
 
 			return $this->addField($field);
 		}
 
-		# Add checkbox field
+		public function checkbox($key, $value, $config = 0) {
 
-		public function checkbox($name, $value = '', $config = 0) {
-
-			$field = new Form\Field\Checkbox($this, $name, $value);
+			$field = new Form\Field\Checkbox($this, $key, $value);
 
 			# Configure field
 
 			$config = $this->getConfig($config);
 
-			$field->error($config[FORM_FIELD_ERROR]);
+			$field->required    ($config[FORM_FIELD_REQUIRED]);
 
-			$field->disabled($config[FORM_FIELD_DISABLED]);
-
-			$field->required($config[FORM_FIELD_REQUIRED]);
+			$field->disabled    ($config[FORM_FIELD_DISABLED]);
 
 			# ------------------------
 
 			return $this->addField($field);
 		}
 
-		# Add hidden field
+		# Add virtual field
 
-		public function hidden($name, $value = '') {
+		public function virtual($key, $value = '') {
 
-			$field = new Form\Field\Hidden($this, $name, $value);
+			$field = new Form\Utils\Field($this, $key, $value);
 
 			return $this->addField($field);
+		}
+
+		# Check POST data
+
+		public function check() {
+
+			$check = false;
+
+			foreach ($this->fields as $field) {
+
+				if (($field instanceof Form\Field\Checkbox)) continue;
+
+				if (($field instanceof Form\Utils\Implementable) && $field->disabled()) continue;
+
+				if (null !== ($value = Request::post($field->name()))) $check = true; else return false;
+			}
+
+			return $check;
 		}
 
 		# Catch POST data
 
 		public function post() {
 
-			if ($this->posted || !$this->checkPostData()) return false;
+			if ($this->posted || !$this->check()) return false;
 
 			$errors = false; $post = array();
 
 			foreach ($this->fields as $field) {
 
-				if ($field->post() && $field->error()) $errors = true;
+				if ($field->post() && ($field instanceof Form\Utils\Implementable) && $field->error()) $errors = true;
 
-				$post[$field->name()] = $field->value();
+				$post[$field->key()] = $field->value();
 			}
+
 
 			$this->posted = true; $this->errors = $errors;
 

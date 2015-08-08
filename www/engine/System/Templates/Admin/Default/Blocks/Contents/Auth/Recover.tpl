@@ -6,7 +6,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_password_new / }
+				{ block:field_recover_password_new / }
 
 				<i class="privacy icon"></i>
 
@@ -18,7 +18,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_password_retype / }
+				{ block:field_recover_password_retype / }
 
 				<i class="privacy icon"></i>
 

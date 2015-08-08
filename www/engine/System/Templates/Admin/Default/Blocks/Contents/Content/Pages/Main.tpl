@@ -30,7 +30,7 @@
 
 		<div class="ui form">
 
-			{ block:field_parent_id / }
+			{ block:field_page_parent_id / }
 
 			{ block:parent }
 
@@ -54,7 +54,7 @@
 
 				<label for="page-title">%PAGE_FIELD_TITLE%</label>
 
-				{ block:field_title / }
+				{ block:field_page_title / }
 
 			</div>
 
@@ -62,7 +62,7 @@
 
 				<label for="page-name">%PAGE_FIELD_NAME%</label>
 
-				{ block:field_name / }
+				{ block:field_page_name / }
 
 			</div>
 
@@ -70,7 +70,7 @@
 
 				<label for="page-visibility">%PAGE_FIELD_VISIBILITY%</label>
 
-				{ block:field_visibility / }
+				{ block:field_page_visibility / }
 
 			</div>
 
@@ -78,7 +78,7 @@
 
 				<label for="page-access">%PAGE_FIELD_ACCESS%</label>
 
-				{ block:field_access / }
+				{ block:field_page_access / }
 
 			</div>
 
@@ -98,7 +98,7 @@
 
 						<label for="page-description">%PAGE_FIELD_DESCRIPTION%</label>
 
-						{ block:field_description / }
+						{ block:field_page_description / }
 
 					</div>
 
@@ -106,7 +106,7 @@
 
 						<label for="page-keywords">%PAGE_FIELD_KEYWORDS%</label>
 
-						{ block:field_keywords / }
+						{ block:field_page_keywords / }
 
 					</div>
 
@@ -114,7 +114,7 @@
 
 						<div class="ui slider checkbox">
 
-							{ block:field_robots_index / }
+							{ block:field_page_robots_index / }
 
 							<label for="page-robots-index">%PAGE_FIELD_ROBOTS_INDEX%</label>
 
@@ -126,7 +126,7 @@
 
 						<div class="ui slider checkbox">
 
-							{ block:field_robots_follow / }
+							{ block:field_page_robots_follow / }
 
 							<label for="page-robots-follow">%PAGE_FIELD_ROBOTS_FOLLOW%</label>
 
@@ -144,7 +144,7 @@
 
 		<div id="editor-container" style="display:none;">
 
-			{ block:field_contents / }
+			{ block:field_page_contents / }
 
 		</div>
 

@@ -6,7 +6,7 @@
 
 			<label for="recover-password-new">%USER_FIELD_PASSWORD_NEW%</label>
 
-			{ block:field_password_new / }
+			{ block:field_recover_password_new / }
 
 		</div>
 
@@ -14,7 +14,7 @@
 
 			<label for="recover-password-retype">%USER_FIELD_PASSWORD_RETYPE%</label>
 
-			{ block:field_password_retype / }
+			{ block:field_recover_password_retype / }
 
 		</div>
 

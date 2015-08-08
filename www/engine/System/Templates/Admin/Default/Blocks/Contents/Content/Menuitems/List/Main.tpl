@@ -50,7 +50,7 @@
 
 		<label for="menuitem-text">%MENUITEM_FIELD_TEXT%</label>
 
-		{ block:field_text / }
+		{ block:field_menuitem_text / }
 
 	</div>
 
@@ -58,7 +58,7 @@
 
 		<label for="menuitem-link">%MENUITEM_FIELD_LINK%</label>
 
-		{ block:field_link / }
+		{ block:field_menuitem_link / }
 
 	</div>
 

@@ -10,7 +10,7 @@
 
 				<label for="settings-site-title">%SETTINGS_FIELD_SITE_TITLE%</label>
 
-				{ block:field_site_title / }
+				{ block:field_settings_site_title / }
 
 			</div>
 
@@ -18,7 +18,7 @@
 
 				<label for="settings-site-status">%SETTINGS_FIELD_SITE_STATUS%</label>
 
-				{ block:field_site_status / }
+				{ block:field_settings_site_status / }
 
 			</div>
 
@@ -26,7 +26,7 @@
 
 				<label for="settings-site-description">%SETTINGS_FIELD_SITE_DESCRIPTION%</label>
 
-				{ block:field_site_description / }
+				{ block:field_settings_site_description / }
 
 			</div>
 
@@ -34,7 +34,7 @@
 
 				<label for="settings-site-keywords">%SETTINGS_FIELD_SITE_KEYWORDS%</label>
 
-				{ block:field_site_keywords / }
+				{ block:field_settings_site_keywords / }
 
 			</div>
 
@@ -48,7 +48,7 @@
 
 				<label for="settings-system-url">%SETTINGS_FIELD_SYSTEM_URL%</label>
 
-				{ block:field_system_url / }
+				{ block:field_settings_system_url / }
 
 			</div>
 
@@ -56,7 +56,7 @@
 
 				<label for="settings-system-timezone">%SETTINGS_FIELD_SYSTEM_TIMEZONE%</label>
 
-				{ block:field_system_timezone / }
+				{ block:field_settings_system_timezone / }
 
 			</div>
 
@@ -64,7 +64,7 @@
 
 				<label for="settings-admin-email">%SETTINGS_FIELD_SYSTEM_EMAIL%</label>
 
-				{ block:field_system_email / }
+				{ block:field_settings_system_email / }
 
 			</div>
 
@@ -74,7 +74,7 @@
 
 				<div class="ui slider checkbox">
 
-					{ block:field_users_registration / }
+					{ block:field_settings_users_registration / }
 
 					<label for="settings-users-registration">%SETTINGS_FIELD_USERS_REGISTRATION%</label>
 

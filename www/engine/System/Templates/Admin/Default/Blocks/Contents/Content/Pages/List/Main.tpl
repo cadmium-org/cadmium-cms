@@ -50,7 +50,7 @@
 
 		<label for="page-title">%PAGE_FIELD_TITLE%</label>
 
-		{ block:field_title / }
+		{ block:field_page_title / }
 
 	</div>
 
@@ -58,7 +58,7 @@
 
 		<label for="page-name">%PAGE_FIELD_NAME%</label>
 
-		{ block:field_name / }
+		{ block:field_page_name / }
 
 	</div>
 

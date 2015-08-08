@@ -26,7 +26,7 @@
 
 						<label for="user-name">%USER_FIELD_NAME%</label>
 
-						{ block:field_name / }
+						{ block:field_user_name / }
 
 					</div>
 
@@ -34,7 +34,7 @@
 
 						<label for="user-email">%USER_FIELD_EMAIL%</label>
 
-						{ block:field_email / }
+						{ block:field_user_email / }
 
 					</div>
 
@@ -42,7 +42,7 @@
 
 						<label for="user-rank">%USER_FIELD_RANK%</label>
 
-						{ block:field_rank / }
+						{ block:field_user_rank / }
 
 					</div>
 
@@ -50,7 +50,7 @@
 
 						<label for="user-first-name">%USER_FIELD_FIRST_NAME%</label>
 
-						{ block:field_first_name / }
+						{ block:field_user_first_name / }
 
 					</div>
 
@@ -58,7 +58,7 @@
 
 						<label for="user-last-name">%USER_FIELD_LAST_NAME%</label>
 
-						{ block:field_last_name / }
+						{ block:field_user_last_name / }
 
 					</div>
 
@@ -66,7 +66,7 @@
 
 						<label for="user-sex">%USER_FIELD_SEX%</label>
 
-						{ block:field_sex / }
+						{ block:field_user_sex / }
 
 					</div>
 
@@ -74,7 +74,7 @@
 
 						<label for="user-city">%USER_FIELD_CITY%</label>
 
-						{ block:field_city / }
+						{ block:field_user_city / }
 
 					</div>
 
@@ -82,7 +82,7 @@
 
 						<label for="user-country">%USER_FIELD_COUNTRY%</label>
 
-						{ block:field_country / }
+						{ block:field_user_country / }
 
 					</div>
 
@@ -90,7 +90,7 @@
 
 						<label for="user-timezone">%USER_FIELD_TIMEZONE%</label>
 
-						{ block:field_timezone / }
+						{ block:field_user_timezone / }
 
 					</div>
 
@@ -102,7 +102,7 @@
 
 						<label for="user-password">%USER_FIELD_PASSWORD%</label>
 
-						{ block:field_password / }
+						{ block:field_user_password / }
 
 					</div>
 
@@ -110,7 +110,7 @@
 
 						<label for="user-password-retype">%USER_FIELD_PASSWORD_RETYPE%</label>
 
-						{ block:field_password_retype / }
+						{ block:field_user_password_retype / }
 
 					</div>
 

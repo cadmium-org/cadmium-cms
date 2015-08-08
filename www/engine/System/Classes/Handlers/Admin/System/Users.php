@@ -127,7 +127,7 @@ namespace System\Handlers\Admin\System {
 
 			$form = new Form('ajax'); $fieldset = array('action', 'id');
 
-			foreach ($fieldset as $name) $form->hidden($name);
+			foreach ($fieldset as $name) $form->virtual($name);
 
 			if (false === ($post = $form->post())) return false;
 

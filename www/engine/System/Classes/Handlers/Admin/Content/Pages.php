@@ -76,7 +76,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Add form fields
 
-			$this->form->hidden       ('parent_id', $this->page->parent_id);
+			$this->form->input        ('parent_id', $this->page->parent_id, FORM_INPUT_HIDDEN);
 
 			$this->form->input        ('title', $this->page->title, FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
@@ -132,7 +132,7 @@ namespace System\Handlers\Admin\Content {
 
 			$form = new Form('ajax'); $fieldset = array('action', 'id');
 
-			foreach ($fieldset as $name) $form->hidden($name);
+			foreach ($fieldset as $name) $form->virtual($name);
 
 			if (false === ($post = $form->post())) return false;
 

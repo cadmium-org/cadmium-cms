@@ -2,51 +2,39 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Request, Tag;
+	use Form\Utils;
 
-	class Checkbox extends Utils\Field {
+	class Checkbox extends Utils\Implementable {
 
-		# Get attributes
+		# Set value
 
-		protected function getAttributes() {
+        public function set($value) {
 
-			$attributes = parent::getAttributes();
+            $this->value = boolval($value);
 
-			$attributes['type'] = 'checkbox';
+			return (!($this->required && (false === $this->value)));
+        }
 
-			if ($this->value) $attributes['checked'] = 'checked';
+		# Constructor
 
-			# ------------------------
+		public function __construct($form, $name, $value) {
 
-            return $attributes;
-		}
+			parent::__construct($form, $name);
 
-		# Catch POST value
-
-		public function post() {
-
-			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
-
-			$value = Request::post($name);
-
-			# Format value
-
-			$this->value = strval($value);
-
-			# Check for errors
-
-			if ($this->required && (false === $this->value)) $this->error = true;
-
-			# ------------------------
-
-			return ($this->posted = true);
+			$this->set($value);
 		}
 
 		# Get block
 
 		public function block() {
 
-			$tag = new Tag('input', $this->getAttributes());
+			$tag = $this->getTag('input');
+
+			$tag->set('type', 'checkbox');
+
+			if (false !== $this->value) $tag->set('checked', 'checked');
+
+			# ------------------------
 
 			return $tag->block();
 		}

@@ -30,7 +30,7 @@
 
 		<div class="ui form">
 
-			{ block:field_parent_id / }
+			{ block:field_menuitem_parent_id / }
 
 			{ block:parent }
 
@@ -54,7 +54,7 @@
 
 				<label for="menuitem-text">%MENUITEM_FIELD_TEXT%</label>
 
-				{ block:field_text / }
+				{ block:field_menuitem_text / }
 
 			</div>
 
@@ -62,7 +62,7 @@
 
 				<label for="menuitem-link">%MENUITEM_FIELD_LINK%</label>
 
-				{ block:field_link / }
+				{ block:field_menuitem_link / }
 
 			</div>
 
@@ -70,7 +70,7 @@
 
 				<label for="menuitem-target">%MENUITEM_FIELD_TARGET%</label>
 
-				{ block:field_target / }
+				{ block:field_menuitem_target / }
 
 			</div>
 
@@ -78,7 +78,7 @@
 
 				<label for="menuitem-position">%MENUITEM_FIELD_POSITION%</label>
 
-				{ block:field_position / }
+				{ block:field_menuitem_position / }
 
 			</div>
 

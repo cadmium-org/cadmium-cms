@@ -15,7 +15,7 @@ namespace System\Handlers\Admin\System {
 
 		# Save configuration
 
-		private function setData($data) {
+		private function setData($data) {var_dump($data);
 
 			foreach ($data as $name => $value) if (false === Config::set($name, $value)) {
 

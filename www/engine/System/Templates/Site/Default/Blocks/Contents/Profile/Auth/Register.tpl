@@ -6,7 +6,7 @@
 
 			<label for="register-name">%USER_FIELD_NAME%</label>
 
-			{ block:field_name / }
+			{ block:field_register_name / }
 
 		</div>
 
@@ -14,7 +14,7 @@
 
 			<label for="register-password">%USER_FIELD_PASSWORD%</label>
 
-			{ block:field_password / }
+			{ block:field_register_password / }
 
 		</div>
 
@@ -22,7 +22,7 @@
 
 			<label for="register-password-retype">%USER_FIELD_PASSWORD_RETYPE%</label>
 
-			{ block:field_password_retype / }
+			{ block:field_register_password_retype / }
 
 		</div>
 
@@ -30,7 +30,7 @@
 
 			<label for="register-email">%USER_FIELD_EMAIL%</label>
 
-			{ block:field_email / }
+			{ block:field_register_email / }
 
 		</div>
 
@@ -38,7 +38,7 @@
 
 			<label for="register-captcha">%USER_FIELD_CAPTCHA%</label>
 
-			{ block:field_captcha / }
+			{ block:field_register_captcha / }
 
 		</div>
 

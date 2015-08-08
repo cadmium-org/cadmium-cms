@@ -2,37 +2,40 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Request, Tag, Template, DOMDocument;
+	use Form\Utils, Form\View;
 
-	class Select extends Utils\Field {
+	class Select extends Utils\Implementable {
 
 		private $options = array(), $search = false, $auto = false;
 
-		# Get options
+		# Set value
 
-		private function getOptions() {
+        protected function set($value) {
 
-			$options = new DOMDocument('1.0', 'UTF-8');
+			$this->value = strval($value);
 
-			foreach ($this->options as $value => $text) {
+			$key = array_search($this->value, ($range = array_keys($this->options)));
 
-				$options->appendChild($option = $options->createElement('option', $text));
-
-				if (($this->value === $value)) $option->setAttribute('selected', 'selected');
-			}
+			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
 
 			# ------------------------
 
-			return new Template\Utils\Block($options->saveHTML(), false);
-		}
+			return (!($this->required && empty($this->value)));
+	    }
 
 		# Constructor
 
-		public function options(array $options, $default = '') {
+		public function __construct($form, $name, $value, array $options, $default = '') {
 
-			$default = (('' !== ($default = strval($default))) ? array('' => $default) : array());
+			parent::__construct($form, $name);
+
+			$default = strval($default);
+
+			$default = (('' !== $default) ? array('' => $default) : array());
 
 			$this->options = array_merge($default, $options);
+
+			$this->set($value);
 		}
 
 		# Set search
@@ -49,34 +52,41 @@ namespace Form\Field {
             $this->auto = boolval($value);
         }
 
-		# Catch POST value
+		# Get options
 
-		public function post() {
+		private function getOptions() {
 
-			if ($this->posted || $this->disabled || ('' === ($name = $this->getName()))) return false;
+			$options = array();
 
-			if ((array() === $this->options) || (null === ($value = Request::post($name)))) return false;
+			foreach ($this->options as $value => $text) {
 
-			# Format value
+				$selected = (($this->value === $value) ? 'selected' : '');
 
-			$key = array_search($value, ($range = array_keys($this->options)));
+				$options[] = array('value' => $value, 'selected' => $selected, 'text' => $text);
+			}
 
-			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
+			$block = new View\Options();
 
-			# Check for errors
-
-			if ($this->required && empty($this->value)) $this->error = true;
+			$block->options = $options;
 
 			# ------------------------
 
-			return ($this->posted = true);
+			return $block;
 		}
 
 		# Get block
 
 		public function block() {
 
-			$tag = new Tag('select', $this->getAttributes(), $this->getOptions());
+			$tag = $this->getTag('select');
+
+			if ($this->search) $tag->set('data-search', 'search');
+
+			if ($this->auto) $tag->set('data-auto', 'auto');
+
+			$tag->contents($this->getOptions());
+
+			# ------------------------
 
 			return $tag->block();
 		}

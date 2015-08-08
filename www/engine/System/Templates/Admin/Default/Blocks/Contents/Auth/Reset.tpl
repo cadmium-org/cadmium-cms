@@ -6,7 +6,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_name / }
+				{ block:field_reset_name / }
 
 				<i class="user icon"></i>
 
@@ -18,7 +18,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_captcha / }
+				{ block:field_reset_captcha / }
 
 				<i class="protect icon"></i>
 

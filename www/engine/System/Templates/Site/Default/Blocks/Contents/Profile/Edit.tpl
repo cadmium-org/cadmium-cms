@@ -20,7 +20,7 @@
 
 					<label for="edit-email">%USER_FIELD_EMAIL%</label>
 
-					{ block:field_email / }
+					{ block:field_edit_email / }
 
 				</div>
 
@@ -28,7 +28,7 @@
 
 					<label for="edit-first-name">%USER_FIELD_FIRST_NAME%</label>
 
-					{ block:field_first_name / }
+					{ block:field_edit_first_name / }
 
 				</div>
 
@@ -36,7 +36,7 @@
 
 					<label for="edit-last-name">%USER_FIELD_LAST_NAME%</label>
 
-					{ block:field_last_name / }
+					{ block:field_edit_last_name / }
 
 				</div>
 
@@ -44,7 +44,7 @@
 
 					<label for="edit-sex">%USER_FIELD_SEX%</label>
 
-					{ block:field_sex / }
+					{ block:field_edit_sex / }
 
 				</div>
 
@@ -52,7 +52,7 @@
 
 					<label for="edit-city">%USER_FIELD_CITY%</label>
 
-					{ block:field_city / }
+					{ block:field_edit_city / }
 
 				</div>
 
@@ -60,7 +60,7 @@
 
 					<label for="edit-country">%USER_FIELD_COUNTRY%</label>
 
-					{ block:field_country / }
+					{ block:field_edit_country / }
 
 				</div>
 
@@ -68,7 +68,7 @@
 
 					<label for="edit-timezone">%USER_FIELD_TIMEZONE%</label>
 
-					{ block:field_timezone / }
+					{ block:field_edit_timezone / }
 
 				</div>
 
@@ -92,7 +92,7 @@
 
 					<label for="edit-password">%USER_FIELD_PASSWORD_CURRENT%</label>
 
-					{ block:field_password / }
+					{ block:field_edit_password / }
 
 				</div>
 
@@ -100,7 +100,7 @@
 
 					<label for="edit-password-new">%USER_FIELD_PASSWORD_NEW%</label>
 
-					{ block:field_password_new / }
+					{ block:field_edit_password_new / }
 
 				</div>
 
@@ -108,7 +108,7 @@
 
 					<label for="edit-password-retype">%USER_FIELD_PASSWORD_RETYPE%</label>
 
-					{ block:field_password_retype / }
+					{ block:field_edit_password_retype / }
 
 				</div>
 

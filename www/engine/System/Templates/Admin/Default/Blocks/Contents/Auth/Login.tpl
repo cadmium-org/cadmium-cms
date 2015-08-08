@@ -6,7 +6,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_name / }
+				{ block:field_login_name / }
 
 				<i class="user icon"></i>
 
@@ -18,7 +18,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_password / }
+				{ block:field_login_password / }
 
 				<i class="lock icon"></i>
 

@@ -6,7 +6,7 @@
 
 			<label for="login-name">%USER_FIELD_NAME%</label>
 
-			{ block:field_name / }
+			{ block:field_login_name / }
 
 		</div>
 
@@ -14,7 +14,7 @@
 
 			<label for="login-password">%USER_FIELD_PASSWORD%</label>
 
-			{ block:field_password / }
+			{ block:field_login_password / }
 
 		</div>
 

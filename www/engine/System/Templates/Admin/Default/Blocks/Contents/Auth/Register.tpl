@@ -6,7 +6,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_name / }
+				{ block:field_register_name / }
 
 				<i class="user icon"></i>
 
@@ -18,7 +18,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_password / }
+				{ block:field_register_password / }
 
 				<i class="lock icon"></i>
 
@@ -30,7 +30,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_password_retype / }
+				{ block:field_register_password_retype / }
 
 				<i class="lock icon"></i>
 
@@ -42,7 +42,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_email / }
+				{ block:field_register_email / }
 
 				<i class="at icon"></i>
 
@@ -54,7 +54,7 @@
 
 			<div class="ui left icon input">
 
-				{ block:field_captcha / }
+				{ block:field_register_captcha / }
 
 				<i class="protect icon"></i>
 
