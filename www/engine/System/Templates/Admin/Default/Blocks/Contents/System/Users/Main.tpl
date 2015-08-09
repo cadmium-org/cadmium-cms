@@ -14,7 +14,7 @@
 
 <div class="ui segment">
 
-	<form class="ui form" method="post" action="$link$">
+	<form class="ui form" method="post" action="$link$" autocomplete="off">
 
 		<div class="ui stackable grid">
 

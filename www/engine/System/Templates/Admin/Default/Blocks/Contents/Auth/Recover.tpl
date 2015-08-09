@@ -1,6 +1,6 @@
 <div class="ui segment">
 
-	<form class="ui form" method="post" action="/admin/recover?code=$code$">
+	<form class="ui form" method="post" action="/admin/recover?code=$code$" autocomplete="off">
 
 		<div class="field">
 

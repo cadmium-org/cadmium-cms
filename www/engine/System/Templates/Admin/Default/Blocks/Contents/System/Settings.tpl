@@ -1,4 +1,4 @@
-<form class="ui form segment" method="post" action="/admin/system/settings">
+<form class="ui form segment" method="post" action="/admin/system/settings" autocomplete="off">
 
 	<div class="ui two column stackable grid">
 

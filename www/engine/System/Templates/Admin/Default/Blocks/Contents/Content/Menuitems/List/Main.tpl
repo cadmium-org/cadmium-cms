@@ -32,7 +32,7 @@
 
 </div>
 
-<form class="ui form segment" id="menuitem-create-form" method="post" action="/admin/content/menuitems?parent_id=$id$#create" style="display:none;">
+<form class="ui form segment" id="menuitem-create-form" method="post" action="/admin/content/menuitems?parent_id=$id$#create" autocomplete="off" style="display:none;">
 
 	{ block:parent }
 

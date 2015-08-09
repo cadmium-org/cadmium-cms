@@ -1,6 +1,6 @@
 <div class="ui segment">
 
-	<form class="ui auth form" method="post" action="/profile/login">
+	<form class="ui auth form" method="post" action="/profile/login" autocomplete="off">
 
 		<div class="field">
 

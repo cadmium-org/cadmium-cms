@@ -26,7 +26,7 @@
 
 <div class="ui segment">
 
-	<form method="post" action="/admin/content/menuitems?id=$id$">
+	<form method="post" action="/admin/content/menuitems?id=$id$" autocomplete="off">
 
 		<div class="ui form">
 

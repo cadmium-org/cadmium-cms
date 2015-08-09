@@ -14,7 +14,7 @@
 
 			<h4 class="ui dividing header">%PROFILE_EDIT_GROUP_PERSONAL%</h4>
 
-			<form class="ui form" method="post" action="/profile/edit">
+			<form class="ui form" method="post" action="/profile/edit" autocomplete="off">
 
 				<div class="field">
 
@@ -86,7 +86,7 @@
 
 			<h4 class="ui dividing header">%PROFILE_EDIT_GROUP_PASSWORD%</h4>
 
-			<form class="ui form" method="post" action="/profile/edit">
+			<form class="ui form" method="post" action="/profile/edit" autocomplete="off">
 
 				<div class="field">
 
