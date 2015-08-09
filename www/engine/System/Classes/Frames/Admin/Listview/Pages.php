@@ -111,7 +111,7 @@ namespace System\Frames\Admin\Listview {
 
 				else $contents->block('parent')->title = $this->parent->title;
 
-				foreach ($this->form->fields() as $name => $block) $contents->block(('field_' . $name), $block);
+				$this->form->implement($contents);
 			}
 
 			# Set list

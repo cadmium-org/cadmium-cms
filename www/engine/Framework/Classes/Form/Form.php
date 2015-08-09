@@ -151,11 +151,10 @@ namespace {
 
 			foreach ($this->fields as $field) {
 
-				if ($field->post() && ($field instanceof Form\Utils\Implementable) && $field->error()) $errors = true;
+				$field->post(); $post[$field->key()] = $field->value();
 
-				$post[$field->key()] = $field->value();
+				if (($field instanceof Form\Utils\Implementable) && $field->error()) $errors = true;
 			}
-
 
 			$this->posted = true; $this->errors = $errors;
 
@@ -185,17 +184,16 @@ namespace {
 			return $this->errors;
 		}
 
-		# Get fields
+		# Implement fields
 
-		public function fields() {
+		public function implement(Template\Utils\Settable $block) {
 
-			$fields = array();
+			foreach ($this->fields as $field) {
 
-			foreach ($this->fields as $field) $fields[$field->name()] = $field->block();
+				if (!($field instanceof Form\Utils\Implementable)) continue;
 
-			# ------------------------
-
-			return $fields;
+				$block->block(('field_' . $field->name()), $field->block());
+			}
 		}
 	}
 }

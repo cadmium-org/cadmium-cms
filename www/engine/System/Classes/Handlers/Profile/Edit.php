@@ -67,9 +67,9 @@ namespace System\Handlers\Profile {
 
 			# Set forms
 
-			foreach ($this->form_personal->fields() as $name => $block) $contents->block(('field_' . $name), $block);
+			$this->form_personal->implement($contents);
 
-			foreach ($this->form_password->fields() as $name => $block) $contents->block(('field_' . $name), $block);
+			$this->form_password->implement($contents);
 
 			# ------------------------
 

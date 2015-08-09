@@ -33,7 +33,7 @@ namespace System\Handlers\Admin\System {
 
 			# Set form
 
-			foreach ($this->form->fields() as $name => $field) $contents->block(('field_' . $name), $field);
+			$this->form->implement($contents);
 
 			# ------------------------
 

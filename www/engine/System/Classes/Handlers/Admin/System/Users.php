@@ -27,7 +27,7 @@ namespace System\Handlers\Admin\System {
 
 			# Set form
 
-			foreach ($this->form->fields() as $name => $block) $contents->block(('field_' . $name), $block);
+			$this->form->implement($contents);
 
 			# Set info
 

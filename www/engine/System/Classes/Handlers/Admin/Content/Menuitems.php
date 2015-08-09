@@ -51,7 +51,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Set form
 
-			foreach ($this->form->fields() as $name => $block) $contents->block(('field_' . $name), $block);
+			$this->form->implement($contents);
 
 			# ------------------------
 

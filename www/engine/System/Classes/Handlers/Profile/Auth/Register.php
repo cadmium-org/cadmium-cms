@@ -21,7 +21,7 @@ namespace System\Handlers\Profile\Auth {
 
 			# Set form
 
-			foreach ($this->form->fields() as $name => $field) $contents->block(('field_' . $name), $field);
+			$this->form->implement($contents);
 
 			# ------------------------
 
