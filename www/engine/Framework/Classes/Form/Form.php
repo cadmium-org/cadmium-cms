@@ -18,6 +18,8 @@ namespace {
 			$options[FORM_FIELD_DISABLED]       = false;
 			$options[FORM_FIELD_READONLY]       = false;
 			$options[FORM_FIELD_TRANSLIT]       = false;
+			$options[FORM_FIELD_AUTOFOCUS]      = false;
+			$options[FORM_FIELD_AUTOCOMPLETE]   = false;
 			$options[FORM_FIELD_SEARCH]         = false;
 			$options[FORM_FIELD_AUTO]           = false;
 
@@ -61,13 +63,17 @@ namespace {
 
 			$config = $this->getConfig($config);
 
-			$field->required    ($config[FORM_FIELD_REQUIRED]);
+			$field->required        ($config[FORM_FIELD_REQUIRED]);
 
-			$field->disabled    ($config[FORM_FIELD_DISABLED]);
+			$field->disabled        ($config[FORM_FIELD_DISABLED]);
 
-			$field->readonly    ($config[FORM_FIELD_READONLY]);
+			$field->readonly        ($config[FORM_FIELD_READONLY]);
 
-			$field->translit    ($config[FORM_FIELD_TRANSLIT]);
+			$field->translit        ($config[FORM_FIELD_TRANSLIT]);
+
+			$field->autofocus       ($config[FORM_FIELD_AUTOFOCUS]);
+
+			$field->autocomplete    ($config[FORM_FIELD_AUTOCOMPLETE]);
 
 			# ------------------------
 
@@ -84,13 +90,13 @@ namespace {
 
 			$config = $this->getConfig($config);
 
-			$field->required    ($config[FORM_FIELD_REQUIRED]);
+			$field->required        ($config[FORM_FIELD_REQUIRED]);
 
-			$field->disabled    ($config[FORM_FIELD_DISABLED]);
+			$field->disabled        ($config[FORM_FIELD_DISABLED]);
 
-			$field->search      ($config[FORM_FIELD_SEARCH]);
+			$field->search          ($config[FORM_FIELD_SEARCH]);
 
-			$field->auto        ($config[FORM_FIELD_AUTO]);
+			$field->auto            ($config[FORM_FIELD_AUTO]);
 
 			# ------------------------
 
@@ -105,9 +111,9 @@ namespace {
 
 			$config = $this->getConfig($config);
 
-			$field->required    ($config[FORM_FIELD_REQUIRED]);
+			$field->required        ($config[FORM_FIELD_REQUIRED]);
 
-			$field->disabled    ($config[FORM_FIELD_DISABLED]);
+			$field->disabled        ($config[FORM_FIELD_DISABLED]);
 
 			# ------------------------
 
@@ -186,7 +192,7 @@ namespace {
 
 		# Implement fields
 
-		public function implement(Template\Utils\Settable $block) {
+		public function implement(Template\Utils\Block $block) {
 
 			foreach ($this->fields as $field) {
 

@@ -10,9 +10,9 @@ namespace Form\Utils {
 
 		# Get attributes
 
-		protected function getTag($name) {
+		protected function getTag($name, array $attributes = array(), $contents = null) {
 
-            $tag = new Tag($name);
+            $tag = new Tag($name, $attributes, $contents);
 
             $tag->set('name', $this->name);
 
