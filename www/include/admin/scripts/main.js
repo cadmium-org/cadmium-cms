@@ -25,6 +25,8 @@ var Main = {
 
 		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange });
 
+		$('.ui.checkbox').checkbox();
+
 		$('.ui.accordion').accordion();
 
 		$('#captcha').click(function() { $(this).find('img').attr('src', '/captcha.png?unique=' + Math.random()); });
