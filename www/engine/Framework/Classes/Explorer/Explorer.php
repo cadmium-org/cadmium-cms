@@ -118,39 +118,27 @@ namespace {
 
 		public static function php($file_name) {
 
-			$file_name = strval($file_name);
-
 			if ((strtolower(self::extension($file_name)) !== 'php')) return false;
 
-			# ------------------------
-
-			return include $file_name;
+			return include strval($file_name);
 		}
 
 		# Get JSON file data
 
 		public static function json($file_name) {
 
-			$file_name = strval($file_name);
-
 			if ((strtolower(self::extension($file_name)) !== 'json')) return false;
 
-			# ------------------------
-
-			return json_decode(@file_get_contents($file_name), true);
+			return json_decode(@file_get_contents(strval($file_name)), true);
 		}
 
 		# Get XML file data
 
 		public static function xml($file_name) {
 
-			$file_name = strval($file_name);
-
 			if ((strtolower(self::extension($file_name)) !== 'xml')) return false;
 
-			# ------------------------
-
-			return @simplexml_load_file($file_name);
+			return @simplexml_load_file(strval($file_name));
 		}
 
 		# Save data to file
