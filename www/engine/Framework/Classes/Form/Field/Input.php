@@ -8,6 +8,8 @@ namespace Form\Field {
 
 		private $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $readonly = false, $translit = false;
 
+		private $autofocus = false, $autocomplete = false;
+
 		# Set value
 
         protected function set($value) {
@@ -53,62 +55,78 @@ namespace Form\Field {
             $this->translit = boolval($value);
         }
 
-		# Get type
+		# Set autofocus
 
-        private function getType() {
+		public function autofocus($value) {
 
-			if ($this->type === FORM_INPUT_PASSWORD) return 'password';
-
-			if ($this->type === FORM_INPUT_HIDDEN) return 'hidden';
-
-			if ($this->type === FORM_INPUT_TEXTAREA) return false;
-
-            # ------------------------
-
-            return 'text';
+            $this->autofocus = boolval($value);
         }
 
-		# Get value
+		# Set autocomplete
 
-		private function getValue() {
+		public function autocomplete($value) {
 
-			if (in_array($this->type, array(FORM_INPUT_CAPTCHA, FORM_INPUT_PASSWORD))) return '';
-
-			if ($this->type === FORM_INPUT_TEXTAREA) return false;
-
-            # ------------------------
-
-            return $this->value;
+            $this->autocomplete = boolval($value);
         }
+
+		# Get hidden input tag
+
+		private function getHidden() {
+
+			return $this->getTag('input', array('type' => 'hidden', 'value' => $this->value));
+		}
+
+		# Get password input tag
+
+		private function getPassword() {
+
+			return $this->getTag('input', array('type' => 'password', 'value' => ''));
+		}
+
+		# Get textarea tag
+
+		private function getTextarea() {
+
+			return $this->getTag('textarea', array(), $this->value);
+		}
+
+		# Get text input tag
+
+		private function getText() {
+
+			$value = (($this->type !== FORM_INPUT_CAPTCHA) ? $this->value : '');
+
+			return $this->getTag('input', array('type' => 'text', 'value' => $value));
+		}
 
 		# Get block
 
 		public function block() {
 
-            $tag = $this->getTag(($this->type === FORM_INPUT_TEXTAREA) ? 'textarea' : 'input');
+			if ($this->type === FORM_INPUT_HIDDEN) {
 
-			# Set type
+				$tag = $this->getHidden();
 
-            if (false !== ($type = $this->getType())) $tag->set('type', $type);
+			} else {
 
-			# Set value
+				if ($this->type === FORM_INPUT_PASSWORD) $tag = $this->getPassword();
 
-			if (false !== ($value = $this->getValue())) $tag->set('value', $value);
+				else if ($this->type === FORM_INPUT_TEXTAREA) $tag = $this->getTextarea();
 
-            # Set appearance
+				else $tag = $this->getText();
 
-			if ($this->type !== FORM_INPUT_HIDDEN) {
+	            # Set appearance
 
 				if (0 !== $this->maxlength) $tag->set('maxlength', $this->maxlength);
 
 				if ('' !== $this->placeholder) $tag->set('placeholder', $this->placeholder);
 
 				if ($this->readonly) $tag->set('readonly', 'readonly');
+
+				if ($this->autofocus) $tag->set('autofocus', 'autofocus');
+
+				if ($this->autocomplete) $tag->set('autocomplete', 'on');
 			}
-
-			# Set contents
-
-			if ($this->type === FORM_INPUT_TEXTAREA) $tag->contents($this->value);
 
 			# ------------------------
 
