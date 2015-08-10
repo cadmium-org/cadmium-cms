@@ -32,22 +32,22 @@ namespace {
 
 		public static function main($name = null) {
 
-			if (!self::$init) return new Template\Utils\Block();
+			if (!self::$init) return new Template\View\Main();
 
-			if (null === $name) return (null !== self::$main) ? self::$main : new Template\Utils\Block();
+			if (null === $name) return (null !== self::$main) ? self::$main : new Template\View\Main();
 
 			$name = strval($name);
 
 			foreach (explode('/', $name) as $item) {
 
-				if (!preg_match(REGEX_TEMPLATE_FILE_NAME, $item)) return new Template\Utils\Block();
+				if (!preg_match(REGEX_TEMPLATE_FILE_NAME, $item)) return new Template\View\Main();
 			}
 
 			$file_name = (self::$dir_name . '/Main/' . $name . '.tpl');
 
-			if (false === ($contents = Explorer::contents($file_name))) return new Template\Utils\Block();
+			if (false === ($contents = Explorer::contents($file_name))) return new Template\View\Main();
 
-			return (self::$main = new Template\Utils\Block($contents));
+			return (self::$main = new Template\View\Main($contents));
 		}
 
 		# Create block
@@ -83,8 +83,6 @@ namespace {
 
 		public static function status($status = null) {
 
-			if (!self::$init) return false;
-
 			if (null === $status) return self::$status;
 
 			if (Headers::isStatusCode($status)) self::$status = $status;
@@ -97,8 +95,6 @@ namespace {
 		# Get/set language
 
 		public static function language($language = null) {
-
-			if (!self::$init) return false;
 
 			if (null === $language) return self::$language;
 
@@ -115,8 +111,6 @@ namespace {
 
 		public static function title($title = null) {
 
-			if (!self::$init) return false;
-
 			if (null === $title) return self::$title;
 
 			self::$title = strval($title);
@@ -129,8 +123,6 @@ namespace {
 		# Get/set meta description
 
 		public static function description($description = null) {
-
-			if (!self::$init) return false;
 
 			if (null === $description) return self::$description;
 
@@ -145,8 +137,6 @@ namespace {
 
 		public static function keywords($keywords = null) {
 
-			if (!self::$init) return false;
-
 			if (null === $keywords) return self::$keywords;
 
 			self::$keywords = strval($keywords);
@@ -159,8 +149,6 @@ namespace {
 		# Get/set meta robots
 
 		public static function robots($index = null, $follow = null) {
-
-			if (!self::$init) return false;
 
 			if ((null === $index) && (null === $follow)) return self::$robots;
 
@@ -177,8 +165,6 @@ namespace {
 
 		public static function meta($name, $content = null) {
 
-			if (!self::$init) return false;
-
 			if ('' === ($name = strval($name))) return false;
 
 			if (null === $content) return (isset(self::$meta[$name]) ? self::$meta[$name] : false);
@@ -193,8 +179,6 @@ namespace {
 		# Get/set canonical link
 
 		public static function canonical($host = null, $link = null) {
-
-			if (!self::$init) return false;
 
 			if ((null === $host) && (null === $link)) return self::$link;
 

@@ -12,11 +12,9 @@ namespace Template\Utils {
 
 		# Parse collapased blocks
 
-		private function parseCollapsedBlocks() {
+		private function parseBlocks() {
 
-			$pattern = ('/(?s){[ ]*(!)?[ ]*block[ ]*:[ ]*([a-zA-Z0-9_]+)[ ]*\/[ ]*}/');
-
-			preg_match_all($pattern, $this->contents, $matches);
+			preg_match_all(REGEX_TEMPLATE_BLOCK, $this->contents, $matches);
 
 			foreach ($matches[2] as $key => $name) {
 
@@ -24,27 +22,7 @@ namespace Template\Utils {
 
 				$this->contents = str_replace($matches[0][$key], ('{ block:' . $name . ' / }'), $this->contents);
 
-				$this->blocks[$name] = new Block();
-
-				if ($matches[1][$key]) $this->blocks[$name]->disable();
-			}
-		}
-
-		# Parse expanded blocks
-
-		private function parseExpandedBlocks() {
-
-			$pattern = ('/(?s){[ ]*(!)?[ ]*block[ ]*:[ ]*([a-zA-Z0-9_]+)[ ]*}(.*?){[ ]*\/[ ]*block[ ]*:[ ]*\2[ ]*}/');
-
-			preg_match_all($pattern, $this->contents, $matches);
-
-			foreach ($matches[2] as $key => $name) {
-
-				if (!preg_match(REGEX_TEMPLATE_ITEM_NAME, $name)) continue;
-
-				$this->contents = str_replace($matches[0][$key], ('{ block:' . $name . ' / }'), $this->contents);
-
-				$this->blocks[$name] = new Block($matches[3][$key]);
+				$this->blocks[$name] = new Block(isset($matches[4]) ? $matches[4][$key] : '');
 
 				if ($matches[1][$key]) $this->blocks[$name]->disable();
 			}
@@ -54,9 +32,7 @@ namespace Template\Utils {
 
 		private function parseLoops() {
 
-			$pattern = ('/(?s){[ ]*for[ ]*:[ ]*([a-zA-Z0-9_]+)[ ]*}(.*?){[ ]*\/[ ]*for[ ]*:[ ]*\1[ ]*}/');
-
-			preg_match_all($pattern, $this->contents, $matches);
+			preg_match_all(REGEX_TEMPLATE_LOOP, $this->contents, $matches);
 
 			foreach ($matches[1] as $key => $name) {
 
@@ -72,31 +48,20 @@ namespace Template\Utils {
 
 		private function parseVariables() {
 
-			preg_match_all('/\$([a-zA-Z0-9_]+)\$/', $this->contents, $matches);
+			$variables = array('stack' => &$this->variables, 'pattern' => REGEX_TEMPLATE_VARIABLE);
 
-			foreach ($matches[1] as $index => $name) {
+			$phrases = array('stack' => &$this->phrases, 'pattern' => REGEX_TEMPLATE_PHRASE);
 
-				if (!preg_match(REGEX_TEMPLATE_ITEM_NAME, $name)) continue;
+			foreach (array($variables, $phrases) as $variables) {
 
-				$this->contents = str_replace($matches[0][$index], ('$' . $name . '$'), $this->contents);
+				preg_match_all($variables['pattern'], $this->contents, $matches);
 
-				$this->variables[$name] = null;
-			}
-		}
+				foreach ($matches[1] as $index => $name) {
 
-		# Parse phrases
+					if (!preg_match(REGEX_TEMPLATE_ITEM_NAME, $name)) continue;
 
-		private function parsePhrases() {
-
-			preg_match_all('/\%([a-zA-Z0-9_]+)\%/', $this->contents, $matches);
-
-			foreach ($matches[1] as $index => $name) {
-
-				if (!preg_match(REGEX_TEMPLATE_ITEM_NAME, $name)) continue;
-
-				$this->contents = str_replace($matches[0][$index], ('%' . $name . '%'), $this->contents);
-
-				$this->phrases[$name] = false;
+					$variables['stack'][$name] = null;
+				}
 			}
 		}
 
@@ -124,16 +89,14 @@ namespace Template\Utils {
 
 			if (!boolval($parse)) return;
 
-			$this->parseCollapsedBlocks(); $this->parseExpandedBlocks();
-
-			$this->parseLoops(); $this->parseVariables(); $this->parsePhrases();
+			$this->parseBlocks(); $this->parseLoops(); $this->parseVariables();
 		}
 
 		# Cloner
 
 		public function __clone() {
 
-			foreach ($this->blocks as $name => $block) if (is_object($block)) $this->blocks[$name] = clone $block;
+			foreach ($this->blocks as $name => $block) $this->blocks[$name] = clone $block;
 		}
 
 		# Setter
@@ -204,23 +167,32 @@ namespace Template\Utils {
 
 			# Insert variables
 
-			foreach ($this->variables as $name => $value) {
+			$variables = array('stack' => &$this->variables, 'symbol' => '$', 'language' => false);
 
-				if (null !== $value) $contents = str_replace(('$' . $name . '$'), $value, $contents);
+			$phrases = array('stack' => &$this->phrases, 'symbol' => '%', 'language' => true);
+
+			foreach (array($variables, $phrases) as $variables) {
+
+				foreach ($variables['stack'] as $name => $value) {
+
+					if (null === ($value = ($variables['language'] ? Language::get($name) : $value))) continue;
+
+					$contents = str_replace(($variables['symbol'] . $name . $variables['symbol']), $value, $contents);
+				}
 			}
 
 			# Insert phrases
 
 			foreach ($this->phrases as $name => $value) {
 
-				if (false !== ($value = Language::get($name))) $contents = str_replace(('%' . $name . '%'), $value, $contents);
+				if (null !== ($value = Language::get($name))) $contents = str_replace(('%' . $name . '%'), $value, $contents);
 			}
 
 			# Insert loops
 
 			foreach ($this->loops as $name => $loop) {
 
-				$replace = ((array() !== $loop['range']) ? $this->getLoopContents($loop['block'], $loop['range']) : '');
+				$replace = $this->getLoopContents($loop['block'], $loop['range']);
 
 				$contents = str_replace('{ for:' . $name . ' / }', $replace, $contents);
 			}
@@ -229,9 +201,7 @@ namespace Template\Utils {
 
 			foreach ($this->blocks as $name => $block) {
 
-				$replace = ((false !== $block) ? $block->contents() : '');
-
-				$contents = str_replace('{ block:' . $name . ' / }', $replace, $contents);
+				$contents = str_replace('{ block:' . $name . ' / }', $block->contents(), $contents);
 			}
 
 			# ------------------------

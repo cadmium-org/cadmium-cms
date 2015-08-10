@@ -54,7 +54,7 @@ namespace {
 
 			$name = strval($name);
 
-			return (isset(self::$phrases[$name]) ? self::$phrases[$name] : false);
+			return (isset(self::$phrases[$name]) ? self::$phrases[$name] : null);
 		}
 	}
 }
