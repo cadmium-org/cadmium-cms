@@ -60,6 +60,17 @@ namespace {
 			return preg_replace('/  +/', ' ', $string);
 		}
 
+		# Check if string length is between given values
+
+		public static function between($string, $min, $max) {
+
+			$string = strval($string); $min = intabs($min); $max = intabs($max);
+
+			if ($min > $max) return false;
+
+			return (preg_match(('/^(?=.{' . $min . ',' . $max . '}$).+$/'), $string) ? true : false);
+		}
+
 		# Cut string
 
 		public static function cut($string, $maxlength, $ellipsis = false) {
