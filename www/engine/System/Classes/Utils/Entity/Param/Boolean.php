@@ -10,7 +10,7 @@ namespace System\Utils\Entity\Param {
 
         # Constructor
 
-        public function __construct($name, $default = 0, $index = false) {
+        public function __construct($name, $default = false, $index = false) {
 
             $this->name = strval($name); $this->value = 0;
 
