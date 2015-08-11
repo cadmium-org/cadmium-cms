@@ -33,11 +33,11 @@ namespace System\Utils {
 
 		# Send mail
 
-		private function sendMail($template, $subject, $link) {
+		private static function sendMail($view, $subject, $link) {
 
-			if (false === ($contents = Explorer::contents(DIR_SYSTEM_DATA . 'Mail/' . $template . '.tpl'))) return false;
+			$view = ('System\\Views\\Mail\\' . $view);
 
-			$message = new Template\Utils\Block($contents);
+			$message = new $view();
 
 			$message->site_title = CONFIG_SITE_TITLE; $message->system_url = CONFIG_SYSTEM_URL;
 
@@ -58,26 +58,18 @@ namespace System\Utils {
 
 		private static function sendResetMail($code) {
 
-			$template = 'Reset'; $subject = Language::get('MAIL_SUBJECT_RESET');
-
 			$link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
 
-			# ------------------------
-
-			return self::sendMail($template, $subject, $link);
+			return self::sendMail('Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
 		}
 
 		# Send register mail
 
 		private static function sendRegisterMail() {
 
-			$template = 'Register'; $subject = Language::get('MAIL_SUBJECT_REGISTER');
-
 			$link = (CONFIG_SYSTEM_URL . (self::$admin ? '/admin' : '/profile'));
 
-			# ------------------------
-
-			return self::sendMail($template, $subject, $link);
+			return self::sendMail('Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
 		}
 
 		# Validate auth code
