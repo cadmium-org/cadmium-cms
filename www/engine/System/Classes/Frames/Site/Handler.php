@@ -31,11 +31,7 @@ namespace System\Frames\Site {
 
 			# Set auth
 
-			if (!Auth::check()) {
-
-				if (CONFIG_USERS_REGISTRATION) $layout->block('auth')->enable();
-
-			} else {
+			if (Auth::check()) {
 
 				$layout->block('user')->enable();
 
@@ -44,6 +40,10 @@ namespace System\Frames\Site {
 				$layout->block('user')->name = Auth::user()->name;
 
 				if (Auth::user()->rank === RANK_ADMINISTRATOR) $layout->block('user')->block('admin')->enable();
+
+			} else {
+
+				if (CONFIG_USERS_REGISTRATION) $layout->block('auth')->enable();
 			}
 
 			# Set title
