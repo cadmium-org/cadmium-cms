@@ -31,7 +31,7 @@ namespace System\Utils\Entity {
 
 		# Add boolean param
 
-        public function boolean($name, $default = 0, $index = false) {
+        public function boolean($name, $default = false, $index = false) {
 
 			$this->add(new Param\Boolean($name, $default, $index));
         }
