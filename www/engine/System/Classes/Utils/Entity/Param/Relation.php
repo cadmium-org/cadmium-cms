@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Relation extends Entity\Utils\Param {
+	class Relation extends General\Number {
 
         private $type = '';
 
