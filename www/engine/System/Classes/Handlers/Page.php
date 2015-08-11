@@ -86,6 +86,8 @@ namespace System\Handlers {
 
 			if ($this->page->id !== 1) $this->setTitle($this->page->title);
 
+			else $this->setLayout('Index');
+
 			$this->setContents($this->getContents());
 
 			# Set SEO data

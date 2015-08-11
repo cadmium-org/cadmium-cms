@@ -7,7 +7,7 @@ namespace System\Frames\Site {
 
 	abstract class Handler extends System\Frames\Main {
 
-		private $title = '', $contents = '';
+		private $title = '', $layout = 'Common', $contents = '';
 
 		# Display site page
 
@@ -21,42 +21,50 @@ namespace System\Frames\Site {
 
 			Template::title(('' === $this->title) ? CONFIG_SITE_TITLE : ($this->title . ' | ' . CONFIG_SITE_TITLE));
 
+			# Set layout
+
+			Template::main()->layout = ($layout = Template::block($this->layout));
+
 			# Set menu
 
-			Template::main()->menu = $menu->block();
+			$layout->menu = $menu->block();
 
 			# Set auth
 
-			if (!Auth::check()) { if (CONFIG_USERS_REGISTRATION) Template::main()->block('auth')->enable(); } else {
+			if (!Auth::check()) {
 
-				Template::main()->block('user')->enable();
+				if (CONFIG_USERS_REGISTRATION) $layout->block('auth')->enable();
 
-				Template::main()->block('user')->gravatar = md5(strtolower(Auth::user()->email));
+			} else {
 
-				Template::main()->block('user')->name = Auth::user()->name;
+				$layout->block('user')->enable();
 
-				if (Auth::user()->rank === RANK_ADMINISTRATOR) Template::main()->block('user')->block('admin')->enable();
+				$layout->block('user')->gravatar = md5(strtolower(Auth::user()->email));
+
+				$layout->block('user')->name = Auth::user()->name;
+
+				if (Auth::user()->rank === RANK_ADMINISTRATOR) $layout->block('user')->block('admin')->enable();
 			}
 
 			# Set title
 
-			Template::main()->title = (('' === $this->title) ? CONFIG_SITE_TITLE : $this->title);
+			$layout->title = (('' === $this->title) ? CONFIG_SITE_TITLE : $this->title);
 
 			# Set messages
 
-			Template::main()->messages = Messages::block();
+			$layout->messages = Messages::block();
 
 			# Set contents
 
-			Template::main()->contents = $this->contents;
+			$layout->contents = $this->contents;
 
 			# Set footer
 
-			Template::main()->system_url = CONFIG_SYSTEM_URL;
+			$layout->system_url = CONFIG_SYSTEM_URL;
 
-			Template::main()->site_title = CONFIG_SITE_TITLE;
+			$layout->site_title = CONFIG_SITE_TITLE;
 
-			Template::main()->copyright = Date::year();
+			$layout->copyright = Date::year();
 
 			# ------------------------
 
@@ -68,6 +76,13 @@ namespace System\Frames\Site {
 		protected function setTitle($title) {
 
 			$this->title = strval($title);
+		}
+
+		# Set layout
+
+		protected function setLayout($layout) {
+
+			$this->layout = strval($layout);
 		}
 
 		# Set contents
