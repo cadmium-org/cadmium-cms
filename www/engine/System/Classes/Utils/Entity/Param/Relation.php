@@ -12,14 +12,9 @@ namespace System\Utils\Entity\Param {
 
         public function __construct($name, $type) {
 
-            $this->name = strval($name); $this->value = 0; $this->type = strval($type);
-        }
+            parent::__construct($name);
 
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = intabs($value));
+            $this->type = strval($type);
         }
 
         # Get entity

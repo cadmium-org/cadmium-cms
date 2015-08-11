@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity, Number;
 
-	class Varchar extends Entity\Utils\Param {
+	class Varchar extends General\String {
 
         protected $maxlength = 0, $index = false;
 
@@ -12,18 +12,11 @@ namespace System\Utils\Entity\Param {
 
         public function __construct($name, $maxlength = null, $index = false) {
 
-            $this->name = strval($name); $this->value = '';
+            parent::__construct($name);
 
             $this->maxlength = (($maxlength !== null) ? Number::format($maxlength, 0, 255) : 255);
 
             $this->index = boolval($index);
-        }
-
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = strval($value));
         }
 
         # Get field statement

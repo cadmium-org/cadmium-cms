@@ -2,33 +2,15 @@
 
 namespace System\Utils\Entity\Param {
 
-    use System\Utils\Entity, Number;
+    use System\Utils\Entity;
 
-	class Unique extends Entity\Utils\Param {
-
-        protected $maxlength = 0;
+	class Unique extends Varchar {
 
         # Constructor
 
         public function __construct($name, $maxlength = null) {
 
-            $this->name = strval($name); $this->value = '';
-
-            $this->maxlength = (($maxlength !== null) ? Number::format($maxlength, 0, 255) : 255);
-        }
-
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = strval($value));
-        }
-
-        # Get field statement
-
-        public function getFieldStatement() {
-
-            return ("`" . $this->name . "` varchar(" . $this->maxlength . ") NOT NULL");
+            parent::__construct($name, $maxlength);
         }
 
         # Get key statement

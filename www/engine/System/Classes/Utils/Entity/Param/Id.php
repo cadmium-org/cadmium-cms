@@ -4,21 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Id extends Entity\Utils\Param {
-
-        # Constructor
-
-        public function __construct($name) {
-
-            $this->name = strval($name); $this->value = 0;
-        }
-
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = intabs($value));
-        }
+	class Id extends General\Number {
 
         # Get field statement
 

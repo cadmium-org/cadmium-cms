@@ -4,21 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity;
 
-	class Text extends Entity\Utils\Param {
-
-        # Constructor
-
-        public function __construct($name) {
-
-            $this->name = strval($name); $this->value = '';
-        }
-
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = strval($value));
-        }
+	class Text extends General\String {
 
         # Get field statement
 

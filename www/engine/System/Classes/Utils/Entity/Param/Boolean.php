@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Param {
 
     use System\Utils\Entity, Number;
 
-	class Boolean extends Entity\Utils\Param {
+	class Boolean extends General\Number {
 
         private $default = 0, $index = false;
 
@@ -12,16 +12,9 @@ namespace System\Utils\Entity\Param {
 
         public function __construct($name, $default = false, $index = false) {
 
-            $this->name = strval($name); $this->value = 0;
+            parent::__construct($name);
 
             $this->default = Number::format($default, 0, 1); $this->index = boolval($index);
-        }
-
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = intabs($value));
         }
 
         # Get field statement
