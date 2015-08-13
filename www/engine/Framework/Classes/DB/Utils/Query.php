@@ -39,15 +39,7 @@ namespace DB\Utils {
 
 			if (!is_array($source)) return strval($source);
 
-			$parsers = array('name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort');
-
-			if ((null !== $key_parser) && !isset($parsers[$key_parser = strval($key_parser)])) return '';
-
-			if ((null !== $value_parser) && !isset($parsers[$value_parser = strval($value_parser)])) return '';
-
-			$concat = strval($concat); $separator = strval($separator);
-
-			$output = array();
+			$parsers = array('name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort'); $output = array();
 
 			foreach ($source as $key => $value) {
 
@@ -57,8 +49,6 @@ namespace DB\Utils {
 
 				$output[] = trim($key . $concat . $value);
 			}
-
-			# ------------------------
 
 			return implode($separator, $output);
 		}

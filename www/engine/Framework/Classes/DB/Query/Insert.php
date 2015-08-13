@@ -16,6 +16,8 @@ namespace DB\Query {
 
 			$dataset = (!$multiple ? array($dataset) : array_values($dataset));
 
+			# Process dataset
+
 			$names = array(); $values = array();
 
 			foreach ($dataset as $key => $row) {

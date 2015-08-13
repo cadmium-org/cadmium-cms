@@ -58,8 +58,6 @@ namespace {
 
 			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit);
 
-			# ------------------------
-
 			return self::send($query->query());
 		}
 
@@ -68,8 +66,6 @@ namespace {
 		public static function insert($table, array $dataset, $multiple = false) {
 
 			$query = new DB\Query\Insert($table, $dataset, $multiple);
-
-			# ------------------------
 
 			return self::send($query->query());
 		}
@@ -80,8 +76,6 @@ namespace {
 
 			$query = new DB\Query\Update($table, $dataset, $condition);
 
-			# ------------------------
-
 			return self::send($query->query());
 		}
 
@@ -90,8 +84,6 @@ namespace {
 		public static function delete($table, $condition = null) {
 
 			$query = new DB\Query\Delete($table, $condition);
-
-			# ------------------------
 
 			return self::send($query->query());
 		}
