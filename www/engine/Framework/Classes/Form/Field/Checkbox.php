@@ -8,7 +8,7 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value = false) {
+		public function __construct($form, $name, $value = null) {
 
 			parent::__construct($form, $name);
 

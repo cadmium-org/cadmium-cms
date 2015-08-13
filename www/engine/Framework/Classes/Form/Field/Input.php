@@ -42,7 +42,7 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '') {
+		public function __construct($form, $name, $value = null, $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '') {
 
 			parent::__construct($form, $name);
 

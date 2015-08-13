@@ -55,7 +55,7 @@ namespace {
 
 		# Add input field
 
-		public function input($key, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
+		public function input($key, $value = null, $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
 
 			$field = new Form\Field\Input($this, $key, $value, $type, $maxlength, $placeholder);
 
@@ -105,7 +105,7 @@ namespace {
 
 		# Add checkbox field
 
-		public function checkbox($key, $value = false, $config = 0) {
+		public function checkbox($key, $value = null, $config = 0) {
 
 			$field = new Form\Field\Checkbox($this, $key, $value);
 
