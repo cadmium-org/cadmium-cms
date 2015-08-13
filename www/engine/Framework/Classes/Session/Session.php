@@ -32,13 +32,13 @@ namespace {
 			if (session_id()) { session_unset(); session_destroy(); $_SESSION = array(); }
 		}
 
-		# Set variable
+		# Check if variable exists
 
-		public static function set($name, $value) {
+		public static function exists($name) {
 
 			$name = strval($name);
 
-			if (session_id()) $_SESSION[$name] = $value;
+			return (session_id() && isset($_SESSION[$name]));
 		}
 
 		# Get variable
@@ -50,13 +50,13 @@ namespace {
 			return ((session_id() && isset($_SESSION[$name])) ? $_SESSION[$name] : null);
 		}
 
-		# Check if variable exists
+		# Set variable
 
-		public static function exists($name) {
+		public static function set($name, $value) {
 
 			$name = strval($name);
 
-			return (session_id() && isset($_SESSION[$name]));
+			if (session_id()) $_SESSION[$name] = $value;
 		}
 
 		# Delete variable
