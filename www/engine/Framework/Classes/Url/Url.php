@@ -14,10 +14,14 @@ namespace {
 
 			if (false === ($url = parse_url($url))) return;
 
+			# Parse path
+
 			if (isset($url['path'])) foreach (explode('/', $url['path']) as $item) {
 
 				if ('' !== $item) $this->path[] = urldecode($item);
 			}
+
+			# Parse query
 
 			if (isset($url['query'])) parse_str($url['query'], $this->query);
 		}

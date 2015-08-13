@@ -7,7 +7,7 @@ namespace Tag\View {
 	/**
 	 * @property-write string $name
 	 * @property-write array $attributes
-	 * @property-write \Template\Utils\Block|\Template\Utils\Group $contents
+	 * @property-write \Template\Utils\Settable $contents
 	 */
 
 	class Regular extends Template\Utils\Block {

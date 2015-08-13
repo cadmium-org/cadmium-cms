@@ -4,13 +4,6 @@ namespace {
 
 	abstract class Validate {
 
-		# Validate id
-
-		public static function id($value) {
-
-			return filter_var(intval($value), FILTER_VALIDATE_INT, array('options' => array('min_range' => 1)));
-		}
-
 		# Validate ip
 
 		public static function ip($value) {

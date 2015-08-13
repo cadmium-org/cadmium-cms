@@ -48,11 +48,11 @@ namespace {
 
 			if (substr($number, ($length - 2), 2) >= 11 && substr($number, ($length - 2), 2) <= 20) return $variant_5;
 
-			else if (substr($number, ($length - 1), 1) == 1) return $variant_1;
+			if (substr($number, ($length - 1), 1) == 1) return $variant_1;
 
-			else if ((substr($number, ($length - 1), 1) >= 2) && (substr($number, ($length - 1), 1) <= 4)) return $variant_3;
+			if ((substr($number, ($length - 1), 1) >= 2) && (substr($number, ($length - 1), 1) <= 4)) return $variant_3;
 
-			else if ((substr($number, ($length - 1), 1) >= 5) || (substr($number, ($length - 1), 1) == 0)) return $variant_5;
+			if ((substr($number, ($length - 1), 1) >= 5) || (substr($number, ($length - 1), 1) == 0)) return $variant_5;
 		}
 	}
 }

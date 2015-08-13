@@ -73,9 +73,9 @@ namespace Template\Utils {
 
 			foreach ($range as $item) {
 
-				$loop->add($loop_item = clone($block));
+				$loop->add($block = clone($block));
 
-				foreach ($item as $name => $value) $loop_item->set($name, $value);
+				foreach ($item as $name => $value) $block->set($name, $value);
 			}
 
 			return $loop->contents();
@@ -85,11 +85,9 @@ namespace Template\Utils {
 
 		public function __construct($contents = '', $parse = true) {
 
-			$this->contents = strval($contents);
+			$this->contents = strval($contents); $parse = boolval($parse);
 
-			if (!boolval($parse)) return;
-
-			$this->parseBlocks(); $this->parseLoops(); $this->parseVariables();
+			if ($parse) { $this->parseBlocks(); $this->parseLoops(); $this->parseVariables(); }
 		}
 
 		# Cloner
