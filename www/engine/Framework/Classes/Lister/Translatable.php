@@ -10,20 +10,21 @@ namespace Lister {
 
 		public static function get($key) {
 
-			$key = strval($key); $class = get_called_class();
+			if (false === ($value = parent::get($key))) return false;
 
-			return (isset(self::$list[$class][$key]) ? Language::get(self::$list[$class][$key]) : false);
+			return ((null !== ($translated = Language::get($value))) ? $translated : $value);
 		}
 
 		# Get list
 
         public static function range() {
 
-			$list = array(); $class = get_called_class();
+			$list = array();
 
-			foreach (self::$list[$class] as $key => $value) $list[$key] = Language::get($value);
+			foreach (parent::range() as $key => $value) {
 
-			# ------------------------
+				$list[$key] = ((null !== ($translated = Language::get($value))) ? $translated : $value);
+			}
 
 			return $list;
         }
