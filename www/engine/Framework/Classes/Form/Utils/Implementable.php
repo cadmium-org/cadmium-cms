@@ -8,7 +8,7 @@ namespace Form\Utils {
 
 		protected $error = false, $disabled = false, $required = false;
 
-		# Get attributes
+		# Get tag
 
 		protected function getTag($name, array $attributes = array(), $contents = null) {
 

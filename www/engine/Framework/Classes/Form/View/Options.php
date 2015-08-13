@@ -10,7 +10,7 @@ namespace Form\View {
 
 	class Options extends Template\Utils\Block {
 
-		private static $contents_raw = '{ for:options }<option value="$value$" $selected$>$text$</option>{ / for:options }';
+		private static $contents_raw = '{ for:options }<option value="$value$"$selected$>$text$</option>{ / for:options }';
 
 		# Constructor
 

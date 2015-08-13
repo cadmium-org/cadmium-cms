@@ -6,68 +6,9 @@ namespace Form\Field {
 
 	class Input extends Utils\Implementable {
 
-		private $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $readonly = false, $translit = false;
+		private $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '';
 
-		private $autofocus = false, $autocomplete = false;
-
-		# Set value
-
-        protected function set($value) {
-
-			$this->value = strval($value);
-
-			if ($this->type !== FORM_INPUT_PASSWORD) {
-
-				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
-
-    			$this->value = String::input($this->value, $multiline, $this->maxlength);
-
-    			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
-            }
-
-            return (!($this->required && ('' === $this->value)));
-	    }
-
-		# Constructor
-
-		public function __construct($form, $name, $value, $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '') {
-
-			parent::__construct($form, $name);
-
-			$this->type = strval($type); $this->maxlength = intabs($maxlength);
-
-			$this->placeholder = strval($placeholder);
-
-			$this->set($value);
-		}
-
-		# Set readonly
-
-        public function readonly($value) {
-
-            $this->readonly = boolval($value);
-        }
-
-		# Set translit
-
-		public function translit($value) {
-
-            $this->translit = boolval($value);
-        }
-
-		# Set autofocus
-
-		public function autofocus($value) {
-
-            $this->autofocus = boolval($value);
-        }
-
-		# Set autocomplete
-
-		public function autocomplete($value) {
-
-            $this->autocomplete = boolval($value);
-        }
+		private $readonly = false, $translit = false, $autofocus = false, $autocomplete = false;
 
 		# Get hidden input tag
 
@@ -99,6 +40,69 @@ namespace Form\Field {
 			return $this->getTag('input', array('type' => 'text', 'value' => $value));
 		}
 
+		# Constructor
+
+		public function __construct($form, $name, $value = '', $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '') {
+
+			parent::__construct($form, $name);
+
+			$this->type = strval($type); $this->maxlength = intabs($maxlength);
+
+			$this->placeholder = strval($placeholder);
+
+			$this->set($value);
+		}
+
+		# Set value
+
+        public function set($value) {
+
+			$this->value = strval($value);
+
+			if ($this->type === FORM_INPUT_PASSWORD) {
+
+				$this->value = String::cut($this->value, $this->maxlength);
+
+			} else {
+
+				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
+
+    			$this->value = String::input($this->value, $multiline, $this->maxlength);
+
+    			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
+            }
+
+            return (!($this->required && ('' === $this->value)));
+	    }
+
+		# Set readonly
+
+        public function readonly($value) {
+
+            $this->readonly = boolval($value);
+        }
+
+		# Set translit
+
+		public function translit($value) {
+
+            $this->translit = boolval($value);
+        }
+
+		# Set autofocus
+
+		public function autofocus($value) {
+
+            $this->autofocus = boolval($value);
+        }
+
+		# Set autocomplete
+
+		public function autocomplete($value) {
+
+            $this->autocomplete = boolval($value);
+        }
+
 		# Get block
 
 		public function block() {
@@ -127,8 +131,6 @@ namespace Form\Field {
 
 				if ($this->autocomplete) $tag->set('autocomplete', 'on');
 			}
-
-			# ------------------------
 
 			return $tag->block();
 		}

@@ -8,20 +8,27 @@ namespace Form\Field {
 
 		private $options = array(), $search = false, $auto = false;
 
-		# Set value
+		# Get options
 
-        protected function set($value) {
+		private function getOptions() {
 
-			$this->value = strval($value);
+			$options = array();
 
-			$key = array_search($this->value, ($range = array_keys($this->options)));
+			foreach ($this->options as $value => $text) {
 
-			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
+				$selected = (($this->value === $value) ? ' selected' : '');
+
+				$options[] = array('value' => $value, 'selected' => $selected, 'text' => $text);
+			}
+
+			$block = new View\Options();
+
+			$block->options = $options;
 
 			# ------------------------
 
-			return (!($this->required && empty($this->value)));
-	    }
+			return $block;
+		}
 
 		# Constructor
 
@@ -38,6 +45,21 @@ namespace Form\Field {
 			$this->set($value);
 		}
 
+		# Set value
+
+        public function set($value) {
+
+			$this->value = strval($value);
+
+			$key = array_search($this->value, ($range = array_keys($this->options)));
+
+			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
+
+			# ------------------------
+
+			return (!($this->required && empty($this->value)));
+	    }
+
 		# Set search
 
 		public function search($value) {
@@ -51,28 +73,6 @@ namespace Form\Field {
 
             $this->auto = boolval($value);
         }
-
-		# Get options
-
-		private function getOptions() {
-
-			$options = array();
-
-			foreach ($this->options as $value => $text) {
-
-				$selected = (($this->value === $value) ? 'selected' : '');
-
-				$options[] = array('value' => $value, 'selected' => $selected, 'text' => $text);
-			}
-
-			$block = new View\Options();
-
-			$block->options = $options;
-
-			# ------------------------
-
-			return $block;
-		}
 
 		# Get block
 

@@ -32,7 +32,7 @@ namespace Form\Utils {
 
 			if ($this->posted || ('' === $this->key)) return false;
 
-			$this->value = strval(Request::post($this->name));
+			$this->value = Request::post($this->name);
 
 			# ------------------------
 

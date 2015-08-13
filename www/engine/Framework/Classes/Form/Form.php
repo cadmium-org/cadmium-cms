@@ -103,7 +103,9 @@ namespace {
 			return $this->addField($field);
 		}
 
-		public function checkbox($key, $value, $config = 0) {
+		# Add checkbox field
+
+		public function checkbox($key, $value = false, $config = 0) {
 
 			$field = new Form\Field\Checkbox($this, $key, $value);
 

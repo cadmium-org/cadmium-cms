@@ -6,6 +6,15 @@ namespace Form\Field {
 
 	class Checkbox extends Utils\Implementable {
 
+		# Constructor
+
+		public function __construct($form, $name, $value = false) {
+
+			parent::__construct($form, $name);
+
+			$this->set($value);
+		}
+
 		# Set value
 
         public function set($value) {
@@ -14,15 +23,6 @@ namespace Form\Field {
 
 			return (!($this->required && (false === $this->value)));
         }
-
-		# Constructor
-
-		public function __construct($form, $name, $value) {
-
-			parent::__construct($form, $name);
-
-			$this->set($value);
-		}
 
 		# Get block
 
