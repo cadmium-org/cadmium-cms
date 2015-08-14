@@ -29,7 +29,7 @@ namespace System\Forms {
 
         public function handle() {
 
-            if (false !== ($post = parent::post())) {
+            if (false !== ($post = $this->post())) {
 
 				if ($this->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
