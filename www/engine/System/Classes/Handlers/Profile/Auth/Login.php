@@ -11,32 +11,21 @@ namespace System\Handlers\Profile\Auth {
 
 	class Login extends System\Frames\Site\Handler {
 
-		private $form = null;
-
-		# Get contents
-
-		private function getContents() {
-
-			$contents = new Views\Site\Blocks\Contents\Login();
-
-			# Set form
-
-			$this->form->implement($contents);
-
-			# ------------------------
-
-			return $contents;
-		}
-
 		# Handle request
 
 		protected function handle() {
 
 			# Create form
 
-			$this->form = new Forms\Login('login');
+			$form = new Forms\Login('login');
 
-			if ($this->form->handle()) Request::redirect('/profile');
+			if ($form->handle()) Request::redirect('/profile');
+
+			# Create contents block
+
+			$contents = new Views\Site\Blocks\Contents\Login();
+
+			$form->implement($contents);
 
 			# Fill template
 

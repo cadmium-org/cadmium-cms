@@ -11,32 +11,21 @@ namespace System\Handlers\Admin\Auth {
 
 	class Login extends System\Frames\Admin\Handler {
 
-		private $form = null;
-
-		# Get contents
-
-		private function getContents() {
-
-			$contents = new Views\Admin\Blocks\Contents\Auth\Login();
-
-			# Set form
-
-			$this->form->implement($contents);
-
-			# ------------------------
-
-			return $contents;
-		}
-
 		# Handle request
 
 		protected function handle() {
 
 			# Create form
 
-			$this->form = new Forms\Login('login', true);
+			$form = new Forms\Login('login', true);
 
-			if ($this->form->handle()) Request::redirect('/admin');
+			if ($form->handle()) Request::redirect('/admin');
+
+			# Create contents block
+
+			$contents = new Views\Admin\Blocks\Contents\Auth\Login();
+
+			$form->implement($contents);
 
 			# Fill template
 
