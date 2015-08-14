@@ -122,26 +122,23 @@ namespace System\Frames\Admin {
 
 			# Handle request
 
-			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Install')) {
+			if ($this instanceof Component\Install) {
 
 				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
 			}
 
-			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin\\Auth')) {
+			if ($this instanceof Component\Auth) {
 
 				if (Auth::check()) return Request::redirect('/admin');
 
 				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
 			}
 
-			if (0 === strpos(get_class($this), 'System\\Handlers\\Admin')) {
+			if (!Auth::check()) return Request::redirect('/admin/login');
 
-				if (!Auth::check()) return Request::redirect('/admin/login');
+			if (Request::isAjax() && method_exists($this, 'handleAjax')) return Ajax::output($this->handleAjax());
 
-				if (Request::isAjax() && method_exists($this, 'handleAjax')) return Ajax::output($this->handleAjax());
-
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : Status::error404());
-			}
+			return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : Status::error404());
 		}
 	}
 }

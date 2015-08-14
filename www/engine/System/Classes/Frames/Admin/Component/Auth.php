@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames\Admin {
+namespace System\Frames\Admin\Component {
 
-	use DB;
+	use System\Frames\Admin\Handler, DB;
 
 	abstract class Auth extends Handler {
 

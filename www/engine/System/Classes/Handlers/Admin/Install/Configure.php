@@ -9,7 +9,7 @@ namespace System\Handlers\Admin\Install {
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
-	class Configure extends System\Frames\Admin\Handler {
+	class Configure extends System\Frames\Admin\Component\Install {
 
 		private $form = null;
 

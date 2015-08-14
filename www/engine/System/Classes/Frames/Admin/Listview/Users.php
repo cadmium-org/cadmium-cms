@@ -9,7 +9,7 @@ namespace System\Frames\Admin\Listview {
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
-	abstract class Users extends System\Frames\Admin\Handler {
+	abstract class Users extends System\Frames\Admin\Component\System {
 
 		private $index = 0, $users = null;
 
