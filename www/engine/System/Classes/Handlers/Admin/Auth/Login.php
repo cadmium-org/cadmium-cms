@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use Error, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
 	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
 	use System\Utils\Requirements, System\Utils\Utils;
 
@@ -34,36 +34,9 @@ namespace System\Handlers\Admin\Auth {
 
 			# Create form
 
-			$this->form = new Form('login');
+			$this->form = new Forms\Login('login', true);
 
-			# Add form fields
-
-			$this->form->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
-
-			                     Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
-
-			$this->form->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
-
-			                     Language::get('USER_FIELD_PASSWORD'), FORM_FIELD_REQUIRED);
-
-			# Post form
-
-			if (false !== ($post = $this->form->post())) {
-
-				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
-
-				else if (true !== ($result = Auth::login($post))) Messages::error(Language::get($result));
-
-				else Request::redirect('/admin');
-
-			} else if (Request::get('submitted') === 'register') {
-
-				Messages::success(Language::get('USER_SUCCESS_REGISTER_TEXT'), Language::get('USER_SUCCESS_REGISTER'));
-
-			} else if (Request::get('submitted') === 'recover') {
-
-				Messages::success(Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
-			}
+			if ($this->form->post()) Request::redirect('/admin');
 
 			# Fill template
 
