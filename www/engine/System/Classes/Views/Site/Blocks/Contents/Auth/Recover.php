@@ -12,7 +12,7 @@ namespace System\Views\Site\Blocks\Contents\Auth {
 
 				Templates::active() . '/Blocks/Contents/Auth/Recover.tpl');
 
-			$this->code = $code;
+			$this->set('code', $code);
         }
     }
 }
