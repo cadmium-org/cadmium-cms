@@ -9,11 +9,13 @@ namespace System\Handlers\Admin\Auth {
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
-	class Recover extends System\Frames\Admin\Handler {
+	class Recover extends System\Frames\Admin\Auth {
 
 		# Handle request
 
 		protected function handle() {
+
+			if ($this->initial()) Request::redirect('/admin/register');
 
 			if (false === ($code = Auth::secret(true))) Request::redirect('/admin/reset');
 

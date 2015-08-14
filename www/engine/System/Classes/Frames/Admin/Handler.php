@@ -131,18 +131,6 @@ namespace System\Frames\Admin {
 
 				if (Auth::check()) return Request::redirect('/admin');
 
-				DB::select(TABLE_USERS, 'id', array('id' => 1), null, 1);
-
-				if (!(DB::last() && DB::last()->status)) return Status::error404();
-
-				$extra_registration = (DB::last()->rows === 0);
-
-				if ($this instanceof System\Handlers\Admin\Auth\Register) {
-
-					if (!$extra_registration) return Request::redirect('/admin/login');
-
-				} else if ($extra_registration) return Request::redirect('/admin/register');
-
 				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
 			}
 
