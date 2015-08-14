@@ -31,7 +31,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$this->setTitle(Language::get('TITLE_AUTH_LOGIN'));
 
-			$this->setContents($this->getContents());
+			$this->setContents($contents);
 
 			# ------------------------
 
