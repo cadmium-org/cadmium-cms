@@ -113,14 +113,23 @@ namespace System\Utils\Extend {
 			return (($dir_name === self::$dir_name) ? self::$items : self::getItems($dir_name));
 		}
 
-		# Return active languages code
+		# Return active language code
 
 		public static function active() {
 
 			return self::$active;
 		}
 
-		# Return active languages data
+		# Return active language path
+
+		public static function path() {
+
+			if (false === self::$active) return false;
+
+			return (DIR_SYSTEM_LANGUAGES . self::$active);
+		}
+
+		# Return active language data
 
 		public static function data($name = null) {
 

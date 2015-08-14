@@ -113,14 +113,23 @@ namespace System\Utils\Extend {
 			return (($dir_name === self::$dir_name) ? self::$items : self::getItems($dir_name));
 		}
 
-		# Return active templates name
+		# Return active template name
 
 		public static function active() {
 
 			return self::$active;
 		}
 
-		# Return active templates data
+		# Return active template path
+
+		public static function path() {
+
+			if (false === self::$active) return false;
+
+			return (DIR_SYSTEM_TEMPLATES . self::$section . '/' . self::$active);
+		}
+
+		# Return active template data
 
 		public static function data($name = null) {
 
