@@ -2,13 +2,13 @@
 
 namespace System\Views\Site\Blocks\Contents\Profile\Auth {
 
-	use System\Views\View, System\Utils\Extend\Templates;
+	use System\Views;
 
-	class Reset extends View {
+	class Reset extends Views\Template {
 
         public function __construct() {
 
-            parent::__construct(Templates::path() . '/Blocks/Contents/Profile/Auth/Reset.tpl');
+            parent::__construct('Blocks/Contents/Profile/Auth/Reset.tpl');
         }
     }
 }

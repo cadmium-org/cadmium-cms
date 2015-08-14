@@ -2,13 +2,13 @@
 
 namespace System\Views\Admin\Blocks\Contents\Auth {
 
-	use System\Views\View, System\Utils\Extend\Templates;
+	use System\Views;
 
-	class Register extends View {
+	class Register extends Views\Template {
 
         public function __construct() {
 
-            parent::__construct(Templates::path() . '/Blocks/Contents/Auth/Register.tpl');
+            parent::__construct('Blocks/Contents/Auth/Register.tpl');
         }
     }
 }
