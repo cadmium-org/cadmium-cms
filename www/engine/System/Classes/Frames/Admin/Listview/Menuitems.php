@@ -76,6 +76,43 @@ namespace System\Frames\Admin\Listview {
 			return $path;
 		}
 
+		# Get children
+
+		private function getChildren($ajax = false) {
+
+			$children = Template::group();
+
+			foreach ($this->children['items'] as $menuitem) {
+
+				$children->add($item = Template::block($ajax ? 'Contents/Content/Menuitems/Ajax/Item' : 'Contents/Content/Menuitems/List/Item'));
+
+				$item->id = $menuitem['id']; $item->text = $menuitem['text'];
+
+				$item->icon = ((0 === $menuitem['children']) ? 'file text outline' : 'folder');
+
+				$item->position = $menuitem['position'];
+
+				$item->block('browse')->class = ($menuitem['link'] ? 'primary' : 'disabled');
+
+				$item->block('browse')->link = $menuitem['link'];
+
+				if (!$ajax) $item->block('remove')->class = (($menuitem['children'] === 0) ? 'negative' : 'disabled');
+			}
+
+			return $children;
+		}
+
+		# Get pagination
+
+		private function getPagination() {
+
+			$display = CONFIG_ADMIN_MENUITEMS_DISPLAY;
+
+			$url = new Url('/admin/content/menuitems?parent_id=' . $this->parent->id);
+
+			return Pagination::block($this->index, $display, $this->children['total'], $url);
+		}
+
 		# Get contents
 
 		private function getListContents($ajax = false) {
@@ -112,37 +149,15 @@ namespace System\Frames\Admin\Listview {
 				$this->form_create->implement($contents);
 			}
 
-			# Set list
+			# Set children
 
-			$list = Template::group();
+			$children = $this->getChildren($ajax);
 
-			foreach ($this->children['items'] as $menuitem) {
-
-				$list->add($item = Template::block($ajax ? 'Contents/Content/Menuitems/Ajax/Item' : 'Contents/Content/Menuitems/List/Item'));
-
-				$item->id = $menuitem['id']; $item->text = $menuitem['text'];
-
-				$item->icon = ((0 === $menuitem['children']) ? 'file text outline' : 'folder');
-
-				$item->position = $menuitem['position'];
-
-				$item->block('browse')->class = ($menuitem['link'] ? 'primary' : 'disabled');
-
-				$item->block('browse')->link = $menuitem['link'];
-
-				if (!$ajax) $item->block('remove')->class = (($menuitem['children'] === 0) ? 'negative' : 'disabled');
-			}
-
-			if ($list->count() > 0) $contents->list = $list;
+			if ($children->count() > 0) $contents->children = $children;
 
 			# Set pagination
 
-			if (!$ajax) {
-
-				$display = CONFIG_ADMIN_MENUITEMS_DISPLAY; $url = new Url('/admin/content/menuitems?parent_id=' . $this->parent->id);
-
-				$contents->pagination = Pagination::block($this->index, $display, $this->children['total'], $url);
-			}
+			if (!$ajax) $contents->pagination = $this->getPagination();
 
 			# ------------------------
 

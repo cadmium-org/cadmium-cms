@@ -78,6 +78,43 @@ namespace System\Frames\Admin\Listview {
 			return $path;
 		}
 
+		# Get children
+
+		private function getChildren($ajax = false) {
+
+			$children = Template::group();
+
+			foreach ($this->children['items'] as $page) {
+
+				$children->add($item = Template::block($ajax ? 'Contents/Content/Pages/Ajax/Item' : 'Contents/Content/Pages/List/Item'));
+
+				$item->id = $page['id']; $item->title = $page['title'];
+
+				$item->icon = ((0 === $page['children']) ? 'file text outline' : 'folder');
+
+				$item->access = Lister\Access::get($page['access']);
+
+				$item->block('browse')->class = ($page['visibility'] ? 'primary' : 'disabled');
+
+				$item->block('browse')->link = ($this->parent->link . '/' . $page['name']);
+
+				if (!$ajax) $item->block('remove')->class = (($page['id'] !== 1) && ($page['children'] === 0) ? 'negative' : 'disabled');
+			}
+
+			return $children;
+		}
+
+		# Get pagination
+
+		private function getPagination() {
+
+			$display = CONFIG_ADMIN_PAGES_DISPLAY;
+
+			$url = new Url('/admin/content/pages?parent_id=' . $this->parent->id);
+
+			return Pagination::block($this->index, $display, $this->children['total'], $url);
+		}
+
 		# Get contents
 
 		private function getListContents($ajax = false) {
@@ -114,37 +151,15 @@ namespace System\Frames\Admin\Listview {
 				$this->form_create->implement($contents);
 			}
 
-			# Set list
+			# Set children
 
-			$list = Template::group();
+			$children = $this->getChildren($ajax);
 
-			foreach ($this->children['items'] as $page) {
-
-				$list->add($item = Template::block($ajax ? 'Contents/Content/Pages/Ajax/Item' : 'Contents/Content/Pages/List/Item'));
-
-				$item->id = $page['id']; $item->title = $page['title'];
-
-				$item->icon = ((0 === $page['children']) ? 'file text outline' : 'folder');
-
-				$item->access = Lister\Access::get($page['access']);
-
-				$item->block('browse')->class = ($page['visibility'] ? 'primary' : 'disabled');
-
-				$item->block('browse')->link = ($this->parent->link . '/' . $page['name']);
-
-				if (!$ajax) $item->block('remove')->class = (($page['id'] !== 1) && ($page['children'] === 0) ? 'negative' : 'disabled');
-			}
-
-			if ($list->count() > 0) $contents->list = $list;
+			if ($children->count() > 0) $contents->children = $children;
 
 			# Set pagination
 
-			if (!$ajax) {
-
-				$display = CONFIG_ADMIN_PAGES_DISPLAY; $url = new Url('/admin/content/pages?parent_id=' . $this->parent->id);
-
-				$contents->pagination = Pagination::block($this->index, $display, $this->children['total'], $url);
-			}
+			if (!$ajax) $contents->pagination = $this->getPagination();
 
 			# ------------------------
 

@@ -40,7 +40,7 @@
 
 	<tbody>
 
-		{ block:list }
+		{ block:children }
 
 		<tr class="disabled">
 
@@ -48,7 +48,7 @@
 
 		</tr>
 
-		{ / block:list }
+		{ / block:children }
 
 	</tbody>
 
