@@ -23,7 +23,7 @@ namespace System\Handlers\Profile\Auth {
 
 			# Create contents block
 
-			$contents = new Views\Site\Blocks\Contents\Login();
+			$contents = new Views\Site\Blocks\Contents\Profile\Auth\Login();
 
 			$form->implement($contents);
 

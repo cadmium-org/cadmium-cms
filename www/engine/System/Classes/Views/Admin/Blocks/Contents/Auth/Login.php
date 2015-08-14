@@ -8,9 +8,7 @@ namespace System\Views\Admin\Blocks\Contents\Auth {
 
         public function __construct() {
 
-            parent::__construct(DIR_SYSTEM_TEMPLATES . SECTION_ADMIN . '/' .
-
-				Templates::active() . '/Blocks/Contents/Auth/Login.tpl');
+            parent::__construct(Templates::path() . '/Blocks/Contents/Auth/Login.tpl');
         }
     }
 }

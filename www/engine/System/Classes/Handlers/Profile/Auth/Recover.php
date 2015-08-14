@@ -25,7 +25,7 @@ namespace System\Handlers\Profile\Auth {
 
 			# Create contents block
 
-			$contents = new Views\Site\Blocks\Contents\Auth\Recover($code);
+			$contents = new Views\Site\Blocks\Contents\Profile\Auth\Recover($code);
 
 			$form->implement($contents);
 
