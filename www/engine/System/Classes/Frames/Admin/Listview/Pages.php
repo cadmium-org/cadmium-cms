@@ -11,7 +11,7 @@ namespace System\Frames\Admin\Listview {
 
 	abstract class Pages extends System\Frames\Admin\Handler {
 
-		private $index = 0, $parent = null, $form = null, $children = null;
+		private $index = 0, $parent = null, $form_create = null, $children = null;
 
 		# Get children pages
 
@@ -111,7 +111,7 @@ namespace System\Frames\Admin\Listview {
 
 				else $contents->block('parent')->title = $this->parent->title;
 
-				$this->form->implement($contents);
+				$this->form_create->implement($contents);
 			}
 
 			# Set list
@@ -165,17 +165,17 @@ namespace System\Frames\Admin\Listview {
 
 			# Create form
 
-			$this->form = new Form('page');
+			$this->form_create = new Form('page');
 
 			# Add form fields
 
-			$this->form->input    ('title', '', FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->form_create->input   ('title', '', FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
-			$this->form->input    ('name', '', FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
+			$this->form_create->input   ('name', '', FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
 
 			# Post form
 
-			if (false !== ($post = $this->form->post()) && !$this->form->errors()) {
+			if (false !== ($post = $this->form_create->post()) && !$this->form_create->errors()) {
 
 				if (true !== ($result = $this->parent->create($post))) Messages::error(Language::get($result));
 
