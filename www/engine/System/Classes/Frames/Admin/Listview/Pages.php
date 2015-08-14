@@ -80,7 +80,7 @@ namespace System\Frames\Admin\Listview {
 
 		# Get children
 
-		private function getChildren($ajax = false) {
+		private function getChildrenBlock($ajax = false) {
 
 			$children = Template::group();
 
@@ -106,7 +106,7 @@ namespace System\Frames\Admin\Listview {
 
 		# Get pagination
 
-		private function getPagination() {
+		private function getPaginationBlock() {
 
 			$display = CONFIG_ADMIN_PAGES_DISPLAY;
 
@@ -153,13 +153,13 @@ namespace System\Frames\Admin\Listview {
 
 			# Set children
 
-			$children = $this->getChildren($ajax);
+			$children = $this->getChildrenBlock($ajax);
 
 			if ($children->count() > 0) $contents->children = $children;
 
 			# Set pagination
 
-			if (!$ajax) $contents->pagination = $this->getPagination();
+			if (!$ajax) $contents->pagination = $this->getPaginationBlock();
 
 			# ------------------------
 
