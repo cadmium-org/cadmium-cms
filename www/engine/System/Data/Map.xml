@@ -63,36 +63,36 @@
 		<handler>/Admin/Overview</handler>
 	</item>
 
-	<!-- Profile section -->
+	<!-- Site section -->
 
 	<item>
 		<path>/profile/login</path>
-		<handler>/Profile/Auth/Login</handler>
+		<handler>/Site/Profile/Auth/Login</handler>
 	</item>
 	<item>
 		<path>/profile/reset</path>
-		<handler>/Profile/Auth/Reset</handler>
+		<handler>/Site/Profile/Auth/Reset</handler>
 	</item>
 	<item>
 		<path>/profile/recover</path>
-		<handler>/Profile/Auth/Recover</handler>
+		<handler>/Site/Profile/Auth/Recover</handler>
 	</item>
 	<item>
 		<path>/profile/register</path>
-		<handler>/Profile/Auth/Register</handler>
+		<handler>/Site/Profile/Auth/Register</handler>
 	</item>
 
 	<item>
 		<path>/profile/edit</path>
-		<handler>/Profile/Edit</handler>
+		<handler>/Site/Profile/Edit</handler>
 	</item>
 	<item>
 		<path>/profile/logout</path>
-		<handler>/Profile/Logout</handler>
+		<handler>/Site/Profile/Logout</handler>
 	</item>
 	<item>
 		<path>/profile</path>
-		<handler>/Profile/Overview</handler>
+		<handler>/Site/Profile/Overview</handler>
 	</item>
 
 	<!-- Tools -->

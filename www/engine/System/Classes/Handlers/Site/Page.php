@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Handlers {
+namespace System\Handlers\Site {
 
 	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
 	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;

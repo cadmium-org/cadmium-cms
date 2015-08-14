@@ -104,13 +104,13 @@ namespace System\Frames\Site {
 
 			# Handle request
 
-			if (0 === strpos(get_class($this), 'System\\Handlers\\Profile\\Auth')) {
+			if ($this instanceof Component\Profile\Auth) {
 
 				if (!CONFIG_USERS_REGISTRATION) return Status::error404();
 
 				if (Auth::check()) return Request::redirect('/profile');
 
-			} else if (0 === strpos(get_class($this), 'System\\Handlers\\Profile')) {
+			} else if ($this instanceof Component\Profile) {
 
 				if (!Auth::check()) Request::redirect('/profile/login');
 			}

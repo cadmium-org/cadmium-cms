@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Handlers\Profile {
+namespace System\Handlers\Site\Profile {
 
 	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
 	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
@@ -9,7 +9,7 @@ namespace System\Handlers\Profile {
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
 
-	class Logout extends System\Frames\Site\Handler {
+	class Logout extends System\Frames\Site\Component\Profile {
 
 		# Handle request
 

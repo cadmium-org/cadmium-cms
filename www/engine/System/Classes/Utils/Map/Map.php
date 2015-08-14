@@ -61,7 +61,7 @@ namespace System\Utils\Map {
 				return new $handler($path);
 			}
 
-			return new System\Handlers\Page($path);
+			return new System\Handlers\Site\Page($path);
 		}
 	}
 }
