@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use Error, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
 	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
 	use System\Utils\Requirements, System\Utils\Utils;
 
@@ -11,63 +11,29 @@ namespace System\Handlers\Admin\Auth {
 
 	class Recover extends System\Frames\Admin\Handler {
 
-		private $code = null, $form = null;
-
-		# Get contents
-
-		private function getContents() {
-
-			$contents = Template::block('Contents/Auth/Recover');
-
-			# Set code
-
-			$contents->code = $this->code;
-
-			# Set form
-
-			$this->form->implement($contents);
-
-			# ------------------------
-
-			return $contents;
-		}
-
 		# Handle request
 
 		protected function handle() {
 
-			if (false === ($this->code = Auth::secret(true))) Request::redirect('/admin/reset');
+			if (false === ($code = Auth::secret(true))) Request::redirect('/admin/reset');
 
 			# Create form
 
-			$this->form = new Form('recover');
+			$form = new Forms\Recover(true);
 
-			# Add form fields
+			if ($form->handle()) Request::redirect('/admin/login?submitted=recover');
 
-			$this->form->input        ('password_new', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
+			# Create contents block
 
-			                     Language::get('USER_FIELD_PASSWORD_NEW'), FORM_FIELD_REQUIRED);
+			$contents = new Views\Admin\Blocks\Contents\Auth\Recover($code);
 
-			$this->form->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
-
-			                     Language::get('USER_FIELD_PASSWORD_RETYPE'), FORM_FIELD_REQUIRED);
-
-			# Post form
-
-			if (false !== ($post = $this->form->post())) {
-
-				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
-
-				else if (true !== ($result = Auth::recover($post))) Messages::error(Language::get($result));
-
-				else Request::redirect('/admin/login?submitted=recover');
-			}
+			$form->implement($contents);
 
 			# Fill template
 
 			$this->setTitle(Language::get('TITLE_AUTH_RECOVER'));
 
-			$this->setContents($this->getContents());
+			$this->setContents($contents);
 
 			# ------------------------
 
