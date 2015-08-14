@@ -17,7 +17,7 @@ namespace System\Handlers\Profile\Auth {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Profile/Auth/Login');
+			$contents = new Views\Site\Blocks\Contents\Login();
 
 			# Set form
 
