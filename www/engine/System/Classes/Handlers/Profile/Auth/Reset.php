@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Profile\Auth {
 
-	use Error, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
 	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
 	use System\Utils\Requirements, System\Utils\Utils;
 
@@ -11,61 +11,27 @@ namespace System\Handlers\Profile\Auth {
 
 	class Reset extends System\Frames\Site\Handler {
 
-		private $form = null;
-
-		# Get contents
-
-		private function getContents() {
-
-			$contents = Template::block('Contents/Profile/Auth/Reset');
-
-			# Set form
-
-			$this->form->implement($contents);
-
-			# ------------------------
-
-			return $contents;
-		}
-
 		# Handle request
 
 		protected function handle() {
 
 			# Create form
 
-			$this->form = new Form('reset');
+			$form = new Forms\Reset();
 
-			# Add form fields
+			if ($form->handle()) Request::redirect('/profile/reset?submitted');
 
-			$this->form->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+			# Create contents block
 
-			                     '', FORM_FIELD_REQUIRED);
+			$contents = new Views\Site\Blocks\Contents\Profile\Auth\Reset();
 
-			$this->form->input        ('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
-
-			                     '', FORM_FIELD_REQUIRED);
-
-			# Post form
-
-			if (false !== ($post = $this->form->post())) {
-
-				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
-
-				else if (true !== ($result = Auth::reset($post))) Messages::error(Language::get($result));
-
-				else Request::redirect('/profile/reset?submitted');
-
-			} else if (null !== Request::get('submitted')) {
-
-				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
-			}
+			$form->implement($contents);
 
 			# Fill template
 
-			$this->setTitle(Language::get('TITLE_AUTH_RESET'));
+			$this->setTitle(Language::get('TITLE_PROFILE_AUTH_RESET'));
 
-			$this->setContents($this->getContents());
+			$this->setContents($contents);
 
 			# ------------------------
 

@@ -4,10 +4,10 @@ return array (
 
 	# Titles
 
-	'TITLE_AUTH_LOGIN'                          => 'Logging in',
-	'TITLE_AUTH_RESET'                          => 'Password reset',
-	'TITLE_AUTH_RECOVER'                        => 'Password recovery',
-	'TITLE_AUTH_REGISTER'                       => 'Registration',
+	'TITLE_PROFILE_AUTH_LOGIN'                  => 'Logging in',
+	'TITLE_PROFILE_AUTH_RESET'                  => 'Password reset',
+	'TITLE_PROFILE_AUTH_RECOVER'                => 'Password recovery',
+	'TITLE_PROFILE_AUTH_REGISTER'               => 'Registration',
 
 	'TITLE_PROFILE'                             => 'Profile',
 

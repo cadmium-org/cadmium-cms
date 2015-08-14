@@ -29,7 +29,7 @@ namespace System\Handlers\Profile\Auth {
 
 			# Fill template
 
-			$this->setTitle(Language::get('TITLE_AUTH_LOGIN'));
+			$this->setTitle(Language::get('TITLE_PROFILE_AUTH_LOGIN'));
 
 			$this->setContents($contents);
 

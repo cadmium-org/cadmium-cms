@@ -4,10 +4,10 @@ return array (
 
 	# Titles
 
-	'TITLE_AUTH_LOGIN'                          => 'Вход',
-	'TITLE_AUTH_RESET'                          => 'Восстановление пароля',
-	'TITLE_AUTH_RECOVER'                        => 'Изменение пароля',
-	'TITLE_AUTH_REGISTER'                       => 'Регистрация',
+	'TITLE_PROFILE_AUTH_LOGIN'                  => 'Вход',
+	'TITLE_PROFILE_AUTH_RESET'                  => 'Восстановление пароля',
+	'TITLE_PROFILE_AUTH_RECOVER'                => 'Изменение пароля',
+	'TITLE_PROFILE_AUTH_REGISTER'               => 'Регистрация',
 
 	'TITLE_PROFILE'                             => 'Профиль',
 

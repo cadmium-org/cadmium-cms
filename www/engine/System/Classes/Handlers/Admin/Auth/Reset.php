@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use Error, System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
+	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config, System\Utils\Entity;
 	use System\Utils\Extend, System\Utils\Lister, System\Utils\Messages, System\Utils\Pagination;
 	use System\Utils\Requirements, System\Utils\Utils;
 
@@ -11,61 +11,27 @@ namespace System\Handlers\Admin\Auth {
 
 	class Reset extends System\Frames\Admin\Handler {
 
-		private $form = null;
-
-		# Get contents
-
-		private function getContents() {
-
-			$contents = Template::block('Contents/Auth/Reset');
-
-			# Set form
-
-			$this->form->implement($contents);
-
-			# ------------------------
-
-			return $contents;
-		}
-
 		# Handle request
 
 		protected function handle() {
 
 			# Create form
 
-			$this->form = new Form('reset');
+			$form = new Forms\Reset(true);
 
-			# Add form fields
+			if ($form->handle()) Request::redirect('/admin/reset?submitted');
 
-			$this->form->input        ('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+			# Create contents block
 
-			                     Language::get('USER_FIELD_NAME'), FORM_FIELD_REQUIRED);
+			$contents = new Views\Admin\Blocks\Contents\Auth\Reset();
 
-			$this->form->input        ('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
-
-			                     Language::get('USER_FIELD_CAPTCHA'), FORM_FIELD_REQUIRED);
-
-			# Post form
-
-			if (false !== ($post = $this->form->post())) {
-
-				if ($this->form->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
-
-				else if (true !== ($result = Auth::reset($post))) Messages::error(Language::get($result));
-
-				else Request::redirect('/admin/reset?submitted');
-
-			} else if (null !== Request::get('submitted')) {
-
-				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
-			}
+			$form->implement($contents);
 
 			# Fill template
 
 			$this->setTitle(Language::get('TITLE_AUTH_RESET'));
 
-			$this->setContents($this->getContents());
+			$this->setContents($contents);
 
 			# ------------------------
 
