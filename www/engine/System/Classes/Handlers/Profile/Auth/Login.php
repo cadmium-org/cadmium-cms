@@ -17,7 +17,7 @@ namespace System\Handlers\Profile\Auth {
 
 			# Create form
 
-			$form = new Forms\Login('login');
+			$form = new Forms\Login();
 
 			if ($form->handle()) Request::redirect('/profile');
 

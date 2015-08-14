@@ -8,21 +8,21 @@ namespace System\Forms {
 
         # Constructor
 
-        public function __construct($name, $admin = false) {
+        public function __construct($placeholder = false) {
 
-            parent::__construct($name);
+            parent::__construct('login');
 
-            $admin = boolval($admin);
+            $placeholder = boolval($placeholder);
 
             # Add fields
 
             $this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
-                ($admin ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
+                ($placeholder ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
 
 			$this->input('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
 
-                ($admin ? Language::get('USER_FIELD_PASSWORD') : ''), FORM_FIELD_REQUIRED);
+                ($placeholder ? Language::get('USER_FIELD_PASSWORD') : ''), FORM_FIELD_REQUIRED);
         }
 
         # Handle form

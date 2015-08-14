@@ -17,7 +17,7 @@ namespace System\Handlers\Admin\Auth {
 
 			# Create form
 
-			$form = new Forms\Login('login', true);
+			$form = new Forms\Login(true);
 
 			if ($form->handle()) Request::redirect('/admin');
 
