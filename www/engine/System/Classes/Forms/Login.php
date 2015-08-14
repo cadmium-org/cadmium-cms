@@ -16,22 +16,22 @@ namespace System\Forms {
 
             # Add fields
 
-            parent::input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+            $this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
                 ($admin ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
 
-			parent::input('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
+			$this->input('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
 
                 ($admin ? Language::get('USER_FIELD_PASSWORD') : ''), FORM_FIELD_REQUIRED);
         }
 
-        # Post form
+        # Handle form
 
-        public function post() {
+        public function handle() {
 
             if (false !== ($post = parent::post())) {
 
-				if ($this->errors) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+				if ($this->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
 				else if (true !== ($result = Auth::login($post))) Messages::error(Language::get($result));
 

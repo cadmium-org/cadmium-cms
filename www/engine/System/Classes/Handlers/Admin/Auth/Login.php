@@ -36,7 +36,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$this->form = new Forms\Login('login', true);
 
-			if ($this->form->post()) Request::redirect('/admin');
+			if ($this->form->handle()) Request::redirect('/admin');
 
 			# Fill template
 

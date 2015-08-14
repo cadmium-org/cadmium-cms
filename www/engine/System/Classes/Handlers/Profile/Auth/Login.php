@@ -36,7 +36,7 @@ namespace System\Handlers\Profile\Auth {
 
 			$this->form = new Forms\Login('login');
 
-			if ($this->form->post()) Request::redirect('/profile');
+			if ($this->form->handle()) Request::redirect('/profile');
 
 			# Fill template
 
