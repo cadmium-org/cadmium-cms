@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-    use Extend\Templates;
+    use System\Utils\Extend\Templates;
 
 	class View {
 
@@ -14,13 +14,13 @@ namespace System\Utils {
 
             $name = strval($name);
 
-            if (isset($cache[$name])) return clone $cache['name'];
+            if (isset(self::$cache[$name])) return clone self::$cache['name'];
 
-            $class_name = ('Views\\' . Templates::section() . $name);
+            $class_name = ('System\\Views\\' . Templates::section() . '\\' . str_replace('/', '\\', $name));
 
             # ------------------------
 
-            return ($this->cache[$name] = new $class_name());
+            return (self::$cache[$name] = new $class_name());
         }
 	}
 }
