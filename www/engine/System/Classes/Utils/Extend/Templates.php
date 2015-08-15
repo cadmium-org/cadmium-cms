@@ -102,6 +102,13 @@ namespace System\Utils\Extend {
 			Template::init($dir_name . (self::$active = $name));
 		}
 
+		# Return active section
+
+		public static function section() {
+
+			return self::$section;
+		}
+
 		# Return items
 
 		public static function items($section = null) {
