@@ -2,9 +2,9 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use Error, System, System\Forms, System\Views, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
+	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
 	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
-	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils;
+	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
 	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
@@ -23,7 +23,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			# Create contents block
 
-			$contents = new Views\Site\Blocks\Contents\Profile\Auth\Register();
+			$contents = View::get('Blocks/Contents/Profile/Auth/Register');
 
 			$form->implement($contents);
 
