@@ -14,7 +14,7 @@ namespace System\Utils {
 
 			if (isset($this->items[$id]['children'])) {
 
-				$item = Template::block('Menu/Container');
+				$item = View::get('Blocks/Menu/Container');
 
 				$item->text = $this->items[$id]['text'];
 
@@ -24,7 +24,7 @@ namespace System\Utils {
 
 			} else {
 
-				$item = Template::block('Menu/Item');
+				$item = View::get('Blocks/Menu/Item');
 
 				$item->link = $this->items[$id]['link'];
 

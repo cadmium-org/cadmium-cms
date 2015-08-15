@@ -49,7 +49,7 @@ namespace System\Handlers\Site {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Page');
+			$contents = View::get('Blocks/Contents/Page');
 
 			# Set breadcrumbs
 

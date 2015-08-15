@@ -186,7 +186,7 @@ namespace System\Handlers\Admin\Install {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Install/Configure');
+			$contents = View::get('Blocks/Contents/Install/Configure');
 
 			# Set form
 

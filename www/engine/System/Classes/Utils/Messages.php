@@ -65,7 +65,7 @@ namespace System\Utils {
 
 				if (null === $message) continue;
 
-				$messages->add($block = Template::block('Utils/Message'));
+				$messages->add($block = View::get('Blocks/Utils/Message'));
 
 				$block->type = $type; $block->text = $message['text']; $header = $block->block('header');
 

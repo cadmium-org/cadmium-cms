@@ -10,7 +10,7 @@ namespace System\Utils {
 
 		public static function block($index, $display, $total, $url) {
 
-			$pagination = Template::block('Utils/Pagination');
+			$pagination = View::get('Blocks/Utils/Pagination');
 
 			$index = intabs($index); $display = intabs($display); $total = intabs($total);
 

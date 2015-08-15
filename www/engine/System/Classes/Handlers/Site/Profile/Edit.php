@@ -63,7 +63,7 @@ namespace System\Handlers\Site\Profile {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Profile/Edit');
+			$contents = View::get('Blocks/Contents/Profile/Edit');
 
 			# Set forms
 

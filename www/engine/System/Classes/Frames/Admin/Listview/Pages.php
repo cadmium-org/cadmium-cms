@@ -86,7 +86,7 @@ namespace System\Frames\Admin\Listview {
 
 			foreach ($this->children['items'] as $page) {
 
-				$children->add($item = Template::block($ajax ? 'Contents/Content/Pages/Ajax/Item' : 'Contents/Content/Pages/List/Item'));
+				$children->add($item = View::get($ajax ? 'Blocks/Contents/Content/Pages/Ajax/Item' : 'Blocks/Contents/Content/Pages/Listview/Item'));
 
 				$item->id = $page['id']; $item->title = $page['title'];
 
@@ -119,7 +119,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getListContents($ajax = false) {
 
-			$contents = Template::block($ajax ? 'Contents/Content/Pages/Ajax/Main' : 'Contents/Content/Pages/List/Main');
+			$contents = View::get($ajax ? 'Blocks/Contents/Content/Pages/Ajax/Main' : 'Blocks/Contents/Content/Pages/Listview/Main');
 
 			# Set general
 

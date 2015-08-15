@@ -70,7 +70,7 @@ namespace System\Handlers\Admin\Extend {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Extend/Templates/Main');
+			$contents = View::get('Blocks/Contents/Extend/Templates/Main');
 
 			# Set sections
 
@@ -84,7 +84,7 @@ namespace System\Handlers\Admin\Extend {
 
 			foreach ($this->items as $name => $template) {
 
-				$list->add($item = Template::block('Contents/Extend/Templates/Item'));
+				$list->add($item = View::get('Blocks/Contents/Extend/Templates/Item'));
 
 				$item->name = $name; $item->title = $template['title'];
 

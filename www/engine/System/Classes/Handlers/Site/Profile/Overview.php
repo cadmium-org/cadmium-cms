@@ -15,7 +15,7 @@ namespace System\Handlers\Site\Profile {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Profile/Overview');
+			$contents = View::get('Blocks/Contents/Profile/Overview');
 
 			# Set general
 

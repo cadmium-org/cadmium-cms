@@ -29,7 +29,7 @@ namespace System\Handlers\Admin\System {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/System/Settings');
+			$contents = View::get('Blocks/Contents/System/Settings');
 
 			# Set form
 

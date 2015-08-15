@@ -56,7 +56,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getListContents() {
 
-			$contents = Template::block('Contents/System/Users/List/Main');
+			$contents = View::get('Blocks/Contents/System/Users/Listview/Main');
 
 			# Set list
 
@@ -64,7 +64,7 @@ namespace System\Frames\Admin\Listview {
 
 			foreach ($this->users['items'] as $user) {
 
-				$list->add($item = Template::block('Contents/System/Users/List/Item'));
+				$list->add($item = View::get('Blocks/Contents/System/Users/Listview/Item'));
 
 				$item->id = $user['id']; $item->name = $user['name']; $item->rank = Lister\Rank::get($user['rank']);
 

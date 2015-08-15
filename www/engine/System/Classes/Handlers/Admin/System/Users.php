@@ -17,7 +17,7 @@ namespace System\Handlers\Admin\System {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/System/Users/Main');
+			$contents = View::get('Blocks/Contents/System/Users/Main');
 
 			# Set general
 

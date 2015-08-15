@@ -61,7 +61,7 @@ namespace System\Handlers\Admin\Install {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Install/Check');
+			$contents = View::get('Blocks/Contents/Install/Check');
 
 			# Set form
 

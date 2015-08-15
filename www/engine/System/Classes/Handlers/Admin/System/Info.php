@@ -24,7 +24,7 @@ namespace System\Handlers\Admin\System {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/System/Info');
+			$contents = View::get('Blocks/Contents/System/Info');
 
 			$contents->system_version = CADMIUM_VERSION;
 

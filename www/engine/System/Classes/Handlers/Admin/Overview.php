@@ -35,7 +35,7 @@ namespace System\Handlers\Admin {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Overview');
+			$contents = View::get('Blocks/Contents/Overview');
 
 			# Set general entries
 

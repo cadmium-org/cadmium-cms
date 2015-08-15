@@ -2,7 +2,7 @@
 
 namespace System\Frames\Site {
 
-	use System, System\Utils\Auth, System\Utils\Menu, System\Utils\Messages, System\Utils\Status;
+	use System, System\Utils\Auth, System\Utils\Menu, System\Utils\Messages, System\Utils\Status, System\Utils\View;
 	use Date, Request, Template;
 
 	abstract class Handler extends System\Frames\Main {
@@ -23,7 +23,7 @@ namespace System\Frames\Site {
 
 			# Set layout
 
-			Template::main()->layout = ($layout = Template::block($this->layout));
+			Template::main()->layout = ($layout = View::get('Blocks/' . $this->layout));
 
 			# Set menu
 

@@ -70,7 +70,7 @@ namespace System\Handlers\Admin\Extend {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Extend/Languages/Main');
+			$contents = View::get('Blocks/Contents/Extend/Languages/Main');
 
 			# Set sections
 
@@ -84,7 +84,7 @@ namespace System\Handlers\Admin\Extend {
 
 			foreach ($this->items as $code => $language) {
 
-				$list->add($item = Template::block('Contents/Extend/Languages/Item'));
+				$list->add($item = View::get('Blocks/Contents/Extend/Languages/Item'));
 
 				$item->code = $code; $item->country = $language['country']; $item->title = $language['title'];
 

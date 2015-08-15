@@ -31,7 +31,7 @@ namespace System\Handlers\Admin\Content {
 
 		private function getContents() {
 
-			$contents = Template::block('Contents/Content/Pages/Main');
+			$contents = View::get('Blocks/Contents/Content/Pages/Main');
 
 			# Set general
 

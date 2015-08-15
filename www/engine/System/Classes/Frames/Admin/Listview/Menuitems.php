@@ -84,7 +84,7 @@ namespace System\Frames\Admin\Listview {
 
 			foreach ($this->children['items'] as $menuitem) {
 
-				$children->add($item = Template::block($ajax ? 'Contents/Content/Menuitems/Ajax/Item' : 'Contents/Content/Menuitems/List/Item'));
+				$children->add($item = View::get($ajax ? 'Blocks/Contents/Content/Menuitems/Ajax/Item' : 'Blocks/Contents/Content/Menuitems/Listview/Item'));
 
 				$item->id = $menuitem['id']; $item->text = $menuitem['text'];
 
@@ -117,7 +117,7 @@ namespace System\Frames\Admin\Listview {
 
 		private function getListContents($ajax = false) {
 
-			$contents = Template::block($ajax ? 'Contents/Content/Menuitems/Ajax/Main' : 'Contents/Content/Menuitems/List/Main');
+			$contents = View::get($ajax ? 'Blocks/Contents/Content/Menuitems/Ajax/Main' : 'Blocks/Contents/Content/Menuitems/Listview/Main');
 
 			# Set general
 

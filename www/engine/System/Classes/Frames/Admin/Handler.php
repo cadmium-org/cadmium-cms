@@ -2,7 +2,8 @@
 
 namespace System\Frames\Admin {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend, System\Utils\Messages, System\Utils\Status;
+	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend;
+	use System\Utils\Messages, System\Utils\Status, System\Utils\View;
 	use DB, Debug, Request, Template;
 
 	abstract class Handler extends System\Frames\Main {
@@ -44,7 +45,7 @@ namespace System\Frames\Admin {
 
 			# Set menu
 
-			Template::main()->menu = Template::block('Menu');
+			Template::main()->menu = View::get('Blocks/Menu');
 
 			# Set user
 
