@@ -2,7 +2,7 @@
 
 namespace System\Frames {
 
-	use System\Utils\Auth, System\Utils\Config, System\Utils\Extend, System\Utils\Requirements;
+	use System\Utils\Auth\Auth, System\Utils\Config, System\Utils\Extend, System\Utils\Requirements;
 	use Language, Template, Session;
 
 	abstract class Main {

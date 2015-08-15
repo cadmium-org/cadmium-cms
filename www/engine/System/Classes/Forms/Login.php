@@ -2,7 +2,7 @@
 
 namespace System\Forms {
 
-	use System\Utils\Auth, System\Utils\Messages, Form, Language, Request;
+	use System\Utils\Auth\Auth, System\Utils\Messages, Form, Language, Request;
 
 	class Login extends Form {
 

@@ -2,7 +2,7 @@
 
 namespace System\Frames\Admin {
 
-	use System, System\Utils\Ajax, System\Utils\Auth, System\Utils\Extend;
+	use System, System\Utils\Ajax, System\Utils\Auth\Auth, System\Utils\Extend;
 	use System\Utils\Messages, System\Utils\Status, System\Utils\View;
 	use DB, Debug, Request, Template;
 

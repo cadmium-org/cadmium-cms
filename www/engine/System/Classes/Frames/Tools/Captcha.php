@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Utils\Auth, System\Utils\Tools;
+	use System, System\Utils\Auth\Auth, System\Utils\Tools;
 
 	class Captcha extends System\Frames\Main {
 

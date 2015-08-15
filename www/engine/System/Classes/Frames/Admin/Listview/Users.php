@@ -2,7 +2,7 @@
 
 namespace System\Frames\Admin\Listview {
 
-	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
+	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth\Auth, System\Utils\Config;
 	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 

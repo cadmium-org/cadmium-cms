@@ -2,7 +2,7 @@
 
 namespace System\Forms {
 
-	use System\Utils\Auth, System\Utils\Messages, Form, Language;
+	use System\Utils\Auth\Auth, System\Utils\Messages, Form, Language;
 
 	class Register extends Form {
 
