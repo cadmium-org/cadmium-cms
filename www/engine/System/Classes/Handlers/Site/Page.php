@@ -59,7 +59,7 @@ namespace System\Handlers\Site {
 
 			# Set contents
 
-			$contents->contents = new Template\Utils\Block($this->page->contents);
+			$contents->contents = Template::block($this->page->contents);
 
 			# ------------------------
 
