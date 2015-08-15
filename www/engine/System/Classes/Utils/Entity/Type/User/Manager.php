@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entity\Type\User {
 
-	use System\Utils\Entity, DB, Form, String, Validate;
+	use System\Utils\Entity, DB, String, Validate;
 
 	/**
 	 * @property-read int $id

@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entity\Type\Menuitem {
 
-	use System\Utils\Entity, DB, Form, Number;
+	use System\Utils\Entity, DB, Number;
 
 	/**
 	 * @property-read int $id

@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entity\Type\Page {
 
-	use System\Utils\Entity, DB, Form;
+	use System\Utils\Entity, DB;
 
 	/**
 	 * @property-read int $id
