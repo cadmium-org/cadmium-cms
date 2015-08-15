@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Auth {
+namespace System\Utils {
 
 	use System\Utils\Entity, DB, Request, Session, String;
 

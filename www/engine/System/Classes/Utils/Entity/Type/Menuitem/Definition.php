@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Type\Menuitem {
 
 	use System\Utils\Entity;
 
-	class Definition extends Entity\Entity {
+	class Definition extends Entity {
 
         const TYPE = 'Menuitem', TABLE = TABLE_MENU, NESTING = true;
 

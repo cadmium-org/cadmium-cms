@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Entity {
+namespace System\Utils {
 
 	use DB;
 
@@ -56,7 +56,7 @@ namespace System\Utils\Entity {
 
 			# Cache entity
 
-			Factory::cache($this->type, $this);
+			Entity\Factory::cache($this->type, $this);
 
 			# ------------------------
 
@@ -73,7 +73,7 @@ namespace System\Utils\Entity {
 
 				if (isset($data[$name])) $param->set($data[$name]);
 
-				if (($param instanceof Param\Relation) && (false === $param->entity())) {
+				if (($param instanceof Entity\Param\Relation) && (false === $param->entity())) {
 
 					if ($param->name() !== 'parent_id') return false;
 
@@ -99,7 +99,7 @@ namespace System\Utils\Entity {
 
 			$this->has_super = boolval(@constant($class_name . '::HAS_SUPER'));
 
-			$this->params = new Params(); $this->foreigns = new Foreigns();
+			$this->params = new Entity\Params(); $this->foreigns = new Entity\Foreigns();
 
 			if ($this->nesting) $this->params->relation('parent_id', $this->type);
 
@@ -146,7 +146,7 @@ namespace System\Utils\Entity {
 
 			if (false === ($param = $this->params->get($name))) return false;
 
-			if (!($param instanceof Param\Unique)) return false;
+			if (!($param instanceof Entity\Param\Unique)) return false;
 
 			# ------------------------
 

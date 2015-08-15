@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Type\Page {
 
 	use System\Utils\Entity;
 
-	class Definition extends Entity\Entity {
+	class Definition extends Entity {
 
 		const TYPE = 'Page', TABLE = TABLE_PAGES, NESTING = true, HAS_SUPER = true;
 

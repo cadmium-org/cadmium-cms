@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Map {
+namespace System\Utils {
 
 	use Error, System, Explorer;
 
@@ -23,7 +23,7 @@ namespace System\Utils\Map {
 
 			foreach ($map_xml->item as $item) {
 
-				$item = new Item($item->path, $item->handler);
+				$item = new Map\Item($item->path, $item->handler);
 
 				if ($item->parsed()) $map[] = $item; else throw new Error\General(self::ERROR_PARSE);
 			}

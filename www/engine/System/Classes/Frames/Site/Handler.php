@@ -2,7 +2,7 @@
 
 namespace System\Frames\Site {
 
-	use System, System\Utils\Auth\Auth, System\Utils\Menu, System\Utils\Messages, System\Utils\Status, System\Utils\View;
+	use System, System\Utils\Auth, System\Utils\Menu, System\Utils\Messages, System\Utils\Status, System\Utils\View;
 	use Date, Request, Template;
 
 	abstract class Handler extends System\Frames\Main {

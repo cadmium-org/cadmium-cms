@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth {
 
-	use DB, String, Validate;
+	use System\Utils\Auth, DB, Session, String, Validate;
 
 	abstract class Controller {
 

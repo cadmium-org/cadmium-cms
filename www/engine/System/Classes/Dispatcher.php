@@ -2,7 +2,7 @@
 
 namespace System {
 
-	use System, System\Utils\Map\Map, DB, Request, Url;
+	use System, System\Utils\Map, DB, Request, Url;
 
 	class Dispatcher extends System {
 

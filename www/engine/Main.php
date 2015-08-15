@@ -41,24 +41,27 @@ require_once (DIR_SYSTEM . 'System.php');
 
 function __autoload($class_name) {
 
-	$path = explode("\\", $class_name);
+	$path = explode('\\', $class_name); $last = $path[count($path) - 1];
 
-	if (0 === strcmp($path[0], 'System')) { $dir_name = DIR_SYSTEM_CLASSES; $path = array_slice($path, 1); }
+	# Determine class path
 
-	else if (0 === strcmp($path[0], 'Plugins')) { $dir_name = DIR_SYSTEM_PLUGINS; $path = array_slice($path, 1); }
+	if ($path[0] === 'System') $path = (DIR_SYSTEM_CLASSES . implode('/', array_slice($path, 1)));
 
-	else { $dir_name = DIR_CLASSES; if (count($path) === 1) $path[] = $path[0]; }
+	else if ($path[0] === 'Plugins') $path = (DIR_SYSTEM_PLUGINS . implode('/', array_slice($path, 1)));
 
-	for ($i = 0; $i < ($count = count($path)); $i++) {
+	else $path = (DIR_CLASSES . implode('/', $path));
 
-		if (($i < ($count - 1)) && @file_exists($dir_name .= $path[$i]) && @is_dir($dir_name)) { $dir_name .= '/'; continue; }
+	# Require class file
 
-		if (@file_exists($file_name = ($dir_name . $path[$i] . '.php')) && @is_file($file_name)) require_once $file_name;
+	if (@file_exists($file_name = ($path . '.php')) && @is_file($file_name)) require_once $file_name;
 
-		break;
-	}
+	else if (@file_exists($file_name = ($path . '/' . $last . '.php')) && @is_file($file_name)) require_once $file_name;
+
+	# Check if class exists
 
 	if (!class_exists($class_name) && !interface_exists($class_name)) throw new Error\ClassLoad($class_name);
+
+	# Call autoload method
 
 	if (method_exists($class_name, '__autoload')) $class_name::__autoload();
 }

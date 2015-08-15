@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Type\User {
 
 	use System\Utils\Entity;
 
-	class Definition extends Entity\Entity {
+	class Definition extends Entity {
 
 		const TYPE = 'User', TABLE = TABLE_USERS, HAS_SUPER = true;
 

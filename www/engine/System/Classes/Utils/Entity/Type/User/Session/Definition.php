@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Type\User\Session {
 
 	use System\Utils\Entity;
 
-	class Definition extends Entity\Entity {
+	class Definition extends Entity {
 
 		const TYPE = 'User\Session', TABLE = TABLE_USERS_SESSIONS;
 

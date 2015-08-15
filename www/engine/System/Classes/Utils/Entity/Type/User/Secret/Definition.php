@@ -4,7 +4,7 @@ namespace System\Utils\Entity\Type\User\Secret {
 
 	use System\Utils\Entity;
 
-	class Definition extends Entity\Entity {
+	class Definition extends Entity {
 
 		const TYPE = 'User\Secret', TABLE = TABLE_USERS_SECRETS;
 

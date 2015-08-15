@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth {
 
-	use Date, Language, Mailer;
+	use System\Utils\Auth, Date, Language, Mailer;
 
 	abstract class Mail {
 

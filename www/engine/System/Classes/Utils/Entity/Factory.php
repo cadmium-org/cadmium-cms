@@ -2,6 +2,8 @@
 
 namespace System\Utils\Entity {
 
+    use System\Utils\Entity;
+
     abstract class Factory {
 
         private static $cache = array();
