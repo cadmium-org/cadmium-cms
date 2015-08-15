@@ -13,9 +13,6 @@ namespace System\Utils\Auth {
 		const ERROR_AUTH_RECOVER                    = 'USER_ERROR_AUTH_RECOVER';
 		const ERROR_AUTH_REGISTER                   = 'USER_ERROR_AUTH_REGISTER';
 
-		const ERROR_EDIT_PERSONAL                   = 'USER_ERROR_EDIT_PERSONAL';
-		const ERROR_EDIT_PASSWORD                   = 'USER_ERROR_EDIT_PASSWORD';
-
 		const ERROR_NAME_INVALID                    = 'USER_ERROR_NAME_INVALID';
 		const ERROR_NAME_INCORRECT                  = 'USER_ERROR_NAME_INCORRECT';
 		const ERROR_NAME_DUPLICATE                  = 'USER_ERROR_NAME_DUPLICATE';
@@ -348,101 +345,6 @@ namespace System\Utils\Auth {
 			# Send mail
 
 			Mail::sendRegister();
-
-			# ------------------------
-
-			return true;
-		}
-
-		# Edit personal data
-
-		public static function editPersonal($post) {
-
-			if (0 === self::$user->id) return false;
-
-			# Declare variables
-
-			$email = null; $first_name = null; $last_name = null; $sex = null;
-
-			$city = null; $country = null; $timezone = null;
-
-			# Extract post array
-
-			extract($post);
-
-			# Validate values
-
-			if (false === ($email = Validate::email($email))) return self::ERROR_EMAIL_INVALID;
-
-			# Check email exists
-
-			$condition = ("email = '" . addslashes($email) . "' AND id != " . self::$user->id);
-
-			DB::select(TABLE_USERS, 'id', $condition, null, 1);
-
-			if (!DB::last()->status) return self::ERROR_EDIT_PERSONAL;
-
-			if (DB::last()->rows === 1) return self::ERROR_EMAIL_DUPLICATE;
-
-			# Update user
-
-			$data = array();
-
-			$data['email']              = $email;
-			$data['first_name']         = $first_name;
-			$data['last_name']          = $last_name;
-			$data['sex']                = $sex;
-			$data['city']               = $city;
-			$data['country']            = $country;
-			$data['timezone']           = $timezone;
-
-			if (!self::$user->edit($data)) return self::ERROR_EDIT_PERSONAL;
-
-			# ------------------------
-
-			return true;
-		}
-
-		# Edit password data
-
-		public static function editPassword($post) {
-
-			if (0 === self::$user->id) return false;
-
-			# Declare variables
-
-			$password = null; $password_new = null; $password_retype = null;
-
-			# Extract post array
-
-			extract($post);
-
-			# Validate values
-
-			if (false === ($password = self::$user->validatePassword($password))) return self::ERROR_PASSWORD_INVALID;
-
-			if (false === ($password_new = self::$user->validatePassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
-
-			if (0 !== strcmp($password_new, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
-
-			# Check password
-
-			$password = String::encode(self::$user->auth_key, $password);
-
-			if (0 !== strcmp(self::$user->password, $password)) return self::ERROR_PASSWORD_INCORRECT;
-
-			# Encode password
-
-			$auth_key = String::random(40); $password = String::encode($auth_key, $password_new);
-
-			# Update user
-
-			$data = array();
-
-			$data['auth_key']           = $auth_key;
-			$data['password']           = $password;
-
-			if (!self::$user->edit($data)) return self::ERROR_EDIT_PASSWORD;
 
 			# ------------------------
 

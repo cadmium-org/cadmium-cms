@@ -92,7 +92,7 @@ namespace System\Handlers\Site\Profile {
 
 				if ($this->form_personal->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
-				else if (true !== ($result = Auth::editPersonal($post_personal))) Messages::error(Language::get($result));
+				else if (true !== ($result = Auth\Edit::personal($post_personal))) Messages::error(Language::get($result));
 
 				else Request::redirect('/profile/edit?submitted');
 
@@ -100,7 +100,7 @@ namespace System\Handlers\Site\Profile {
 
 				if ($this->form_password->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
-				else if (true !== ($result = Auth::editPassword($post_password))) Messages::error(Language::get($result));
+				else if (true !== ($result = Auth\Edit::password($post_password))) Messages::error(Language::get($result));
 
 				else Request::redirect('/profile/edit?submitted');
 
