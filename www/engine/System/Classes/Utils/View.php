@@ -14,7 +14,7 @@ namespace System\Utils {
 
             $name = strval($name);
 
-            if (isset(self::$cache[$name])) return clone self::$cache['name'];
+            if (isset(self::$cache[$name])) return clone self::$cache[$name];
 
             $class_name = ('System\\Views\\' . Templates::section() . '\\' . str_replace('/', '\\', $name));
 
