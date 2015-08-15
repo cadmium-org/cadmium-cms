@@ -16,7 +16,7 @@ namespace System\Frames\Admin {
 
 			# Process template
 
-			Template::main('Form');
+			Template::main(View::get('Main/Form'));
 
 			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
 
@@ -39,7 +39,7 @@ namespace System\Frames\Admin {
 
 			# Process template
 
-			Template::main('Page');
+			Template::main(View::get('Main/Page'));
 
 			Template::title(('' === $this->title) ? CADMIUM_NAME : ($this->title . ' | ' . CADMIUM_NAME));
 

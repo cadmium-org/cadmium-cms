@@ -4,22 +4,9 @@ namespace {
 
 	abstract class Template {
 
-		private static $init = false, $dir_name = '', $main = null, $blocks = array(), $status = STATUS_CODE_200;
+		private static $main = null, $status = STATUS_CODE_200;
 
 		private static $language = '', $title = '', $description = '', $keywords = '', $robots = '', $meta = array(), $link = '';
-
-		# Init template
-
-		public static function init($dir_name) {
-
-			if (self::$init) return;
-
-			$dir_name = strval($dir_name);
-
-			if (!Explorer::isDir($dir_name)) throw new Error\TemplateInit($dir_name);
-
-			self::$init = true; self::$dir_name = $dir_name;
-		}
 
 		# Check if object is settable
 
@@ -28,48 +15,11 @@ namespace {
 			return ($object instanceof Template\Utils\Settable);
 		}
 
-		# Set main file
-
-		public static function main($name = null) {
-
-			if (!self::$init) return new Template\View\Main();
-
-			if (null === $name) return (null !== self::$main) ? self::$main : new Template\View\Main();
-
-			$name = strval($name);
-
-			foreach (explode('/', $name) as $item) {
-
-				if (!preg_match(REGEX_TEMPLATE_FILE_NAME, $item)) return new Template\View\Main();
-			}
-
-			$file_name = (self::$dir_name . '/Main/' . $name . '.tpl');
-
-			if (false === ($contents = Explorer::contents($file_name))) return new Template\View\Main();
-
-			return (self::$main = new Template\View\Main($contents));
-		}
-
 		# Create block
 
-		public static function block($name = null) {
+		public static function block($contents = '', $parse = true) {
 
-			if (!self::$init || (null === $name)) return new Template\Utils\Block();
-
-			$name = strval($name);
-
-			foreach (explode('/', $name) as $item) {
-
-				if (!preg_match(REGEX_TEMPLATE_FILE_NAME, $item)) return new Template\Utils\Block();
-			}
-
-			if (isset(self::$blocks[$name])) return clone self::$blocks[$name];
-
-			$file_name = (self::$dir_name . '/Blocks/' . $name . '.tpl');
-
-			if (false === ($contents = Explorer::contents($file_name))) return new Template\Utils\Block();
-
-			return (clone self::$blocks[$name] = new Template\Utils\Block($contents));
+			return new Template\Utils\Block($contents, $parse);
 		}
 
 		# Create group
@@ -77,6 +27,15 @@ namespace {
 		public static function group() {
 
 			return new Template\Utils\Group();
+		}
+
+		# Set main block
+
+		public static function main(Template\Utils\Settable $block = null) {
+
+			if (null === $block) return self::$main;
+
+			self::$main = $block;
 		}
 
 		# Set status
@@ -197,7 +156,7 @@ namespace {
 
 		public static function output($status = null, $format = false) {
 
-			if (!self::$init || (null === self::$main)) return false;
+			if (null === self::$main) return false;
 
 			if ((null === $status) || !Headers::isStatusCode($status)) $status = self::$status;
 

@@ -73,11 +73,4 @@ namespace Error {
 
 		protected $message = 'Unable to init language \'$value$\'';
 	}
-
-	# Template init error
-
-	class TemplateInit extends Error {
-
-		protected $message = 'Unable to init template \'$value$\'';
-	}
 }

@@ -99,7 +99,7 @@ namespace System\Utils\Extend {
 
 			# ------------------------
 
-			Template::init($dir_name . (self::$active = $name));
+			self::$active = $name;
 		}
 
 		# Return active section

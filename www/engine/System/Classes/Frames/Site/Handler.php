@@ -17,7 +17,7 @@ namespace System\Frames\Site {
 
 			# Process template
 
-			Template::main('Page');
+			Template::main(View::get('Main/Page'));
 
 			Template::title(('' === $this->title) ? CONFIG_SITE_TITLE : ($this->title . ' | ' . CONFIG_SITE_TITLE));
 

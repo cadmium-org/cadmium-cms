@@ -10,7 +10,7 @@ namespace System\Utils {
 
 		private static function display($name, $code) {
 
-			Template::main('Status/' . $name);
+			Template::main(View::get('Main/Status/' . $name));
 
 			Template::main()->system_url = CONFIG_SYSTEM_URL;
 
@@ -29,7 +29,7 @@ namespace System\Utils {
 
 			Template::title(Language::get('STATUS_TITLE_404'));
 
-			self::display('404', STATUS_CODE_404);
+			self::display('Error404', STATUS_CODE_404);
 		}
 
 		# Display maintenance screen
