@@ -10,7 +10,7 @@ namespace System\Frames\Tools {
 
 		protected function main() {
 
-			$code = Auth::captcha();
+			$code = Auth::generateCaptcha();
 
 			$black = array(0, 0, 0); $white = array(255, 255, 255);
 

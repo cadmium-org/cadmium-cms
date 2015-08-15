@@ -2,7 +2,7 @@
 
 namespace System\Forms {
 
-	use System\Utils\Auth\Auth, System\Utils\Messages, Form, Language, Request;
+	use System\Utils\Auth, System\Utils\Messages, Form, Language, Request;
 
 	class Login extends Form {
 
@@ -33,7 +33,7 @@ namespace System\Forms {
 
 				if ($this->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
-				else if (true !== ($result = Auth::login($post))) Messages::error(Language::get($result));
+				else if (true !== ($result = Auth\Controller::login($post))) Messages::error(Language::get($result));
 
 				else return true;
 

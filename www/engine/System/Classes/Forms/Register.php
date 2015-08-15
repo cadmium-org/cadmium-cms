@@ -2,7 +2,7 @@
 
 namespace System\Forms {
 
-	use System\Utils\Auth\Auth, System\Utils\Messages, Form, Language;
+	use System\Utils\Auth, System\Utils\Messages, Form, Language;
 
 	class Register extends Form {
 
@@ -45,7 +45,7 @@ namespace System\Forms {
 
 				if ($this->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
 
-				else if (true !== ($result = Auth::register($post))) Messages::error(Language::get($result));
+				else if (true !== ($result = Auth\Controller::register($post))) Messages::error(Language::get($result));
 
 				else return true;
 			}
