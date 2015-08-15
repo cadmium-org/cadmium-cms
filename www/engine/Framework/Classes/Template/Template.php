@@ -31,7 +31,7 @@ namespace {
 
 		# Set main block
 
-		public static function main(Template\Utils\Settable $block = null) {
+		public static function main(Template\Utils\Block $block = null) {
 
 			if (null === $block) return self::$main;
 
@@ -160,15 +160,15 @@ namespace {
 
 			if ((null === $status) || !Headers::isStatusCode($status)) $status = self::$status;
 
-			self::$main->language       = self::$language;
+			self::$main->set('language',        self::$language);
 
-			self::$main->head_title     = (('' !== self::$title) ? self::$title : 'UNTITLED');
+			self::$main->set('head_title',      (('' !== self::$title) ? self::$title : 'UNTITLED'));
 
-			self::$main->description    = self::$description;
-			self::$main->keywords       = self::$keywords;
-			self::$main->robots         = self::$robots;
+			self::$main->set('description',     self::$description);
+			self::$main->set('keywords',        self::$keywords);
+			self::$main->set('robots',          self::$robots);
 
-			self::$main->loop('meta', Arr::index(self::$meta, 'name', 'content'));
+			self::$main->loop('meta',           Arr::index(self::$meta, 'name', 'content'));
 
 			if ('' === self::$link) self::$main->block('canonical')->disable();
 
