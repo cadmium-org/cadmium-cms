@@ -6,11 +6,9 @@ namespace System\Views\Admin\Blocks\Contents\Auth {
 
 	class Recover extends Views\Template {
 
-        public function __construct($code) {
+        public function __construct() {
 
             parent::__construct('Blocks/Contents/Auth/Recover.tpl');
-
-			$this->set('code', $code);
         }
     }
 }

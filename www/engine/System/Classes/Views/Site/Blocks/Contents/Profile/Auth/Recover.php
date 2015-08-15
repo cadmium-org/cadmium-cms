@@ -9,8 +9,6 @@ namespace System\Views\Site\Blocks\Contents\Profile\Auth {
         public function __construct($code) {
 
             parent::__construct('Blocks/Contents/Profile/Auth/Recover.tpl');
-
-			$this->set('code', $code);
         }
     }
 }

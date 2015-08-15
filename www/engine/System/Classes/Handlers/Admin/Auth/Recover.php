@@ -27,7 +27,9 @@ namespace System\Handlers\Admin\Auth {
 
 			# Create contents block
 
-			$contents = new Views\Admin\Blocks\Contents\Auth\Recover($code);
+			$contents = new Views\Admin\Blocks\Contents\Auth\Recover();
+
+			$contents->code = $code;
 
 			$form->implement($contents);
 
