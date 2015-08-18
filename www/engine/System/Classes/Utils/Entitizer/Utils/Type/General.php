@@ -18,7 +18,7 @@ namespace System\Utils\Entitizer\Utils\Type {
 
 			# Init entity
 
-			if (!parent::init('id', $id)) return false;
+			if (!$this->init('id', $id)) return false;
 
 			# ------------------------
 
@@ -39,7 +39,7 @@ namespace System\Utils\Entitizer\Utils\Type {
 
 			# Init entity
 
-			if (!parent::init($name, $value)) return false;
+			if (!$this->init($name, $value)) return false;
 
 			# ------------------------
 

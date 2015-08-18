@@ -194,7 +194,7 @@ namespace System\Utils\Entitizer {
 
             # ------------------------
 
-			return $param->entity;
+			return $param->entity();
         }
 
         # Return data

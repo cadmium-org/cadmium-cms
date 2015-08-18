@@ -192,9 +192,9 @@ namespace System\Frames\Admin\Listview {
 
 			if (false !== ($post = $this->form_create->post()) && !$this->form_create->errors()) {
 
-				if (false === ($child = $this->parent->createChild($post))) Messages::error(Language::get($result));
+				if (false === ($result = $this->parent->createChild($post))) Messages::error(Language::get($result));
 
-				else Request::redirect('/admin/content/pages?id=' . $child->id . '&submitted=create');
+				else Request::redirect('/admin/content/pages?id=' . $result->id . '&submitted=create');
 			}
 
 			# Get children pages

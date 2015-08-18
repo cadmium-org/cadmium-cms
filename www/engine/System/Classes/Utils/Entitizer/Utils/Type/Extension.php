@@ -20,7 +20,7 @@ namespace System\Utils\Entitizer\Utils\Type {
 
 			# ------------------------
 
-			return parent::init('id', $this->id);
+			return $this->init('id', $this->id);
 		}
 	}
 }
