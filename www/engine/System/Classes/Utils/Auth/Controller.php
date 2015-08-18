@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth {
 
-	use System\Utils\Auth, DB, Session, String, Validate;
+	use System\Utils\Entitizer, System\Utils\Auth, DB, Session, String, Validate;
 
 	abstract class Controller {
 
@@ -25,6 +25,19 @@ namespace System\Utils\Auth {
 		const ERROR_CAPTCHA_INCORRECT               = 'USER_ERROR_CAPTCHA_INCORRECT';
 
 		const ERROR_ACCESS                          = 'USER_ERROR_ACCESS';
+
+		# Insert session/secret code
+
+		private static function insertCode($type, $code) {
+
+			$extension = Entitizer::create($type, Auth::user()->id);
+
+			$extension->remove();
+
+			$data = array('code' => $code, 'ip' => ENGINE_CLIENT_IP, 'time' => ENGINE_TIME);
+
+			return $extension->create($data);
+		}
 
 		# Create new session
 
@@ -64,13 +77,9 @@ namespace System\Utils\Auth {
 
 			# Create session
 
-			$id = Auth::user()->id; $code = String::random(40); $ip = ENGINE_CLIENT_IP; $time = ENGINE_TIME;
+			if (!self::insertCode(ENTITY_TYPE_USER_SESSION, ($code = String::random(40)))) return self::ERROR_AUTH_LOGIN;
 
-			DB::delete(TABLE_USERS_SESSIONS, array('id' => $id));
-
-			$set = array('id' => $id, 'code' => $code, 'ip' => $ip, 'time' => $time);
-
-			if (!(DB::insert(TABLE_USERS_SESSIONS, $set) && (DB::last()->status))) return self::ERROR_AUTH_LOGIN;
+			# Set session variable
 
 			Session::set(USER_SESSION_PARAM_CODE, $code);
 
@@ -111,13 +120,7 @@ namespace System\Utils\Auth {
 
 			# Create secret
 
-			$id = Auth::user()->id; $code = String::random(40); $ip = ENGINE_CLIENT_IP; $time = ENGINE_TIME;
-
-			DB::delete(TABLE_USERS_SECRETS, array('id' => $id));
-
-			$set = array('id' => $id, 'code' => $code, 'ip' => $ip, 'time' => $time);
-
-			if (!(DB::insert(TABLE_USERS_SECRETS, $set) && (DB::last()->status))) return self::ERROR_AUTH_RESET;
+			if (!self::insertCode(ENTITY_TYPE_SECRET, ($code = String::random(40)))) return self::ERROR_AUTH_RESET;
 
 			# Send mail
 

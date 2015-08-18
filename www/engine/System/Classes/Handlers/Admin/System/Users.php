@@ -3,7 +3,7 @@
 namespace System\Handlers\Admin\System {
 
 	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
+	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
@@ -53,11 +53,11 @@ namespace System\Handlers\Admin\System {
 
 				if (null === ($id = Request::get('id'))) return $this->handleList();
 
-				$this->user = new Entity\Type\User\Manager($id);
+				$this->user = Entitizer::manager(ENTITY_TYPE_USER, $id);;
 
 				if (0 === $this->user->id) return $this->handleList(true);
 
-			} else $this->user = new Entity\Type\User\Manager(0);
+			} else $this->user = Entitizer::manager(ENTITY_TYPE_USER, 0);
 
 			# Create form
 
@@ -133,7 +133,7 @@ namespace System\Handlers\Admin\System {
 
 			# Create user
 
-			$this->user = Entity\Factory::user($post['id']);
+			$this->user = Entitizer::user($post['id']);
 
 			# Process remove
 

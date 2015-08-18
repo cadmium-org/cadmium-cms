@@ -3,7 +3,7 @@
 namespace System\Handlers\Admin\Install {
 
 	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
+	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
@@ -30,15 +30,15 @@ namespace System\Handlers\Admin\Install {
 
 			$entities = array();
 
-			$entities[] = new Entity\Type\Page\Definition();
+			$entities[] = Entitizer::page();
 
-			$entities[] = new Entity\Type\Menuitem\Definition();
+			$entities[] = Entitizer::menuitem();
 
-			$entities[] = new Entity\Type\User\Definition();
+			$entities[] = Entitizer::user();
 
-			$entities[] = new Entity\Type\User\Secret\Definition();
+			$entities[] = Entitizer::userSecret();
 
-			$entities[] = new Entity\Type\User\Session\Definition();
+			$entities[] = Entitizer::userSession();
 
 			foreach ($entities as $entity) if (!$entity->createTable()) return false;
 

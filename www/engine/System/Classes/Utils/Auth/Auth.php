@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use System\Utils\Entity, DB, Request, Session, String;
+	use System\Utils\Entitizer, DB, Request, Session, String;
 
 	abstract class Auth {
 
@@ -21,7 +21,7 @@ namespace System\Utils {
 
 		public static function __autoload() {
 
-			self::$user = Entity\Factory::user();
+			self::$user = Entitizer::user();
 		}
 
 		# Authorize with session code

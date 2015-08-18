@@ -3,7 +3,7 @@
 namespace System\Handlers\Site {
 
 	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
+	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
@@ -76,7 +76,7 @@ namespace System\Handlers\Site {
 
 			# Create page
 
-			$this->page = Entity\Factory::page($this->path ? end($this->path)['id'] : 1);
+			$this->page = Entitizer::page($this->path ? end($this->path)['id'] : 1);
 
 			if (0 === $this->page->id) return false;
 

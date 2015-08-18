@@ -3,7 +3,7 @@
 namespace System\Handlers\Admin\Content {
 
 	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
+	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
@@ -66,7 +66,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Create page
 
-			$this->page = new Entity\Type\Page\Manager($id);
+			$this->page = Entitizer::manager(ENTITY_TYPE_PAGE, $id);
 
 			if (0 === $this->page->id) return $this->handleList(true);
 
@@ -138,7 +138,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Create page
 
-			$this->page = Entity\Factory::page($post['id']);
+			$this->page = Entitizer::page($post['id']);
 
 			# Process list
 

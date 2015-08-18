@@ -3,7 +3,7 @@
 namespace System\Frames\Admin\Listview {
 
 	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
+	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
@@ -176,7 +176,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create parent page
 
-			$this->parent = new Entity\Type\Page\Manager(Request::get('parent_id'));
+			$this->parent = Entitizer::manager(ENTITY_TYPE_PAGE, Request::get('parent_id'));
 
 			# Create form
 
@@ -192,9 +192,9 @@ namespace System\Frames\Admin\Listview {
 
 			if (false !== ($post = $this->form_create->post()) && !$this->form_create->errors()) {
 
-				if (true !== ($result = $this->parent->create($post))) Messages::error(Language::get($result));
+				if (false === ($child = $this->parent->createChild($post))) Messages::error(Language::get($result));
 
-				else Request::redirect('/admin/content/pages?id=' . $this->parent->created_id . '&submitted=create');
+				else Request::redirect('/admin/content/pages?id=' . $child->id . '&submitted=create');
 			}
 
 			# Get children pages
@@ -220,7 +220,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create parent page
 
-			$this->parent = Entity\Factory::page(Request::get('parent_id'));
+			$this->parent = Entitizer::page(Request::get('parent_id'));
 
 			# Get children pages
 

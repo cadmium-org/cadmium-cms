@@ -3,7 +3,7 @@
 namespace System\Handlers\Admin\Content {
 
 	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entity, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
+	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
 	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
 
 	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
@@ -66,7 +66,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Create menuitem
 
-			$this->menuitem = new Entity\Type\Menuitem\Manager($id);
+			$this->menuitem = Entitizer::manager(ENTITY_TYPE_MENUITEM, $id);
 
 			if (0 === $this->menuitem->id) return $this->handleList(true);
 
@@ -128,7 +128,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Create menuitem
 
-			$this->menuitem = Entity\Factory::menuitem($post['id']);
+			$this->menuitem = Entitizer::menuitem($post['id']);
 
 			# Process list
 

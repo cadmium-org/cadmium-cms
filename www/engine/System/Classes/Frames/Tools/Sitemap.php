@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Utils\Entity, System\Utils\Tools, Arr, Date, DB;
+	use System, System\Utils\Entitizer, System\Utils\Tools, Arr, Date, DB;
 
 	class Sitemap extends System\Frames\Main {
 
@@ -20,7 +20,7 @@ namespace System\Frames\Tools {
 
 			foreach ($pages as $key => $id) {
 
-				$page = Entity\Factory::page($id);
+				$page = Entitizer::page($id);
 
 				$pages[$key] = array('canonical' => $page->canonical, 'modified' => $page->time_modified);
 			}

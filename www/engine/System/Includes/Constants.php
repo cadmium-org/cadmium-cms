@@ -31,6 +31,14 @@ define('CONFIG_PARAM_SYSTEM_EMAIL',                 'system_email');
 
 define('CONFIG_PARAM_USERS_REGISTRATION',           'users_registration');
 
+# Entity types
+
+define('ENTITY_TYPE_PAGE',                          'Page');
+define('ENTITY_TYPE_MENUITEM',                      'Menuitem');
+define('ENTITY_TYPE_USER',                          'User');
+define('ENTITY_TYPE_USER_SECRET',                   'User\Secret');
+define('ENTITY_TYPE_USER_SESSION',                  'User\Session');
+
 # User
 
 define('USER_SESSION_PARAM_CODE',                   'code');
