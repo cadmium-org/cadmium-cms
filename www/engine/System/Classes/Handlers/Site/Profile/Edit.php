@@ -13,59 +13,13 @@ namespace System\Handlers\Site\Profile {
 
 		private $form_personal = null, $form_password = null;
 
-		# Get personal form
-
-		private function getFormPersonal() {
-
-			$form = new Form('edit');
-
-			# Add form fields
-
-			$form->input        ('email', Auth::user()->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$form->input        ('first_name', Auth::user()->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
-
-			$form->input        ('last_name', Auth::user()->last_name, FORM_INPUT_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
-
-			$form->select       ('sex', Auth::user()->sex, Lister\Sex::range());
-
-			$form->input        ('city', Auth::user()->city, FORM_INPUT_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
-
-			$form->select       ('country', Auth::user()->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
-
-			$form->select       ('timezone', Auth::user()->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
-
-			# ------------------------
-
-			return $form;
-		}
-
-		# Get password form
-
-		private function getFormPassword() {
-
-			$form = new Form('edit');
-
-			# Add form fields
-
-			$form->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$form->input        ('password_new', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$form->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			# ------------------------
-
-			return $form;
-		}
-
 		# Get contents
 
 		private function getContents() {
 
 			$contents = View::get('Blocks/Contents/Profile/Edit');
 
-			# Set forms
+			# Implement forms
 
 			$this->form_personal->implement($contents);
 
@@ -82,9 +36,9 @@ namespace System\Handlers\Site\Profile {
 
 			# Create forms
 
-			$this->form_personal = $this->getFormPersonal();
+			$this->form_personal = new Forms\Site\Profile\Edit\Personal();
 
-			$this->form_password = $this->getFormPassword();
+			$this->form_password = new Forms\Site\Profile\Edit\Password();
 
 			# Post forms
 
