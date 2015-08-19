@@ -29,7 +29,7 @@ namespace System\Utils\Auth\Handler {
 
 			$contents = View::get($admin ? 'Blocks/Contents/Auth/Recover' : 'Blocks/Contents/Profile/Auth/Recover');
 
-			$form->code = $code;
+			$contents->code = $code;
 
 			$form->implement($contents);
 
