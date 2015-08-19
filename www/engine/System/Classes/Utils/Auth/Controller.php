@@ -28,7 +28,7 @@ namespace System\Utils\Auth {
 
 		# Remove session/secret code
 
-		private static function removeCode($type, $code) {
+		private static function removeCode($type) {
 
 			$extension = Entitizer::create($type, Auth::user()->id);
 
