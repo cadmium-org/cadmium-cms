@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entitizer\Type\User {
 
-	use System\Utils\Entitizer, DB, String, Validate;
+	use System\Utils\Entitizer, System\Utils\Validate, DB, String, Validate;
 
 	/**
 	 * @property-read int $id
@@ -61,11 +61,11 @@ namespace System\Utils\Entitizer\Type\User {
 
 			# Validate values
 
-			if (false === ($name = $this->entity->validateName($name))) return self::ERROR_NAME_INVALID;
+			if (false === ($name = Validate::userName($name))) return self::ERROR_NAME_INVALID;
 
 			if (false === ($email = Validate::email($email))) return self::ERROR_EMAIL_INVALID;
 
-			if (false === ($password = $this->entity->validatePassword($password))) return self::ERROR_PASSWORD_INVALID;
+			if (false === ($password = Validate::userPassword($password))) return self::ERROR_PASSWORD_INVALID;
 
 			if (0 !== strcmp($password, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
 
@@ -132,13 +132,13 @@ namespace System\Utils\Entitizer\Type\User {
 
 			# Validate values
 
-			if (false === ($name = $this->entity->validateName($name))) return self::ERROR_NAME_INVALID;
+			if (false === ($name = Validate::userName($name))) return self::ERROR_NAME_INVALID;
 
 			if (false === ($email = Validate::email($email))) return self::ERROR_EMAIL_INVALID;
 
             if ('' !== $password) {
 
-    			if (false === ($password = $this->entity->validatePassword($password))) return self::ERROR_PASSWORD_INVALID;
+    			if (false === ($password = Validate::userPassword($password))) return self::ERROR_PASSWORD_INVALID;
 
     			if (0 !== strcmp($password, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
             }

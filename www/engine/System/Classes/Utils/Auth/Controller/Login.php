@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth\Controller {
 
-	use System\Utils\Auth, DB, String;
+	use System\Utils\Auth, System\Utils\Validate, DB, String;
 
 	abstract class Login {
 
@@ -29,9 +29,9 @@ namespace System\Utils\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth::user()->validateName($name))) return self::ERROR_NAME_INVALID;
+			if (false === ($name = Validate::userName($name))) return self::ERROR_NAME_INVALID;
 
-			if (false === ($password = Auth::user()->validatePassword($password))) return self::ERROR_PASSWORD_INVALID;
+			if (false === ($password = Validate::userPassword($password))) return self::ERROR_PASSWORD_INVALID;
 
 			# Select user from DB
 

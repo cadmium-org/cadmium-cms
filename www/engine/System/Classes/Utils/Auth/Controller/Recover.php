@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth\Controller {
 
-	use System\Utils\Auth, DB, String;
+	use System\Utils\Auth, System\Utils\Validate, DB, String;
 
 	abstract class Recover {
 
@@ -25,7 +25,7 @@ namespace System\Utils\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($password_new = Auth::user()->validatePassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
+			if (false === ($password_new = Validate::userPassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
 
 			if (0 !== strcmp($password_new, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
 

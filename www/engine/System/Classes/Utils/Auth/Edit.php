@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth {
 
-	use System\Utils\Auth, DB, String, Validate;
+	use System\Utils\Auth, System\Utils\Validate, DB, String, Validate;
 
 	abstract class Edit {
 
@@ -83,9 +83,9 @@ namespace System\Utils\Auth {
 
 			# Validate values
 
-			if (false === ($password = Auth::user()->validatePassword($password))) return self::ERROR_PASSWORD_INVALID;
+			if (false === ($password = Validate::userPassword($password))) return self::ERROR_PASSWORD_INVALID;
 
-			if (false === ($password_new = Auth::user()->validatePassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
+			if (false === ($password_new = Validate::userPassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
 
 			if (0 !== strcmp($password_new, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
 

@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth\Controller {
 
-	use System\Utils\Auth, DB;
+	use System\Utils\Auth, System\Utils\Validate, DB;
 
 	abstract class Reset {
 
@@ -28,7 +28,7 @@ namespace System\Utils\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth::user()->validateName($name))) return self::ERROR_NAME_INVALID;
+			if (false === ($name = Validate::userName($name))) return self::ERROR_NAME_INVALID;
 
 			if (false === Auth::checkCaptcha($captcha)) return self::ERROR_CAPTCHA_INCORRECT;
 
