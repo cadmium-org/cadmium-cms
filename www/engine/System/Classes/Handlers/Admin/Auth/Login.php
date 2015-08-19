@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use System, System\Forms, System\Utils\Auth, Language;
+	use System, System\Forms, System\Utils\Auth, Language, Request;
 
 	class Login extends System\Frames\Admin\Component\Auth {
 

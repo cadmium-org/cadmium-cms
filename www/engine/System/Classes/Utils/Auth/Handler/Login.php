@@ -10,7 +10,7 @@ namespace System\Utils\Auth\Handler {
 
 		public static function handle($admin = false) {
 
-			$form = new Forms\Login(true);
+			$form = new Forms\Login($admin);
 
 			# Post form
 
@@ -20,7 +20,7 @@ namespace System\Utils\Auth\Handler {
 
 				else if (true !== ($result = Auth\Controller::login($post))) Messages::error(Language::get($result));
 
-				else return Request::redirect($admin ? '/admin' : '/profile');
+				else Request::redirect($admin ? '/admin' : '/profile');
 
 			} else if (Request::get('submitted') === 'register') {
 
