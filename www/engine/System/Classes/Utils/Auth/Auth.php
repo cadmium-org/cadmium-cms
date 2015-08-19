@@ -21,7 +21,7 @@ namespace System\Utils {
 
 		public static function __autoload() {
 
-			self::$user = Entitizer::user();
+			if (null === self::$user) self::$user = Entitizer::user();
 		}
 
 		# Authorize with session code
