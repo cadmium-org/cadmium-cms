@@ -180,13 +180,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create form
 
-			$this->form_create = new Form('page');
-
-			# Add form fields
-
-			$this->form_create->input   ('title', '', FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$this->form_create->input   ('name', '', FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED | FORM_FIELD_TRANSLIT);
+			$this->form_create = new Forms\Admin\Content\Pages\Create();
 
 			# Post form
 

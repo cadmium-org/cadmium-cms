@@ -178,13 +178,7 @@ namespace System\Frames\Admin\Listview {
 
 			# Create form
 
-			$this->form_create = new Form('menuitem');
-
-			# Add form fields
-
-			$this->form_create->input   ('text', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$this->form_create->input   ('link', '', FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH);
+			$this->form_create = new Forms\Admin\Content\Menuitems\Create();
 
 			# Post form
 
