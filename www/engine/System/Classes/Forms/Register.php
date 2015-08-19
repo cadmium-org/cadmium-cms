@@ -2,7 +2,7 @@
 
 namespace System\Forms {
 
-	use System\Utils\Auth, System\Utils\Messages, Form, Language;
+	use Form, Language;
 
 	class Register extends Form {
 
@@ -35,22 +35,6 @@ namespace System\Forms {
 			$this->input('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
 
                 ($placeholder ? Language::get('USER_FIELD_CAPTCHA') : ''), FORM_FIELD_REQUIRED);
-        }
-
-        # Handle form
-
-        public function handle() {
-
-            if (false !== ($post = $this->post())) {
-
-				if ($this->errors()) Messages::error(Language::get('FORM_ERROR_REQUIRED'));
-
-				else if (true !== ($result = Auth\Controller::register($post))) Messages::error(Language::get($result));
-
-				else return true;
-			}
-
-            return false;
         }
     }
 }
