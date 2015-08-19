@@ -49,7 +49,7 @@ namespace System\Handlers\Admin\Content {
 
 			$contents->block('parent')->text = $parent_text;
 
-			# Set form
+			# Implement form
 
 			$this->form->implement($contents);
 

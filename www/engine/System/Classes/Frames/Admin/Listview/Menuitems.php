@@ -138,7 +138,7 @@ namespace System\Frames\Admin\Listview {
 				$contents->block('actions')->id = $this->parent->id;
 			}
 
-			# Set form
+			# Implement form
 
 			if (!$ajax) {
 
