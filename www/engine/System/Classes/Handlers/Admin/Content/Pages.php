@@ -72,29 +72,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Create form
 
-			$this->form = new Form('page');
-
-			# Add form fields
-
-			$this->form->input        ('parent_id', $this->page->parent_id, FORM_INPUT_HIDDEN);
-
-			$this->form->input        ('title', $this->page->title, FORM_INPUT_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$this->form->input        ('name', $this->page->name, FORM_INPUT_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, '', FORM_FIELD_TRANSLIT | FORM_FIELD_REQUIRED);
-
-			$this->form->select       ('visibility', $this->page->visibility, Lister\Visibility::range());
-
-			$this->form->select       ('access', $this->page->access, Lister\Access::range());
-
-			$this->form->input        ('description', $this->page->description, FORM_INPUT_TEXTAREA, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
-
-			$this->form->input        ('keywords', $this->page->keywords, FORM_INPUT_TEXTAREA, CONFIG_PAGE_KEYWORDS_MAX_LENGTH);
-
-			$this->form->checkbox     ('robots_index', $this->page->robots_index);
-
-			$this->form->checkbox     ('robots_follow', $this->page->robots_follow);
-
-			$this->form->input        ('contents', $this->page->contents, FORM_INPUT_TEXTAREA);
+		 	$this->form = new Forms\Admin\Content\Pages\Edit($this->page);
 
 			# Post form
 

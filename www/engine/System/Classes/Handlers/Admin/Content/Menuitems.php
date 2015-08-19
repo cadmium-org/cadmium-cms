@@ -72,19 +72,7 @@ namespace System\Handlers\Admin\Content {
 
 			# Create form
 
-			$this->form = new Form('menuitem');
-
-			# Add form fields
-
-			$this->form->input        ('parent_id', $this->menuitem->parent_id, FORM_INPUT_HIDDEN);
-
-			$this->form->input        ('text', $this->menuitem->text, FORM_INPUT_TEXT, CONFIG_MENUITEM_TEXT_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$this->form->input        ('link', $this->menuitem->link, FORM_INPUT_TEXT, CONFIG_MENUITEM_LINK_MAX_LENGTH, '');
-
-			$this->form->select       ('target', $this->menuitem->target, Lister\Target::range());
-
-			$this->form->input        ('position', $this->menuitem->position, FORM_INPUT_TEXT, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
+			$this->form = new Forms\Admin\Content\Menuitems\Edit($this->menuitem);
 
 			# Post form
 
