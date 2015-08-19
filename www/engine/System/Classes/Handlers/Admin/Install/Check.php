@@ -13,32 +13,6 @@ namespace System\Handlers\Admin\Install {
 
 		private $form = null;
 
-		# Get languages list
-
-		private function getLanguages() {
-
-			$languages = array();
-
-			foreach (Extend\Languages::items() as $code => $language) $languages[$code] = $language['title'];
-
-			# ------------------------
-
-			return $languages;
-		}
-
-		# Get templates list
-
-		private function getTemplates() {
-
-			$templates = array();
-
-			foreach (Extend\Templates::items() as $name => $template) $templates[$name] = $template['title'];
-
-			# ------------------------
-
-			return $templates;
-		}
-
 		# Get requirements
 
 		private function getRequirements() {
@@ -63,7 +37,7 @@ namespace System\Handlers\Admin\Install {
 
 			$contents = View::get('Blocks/Contents/Install/Check');
 
-			# Set form
+			# Implement form
 
 			$this->form->implement($contents);
 
@@ -90,13 +64,7 @@ namespace System\Handlers\Admin\Install {
 
 			# Create form
 
-			$this->form = new Form();
-
-			# Add form fields
-
-            $this->form->select       ('language', Extend\Languages::active(), $this->getLanguages(), '', FORM_FIELD_AUTO);
-
-			$this->form->select       ('template', Extend\Templates::active(), $this->getTemplates(), '', FORM_FIELD_AUTO);
+			$this->form = new Forms\Admin\Install\Check();
 
 			# Fill template
 
