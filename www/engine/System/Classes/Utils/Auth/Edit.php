@@ -2,7 +2,7 @@
 
 namespace System\Utils\Auth {
 
-	use System\Utils\Auth, System\Utils\Validate, DB, String, Validate;
+	use System\Utils\Auth, System\Utils\Validate, DB, String;
 
 	abstract class Edit {
 

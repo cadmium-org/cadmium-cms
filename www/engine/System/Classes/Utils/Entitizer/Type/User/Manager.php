@@ -2,7 +2,7 @@
 
 namespace System\Utils\Entitizer\Type\User {
 
-	use System\Utils\Entitizer, System\Utils\Validate, DB, String, Validate;
+	use System\Utils\Entitizer, System\Utils\Validate, DB, String;
 
 	/**
 	 * @property-read int $id
