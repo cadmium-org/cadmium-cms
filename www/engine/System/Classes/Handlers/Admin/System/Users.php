@@ -25,7 +25,7 @@ namespace System\Handlers\Admin\System {
 
 			$contents->title = ($this->create ? Language::get('USERS_ITEM_NEW') : $this->user->name);
 
-			# Set form
+			# Implement form
 
 			$this->form->implement($contents);
 
@@ -61,37 +61,7 @@ namespace System\Handlers\Admin\System {
 
 			# Create form
 
-			$this->form = new Form('user');
-
-			# Add form fields
-
-			$this->form->input        ('name', $this->user->name, FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$this->form->input        ('email', $this->user->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-
-			$this->form->select       ('rank', $this->user->rank, Lister\Rank::range(), '',
-
-			                    ((($this->user->id === 1) || ($this->user->id === Auth::user()->id)) ? FORM_FIELD_DISABLED : 0));
-
-			$this->form->input        ('first_name', $this->user->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
-
-			$this->form->input        ('last_name', $this->user->last_name, FORM_INPUT_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
-
-			$this->form->select       ('sex', $this->user->sex, Lister\Sex::range());
-
-			$this->form->input        ('city', $this->user->city, FORM_INPUT_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
-
-			$this->form->select       ('country', $this->user->country, Country::range(), Language::get('SELECT_COUNTRY'), FORM_FIELD_SEARCH);
-
-			$this->form->select       ('timezone', $this->user->timezone, Timezone::range(), Language::get('SELECT_TIMEZONE'), FORM_FIELD_SEARCH);
-
-			$this->form->input        ('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
-
-			                    ($this->create ? FORM_FIELD_REQUIRED : 0));
-
-			$this->form->input        ('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '',
-
-			                    ($this->create ? FORM_FIELD_REQUIRED : 0));
+			$this->form = new Forms\Admin\System\Users($this->user, $this->create);
 
 			# Post form
 
