@@ -100,7 +100,9 @@ namespace System\Handlers\Admin\Extend {
 
 		# Handle request
 
-		protected function handle() {
+		protected function handle($ajax = false) {
+
+			if ($ajax) return $this->handleAjax();
 
 			list ($this->section, $name, $default) = (strcasecmp(Request::get('list'), SECTION_ADMIN) === 0) ?
 

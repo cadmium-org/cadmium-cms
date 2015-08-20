@@ -121,25 +121,33 @@ namespace System\Frames\Admin {
 
 			if (('' !== CONFIG_ADMIN_IP) && (false !== stripos(ENGINE_CLIENT_IP, CONFIG_ADMIN_IP))) return Status::error404();
 
-			# Handle request
+			# Handle install component request
 
 			if ($this instanceof Component\Install) {
 
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
+				return ($this->handle() ? $this->displayForm() : Status::error404());
 			}
+
+			# Handle auth component request
 
 			if ($this instanceof Component\Auth) {
 
 				if (Auth::check()) return Request::redirect('/admin');
 
-				return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayForm() : Status::error404());
+				return ($this->handle() ? $this->displayForm() : Status::error404());
 			}
+
+			# Handle common request
 
 			if (!Auth::check()) return Request::redirect('/admin/login');
 
-			if (Request::isAjax() && method_exists($this, 'handleAjax')) return Ajax::output($this->handleAjax());
+			if (Request::isAjax()) return Ajax::output($this->handle(true));
 
-			return ((method_exists($this, 'handle') && $this->handle()) ? $this->displayPage() : Status::error404());
+			return ($this->handle() ? $this->displayPage() : Status::error404());
 		}
+
+		# Handler interface
+
+		abstract protected function handle();
 	}
 }

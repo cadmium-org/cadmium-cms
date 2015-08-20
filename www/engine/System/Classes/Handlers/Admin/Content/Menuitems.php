@@ -60,7 +60,9 @@ namespace System\Handlers\Admin\Content {
 
 		# Handle request
 
-		protected function handle() {
+		protected function handle($ajax = false) {
+
+			if ($ajax) return $this->handleAjax();
 
 			if (null === ($id = Request::get('id'))) return $this->handleList();
 
@@ -104,7 +106,7 @@ namespace System\Handlers\Admin\Content {
 
 		# Handle ajax request
 
-		public function handleAjax() {
+		protected function handleAjax() {
 
 			# Process form
 

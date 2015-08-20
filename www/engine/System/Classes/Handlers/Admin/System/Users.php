@@ -45,7 +45,9 @@ namespace System\Handlers\Admin\System {
 
 		# Handle request
 
-		protected function handle() {
+		protected function handle($ajax = false) {
+
+			if ($ajax) return $this->handleAjax();
 
 			# Create user
 
@@ -91,7 +93,7 @@ namespace System\Handlers\Admin\System {
 
 		# Handle ajax request
 
-		public function handleAjax() {
+		protected function handleAjax() {
 
 			# Process form
 

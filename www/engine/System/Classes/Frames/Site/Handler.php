@@ -117,5 +117,9 @@ namespace System\Frames\Site {
 
 			return ($this->handle() ? $this->displayPage() : Status::error404());
 		}
+
+		# Handler interface
+
+		abstract protected function handle();
 	}
 }
