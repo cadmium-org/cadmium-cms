@@ -68,5 +68,13 @@ namespace Form\Utils {
 
 			if (boolval($value)) $this->required = true;
 		}
+
+        # Setter interface
+
+        abstract public function set($value);
+
+        # Block getter interface
+
+        abstract public function block();
 	}
 }
