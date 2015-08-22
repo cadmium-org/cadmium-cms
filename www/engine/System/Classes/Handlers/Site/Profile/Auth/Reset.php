@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use System, System\Forms, System\Utils\Auth, Language;
+	use System, System\Utils\Auth, Language;
 
 	class Reset extends System\Frames\Site\Component\Profile\Auth {
 
