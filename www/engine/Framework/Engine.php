@@ -53,7 +53,7 @@ namespace {
 
 			# ------------------------
 
-			$this->init();
+			try { $this->init(); } catch (Error\Error $error) { self::error($error->message()); }
 		}
 
 		# Display error screen
