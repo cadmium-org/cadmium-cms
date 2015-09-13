@@ -22,7 +22,7 @@ namespace {
 
 		function boolval($value) {
 
-			return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+			return (bool) $value;
 		}
 	}
 }

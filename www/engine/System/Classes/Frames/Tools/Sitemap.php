@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Utils\Entitizer, System\Utils\Tools, Arr, Date, DB;
+	use System, System\Modules\Config, System\Modules\Entitizer, System\Utils\Tools, Arr, Date, DB;
 
 	class Sitemap extends System\Frames\Main {
 
@@ -12,11 +12,15 @@ namespace System\Frames\Tools {
 
 			$pages = array();
 
+			# Select pages
+
 			$condition = array('visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC);
 
-			if (!(DB::select(TABLE_PAGES, 'id', $condition) && DB::last()->status)) return false;
+			if (!(DB::select(TABLE_PAGES, 'id', $condition) && DB::last()->status)) return array();
 
 			while (null !== ($page = DB::last()->row())) $pages[] = $page['id'];
+
+			# Init pages
 
 			foreach ($pages as $key => $id) {
 
@@ -25,6 +29,8 @@ namespace System\Frames\Tools {
 				$pages[$key] = array('canonical' => $page->canonical, 'modified' => $page->time_modified);
 			}
 
+			# ------------------------
+
 			return Arr::subvalSort($pages, 'canonical');
 		}
 
@@ -32,16 +38,22 @@ namespace System\Frames\Tools {
 
 		protected function main() {
 
+			# Create sitemap
+
 			$sitemap = new Tools\Sitemap();
 
-			if (false !== ($pages = $this->getPages())) foreach ($pages as $page) {
+			# Fill sitemap
 
-				$loc = (CONFIG_SYSTEM_URL . $page['canonical']);
+			foreach ($this->getPages() as $page) {
+
+				$loc = (Config::get('system_url') . $page['canonical']);
 
 				$lastmod = Date::get(DATE_FORMAT_W3C, $page['modified']);
 
 				$sitemap->add($loc, $lastmod, FREQUENCY_WEEKLY, 0.5);
 			}
+
+			# ------------------------
 
 			$sitemap->output();
 		}

@@ -5,31 +5,19 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.1');
+define('CADMIUM_VERSION',                           '0.1.0');
 define('CADMIUM_COPY',                              '2015');
+
+# External
+
+define('JQUERY_VERSION',                            '2.1.4');
+define('SEMANTIC_UI_VERSION',                       '2.0.7');
+define('CKEDITOR_VERSION',                          '4.5.1');
 
 # Sections
 
 define('SECTION_ADMIN',                             'Admin');
 define('SECTION_SITE',                              'Site');
-
-# Config params
-
-define('CONFIG_PARAM_ADMIN_LANGUAGE',               'admin_language');
-define('CONFIG_PARAM_ADMIN_TEMPLATE',               'admin_template');
-
-define('CONFIG_PARAM_SITE_LANGUAGE',                'site_language');
-define('CONFIG_PARAM_SITE_TEMPLATE',                'site_template');
-define('CONFIG_PARAM_SITE_TITLE',                   'site_title');
-define('CONFIG_PARAM_SITE_STATUS',                  'site_status');
-define('CONFIG_PARAM_SITE_DESCRIPTION',             'site_description');
-define('CONFIG_PARAM_SITE_KEYWORDS',                'site_keywords');
-
-define('CONFIG_PARAM_SYSTEM_URL',                   'system_url');
-define('CONFIG_PARAM_SYSTEM_TIMEZONE',              'system_timezone');
-define('CONFIG_PARAM_SYSTEM_EMAIL',                 'system_email');
-
-define('CONFIG_PARAM_USERS_REGISTRATION',           'users_registration');
 
 # Entity types
 

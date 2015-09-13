@@ -4,9 +4,9 @@ namespace {
 
 	abstract class System extends Engine {
 
-		protected $installed = false, $time = 0;
+		protected $installed = false;
 
-		protected $database = array('server' => '', 'user' => '', 'password' => '', 'name' => '');
+		protected $database = array('server' => '', 'user' => '', 'password' => '', 'name' => ''), $time = 0;
 
 		# Parse system file
 
@@ -14,16 +14,16 @@ namespace {
 
 			$this->installed = true;
 
-			# Parse installation details
-
-			$this->time = intabs(Arr::get($data, array('time')));
-
 			# Parse database params
 
 			foreach (array_keys($this->database) as $key) {
 
 				$this->database[$key] = strval(Arr::get($data, array('database', $key)));
 			}
+
+			# Parse installation details
+
+			$this->time = intabs(Arr::get($data, array('time')));
 		}
 
         # System init method
@@ -45,5 +45,9 @@ namespace {
 
 			$this->main();
 		}
+
+		# System main method interface
+
+		abstract protected function main();
     }
 }

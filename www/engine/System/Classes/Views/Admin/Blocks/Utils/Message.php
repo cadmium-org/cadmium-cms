@@ -4,13 +4,8 @@ namespace System\Views\Admin\Blocks\Utils {
 
 	use System\Views;
 
-	class Message extends Views\Templatable {
+	class Message extends Views\Admin\View {
 
-		# Constructor
-
-        public function __construct() {
-
-            parent::__construct(SECTION_ADMIN, 'Blocks/Utils/Message.tpl');
-        }
+		protected static $file_name = 'Blocks/Utils/Message.tpl';
     }
 }

@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Utils\Auth, System\Utils\Tools;
+	use System, System\Modules\Auth, System\Utils\Tools;
 
 	class Captcha extends System\Frames\Main {
 
@@ -10,25 +10,29 @@ namespace System\Frames\Tools {
 
 		protected function main() {
 
+			# Generate capctha code
+
 			$code = Auth::generateCaptcha();
 
-			$black = array(0, 0, 0); $white = array(255, 255, 255);
+			# Create captcha
 
-			$captcha = new Tools\Captcha(CONFIG_CAPTCHA_WIDTH, CONFIG_CAPTCHA_HEIGHT, $white);
+			$captcha = new Tools\Captcha(CONFIG_CAPTCHA_WIDTH, CONFIG_CAPTCHA_HEIGHT, [255, 255, 255]);
+
+			# Customize captcha
 
 			$font = (DIR_SYSTEM_DATA . CONFIG_CAPTCHA_FONT); $size = CONFIG_CAPTCHA_FONT_SIZE;
 
 			$indent = CONFIG_CAPTCHA_TEXT_INDENT; $step = CONFIG_CAPTCHA_TEXT_STEP;
 
-			$captcha->text($font, $size, $indent, $step, $code, $black);
+			$captcha->text($font, $size, $indent, $step, $code, [0, 0, 0]);
 
-			$captcha->lines(2, $white); $captcha->noise(10, $white);
+			$captcha->lines(2, [255, 255, 255]); $captcha->noise(10, [255, 255, 255]);
 
-			$captcha->lines(2, $black); $captcha->noise(100, $black);
+			$captcha->lines(2, [0, 0, 0]); $captcha->noise(100, [0, 0, 0]);
 
 			# ------------------------
 
-			$captcha->outputPNG();
+			$captcha->output();
 		}
 	}
 }

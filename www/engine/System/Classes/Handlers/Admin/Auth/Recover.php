@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use System, System\Utils\Auth, Language, Request;
+	use System, System\Modules\Auth, Language;
 
 	class Recover extends System\Frames\Admin\Component\Auth {
 
@@ -10,17 +10,9 @@ namespace System\Handlers\Admin\Auth {
 
 		protected function handle() {
 
-			if ($this->initial()) Request::redirect('/admin/register');
+			$this->title = Language::get('TITLE_AUTH_RECOVER');
 
-			# Fill template
-
-			$this->setTitle(Language::get('TITLE_AUTH_RECOVER'));
-
-			$this->setContents(Auth\Handler\Recover::handle(true));
-
-			# ------------------------
-
-			return true;
+			return Auth\Handler\Recover::handle();
 		}
 	}
 }

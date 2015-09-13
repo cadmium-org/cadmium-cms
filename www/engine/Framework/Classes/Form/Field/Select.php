@@ -16,7 +16,7 @@ namespace Form\Field {
 
 			foreach ($this->options as $value => $text) {
 
-				$selected = (($this->value === $value) ? ' selected' : '');
+				$selected = (($this->value === $value) ? ' selected="selected"' : '');
 
 				$options[] = array('value' => $value, 'selected' => $selected, 'text' => $text);
 			}
@@ -32,13 +32,11 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value, array $options, $default = '') {
+		public function __construct($form, $name, $value, array $options, $default = null) {
 
 			parent::__construct($form, $name);
 
-			$default = strval($default);
-
-			$default = (('' !== $default) ? array('' => $default) : array());
+			$default = ((null !== $default) ? array('' => strval($default)) : array());
 
 			$this->options = array_merge($default, $options);
 

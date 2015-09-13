@@ -63,7 +63,7 @@ define('CONFIG_CAPTCHA_TEXT_STEP',                  25);
 
 # Admin
 
-define('CONFIG_ADMIN_LANGUAGE_DEFAULT',             'en_US');
+define('CONFIG_ADMIN_LANGUAGE_DEFAULT',             'en-US');
 define('CONFIG_ADMIN_TEMPLATE_DEFAULT',             'Default');
 
 define('CONFIG_ADMIN_PAGES_DISPLAY',                50);
@@ -72,8 +72,10 @@ define('CONFIG_ADMIN_USERS_DISPLAY',                50);
 
 # Site
 
-define('CONFIG_SITE_LANGUAGE_DEFAULT',              'en_US');
+define('CONFIG_SITE_LANGUAGE_DEFAULT',              'en-US');
 define('CONFIG_SITE_TEMPLATE_DEFAULT',              'Default');
+
+define('CONFIG_SITE_TITLE_DEFAULT',                 'Demo Site');
 
 define('CONFIG_SITE_TITLE_MAX_LENGTH',              128);
 define('CONFIG_SITE_DESCRIPTION_MAX_LENGTH',        512);
@@ -82,7 +84,12 @@ define('CONFIG_SITE_KEYWORDS_MAX_LENGTH',           512);
 # System
 
 define('CONFIG_SYSTEM_URL_MAX_LENGTH',				128);
+define('CONFIG_SYSTEM_URL_DEFAULT',				    'http://example.com');
+
 define('CONFIG_SYSTEM_EMAIL_MAX_LENGTH',			128);
+define('CONFIG_SYSTEM_EMAIL_DEFAULT',				'admin@example.com');
+
+define('CONFIG_SYSTEM_TIMEZONE_DEFAULT',			'UTC');
 
 # Database
 

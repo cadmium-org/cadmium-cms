@@ -2,7 +2,7 @@
 
 namespace System {
 
-	use System, System\Handlers, System\Utils\Requirements, Request;
+	use System, System\Handlers, System\Modules\Install, Request;
 
 	class Installer extends System {
 
@@ -10,15 +10,11 @@ namespace System {
 
 		protected function main() {
 
-			# Check installation
-
-			if ($this->installed) return new Handlers\Page();
-
 			# Handle request
 
-			$checked = (Requirements::status() && boolval(Request::get('checked')));
+			$checked = (Install::status() && boolval(Request::get('checked')));
 
-			return (!$checked ? new Handlers\Admin\Install\Check() : new Handlers\Admin\Install\Configure());
+			return (!$checked ? new Handlers\Admin\Install\Check() : new Handlers\Admin\Install\Database());
 		}
 	}
 }

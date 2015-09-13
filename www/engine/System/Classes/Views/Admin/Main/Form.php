@@ -4,13 +4,8 @@ namespace System\Views\Admin\Main {
 
 	use System\Views;
 
-	class Form extends Views\Templatable {
+	class Form extends Views\Admin\View {
 
-		# Constructor
-
-        public function __construct() {
-
-            parent::__construct(SECTION_ADMIN, 'Main/Form.tpl');
-        }
+		protected static $file_name = 'Main/Form.tpl';
     }
 }

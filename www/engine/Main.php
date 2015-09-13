@@ -12,7 +12,8 @@ error_reporting(E_ALL);
 
 define('DIR_ENGINE',                (dirname(__FILE__) . '/'));
 
-define('DIR_UPLOADS',               (DIR_ENGINE . '../uploads/'));
+define('DIR_WWW',                   (DIR_ENGINE . '../'));
+define('DIR_UPLOADS',               (DIR_WWW . 'uploads/'));
 
 define('DIR_FRAMEWORK',             (DIR_ENGINE . 'Framework/'));
 define('DIR_SYSTEM',                (DIR_ENGINE . 'System/'));
@@ -59,7 +60,7 @@ function __autoload($class_name) {
 
 	# Check if class exists
 
-	if (!class_exists($class_name) && !interface_exists($class_name)) throw new Error\ClassLoad($class_name);
+	if (!class_exists($class_name) && !interface_exists($class_name) && !trait_exists($class_name)) throw new Error\ClassLoad($class_name);
 
 	# Call autoload method
 

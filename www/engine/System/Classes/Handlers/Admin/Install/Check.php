@@ -2,79 +2,17 @@
 
 namespace System\Handlers\Admin\Install {
 
-	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
-	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
-
-	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
-	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
+	use System, System\Modules\Install, Language;
 
 	class Check extends System\Frames\Admin\Component\Install {
-
-		private $form = null;
-
-		# Get requirements
-
-		private function getRequirements() {
-
-			$requirements = array();
-
-			foreach (Requirements::get() as $name => $value) {
-
-				$class = ($value ? 'positive' : 'negative'); $icon = ($value ? 'check circle' : 'warning circle');
-
-				$text = Language::get('INSTALL_REQUIREMENT_' . strtoupper($name) . '_' . ($value ? 'SUCCESS' : 'FAIL'));
-
-				$requirements[] = array('class' => $class, 'icon' => $icon, 'text' => $text);
-			}
-
-			return $requirements;
-		}
-
-		# Get contents
-
-		private function getContents() {
-
-			$contents = View::get('Blocks/Contents/Install/Check');
-
-			# Implement form
-
-			$this->form->implement($contents);
-
-			# Set requirements
-
-			$contents->php_version = phpversion();
-
-			$contents->requirements = $this->getRequirements();
-
-			# Set button
-
-			$contents->block('button')->value = intabs(Requirements::status());
-
-			$contents->block('button')->text = Language::get(Requirements::status() ? 'CONTINUE' : 'RECHECK');
-
-			# ------------------------
-
-			return $contents;
-		}
 
 		# Handle request
 
 		protected function handle() {
 
-			# Create form
+			$this->title = Language::get('TITLE_INSTALL_CHECK');
 
-			$this->form = new Forms\Admin\Install\Check();
-
-			# Fill template
-
-			$this->setTitle(Language::get('INSTALL_TITLE_CHECK'));
-
-			$this->setContents($this->getContents());
-
-			# ------------------------
-
-			return true;
+			return Install\Handler\Check::handle();
 		}
 	}
 }

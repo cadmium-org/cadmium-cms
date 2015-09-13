@@ -16,16 +16,16 @@ namespace {
 
 			if (!Explorer::isDir($dir_name)) throw new Error\LanguageInit($dir_name);
 
-			self::$init = true; self::$dir_name = $dir_name;
+			self::$init = true; self::$dir_name = $dir_name; self::$phrases = array();
 		}
 
 		# Include phrases files
 
-		public static function phrases() {
+		public static function phrases(array $phrases) {
 
 			if (!self::$init) return false;
 
-			foreach (func_get_args() as $name) {
+			foreach ($phrases as $name) {
 
 				$name = strval($name);
 

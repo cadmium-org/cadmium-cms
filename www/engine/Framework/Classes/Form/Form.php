@@ -82,7 +82,7 @@ namespace {
 
 		# Add select field
 
-		public function select($key, $value, array $options, $default = '', $config = 0) {
+		public function select($key, $value, array $options, $default = null, $config = 0) {
 
 			$field = new Form\Field\Select($this, $key, $value, $options, $default);
 
@@ -190,6 +190,15 @@ namespace {
 		public function errors() {
 
 			return $this->errors;
+		}
+
+		# Get field object
+
+		public function get($key) {
+
+			$key = strval($key);
+
+			return (isset($this->fields[$key]) ? $this->fields[$key] : null);
 		}
 
 		# Implement fields

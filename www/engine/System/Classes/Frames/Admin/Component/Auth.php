@@ -2,19 +2,7 @@
 
 namespace System\Frames\Admin\Component {
 
-	use System\Frames\Admin\Handler, DB;
+	use System;
 
-	abstract class Auth extends Handler {
-
-        # Check if initial registration required
-
-        protected function initial() {
-
-			DB::select(TABLE_USERS, 'id', array('id' => 1), null, 1);
-
-			if (!(DB::last() && DB::last()->status)) return false;
-
-			return (DB::last()->rows === 0);
-        }
-	}
+	abstract class Auth extends System\Frames\Admin\Section {}
 }

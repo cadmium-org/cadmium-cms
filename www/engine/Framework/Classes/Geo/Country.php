@@ -6,6 +6,8 @@ namespace Geo {
 
 	abstract class Country extends Lister {
 
+		protected static $list = array();
+
 		# Autoloader
 
 		public static function __autoload() {

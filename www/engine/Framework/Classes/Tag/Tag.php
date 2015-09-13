@@ -43,7 +43,7 @@ namespace {
 
 			if (null === $contents) $this->contents = null;
 
-			if (Template::settable($contents)) $this->contents = $contents;
+			if (Template::isSettable($contents)) $this->contents = $contents;
 
 			else $this->contents = Template::block(String::output($contents), false);
 		}

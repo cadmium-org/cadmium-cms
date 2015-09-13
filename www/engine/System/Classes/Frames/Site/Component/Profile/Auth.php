@@ -2,7 +2,7 @@
 
 namespace System\Frames\Site\Component\Profile {
 
-	use System\Frames\Site\Handler;
+	use System;
 
-	abstract class Auth extends Handler {}
+	abstract class Auth extends System\Frames\Site\Section {}
 }

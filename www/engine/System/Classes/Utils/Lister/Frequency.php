@@ -6,11 +6,13 @@ namespace System\Utils\Lister {
 
 	abstract class Frequency extends Lister\Translatable {
 
+		protected static $list = array();
+
         # Autoloader
 
         public static function __autoload() {
 
-            self::$list[get_called_class()] = array (
+            self::$list = array (
 
 				FREQUENCY_ALWAYS            => 'FREQUENCY_ALWAYS',
 				FREQUENCY_HOURLY            => 'FREQUENCY_HOURLY',

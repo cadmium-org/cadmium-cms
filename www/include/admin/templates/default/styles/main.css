@@ -5,6 +5,8 @@
 
 .wrapper { margin:0 !important; padding-top:55px !important; }
 
+.breadcrumb .section:last-of-type { font-weight:bold; }
+
 .breadcrumb .divider:last-child { display:none; }
 
 #captcha { background-color:#FFF !important; }

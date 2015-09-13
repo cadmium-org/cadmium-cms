@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use System, System\Utils\Auth, Language;
+	use System, System\Modules\Auth, Language;
 
 	class Login extends System\Frames\Site\Component\Profile\Auth {
 
@@ -10,15 +10,9 @@ namespace System\Handlers\Site\Profile\Auth {
 
 		protected function handle() {
 
-			# Fill template
+			$this->title = Language::get('TITLE_PROFILE_AUTH_LOGIN');
 
-			$this->setTitle(Language::get('TITLE_PROFILE_AUTH_LOGIN'));
-
-			$this->setContents(Auth\Handler\Login::handle());
-
-			# ------------------------
-
-			return true;
+			return Auth\Handler\Login::handle();
 		}
 	}
 }

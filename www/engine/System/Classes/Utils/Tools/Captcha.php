@@ -62,6 +62,8 @@ namespace System\Utils\Tools {
 				imagettftext($this->captcha, $size, $angle, $x, $y, $color, $font, $character);
 			}
 
+			# ------------------------
+
 			return true;
 		}
 
@@ -82,6 +84,8 @@ namespace System\Utils\Tools {
 					if (mt_rand(1, $rate) === 1) imagesetpixel($this->captcha, $x, $y, $color);
 				}
 			}
+
+			# ------------------------
 
 			return true;
 		}
@@ -105,36 +109,6 @@ namespace System\Utils\Tools {
 				imageline($this->captcha, $point_0[0], $point_0[1], $point_1[0], $point_1[1], $color);
 			}
 
-			return true;
-		}
-
-		# Output GIF image
-
-		public function outputGIF() {
-
-			if (!is_resource($this->captcha)) return false;
-
-			Headers::nocache(); Headers::content(MIME_TYPE_GIF);
-
-			imagegif($this->captcha); imagedestroy($this->captcha);
-
-			# ------------------------
-
-			return true;
-		}
-
-		# Output JPEG image
-
-		public function outputJPEG($quality = 75) {
-
-			if (!is_resource($this->captcha)) return false;
-
-			if (($quality = intabs($quality)) > 100) $quality = 100;
-
-			Headers::nocache(); Headers::content(MIME_TYPE_JPEG);
-
-			imagejpeg($this->captcha, null, $quality); imagedestroy($this->captcha);
-
 			# ------------------------
 
 			return true;
@@ -142,7 +116,7 @@ namespace System\Utils\Tools {
 
 		# Output PNG image
 
-		public function outputPNG($quality = 4) {
+		public function output($quality = 4) {
 
 			if (!is_resource($this->captcha)) return false;
 

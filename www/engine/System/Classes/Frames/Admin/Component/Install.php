@@ -2,7 +2,7 @@
 
 namespace System\Frames\Admin\Component {
 
-	use System\Frames\Admin\Handler;
+	use System;
 
-	abstract class Install extends Handler {}
+	abstract class Install extends System\Frames\Admin\Section {}
 }

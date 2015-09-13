@@ -4,13 +4,8 @@ namespace System\Views\Admin\Blocks\Utils {
 
 	use System\Views;
 
-	class Pagination extends Views\Templatable {
+	class Pagination extends Views\Admin\View {
 
-		# Constructor
-
-        public function __construct() {
-
-            parent::__construct(SECTION_ADMIN, 'Blocks/Utils/Pagination.tpl');
-        }
+		protected static $file_name = 'Blocks/Utils/Pagination.tpl';
     }
 }

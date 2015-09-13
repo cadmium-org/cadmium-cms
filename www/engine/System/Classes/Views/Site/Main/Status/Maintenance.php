@@ -4,13 +4,8 @@ namespace System\Views\Site\Main\Status {
 
 	use System\Views;
 
-	class Maintenance extends Views\Templatable {
+	class Maintenance extends Views\Site\View {
 
-		# Constructor
-
-        public function __construct() {
-
-            parent::__construct(SECTION_SITE, 'Main/Status/Maintenance.tpl');
-        }
+		protected static $file_name = 'Main/Status/Maintenance.tpl';
     }
 }

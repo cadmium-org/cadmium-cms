@@ -2,14 +2,9 @@
 
 namespace System\Handlers\Site {
 
-	use Error, System, System\Forms, System\Utils\Ajax, System\Utils\Auth, System\Utils\Config;
-	use System\Utils\Entitizer, System\Utils\Extend, System\Utils\Lister, System\Utils\Messages;
-	use System\Utils\Pagination, System\Utils\Requirements, System\Utils\Utils, System\Utils\View;
+	use System, System\Modules\Auth, System\Modules\Entitizer, System\Utils\View, DB, Template;
 
-	use Agent, Arr, Cookie, Date, DB, Explorer, Form, Geo\Country, Geo\Timezone;
-	use Headers, Language, Mailer, Number, Request, Session, String, Tag, Template, Url, Validate;
-
-	class Page extends System\Frames\Site\Handler {
+	class Page extends System\Frames\Site\Section {
 
 		private $page = false;
 
@@ -42,6 +37,8 @@ namespace System\Handlers\Site {
 				$path[] = array('id' => $id, 'link' => $link, 'title' => $title);
 			}
 
+			# ------------------------
+
 			return $path;
 		}
 
@@ -49,7 +46,7 @@ namespace System\Handlers\Site {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks/Contents/Page');
+			$contents = View::get('Blocks\Page');
 
 			# Set breadcrumbs
 
@@ -70,9 +67,7 @@ namespace System\Handlers\Site {
 
 		protected function handle() {
 
-			if (false === ($path = $this->getPath())) return false;
-
-			$this->path = $path;
+			if (false !== ($path = $this->getPath())) $this->path = $path; else return false;
 
 			# Create page
 
@@ -80,29 +75,19 @@ namespace System\Handlers\Site {
 
 			if (0 === $this->page->id) return false;
 
-			$description = $this->page->description; $keywords = $this->page->keywords;
+			# Set data
 
-			# Fill template
+			if ($this->page->id !== 1) $this->title = $this->page->title; else $this->layout = 'Index';
 
-			if ($this->page->id !== 1) $this->setTitle($this->page->title);
-
-			else $this->setLayout('Index');
-
-			$this->setContents($this->getContents());
-
-			# Set SEO data
-
-			Template::description   ((false !== $description) ? $description : CONFIG_SITE_DESCRIPTION);
-
-			Template::keywords      ((false !== $keywords) ? $keywords : CONFIG_SITE_KEYWORDS);
-
-			Template::robots        ($this->page->robots_index, $this->page->robots_follow);
-
-			Template::canonical     (CONFIG_SYSTEM_URL, $this->page->canonical);
+			$this->description      = $this->page->description;
+			$this->keywords         = $this->page->keywords;
+			$this->robots_index     = $this->page->robots_index;
+			$this->robots_follow    = $this->page->robots_follow;
+			$this->canonical        = $this->page->canonical;
 
 			# ------------------------
 
-			return true;
+			return $this->getContents();
 		}
 	}
 }

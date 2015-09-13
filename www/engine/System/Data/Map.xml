@@ -21,11 +21,27 @@
 
 	<item>
 		<path>/admin/content/pages</path>
-		<handler>/Admin/Content/Pages</handler>
+		<handler>/Admin/Content/Pages/Listview</handler>
+	</item>
+	<item>
+		<path>/admin/content/pages/create</path>
+		<handler>/Admin/Content/Pages/Create</handler>
+	</item>
+	<item>
+		<path>/admin/content/pages/edit</path>
+		<handler>/Admin/Content/Pages/Edit</handler>
 	</item>
 	<item>
 		<path>/admin/content/menuitems</path>
-		<handler>/Admin/Content/Menuitems</handler>
+		<handler>/Admin/Content/Menuitems/Listview</handler>
+	</item>
+	<item>
+		<path>/admin/content/menuitems/create</path>
+		<handler>/Admin/Content/Menuitems/Create</handler>
+	</item>
+	<item>
+		<path>/admin/content/menuitems/edit</path>
+		<handler>/Admin/Content/Menuitems/Edit</handler>
 	</item>
 	<item>
 		<path>/admin/content/filemanager</path>
@@ -47,11 +63,19 @@
 	</item>
 	<item>
 		<path>/admin/system/users</path>
-		<handler>/Admin/System/Users</handler>
+		<handler>/Admin/System/Users/Listview</handler>
 	</item>
 	<item>
-		<path>/admin/system/info</path>
-		<handler>/Admin/System/Info</handler>
+		<path>/admin/system/users/create</path>
+		<handler>/Admin/System/Users/Create</handler>
+	</item>
+	<item>
+		<path>/admin/system/users/edit</path>
+		<handler>/Admin/System/Users/Edit</handler>
+	</item>
+	<item>
+		<path>/admin/system/information</path>
+		<handler>/Admin/System/Information</handler>
 	</item>
 
 	<item>
@@ -60,7 +84,7 @@
 	</item>
 	<item>
 		<path>/admin</path>
-		<handler>/Admin/Overview</handler>
+		<handler>/Admin/Dashboard</handler>
 	</item>
 
 	<!-- Site section -->

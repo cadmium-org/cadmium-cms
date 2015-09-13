@@ -4,13 +4,8 @@ namespace System\Views\Admin\Main\Status {
 
 	use System\Views;
 
-	class Error404 extends Views\Templatable {
+	class Error404 extends Views\Admin\View {
 
-		# Constructor
-
-        public function __construct() {
-
-            parent::__construct(SECTION_ADMIN, 'Main/Status/Error404.tpl');
-        }
+		protected static $file_name = 'Main/Status/Error404.tpl';
     }
 }

@@ -10,7 +10,7 @@
 
 		<meta name="robots" content="NOINDEX,FOLLOW" />
 
-		<title>$head_title$</title>
+		<title>$title$</title>
 
 		<link rel="icon" type="image/png" href="/include/admin/favicon.png" />
 
@@ -41,23 +41,7 @@
 
 	<body>
 
-		<div class="ui center aligned grid">
-
-			<div class="column">
-
-				<h1 class="image header">
-
-					<a href="/"><img class="image" src="/include/admin/templates/default/images/logo.png" /></a>
-
-				</h1>
-
-				{ block:messages / }
-
-				{ block:contents / }
-
-			</div>
-
-		</div>
+		{ block:layout / }
 
 	</body>
 

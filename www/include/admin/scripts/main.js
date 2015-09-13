@@ -23,7 +23,7 @@ var Main = {
 
 		var onChange = function() { if ($(this).is('select[data-auto=auto]')) $(this).closest('form').submit(); };
 
-		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange });
+		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange, 'placeholder' : '----' });
 
 		$('.ui.checkbox').checkbox();
 
@@ -131,14 +131,7 @@ var Main = {
 
 		'init' : function() {
 
-			var handler = this, create_toggler = $('#page-create-toggler'), create_form = $('#page-create-form');
-
-			if (create_toggler.length && create_form.length) {
-
-				create_toggler.click(function() { create_toggler.toggleClass('active'); create_form.slideToggle(); });
-
-				if (window.location.hash == '#create') create_toggler.click();
-			}
+			var handler = this;
 
 			$('table#pages-list tbody tr').each(function() {
 
@@ -163,7 +156,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, false, { 'ajax_action': 'remove', 'ajax_id' : item.id, 'ajax_index' : 0 });
+			Main.ajax(this, ('/admin/content/pages/edit?id=' + item.id), { 'ajax_action': 'remove' });
 		},
 
 		'handle' : function(data) {
@@ -192,17 +185,15 @@ var Main = {
 			this.parent_title = $('input#page-parent-title');
 		},
 
-		'load' : function(parent_id, index) {
+		'load' : function(parent_id) {
 
-			if (this.locked || !this.id) return;
+			if (this.locked) return;
 
 			parent_id = ((typeof parent_id != 'undefined') ? parseInt(parent_id) : this.parent_id);
 
-			index = ((typeof index != 'undefined') ? parseInt(index) : 1);
-
 			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
 
-			Main.ajax(this, ('?parent_id=' + parent_id + '&index=' + index), { 'ajax_action': 'list', 'ajax_id' : this.id });
+			Main.ajax(this, ('/admin/content/pages?parent_id=' + parent_id), { 'ajax_id' : this.id });
 		},
 
 		'handle' : function(data) {
@@ -245,14 +236,7 @@ var Main = {
 
 		'init' : function() {
 
-			var handler = this, create_toggler = $('#menuitem-create-toggler'), create_form = $('#menuitem-create-form');
-
-			if (create_toggler.length && create_form.length) {
-
-				create_toggler.click(function() { create_toggler.toggleClass('active'); create_form.slideToggle(); });
-
-				if (window.location.hash == '#create')  create_toggler.click();
-			}
+			var handler = this;
 
 			$('table#menuitems-list tbody tr').each(function() {
 
@@ -277,7 +261,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, false, { 'ajax_action': 'remove', 'ajax_id' : item.id, 'ajax_index' : 0 });
+			Main.ajax(this, ('/admin/content/menuitems/edit?id=' + item.id), { 'ajax_action': 'remove' });
 		},
 
 		'handle' : function(data) {
@@ -306,17 +290,15 @@ var Main = {
 			this.parent_text = $('input#menuitem-parent-text');
 		},
 
-		'load' : function(parent_id, index) {
+		'load' : function(parent_id) {
 
-			if (this.locked || !this.id) return;
+			if (this.locked) return;
 
 			parent_id = ((typeof parent_id != 'undefined') ? parseInt(parent_id) : this.parent_id);
 
-			index = ((typeof index != 'undefined') ? parseInt(index) : 1);
-
 			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
 
-			Main.ajax(this, ('?parent_id=' + parent_id + '&index=' + index), { 'ajax_action': 'list', 'ajax_id' : this.id });
+			Main.ajax(this, ('/admin/content/menuitems?parent_id=' + parent_id), { 'ajax_id' : this.id });
 		},
 
 		'handle' : function(data) {
@@ -367,13 +349,13 @@ var Main = {
 
 			$('table#languages-list tbody tr').each(function() {
 
-				var row = $(this), index = handler.list.length, code = row.data('code');
+				var row = $(this), index = handler.list.length, name = row.data('name');
 
 				var checker = row.find('a[data-checker=is-active]').click(function() { handler.submit(index, $(this)); });
 
 				if (checker.data('value') == 1) checker.addClass('positive');
 
-				handler.list[index] = { 'row' : row, 'code' : code, 'checker' : checker };
+				handler.list[index] = { 'row' : row, 'name' : name, 'checker' : checker };
 			});
 		},
 
@@ -385,7 +367,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; checker.addClass('loading');
 
-			Main.ajax(this, false, { 'ajax_code': item.code });
+			Main.ajax(this, false, { 'ajax_name': item.name });
 		},
 
 		'handle' : function(data) {

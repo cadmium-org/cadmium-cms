@@ -2,25 +2,32 @@
 
 namespace System\Utils {
 
-    use System\Utils\Extend\Templates;
+    use Error;
 
-	class View {
+	abstract class View {
 
-        private static $cache = array();
+        private static $section = '', $error = 'View is not initialized', $cache = array();
+
+        # Init view
+
+        public static function init($section) {
+
+            self::$section = (($section === SECTION_ADMIN) ? SECTION_ADMIN : SECTION_SITE);
+        }
 
         # Get view
 
 		public static function get($name) {
 
-            $name = strval($name);
+            if ('' === self::$section) throw new Error\General(self::$error);
 
-            if (isset(self::$cache[$name])) return clone self::$cache[$name];
+            $class_name = ('System\Views\\' . self::$section . '\\' . $name);
 
-            $class_name = ('System\\Views\\' . Templates::section() . '\\' . str_replace('/', '\\', $name));
+            if (isset(self::$cache[$class_name])) return clone self::$cache[$class_name];
 
             # ------------------------
 
-            return (self::$cache[$name] = new $class_name());
+            return (self::$cache[$class_name] = new $class_name());
         }
 	}
 }

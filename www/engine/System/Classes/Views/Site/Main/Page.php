@@ -4,13 +4,8 @@ namespace System\Views\Site\Main {
 
 	use System\Views;
 
-	class Page extends Views\Templatable {
+	class Page extends Views\Site\View {
 
-		# Constructor
-
-        public function __construct() {
-
-            parent::__construct(SECTION_SITE, 'Main/Page.tpl');
-        }
+		protected static $file_name = 'Main/Page.tpl';
     }
 }

@@ -12,7 +12,7 @@
 		<meta name="keywords" content="$keywords$" />
 		<meta name="robots" content="$robots$" />
 
-		<title>$head_title$</title>
+		<title>$title$</title>
 
 		{ block:canonical }<link rel="canonical" href="$link$" />{ / block:canonical }
 

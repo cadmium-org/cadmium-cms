@@ -86,5 +86,9 @@ namespace {
 
 			exit ($contents);
 		}
+
+		# System init method interface
+
+		abstract protected function init();
 	}
 }

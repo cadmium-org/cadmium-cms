@@ -4,7 +4,7 @@ namespace System\Views {
 
 	use Explorer, Template;
 
-	class View extends Template\Utils\Block {
+	abstract class View extends Template\Utils\Block {
 
         # Constructor
 

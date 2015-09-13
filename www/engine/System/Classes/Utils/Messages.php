@@ -6,17 +6,24 @@ namespace System\Utils {
 
 	abstract class Messages {
 
-		private static $messages = array('info' => null, 'warning' => null, 'error' => null, 'success' => null);
+		private static $messages = array();
 
 		# Set message
 
 		private static function setMessage($type, $text, $header) {
 
-			if (null !== self::$messages[$type]) return;
+			if (isset(self::$messages[$type])) return;
 
 			$text = strval($text); $header = strval($header);
 
 			self::$messages[$type] = array('text' => $text, 'header' => $header);
+		}
+
+		# Init messages
+
+		public static function init() {
+
+			self::$messages = array();
 		}
 
 		# Set info message
@@ -63,13 +70,11 @@ namespace System\Utils {
 
 			foreach (self::$messages as $type => $message) {
 
-				if (null === $message) continue;
+				$messages->add($block = View::get('Blocks\Utils\Message'));
 
-				$messages->add($block = View::get('Blocks/Utils/Message'));
+				$block->type = $type; $block->set('text', $message['text'], true); $header = $block->block('header');
 
-				$block->type = $type; $block->text = $message['text']; $header = $block->block('header');
-
-				if ('' !== $message['header']) $header->text = $message['header']; else $header->disable();
+				if ('' !== $message['header']) $header->set('text', $message['header'], true); else $header->disable();
 			}
 
 			# ------------------------
