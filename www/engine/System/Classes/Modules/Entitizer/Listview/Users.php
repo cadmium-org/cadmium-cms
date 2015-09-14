@@ -3,16 +3,12 @@
 namespace System\Modules\Entitizer\Listview {
 
 	use System\Modules\Entitizer, System\Utils\Lister, Template;
-	
-	/*
-	 * @method Template\Utils\Settable|Ajax\Utils\Dataset handle()
-	 */
 
 	abstract class Users {
 
-		use Entitizer\Common\User;
-		use Entitizer\Utils\Lister;
 		use Entitizer\Utils\Listview;
+		use Entitizer\Utils\Lister;
+		use Entitizer\Common\User;
 
 		protected static $link = '/admin/system/users';
 
