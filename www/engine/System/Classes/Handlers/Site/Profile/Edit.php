@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Profile, Language;
 
 	class Edit extends System\Frames\Site\Component\Profile {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Site\Profile {
 
 			$this->title = Language::get('TITLE_PROFILE');
 
-			return Modules\Profile\Handler\Edit::handle();
+			return Profile\Handler\Edit::handle();
 		}
 	}
 }

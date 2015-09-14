@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Auth, Language;
 
 	class Recover extends System\Frames\Admin\Component\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$this->title = Language::get('TITLE_AUTH_RECOVER');
 
-			return Modules\Auth\Handler\Recover::handle();
+			return Auth\Handler\Recover::handle();
 		}
 	}
 }

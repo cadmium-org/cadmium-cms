@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Auth, Language;
 
 	class Reset extends System\Frames\Site\Component\Profile\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_RESET');
 
-			return Modules\Auth\Handler\Reset::handle();
+			return Auth\Handler\Reset::handle();
 		}
 	}
 }

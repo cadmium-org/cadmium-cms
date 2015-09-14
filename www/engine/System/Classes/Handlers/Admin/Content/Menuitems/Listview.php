@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Content\Menuitems {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Entitizer, Language;
 
 	class Listview extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Content\Menuitems {
 
 			$this->title = Language::get('TITLE_CONTENT_MENUITEMS');
 
-			return Modules\Entitizer\Listview\Menuitems::handle();
+			return Entitizer\Listview\Menuitems::handle();
 		}
 	}
 }

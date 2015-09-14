@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Content\Pages {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Entitizer, Language;
 
 	class Listview extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Content\Pages {
 
 			$this->title = Language::get('TITLE_CONTENT_PAGES');
 
-			return Modules\Entitizer\Listview\Pages::handle();
+			return Entitizer\Listview\Pages::handle();
 		}
 	}
 }

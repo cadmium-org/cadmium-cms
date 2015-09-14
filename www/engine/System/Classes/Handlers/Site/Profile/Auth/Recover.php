@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Auth, Language;
 
 	class Recover extends System\Frames\Site\Component\Profile\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_RECOVER');
 
-			return Modules\Auth\Handler\Recover::handle();
+			return Auth\Handler\Recover::handle();
 		}
 	}
 }

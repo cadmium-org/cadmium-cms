@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Install {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Install, Language;
 
 	class Check extends System\Frames\Admin\Component\Install {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Install {
 
 			$this->title = Language::get('TITLE_INSTALL_CHECK');
 
-			return Modules\Install\Handler\Check::handle();
+			return Install\Handler\Check::handle();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Install {
 
-	use System, System\Modules, Language;
+	use System, System\Modules\Install, Language;
 
 	class Database extends System\Frames\Admin\Component\Install {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Install {
 
 			$this->title = Language::get('TITLE_INSTALL_DATABASE');
 
-			return Modules\Install\Handler\Database::handle();
+			return Install\Handler\Database::handle();
 		}
 	}
 }

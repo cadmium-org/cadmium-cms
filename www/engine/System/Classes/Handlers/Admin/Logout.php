@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin {
 
-	use System, System\Modules, Request;
+	use System, System\Modules\Auth, Request;
 
 	class Logout extends System\Frames\Admin\Component\Panel {
 
@@ -10,7 +10,7 @@ namespace System\Handlers\Admin {
 
 		protected function handle() {
 
-			Modules\Auth::logout(); Request::redirect('/admin/login');
+			Auth::logout(); Request::redirect('/admin/login');
 		}
 	}
 }
