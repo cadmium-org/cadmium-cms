@@ -2,23 +2,11 @@
 
 namespace System\Utils {
 
-	use System, Explorer;
+	use Explorer;
 
 	class Map {
 
-		private $map = array();
-
-		# Get handler name by path
-
-		private function getHandler(array $path) {
-
-			foreach ($this->map as $item) {
-
-				if (false !== ($handler = $item->handler($path))) return $handler;
-			}
-
-			return false;
-		}
+		private $map = [];
 
 		# Constructor
 
@@ -26,25 +14,29 @@ namespace System\Utils {
 
 			$file_name = (DIR_SYSTEM_DATA . 'Map.xml');
 
-			if (false !== ($map_xml = Explorer::xml($file_name))) foreach ($map_xml->item as $item) {
+			if (false !== ($map_xml = Explorer::xml($file_name))) {
 
-				$item = new Map\Utils\Item($item->path, $item->handler);
+				foreach ($map_xml->item as $item) {
 
-				if ($item->parsed()) $this->map[] = $item;
+					$item = new Map\Item($item->path, $item->handler);
+
+					if ($item->parsed()) $this->map[] = $item;
+				}
 			}
 		}
 
-		# Get handler object by path
+		# Get handler by path
 
-		public function handle(array $path) {
+		public function handler(array $path) {
 
-			$handler = $this->getHandler($path);
+			foreach ($this->map as $item) {
 
-			$class = ((false !== $handler) ? ('System\Handlers\\' . $handler) : 'System\Handlers\Site\Page');
+				if (false !== ($handler = $item->handler($path))) return $handler;
+			}
+            
+            # ------------------------
 
-			# ------------------------
-
-			return new $class($path);
+			return false;
 		}
 	}
 }

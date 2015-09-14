@@ -2,19 +2,21 @@
 
 namespace System {
 
-	use System, System\Handlers, System\Modules\Install, Request;
+	use System, System\Modules\Install, Request;
 
 	class Installer extends System {
 
-		# Installer main method
+		# Installer handle method
 
 		public function handle() {
 
-			# Handle request
-
 			$checked = (Install::status() && boolval(Request::get('checked')));
 
-			return (!$checked ? new Handlers\Admin\Install\Check() : new Handlers\Admin\Install\Database());
+			$class = ('System\Handlers\Admin\Install\\' . (!$checked ? 'Check' : 'Database'));
+
+			# ------------------------
+
+			new $class();
 		}
 	}
 }

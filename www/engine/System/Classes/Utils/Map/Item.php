@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Utils\Map\Utils {
+namespace System\Utils\Map {
 
 	class Item {
 
-		private $path = array(), $handler = array(), $parsed = false;
+		private $path = [], $handler = [], $parsed = false;
 
 		# Parse string
 

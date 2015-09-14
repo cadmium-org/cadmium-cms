@@ -6,7 +6,7 @@ namespace System {
 
 	class Dispatcher extends System {
 
-		# Dispatcher main method
+		# Dispatcher handle method
 
 		public function handle() {
 
@@ -23,11 +23,21 @@ namespace System {
 				$this->database['password'], $this->database['name']
 			);
 
-			# Handle request
+			# Create url
 
 			$url = new Url(getenv('REQUEST_URI'));
 
-			$map = new Map(); $map->handle($url->path());
+			# Create map
+
+			$map = new Map(); $handler = $map->handler($url->path());
+
+			# Determine handler class
+
+			$class = ((false !== $handler) ? ('System\Handlers\\' . $handler) : 'System\Handlers\Site\Page');
+
+			# ------------------------
+
+			new $class($url->path());
 		}
 	}
 }

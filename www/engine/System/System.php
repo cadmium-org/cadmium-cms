@@ -26,7 +26,7 @@ namespace {
 			$this->time = intabs(Arr::get($data, ['time']));
 		}
 
-        # Constructor
+		# Constructor
 
 		public function __construct() {
 
@@ -34,5 +34,5 @@ namespace {
 
 			if (false !== ($data = Explorer::json($system_file))) $this->parse($data);
 		}
-    }
+	}
 }
