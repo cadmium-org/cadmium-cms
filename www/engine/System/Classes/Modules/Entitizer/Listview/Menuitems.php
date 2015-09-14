@@ -6,7 +6,9 @@ namespace System\Modules\Entitizer\Listview {
 
 	abstract class Menuitems {
 
-		use Entitizer\Common\Menuitem, Entitizer\Utils\Lister, Entitizer\Utils\Listview;
+		use Entitizer\Common\Menuitem;
+		use Entitizer\Utils\Lister;
+		use Entitizer\Utils\Listview;
 
 		private static $link = '/admin/content/menuitems';
 

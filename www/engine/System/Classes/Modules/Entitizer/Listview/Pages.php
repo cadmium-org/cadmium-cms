@@ -6,7 +6,9 @@ namespace System\Modules\Entitizer\Listview {
 
 	abstract class Pages {
 
-		use Entitizer\Common\Page, Entitizer\Utils\Lister, Entitizer\Utils\Listview;
+		use Entitizer\Common\Page;
+		use Entitizer\Utils\Lister;
+		use Entitizer\Utils\Listview;
 
 		private static $link = '/admin/content/pages';
 

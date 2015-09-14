@@ -6,7 +6,9 @@ namespace System\Modules\Entitizer\Listview {
 
 	abstract class Users {
 
-		use Entitizer\Common\User, Entitizer\Utils\Lister, Entitizer\Utils\Listview;
+		use Entitizer\Common\User;
+		use Entitizer\Utils\Lister;
+		use Entitizer\Utils\Listview;
 
 		private static $link = '/admin/system/users';
 
