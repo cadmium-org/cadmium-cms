@@ -33,8 +33,8 @@ namespace System\Utils {
 
 				if (false !== ($handler = $item->handler($path))) return $handler;
 			}
-            
-            # ------------------------
+
+			# ------------------------
 
 			return false;
 		}
