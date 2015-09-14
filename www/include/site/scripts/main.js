@@ -23,7 +23,7 @@ var Main = {
 
 		var onChange = function() { if ($(this).is('select[data-auto=auto]')) $(this).closest('form').submit(); };
 
-		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange });
+		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange, 'placeholder' : '----' });
 
 		$('.ui.checkbox').checkbox();
 
