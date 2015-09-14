@@ -20,7 +20,7 @@ namespace System\Modules {
 
 			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
 
-			$ip = addslashes(ENGINE_CLIENT_IP); $time = (ENGINE_TIME - CONFIG_USER_SESSION_LIFETIME);
+			$ip = addslashes(REQUEST_CLIENT_IP); $time = (REQUEST_TIME - CONFIG_USER_SESSION_LIFETIME);
 
 			$query = ("SELECT usr.id FROM " . TABLE_USERS_SESSIONS . " ses ") .
 
@@ -34,11 +34,11 @@ namespace System\Modules {
 
 			# Update session
 
-			Entitizer::userSession(self::$user->id)->edit(array('time' => ENGINE_TIME));
+			Entitizer::userSession(self::$user->id)->edit(array('time' => REQUEST_TIME));
 
 			# Update activity
 
-			self::$user->edit(array('time_logged' => ENGINE_TIME));
+			self::$user->edit(array('time_logged' => REQUEST_TIME));
 
 			# ------------------------
 
@@ -59,7 +59,7 @@ namespace System\Modules {
 
 			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
 
-			$ip = addslashes(ENGINE_CLIENT_IP); $time = (ENGINE_TIME - CONFIG_USER_SECRET_LIFETIME);
+			$ip = addslashes(REQUEST_CLIENT_IP); $time = (REQUEST_TIME - CONFIG_USER_SECRET_LIFETIME);
 
 			$query = ("SELECT usr.id FROM " . TABLE_USERS_SECRETS . " sec ") .
 
