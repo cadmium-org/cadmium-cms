@@ -3,6 +3,10 @@
 namespace System\Modules\Entitizer\Listview {
 
 	use System\Modules\Entitizer, System\Utils\Lister, Template;
+	
+	/*
+	 * @method Template\Utils\Settable|Ajax\Utils\Dataset handle()
+	 */
 
 	abstract class Users {
 
