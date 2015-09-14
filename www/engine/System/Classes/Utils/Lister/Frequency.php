@@ -6,22 +6,15 @@ namespace System\Utils\Lister {
 
 	abstract class Frequency extends Lister\Translatable {
 
-		protected static $list = array();
+		protected static $list = [
 
-        # Autoloader
-
-        public static function __autoload() {
-
-            self::$list = array (
-
-				FREQUENCY_ALWAYS            => 'FREQUENCY_ALWAYS',
-				FREQUENCY_HOURLY            => 'FREQUENCY_HOURLY',
-				FREQUENCY_DAILY             => 'FREQUENCY_DAILY',
-				FREQUENCY_WEEKLY            => 'FREQUENCY_WEEKLY',
-				FREQUENCY_MONTHLY           => 'FREQUENCY_MONTHLY',
-				FREQUENCY_YEARLY            => 'FREQUENCY_YEARLY',
-				FREQUENCY_NEVER             => 'FREQUENCY_NEVER'
-    		);
-        }
-    }
+			FREQUENCY_ALWAYS            => 'FREQUENCY_ALWAYS',
+			FREQUENCY_HOURLY            => 'FREQUENCY_HOURLY',
+			FREQUENCY_DAILY             => 'FREQUENCY_DAILY',
+			FREQUENCY_WEEKLY            => 'FREQUENCY_WEEKLY',
+			FREQUENCY_MONTHLY           => 'FREQUENCY_MONTHLY',
+			FREQUENCY_YEARLY            => 'FREQUENCY_YEARLY',
+			FREQUENCY_NEVER             => 'FREQUENCY_NEVER'
+		];
+	}
 }

@@ -6,18 +6,11 @@ namespace System\Utils\Lister {
 
 	abstract class Status extends Lister\Translatable {
 
-		protected static $list = array();
+		protected static $list = [
 
-        # Autoloader
-
-        public static function __autoload() {
-
-            self::$list = array (
-
-				STATUS_ONLINE               => 'STATUS_ONLINE',
-				STATUS_MAINTENANCE          => 'STATUS_MAINTENANCE',
-				STATUS_UPDATE               => 'STATUS_UPDATE'
-    		);
-        }
-    }
+			STATUS_ONLINE               => 'STATUS_ONLINE',
+			STATUS_MAINTENANCE          => 'STATUS_MAINTENANCE',
+			STATUS_UPDATE               => 'STATUS_UPDATE'
+		];
+	}
 }

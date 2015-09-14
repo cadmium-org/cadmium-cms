@@ -6,18 +6,11 @@ namespace System\Utils\Lister {
 
 	abstract class Sex extends Lister\Translatable {
 
-		protected static $list = array();
+		protected static $list = [
 
-        # Autoloader
-
-        public static function __autoload() {
-
-            self::$list = array (
-
-				SEX_NOT_SELECTED            => 'SEX_NOT_SELECTED',
-				SEX_MALE                    => 'SEX_MALE',
-				SEX_FEMALE                  => 'SEX_FEMALE'
-    		);
-        }
-    }
+			SEX_NOT_SELECTED            => 'SEX_NOT_SELECTED',
+			SEX_MALE                    => 'SEX_MALE',
+			SEX_FEMALE                  => 'SEX_FEMALE'
+		];
+	}
 }
