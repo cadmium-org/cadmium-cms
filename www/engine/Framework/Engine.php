@@ -33,11 +33,11 @@ namespace {
             
             # Load template
 
-			$file_name = (DIR_TEMPLATES . 'Error.tpl');
+			$file_name = (DIR_TEMPLATES . 'Error.tpl'); $contents = false;
 
-			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
+			if (@file_exists($file_name)) $contents = @file_get_contents($file_name);
 
-			$contents = ($file_exists ? str_replace('$message$', $message, $contents) : $message);
+			$output = ($contents ? str_replace('$message$', $message, $contents) : $message);
 
 			# Set headers
 
@@ -55,7 +55,7 @@ namespace {
 
 			# ------------------------
 
-			exit ($contents);
+			exit ($output);
 		}
 	}
 }
