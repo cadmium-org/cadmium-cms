@@ -131,7 +131,7 @@ namespace System\Frames\Admin {
 
 			# Check for restricted access
 
-			if (('' === CONFIG_ADMIN_IP) || (false !== stripos(ENGINE_CLIENT_IP, CONFIG_ADMIN_IP))) {
+			if (('' === CONFIG_ADMIN_IP) || (false !== stripos(REQUEST_CLIENT_IP, CONFIG_ADMIN_IP))) {
 
 				# Handle install component request
 

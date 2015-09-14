@@ -74,8 +74,8 @@ namespace System\Modules\Entitizer\Controller {
 			$data['timezone']           = $timezone;
             $data['auth_key']           = $auth_key;
 			$data['password']           = $password;
-			$data['time_registered']    = ENGINE_TIME;
-			$data['time_logged']        = ENGINE_TIME;
+			$data['time_registered']    = REQUEST_TIME;
+			$data['time_logged']        = REQUEST_TIME;
 
             if (!$this->entity->create($data)) return 'USER_ERROR_CREATE';
 

@@ -2,4 +2,6 @@
 
 require_once 'engine/Main.php';
 
-new System\Installer();
+try { $installer = new System\Installer(); $installer->handle(); }
+
+catch (Error\Error $error) { Engine::error($error->message()); }

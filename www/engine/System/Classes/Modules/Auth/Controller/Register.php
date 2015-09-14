@@ -78,8 +78,8 @@ namespace System\Modules\Auth\Controller {
 			$data['password']           = $password;
 			$data['rank']               = $rank;
 			$data['timezone']           = CONFIG_SYSTEM_TIMEZONE_DEFAULT;
-			$data['time_registered']    = ENGINE_TIME;
-			$data['time_logged']        = ENGINE_TIME;
+			$data['time_registered']    = REQUEST_TIME;
+			$data['time_logged']        = REQUEST_TIME;
 
 			if (!Auth::user()->create($data)) return self::ERROR_AUTH_REGISTER;
 

@@ -46,7 +46,7 @@ namespace {
 
 		public static function get($format = DATE_FORMAT_STANDART, $time = null) {
 
-			$format = strval($format); $time = ((null !== $time) ? intabs($time) : ENGINE_TIME);
+			$format = strval($format); $time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
 
 			if ($format === DATE_FORMAT_STANDART) return date(DATE_FORMAT_STANDART, $time);
 
@@ -65,7 +65,7 @@ namespace {
 
 		public static function day($time = null) {
 
-			$time = ((null !== $time) ? intabs($time) : ENGINE_TIME);
+			$time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
 
 			return date('d', $time);
 		}
@@ -74,7 +74,7 @@ namespace {
 
 		public static function month($time = null) {
 
-			$time = ((null !== $time) ? intabs($time) : ENGINE_TIME);
+			$time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
 
 			return date('m', $time);
 		}
@@ -83,7 +83,7 @@ namespace {
 
 		public static function year($time = null) {
 
-			$time = ((null !== $time) ? intabs($time) : ENGINE_TIME);
+			$time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
 
 			return date('Y', $time);
 		}

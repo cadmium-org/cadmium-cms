@@ -8,7 +8,7 @@ namespace System {
 
 		# Dispatcher main method
 
-		protected function main() {
+		public function handle() {
 
 			# Check installation
 

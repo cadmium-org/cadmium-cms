@@ -16,7 +16,7 @@ namespace {
 
 			$headers  = ('MIME-Version: 1.0' . "\r\n");
 
-			$headers .= ('Content-Type: ' . ($is_html ? 'text/html' : 'text/plain') . '; charset=' . CONFIG_FRAMEWORK_DEFAULT_CHARSET . "\r\n");
+			$headers .= ('Content-Type: ' . ($is_html ? 'text/html' : 'text/plain') . '; charset=' . CONFIG_DEFAULT_CHARSET . "\r\n");
 
 			$headers .= ('From: ' . $sender . ' <' . $from . '>' . "\r\n") .
 

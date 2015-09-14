@@ -8,7 +8,7 @@ namespace System {
 
 		# Installer main method
 
-		protected function main() {
+		public function handle() {
 
 			# Handle request
 

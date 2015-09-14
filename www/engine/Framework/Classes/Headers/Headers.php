@@ -134,7 +134,7 @@ namespace {
 
 			if (self::isContentTypeText($type)) {
 
-				return header('Content-type: ' . self::$content_types_text[$type] . '; charset=' . CONFIG_FRAMEWORK_DEFAULT_CHARSET);
+				return header('Content-type: ' . self::$content_types_text[$type] . '; charset=' . CONFIG_DEFAULT_CHARSET);
 			}
 
 			if (self::isContentTypeMedia($type)) {
@@ -153,9 +153,9 @@ namespace {
 
 			if (!in_array($limiter, array(CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC), true)) return;
 
-			header('Expires: ' . gmdate('D, d M Y H:i:s', (ENGINE_TIME + $expires)) . ' GMT');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', (REQUEST_TIME + $expires)) . ' GMT');
 
-			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', ENGINE_TIME) . ' GMT');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', REQUEST_TIME) . ' GMT');
 
 			header('Cache-Control: ' . $limiter . ', max-age=' . $expires . ', pre-check=' . $expires);
 

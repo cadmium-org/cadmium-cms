@@ -6,7 +6,7 @@ namespace {
 
 		# Get client IP
 
-		private function getIP() {
+		public static function ip() {
 
 			if (!empty(getenv('HTTP_CLIENT_IP')))           return getenv('HTTP_CLIENT_IP');
 
@@ -25,44 +25,15 @@ namespace {
 			return 'unknown';
 		}
 
-		# Engine constructor
-
-		public function __construct() {
-
-			# Include engine constants
-
-			require_once (DIR_INCLUDES . 'Config.php');
-			require_once (DIR_INCLUDES . 'Constants.php');
-			require_once (DIR_INCLUDES . 'Regex.php');
-			require_once (DIR_INCLUDES . 'Headers/Mime.php');
-			require_once (DIR_INCLUDES . 'Headers/Status.php');
-
-			# Set engine defaults
-
-			if (function_exists('mb_internal_encoding')) mb_internal_encoding(CONFIG_FRAMEWORK_DEFAULT_CHARSET);
-
-			date_default_timezone_set(CONFIG_FRAMEWORK_DEFAULT_TIMEZONE);
-
-			# Set engine constants
-
-			define('ENGINE_CLIENT_IP', $this->getIP());
-
-			define('ENGINE_TIME', $_SERVER['REQUEST_TIME']);
-
-			define('ENGINE_MICRO_TIME', $_SERVER['REQUEST_TIME_FLOAT']);
-
-			# ------------------------
-
-			try { $this->init(); } catch (Error\Error $error) { self::error($error->message()); }
-		}
-
 		# Display error screen
 
 		public static function error($message = '') {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine error: ' . $message) : 'Unknown error');
+            
+            # Load template
 
-			$file_name = (DIR_TEMPLATES . 'Error.tpl'); $contents = false;
+			$file_name = (DIR_TEMPLATES . 'Error.tpl');
 
 			$file_exists = (@file_exists($file_name) && ($contents = @file_get_contents($file_name)));
 
@@ -86,9 +57,5 @@ namespace {
 
 			exit ($contents);
 		}
-
-		# System init method interface
-
-		abstract protected function init();
 	}
 }

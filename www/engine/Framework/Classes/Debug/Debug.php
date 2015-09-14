@@ -15,7 +15,7 @@ namespace {
 
 		public static function time() {
 
-			return number_format((microtime(true) - ENGINE_MICRO_TIME), 10);
+			return number_format((microtime(true) - REQUEST_TIME_FLOAT), 10);
 		}
 	}
 }

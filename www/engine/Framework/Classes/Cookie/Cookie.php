@@ -8,7 +8,7 @@ namespace {
 
 		public static function set($name, $value, $expire = 0, $path = '/', $domain = false, $secure = false, $http_only = false) {
 
-			$name = strval($name); $value = strval($value); $expire = (ENGINE_TIME + intabs($expire));
+			$name = strval($name); $value = strval($value); $expire = (REQUEST_TIME + intabs($expire));
 
 			$path = strval($path); $domain = strval($domain); $secure = boolval($secure); $http_only = boolval($http_only);
 

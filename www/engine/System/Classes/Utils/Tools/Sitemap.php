@@ -12,7 +12,7 @@ namespace System\Utils\Tools {
 
 		public function __construct() {
 
-			$version = '1.0'; $encoding = CONFIG_FRAMEWORK_DEFAULT_CHARSET;
+			$version = '1.0'; $encoding = CONFIG_DEFAULT_CHARSET;
 
 			$this->sitemap = simplexml_load_string (
 

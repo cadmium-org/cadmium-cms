@@ -10,37 +10,22 @@ error_reporting(E_ALL);
 
 # Define constants
 
-define('DIR_ENGINE',                (dirname(__FILE__) . '/'));
+define('DIR_ENGINE',        (dirname(__FILE__) . '/'));
 
-define('DIR_WWW',                   (DIR_ENGINE . '../'));
-define('DIR_UPLOADS',               (DIR_WWW . 'uploads/'));
+define('DIR_WWW',           (DIR_ENGINE . '../'));
+define('DIR_UPLOADS',       (DIR_ENGINE . '../uploads/'));
 
-define('DIR_FRAMEWORK',             (DIR_ENGINE . 'Framework/'));
-define('DIR_SYSTEM',                (DIR_ENGINE . 'System/'));
+# Require framework main file
 
-define('DIR_CLASSES',               (DIR_FRAMEWORK . 'Classes/'));
-define('DIR_DATA',                  (DIR_FRAMEWORK . 'Data/'));
-define('DIR_INCLUDES',              (DIR_FRAMEWORK . 'Includes/'));
-define('DIR_TEMPLATES',             (DIR_FRAMEWORK . 'Templates/'));
+require_once(DIR_ENGINE . 'Framework/Main.php');
 
-define('DIR_SYSTEM_CLASSES',        (DIR_SYSTEM . 'Classes/'));
-define('DIR_SYSTEM_DATA',           (DIR_SYSTEM . 'Data/'));
-define('DIR_SYSTEM_INCLUDES',       (DIR_SYSTEM . 'Includes/'));
-define('DIR_SYSTEM_LANGUAGES',      (DIR_SYSTEM . 'Languages/'));
-define('DIR_SYSTEM_PLUGINS',        (DIR_SYSTEM . 'Plugins/'));
-define('DIR_SYSTEM_TEMPLATES',      (DIR_SYSTEM . 'Templates/'));
+# Require system main file
 
-# Require classes
+require_once(DIR_ENGINE . 'System/Main.php');
 
-require_once (DIR_FRAMEWORK . 'Engine.php');
-require_once (DIR_FRAMEWORK . 'Error.php');
-require_once (DIR_FRAMEWORK . 'Functions.php');
+# Register classes autoloader
 
-require_once (DIR_SYSTEM . 'System.php');
-
-# Define classes autoloader
-
-function __autoload($class_name) {
+spl_autoload_register(function($class_name) {
 
 	$path = explode('\\', $class_name); $last = $path[count($path) - 1];
 
@@ -65,4 +50,4 @@ function __autoload($class_name) {
 	# Call autoload method
 
 	if (method_exists($class_name, '__autoload')) $class_name::__autoload();
-}
+});

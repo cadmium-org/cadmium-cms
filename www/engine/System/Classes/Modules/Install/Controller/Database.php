@@ -54,7 +54,7 @@ namespace System\Modules\Install\Controller {
             $system['database']['password']     = $database_password;
             $system['database']['name']         = $database_name;
 
-            $system['time'] = ENGINE_TIME;
+            $system['time'] = REQUEST_TIME;
 
 			$system_file = (DIR_SYSTEM_DATA . 'System.json'); $system = json_encode($system, JSON_PRETTY_PRINT);
 

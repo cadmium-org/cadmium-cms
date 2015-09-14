@@ -26,7 +26,7 @@ namespace System\Modules\Install\Utils {
 
 				'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
 
-				'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
+				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME);
 
 			for ($i = 1; $i <= 3; $i++) $pages[] = array('visibility' => VISIBILITY_PUBLISHED,
 
@@ -34,7 +34,7 @@ namespace System\Modules\Install\Utils {
 
 				'contents' => Language::get('INSTALL_PAGE_DEMO_CONTENTS'),
 
-				'time_created' => ENGINE_TIME, 'time_modified' => ENGINE_TIME);
+				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME);
 
 			# ------------------------
 

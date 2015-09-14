@@ -50,7 +50,7 @@ namespace System\Modules\Auth\Controller {
 
 			$secret = Entitizer::userSecret(Auth::user()->id); $secret->remove();
 
-			$code = String::random(40); $ip = ENGINE_CLIENT_IP; $time = ENGINE_TIME;
+			$code = String::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
 
 			$data = array('id' => Auth::user()->id, 'code' => $code, 'ip' => $ip, 'time' => $time);
 
