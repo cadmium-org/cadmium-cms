@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use System, System\Modules\Auth, Language;
+	use System, System\Modules, Language;
 
 	class Login extends System\Frames\Site\Component\Profile\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_LOGIN');
 
-			return Auth\Handler\Login::handle();
+			return Modules\Auth\Handler\Login::handle();
 		}
 	}
 }

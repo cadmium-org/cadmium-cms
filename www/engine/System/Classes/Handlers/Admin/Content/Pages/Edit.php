@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Content\Pages {
 
-	use System, System\Modules\Entitizer, Language;
+	use System, System\Modules, Language;
 
 	class Edit extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Content\Pages {
 
 			$this->title = Language::get('TITLE_CONTENT_PAGES_EDIT');
 
-			return Entitizer\Handler\Page::handle();
+			return Modules\Entitizer\Handler\Page::handle();
 		}
 	}
 }

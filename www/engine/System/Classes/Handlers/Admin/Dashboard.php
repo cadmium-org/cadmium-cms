@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin {
 
-	use System, System\Modules\Info, Language;
+	use System, System\Modules, Language;
 
 	class Dashboard extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin {
 
 			$this->title = Language::get('TITLE_DASHBOARD');
 
-			return Info\Handler\Dashboard::handle();
+			return Modules\Info\Handler\Dashboard::handle();
 		}
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile\Auth {
 
-	use System, System\Modules\Auth, Language;
+	use System, System\Modules, Language;
 
 	class Register extends System\Frames\Site\Component\Profile\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_REGISTER');
 
-			return Auth\Handler\Register::handle();
+			return Modules\Auth\Handler\Register::handle();
 		}
 	}
 }

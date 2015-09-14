@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Content\Menuitems {
 
-	use System, System\Modules\Entitizer, Language;
+	use System, System\Modules, Language;
 
 	class Create extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Content\Menuitems {
 
 			$this->title = Language::get('TITLE_CONTENT_MENUITEMS_CREATE');
 
-			return Entitizer\Handler\Menuitem::handle(true);
+			return Modules\Entitizer\Handler\Menuitem::handle(true);
 		}
 	}
 }

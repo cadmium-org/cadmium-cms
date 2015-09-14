@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\System {
 
-	use System, System\Modules\Config, Language;
+	use System, System\Modules, Language;
 
 	class Settings extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\System {
 
 			$this->title = Language::get('TITLE_SYSTEM_SETTINGS');
 
-			return Config\Handler\Settings::handle();
+			return Modules\Config\Handler\Settings::handle();
 		}
 	}
 }
