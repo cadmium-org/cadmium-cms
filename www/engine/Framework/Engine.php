@@ -30,8 +30,8 @@ namespace {
 		public static function error($message = '') {
 
 			$message = (('' !== ($message = strval($message))) ? ('Engine error: ' . $message) : 'Unknown error');
-            
-            # Load template
+
+			# Load template
 
 			$file_name = (DIR_TEMPLATES . 'Error.tpl'); $contents = false;
 
