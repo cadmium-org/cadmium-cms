@@ -123,7 +123,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		public function create(array $data) {
 
-            if ($this->init) return true;
+            if ($this->init) return false;
 
             # Create temporary definition
 
@@ -209,7 +209,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
-			$this->id = 0; $this->data = array();
+			$this->init = false; $this->id = 0; $this->data = array();
 
 			# ------------------------
 

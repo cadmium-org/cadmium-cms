@@ -54,7 +54,7 @@ namespace System\Modules {
                 throw new Error\General(self::ERROR_TYPE);
             }
 
-            if ((0 !== $id) && isset(self::$cache[$type][$id])) return self::$cache[$type][$id];
+            if ((0 !== $id) && isset(self::$cache[$type][$id]) && (0 !== self::$cache[$type][$id]->id)) return self::$cache[$type][$id];
 
             $entity = new self::$types[$type]; $entity->init($id);
 
