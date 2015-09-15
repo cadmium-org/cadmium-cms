@@ -4,25 +4,25 @@ namespace System\Modules\Auth\Handler {
 
 	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	abstract class Login {
+	trait Login {
 
 		use Auth\Utils\Handler;
 
-		private static $view = 'Blocks\Auth\Login';
+		private $view = 'Blocks\Auth\Login';
 
 		# Handle request
 
-		public static function handle() {
+		protected function handle() {
 
 			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
 
 			# Create form
 
-			self::$form = new Auth\Form\Login();
+			$this->form = new Auth\Form\Login();
 
 			# Submit form
 
-			if (self::$form->submit(array('System\Modules\Auth\Controller\Login', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Auth\Controller\Login', 'process'))) {
 
 				Request::redirect(Auth::admin() ? '/admin' : '/profile');
 
@@ -35,9 +35,13 @@ namespace System\Modules\Auth\Handler {
 				Messages::success(Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
 			}
 
+			# Set title
+
+			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_LOGIN' : 'TITLE_PROFILE_AUTH_LOGIN');
+
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

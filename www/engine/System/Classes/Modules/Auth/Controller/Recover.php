@@ -6,13 +6,6 @@ namespace System\Modules\Auth\Controller {
 
 	abstract class Recover {
 
-		# Errors
-
-		const ERROR_AUTH_RECOVER            = 'USER_ERROR_AUTH_RECOVER';
-
-		const ERROR_PASSWORD_MISMATCH       = 'USER_ERROR_PASSWORD_MISMATCH';
-		const ERROR_PASSWORD_NEW_INVALID    = 'USER_ERROR_PASSWORD_NEW_INVALID';
-
 		# Process post data
 
 		public static function process($post) {
@@ -29,9 +22,9 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
+			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
 
-			if (0 !== strcmp($password_new, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
+			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 
 			# Encode password
 
@@ -41,7 +34,7 @@ namespace System\Modules\Auth\Controller {
 
 			$data = array('auth_key' => $auth_key, 'password' => $password);
 
-			if (!Auth::user()->edit($data)) return self::ERROR_AUTH_RECOVER;
+			if (!Auth::user()->edit($data)) return 'USER_ERROR_AUTH_RECOVER';
 
 			# Remove secret
 

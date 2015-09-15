@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Utils {
 
 		private static function send($view, $subject, $link) {
 
-			$message = new View::get($view);
+			$message = View::get($view);
 
 			$message->site_title = Config::get('site_title');
 

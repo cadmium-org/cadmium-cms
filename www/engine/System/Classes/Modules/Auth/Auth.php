@@ -14,31 +14,33 @@ namespace System\Modules {
 
 			self::$admin = ($section === SECTION_ADMIN); self::$user = Entitizer::user();
 
-			if (false === ($code = Auth\Validate::code(Session::get(USER_SESSION_PARAM_CODE)))) return false;
+			# Check session code
 
-			# Select user from DB
+			if (false === ($code = Auth\Validate::code(Session::get('code')))) return false;
 
-			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
+			# Load session
 
-			$ip = addslashes(REQUEST_CLIENT_IP); $time = (REQUEST_TIME - CONFIG_USER_SESSION_LIFETIME);
+			$session = Entitizer::userSession();
 
-			$query = ("SELECT usr.id FROM " . TABLE_USERS_SESSIONS . " ses ") .
+			if (!$session->init($code, 'code') || ($session->ip !== REQUEST_CLIENT_IP)) return false;
 
-					 ("INNER JOIN " . TABLE_USERS . " usr ON usr.id = ses.id AND usr.rank >= " . $rank . " ") .
+			if ($session->time < (REQUEST_TIME - CONFIG_USER_SESSION_LIFETIME)) return false;
 
-					 ("WHERE ses.code = '" . $code . "' AND ses.ip = '" . $ip . "' AND ses.time > " . $time . " LIMIT 1");
+			# Load user
 
-			if (!(DB::send($query) && (DB::last()->rows === 1))) return false;
+			$user = Entitizer::user($session->id);
 
-			if (!self::$user->init(DB::last()->row()['id'])) return false;
+			if ((0 === $user->id) || ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER))) return false;
+
+			self::$user = $user;
 
 			# Update session
 
-			Entitizer::userSession(self::$user->id)->edit(array('time' => REQUEST_TIME));
+			$session->edit(['time' => REQUEST_TIME]);
 
 			# Update activity
 
-			self::$user->edit(array('time_logged' => REQUEST_TIME));
+			$user->edit(['time_logged' => REQUEST_TIME]);
 
 			# ------------------------
 
@@ -53,23 +55,25 @@ namespace System\Modules {
 
 			if (0 !== self::$user->id) return true;
 
-			if (false === ($code = Auth\Validate::code(Request::get(USER_SECRET_PARAM_CODE)))) return false;
+			# Check secret code
 
-			# Select user from DB
+			if (false === ($code = Auth\Validate::code(Request::get('code')))) return false;
 
-			$rank = (self::$admin ? RANK_ADMINISTRATOR : RANK_USER);
+			# Load secret
 
-			$ip = addslashes(REQUEST_CLIENT_IP); $time = (REQUEST_TIME - CONFIG_USER_SECRET_LIFETIME);
+			$secret = Entitizer::userSession();
 
-			$query = ("SELECT usr.id FROM " . TABLE_USERS_SECRETS . " sec ") .
+			if (!$secret->init($code, 'code') || ($secret->ip !== REQUEST_CLIENT_IP)) return false;
 
-					 ("INNER JOIN " . TABLE_USERS . " usr ON usr.id = sec.id AND usr.rank >= " . $rank . " ") .
+			if ($secret->time < (REQUEST_TIME - CONFIG_USER_SECRET_LIFETIME)) return false;
 
-					 ("WHERE sec.code = '" . $code . "' AND sec.ip = '" . $ip . "' AND sec.time > " . $time . " LIMIT 1");
+			# Load user
 
-			if (!(DB::send($query) && (DB::last()->rows === 1))) return false;
+			$user = Entitizer::user($secret->id);
 
-			if (!self::$user->init(DB::last()->row()['id'])) return false;
+			if ((0 === $user->id) || ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER))) return false;
+
+			self::$user = $user;
 
 			# ------------------------
 
@@ -80,7 +84,7 @@ namespace System\Modules {
 
 		public static function logout() {
 
-			if ((null === self::$user) || (0 === Auth::user()->id)) return false;
+			if ((null === self::$user) || (0 === self::$user->id)) return false;
 
 			# Remove session
 
@@ -88,7 +92,7 @@ namespace System\Modules {
 
 			# Remove session variable
 
-			Session::delete(USER_SESSION_PARAM_CODE);
+			Session::delete('code');
 
 			# ------------------------
 
@@ -99,36 +103,10 @@ namespace System\Modules {
 
         public static function initial() {
 
-			DB::select(TABLE_USERS, 'id', array('id' => 1), null, 1);
+			$user = Entitizer::user(1);
 
-			if (!(DB::last() && DB::last()->status)) return false;
-
-			# ------------------------
-
-			return (DB::last()->rows === 0);
+			return (!$user->error() && (0 === $user->id));
         }
-
-		# Generate and return captcha
-
-		public static function generateCaptcha() {
-
-			$captcha = String::random(CONFIG_CAPTCHA_LENGTH, STRING_POOL_LATIN_UPPER);
-
-			Session::set(USER_SESSION_PARAM_CAPTCHA, $captcha);
-
-			# ------------------------
-
-			return $captcha;
-		}
-
-		# Check captcha
-
-		public static function checkCaptcha($captcha) {
-
-			$captcha = strval($captcha);
-
-			return (0 === strcasecmp(Session::get(USER_SESSION_PARAM_CAPTCHA), $captcha));
-		}
 
 		# Check if authorized
 

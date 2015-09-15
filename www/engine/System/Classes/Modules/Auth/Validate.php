@@ -32,6 +32,8 @@ namespace System\Modules\Auth {
 
 			$min = CONFIG_USER_NAME_MIN_LENGTH; $max = CONFIG_USER_NAME_MAX_LENGTH;
 
+			# ------------------------
+
 			return self::validate($name, REGEX_USER_NAME, $min, $max);
 		}
 
@@ -42,6 +44,8 @@ namespace System\Modules\Auth {
 			$password = strval($password);
 
 			$min = CONFIG_USER_PASSWORD_MIN_LENGTH; $max = CONFIG_USER_PASSWORD_MAX_LENGTH;
+
+			# ------------------------
 
 			return self::validate($password, REGEX_USER_PASSWORD, $min, $max);
 		}

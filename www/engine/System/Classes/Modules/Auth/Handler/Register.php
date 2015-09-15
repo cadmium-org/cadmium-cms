@@ -2,34 +2,38 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Request;
+	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	abstract class Register {
+	trait Register {
 
 		use Auth\Utils\Handler;
 
-		private static $view = 'Blocks\Auth\Register';
+		private $view = 'Blocks\Auth\Register';
 
 		# Handle request
 
-		public static function handle() {
+		protected function handle() {
 
 			if (Auth::admin() && !Auth::initial()) Request::redirect('/admin/login');
 
 			# Create form
 
-			self::$form = new Auth\Form\Register();
+			$this->form = new Auth\Form\Register();
 
 			# Submit form
 
-			if (self::$form->submit(array('System\Modules\Auth\Controller\Register', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Auth\Controller\Register', 'process'))) {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/login?submitted=register');
 			}
 
+			# Set title
+
+			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_REGISTER' : 'TITLE_PROFILE_AUTH_REGISTER');
+
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

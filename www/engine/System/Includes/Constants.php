@@ -27,12 +27,6 @@ define('ENTITY_TYPE_USER',                          'User');
 define('ENTITY_TYPE_USER_SECRET',                   'User\Secret');
 define('ENTITY_TYPE_USER_SESSION',                  'User\Session');
 
-# User
-
-define('USER_SESSION_PARAM_CODE',                   'code');
-define('USER_SESSION_PARAM_CAPTCHA',                'captcha');
-
-define('USER_SECRET_PARAM_CODE',                    'code');
 
 # Access
 

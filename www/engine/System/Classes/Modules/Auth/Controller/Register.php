@@ -2,21 +2,9 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, DB, String, Validate;
+	use System\Modules\Auth, System\Modules\Security, DB, String, Validate;
 
 	abstract class Register {
-
-		# Errors
-
-		const ERROR_AUTH_REGISTER           = 'USER_ERROR_AUTH_REGISTER';
-
-		const ERROR_NAME_INVALID            = 'USER_ERROR_NAME_INVALID';
-		const ERROR_NAME_DUPLICATE          = 'USER_ERROR_NAME_DUPLICATE';
-		const ERROR_EMAIL_INVALID           = 'USER_ERROR_EMAIL_INVALID';
-		const ERROR_EMAIL_DUPLICATE         = 'USER_ERROR_EMAIL_DUPLICATE';
-		const ERROR_PASSWORD_INVALID        = 'USER_ERROR_PASSWORD_INVALID';
-		const ERROR_PASSWORD_MISMATCH       = 'USER_ERROR_PASSWORD_MISMATCH';
-		const ERROR_CAPTCHA_INCORRECT       = 'USER_ERROR_CAPTCHA_INCORRECT';
 
 		# Process post data
 
@@ -34,31 +22,35 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth\Validate::userName($name))) return self::ERROR_NAME_INVALID;
+			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return self::ERROR_PASSWORD_INVALID;
+			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
-			if (false === ($email = Validate::email($email))) return self::ERROR_EMAIL_INVALID;
+			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
 
-			if (0 !== strcmp($password, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
+			if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 
-			if (false === Auth::checkCaptcha($captcha)) return self::ERROR_CAPTCHA_INCORRECT;
+			if (false === Security::checkCaptcha($captcha)) return 'USER_ERROR_CAPTCHA_INCORRECT';
+
+			# Create user object
+
+			$user = Entitizer::user();
 
 			# Check name exists
 
-			DB::select(TABLE_USERS, 'id', array('name' => $name), null, 1);
+			$user->init($name, 'name');
 
-			if (!DB::last()->status) return self::ERROR_AUTH_REGISTER;
+			if ($user->error()) return 'USER_ERROR_AUTH_REGISTER';
 
-			if (DB::last()->rows === 1) return self::ERROR_NAME_DUPLICATE;
+			if (0 !== $user->id) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			DB::select(TABLE_USERS, 'id', array('email' => $email), null, 1);
+			$user->init($email, 'email');
 
-			if (!DB::last()->status) return self::ERROR_AUTH_REGISTER;
+			if ($user->error()) return 'USER_ERROR_AUTH_REGISTER';
 
-			if (DB::last()->rows === 1) return self::ERROR_EMAIL_DUPLICATE;
+			if (0 !== $user->id) return 'USER_ERROR_EMAIL_DUPLICATE';
 
 			# Encode password
 
@@ -81,7 +73,7 @@ namespace System\Modules\Auth\Controller {
 			$data['time_registered']    = REQUEST_TIME;
 			$data['time_logged']        = REQUEST_TIME;
 
-			if (!Auth::user()->create($data)) return self::ERROR_AUTH_REGISTER;
+			if (!$user->create($data)) return 'USER_ERROR_AUTH_REGISTER';
 
 			# Send mail
 

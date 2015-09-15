@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Modules\Auth, System\Utils\Tools;
+	use System, System\Utils\Security, System\Utils\Tools;
 
 	class Captcha extends System\Frames\Main {
 
@@ -12,7 +12,7 @@ namespace System\Frames\Tools {
 
 			# Generate capctha code
 
-			$code = Auth::generateCaptcha();
+			$code = Security::generateCaptcha();
 
 			# Create captcha
 

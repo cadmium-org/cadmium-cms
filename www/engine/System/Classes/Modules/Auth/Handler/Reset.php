@@ -4,25 +4,25 @@ namespace System\Modules\Auth\Handler {
 
 	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	abstract class Reset {
+	trait Reset {
 
 		use Auth\Utils\Handler;
 
-		private static $view = 'Blocks\Auth\Reset';
+		private $view = 'Blocks\Auth\Reset';
 
 		# Handle request
 
-		public static function handle() {
+		protected function handle() {
 
 			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
 
 			# Create form
 
-			self::$form = new Auth\Form\Reset();
+			$this->form = new Auth\Form\Reset();
 
 			# Submit form
 
-			if (self::$form->submit(array('System\Modules\Auth\Controller\Reset', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Auth\Controller\Reset', 'process'))) {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset?submitted');
 
@@ -31,9 +31,13 @@ namespace System\Modules\Auth\Handler {
 				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
 			}
 
+			# Set title
+
+			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_RESET' : 'TITLE_PROFILE_AUTH_RESET');
+
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

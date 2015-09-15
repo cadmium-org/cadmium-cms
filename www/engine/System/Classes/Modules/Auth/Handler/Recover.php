@@ -2,38 +2,44 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Request;
+	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	abstract class Recover {
+	trait Recover {
 
 		use Auth\Utils\Handler;
 
-		private static $view = 'Blocks\Auth\Recover';
+		private $view = 'Blocks\Auth\Recover';
 
 		# Handle request
 
-		public static function handle() {
+		protected function handle() {
 
 			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
 
 			# Init user by secret code
 
-			if (false === (self::$code = Auth::secret())) Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset');
+			if (false !== ($code = Auth::secret())) $this->code = $code;
+
+			else Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset');
 
 			# Create form
 
-			self::$form = new Auth\Form\Recover();
+			$this->form = new Auth\Form\Recover();
 
 			# Submit form
 
-			if (self::$form->submit(array('System\Modules\Auth\Controller\Recover', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Auth\Controller\Recover', 'process'))) {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/login?submitted=recover');
 			}
 
+			# Set title
+
+			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_RECOVER' : 'TITLE_PROFILE_AUTH_RECOVER');
+
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }
