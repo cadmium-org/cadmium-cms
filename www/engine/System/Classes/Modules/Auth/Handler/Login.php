@@ -6,8 +6,6 @@ namespace System\Modules\Auth\Handler {
 
 	trait Login {
 
-		use Auth\Utils\Handler;
-
 		private $view = 'Blocks\Auth\Login';
 
 		# Handle request
