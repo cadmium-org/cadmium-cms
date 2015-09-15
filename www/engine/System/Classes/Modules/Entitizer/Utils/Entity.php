@@ -69,7 +69,9 @@ namespace System\Modules\Entitizer\Utils {
 
                 if (false === ($param = $this->definition->get($name))) return false;
 
-    			if (!($param instanceof Entitizer\Utils\Param\Type\Unique)) return false;
+				if (!($param instanceof Entitizer\Utils\Param\Type\Hash) &&
+
+					!($param instanceof Entitizer\Utils\Param\Type\Unique)) return false;
             }
 
             # Select entity from DB
