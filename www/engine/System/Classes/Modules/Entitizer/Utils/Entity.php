@@ -8,7 +8,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		protected $definition = null;
 
-		protected $init = false, $id = 0, $data = array();
+		protected $init = false, $error = false, $id = 0, $data = array();
 
         # Init parent entities
 
@@ -78,7 +78,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			DB::select(static::$table, $selection, array($name => $value), null, 1);
 
-			if (!(DB::last() && (DB::last()->rows === 1))) return false;
+			if (($this->error = !(DB::last() && DB::last()->status)) || (DB::last()->rows !== 1)) return false;
 
 			$data = DB::last()->row();
 
@@ -212,6 +212,13 @@ namespace System\Modules\Entitizer\Utils {
 			# ------------------------
 
 			return true;
+		}
+
+		# Check for init error
+
+		public function error() {
+
+			return $this->error;
 		}
 
         # Return data
