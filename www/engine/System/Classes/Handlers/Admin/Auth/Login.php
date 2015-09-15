@@ -6,6 +6,6 @@ namespace System\Handlers\Admin\Auth {
 
 	class Login extends System\Frames\Admin\Component\Auth {
 
-		use Auth\Utils\Handler, Auth\Handler\Login;
+		use Auth\Handler\Login;
 	}
 }
