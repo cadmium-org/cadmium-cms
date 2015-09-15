@@ -37,7 +37,7 @@ namespace System\Modules\Auth\Handler {
 
 			# Set title
 
-			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_LOGIN' : 'TITLE_PROFILE_AUTH_LOGIN');
+			$this->setTitle(Language::get(Auth::admin() ? 'TITLE_AUTH_LOGIN' : 'TITLE_PROFILE_AUTH_LOGIN'));
 
 			# ------------------------
 
