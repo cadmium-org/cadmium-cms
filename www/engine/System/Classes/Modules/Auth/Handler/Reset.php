@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Handler {
 
 		# Handle request
 
-		protected function handle() {
+		public function handle() {
 
 			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
 
