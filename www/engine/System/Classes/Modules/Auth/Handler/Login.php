@@ -4,15 +4,13 @@ namespace System\Modules\Auth\Handler {
 
 	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	trait Login {
+	class Login extends Auth\Utils\Handler {
 
-		use Auth\Utils\Handler;
-
-		private $view = 'Blocks\Auth\Login';
+		protected $view = 'Blocks\Auth\Login';
 
 		# Handle request
 
-		protected function handle() {
+		public function handle() {
 
 			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
 
@@ -34,10 +32,6 @@ namespace System\Modules\Auth\Handler {
 
 				Messages::success(Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
 			}
-
-			# Set title
-
-			$this->setTitle(Language::get(Auth::admin() ? 'TITLE_AUTH_LOGIN' : 'TITLE_PROFILE_AUTH_LOGIN'));
 
 			# ------------------------
 

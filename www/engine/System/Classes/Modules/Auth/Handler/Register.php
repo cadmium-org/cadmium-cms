@@ -2,17 +2,15 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Language, Request;
+	use System\Modules\Auth, System\Utils\Messages, Request;
 
-	trait Register {
+	class Register extends Auth\Utils\Handler {
 
-		use Auth\Utils\Handler;
-
-		private $view = 'Blocks\Auth\Register';
+		protected $view = 'Blocks\Auth\Register';
 
 		# Handle request
 
-		protected function handle() {
+		public function handle() {
 
 			if (Auth::admin() && !Auth::initial()) Request::redirect('/admin/login');
 
@@ -26,10 +24,6 @@ namespace System\Modules\Auth\Handler {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/login?submitted=register');
 			}
-
-			# Set title
-
-			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_REGISTER' : 'TITLE_PROFILE_AUTH_REGISTER');
 
 			# ------------------------
 

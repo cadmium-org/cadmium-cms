@@ -4,11 +4,9 @@ namespace System\Modules\Auth\Handler {
 
 	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	trait Reset {
+	class Reset extends Auth\Utils\Handler {
 
-		use Auth\Utils\Handler;
-
-		private $view = 'Blocks\Auth\Reset';
+		protected $view = 'Blocks\Auth\Reset';
 
 		# Handle request
 
@@ -30,10 +28,6 @@ namespace System\Modules\Auth\Handler {
 
 				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
 			}
-
-			# Set title
-
-			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_RESET' : 'TITLE_PROFILE_AUTH_RESET');
 
 			# ------------------------
 

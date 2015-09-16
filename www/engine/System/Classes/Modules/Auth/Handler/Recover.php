@@ -2,17 +2,15 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Language, Request;
+	use System\Modules\Auth, System\Utils\Messages, Request;
 
-	trait Recover {
+	class Recover extends Auth\Utils\Handler {
 
-		use Auth\Utils\Handler;
-
-		private $view = 'Blocks\Auth\Recover';
+		protected $view = 'Blocks\Auth\Recover';
 
 		# Handle request
 
-		protected function handle() {
+		public function handle() {
 
 			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
 
@@ -32,10 +30,6 @@ namespace System\Modules\Auth\Handler {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/login?submitted=recover');
 			}
-
-			# Set title
-
-			$this->title = Language::get(Auth::admin() ? 'TITLE_AUTH_RECOVER' : 'TITLE_PROFILE_AUTH_RECOVER');
 
 			# ------------------------
 

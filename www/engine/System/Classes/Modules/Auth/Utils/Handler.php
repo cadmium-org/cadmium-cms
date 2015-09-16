@@ -4,13 +4,13 @@ namespace System\Modules\Auth\Utils {
 
 	use System\Utils\View;
 
-	trait Handler {
+	abstract class Handler {
 
-        private $code = '', $form = null;
+        protected $view = '', $code = '', $form = null;
 
         # Get contents
 
-        private function getContents() {
+        protected function getContents() {
 
             $contents = View::get($this->view);
 
@@ -20,7 +20,7 @@ namespace System\Modules\Auth\Utils {
 
             # Implement form
 
-            $this->form->implement($contents);
+            if (null !== $this->form) $this->form->implement($contents);
 
             # ------------------------
 
