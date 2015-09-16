@@ -8,6 +8,34 @@ namespace System\Modules {
 
 		private static $admin = false, $user = null;
 
+		# Get auth
+
+		private static function getAuth($code, $type, $lifetime) {
+
+			$auth = Entitizer::create($type);
+
+			if (!$auth->init($code, 'code') || ($auth->ip !== REQUEST_CLIENT_IP)) return false;
+
+			if ($auth->time < (REQUEST_TIME - CONFIG_USER_SESSION_LIFETIME)) return false;
+
+			# ------------------------
+
+			return $auth;
+		}
+
+		# Get user
+
+		private static function getUser($id) {
+
+			$user = Entitizer::user($id);
+
+			if ((0 === $user->id) || ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER))) return false;
+
+			# ------------------------
+
+			return (self::$user = $user);
+		}
+
 		# Authorize with session code
 
 		public static function init($section) {
@@ -18,21 +46,15 @@ namespace System\Modules {
 
 			if (false === ($code = Auth\Validate::code(Session::get('code')))) return false;
 
-			# Load session
+			# Get auth
 
-			$session = Entitizer::userSession();
+			$type = ENTITY_TYPE_USER_SESSION; $lifetime = CONFIG_USER_SESSION_LIFETIME;
 
-			if (!$session->init($code, 'code') || ($session->ip !== REQUEST_CLIENT_IP)) return false;
+			if (false === ($session = self::getAuth($code, $type, $lifetime))) return false;
 
-			if ($session->time < (REQUEST_TIME - CONFIG_USER_SESSION_LIFETIME)) return false;
+			# Get user
 
-			# Load user
-
-			$user = Entitizer::user($session->id);
-
-			if ((0 === $user->id) || ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER))) return false;
-
-			self::$user = $user;
+			if (false === ($user = self::getUser($session->id))) return false;
 
 			# Update session
 
@@ -59,21 +81,15 @@ namespace System\Modules {
 
 			if (false === ($code = Auth\Validate::code(Request::get('code')))) return false;
 
-			# Load secret
+			# Get auth
 
-			$secret = Entitizer::userSession();
+			$type = ENTITY_TYPE_USER_SECRET; $lifetime = CONFIG_USER_SECRET_LIFETIME;
 
-			if (!$secret->init($code, 'code') || ($secret->ip !== REQUEST_CLIENT_IP)) return false;
+			if (false === ($secret = self::getAuth($code, $type, $lifetime))) return false;
 
-			if ($secret->time < (REQUEST_TIME - CONFIG_USER_SECRET_LIFETIME)) return false;
+			# Get user
 
-			# Load user
-
-			$user = Entitizer::user($secret->id);
-
-			if ((0 === $user->id) || ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER))) return false;
-
-			self::$user = $user;
+			if (false === ($user = self::getUser($session->id))) return false;
 
 			# ------------------------
 
