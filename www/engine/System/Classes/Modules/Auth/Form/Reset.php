@@ -6,21 +6,21 @@ namespace System\Modules\Auth\Form {
 
 	class Reset extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct('reset');
+			parent::__construct('reset');
 
-            # Add fields
+			# Add fields
 
-            $this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+			$this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
 				(Auth::admin() ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
 
 			$this->input('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
 
 				(Auth::admin() ? Language::get('USER_FIELD_CAPTCHA') : ''), FORM_FIELD_REQUIRED);
-        }
-    }
+		}
+	}
 }

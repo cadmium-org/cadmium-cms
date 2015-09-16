@@ -6,21 +6,21 @@ namespace System\Modules\Auth\Form {
 
 	class Login extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct('login');
+			parent::__construct('login');
 
-            # Add fields
+			# Add fields
 
-            $this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
+			$this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
 				(Auth::admin() ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
 
 			$this->input('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH,
 
 				(Auth::admin() ? Language::get('USER_FIELD_PASSWORD') : ''), FORM_FIELD_REQUIRED);
-        }
-    }
+		}
+	}
 }

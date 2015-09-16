@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Controller {
 
 		public static function process($post) {
 
-			if (0 !== Auth::user()->id) return true;
+			if (Auth::check()) return true;
 
 			# Declare variables
 
