@@ -16,7 +16,7 @@ namespace System\Modules {
 
 			if (!$auth->init($code, 'code') || ($auth->ip !== REQUEST_CLIENT_IP)) return false;
 
-			if ($auth->time < (REQUEST_TIME - CONFIG_USER_SESSION_LIFETIME)) return false;
+			if ($auth->time < (REQUEST_TIME - $lifetime)) return false;
 
 			# ------------------------
 
@@ -89,7 +89,7 @@ namespace System\Modules {
 
 			# Get user
 
-			if (false === ($user = self::getUser($session->id))) return false;
+			if (false === ($user = self::getUser($secret->id))) return false;
 
 			# ------------------------
 
