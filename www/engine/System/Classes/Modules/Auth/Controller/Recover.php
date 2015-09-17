@@ -8,7 +8,7 @@ namespace System\Modules\Auth\Controller {
 
 		# Process post data
 
-		public static function process($post) {
+		public static function process(array $post) {
 
 			if (!Auth::check()) return false;
 
