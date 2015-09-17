@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Info\Handler {
+namespace System\Modules\Informer\Handler {
 
-	use System\Modules\Config, System\Modules\Info, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
+	use System\Modules\Config, System\Modules\Informer, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
 
 	class Dashboard {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Info\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Info\Dashboard');
+			$contents = View::get('Blocks\Informer\Dashboard');
 
 			# Set general entries
 
@@ -24,9 +24,9 @@ namespace System\Modules\Info\Handler {
 
 			# Set database entries
 
-			$contents->pages_count          = Info::countPages();
+			$contents->pages_count          = Informer::countPages();
 
-			$contents->users_count          = Info::countUsers();
+			$contents->users_count          = Informer::countUsers();
 
 			# ------------------------
 
@@ -37,9 +37,9 @@ namespace System\Modules\Info\Handler {
 
 		public function handle() {
 
-			 # Check if install file exists
+			# Check if install file exists
 
-			if (Info::checkInstallFile()) Messages::error(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
+			if (Informer::checkInstallFile()) Messages::error(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
 
 			# Check if configuration file is loaded
 

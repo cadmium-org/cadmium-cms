@@ -4,7 +4,7 @@ namespace System\Modules {
 
     use DB, Explorer;
 
-	abstract class Info {
+	abstract class Informer {
 
         # Check if install file exists
 

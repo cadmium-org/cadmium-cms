@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Info\Handler {
+namespace System\Modules\Informer\Handler {
 
-	use System\Modules\Info, System\Utils\View;
+	use System\Modules\Informer, System\Utils\View;
 
 	class Information {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Info\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Info\Information');
+			$contents = View::get('Blocks\Informer\Information');
 
 			# Set core entries
 
@@ -18,7 +18,7 @@ namespace System\Modules\Info\Handler {
 
 			$contents->php_version          = phpversion();
 
-			$contents->mysql_version        = Info::mysqlVersion();
+			$contents->mysql_version        = Informer::mysqlVersion();
 
 			# Set external entries
 
