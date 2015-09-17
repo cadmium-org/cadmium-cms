@@ -4,11 +4,11 @@ namespace System\Modules\Info\Handler {
 
 	use System\Modules\Info, System\Utils\View;
 
-	abstract class Information {
+	class Information {
 
-		# Handle request
+		# Get contents
 
-		public static function handle() {
+		private function getContents() {
 
 			$contents = View::get('Blocks\Info\Information');
 
@@ -31,6 +31,13 @@ namespace System\Modules\Info\Handler {
 			# ------------------------
 
 			return $contents;
+		}
+
+		# Handle request
+
+		public function handle() {
+
+			return $this->getContents();
 		}
 	}
 }

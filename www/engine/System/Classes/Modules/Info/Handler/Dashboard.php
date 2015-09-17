@@ -4,15 +4,11 @@ namespace System\Modules\Info\Handler {
 
 	use System\Modules\Config, System\Modules\Info, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
 
-	abstract class Dashboard {
+	class Dashboard {
 
-		# Handle request
+		# Get contents
 
-		public static function handle() {
-
-			if (Info::checkInstallFile()) Messages::error(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
-
-			if (!Config::loaded()) Messages::warning(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
+		private function getContents() {
 
 			$contents = View::get('Blocks\Info\Dashboard');
 
@@ -35,6 +31,23 @@ namespace System\Modules\Info\Handler {
 			# ------------------------
 
 			return $contents;
+		}
+
+		# Handle request
+
+		public function handle() {
+
+			 # Check if install file exists
+
+			if (Info::checkInstallFile()) Messages::error(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
+
+			# Check if configuration file is loaded
+
+			if (!Config::loaded()) Messages::warning(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
+
+			# ------------------------
+
+			return $this->getContents();
 		}
 	}
 }

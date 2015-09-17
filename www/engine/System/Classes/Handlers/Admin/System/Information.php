@@ -12,7 +12,11 @@ namespace System\Handlers\Admin\System {
 
 			$this->title = Language::get('TITLE_SYSTEM_INFORMATION');
 
-			return Info\Handler\Information::handle();
+			$information = new Info\Handler\Information();
+
+			# ------------------------
+
+			return $information->handle();
 		}
 	}
 }
