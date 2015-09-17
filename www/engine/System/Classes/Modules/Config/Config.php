@@ -8,6 +8,8 @@ namespace System\Modules {
 
 		private static $loaded = false;
 
+		# Configuration params
+
 		private static $config = [
 
 			'admin_language'        => CONFIG_ADMIN_LANGUAGE_DEFAULT,

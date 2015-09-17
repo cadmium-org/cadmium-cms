@@ -12,7 +12,11 @@ namespace System\Handlers\Admin\System {
 
 			$this->title = Language::get('TITLE_SYSTEM_SETTINGS');
 
-			return Config\Handler\Settings::handle();
+			$settings = new Config\Handler\Settings();
+
+			# ------------------------
+
+			return $settings->handle();
 		}
 	}
 }

@@ -4,17 +4,17 @@ namespace System\Modules\Config\Handler {
 
 	use System\Modules\Config, System\Utils\Messages, System\Utils\View, Language, Request;
 
-	abstract class Settings {
+	class Settings {
 
-		private static $form = null;
+		private $form = null;
 
 		# Get contents
 
-		public static function getContents() {
+		public function getContents() {
 
 			$contents = View::get('Blocks\Config\Settings');
 
-			self::$form->implement($contents);
+			$this->form->implement($contents);
 
 			# ------------------------
 
@@ -23,15 +23,15 @@ namespace System\Modules\Config\Handler {
 
 		# Handle request
 
-		public static function handle() {
+		public function handle() {
 
 			# Create form
 
-			self::$form = new Config\Form\Settings();
+			$this->form = new Config\Form\Settings();
 
 			# Submit form
 
-			if (self::$form->submit(array('System\Modules\Config\Controller\Settings', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Config\Controller\Settings', 'process'))) {
 
 				Request::redirect('/admin/system/settings?submitted');
 
@@ -39,7 +39,7 @@ namespace System\Modules\Config\Handler {
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

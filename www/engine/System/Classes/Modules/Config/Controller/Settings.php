@@ -6,21 +6,14 @@ namespace System\Modules\Config\Controller {
 
 	abstract class Settings {
 
-		# Errors
-
-		const ERROR_SYSTEM_URL              = 'SETTINGS_ERROR_SYSTEM_URL';
-		const ERROR_SYSTEM_EMAIL            = 'SETTINGS_ERROR_SYSTEM_EMAIL';
-
-		const ERROR_SAVE                    = 'SETTINGS_ERROR_SAVE';
-
 		# Process post data
 
 		public static function process(array $post) {
 
 			$errors = array();
 
-			$errors['system_url']           = self::ERROR_SYSTEM_URL;
-			$errors['system_email']         = self::ERROR_SYSTEM_EMAIL;
+			$errors['system_url']       = 'SETTINGS_ERROR_SYSTEM_URL';
+			$errors['system_email']     = 'SETTINGS_ERROR_SYSTEM_EMAIL';
 
 			# Process post data
 
@@ -31,7 +24,7 @@ namespace System\Modules\Config\Controller {
 
 			# Save configuration
 
-			if (!Config::save()) return self::ERROR_SAVE;
+			if (!Config::save()) return 'SETTINGS_ERROR_SAVE';
 
 			# ------------------------
 
