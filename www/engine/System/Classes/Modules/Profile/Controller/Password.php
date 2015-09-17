@@ -6,20 +6,11 @@ namespace System\Modules\Profile\Controller {
 
 	abstract class Password {
 
-		# Errors
+		# Process post data
 
-		const ERROR_EDIT_PASSWORD                   = 'USER_ERROR_EDIT_PASSWORD';
+		public static function process(array $post) {
 
-		const ERROR_PASSWORD_INVALID                = 'USER_ERROR_PASSWORD_INVALID';
-		const ERROR_PASSWORD_INCORRECT              = 'USER_ERROR_PASSWORD_INCORRECT';
-		const ERROR_PASSWORD_MISMATCH               = 'USER_ERROR_PASSWORD_MISMATCH';
-		const ERROR_PASSWORD_NEW_INVALID            = 'USER_ERROR_PASSWORD_NEW_INVALID';
-
-		# Edit password data
-
-		public static function process($post) {
-
-			if (0 === Auth::user()->id) return false;
+			if (!Auth::check()) return false;
 
 			# Declare variables
 
@@ -31,17 +22,17 @@ namespace System\Modules\Profile\Controller {
 
 			# Validate values
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return self::ERROR_PASSWORD_INVALID;
+			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
-			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return self::ERROR_PASSWORD_NEW_INVALID;
+			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
 
-			if (0 !== strcmp($password_new, $password_retype)) return self::ERROR_PASSWORD_MISMATCH;
+			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 
 			# Check password
 
 			$password = String::encode(Auth::user()->auth_key, $password);
 
-			if (0 !== strcmp(Auth::user()->password, $password)) return self::ERROR_PASSWORD_INCORRECT;
+			if (0 !== strcmp(Auth::user()->password, $password)) return 'USER_ERROR_PASSWORD_INCORRECT';
 
 			# Encode password
 
@@ -54,7 +45,7 @@ namespace System\Modules\Profile\Controller {
 			$data['auth_key']           = $auth_key;
 			$data['password']           = $password;
 
-			if (!Auth::user()->edit($data)) return self::ERROR_EDIT_PASSWORD;
+			if (!Auth::user()->edit($data)) return 'USER_ERROR_EDIT_PASSWORD';
 
 			# ------------------------
 

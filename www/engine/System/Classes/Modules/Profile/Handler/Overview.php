@@ -4,11 +4,11 @@ namespace System\Modules\Profile\Handler {
 
 	use System\Modules\Auth, System\Utils\Lister, System\Utils\View, Date, Geo\Country, Geo\Timezone;
 
-	abstract class Overview {
+	class Overview {
 
-		# Handle request
+		# Get contents
 
-		public static function handle() {
+		private function getContents() {
 
             $contents = View::get('Blocks\Profile\Overview');
 
@@ -52,6 +52,13 @@ namespace System\Modules\Profile\Handler {
 			# ------------------------
 
 			return $contents;
+		}
+
+		# Handle request
+
+		public function handle() {
+
+			return $this->getContents();
 		}
 	}
 }

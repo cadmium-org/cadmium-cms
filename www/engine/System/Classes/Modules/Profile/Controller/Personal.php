@@ -6,18 +6,11 @@ namespace System\Modules\Profile\Controller {
 
 	abstract class Personal {
 
-		# Errors
+		# Process post data
 
-		const ERROR_EDIT_PERSONAL                   = 'USER_ERROR_EDIT_PERSONAL';
+		public static function process(array $post) {
 
-		const ERROR_EMAIL_INVALID                   = 'USER_ERROR_EMAIL_INVALID';
-		const ERROR_EMAIL_DUPLICATE                 = 'USER_ERROR_EMAIL_DUPLICATE';
-
-		# Edit personal data
-
-		public static function process($post) {
-
-			if (0 === Auth::user()->id) return false;
+			if (!Auth::check()) return false;
 
 			# Declare variables
 
@@ -31,7 +24,7 @@ namespace System\Modules\Profile\Controller {
 
 			# Validate values
 
-			if (false === ($email = Validate::email($email))) return self::ERROR_EMAIL_INVALID;
+			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
 
 			# Check email exists
 
@@ -39,9 +32,9 @@ namespace System\Modules\Profile\Controller {
 
 			DB::select(TABLE_USERS, 'id', $condition, null, 1);
 
-			if (!DB::last()->status) return self::ERROR_EDIT_PERSONAL;
+			if (!DB::last()->status) return 'USER_ERROR_EDIT_PERSONAL';
 
-			if (DB::last()->rows === 1) return self::ERROR_EMAIL_DUPLICATE;
+			if (DB::last()->rows === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
 			# Update user
 
@@ -55,7 +48,7 @@ namespace System\Modules\Profile\Controller {
 			$data['country']            = $country;
 			$data['timezone']           = $timezone;
 
-			if (!Auth::user()->edit($data)) return self::ERROR_EDIT_PERSONAL;
+			if (!Auth::user()->edit($data)) return 'USER_ERROR_EDIT_PERSONAL';
 
 			# ------------------------
 

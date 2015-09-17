@@ -4,21 +4,21 @@ namespace System\Modules\Profile\Handler {
 
 	use System\Modules\Profile, System\Utils\Messages, System\Utils\View, Language, Request;
 
-	abstract class Edit {
+	class Edit {
 
-        private static $form_personal = null, $form_password = null;
+        private $form_personal = null, $form_password = null;
 
         # Get contents
 
-		private static function getContents() {
+		private function getContents() {
 
 			$contents = View::get('Blocks\Profile\Edit');
 
 			# Implement forms
 
-			self::$form_personal->implement($contents);
+			$this->form_personal->implement($contents);
 
-			self::$form_password->implement($contents);
+			$this->form_password->implement($contents);
 
 			# ------------------------
 
@@ -27,13 +27,13 @@ namespace System\Modules\Profile\Handler {
 
         # Handle request
 
-		public static function handle() {
+		public function handle() {
 
 			# Create forms
 
-			self::$form_personal = new Profile\Form\Personal();
+			$this->form_personal = new Profile\Form\Personal();
 
-			self::$form_password = new Profile\Form\Password();
+			$this->form_password = new Profile\Form\Password();
 
 			# Submit forms
 
@@ -41,7 +41,7 @@ namespace System\Modules\Profile\Handler {
 
 			$controller_password = array('System\Modules\Profile\Controller\Password', 'process');
 
-			if (self::$form_personal->submit($controller_personal) || self::$form_password->submit($controller_password)) {
+			if ($this->form_personal->submit($controller_personal) || $this->form_password->submit($controller_password)) {
 
 				Request::redirect('/profile/edit?submitted');
 
@@ -49,7 +49,7 @@ namespace System\Modules\Profile\Handler {
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

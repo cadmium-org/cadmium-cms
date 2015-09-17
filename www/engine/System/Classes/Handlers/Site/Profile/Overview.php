@@ -12,7 +12,11 @@ namespace System\Handlers\Site\Profile {
 
 			$this->title = Language::get('TITLE_PROFILE');
 
-			return Profile\Handler\Overview::handle();
+			$overview = new Profile\Handler\Overview();
+
+			# ------------------------
+
+			return $overview->handle();
 		}
 	}
 }
