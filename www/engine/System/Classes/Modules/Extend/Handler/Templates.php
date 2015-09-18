@@ -4,7 +4,7 @@ namespace System\Modules\Extend\Handler {
 
     use System\Modules\Extend;
 
-	abstract class Templates extends Extend\Templates {
+	class Templates extends Extend\Templates {
 
         use Extend\Utils\Handler;
 

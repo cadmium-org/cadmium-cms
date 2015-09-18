@@ -6,7 +6,7 @@ namespace System\Modules\Extend\Utils {
 
     trait Extension {
 
-        private static $dir_name = '', $section = '', $items = array(), $active = '';
+        private static $section = '', $dir_name = '', $items = [], $active = '';
 
         # Get section
 
@@ -30,7 +30,7 @@ namespace System\Modules\Extend\Utils {
 
 			if (!is_array($include = Explorer::php($file_name))) return false;
 
-			$config = array();
+			$config = [];
 
 			foreach ($params as $name) {
 
@@ -48,7 +48,7 @@ namespace System\Modules\Extend\Utils {
 
         private static function getItems($dir_name) {
 
-			$items = array();
+			$items = [];
 
 			foreach (Explorer::listDirs($dir_name) as $name) {
 
@@ -116,7 +116,7 @@ namespace System\Modules\Extend\Utils {
 
 			if (!Explorer::isDir($dir_name)) throw new Error\General(self::$error_directory);
 
-			self::$dir_name = $dir_name; self::$section = $section; self::$items = self::getItems($dir_name);
+			self::$section = $section; self::$dir_name = $dir_name; self::$items = self::getItems($dir_name);
 
             $selectable = self::$selectable[$section]; $param = self::$param[$section]; $default = self::$default[$section];
 
@@ -131,18 +131,18 @@ namespace System\Modules\Extend\Utils {
 			self::$active = $name;
         }
 
+		# Return active section
+
+		public static function section() {
+
+			return self::$section;
+		}
+
         # Return directory name
 
 		public static function dirName() {
 
 			return self::$dir_name;
-		}
-
-        # Return active section
-
-		public static function section() {
-
-			return self::$section;
 		}
 
         # Return items

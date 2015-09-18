@@ -6,22 +6,22 @@ namespace System\Modules\Extend\Utils {
 
 	trait Handler {
 
-		private static $section = '', $items = array();
+		private $section = '', $items = [];
 
 		# Get section
 
-		private static function getSection() {
+		private function getHandlerSection() {
 
 			return ((strcasecmp(Request::get('list'), SECTION_ADMIN) === 0) ? SECTION_ADMIN : SECTION_SITE);
 		}
 
 		# Get items
 
-		private static function getItems() {
+		private function getHandlerItems() {
 
-			$items = self::items(self::$section); $active = key($items);
+			$items = self::items($this->section); $active = key($items);
 
-            $name = Config::get(self::$param[self::$section]); $default = self::$default[self::$section];
+            $name = Config::get(self::$param[$this->section]); $default = self::$default[$this->section];
 
 			if (self::valid($name) && isset($items[$name])) $active = $name;
 
@@ -36,18 +36,18 @@ namespace System\Modules\Extend\Utils {
 
 		# Get sections loop
 
-		private static function getSectionsLoop() {
+		private function getSectionsLoop() {
 
-			$loop = array(); $sections = array();
+			$loop = []; $sections = [];
 
 			$sections[SECTION_SITE]     = Language::get('SECTION_SITE');
 			$sections[SECTION_ADMIN]    = Language::get('SECTION_ADMIN');
 
 			foreach ($sections as $name => $title) {
 
-				$class = (($name === self::$section) ? 'active item' : 'item');
+				$class = (($name === $this->section) ? 'active item' : 'item');
 
-				$loop[] = array('name' => strtolower($name), 'title' => $title, 'class' => $class);
+				$loop[] = ['name' => strtolower($name), 'title' => $title, 'class' => $class];
 			}
 
 			return $loop;
@@ -55,21 +55,21 @@ namespace System\Modules\Extend\Utils {
 
 		# Get contents
 
-		private static function getContents() {
+		private function getContents() {
 
 			$contents = View::get(self::$view_main);
 
 			# Set sections
 
-			$contents->sections = self::getSectionsLoop();
+			$contents->sections = $this->getSectionsLoop();
 
-			$contents->section = self::$section;
+			$contents->section = $this->section;
 
 			# Set items
 
 			$items = Template::group();
 
-			foreach (self::$items as $name => $extension) {
+			foreach ($this->items as $name => $extension) {
 
 				$items->add($item = View::get(self::$view_item));
 
@@ -87,7 +87,7 @@ namespace System\Modules\Extend\Utils {
 
         # Handle ajax request
 
-		private static function handleAjax() {
+		private function handleAjax() {
 
 			$ajax = Ajax::dataset();
 
@@ -101,7 +101,7 @@ namespace System\Modules\Extend\Utils {
 
 			# Save configuration
 
-			$param = self::$param[self::$section];
+			$param = self::$param[$this->section];
 
 			if (false === Config::set($param, $post['name'])) return $ajax->error(Language::get(self::$error_name));
 
@@ -114,15 +114,17 @@ namespace System\Modules\Extend\Utils {
 
 		# Handle common request
 
-		public static function handle() {
+		public function handle() {
 
-			self::$section = self::getSection(); self::$items = self::getItems();
+			$this->section = $this->getHandlerSection();
 
-            if (Request::isAjax()) return self::handleAjax();
+			$this->items = $this->getHandlerItems();
+
+            if (Request::isAjax()) return $this->handleAjax();
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

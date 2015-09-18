@@ -12,7 +12,11 @@ namespace System\Handlers\Admin\Extend {
 
 			$this->title = Language::get('TITLE_EXTEND_LANGUAGES');
 
-			return Extend\Handler\Languages::handle();
+			$languages = new Extend\Handler\Languages();
+
+			# ------------------------
+
+			return $languages->handle();
 		}
 	}
 }

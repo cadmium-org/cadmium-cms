@@ -4,7 +4,7 @@ namespace System\Modules\Extend\Handler {
 
     use System\Modules\Extend;
 
-	abstract class Languages extends Extend\Languages {
+	class Languages extends Extend\Languages {
 
         use Extend\Utils\Handler;
 
