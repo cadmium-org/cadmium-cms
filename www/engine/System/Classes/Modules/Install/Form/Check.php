@@ -10,7 +10,7 @@ namespace System\Modules\Install\Form {
 
 		private function getLanguages() {
 
-			$languages = array();
+			$languages = [];
 
 			foreach (Extend\Languages::items() as $code => $language) $languages[$code] = $language['title'];
 
@@ -23,7 +23,7 @@ namespace System\Modules\Install\Form {
 
 		private function getTemplates() {
 
-			$templates = array();
+			$templates = [];
 
 			foreach (Extend\Templates::items() as $name => $template) $templates[$name] = $template['title'];
 

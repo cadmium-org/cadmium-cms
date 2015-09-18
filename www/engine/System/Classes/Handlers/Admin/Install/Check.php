@@ -12,7 +12,11 @@ namespace System\Handlers\Admin\Install {
 
 			$this->title = Language::get('TITLE_INSTALL_CHECK');
 
-			return Install\Handler\Check::handle();
+			$check = new Install\Handler\Check();
+
+			# ------------------------
+
+			return $check->handle();
 		}
 	}
 }

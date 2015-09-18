@@ -4,19 +4,19 @@ namespace System\Modules\Install\Handler {
 
 	use System\Modules\Install, System\Utils\Messages, System\Utils\View, Language, Request;
 
-	abstract class Database {
+	class Database {
 
-		private static $form = null;
+		private $form = null;
 
 		# Get contents
 
-		private static function getContents() {
+		private function getContents() {
 
 			$contents = View::get('Blocks\Install\Database');
 
 			# Implement form
 
-			self::$form->implement($contents);
+			$this->form->implement($contents);
 
 			# ------------------------
 
@@ -25,22 +25,22 @@ namespace System\Modules\Install\Handler {
 
 		# Handle request
 
-		public static function handle() {
+		public function handle() {
 
 			# Create form
 
-			self::$form = new Install\Form\Database();
+			$this->form = new Install\Form\Database();
 
 			# Submit form
 
-			if (self::$form->submit(array('System\Modules\Install\Controller\Database', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Install\Controller\Database', 'process'))) {
 
 				Request::redirect('/admin/register');
 			}
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

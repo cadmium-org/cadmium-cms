@@ -12,29 +12,29 @@ namespace System\Modules\Install\Utils {
 
 			# Count pages
 
-			if (!(DB::select(TABLE_PAGES, 'COUNT(*) as count') && (DB::last()->rows === 1))) return false;
+			if (!(DB::select(TABLE_PAGES, 'COUNT(id) as count') && (DB::last()->rows === 1))) return false;
 
 			if (intabs(DB::last()->row()['count']) > 0) return true;
 
 			# Insert initial pages
 
-			$pages = array();
+			$pages = [];
 
-			$pages[] = array('visibility' => VISIBILITY_PUBLISHED,
+			$pages[] = ['visibility' => VISIBILITY_PUBLISHED,
 
 				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
 				'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
 
-				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME);
+				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
-			for ($i = 1; $i <= 3; $i++) $pages[] = array('visibility' => VISIBILITY_PUBLISHED,
+			for ($i = 1; $i <= 3; $i++) $pages[] = ['visibility' => VISIBILITY_PUBLISHED,
 
 				'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
 
 				'contents' => Language::get('INSTALL_PAGE_DEMO_CONTENTS'),
 
-				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME);
+				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
 			# ------------------------
 
@@ -47,19 +47,19 @@ namespace System\Modules\Install\Utils {
 
 			# Count menuitems
 
-			if (!(DB::select(TABLE_MENU, 'COUNT(*) as count') && (DB::last()->rows === 1))) return false;
+			if (!(DB::select(TABLE_MENU, 'COUNT(id) as count') && (DB::last()->rows === 1))) return false;
 
 			if (intabs(DB::last()->row()['count']) > 0) return true;
 
 			# Insert initial menuitems
 
-			$menu = array();
+			$menu = [];
 
-			for ($i = 1; $i <= 3; $i++) $menu[] = array (
+			for ($i = 1; $i <= 3; $i++) $menu[] = [
 
 				'position' => ($i - 1), 'link' => ('/page-' . $i),
 
-				'text' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i));
+				'text' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i)];
 
 			# ------------------------
 
@@ -70,7 +70,7 @@ namespace System\Modules\Install\Utils {
 
 		public static function create() {
 
-			$definitions = array();
+			$definitions = [];
 
 			$definitions[] = Entitizer::definition(ENTITY_TYPE_PAGE);
 

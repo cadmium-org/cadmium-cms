@@ -4,15 +4,15 @@ namespace System\Modules\Install\Handler {
 
 	use System\Modules\Install, System\Utils\View, Language;
 
-	abstract class Check {
+	class Check {
 
-		private static $form = null;
+		private $form = null;
 
 		# Get requirements
 
-		private static function getRequirements() {
+		private function getRequirements() {
 
-			$requirements = array();
+			$requirements = [];
 
 			foreach (Install::requirements() as $name => $value) {
 
@@ -20,7 +20,7 @@ namespace System\Modules\Install\Handler {
 
 				$text = Language::get('INSTALL_REQUIREMENT_' . strtoupper($name) . '_' . ($value ? 'SUCCESS' : 'FAIL'));
 
-				$requirements[] = array('class' => $class, 'icon' => $icon, 'text' => $text);
+				$requirements[] = ['class' => $class, 'icon' => $icon, 'text' => $text];
 			}
 
 			# ------------------------
@@ -30,19 +30,19 @@ namespace System\Modules\Install\Handler {
 
 		# Get contents
 
-		private static function getContents() {
+		private function getContents() {
 
 			$contents = View::get('Blocks\Install\Check');
 
 			# Implement form
 
-			self::$form->implement($contents);
+			$this->form->implement($contents);
 
 			# Set requirements
 
 			$contents->php_version = phpversion();
 
-			$contents->requirements = self::getRequirements();
+			$contents->requirements = $this->getRequirements();
 
 			# Set button
 
@@ -57,13 +57,13 @@ namespace System\Modules\Install\Handler {
 
 		# Handle request
 
-		public static function handle() {
+		public function handle() {
 
-			self::$form = new Install\Form\Check();
+			$this->form = new Install\Form\Check();
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
 	}
 }

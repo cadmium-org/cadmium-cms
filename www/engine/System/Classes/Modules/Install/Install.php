@@ -10,37 +10,25 @@ namespace System\Modules {
 
         public static function __autoload() {
 
-            # Check if mysqli extension loaded
+			# Check extensions
 
-			self::$requirements['mysqli'] = extension_loaded('mysqli');
+			$extensions = ['mysqli', 'mbstring', 'gd', 'simplexml'];
 
-			# Check if mbstring extension loaded
+			foreach ($extensions as $name) self::$requirements[$name] = extension_loaded($name);
 
-			self::$requirements['mbstring'] = extension_loaded('mbstring');
+			# Check mod_rewrite
 
-			# Check if gd extension loaded
+			$rewrite = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
 
-			self::$requirements['gd'] = extension_loaded('gd');
+			self::$requirements['rewrite'] = $rewrite;
 
-			# Check if simplexml extension loaded
+			# Check writables
 
-			self::$requirements['simplexml'] = extension_loaded('simplexml');
+			$writables = ['data' => DIR_SYSTEM_DATA, 'uploads' => DIR_UPLOADS];
 
-			# Check if mod_rewrite enabled
+			foreach ($writables as $name => $dir) self::$requirements[$name] = is_writable($dir);
 
-			self::$requirements['rewrite'] = (function_exists('apache_get_modules') &&
-
-                in_array('mod_rewrite', apache_get_modules()));
-
-			# Check if data directory is writable
-
-			self::$requirements['data'] = is_writable(DIR_SYSTEM_DATA);
-
-			# Check if uploads directory is writable
-
-			self::$requirements['uploads'] = is_writable(DIR_UPLOADS);
-
-            # Determine checking status
+            # Set checking status
 
 			self::$status = (!in_array(false, self::$requirements));
         }
