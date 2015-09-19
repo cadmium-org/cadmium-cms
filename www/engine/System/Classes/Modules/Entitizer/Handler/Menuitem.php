@@ -4,29 +4,31 @@ namespace System\Modules\Entitizer\Handler {
 
 	use System\Modules\Entitizer, Template;
 
-	abstract class Menuitem {
+	class Menuitem extends Entitizer\Utils\Handler {
 
-		use Entitizer\Common\Menuitem, Entitizer\Utils\Handler;
+		use Entitizer\Common\Menuitem;
 
-		private static $link = '/admin/content/menuitems';
+		# Handler configuration
 
-		private static $naming = 'text', $naming_new = '';
+		protected static $link = '/admin/content/menuitems';
 
-		private static $form_class = 'System\Modules\Entitizer\Form\Menuitem';
+		protected static $naming = 'text', $naming_new = '';
 
-		private static $message_success_create = 'MENUITEM_SUCCESS_CREATE';
+		protected static $form_class = 'System\Modules\Entitizer\Form\Menuitem';
 
-		private static $message_success_save = 'MENUITEM_SUCCESS_SAVE';
+		protected static $message_success_create = 'MENUITEM_SUCCESS_CREATE';
 
-		private static $view = 'Blocks\Entitizer\Menuitems\Main';
+		protected static $message_success_save = 'MENUITEM_SUCCESS_SAVE';
+
+		protected static $view = 'Blocks\Entitizer\Menuitems\Main';
 
 		# Add additional data for specific entity
 
-		private static function processEntity(Template\Utils\Block $contents) {
+		protected function processEntity(Template\Utils\Block $contents) {
 
-			if (0 === self::$parent->id) $contents->block('parent')->block('browse')->disable();
+			if (0 === $this->parent->id) $contents->block('parent')->block('browse')->disable();
 
-			else $contents->block('parent')->block('browse')->link = self::$parent->link;
+			else $contents->block('parent')->block('browse')->link = $this->parent->link;
 		}
 	}
 }

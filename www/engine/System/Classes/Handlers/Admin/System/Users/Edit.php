@@ -12,7 +12,11 @@ namespace System\Handlers\Admin\System\Users {
 
 			$this->title = Language::get('TITLE_SYSTEM_USERS_EDIT');
 
-			return Entitizer\Handler\User::handle();
+			$user = new Entitizer\Handler\User();
+
+			# ------------------------
+
+			return $user->handle();
 		}
 	}
 }

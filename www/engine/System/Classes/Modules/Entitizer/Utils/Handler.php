@@ -4,84 +4,84 @@ namespace System\Modules\Entitizer\Utils {
 
     use System\Modules\Entitizer, System\Utils\Messages, System\Utils\View, Ajax, Form, Language, Request, Template;
 
-    trait Handler {
+    abstract class Handler {
 
-        private static $create = false, $parent = null, $entity = null, $form = null;
+        protected $create = false, $parent = null, $entity = null, $form = null;
 
         # Process parent block
 
-        private static function processParent(Template\Utils\Block $parent) {
+        private function processParent(Template\Utils\Block $parent) {
 
             # Set parent id
 
-            $parent->id = self::$parent->id;
+            $parent->id = $this->parent->id;
 
             # Set create button
 
-            $parent->block('create')->class = (self::$create ? 'active item' : 'item');
+            $parent->block('create')->class = ($this->create ? 'active item' : 'item');
 
-            $parent->block('create')->id = self::$parent->id;
+            $parent->block('create')->id = $this->parent->id;
 
             # Set edit button
 
-			if (0 === self::$parent->id) $parent->block('edit')->disable(); else {
+			if (0 === $this->parent->id) $parent->block('edit')->disable(); else {
 
-                $parent->block('edit')->class = (!self::$create ? 'active item' : 'item');
+                $parent->block('edit')->class = (!$this->create ? 'active item' : 'item');
 
-                $parent->block('edit')->id = self::$parent->id;
+                $parent->block('edit')->id = $this->parent->id;
             }
         }
 
         # Process selector block
 
-        private static function processSelector(Template\Utils\Block $selector) {
+        private function processSelector(Template\Utils\Block $selector) {
 
-            if (self::$create) return $selector->disable();
+            if ($this->create) return $selector->disable();
 
-            $parent = Entitizer::create(self::$type, self::$entity->parent_id);
+            $parent = Entitizer::create(static::$type, $this->entity->parent_id);
 
-            $title = ((0 !== $parent->id) ? $parent->__get(self::$naming) : ('- ' . Language::get('NONE')));
+            $title = ((0 !== $parent->id) ? $parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
 
-            $selector->set(self::$naming, $title);
+            $selector->set(static::$naming, $title);
         }
 
         # Get contents
 
-		private static function getContents() {
+		private function getContents() {
 
-			$contents = View::get(self::$view);
+			$contents = View::get(static::$view);
 
             # Set id
 
-            $contents->id = self::$entity->id;
+            $contents->id = $this->entity->id;
 
             # Set path / title
 
-            if (self::$nesting) $contents->path = self::$parent->path;
+            if (static::$nesting) $contents->path = $this->parent->path;
 
-			else $contents->title = (self::$create ? Language::get(self::$naming_new) : self::$entity->__get(self::$naming));
+			else $contents->title = ($this->create ? Language::get(static::$naming_new) : $this->entity->__get(static::$naming));
 
             # Set link
 
-            if (self::$nesting) $contents->link = ((self::$create ? 'create' : 'edit') . '?id=' . self::$parent->id);
+            if (static::$nesting) $contents->link = (($this->create ? 'create' : 'edit') . '?id=' . $this->parent->id);
 
-			else $contents->link = (self::$link . '/' .  (self::$create ? 'create' : ('edit?id=' . self::$entity->id)));
+			else $contents->link = (static::$link . '/' . ($this->create ? 'create' : ('edit?id=' . $this->entity->id)));
 
             # Process parent block
 
-            if (self::$nesting) self::processParent($contents->block('parent'));
+            if (static::$nesting) $this->processParent($contents->block('parent'));
 
             # Process selector block
 
-            if (self::$nesting) self::processSelector($contents->block('selector'));
+            if (static::$nesting) $this->processSelector($contents->block('selector'));
 
 			# Implement form
 
-			self::$form->implement($contents);
+			$this->form->implement($contents);
 
 			# Add additional data for specific entity
 
-            self::processEntity($contents);
+            $this->processEntity($contents);
 
 			# ------------------------
 
@@ -90,7 +90,7 @@ namespace System\Modules\Entitizer\Utils {
 
         # Handle ajax request
 
-		private static function handleAjax() {
+		private function handleAjax() {
 
             $ajax = Ajax::dataset();
 
@@ -102,11 +102,11 @@ namespace System\Modules\Entitizer\Utils {
 
             # Create entity
 
-            self::$entity = Entitizer::create(self::$type, Request::get('id'));
+            $this->entity = Entitizer::create(static::$type, Request::get('id'));
 
             # Process remove action
 
-            if ($post['action'] == 'remove') if (!self::$entity->remove()) return Ajax::error();
+            if ($post['action'] == 'remove') if (!$this->entity->remove()) return Ajax::error();
 
             # ------------------------
 
@@ -115,42 +115,42 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Handle request
 
-		public static function handle($create = false) {
+		public function handle($create = false) {
 
-            self::$create = boolval($create);
+            $this->create = boolval($create);
 
-			if (!self::$create && Request::isAjax()) return self::handleAjax();
+			if (!$this->create && Request::isAjax()) return $this->handleAjax();
 
             # Create entity
 
-            if (self::$nesting) self::$parent = Entitizer::create(self::$type, Request::get('id'));
+            if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('id'));
 
-            self::$entity = Entitizer::controller(self::$type, (!self::$create ? Request::get('id') : 0));
+            $this->entity = Entitizer::controller(static::$type, (!$this->create ? Request::get('id') : 0));
 
             # Redirect if entity not found
 
-            if (!self::$create && (0 === self::$entity->id)) return Request::redirect(self::$link);
+            if (!$this->create && (0 === $this->entity->id)) return Request::redirect(static::$link);
 
 			# Create form
 
-			self::$form = new self::$form_class(self::$entity);
+			$this->form = new static::$form_class($this->entity);
 
-            if (self::$nesting && self::$create) self::$form->get('parent_id')->set(self::$parent->id);
+            if (static::$nesting && $this->create) $this->form->get('parent_id')->set($this->parent->id);
 
             # Submit form
 
-            if (self::$form->submit(array(self::$entity, (self::$create ? 'create' : 'edit')))) {
+            if ($this->form->submit([$this->entity, ($this->create ? 'create' : 'edit')])) {
 
-				Request::redirect(self::$link . '/edit?id=' . self::$entity->id . '&submitted');
+				Request::redirect(static::$link . '/edit?id=' . $this->entity->id . '&submitted');
 
-			} else if (!self::$create && (null !== Request::get('submitted'))) {
+			} else if (!$this->create && (null !== Request::get('submitted'))) {
 
-				Messages::success(Language::get(self::$message_success_save));
+				Messages::success(Language::get(static::$message_success_save));
 			}
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
     }
 }

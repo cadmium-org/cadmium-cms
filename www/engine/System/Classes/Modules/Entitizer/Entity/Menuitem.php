@@ -10,9 +10,6 @@ namespace System\Modules\Entitizer\Entity {
 
 		# Implement entity
 
-		protected function implement() {
-
-			$this->data['path'] = $this->getPath();
-		}
+		protected function implement() {}
 	}
 }

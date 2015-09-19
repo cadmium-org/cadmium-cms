@@ -12,7 +12,11 @@ namespace System\Handlers\Admin\System\Users {
 
 			$this->title = Language::get('TITLE_SYSTEM_USERS_CREATE');
 
-			return Entitizer\Handler\User::handle(true);
+			$user = new Entitizer\Handler\User(true);
+
+			# ------------------------
+
+			return $user->handle();
 		}
 	}
 }

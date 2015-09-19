@@ -8,9 +8,10 @@ namespace System\Modules {
 
         const ERROR_TYPE            = 'Invalid entity type';
         const ERROR_DEFINITION      = 'Entity definition does not exists';
+		const ERROR_LISTER          = 'Entities lister does not exists';
         const ERROR_CONTROLLER      = 'Entity controller does not exists';
 
-        private static $cache = array();
+        private static $cache = [];
 
         # Registred types
 
@@ -32,6 +33,15 @@ namespace System\Modules {
             ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Definition\User',
             ENTITY_TYPE_USER_SECRET         => 'System\Modules\Entitizer\Definition\User\Secret',
             ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Definition\User\Session'
+        );
+
+		# Listers
+
+        private static $listers = array (
+
+            ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Lister\Pages',
+            ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Lister\Menuitems',
+            ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Lister\Users'
         );
 
         # Controlles
@@ -75,6 +85,20 @@ namespace System\Modules {
             }
 
             return new self::$definitions[$type];
+        }
+
+		# Create new entities lister
+
+        public static function lister($type) {
+
+            $type = strval($type);
+
+            if (!isset(self::$listers[$type]) || !class_exists(self::$listers[$type])) {
+
+                throw new Error\General(self::ERROR_LISTER);
+            }
+
+            return new self::$listers[$type];
         }
 
         # Create new entity controller

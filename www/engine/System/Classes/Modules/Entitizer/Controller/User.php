@@ -41,7 +41,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			DB::select(TABLE_USERS, 'id', array('name' => $name), null, 1);
+			DB::select(TABLE_USERS, 'id', ['name' => $name], null, 1);
 
 			if (!DB::last()->status) return 'USER_ERROR_CREATE';
 
@@ -49,7 +49,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check email exists
 
-			DB::select(TABLE_USERS, 'id', array('email' => $email), null, 1);
+			DB::select(TABLE_USERS, 'id', ['email' => $email], null, 1);
 
 			if (!DB::last()->status) return 'USER_ERROR_CREATE';
 
@@ -61,7 +61,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Create user
 
-			$data = array();
+			$data = [];
 
 			$data['name']               = $name;
 			$data['email']              = $email;
@@ -141,7 +141,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Edit user
 
-			$data = array();
+			$data = [];
 
             $data['name']               = $name;
 			$data['email']              = $email;

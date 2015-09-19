@@ -8,7 +8,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		protected $definition = null;
 
-		protected $init = false, $error = false, $id = 0, $data = array();
+		protected $init = false, $error = false, $id = 0, $data = [];
 
         # Init parent entities
 
@@ -20,7 +20,7 @@ namespace System\Modules\Entitizer\Utils {
 
 				$entity = $entity->definition->get('parent_id')->entity();
 
-				if ((0 === $entity->id)) return array();
+				if ((0 === $entity->id)) return [];
 
                 $path[] = array_merge(['id' => $entity->id], $entity->data);
 			}
@@ -32,7 +32,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function getDataset(Definition $definition, array $data, $initial = false) {
 
-			$set = array();
+			$set = [];
 
             if ($initial && isset($data['id'])) $set['id'] = $definition->id()->set($data['id']);
 
@@ -48,7 +48,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		public function countChildren() {
 
-			DB::select(static::$table, 'COUNT(*) as count', array('parent_id' => $this->id));
+			DB::select(static::$table, 'COUNT(*) as count', ['parent_id' => $this->id]);
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
@@ -76,9 +76,9 @@ namespace System\Modules\Entitizer\Utils {
 
             # Select entity from DB
 
-			$selection = array_merge(array('id'), array_keys($this->definition->params()));
+			$selection = array_merge(['id'], array_keys($this->definition->params()));
 
-			DB::select(static::$table, $selection, array($name => $value), null, 1);
+			DB::select(static::$table, $selection, [$name => $value], null, 1);
 
 			if (($this->error = !(DB::last() && DB::last()->status)) || (DB::last()->rows !== 1)) return false;
 
@@ -168,7 +168,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Update entity
 
-			DB::update(static::$table, $set, array('id' => $this->id));
+			DB::update(static::$table, $set, ['id' => $this->id]);
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
@@ -205,11 +205,11 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Remove entity
 
-			DB::delete(static::$table, array('id' => $this->id));
+			DB::delete(static::$table, ['id' => $this->id]);
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
-			$this->init = false; $this->id = 0; $this->data = array();
+			$this->init = false; $this->id = 0; $this->data = [];
 
 			# ------------------------
 

@@ -4,60 +4,60 @@ namespace System\Modules\Entitizer\Utils {
 
     use System\Modules\Entitizer, System\Utils\Pagination, System\Utils\View, Ajax, Form, Language, Number, Request, Template, Url;
 
-    trait Listview {
+    abstract class Listview {
 
-        private static $index = 0, $parent = null, $items = array();
+        protected $index = 0, $parent = null, $items = [];
 
         # Process parent block
 
-        private static function processParent(Template\Utils\Block $parent) {
+        private function processParent(Template\Utils\Block $parent) {
 
             # Set parent id
 
-            $parent->id = self::$parent->id;
+            $parent->id = $this->parent->id;
 
             # Set parent naming
 
-            $naming = ((0 !== self::$parent->id) ? self::$parent->__get(self::$naming) : ('- ' . Language::get('NONE')));
+            $naming = ((0 !== $this->parent->id) ? $this->parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
 
-            $parent->set(self::$naming, $naming);
+            $parent->set(static::$naming, $naming);
 
             # Set create button
 
-            $parent->block('create')->id = self::$parent->id;
+            $parent->block('create')->id = $this->parent->id;
 
             # Set edit button
 
-            if (0 === self::$parent->id) $parent->block('edit')->disable();
+            if (0 === $this->parent->id) $parent->block('edit')->disable();
 
-            else $parent->block('edit')->id = self::$parent->id;
+            else $parent->block('edit')->id = $this->parent->id;
 		}
 
         # Get items block
 
-        private static function getItemsBlock($ajax = false) {
+        private function getItemsBlock($ajax = false) {
 
 			$items = Template::group();
 
-			foreach (self::$items['items'] as $item) {
+			foreach ($this->items['items'] as $item) {
 
-				$items->add($view = View::get($ajax ? self::$view_ajax_item : self::$view_item));
+				$items->add($view = View::get($ajax ? static::$view_ajax_item : static::$view_item));
 
                 # Set data
 
-				$view->id = $item['id']; $view->set(self::$naming, $item[self::$naming]);
+				$view->id = $item['id']; $view->set(static::$naming, $item[static::$naming]);
 
                 # Set remove button
 
-                $super = (self::$super && ($item['id'] === 1));
+                $super = (static::$super && ($item['id'] === 1));
 
-                $has_children = (self::$nesting && ($item['children'] > 0));
+                $has_children = (static::$nesting && ($item['children'] > 0));
 
 				$view->block('remove')->class = ((!$super && !$has_children) ? 'negative' : 'disabled');
 
                 # Add item additional data
 
-                self::processItem($view, $item);
+                $this->processItem($view, $item);
 			}
 
             # ------------------------
@@ -67,40 +67,40 @@ namespace System\Modules\Entitizer\Utils {
 
         # Get pagination
 
-        private static function getPaginationBlock() {
+        private function getPaginationBlock() {
 
-			$url = new Url(self::$link . (self::$nesting ? ('?parent_id=' . self::$parent->id) : ''));
+			$url = new Url(static::$link . (static::$nesting ? ('?parent_id=' . $this->parent->id) : ''));
 
-			return Pagination::block(self::$index, self::$display, self::$items['total'], $url);
+			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
 		}
 
         # Get contents
 
-        private static function getContents($ajax = false) {
+        private function getContents($ajax = false) {
 
-			$contents = View::get($ajax ? self::$view_ajax_main : self::$view_main);
+			$contents = View::get($ajax ? static::$view_ajax_main : static::$view_main);
 
             # Set path
 
-			if (self::$nesting) $contents->path = self::$parent->path;
+			if (static::$nesting) $contents->path = $this->parent->path;
 
             # Process parent block
 
-            if (self::$nesting) self::processParent($contents->block('parent'));
+            if (static::$nesting) $this->processParent($contents->block('parent'));
 
 			# Set items
 
-			$items = self::getItemsBlock($ajax);
+			$items = $this->getItemsBlock($ajax);
 
 			if ($items->count() > 0) $contents->items = $items;
 
 			# Set pagination
 
-			if (!$ajax) $contents->pagination = self::getPaginationBlock();
+			if (!$ajax) $contents->pagination = $this->getPaginationBlock();
 
             # Add additional data for specific entity
 
-            self::processEntity($contents);
+            $this->processEntity($contents);
 
 			# ------------------------
 
@@ -109,7 +109,7 @@ namespace System\Modules\Entitizer\Utils {
 
         # Handle ajax request
 
-        private static function handleAjax() {
+        private function handleAjax() {
 
             $ajax = Ajax::dataset();
 
@@ -121,36 +121,40 @@ namespace System\Modules\Entitizer\Utils {
 
             # Create parent entity
 
-            if (self::$nesting) self::$parent = Entitizer::create(self::$type, Request::get('parent_id'));
+            if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('parent_id'));
 
             # Get children items
 
-            self::$items = self::getItems($post['id']);
+			$lister = Entitizer::lister(static::$type);
+
+            $this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), $post['id']);
 
             # ------------------------
 
-            return $ajax->set('contents', self::getContents(true)->contents(true));
+            return $ajax->set('contents', $this->getContents(true)->contents(true));
         }
 
         # Handle common request
 
-        public static function handle() {
+        public function handle() {
 
-            if (Request::isAjax()) return self::handleAjax();
+            if (Request::isAjax()) return $this->handleAjax();
 
-			self::$index = Number::format(Request::get('index'), 1, 999999);
+			$this->index = Number::format(Request::get('index'), 1, 999999);
 
 			# Create parent entity
 
-			if (self::$nesting) self::$parent = Entitizer::create(self::$type, Request::get('parent_id'));
+			if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('parent_id'));
 
 			# Get children items
 
-			self::$items = self::getItems();
+			$lister = Entitizer::lister(static::$type);
+
+			$this->items = $lister->select($this->index, static::$display, (static::$nesting ? $this->parent->id : 0));
 
 			# ------------------------
 
-			return self::getContents();
+			return $this->getContents();
 		}
     }
 }

@@ -6,7 +6,7 @@ namespace System\Modules\Entitizer\Utils {
 
 	abstract class Definition {
 
-		private $id = null, $params = array();
+		private $id = null, $params = [];
 
 		# Add param to set
 
@@ -21,11 +21,11 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function getStatements($method) {
 
-			$statements = array(call_user_func(array($this->id, $method)));
+			$statements = [call_user_func([$this->id, $method])];
 
 			foreach ($this->params as $param) {
 
-				if (false !== ($statement = call_user_func(array($param, $method)))) $statements[] = $statement;
+				if (false !== ($statement = call_user_func([$param, $method]))) $statements[] = $statement;
 			}
 
 			return $statements;

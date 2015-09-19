@@ -17,13 +17,6 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
             $this->type = strval($type);
         }
 
-        # Set value
-
-        public function set($value) {
-
-            return ($this->value = Entitizer::create($this->type, $value)->id);
-        }
-
         # Get entity
 
         public function entity() {

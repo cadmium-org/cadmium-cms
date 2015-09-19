@@ -8,6 +8,8 @@ namespace System\Modules\Entitizer\Entity\User {
 
 		use Entitizer\Common\User\Session;
 
+		# Implement entity
+
         protected function implement() {}
     }
 }

@@ -29,7 +29,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Create menuitem
 
-			$data = array();
+			$data = [];
 
 			$data['parent_id']          = $parent_id;
 			$data['text']               = $text;
@@ -60,7 +60,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Edit menuitem
 
-			$data = array();
+			$data = [];
 
 			$data['parent_id']          = $parent_id;
 			$data['text']               = $text;

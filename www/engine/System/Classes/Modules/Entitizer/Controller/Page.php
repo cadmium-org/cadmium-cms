@@ -41,7 +41,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Create page
 
-			$data = array();
+			$data = [];
 
 			$data['parent_id']          = $parent_id;
 			$data['title']              = $title;
@@ -89,7 +89,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Edit page
 
-			$data = array();
+			$data = [];
 
 			$data['parent_id']          = $parent_id;
 			$data['title']              = $title;

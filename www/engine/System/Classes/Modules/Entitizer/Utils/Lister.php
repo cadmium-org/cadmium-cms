@@ -4,37 +4,39 @@ namespace System\Modules\Entitizer\Utils {
 
     use System\Modules\Entitizer, DB;
 
-    trait Lister {
+    abstract class Lister {
 
-        # Get query
+		# Get query
 
-        private static function getQuery($disable_id = 0) {
+        private function getQuery($select, $index, $display, $parent_id, $disable_id) {
 
-            # Determine selection params
+            $selection = []; $order_by = [];
 
-            $selection = array(); $order_by = array();
+			# Process selection
 
-            foreach (self::$select as $field) $selection[] = ('ent.' . $field);
+            foreach ($select as $field) $selection[] = ('ent.' . $field);
 
-            if (!is_array(self::$order_by)) $order_by[] = ('ent.' . self::$order_by);
+			# Process order
 
-            else foreach (self::$order_by as $field) $order_by[] = ('ent.' . $field);
+            foreach (static::$order as $field) $order_by[] = ('ent.' . $field);
 
-            $limit = ((self::$index > 0) ? (((self::$index - 1) * self::$display) . ", " . self::$display) : "");
+			# Process limit
 
-            # Select entries
+            $limit = (($index > 0) ? ((($index - 1) * $display) . ", " . $display) : "");
+
+            # Process query
 
             $query = ("SELECT SQL_CALC_FOUND_ROWS ent.id, " . implode(', ', $selection)) .
 
-                     (self::$nesting ? ", COUNT(chd.id) as children " : " ") .
+                     (static::$nesting ? ", COUNT(chd.id) as children " : " ") .
 
-                     ("FROM " . self::$table . " ent ") .
+                     ("FROM " . static::$table . " ent ") .
 
-                     (self::$nesting ? ("LEFT JOIN " . self::$table . " chd ON chd.parent_id = ent.id ") : "") .
+                     (static::$nesting ? ("LEFT JOIN " . static::$table . " chd ON chd.parent_id = ent.id ") : "") .
 
                      ("WHERE ent.id != " . $disable_id . " ") .
 
-                     (self::$nesting ? ("AND ent.parent_id = " . self::$parent->id . " GROUP BY ent.id ") : "") .
+                     (static::$nesting ? ("AND ent.parent_id = " . $parent_id . " GROUP BY ent.id ") : "") .
 
                      ("ORDER BY " . implode(', ', $order_by) . ", ent.id ASC" . ($limit ? (" LIMIT " . $limit) : ""));
 
@@ -45,25 +47,33 @@ namespace System\Modules\Entitizer\Utils {
 
         # Get items
 
-        private static function getItems($disable_id = 0) {
+        public function select($index = 0, $display = 0, $parent_id = 0, $disable_id = 0) {
 
-            $items = array('items' => array(), 'total' => 0);
+			$index = intabs($index); $display = intabs($display);
+
+			$parent_id = intabs($parent_id); $disable_id = intabs($disable_id);
+
+            $items = ['items' => [], 'total' => 0];
 
             # Create definition
 
-            $definition = Entitizer::definition(self::$type); $params = $definition->params();
+            $definition = Entitizer::definition(static::$type); $params = $definition->params();
 
-            if (!(DB::send(self::getQuery($disable_id)) && DB::last()->status)) return $items;
+			# Select entities
+
+			$query = $this->getQuery(array_keys($params), $index, $display, $parent_id, $disable_id);
+
+            if (!(DB::send($query) && DB::last()->status)) return $items;
 
             # Process results
 
 			while (null !== ($row = DB::last()->row())) {
 
-                $item = array('id' => $definition->id()->set($row['id']));
+                $item = ['id' => $definition->id()->set($row['id'])];
 
-                foreach (self::$select as $field) $item[$field] = $definition->get($field)->set($row[$field]);
+                foreach ($params as $name => $param) $item[$name] = $param->set($row[$name]);
 
-                if (self::$nesting) $item['children'] = intabs($row['children']);
+                if (static::$nesting) $item['children'] = intabs($row['children']);
 
                 $items['items'][] = $item;
             }
@@ -79,5 +89,5 @@ namespace System\Modules\Entitizer\Utils {
 
             return $items;
         }
-    }
+	}
 }
