@@ -12,11 +12,11 @@ namespace System\Handlers\Admin\Content\Menuitems {
 
 			$this->title = Language::get('TITLE_CONTENT_MENUITEMS_CREATE');
 
-			$menuitem = new Entitizer\Handler\Menuitem(true);
+			$menuitem = new Entitizer\Handler\Menuitem();
 
 			# ------------------------
 
-			return $menuitem->handle();
+			return $menuitem->handle(true);
 		}
 	}
 }
