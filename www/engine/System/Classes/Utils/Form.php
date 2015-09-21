@@ -10,7 +10,7 @@ namespace System\Utils {
 
         public function submit($callback) {
 
-            if (!is_callable($callback) || (false === ($post = parent::post()))) return false;
+            if (!is_callable($callback) || (false === ($post = $this->post()))) return false;
 
             # Check form for errors
 
