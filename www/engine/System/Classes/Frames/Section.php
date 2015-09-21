@@ -10,7 +10,7 @@ namespace System\Frames {
 
 		const SECTION = '';
 
-		# Phrases list interface // change to constant in PHP 5.6+
+		# Phrases list interface (change to constant in PHP 5.6+)
 
 		protected static $phrases = [];
 
