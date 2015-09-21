@@ -68,7 +68,7 @@ namespace System\Modules\Extend\Utils {
 
         # Get user defined extension name
 
-		private static function getUserDefined($section) {
+		private static function getUserDefined() {
 
 			if (self::exists($name_get = Request::get(self::$name))) $name = $name_get;
 
@@ -120,7 +120,7 @@ namespace System\Modules\Extend\Utils {
 
             $selectable = self::$selectable[$section]; $param = self::$param[$section]; $default = self::$default[$section];
 
-			if ($selectable && (false !== ($name = self::getUserDefined($section)))) $name_valid = true;
+			if ($selectable && (false !== ($name = self::getUserDefined()))) $name_valid = true;
 
 			else $name_valid = (self::exists($name = Config::get($param)) || self::exists($name = $default));
 
