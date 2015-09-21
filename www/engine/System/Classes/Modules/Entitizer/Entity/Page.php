@@ -41,6 +41,8 @@ namespace System\Modules\Entitizer\Entity {
 
 			DB::select(TABLE_PAGES, 'id', $condition, null, 1);
 
+			# ------------------------
+
 			return ((DB::last() && DB::last()->status) ? DB::last()->rows : false);
 		}
     }
