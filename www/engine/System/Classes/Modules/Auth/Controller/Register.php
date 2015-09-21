@@ -38,19 +38,15 @@ namespace System\Modules\Auth\Controller {
 
 			# Check name exists
 
-			$user->init($name, 'name');
+			if (false === ($check_name = $user->checkName($name))) return 'USER_ERROR_AUTH_REGISTER';
 
-			if ($user->error()) return 'USER_ERROR_AUTH_REGISTER';
-
-			if (0 !== $user->id) return 'USER_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			$user->init($email, 'email');
+			if (false === ($check_email = $user->checkEmail($email))) return 'USER_ERROR_AUTH_REGISTER';
 
-			if ($user->error()) return 'USER_ERROR_AUTH_REGISTER';
-
-			if (0 !== $user->id) return 'USER_ERROR_EMAIL_DUPLICATE';
+			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
 			# Encode password
 

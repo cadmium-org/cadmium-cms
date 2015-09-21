@@ -31,13 +31,9 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			$condition = ("name = '" . addslashes($name) . "' AND parent_id = " . $this->entity->id);
+			if (false === ($check_name = $this->entity->checkName($name, $parent_id))) return 'PAGE_ERROR_CREATE';
 
-			DB::select(TABLE_PAGES, 'id', $condition, null, 1);
-
-			if (!DB::last()->status) return 'PAGE_ERROR_CREATE';
-
-			if (DB::last()->rows === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
 
 			# Create page
 
@@ -79,13 +75,9 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			$condition = ("name = '" . addslashes($name) . "' AND parent_id = " . $parent_id . " AND id != " . $this->entity->id);
+			if (false === ($check_name = $this->entity->checkName($name, $parent_id))) return 'PAGE_ERROR_EDIT';
 
-			DB::select(TABLE_PAGES, 'id', $condition, null, 1);
-
-			if (!DB::last()->status) return 'PAGE_ERROR_EDIT';
-
-			if (DB::last()->rows === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
 
 			# Edit page
 

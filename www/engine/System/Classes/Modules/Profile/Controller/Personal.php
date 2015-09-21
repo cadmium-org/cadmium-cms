@@ -28,13 +28,9 @@ namespace System\Modules\Profile\Controller {
 
 			# Check email exists
 
-			$condition = ("email = '" . addslashes($email) . "' AND id != " . Auth::user()->id);
+			if (false === ($check_email = Auth::user()->checkEmail($email))) return 'USER_ERROR_EDIT_PERSONAL';
 
-			DB::select(TABLE_USERS, 'id', $condition, null, 1);
-
-			if (!DB::last()->status) return 'USER_ERROR_EDIT_PERSONAL';
-
-			if (DB::last()->rows === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
+			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
 			# Update user
 

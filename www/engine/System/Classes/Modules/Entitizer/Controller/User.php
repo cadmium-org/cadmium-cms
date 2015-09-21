@@ -41,19 +41,15 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			DB::select(TABLE_USERS, 'id', ['name' => $name], null, 1);
+			if (false === ($check_name = $this->entity->checkName($name))) return 'USER_ERROR_CREATE';
 
-			if (!DB::last()->status) return 'USER_ERROR_CREATE';
-
-			if (DB::last()->rows === 1) return 'USER_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			DB::select(TABLE_USERS, 'id', ['email' => $email], null, 1);
+			if (false === ($check_email = $this->entity->checkEmail($email))) return 'USER_ERROR_CREATE';
 
-			if (!DB::last()->status) return 'USER_ERROR_CREATE';
-
-			if (DB::last()->rows === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
+			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
 			# Encode password
 
@@ -115,23 +111,15 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			$condition = ("name = '" . addslashes($name) . "' AND id != " . $this->entity->id);
+			if (false === ($check_name = $this->entity->checkName($name))) return 'USER_ERROR_EDIT';
 
-			DB::select(TABLE_USERS, 'id', $condition, null, 1);
-
-			if (!DB::last()->status) return 'USER_ERROR_EDIT';
-
-			if (DB::last()->rows === 1) return 'USER_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			$condition = ("email = '" . addslashes($email) . "' AND id != " . $this->entity->id);
+			if (false === ($check_email = $this->entity->checkEmail($email))) return 'USER_ERROR_EDIT';
 
-			DB::select(TABLE_USERS, 'id', $condition, null, 1);
-
-			if (!DB::last()->status) return 'USER_ERROR_EDIT';
-
-			if (DB::last()->rows === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
+			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
 			# Encode password
 
