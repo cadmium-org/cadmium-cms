@@ -12,11 +12,11 @@ namespace System\Handlers\Admin\System\Users {
 
 			$this->title = Language::get('TITLE_SYSTEM_USERS');
 
-			$users = new Entitizer\Listview\Users();
+			$users_list = new Entitizer\Listview\Users();
 
 			# ------------------------
 
-			return $users->handle();
+			return $users_list->handle();
 		}
 	}
 }
