@@ -12,7 +12,7 @@ namespace System\Frames\Site {
 
 		const SECTION = SECTION_SITE;
 
-		# Define phrases list // change to constant in PHP 5.6+
+		# Define phrases list (change to constant in PHP 5.6+)
 
 		protected static $phrases = ['Common', 'Lister', 'Mail', 'Site', 'User'];
 

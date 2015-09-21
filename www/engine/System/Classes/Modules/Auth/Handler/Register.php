@@ -12,8 +12,6 @@ namespace System\Modules\Auth\Handler {
 
 		public function handle() {
 
-			if (Auth::admin() && !Auth::initial()) Request::redirect('/admin/login');
-
 			# Create form
 
 			$this->form = new Auth\Form\Register();

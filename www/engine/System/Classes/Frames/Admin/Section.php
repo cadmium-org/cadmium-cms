@@ -12,7 +12,7 @@ namespace System\Frames\Admin {
 
 		const SECTION = SECTION_ADMIN;
 
-		# Define phrases list // change to constant in PHP 5.6+
+		# Define phrases list (change to constant in PHP 5.6+)
 
 		protected static $phrases = ['Admin', 'Ajax', 'Common', 'Install', 'Lister', 'Mail', 'Menuitem', 'Page', 'User'];
 
@@ -145,6 +145,10 @@ namespace System\Frames\Admin {
 				else if ($this instanceof Component\Auth) {
 
 					if (Auth::check()) Request::redirect('/admin');
+
+					if ($this instanceof Component\Auth\Initial) { if (!Auth::initial()) Request::redirect('/admin/login'); }
+
+					else if (Auth::initial()) Request::redirect('/admin/register');
 
 					if (Template::isSettable($result = $this->handle())) return $this->displayForm($result, STATUS_CODE_401);
 				}

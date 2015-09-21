@@ -12,8 +12,6 @@ namespace System\Modules\Auth\Handler {
 
 		public function handle() {
 
-			if (Auth::admin() && Auth::initial()) Request::redirect('/admin/register');
-
 			# Init user by secret code
 
 			if (false !== ($code = Auth::secret())) $this->code = $code;
