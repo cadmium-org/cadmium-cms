@@ -35,7 +35,7 @@ namespace System\Modules\Auth\Utils {
 
 			$link = (Config::get('system_url') . (Auth::admin() ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
 
-			return self::send('Auth\Mailing\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
+			return self::send('Blocks\Auth\Mail\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
 		}
 
 		# Send register mail
@@ -44,7 +44,7 @@ namespace System\Modules\Auth\Utils {
 
 			$link = (Config::get('system_url') . (Auth::admin() ? '/admin' : '/profile'));
 
-			return self::send('Auth\Mailing\Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
+			return self::send('Blocks\Auth\Mail\Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
 		}
 	}
 }
