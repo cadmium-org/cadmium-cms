@@ -78,7 +78,7 @@ namespace {
 
 		public static function encode(array $array) {
 
-			return String::encode(serialize($array));
+			return sha1(serialize($array));
 		}
 	}
 }
