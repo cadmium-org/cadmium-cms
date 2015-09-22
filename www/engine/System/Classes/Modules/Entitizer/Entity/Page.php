@@ -30,20 +30,5 @@ namespace System\Modules\Entitizer\Entity {
 
 			$this->data['canonical'] = $this->getCanonical();
 		}
-
-		# Check if name available
-
-		public function checkName($name, $parent_id = 0) {
-
-			$name = strval($name); $parent_id = intabs($parent_id);
-
-			$condition = ("name = '" . addslashes($name) . "' AND id != " . $this->id . " AND parent_id = " . $parent_id);
-
-			DB::select(TABLE_PAGES, 'id', $condition, null, 1);
-
-			# ------------------------
-
-			return ((DB::last() && DB::last()->status) ? DB::last()->rows : false);
-		}
     }
 }

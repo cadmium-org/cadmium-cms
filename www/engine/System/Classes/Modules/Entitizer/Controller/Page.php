@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Controller {
 
-	use System\Modules\Entitizer, DB;
+	use System\Modules\Entitizer, Arr, DB;
 
 	class Page extends Entitizer\Utils\Controller {
 
@@ -27,9 +27,13 @@ namespace System\Modules\Entitizer\Controller {
 
 			extract($post);
 
+			# Get hash
+
+			$hash = Arr::encode([$name, Entitizer::page($parent_id)->id]);
+
 			# Check name exists
 
-			if (false === ($check_name = $this->entity->checkName($name, $parent_id))) return 'PAGE_ERROR_MODIFY';
+			if (false === ($check_name = $this->entity->check('hash', $hash))) return 'PAGE_ERROR_MODIFY';
 
 			if ($check_name === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
 
@@ -47,6 +51,7 @@ namespace System\Modules\Entitizer\Controller {
 			$data['robots_index']       = $robots_index;
 			$data['robots_follow']      = $robots_follow;
 			$data['contents']           = $contents;
+			$data['hash']               = $hash;
 
 			$modifier = ((0 === $this->entity->id) ? 'create' : 'edit');
 

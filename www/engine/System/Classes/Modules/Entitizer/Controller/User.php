@@ -44,13 +44,13 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			if (false === ($check_name = $this->entity->checkName($name))) return 'USER_ERROR_MODIFY';
+			if (false === ($check_name = $this->entity->check('name', $name))) return 'USER_ERROR_MODIFY';
 
 			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			if (false === ($check_email = $this->entity->checkEmail($email))) return 'USER_ERROR_MODIFY';
+			if (false === ($check_email = $this->entity->check('email', $email))) return 'USER_ERROR_MODIFY';
 
 			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 

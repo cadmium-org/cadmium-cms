@@ -28,7 +28,7 @@ namespace System\Modules\Profile\Controller {
 
 			# Check email exists
 
-			if (false === ($check_email = Auth::user()->checkEmail($email))) return 'USER_ERROR_EDIT_PERSONAL';
+			if (false === ($check_email = Auth::user()->check('email', $email))) return 'USER_ERROR_EDIT_PERSONAL';
 
 			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 

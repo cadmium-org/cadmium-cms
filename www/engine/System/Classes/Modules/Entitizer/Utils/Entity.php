@@ -55,6 +55,15 @@ namespace System\Modules\Entitizer\Utils {
 			return (intabs(DB::last()->row()['count']));
 		}
 
+		# Constructor
+
+		public function __construct() {
+
+            # Create definition object
+
+			$this->definition = Entitizer::definition(static::$type);
+		}
+
         # Init entity
 
         public function init($value, $name = 'id') {
@@ -110,13 +119,27 @@ namespace System\Modules\Entitizer\Utils {
 			return ($this->init = true);
 		}
 
-        # Constructor
+		# Check if unique param value exists
 
-		public function __construct() {
+		public function check($name, $value) {
 
-            # Create definition object
+			$name = strval($name); $value = strval($value);
 
-			$this->definition = Entitizer::definition(static::$type);
+			if (false === ($param = $this->definition->get($name))) return false;
+
+				if (!($param instanceof Entitizer\Utils\Param\Type\Hash) &&
+
+					!($param instanceof Entitizer\Utils\Param\Type\Unique)) return false;
+
+			# Select entity from DB
+
+			$condition = ($name . " = '" . addslashes($value) . "' AND id != " . $this->id);
+
+			DB::select(static::$table, 'id', $condition, null, 1);
+
+			# ------------------------
+
+			return ((DB::last() && DB::last()->status) ? DB::last()->rows : false);
 		}
 
         # Create entity
@@ -143,7 +166,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			foreach ($set as $name => $value) $this->data[$name] = $value;
 
-			if (static::$nesting) $this->data['path'] = static::initPath();
+			if (static::$nesting) $this->data['path'] = $this->getPath();
 
             # Implement entity
 
@@ -177,6 +200,8 @@ namespace System\Modules\Entitizer\Utils {
 			$this->definition = $definition;
 
 			foreach ($set as $name => $value) $this->data[$name] = $value;
+
+			if (static::$nesting) $this->data['path'] = $this->getPath();
 
             # Implement entity
 
