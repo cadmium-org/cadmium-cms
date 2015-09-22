@@ -139,7 +139,7 @@ namespace System\Modules\Entitizer\Utils {
 
             # Submit form
 
-            if ($this->form->submit([$this->entity, ($this->create ? 'create' : 'edit')])) {
+            if ($this->form->submit([$this->entity, 'process'])) {
 
 				Request::redirect(static::$link . '/edit?id=' . $this->entity->id . '&submitted');
 

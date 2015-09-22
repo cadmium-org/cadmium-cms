@@ -2,10 +2,9 @@
 
 return array (
 
-	# Process errors
+	# Errors
 
-	'MENUITEM_ERROR_CREATE'                         => 'Error creating item',
-	'MENUITEM_ERROR_EDIT'                           => 'Error saving item data',
+	'MENUITEM_ERROR_MODIFY'                         => 'Error saving item data',
 
 	# Success messages
 

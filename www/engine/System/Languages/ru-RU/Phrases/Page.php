@@ -2,17 +2,11 @@
 
 return array (
 
-	# Process errors
+	# Errors
 
-	'PAGE_ERROR_CREATE'                             => 'Ошибка создания страницы',
-	'PAGE_ERROR_EDIT'                               => 'Ошибка сохранения данных страницы',
+	'PAGE_ERROR_MODIFY'                             => 'Ошибка сохранения данных страницы',
 
 	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Страница с таким URL уже существует',
-
-	# Input errors
-
-	'PAGE_ERROR_INPUT_NAME'                         => 'Необходимо ввести URL страницы',
-	'PAGE_ERROR_INPUT_TITLE'                        => 'Необходимо ввести заголовок страницы',
 
 	# Success messages
 

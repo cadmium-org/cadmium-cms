@@ -4,8 +4,7 @@ return array (
 
 	# Errors
 
-	'USER_ERROR_CREATE'                             => 'Ошибка создания пользователя',
-	'USER_ERROR_EDIT'                               => 'Ошибка сохранения данных пользователя',
+	'USER_ERROR_MODIFY'                             => 'Ошибка сохранения данных пользователя',
 
 	'USER_ERROR_AUTH_LOGIN'                         => 'Ошибка авторизации',
 	'USER_ERROR_AUTH_RESET'                         => 'Ошибка восстановления пароля',

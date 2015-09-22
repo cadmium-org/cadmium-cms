@@ -2,17 +2,11 @@
 
 return array (
 
-	# Process errors
+	# Errors
 
-	'PAGE_ERROR_CREATE'                             => 'Error creating page',
-	'PAGE_ERROR_EDIT'                               => 'Error saving page data',
+	'PAGE_ERROR_MODIFY'                             => 'Error saving page data',
 
 	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Page URL is already in use',
-
-	# Input errors
-
-	'PAGE_ERROR_INPUT_NAME'                         => 'Please enter page URL',
-	'PAGE_ERROR_INPUT_TITLE'                        => 'Please enter page title',
 
 	# Success messages
 

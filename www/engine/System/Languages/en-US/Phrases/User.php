@@ -4,8 +4,7 @@ return array (
 
 	# Errors
 
-	'USER_ERROR_CREATE'                             => 'Error creating user',
-	'USER_ERROR_EDIT'                               => 'Error saving user data',
+	'USER_ERROR_MODIFY'                             => 'Error saving user data',
 
 	'USER_ERROR_AUTH_LOGIN'                         => 'Authorization error',
 	'USER_ERROR_AUTH_RESET'                         => 'Error resetting password',

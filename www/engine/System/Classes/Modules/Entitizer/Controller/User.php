@@ -13,11 +13,9 @@ namespace System\Modules\Entitizer\Controller {
 			$this->entity = Entitizer::user($id);
 		}
 
-		# Create user
+		# Process post data
 
-		public function create($post) {
-
-			if (0 !== $this->entity->id) return true;
+		public function process($post) {
 
 			# Declare variables
 
@@ -29,33 +27,34 @@ namespace System\Modules\Entitizer\Controller {
 
 			extract($post);
 
-			# Validate values
+			# Validate name & email
 
 			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
 			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			# Validate password
 
-			if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
+			if ((0 !== $this->entity->id) && ('' !== $password)) {
+
+				if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+
+				if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
+			}
 
 			# Check name exists
 
-			if (false === ($check_name = $this->entity->checkName($name))) return 'USER_ERROR_CREATE';
+			if (false === ($check_name = $this->entity->checkName($name))) return 'USER_ERROR_MODIFY';
 
 			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			if (false === ($check_email = $this->entity->checkEmail($email))) return 'USER_ERROR_CREATE';
+			if (false === ($check_email = $this->entity->checkEmail($email))) return 'USER_ERROR_MODIFY';
 
 			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
-			# Encode password
-
-			$auth_key = String::random(40); $password = String::encode($auth_key, $password);
-
-			# Create user
+			# Modify user
 
 			$data = [];
 
@@ -68,82 +67,22 @@ namespace System\Modules\Entitizer\Controller {
 			$data['city']               = $city;
 			$data['country']            = $country;
 			$data['timezone']           = $timezone;
-            $data['auth_key']           = $auth_key;
-			$data['password']           = $password;
-			$data['time_registered']    = REQUEST_TIME;
-			$data['time_logged']        = REQUEST_TIME;
 
-            if (!$this->entity->create($data)) return 'USER_ERROR_CREATE';
+			if ((0 !== $this->entity->id) && ('' !== $password)) {
 
-			# ------------------------
+				$data['auth_key']           = String::random(40);
+				$data['password']           = String::encode($auth_key, $password);
+			}
 
-			return true;
-		}
+			if (0 === $this->entity->id) {
 
-		# Edit user
+				$data['time_registered']    = REQUEST_TIME;
+				$data['time_logged']        = REQUEST_TIME;
+			}
 
-		public function edit($post) {
+			$modifier = ((0 === $this->entity->id) ? 'create' : 'edit');
 
-			if (0 === $this->entity->id) return false;
-
-			# Declare variables
-
-			$name = null; $email = null; $rank = null; $first_name = null; $last_name = null; $sex = null;
-
-			$city = null; $country = null; $timezone = null; $password = null; $password_retype = null;
-
-			# Extract post array
-
-			extract($post);
-
-			# Validate values
-
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
-
-			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
-
-            if ('' !== $password) {
-
-    			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
-
-    			if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
-            }
-
-			# Check name exists
-
-			if (false === ($check_name = $this->entity->checkName($name))) return 'USER_ERROR_EDIT';
-
-			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
-
-			# Check email exists
-
-			if (false === ($check_email = $this->entity->checkEmail($email))) return 'USER_ERROR_EDIT';
-
-			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
-
-			# Encode password
-
-			if ('' !== $password) { $auth_key = String::random(40); $password = String::encode($auth_key, $password); }
-
-			else { $auth_key = $this->entity->auth_key; $password = $this->entity->password; }
-
-			# Edit user
-
-			$data = [];
-
-            $data['name']               = $name;
-			$data['email']              = $email;
-            $data['rank']               = $rank;
-			$data['first_name']         = $first_name;
-			$data['last_name']          = $last_name;
-			$data['sex']                = $sex;
-			$data['city']               = $city;
-			$data['country']            = $country;
-			$data['timezone']           = $timezone;
-            $data['auth_key']           = $auth_key;
-			$data['password']           = $password;
-
-			if (!$this->entity->edit($data)) return 'USER_ERROR_EDIT';
+			if (!call_user_func([$this->entity, $modifier], $data)) return 'USER_ERROR_MODIFY';
 
 			# ------------------------
 

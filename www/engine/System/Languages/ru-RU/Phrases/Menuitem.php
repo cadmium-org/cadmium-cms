@@ -2,10 +2,9 @@
 
 return array (
 
-	# Process errors
+	# Errors
 
-	'MENUITEM_ERROR_CREATE'                         => 'Ошибка создания элемента',
-	'MENUITEM_ERROR_EDIT'                           => 'Ошибка сохранения данных элемента',
+	'MENUITEM_ERROR_MODIFY'                         => 'Ошибка сохранения данных элемента',
 
 	# Success messages
 

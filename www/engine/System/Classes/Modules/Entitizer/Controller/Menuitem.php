@@ -13,11 +13,9 @@ namespace System\Modules\Entitizer\Controller {
 			$this->entity = Entitizer::menuitem($id);
 		}
 
-		# Create menuitem
+		# Process post data
 
-		public function create($post) {
-
-			if (0 !== $this->entity->id) return true;
+		public function process($post) {
 
 			# Declare variables
 
@@ -27,7 +25,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			extract($post);
 
-			# Create menuitem
+			# Modify menuitem
 
 			$data = [];
 
@@ -37,38 +35,9 @@ namespace System\Modules\Entitizer\Controller {
 			$data['target']             = $target;
 			$data['position']           = $position;
 
-			if (!$this->entity->create($data)) return 'MENUITEM_ERROR_CREATE';
+			$modifier = ((0 === $this->entity->id) ? 'create' : 'edit');
 
-			# ------------------------
-
-			return true;
-		}
-
-		# Edit menuitem
-
-		public function edit($post) {
-
-			if (0 === $this->entity->id) return false;
-
-			# Declare variables
-
-			$parent_id = null; $text = null; $link = null; $target = null; $position = null;
-
-			# Extract post array
-
-			extract($post);
-
-			# Edit menuitem
-
-			$data = [];
-
-			$data['parent_id']          = $parent_id;
-			$data['text']               = $text;
-			$data['link']               = $link;
-			$data['target']             = $target;
-			$data['position']           = $position;
-
-			if (!$this->entity->edit($data)) return 'MENUITEM_ERROR_EDIT';
+			if (!call_user_func([$this->entity, $modifier], $data)) return 'MENUITEM_ERROR_MODIFY';
 
 			# ------------------------
 
