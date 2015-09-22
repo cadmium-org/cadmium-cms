@@ -16,6 +16,7 @@ namespace System\Modules\Entitizer\Definition {
 
 			$this->range        ('visibility', VISIBILITY_DRAFT, true);
             $this->range        ('access', ACCESS_PUBLIC, true);
+			$this->unique       ('hash');
             $this->varchar      ('name', null, true);
             $this->varchar      ('title', null, true);
             $this->text         ('contents');

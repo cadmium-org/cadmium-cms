@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Utils {
 
-	use System\Modules\Entitizer, DB, Language;
+	use System\Modules\Entitizer, Arr, DB, Language;
 
 	abstract class Tables {
 
@@ -22,6 +22,8 @@ namespace System\Modules\Install\Utils {
 
 			$pages[] = ['visibility' => VISIBILITY_PUBLISHED,
 
+				'hash' => Arr::encode(['index', 0]),
+
 				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
 				'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
@@ -29,6 +31,8 @@ namespace System\Modules\Install\Utils {
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
 			for ($i = 1; $i <= 3; $i++) $pages[] = ['visibility' => VISIBILITY_PUBLISHED,
+
+				'hash' => Arr::encode([('page-' . $i), 0]),
 
 				'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
 
