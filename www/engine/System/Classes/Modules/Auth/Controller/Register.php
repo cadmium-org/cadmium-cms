@@ -38,13 +38,13 @@ namespace System\Modules\Auth\Controller {
 
 			# Check name exists
 
-			if (false === ($check_name = $user->checkName($name))) return 'USER_ERROR_AUTH_REGISTER';
+			if (false === ($check_name = $user->check('name', $name))) return 'USER_ERROR_AUTH_REGISTER';
 
 			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			if (false === ($check_email = $user->checkEmail($email))) return 'USER_ERROR_AUTH_REGISTER';
+			if (false === ($check_email = $user->check('email', $email))) return 'USER_ERROR_AUTH_REGISTER';
 
 			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 

@@ -106,7 +106,7 @@ namespace System\Modules\Entitizer\Utils {
 
             $set = array_merge($this->getStatements('fieldStatement'), $this->getStatements('keyStatement'));
 
-            $query = ("CREATE TABLE IF NOT EXISTS `" . self::$table . "`") .
+            $query = ("CREATE TABLE IF NOT EXISTS `" . static::$table . "`") .
 
                      ("(" . implode(", ", $set) . ") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
