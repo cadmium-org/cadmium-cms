@@ -73,5 +73,12 @@ namespace {
 
 		    return $array[array_rand($array)];
 		}
+
+		# Encode array
+
+		public static function encode(array $array) {
+
+			return String::encode(serialize($array));
+		}
 	}
 }
