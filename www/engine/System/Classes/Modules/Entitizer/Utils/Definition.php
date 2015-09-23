@@ -28,14 +28,16 @@ namespace System\Modules\Entitizer\Utils {
 				if (false !== ($statement = call_user_func([$param, $method]))) $statements[] = $statement;
 			}
 
+			# ------------------------
+
 			return $statements;
 		}
 
 		# Add relation param
 
-        protected function relation($name, $type) {
+        protected function relation($name) {
 
-			$this->addParam(new Param\Type\Relation($name, $type));
+			$this->addParam(new Param\Type\Relation($name));
         }
 
 		# Add boolean param
@@ -93,7 +95,7 @@ namespace System\Modules\Entitizer\Utils {
 
             $this->id = new Param\Type\Id('id', static::$auto_increment);
 
-			if (static::$nesting) $this->relation('parent_id', static::$type);
+			if (static::$nesting) $this->relation('parent_id');
 
 			# ------------------------
 
@@ -115,7 +117,7 @@ namespace System\Modules\Entitizer\Utils {
             return (DB::send($query) && DB::last()->status);
 		}
 
-		# Return id
+		# Return id param
 
 		public function id() {
 
@@ -131,11 +133,15 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Return param by name
 
-        public function get($name = null) {
+        public function get($name) {
 
 			$name = strval($name);
 
 			return (isset($this->params[$name]) ? $this->params[$name] : false);
         }
+
+		# Definer interface
+
+		abstract protected function define();
     }
 }

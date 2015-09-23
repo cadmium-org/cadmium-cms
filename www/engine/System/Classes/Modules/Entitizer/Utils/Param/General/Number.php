@@ -10,14 +10,14 @@ namespace System\Modules\Entitizer\Utils\Param\General {
 
         public function __construct($name) {
 
-            $this->name = strval($name); $this->value = 0;
+            $this->name = strval($name);
         }
 
-        # Set value
+        # Validate value
 
-        public function set($value) {
+        public function validate($value) {
 
-            return ($this->value = intabs($value));
+            return intabs($value);
         }
     }
 }

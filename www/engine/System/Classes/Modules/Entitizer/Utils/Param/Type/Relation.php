@@ -6,22 +6,11 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
 
 	class Relation extends Entitizer\Utils\Param\General\Number {
 
-        private $type = '';
-
         # Constructor
 
-        public function __construct($name, $type) {
+        public function __construct($name) {
 
             parent::__construct($name);
-
-            $this->type = strval($type);
-        }
-
-        # Get entity
-
-        public function entity() {
-
-            return Entitizer::create($this->type, $this->value);
         }
 
         # Get field statement

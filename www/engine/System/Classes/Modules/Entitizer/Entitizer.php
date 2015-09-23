@@ -8,50 +8,50 @@ namespace System\Modules {
 
         const ERROR_TYPE            = 'Invalid entity type';
         const ERROR_DEFINITION      = 'Entity definition does not exists';
-		const ERROR_LISTER          = 'Entities lister does not exists';
+		const ERROR_LISTER          = 'Entity lister does not exists';
         const ERROR_CONTROLLER      = 'Entity controller does not exists';
 
         private static $cache = [];
 
         # Registred types
 
-        private static $types = array (
+        private static $types = [
 
             ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Entity\Page',
             ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Entity\Menuitem',
             ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Entity\User',
             ENTITY_TYPE_USER_SECRET         => 'System\Modules\Entitizer\Entity\User\Secret',
             ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Entity\User\Session'
-        );
+        ];
 
         # Definitions
 
-        private static $definitions = array (
+        private static $definitions = [
 
             ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Definition\Page',
             ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Definition\Menuitem',
             ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Definition\User',
             ENTITY_TYPE_USER_SECRET         => 'System\Modules\Entitizer\Definition\User\Secret',
             ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Definition\User\Session'
-        );
+        ];
 
 		# Listers
 
-        private static $listers = array (
+        private static $listers = [
 
             ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Lister\Pages',
             ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Lister\Menuitems',
             ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Lister\Users'
-        );
+        ];
 
         # Controlles
 
-        private static $controllers = array (
+        private static $controllers = [
 
             ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Controller\Page',
             ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Controller\Menuitem',
             ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Controller\User'
-        );
+        ];
 
         # Create new entity
 
@@ -59,12 +59,9 @@ namespace System\Modules {
 
             $type = strval($type); $id = intabs($id);
 
-            if (!isset(self::$types[$type]) || !class_exists(self::$types[$type])) {
+            if (!isset(self::$types[$type])) throw new Error\General(self::ERROR_TYPE);
 
-                throw new Error\General(self::ERROR_TYPE);
-            }
-
-            if ((0 !== $id) && isset(self::$cache[$type][$id]) && (0 !== self::$cache[$type][$id]->id)) return self::$cache[$type][$id];
+            if (isset(self::$cache[$type][$id]) && (0 !== self::$cache[$type][$id]->id)) return self::$cache[$type][$id];
 
             $entity = new self::$types[$type]; $entity->init($id);
 
@@ -79,24 +76,22 @@ namespace System\Modules {
 
             $type = strval($type);
 
-            if (!isset(self::$definitions[$type]) || !class_exists(self::$definitions[$type])) {
+            if (!isset(self::$definitions[$type])) throw new Error\General(self::ERROR_DEFINITION);
 
-                throw new Error\General(self::ERROR_DEFINITION);
-            }
+			# ------------------------
 
             return new self::$definitions[$type];
         }
 
-		# Create new entities lister
+		# Create new entity lister
 
         public static function lister($type) {
 
             $type = strval($type);
 
-            if (!isset(self::$listers[$type]) || !class_exists(self::$listers[$type])) {
+            if (!isset(self::$listers[$type])) throw new Error\General(self::ERROR_LISTER);
 
-                throw new Error\General(self::ERROR_LISTER);
-            }
+			# ------------------------
 
             return new self::$listers[$type];
         }
@@ -107,10 +102,9 @@ namespace System\Modules {
 
             $type = strval($type); $id = intabs($id);
 
-            if (!isset(self::$controllers[$type]) || !class_exists(self::$controllers[$type])) {
+            if (!isset(self::$controllers[$type])) throw new Error\General(self::ERROR_CONTROLLER);
 
-                throw new Error\General(self::ERROR_CONTROLLER);
-            }
+			# ------------------------
 
             return new self::$controllers[$type]($id);
         }

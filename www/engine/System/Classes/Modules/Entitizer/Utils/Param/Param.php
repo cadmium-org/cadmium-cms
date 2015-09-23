@@ -4,7 +4,7 @@ namespace System\Modules\Entitizer\Utils {
 
 	abstract class Param {
 
-        protected $name = '', $value = null;
+        protected $name = '';
 
 		# Return name
 
@@ -13,20 +13,13 @@ namespace System\Modules\Entitizer\Utils {
             return $this->name;
         }
 
-		# Return value
-
-        public function value() {
-
-            return $this->value;
-        }
-
 		# Constructor interface
 
 		abstract public function __construct($name);
 
-		# Setter interface
+		# Validator interface
 
-		abstract public function set($value);
+		abstract public function validate($value);
 
 		# Field statement getter interface
 

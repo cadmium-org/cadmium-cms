@@ -69,9 +69,9 @@ namespace System\Modules\Entitizer\Utils {
 
 			while (null !== ($row = DB::last()->row())) {
 
-                $item = ['id' => $definition->id()->set($row['id'])];
+                $item = ['id' => $definition->id()->validate($row['id'])];
 
-                foreach ($params as $name => $param) $item[$name] = $param->set($row[$name]);
+                foreach ($params as $name => $param) $item[$name] = $param->validate($row[$name]);
 
                 if (static::$nesting) $item['children'] = intabs($row['children']);
 
