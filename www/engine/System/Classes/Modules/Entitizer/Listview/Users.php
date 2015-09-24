@@ -26,7 +26,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Add additional data for specific entity
 
-		protected function processEntity(Template\Utils\Block $contents) {}
+		protected function processEntity() {}
 
 		# Add item additional data
 
