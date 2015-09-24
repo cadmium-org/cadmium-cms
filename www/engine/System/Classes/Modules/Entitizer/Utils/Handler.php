@@ -106,7 +106,7 @@ namespace System\Modules\Entitizer\Utils {
 
             # Process remove action
 
-            if ($post['action'] == 'remove') if (!$this->entity->remove()) return Ajax::error();
+            if ($post['action'] == 'remove') if (!$this->entity->remove()) return $ajax->error();
 
             # ------------------------
 
