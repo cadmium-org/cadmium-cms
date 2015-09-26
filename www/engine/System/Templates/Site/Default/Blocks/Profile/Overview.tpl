@@ -40,18 +40,6 @@
 
 			</tr>
 
-			{ block:full_name }
-
-			<tr>
-
-				<td class="four wide">%PROFILE_OVERVIEW_FULL_NAME%</td>
-
-				<td>$text$</td>
-
-			</tr>
-
-			{ / block:full_name }
-
 			{ block:sex }
 
 			<tr>
@@ -63,6 +51,18 @@
 			</tr>
 
 			{ / block:sex }
+
+			{ block:full_name }
+
+			<tr>
+
+				<td class="four wide">%PROFILE_OVERVIEW_FULL_NAME%</td>
+
+				<td>$text$</td>
+
+			</tr>
+
+			{ / block:full_name }
 
 			{ block:city }
 

@@ -19,8 +19,8 @@ return array (
 	'PROFILE_OVERVIEW_EMAIL'                    => 'E-mail',
 	'PROFILE_OVERVIEW_RANK'                     => 'Ранг',
 	'PROFILE_OVERVIEW_TIME'                     => 'Зарегистрирован',
-	'PROFILE_OVERVIEW_FULL_NAME'                => 'Полное имя',
 	'PROFILE_OVERVIEW_SEX'                      => 'Пол',
+	'PROFILE_OVERVIEW_FULL_NAME'                => 'Полное имя',
 	'PROFILE_OVERVIEW_CITY'                     => 'Город',
 	'PROFILE_OVERVIEW_COUNTRY'                  => 'Страна',
 

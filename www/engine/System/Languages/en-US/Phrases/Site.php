@@ -19,8 +19,8 @@ return array (
 	'PROFILE_OVERVIEW_EMAIL'                    => 'E-mail',
 	'PROFILE_OVERVIEW_RANK'                     => 'Rank',
 	'PROFILE_OVERVIEW_TIME'                     => 'Registered',
-	'PROFILE_OVERVIEW_FULL_NAME'                => 'Full name',
 	'PROFILE_OVERVIEW_SEX'                      => 'Sex',
+	'PROFILE_OVERVIEW_FULL_NAME'                => 'Full name',
 	'PROFILE_OVERVIEW_CITY'                     => 'City',
 	'PROFILE_OVERVIEW_COUNTRY'                  => 'Country',
 

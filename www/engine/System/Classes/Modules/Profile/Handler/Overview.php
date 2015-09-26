@@ -22,27 +22,22 @@ namespace System\Modules\Profile\Handler {
 
 			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->time_registered);
 
-			# Set full name
-
-			if (!($full_name = Auth::user()->full_name)) $contents->block('full_name')->disable();
-
-			else $contents->block('full_name')->text = $full_name;
-
 			# Set sex
 
-			if (!($sex = Auth::user()->sex)) $contents->block('sex')->disable();
+			$contents->block('sex')->text = Lister\Sex::get(Auth::user()->sex);
 
-			else $contents->block('sex')->text = Lister\Sex::get($sex);
+			# Set full name & city
 
-			# Set city
+			foreach (['full_name', 'city'] as $name) {
 
-			if (!($city = Auth::user()->city)) $contents->block('city')->disable();
+				if ('' === ($text = Auth::user()->$name)) $contents->block($name)->disable();
 
-			else $contents->block('city')->text = $city;
+				else $contents->block($name)->text = $text;
+			}
 
 			# Set country
 
-			if (!($country = Auth::user()->country)) $contents->block('country')->disable(); else {
+			if ('' === ($country = Auth::user()->country)) $contents->block('country')->disable(); else {
 
 				$contents->block('country')->code = $country;
 
