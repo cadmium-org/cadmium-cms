@@ -1,47 +1,41 @@
-<div class="ui left aligned segment">
+<form class="ui form" method="post" action="/install.php?checked=1">
 
-	<form class="ui form" method="post" action="/install.php?checked=1">
+	<div class="field">
 
-		<h4 class="ui dividing header">%TITLE_INSTALL_DATABASE%</h4>
+		<label for="install-database-server">%INSTALL_FIELD_DATABASE_SERVER%</label>
 
-		<div class="field">
+		{ block:field_database_server / }
 
-            <label for="install-database-server">%INSTALL_FIELD_DATABASE_SERVER%</label>
+	</div>
 
-			{ block:field_database_server / }
+	<div class="field">
 
-		</div>
+		<label for="install-database-user">%INSTALL_FIELD_DATABASE_USER%</label>
 
-		<div class="field">
+		{ block:field_database_user / }
 
-            <label for="install-database-user">%INSTALL_FIELD_DATABASE_USER%</label>
+	</div>
 
-			{ block:field_database_user / }
+	<div class="field">
 
-		</div>
+		<label for="install-database-password">%INSTALL_FIELD_DATABASE_PASSWORD%</label>
 
-		<div class="field">
+		{ block:field_database_password / }
 
-            <label for="install-database-password">%INSTALL_FIELD_DATABASE_PASSWORD%</label>
+	</div>
 
-			{ block:field_database_password / }
+	<div class="field">
 
-		</div>
+		<label for="install-database-name">%INSTALL_FIELD_DATABASE_NAME%</label>
 
-		<div class="field">
+		{ block:field_database_name / }
 
-            <label for="install-database-name">%INSTALL_FIELD_DATABASE_NAME%</label>
+	</div>
 
-			{ block:field_database_name / }
+	<div class="field">
 
-		</div>
+		<input class="ui fluid teal button" type="submit" value="%SUBMIT%" />
 
-		<div class="field">
+	</div>
 
-			<input class="ui fluid teal button" type="submit" value="%SUBMIT%" />
-
-		</div>
-
-	</form>
-
-</div>
+</form>

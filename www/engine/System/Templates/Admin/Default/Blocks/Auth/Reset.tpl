@@ -1,55 +1,51 @@
-<div class="ui segment">
+<form class="ui form" method="post" action="/admin/reset" autocomplete="off">
 
-	<form class="ui form" method="post" action="/admin/reset" autocomplete="off">
+	<div class="field">
 
-		<div class="field">
+		<div class="ui left icon input">
 
-			<div class="ui left icon input">
+			{ block:field_reset_name / }
 
-				{ block:field_reset_name / }
-
-				<i class="user icon"></i>
-
-			</div>
+			<i class="user icon"></i>
 
 		</div>
 
-		<div class="field">
+	</div>
 
-			<div class="ui left icon input">
+	<div class="field">
 
-				{ block:field_reset_captcha / }
+		<div class="ui left icon input">
 
-				<i class="protect icon"></i>
+			{ block:field_reset_captcha / }
 
-			</div>
-
-		</div>
-
-		<div class="field">
-
-			<a class="ui fluid labeled icon basic button" id="captcha">
-
-				<i class="refresh icon"></i>
-
-				<img class="ui centered image" width="150" height="40" src="/captcha.png" />
-
-			</a>
+			<i class="protect icon"></i>
 
 		</div>
 
-		<div class="field">
+	</div>
 
-			<input class="ui fluid teal button" type="submit" value="%RESET%" />
+	<div class="field">
 
-		</div>
+		<a class="ui fluid labeled icon basic button" id="captcha">
 
-		<div class="field">
+			<i class="refresh icon"></i>
 
-			<a class="ui fluid basic button" href="/admin/login">%LOGIN%</a>
+			<img class="ui centered image" width="150" height="40" src="/captcha.png" />
 
-		</div>
+		</a>
 
-	</form>
+	</div>
 
-</div>
+	<div class="field">
+
+		<input class="ui fluid teal button" type="submit" value="%RESET%" />
+
+	</div>
+
+	<div class="field">
+
+		<a class="ui fluid basic button" href="/admin/login">%LOGIN%</a>
+
+	</div>
+
+</form>

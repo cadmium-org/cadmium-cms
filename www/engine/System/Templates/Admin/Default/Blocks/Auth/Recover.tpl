@@ -1,37 +1,33 @@
-<div class="ui segment">
+<form class="ui form" method="post" action="/admin/recover?code=$code$" autocomplete="off">
 
-	<form class="ui form" method="post" action="/admin/recover?code=$code$" autocomplete="off">
+	<div class="field">
 
-		<div class="field">
+		<div class="ui left icon input">
 
-			<div class="ui left icon input">
+			{ block:field_recover_password_new / }
 
-				{ block:field_recover_password_new / }
-
-				<i class="privacy icon"></i>
-
-			</div>
+			<i class="privacy icon"></i>
 
 		</div>
 
-		<div class="field">
+	</div>
 
-			<div class="ui left icon input">
+	<div class="field">
 
-				{ block:field_recover_password_retype / }
+		<div class="ui left icon input">
 
-				<i class="privacy icon"></i>
+			{ block:field_recover_password_retype / }
 
-			</div>
-
-		</div>
-
-		<div class="field">
-
-			<input class="ui fluid teal button" type="submit" value="%SUBMIT%" />
+			<i class="privacy icon"></i>
 
 		</div>
 
-	</form>
+	</div>
 
-</div>
+	<div class="field">
+
+		<input class="ui fluid teal button" type="submit" value="%SUBMIT%" />
+
+	</div>
+
+</form>

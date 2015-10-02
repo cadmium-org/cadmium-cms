@@ -1,43 +1,39 @@
-<div class="ui segment">
+<form class="ui form" method="post" action="/admin/login" autocomplete="off">
 
-	<form class="ui form" method="post" action="/admin/login" autocomplete="off">
+	<div class="field">
 
-		<div class="field">
+		<div class="ui left icon input">
 
-			<div class="ui left icon input">
+			{ block:field_login_name / }
 
-				{ block:field_login_name / }
-
-				<i class="user icon"></i>
-
-			</div>
+			<i class="user icon"></i>
 
 		</div>
 
-		<div class="field">
+	</div>
 
-			<div class="ui left icon input">
+	<div class="field">
 
-				{ block:field_login_password / }
+		<div class="ui left icon input">
 
-				<i class="lock icon"></i>
+			{ block:field_login_password / }
 
-			</div>
-
-		</div>
-
-		<div class="field">
-
-			<input class="ui fluid teal button" type="submit" value="%LOGIN%" />
+			<i class="lock icon"></i>
 
 		</div>
 
-		<div class="field">
+	</div>
 
-			<a class="ui fluid basic button" href="/admin/reset">%RESET%</a>
+	<div class="field">
 
-		</div>
+		<input class="ui fluid teal button" type="submit" value="%LOGIN%" />
 
-	</form>
+	</div>
 
-</div>
+	<div class="field">
+
+		<a class="ui fluid basic button" href="/admin/reset">%RESET%</a>
+
+	</div>
+
+</form>

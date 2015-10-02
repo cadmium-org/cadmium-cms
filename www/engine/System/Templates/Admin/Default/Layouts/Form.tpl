@@ -10,7 +10,13 @@
 
 		{ block:messages / }
 
-		{ block:contents / }
+		<div class="ui left aligned segment">
+
+			<h4 class="ui dividing header">$title$</h4>
+
+			{ block:contents / }
+
+		</div>
 
 	</div>
 
