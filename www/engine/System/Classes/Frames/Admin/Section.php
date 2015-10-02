@@ -42,6 +42,10 @@ namespace System\Frames\Admin {
 
 			$layout->messages = Messages::block();
 
+			# Set title
+
+			$layout->title = $this->title;
+
 			# Set contents
 
 			$layout->contents = $contents;
