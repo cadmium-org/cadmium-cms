@@ -37,7 +37,7 @@ namespace {
 
 		public static function send($query) {
 
-			if (false === self::$link) return false;
+			if (false === self::$link) return (self::$last = false);
 
 			$query = strval($query);
 
