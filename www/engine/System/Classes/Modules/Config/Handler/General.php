@@ -4,7 +4,7 @@ namespace System\Modules\Config\Handler {
 
 	use System\Modules\Config, System\Utils\Messages, System\Utils\View, Language, Request;
 
-	class Settings {
+	class General {
 
 		private $form = null;
 
@@ -27,11 +27,11 @@ namespace System\Modules\Config\Handler {
 
 			# Create form
 
-			$this->form = new Config\Form\Settings();
+			$this->form = new Config\Form\General();
 
 			# Submit form
 
-			if ($this->form->submit(array('System\Modules\Config\Controller\Settings', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Config\Controller\General', 'process'))) {
 
 				Request::redirect('/admin/system/settings?submitted');
 

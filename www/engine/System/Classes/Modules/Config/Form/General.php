@@ -4,7 +4,7 @@ namespace System\Modules\Config\Form {
 
 	use System\Modules\Config, System\Utils\Form, System\Utils\Lister, Geo\Timezone;
 
-	class Settings extends Form {
+	class General extends Form {
 
         # Constructor
 

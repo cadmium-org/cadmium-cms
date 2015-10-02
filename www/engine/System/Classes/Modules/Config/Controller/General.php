@@ -4,7 +4,7 @@ namespace System\Modules\Config\Controller {
 
 	use System\Modules\Config;
 
-	abstract class Settings {
+	abstract class General {
 
 		# Process post data
 
