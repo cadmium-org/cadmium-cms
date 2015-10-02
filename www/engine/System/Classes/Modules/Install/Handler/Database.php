@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Handler {
 
-	use System\Modules\Install as Module, System\Utils\Messages, System\Utils\View, Language, Request;
+	use System\Modules\Install, System\Utils\Messages, System\Utils\View, Language, Request;
 
 	class Database {
 
@@ -29,7 +29,7 @@ namespace System\Modules\Install\Handler {
 
 			# Create form
 
-			$this->form = new Module\Form\Database();
+			$this->form = new Install\Form\Database();
 
 			# Submit form
 

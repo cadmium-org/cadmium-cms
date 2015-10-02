@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Controller {
 
-	use Error, System\Modules\Install as Module, DB, Explorer;
+	use Error, System\Modules\Install, DB, Explorer;
 
 	abstract class Database {
 
@@ -28,11 +28,11 @@ namespace System\Modules\Install\Controller {
 
             # Create tables
 
-            if (!Module\Utils\Tables::create()) return 'INSTALL_ERROR_DATABASE_TABLES_CREATE';
+            if (!Install\Utils\Tables::create()) return 'INSTALL_ERROR_DATABASE_TABLES_CREATE';
 
             # Fill tables
 
-            if (!Module\Utils\Tables::fill()) return 'INSTALL_ERROR_DATABASE_TABLES_FILL';
+            if (!Install\Utils\Tables::fill()) return 'INSTALL_ERROR_DATABASE_TABLES_FILL';
 
             # Save system file
 
