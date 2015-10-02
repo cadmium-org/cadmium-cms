@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth as Module, System\Modules\Entitizer, DB, Session, String;
+	use System\Modules\Auth, System\Modules\Entitizer, DB, Session, String;
 
 	abstract class Login {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Controller {
 
 		public static function process(array $post) {
 
-			if (Module::check()) return true;
+			if (Auth::check()) return true;
 
 			# Declare variables
 
@@ -22,9 +22,9 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Module\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($password = Module\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
 			# Create user object
 
@@ -34,7 +34,7 @@ namespace System\Modules\Auth\Controller {
 
 			if (!$user->init($name, 'name')) return 'USER_ERROR_NAME_INCORRECT';
 
-			if (Module::admin() && ($user->rank < RANK_ADMINISTRATOR)) return 'USER_ERROR_NAME_INCORRECT';
+			if (Auth::admin() && ($user->rank < RANK_ADMINISTRATOR)) return 'USER_ERROR_NAME_INCORRECT';
 
 			# Check password
 
@@ -44,7 +44,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Check access
 
-			if (!Module::admin() && ($user->rank === RANK_GUEST)) return 'USER_ERROR_ACCESS';
+			if (!Auth::admin() && ($user->rank === RANK_GUEST)) return 'USER_ERROR_ACCESS';
 
 			# Create session
 

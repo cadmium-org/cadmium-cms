@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth as Module, System\Modules\Entitizer, DB, String;
+	use System\Modules\Auth, System\Modules\Entitizer, DB, String;
 
 	abstract class Recover {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Controller {
 
 		public static function process(array $post) {
 
-			if (!Module::check()) return false;
+			if (!Auth::check()) return false;
 
 			# Declare variables
 
@@ -22,7 +22,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($password_new = Module\Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
+			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
 
 			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 
@@ -34,11 +34,11 @@ namespace System\Modules\Auth\Controller {
 
 			$data = array('auth_key' => $auth_key, 'password' => $password);
 
-			if (!Module::user()->edit($data)) return 'USER_ERROR_AUTH_RECOVER';
+			if (!Auth::user()->edit($data)) return 'USER_ERROR_AUTH_RECOVER';
 
 			# Remove secret
 
-			Entitizer::userSecret(Module::user()->id)->remove();
+			Entitizer::userSecret(Auth::user()->id)->remove();
 
 			# ------------------------
 

@@ -2,9 +2,9 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth as Module, System\Utils\Messages, Language, Request;
+	use System\Modules\Auth, System\Utils\Messages, Language, Request;
 
-	class Reset extends Module\Utils\Handler {
+	class Reset extends Auth\Utils\Handler {
 
 		protected $view = 'Blocks\Auth\Reset';
 
@@ -14,13 +14,13 @@ namespace System\Modules\Auth\Handler {
 
 			# Create form
 
-			$this->form = new Module\Form\Reset();
+			$this->form = new Auth\Form\Reset();
 
 			# Submit form
 
 			if ($this->form->submit(array('System\Modules\Auth\Controller\Reset', 'process'))) {
 
-				Request::redirect((Module::admin() ? '/admin' : '/profile') . '/reset?submitted');
+				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset?submitted');
 
 			} else if (null !== Request::get('submitted')) {
 
