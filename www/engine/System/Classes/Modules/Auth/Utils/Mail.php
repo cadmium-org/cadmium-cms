@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Utils {
 
-	use System\Modules\Auth, System\Modules\Config, System\Utils\View, Date, Language, Mailer;
+	use System\Modules\Auth, System\Modules\Settings, System\Utils\View, Date, Language, Mailer;
 
 	abstract class Mail {
 
@@ -12,19 +12,19 @@ namespace System\Modules\Auth\Utils {
 
 			$message = View::get($view);
 
-			$message->site_title = Config::get('site_title');
+			$message->site_title = Settings::get('site_title');
 
-			$message->system_url = Config::get('system_url');
+			$message->system_url = Settings::get('system_url');
 
 			$message->name = Auth::user()->name; $message->link = $link;
 
-			$message->system_email = Config::get('system_email'); $message->copyright = Date::year();
+			$message->system_email = Settings::get('system_email'); $message->copyright = Date::year();
 
 			# ------------------------
 
-			$to = Auth::user()->email; $sender = Config::get('site_title'); $reply_to = Config::get('system_email');
+			$to = Auth::user()->email; $sender = Settings::get('site_title'); $reply_to = Settings::get('system_email');
 
-			$from = ((false !== ($host = parse_url(Config::get('system_url'), PHP_URL_HOST))) ? ('noreply@' . $host) : '');
+			$from = ((false !== ($host = parse_url(Settings::get('system_url'), PHP_URL_HOST))) ? ('noreply@' . $host) : '');
 
 			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(true), true);
 		}
@@ -33,7 +33,7 @@ namespace System\Modules\Auth\Utils {
 
 		public static function reset($code) {
 
-			$link = (Config::get('system_url') . (Auth::admin() ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
+			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
 
 			return self::send('Blocks\Auth\Mail\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
 		}
@@ -42,7 +42,7 @@ namespace System\Modules\Auth\Utils {
 
 		public static function register() {
 
-			$link = (Config::get('system_url') . (Auth::admin() ? '/admin' : '/profile'));
+			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile'));
 
 			return self::send('Blocks\Auth\Mail\Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
 		}

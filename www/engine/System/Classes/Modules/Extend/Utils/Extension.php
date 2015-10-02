@@ -2,7 +2,7 @@
 
 namespace System\Modules\Extend\Utils {
 
-    use Error, System\Modules\Config, Cookie, Explorer, Request;
+    use Error, System\Modules\Settings, Cookie, Explorer, Request;
 
     trait Extension {
 
@@ -122,7 +122,7 @@ namespace System\Modules\Extend\Utils {
 
 			if ($selectable && (false !== ($name = self::getUserDefined()))) $name_valid = true;
 
-			else $name_valid = (self::exists($name = Config::get($param)) || self::exists($name = $default));
+			else $name_valid = (self::exists($name = Settings::get($param)) || self::exists($name = $default));
 
 			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Error\General(self::$error_select);
 

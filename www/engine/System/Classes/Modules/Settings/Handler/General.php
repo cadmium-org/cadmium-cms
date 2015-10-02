@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Config\Handler {
+namespace System\Modules\Settings\Handler {
 
-	use System\Modules\Config, System\Utils\Messages, System\Utils\View, Language, Request;
+	use System\Modules\Settings, System\Utils\Messages, System\Utils\View, Language, Request;
 
 	class General {
 
@@ -12,7 +12,7 @@ namespace System\Modules\Config\Handler {
 
 		public function getContents() {
 
-			$contents = View::get('Blocks\Config\Settings');
+			$contents = View::get('Blocks\Settings\General');
 
 			$this->form->implement($contents);
 
@@ -27,11 +27,11 @@ namespace System\Modules\Config\Handler {
 
 			# Create form
 
-			$this->form = new Config\Form\General();
+			$this->form = new Settings\Form\General();
 
 			# Submit form
 
-			if ($this->form->submit(array('System\Modules\Config\Controller\General', 'process'))) {
+			if ($this->form->submit(array('System\Modules\Settings\Controller\General', 'process'))) {
 
 				Request::redirect('/admin/system/settings?submitted');
 

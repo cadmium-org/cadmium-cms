@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Config\Controller {
+namespace System\Modules\Settings\Controller {
 
-	use System\Modules\Config;
+	use System\Modules\Settings;
 
 	abstract class General {
 
@@ -19,12 +19,12 @@ namespace System\Modules\Config\Controller {
 
 			foreach ($post as $name => $value) {
 
-				if (!Config::set($name, $value)) return (isset($errors[$name]) ? $errors[$name] : false);
+				if (!Settings::set($name, $value)) return (isset($errors[$name]) ? $errors[$name] : false);
 			}
 
-			# Save configuration
+			# Save settings
 
-			if (!Config::save()) return 'SETTINGS_ERROR_SAVE';
+			if (!Settings::save()) return 'SETTINGS_ERROR_SAVE';
 
 			# ------------------------
 

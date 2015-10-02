@@ -2,7 +2,7 @@
 
 namespace System\Frames {
 
-	use System\Modules\Extend, System\Modules\Config, System\Utils\View, Date, Language, Template;
+	use System\Modules\Extend, System\Modules\Settings, System\Utils\View, Date, Language, Template;
 
 	abstract class Status  {
 
@@ -18,9 +18,9 @@ namespace System\Frames {
 
 			$status->title = Language::get($title);
 
-			$status->system_url = Config::get('system_url');
+			$status->system_url = Settings::get('system_url');
 
-			$status->site_title = Config::get('site_title');
+			$status->site_title = Settings::get('site_title');
 
 			$status->copyright = Date::year();
 

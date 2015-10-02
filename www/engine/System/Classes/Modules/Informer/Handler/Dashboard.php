@@ -2,7 +2,7 @@
 
 namespace System\Modules\Informer\Handler {
 
-	use System\Modules\Config, System\Modules\Informer, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
+	use System\Modules\Informer, System\Modules\Settings, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
 
 	class Dashboard {
 
@@ -14,13 +14,13 @@ namespace System\Modules\Informer\Handler {
 
 			# Set general entries
 
-			$contents->site_title           = Config::get('site_title');
+			$contents->site_title           = Settings::get('site_title');
 
-			$contents->site_status          = Lister\Status::get(Config::get('site_status'));
+			$contents->site_status          = Lister\Status::get(Settings::get('site_status'));
 
-			$contents->system_url           = Config::get('system_url');
+			$contents->system_url           = Settings::get('system_url');
 
-			$contents->system_timezone      = Timezone::get(Config::get('system_timezone'));
+			$contents->system_timezone      = Timezone::get(Settings::get('system_timezone'));
 
 			# Set database entries
 
@@ -43,7 +43,7 @@ namespace System\Modules\Informer\Handler {
 
 			# Check if configuration file is loaded
 
-			if (!Config::loaded()) Messages::warning(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
+			if (!Settings::loaded()) Messages::warning(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
 
 			# ------------------------
 

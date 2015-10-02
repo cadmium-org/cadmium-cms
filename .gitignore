@@ -1,7 +1,7 @@
 /node_modules
 /semantic
 /semantic.json
-/www/engine/System/Data/Config.json
+/www/engine/System/Data/Settings.json
 /www/engine/System/Data/System.json
 /www/engine/System/Templates/Site/Cadmium
 /www/include/site/templates/cadmium

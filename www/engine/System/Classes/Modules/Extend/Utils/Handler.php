@@ -2,7 +2,7 @@
 
 namespace System\Modules\Extend\Utils {
 
-	use System\Modules\Config, System\Utils\View, Ajax, Arr, Form, Language, Request, Template;
+	use System\Modules\Settings, System\Utils\View, Ajax, Arr, Form, Language, Request, Template;
 
 	trait Handler {
 
@@ -21,7 +21,7 @@ namespace System\Modules\Extend\Utils {
 
 			$items = self::items($this->section); $active = key($items);
 
-            $name = Config::get(self::$param[$this->section]); $default = self::$default[$this->section];
+            $name = Settings::get(self::$param[$this->section]); $default = self::$default[$this->section];
 
 			if (self::valid($name) && isset($items[$name])) $active = $name;
 
@@ -103,9 +103,9 @@ namespace System\Modules\Extend\Utils {
 
 			$param = self::$param[$this->section];
 
-			if (false === Config::set($param, $post['name'])) return $ajax->error(Language::get(self::$error_name));
+			if (false === Settings::set($param, $post['name'])) return $ajax->error(Language::get(self::$error_name));
 
-			if (false === Config::save()) return $ajax->error(Language::get(self::$error_save));
+			if (false === Settings::save()) return $ajax->error(Language::get(self::$error_save));
 
 			# ------------------------
 

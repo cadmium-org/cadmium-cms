@@ -3,7 +3,7 @@
 namespace System\Frames\Site {
 
 	use System, System\Frames\Status;
-	use System\Modules\Auth, System\Modules\Config, System\Modules\Extend, System\Utils\Menu, System\Utils\Messages, System\Utils\View;
+	use System\Modules\Auth, System\Modules\Extend, System\Modules\Settings, System\Utils\Menu, System\Utils\Messages, System\Utils\View;
 	use Date, Request, Template;
 
 	abstract class Section extends System\Frames\Section {
@@ -38,7 +38,7 @@ namespace System\Frames\Site {
 
 			# Set auth
 
-			if (Config::get('users_registration')) {
+			if (Settings::get('users_registration')) {
 
 				if (!Auth::check()) $layout->block('auth')->enable(); else {
 
@@ -54,7 +54,7 @@ namespace System\Frames\Site {
 
 			# Set title
 
-			$layout->title = (('' !== $this->title) ? $this->title : Config::get('site_title'));
+			$layout->title = (('' !== $this->title) ? $this->title : Settings::get('site_title'));
 
 			# Set messages
 
@@ -66,9 +66,9 @@ namespace System\Frames\Site {
 
 			# Set footer
 
-			$layout->system_url = Config::get('system_url');
+			$layout->system_url = Settings::get('system_url');
 
-			$layout->site_title = Config::get('site_title');
+			$layout->site_title = Settings::get('site_title');
 
 			$layout->copyright = Date::year();
 
@@ -91,13 +91,13 @@ namespace System\Frames\Site {
 
 			# Set title
 
-			$page->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . Config::get('site_title'));
+			$page->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . Settings::get('site_title'));
 
 			# Set SEO data
 
-			$page->description = ('' !== $this->description) ? $this->description : Config::get('site_description');
+			$page->description = ('' !== $this->description) ? $this->description : Settings::get('site_description');
 
-			$page->keywords = ('' !== $this->keywords) ? $this->keywords : Config::get('site_keywords');
+			$page->keywords = ('' !== $this->keywords) ? $this->keywords : Settings::get('site_keywords');
 
 			$page->robots = (($this->robots_index ? 'INDEX' : 'NOINDEX') . ',' . ($this->robots_follow ? 'FOLLOW' : 'NOFOLLOW'));
 
@@ -105,7 +105,7 @@ namespace System\Frames\Site {
 
 			if ('' === $this->canonical) $page->block('canonical')->disable();
 
-			else $page->block('canonical')->link = (Config::get('system_url') . $this->canonical);
+			else $page->block('canonical')->link = (Settings::get('system_url') . $this->canonical);
 
 			# Set layout
 
@@ -122,15 +122,15 @@ namespace System\Frames\Site {
 
 			# Display status screen
 
-			if (Config::get('site_status') === STATUS_MAINTENANCE) return Status::maintenance();
+			if (Settings::get('site_status') === STATUS_MAINTENANCE) return Status::maintenance();
 
-			if (Config::get('site_status') === STATUS_UPDATE) return Status::update();
+			if (Settings::get('site_status') === STATUS_UPDATE) return Status::update();
 
 			# Handle request
 
 			if ($this instanceof Component\Profile) {
 
-				if (!Config::get('users_registration')) return Status::error404();
+				if (!Settings::get('users_registration')) return Status::error404();
 
 				if (($this instanceof Component\Profile\Auth)) { if (Auth::check()) Request::redirect('/profile'); }
 

@@ -2,7 +2,7 @@
 
 namespace System\Frames {
 
-	use System\Modules\Config, Session;
+	use System\Modules\Settings, Session;
 
 	abstract class Main {
 
@@ -20,11 +20,11 @@ namespace System\Frames {
 
 			# Init configuration
 
-            Config::init();
+            Settings::init();
 
 			# Set timezone
 
-			date_default_timezone_set(Config::get('system_timezone'));
+			date_default_timezone_set(Settings::get('system_timezone'));
 
 			# ------------------------
 

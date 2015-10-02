@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Tools {
 
-	use System, System\Modules\Config, System\Modules\Entitizer, System\Utils\Tools, Arr, Date, DB;
+	use System, System\Modules\Entitizer, System\Modules\Settings, System\Utils\Tools, Arr, Date, DB;
 
 	class Sitemap extends System\Frames\Tools\Sitemap {
 
@@ -46,7 +46,7 @@ namespace System\Handlers\Tools {
 
 			foreach ($this->getPages() as $page) {
 
-				$loc = (Config::get('system_url') . $page['canonical']);
+				$loc = (Settings::get('system_url') . $page['canonical']);
 
 				$lastmod = Date::get(DATE_FORMAT_W3C, $page['modified']);
 

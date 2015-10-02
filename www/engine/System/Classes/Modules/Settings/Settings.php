@@ -4,13 +4,13 @@ namespace System\Modules {
 
 	use System\Utils\Lister, Explorer, Geo\Timezone, String, Validate;
 
-	abstract class Config {
+	abstract class Settings {
 
 		private static $loaded = false;
 
-		# Configuration params
+		# Params
 
-		private static $config = [
+		private static $settings = [
 
 			'admin_language'        => CONFIG_ADMIN_LANGUAGE_DEFAULT,
 			'admin_template'        => CONFIG_ADMIN_TEMPLATE_DEFAULT,
@@ -32,37 +32,37 @@ namespace System\Modules {
 			'users_registration'    => false
 		];
 
-		# Init configuration
+		# Init settings
 
 		public static function init() {
 
-			$config_file = (DIR_SYSTEM_DATA . 'Config.json');
+			$settings_file = (DIR_SYSTEM_DATA . 'Settings.json');
 
-			self::$loaded = (false !== ($config = Explorer::json($config_file)));
+			self::$loaded = (false !== ($settings = Explorer::json($settings_file)));
 
-			if (self::$loaded) foreach ($config as $name => $value) self::set($name, $value);
+			if (self::$loaded) foreach ($settings as $name => $value) self::set($name, $value);
 
 			# ------------------------
 
 			return true;
 		}
 
-		# Save configuration
+		# Save settings
 
 		public static function save() {
 
-			$config_file = (DIR_SYSTEM_DATA . 'Config.json');
+			$settings_file = (DIR_SYSTEM_DATA . 'Settings.json');
 
-			if (false === ($config = json_encode(self::$config, JSON_PRETTY_PRINT))) return false;
+			if (false === ($settings = json_encode(self::$settings, JSON_PRETTY_PRINT))) return false;
 
-			if (false === Explorer::save($config_file, $config, true)) return false;
+			if (false === Explorer::save($settings_file, $settings, true)) return false;
 
 			# ------------------------
 
 			return true;
 		}
 
-		# Check if configuration file is loaded
+		# Check if settings file is loaded
 
 		public static function loaded() {
 
@@ -75,7 +75,7 @@ namespace System\Modules {
 
 			$name = strval($name);
 
-			if (!isset(self::$config[$name])) return false;
+			if (!isset(self::$settings[$name])) return false;
 
 			# Validate admin language
 
@@ -142,7 +142,7 @@ namespace System\Modules {
 
 			# Validate value
 
-			self::$config[$name] = $value;
+			self::$settings[$name] = $value;
 
 			# ------------------------
 
@@ -155,7 +155,7 @@ namespace System\Modules {
 
 			$name = strval($name);
 
-			return (isset(self::$config[$name]) ? self::$config[$name] : null);
+			return (isset(self::$settings[$name]) ? self::$settings[$name] : null);
 		}
 	}
 }
