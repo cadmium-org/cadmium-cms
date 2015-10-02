@@ -4,9 +4,9 @@
 
 	<div class="ui breadcrumb">
 
-        <a class="section" href="/admin/content/menuitems">%TITLE_CONTENT_MENUITEMS%</a>
+		<a class="section" href="/admin/content/menuitems">%TITLE_CONTENT_MENUITEMS%</a>
 
-        <i class="divider"> / </i>
+		<i class="divider"> / </i>
 
 		{ for:path }
 

@@ -4,9 +4,9 @@
 
 	<div class="ui breadcrumb">
 
-        <a class="section" href="/admin/content/pages">%TITLE_CONTENT_PAGES%</a>
+		<a class="section" href="/admin/content/pages">%TITLE_CONTENT_PAGES%</a>
 
-        <i class="divider"> / </i>
+		<i class="divider"> / </i>
 
 		{ for:path }
 
@@ -54,7 +54,7 @@
 
 		<div class="ui form">
 
-            { block:selector }
+			{ block:selector }
 
 			<div class="field">
 
@@ -90,7 +90,7 @@
 
 			</div>
 
-            <div class="field">
+			<div class="field">
 
 				<label for="page-visibility">%PAGE_FIELD_VISIBILITY%</label>
 
