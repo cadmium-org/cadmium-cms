@@ -10,9 +10,9 @@ namespace System\Handlers\Admin {
 
 		protected function handle() {
 
-			Modules\Auth::logout();
+			$logout = new Modules\Auth\Handler\Logout();
 
-			Request::redirect('/admin/login');
+			return $logout->handle();
 		}
 	}
 }

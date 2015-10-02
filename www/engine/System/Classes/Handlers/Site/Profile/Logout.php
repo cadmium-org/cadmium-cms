@@ -10,9 +10,9 @@ namespace System\Handlers\Site\Profile {
 
 		protected function handle() {
 
-			Modules\Auth::logout();
+			$logout = new Modules\Auth\Handler\Logout();
 
-			Request::redirect('/profile/login');
+			return $logout->handle();
 		}
 	}
 }
