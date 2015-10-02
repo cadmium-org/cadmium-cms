@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Form {
 
-	use System\Modules\Auth, System\Utils\Form, Language;
+	use System\Modules\Auth as Module, System\Utils\Form, Language;
 
 	class Reset extends Form {
 
@@ -16,11 +16,11 @@ namespace System\Modules\Auth\Form {
 
 			$this->input('name', '', FORM_INPUT_TEXT, CONFIG_USER_NAME_MAX_LENGTH,
 
-				(Auth::admin() ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
+				(Module::admin() ? Language::get('USER_FIELD_NAME') : ''), FORM_FIELD_REQUIRED);
 
 			$this->input('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
 
-				(Auth::admin() ? Language::get('USER_FIELD_CAPTCHA') : ''), FORM_FIELD_REQUIRED);
+				(Module::admin() ? Language::get('USER_FIELD_CAPTCHA') : ''), FORM_FIELD_REQUIRED);
 		}
 	}
 }

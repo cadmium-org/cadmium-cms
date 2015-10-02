@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB;
+	use System\Modules\Auth as Module, System\Modules\Entitizer, System\Utils\Security, DB;
 
 	abstract class Reset {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Controller {
 
 		public static function process(array $post) {
 
-			if (Auth::check()) return true;
+			if (Module::check()) return true;
 
 			# Declare variables
 
@@ -22,7 +22,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Module\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
 			if (false === Security::checkCaptcha($captcha)) return 'USER_ERROR_CAPTCHA_INCORRECT';
 
@@ -34,11 +34,11 @@ namespace System\Modules\Auth\Controller {
 
 			if (!$user->init($name, 'name')) return 'USER_ERROR_NAME_INCORRECT';
 
-			if (Auth::admin() && ($user->rank < RANK_ADMINISTRATOR)) return 'USER_ERROR_NAME_INCORRECT';
+			if (Module::admin() && ($user->rank < RANK_ADMINISTRATOR)) return 'USER_ERROR_NAME_INCORRECT';
 
 			# Check access
 
-			if (!Auth::admin() && ($user->rank === RANK_GUEST)) return 'USER_ERROR_ACCESS';
+			if (!Module::admin() && ($user->rank === RANK_GUEST)) return 'USER_ERROR_ACCESS';
 
 			# Create session
 
@@ -52,7 +52,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Send mail
 
-			Auth\Utils\Mail::reset($code);
+			Module\Utils\Mail::reset($code);
 
 			# ------------------------
 

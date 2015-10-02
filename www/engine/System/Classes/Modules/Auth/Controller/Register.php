@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB, String, Validate;
+	use System\Modules\Auth as Module, System\Modules\Entitizer, System\Utils\Security, DB, String, Validate;
 
 	abstract class Register {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Auth\Controller {
 
 		public static function process(array $post) {
 
-			if (Auth::check()) return true;
+			if (Module::check()) return true;
 
 			# Declare variables
 
@@ -22,9 +22,9 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Module\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Module\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
 			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
 
@@ -54,7 +54,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Determine rank
 
-			$rank = (Auth::admin() ? RANK_ADMINISTRATOR : RANK_USER);
+			$rank = (Module::admin() ? RANK_ADMINISTRATOR : RANK_USER);
 
 			# Create user
 
@@ -73,7 +73,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Send mail
 
-			Auth\Utils\Mail::register();
+			Module\Utils\Mail::register();
 
 			# ------------------------
 

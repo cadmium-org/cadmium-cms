@@ -2,9 +2,9 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Language, Request;
+	use System\Modules\Auth as Module, System\Utils\Messages, Language, Request;
 
-	class Login extends Auth\Utils\Handler {
+	class Login extends Module\Utils\Handler {
 
 		protected $view = 'Blocks\Auth\Login';
 
@@ -14,13 +14,13 @@ namespace System\Modules\Auth\Handler {
 
 			# Create form
 
-			$this->form = new Auth\Form\Login();
+			$this->form = new Module\Form\Login();
 
 			# Submit form
 
 			if ($this->form->submit(array('System\Modules\Auth\Controller\Login', 'process'))) {
 
-				Request::redirect(Auth::admin() ? '/admin' : '/profile');
+				Request::redirect(Module::admin() ? '/admin' : '/profile');
 
 			} else if (Request::get('submitted') === 'register') {
 
