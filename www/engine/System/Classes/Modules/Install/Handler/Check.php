@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Handler {
 
-	use System\Modules\Install, System\Utils\View, Language;
+	use System\Modules\Install as Module, System\Utils\View, Language;
 
 	class Check {
 
@@ -14,7 +14,7 @@ namespace System\Modules\Install\Handler {
 
 			$requirements = [];
 
-			foreach (Install::requirements() as $name => $value) {
+			foreach (Module::requirements() as $name => $value) {
 
 				$class = ($value ? 'positive' : 'negative'); $icon = ($value ? 'check circle' : 'warning circle');
 
@@ -46,9 +46,9 @@ namespace System\Modules\Install\Handler {
 
 			# Set button
 
-			$contents->block('button')->checked = intabs(Install::status());
+			$contents->block('button')->checked = intabs(Module::status());
 
-			$contents->block('button')->text = Language::get(Install::status() ? 'CONTINUE' : 'RECHECK');
+			$contents->block('button')->text = Language::get(Module::status() ? 'CONTINUE' : 'RECHECK');
 
 			# ------------------------
 
@@ -59,7 +59,7 @@ namespace System\Modules\Install\Handler {
 
 		public function handle() {
 
-			$this->form = new Install\Form\Check();
+			$this->form = new Module\Form\Check();
 
 			# ------------------------
 
