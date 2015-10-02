@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Site\Profile {
 
-	use System, System\Modules\Auth, Request;
+	use System, System\Modules, Request;
 
 	class Logout extends System\Frames\Site\Component\Profile {
 
@@ -10,7 +10,9 @@ namespace System\Handlers\Site\Profile {
 
 		protected function handle() {
 
-			Auth::logout(); Request::redirect('/profile/login');
+			Modules\Auth::logout();
+
+			Request::redirect('/profile/login');
 		}
 	}
 }

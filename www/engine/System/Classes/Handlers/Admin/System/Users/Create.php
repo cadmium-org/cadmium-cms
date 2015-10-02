@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\System\Users {
 
-	use System, System\Modules\Entitizer, Language;
+	use System, System\Modules, Language;
 
 	class Create extends System\Frames\Admin\Component\Panel {
 
@@ -12,11 +12,11 @@ namespace System\Handlers\Admin\System\Users {
 
 			$this->title = Language::get('TITLE_SYSTEM_USERS_CREATE');
 
-			$user_create = new Entitizer\Handler\User();
+			$user = new Modules\Entitizer\Handler\User();
 
 			# ------------------------
 
-			return $user_create->handle(true);
+			return $user->handle(true);
 		}
 	}
 }

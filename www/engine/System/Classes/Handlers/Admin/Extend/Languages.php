@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Extend {
 
-	use System, System\Modules\Extend, Language;
+	use System, System\Modules, Language;
 
 	class Languages extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Extend {
 
 			$this->title = Language::get('TITLE_EXTEND_LANGUAGES');
 
-			$languages = new Extend\Handler\Languages();
+			$languages = new Modules\Extend\Handler\Languages();
 
 			# ------------------------
 

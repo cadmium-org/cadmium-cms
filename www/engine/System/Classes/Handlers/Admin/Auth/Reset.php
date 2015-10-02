@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use System, System\Modules\Auth, Language;
+	use System, System\Modules, Language;
 
 	class Reset extends System\Frames\Admin\Component\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$this->title = Language::get('TITLE_AUTH_RESET');
 
-			$reset = new Auth\Handler\Reset();
+			$reset = new Modules\Auth\Handler\Reset();
 
 			# ------------------------
 

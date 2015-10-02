@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Content\Menuitems {
 
-	use System, System\Modules\Entitizer, Language;
+	use System, System\Modules, Language;
 
 	class Edit extends System\Frames\Admin\Component\Panel {
 
@@ -12,11 +12,11 @@ namespace System\Handlers\Admin\Content\Menuitems {
 
 			$this->title = Language::get('TITLE_CONTENT_MENUITEMS_EDIT');
 
-			$menuitem_edit = new Entitizer\Handler\Menuitem();
+			$menuitem = new Modules\Entitizer\Handler\Menuitem();
 
 			# ------------------------
 
-			return $menuitem_edit->handle();
+			return $menuitem->handle();
 		}
 	}
 }

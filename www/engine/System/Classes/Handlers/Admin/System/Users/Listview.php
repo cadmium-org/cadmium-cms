@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\System\Users {
 
-	use System, System\Modules\Entitizer, Language;
+	use System, System\Modules, Language;
 
 	class Listview extends System\Frames\Admin\Component\Panel {
 
@@ -12,11 +12,11 @@ namespace System\Handlers\Admin\System\Users {
 
 			$this->title = Language::get('TITLE_SYSTEM_USERS');
 
-			$users_list = new Entitizer\Listview\Users();
+			$users = new Modules\Entitizer\Listview\Users();
 
 			# ------------------------
 
-			return $users_list->handle();
+			return $users->handle();
 		}
 	}
 }

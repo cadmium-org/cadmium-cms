@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\System {
 
-	use System, System\Modules\Informer, Language;
+	use System, System\Modules, Language;
 
 	class Information extends System\Frames\Admin\Component\Panel {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\System {
 
 			$this->title = Language::get('TITLE_SYSTEM_INFORMATION');
 
-			$information = new Informer\Handler\Information();
+			$information = new Modules\Informer\Handler\Information();
 
 			# ------------------------
 

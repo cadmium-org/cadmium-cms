@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use System, System\Modules\Auth, Language;
+	use System, System\Modules, Language;
 
 	class Register extends System\Frames\Admin\Component\Auth\Initial {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$this->title = Language::get('TITLE_AUTH_REGISTER');
 
-			$register = new Auth\Handler\Register();
+			$register = new Modules\Auth\Handler\Register();
 
 			# ------------------------
 

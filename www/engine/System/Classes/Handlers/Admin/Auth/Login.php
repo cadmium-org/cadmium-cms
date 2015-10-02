@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Auth {
 
-	use System, System\Modules\Auth, Language;
+	use System, System\Modules, Language;
 
 	class Login extends System\Frames\Admin\Component\Auth {
 
@@ -12,7 +12,7 @@ namespace System\Handlers\Admin\Auth {
 
 			$this->title = Language::get('TITLE_AUTH_LOGIN');
 
-			$login = new Auth\Handler\Login();
+			$login = new Modules\Auth\Handler\Login();
 
 			# ------------------------
 
