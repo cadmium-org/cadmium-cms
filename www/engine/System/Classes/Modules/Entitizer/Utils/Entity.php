@@ -173,7 +173,12 @@ namespace System\Modules\Entitizer\Utils {
 
 			$this->id = DB::last()->id;
 
-			foreach ($set as $name => $value) $this->data[$name] = $value;
+			foreach ($this->definition->params() as $name => $param) {
+
+				$value = (isset($set[$name]) ? $set[$name] : null);
+
+                $this->data[$name] = $param->validate($value);
+            }
 
 			if (static::$nesting) $this->data['path'] = $this->getPath();
 
