@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB, String;
 
 	abstract class Reset {
 
