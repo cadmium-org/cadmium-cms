@@ -14,11 +14,11 @@ namespace DB\Query {
 
 			$table = $this->getName($table); $multiple = boolval($multiple);
 
-			$dataset = (!$multiple ? array($dataset) : array_values($dataset));
+			$dataset = (!$multiple ? [$dataset] : array_values($dataset));
 
 			# Process dataset
 
-			$names = array(); $values = array();
+			$names = []; $values = [];
 
 			foreach ($dataset as $key => $row) {
 

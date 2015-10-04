@@ -39,13 +39,13 @@ namespace DB\Utils {
 
 			if (!is_array($source)) return strval($source);
 
-			$parsers = array('name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort'); $output = array();
+			$parsers = ['name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort']; $output = [];
 
 			foreach ($source as $key => $value) {
 
-				$key = ((null !== $key_parser) ? call_user_func(array($this, $parsers[$key_parser]), $key) : '');
+				$key = ((null !== $key_parser) ? call_user_func([$this, $parsers[$key_parser]], $key) : '');
 
-				$value = ((null !== $value_parser) ? call_user_func(array($this, $parsers[$value_parser]), $value) : '');
+				$value = ((null !== $value_parser) ? call_user_func([$this, $parsers[$value_parser]], $value) : '');
 
 				$output[] = trim($key . $concat . $value);
 			}

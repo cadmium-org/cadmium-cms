@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	'BROWSE'                                    => 'Browse',
 	'CONTINUE'                                  => 'Continue',
@@ -63,4 +63,4 @@ return array (
 	'STATUS_LINK_RELOAD'                        => 'Reload page',
 
 	'FEATURE_NOT_AVAILABLE'                     => 'Feature is currently in development'
-);
+];

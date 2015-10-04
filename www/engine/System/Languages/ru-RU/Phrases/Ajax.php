@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Response errors
 
@@ -12,4 +12,4 @@ return array (
 	'AJAX_RESPONSE_ERROR_STATUS'                => 'Неверный формат ответа',
 	'AJAX_RESPONSE_ERROR_TIMEOUT'               => 'Время ожидания ответа истекло',
 	'AJAX_RESPONSE_ERROR_UNKNOWN'               => 'Неизвестная ошибка'
-);
+];

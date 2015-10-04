@@ -40,7 +40,7 @@ namespace System\Modules\Profile\Controller {
 
 			# Update user
 
-			$data = array();
+			$data = [];
 
 			$data['auth_key']           = $auth_key;
 			$data['password']           = $password;

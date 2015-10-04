@@ -4,7 +4,7 @@ namespace Ajax\Utils {
 
 	class Dataset {
 
-		private $data = array(), $status = true;
+		private $data = [], $status = true;
 
 		# Set variable
 

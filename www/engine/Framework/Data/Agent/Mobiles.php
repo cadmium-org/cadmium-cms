@@ -2,7 +2,7 @@
 
 # Mobiles list
 
-return array (
+return [
 
 	'android',
 	'avantgo',
@@ -34,4 +34,4 @@ return array (
 	'windows ce',
 	'windows phone',
 	'xiino'
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	'BROWSE'                                    => 'Просмотреть',
 	'CONTINUE'                                  => 'Продолжить',
@@ -63,4 +63,4 @@ return array (
 	'STATUS_LINK_RELOAD'                        => 'Обновить страницу',
 
 	'FEATURE_NOT_AVAILABLE'                     => 'Функция находится в разработке'
-);
+];

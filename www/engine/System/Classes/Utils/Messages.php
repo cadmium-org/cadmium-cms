@@ -6,7 +6,7 @@ namespace System\Utils {
 
 	abstract class Messages {
 
-		private static $messages = array();
+		private static $messages = [];
 
 		# Set message
 
@@ -16,14 +16,14 @@ namespace System\Utils {
 
 			$text = strval($text); $header = strval($header);
 
-			self::$messages[$type] = array('text' => $text, 'header' => $header);
+			self::$messages[$type] = ['text' => $text, 'header' => $header];
 		}
 
 		# Init messages
 
 		public static function init() {
 
-			self::$messages = array();
+			self::$messages = [];
 		}
 
 		# Set info message

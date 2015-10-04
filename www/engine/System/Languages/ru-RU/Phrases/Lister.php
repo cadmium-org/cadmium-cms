@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Access
 
@@ -45,4 +45,4 @@ return array (
 
 	'VISIBILITY_DRAFT'                          => 'Черновик',
 	'VISIBILITY_PUBLISHED'                      => 'Опубликовано'
-);
+];

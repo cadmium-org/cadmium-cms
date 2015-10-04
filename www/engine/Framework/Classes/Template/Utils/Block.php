@@ -8,7 +8,7 @@ namespace Template\Utils {
 
 		private $contents = '', $enabled = true;
 
-		private $blocks = array(), $loops = array(), $variables = array(), $phrases = array();
+		private $blocks = [], $loops = [], $variables = [], $phrases = [];
 
 		# Parse collapased blocks
 
@@ -40,7 +40,7 @@ namespace Template\Utils {
 
 				$this->contents = str_replace($matches[0][$key], ('{ for:' . $name . ' / }'), $this->contents);
 
-				$this->loops[$name] = array('block' => new Block($matches[2][$key]), 'range' => array(), 'separator' => '');
+				$this->loops[$name] = ['block' => new Block($matches[2][$key]), 'range' => [], 'separator' => ''];
 			}
 		}
 
@@ -48,11 +48,11 @@ namespace Template\Utils {
 
 		private function parseVariables() {
 
-			$variables = array('stack' => &$this->variables, 'pattern' => REGEX_TEMPLATE_VARIABLE);
+			$variables = ['stack' => &$this->variables, 'pattern' => REGEX_TEMPLATE_VARIABLE];
 
-			$phrases = array('stack' => &$this->phrases, 'pattern' => REGEX_TEMPLATE_PHRASE);
+			$phrases = ['stack' => &$this->phrases, 'pattern' => REGEX_TEMPLATE_PHRASE];
 
-			foreach (array($variables, $phrases) as $variables) {
+			foreach ([$variables, $phrases] as $variables) {
 
 				preg_match_all($variables['pattern'], $this->contents, $matches);
 
@@ -165,11 +165,11 @@ namespace Template\Utils {
 
 			# Insert variables
 
-			$variables = array('stack' => &$this->variables, 'symbol' => '$', 'language' => false);
+			$variables = ['stack' => &$this->variables, 'symbol' => '$', 'language' => false];
 
-			$phrases = array('stack' => &$this->phrases, 'symbol' => '%', 'language' => true);
+			$phrases = ['stack' => &$this->phrases, 'symbol' => '%', 'language' => true];
 
-			foreach (array($variables, $phrases) as $variables) {
+			foreach ([$variables, $phrases] as $variables) {
 
 				foreach ($variables['stack'] as $name => $value) {
 

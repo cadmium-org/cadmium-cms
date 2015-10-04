@@ -23,9 +23,9 @@ namespace {
 
 			$key_name = strval($key_name); $value_name = strval($value_name);
 
-			$array_indexed = array();
+			$array_indexed = [];
 
-			foreach ($array as $key => $value) $array_indexed[] = array($key_name => $key, $value_name => $value);
+			foreach ($array as $key => $value) $array_indexed[] = [$key_name => $key, $value_name => $value];
 
 			# ------------------------
 
@@ -38,7 +38,7 @@ namespace {
 
 			$sub_key = strval($sub_key);
 
-			$array_extracted = array();
+			$array_extracted = [];
 
 			foreach ($array as $key => $sub_array) {
 
@@ -56,7 +56,7 @@ namespace {
 
 			$sub_key = strval($sub_key); $descending = boolval($descending);
 
-			$array_extracted = self::subvalExtract($array, $sub_key); $array_sorted = array();
+			$array_extracted = self::subvalExtract($array, $sub_key); $array_sorted = [];
 
 			if (!$descending) asort($array_extracted); else arsort($array_extracted);
 

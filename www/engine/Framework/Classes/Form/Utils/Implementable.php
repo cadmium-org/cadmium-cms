@@ -10,7 +10,7 @@ namespace Form\Utils {
 
 		# Get tag
 
-		protected function getTag($name, array $attributes = array(), $contents = null) {
+		protected function getTag($name, array $attributes = [], $contents = null) {
 
             $tag = new Tag($name, $attributes, $contents);
 

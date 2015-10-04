@@ -6,7 +6,7 @@ namespace System\Frames {
 
 	abstract class Main {
 
-		protected $path = array();
+		protected $path = [];
 
 		# Constructor
 

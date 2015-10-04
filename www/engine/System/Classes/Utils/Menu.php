@@ -6,7 +6,7 @@ namespace System\Utils {
 
 	class Menu {
 
-		private $items = array(), $menu = array();
+		private $items = [], $menu = [];
 
 		# Parse item
 
@@ -44,7 +44,7 @@ namespace System\Utils {
 
 			if (!(DB::send($query) && DB::last()->status)) return;
 
-			while (null !== ($item = DB::last()->row())) $this->items[intabs($item['id'])] = array (
+			while (null !== ($item = DB::last()->row())) $this->items[intabs($item['id'])] = [
 
 				'parent_id'     => intabs($item['parent_id']),
 
@@ -53,7 +53,7 @@ namespace System\Utils {
 				'text'          => strval($item['text']),
 
 				'target'        => intabs($item['target'])
-			);
+			];
 
 			foreach ($this->items as $id => $item) if (0 === $item['parent_id']) $this->menu[] = $id;
 

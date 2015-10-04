@@ -19,7 +19,7 @@ namespace Lister {
 
         public static function range() {
 
-			$list = array();
+			$list = [];
 
 			foreach (parent::range() as $key => $value) {
 

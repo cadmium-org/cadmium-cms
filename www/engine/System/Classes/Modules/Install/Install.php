@@ -4,7 +4,7 @@ namespace System\Modules {
 
 	abstract class Install {
 
-        private static $requirements = array(), $status = false;
+        private static $requirements = [], $status = false;
 
         # Autoloader
 

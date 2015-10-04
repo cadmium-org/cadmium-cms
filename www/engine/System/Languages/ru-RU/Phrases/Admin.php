@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Titles
 
@@ -162,4 +162,4 @@ return array (
 
 	'INFORMATION_GROUP_CORE'					=> 'Ядро',
 	'INFORMATION_GROUP_EXTERNAL'				=> 'Стороннее ПО'
-);
+];

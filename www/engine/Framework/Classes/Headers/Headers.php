@@ -6,7 +6,7 @@ namespace {
 
 		private static $cache_send = false;
 
-		private static $status_codes = array (
+		private static $status_codes = [
 
 			STATUS_CODE_100     => '100 Continue',
 			STATUS_CODE_101     => '101 Switching Protocols',
@@ -65,21 +65,21 @@ namespace {
 			STATUS_CODE_507     => '507 Insufficient Storage',
 			STATUS_CODE_509     => '509 Bandwidth Limit Exceeded',
 			STATUS_CODE_510     => '510 Not Extended'
-		);
+		];
 
-		private static $content_types_text = array (
+		private static $content_types_text = [
 
 			MIME_TYPE_HTML      => 'text/html',
 			MIME_TYPE_XML       => 'text/xml',
 			MIME_TYPE_JSON      => 'application/json'
-		);
+		];
 
-		private static $content_types_media = array (
+		private static $content_types_media = [
 
 			MIME_TYPE_GIF       => 'image/gif',
 			MIME_TYPE_JPEG      => 'image/jpeg',
 			MIME_TYPE_PNG       => 'image/png'
-		);
+		];
 
 		# Check if string is status code
 
@@ -151,7 +151,7 @@ namespace {
 
 			$limiter = strval($limiter); $expires = intabs($expires);
 
-			if (!in_array($limiter, array(CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC), true)) return;
+			if (!in_array($limiter, [CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC], true)) return;
 
 			header('Expires: ' . gmdate('D, d M Y H:i:s', (REQUEST_TIME + $expires)) . ' GMT');
 

@@ -4,7 +4,7 @@ namespace {
 
 	abstract class Language {
 
-		private static $init = false, $dir_name = '', $phrases = array();
+		private static $init = false, $dir_name = '', $phrases = [];
 
 		# Init language
 
@@ -16,7 +16,7 @@ namespace {
 
 			if (!Explorer::isDir($dir_name)) throw new Error\LanguageInit($dir_name);
 
-			self::$init = true; self::$dir_name = $dir_name; self::$phrases = array();
+			self::$init = true; self::$dir_name = $dir_name; self::$phrases = [];
 		}
 
 		# Include phrases files

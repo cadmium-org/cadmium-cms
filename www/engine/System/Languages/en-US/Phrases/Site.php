@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Titles
 
@@ -26,4 +26,4 @@ return array (
 
 	'PROFILE_EDIT_GROUP_PERSONAL'               => 'Personal information',
 	'PROFILE_EDIT_GROUP_PASSWORD'               => 'Change password'
-);
+];

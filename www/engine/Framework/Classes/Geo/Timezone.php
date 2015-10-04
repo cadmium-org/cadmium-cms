@@ -6,7 +6,7 @@ namespace Geo {
 
 	abstract class Timezone extends Lister {
 
-		protected static $list = array();
+		protected static $list = [];
 
 		# Autoloader
 

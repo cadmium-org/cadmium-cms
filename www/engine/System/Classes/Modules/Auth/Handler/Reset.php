@@ -18,7 +18,7 @@ namespace System\Modules\Auth\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(array('System\Modules\Auth\Controller\Reset', 'process'))) {
+			if ($this->form->submit(['System\Modules\Auth\Controller\Reset', 'process'])) {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset?submitted');
 

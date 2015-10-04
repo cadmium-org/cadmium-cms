@@ -46,7 +46,7 @@ namespace System\Modules\Auth\Controller {
 
 			$code = String::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
 
-			$data = array('id' => $user->id, 'code' => $code, 'ip' => $ip, 'time' => $time);
+			$data = ['id' => $user->id, 'code' => $code, 'ip' => $ip, 'time' => $time];
 
 			if (!$secret->create($data)) return 'USER_ERROR_AUTH_RESET';
 

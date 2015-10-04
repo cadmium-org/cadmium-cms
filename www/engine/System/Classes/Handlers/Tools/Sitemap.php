@@ -10,13 +10,13 @@ namespace System\Handlers\Tools {
 
 		private function getPages() {
 
-			$pages = array();
+			$pages = [];
 
 			# Select pages
 
-			$condition = array('visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC);
+			$condition = ['visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC];
 
-			if (!(DB::select(TABLE_PAGES, 'id', $condition) && DB::last()->status)) return array();
+			if (!(DB::select(TABLE_PAGES, 'id', $condition) && DB::last()->status)) return [];
 
 			while (null !== ($page = DB::last()->row())) $pages[] = $page['id'];
 
@@ -26,7 +26,7 @@ namespace System\Handlers\Tools {
 
 				$page = Entitizer::page($id);
 
-				$pages[$key] = array('canonical' => $page->canonical, 'modified' => $page->time_modified);
+				$pages[$key] = ['canonical' => $page->canonical, 'modified' => $page->time_modified];
 			}
 
 			# ------------------------

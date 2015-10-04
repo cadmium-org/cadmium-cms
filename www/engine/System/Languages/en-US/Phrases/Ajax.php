@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Response errors
 
@@ -12,4 +12,4 @@ return array (
 	'AJAX_RESPONSE_ERROR_STATUS'                => 'Invalid response format',
 	'AJAX_RESPONSE_ERROR_TIMEOUT'               => 'Waiting for response has timed out',
 	'AJAX_RESPONSE_ERROR_UNKNOWN'               => 'Unknown error'
-);
+];

@@ -20,7 +20,7 @@ namespace System\Utils {
 
 			if ($index > ($count = intval(ceil($total / $display)))) return false;
 
-			$items = array();
+			$items = [];
 
 			for ($i = ($index - 3); $i <= ($index + 3); $i++) {
 
@@ -28,7 +28,7 @@ namespace System\Utils {
 
 				$class = ($i === $index ? 'active item' : 'item'); $link = $item->get();
 
-				if ($i > 0 && $i <= $count) $items[] = array('class' => $class, 'link' => $link, 'index' => $i);
+				if ($i > 0 && $i <= $count) $items[] = ['class' => $class, 'link' => $link, 'index' => $i];
 			}
 
 			# Set prev

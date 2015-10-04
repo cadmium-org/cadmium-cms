@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Titles
 
@@ -64,4 +64,4 @@ return array (
 
 	'INSTALL_PAGE_DEMO_TITLE'                   => 'Page',
 	'INSTALL_PAGE_DEMO_CONTENTS'                => '<p>This is demo page.</p>'
-);
+];

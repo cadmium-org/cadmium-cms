@@ -37,9 +37,9 @@ namespace System\Modules\Profile\Handler {
 
 			# Submit forms
 
-			$controller_personal = array('System\Modules\Profile\Controller\Personal', 'process');
+			$controller_personal = ['System\Modules\Profile\Controller\Personal', 'process'];
 
-			$controller_password = array('System\Modules\Profile\Controller\Password', 'process');
+			$controller_password = ['System\Modules\Profile\Controller\Password', 'process'];
 
 			if ($this->form_personal->submit($controller_personal) || $this->form_password->submit($controller_password)) {
 

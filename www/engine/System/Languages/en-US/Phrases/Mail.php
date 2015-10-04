@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	'MAIL_SUBJECT_REGISTER'                     => 'Registration',
 	'MAIL_SUBJECT_RESET'                        => 'Password reset',
@@ -16,4 +16,4 @@ return array (
 
 	'MAIL_TEXT_FOOTER_NOREPLY'                  => 'This message was generated automatically. Please do not reply',
 	'MAIL_TEXT_FOOTER_REPLY_TO'                 => 'If you have any questions, please email to'
-);
+];

@@ -18,7 +18,7 @@ namespace System\Modules\Auth\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(array('System\Modules\Auth\Controller\Register', 'process'))) {
+			if ($this->form->submit(['System\Modules\Auth\Controller\Register', 'process'])) {
 
 				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/login?submitted=register');
 			}

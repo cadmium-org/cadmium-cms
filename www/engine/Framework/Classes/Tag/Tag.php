@@ -6,7 +6,7 @@ namespace {
 
 		private static $block_regular, $block_self_closing;
 
-		private $name = '', $attributes = array(), $contents = null;
+		private $name = '', $attributes = [], $contents = null;
 
 		# Autoloader
 
@@ -19,7 +19,7 @@ namespace {
 
 		# Constructor
 
-		public function __construct($name, array $attributes = array(), $contents = null) {
+		public function __construct($name, array $attributes = [], $contents = null) {
 
 			$this->name = strval($name);
 

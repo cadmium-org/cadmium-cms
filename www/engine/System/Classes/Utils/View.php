@@ -6,7 +6,7 @@ namespace System\Utils {
 
 	abstract class View {
 
-        private static $section = '', $error = 'View is not initialized', $cache = array();
+        private static $section = '', $error = 'View is not initialized', $cache = [];
 
         # Init view
 

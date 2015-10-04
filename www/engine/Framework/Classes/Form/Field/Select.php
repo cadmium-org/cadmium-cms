@@ -6,19 +6,19 @@ namespace Form\Field {
 
 	class Select extends Utils\Implementable {
 
-		private $options = array(), $search = false, $auto = false;
+		private $options = [], $search = false, $auto = false;
 
 		# Get options
 
 		private function getOptions() {
 
-			$options = array();
+			$options = [];
 
 			foreach ($this->options as $value => $text) {
 
 				$selected = (($this->value === $value) ? ' selected="selected"' : '');
 
-				$options[] = array('value' => $value, 'selected' => $selected, 'text' => $text);
+				$options[] = ['value' => $value, 'selected' => $selected, 'text' => $text];
 			}
 
 			$block = new View\Options();
@@ -36,7 +36,7 @@ namespace Form\Field {
 
 			parent::__construct($form, $name);
 
-			$default = ((null !== $default) ? array('' => strval($default)) : array());
+			$default = ((null !== $default) ? ['' => strval($default)] : []);
 
 			$this->options = array_merge($default, $options);
 

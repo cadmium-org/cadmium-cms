@@ -58,9 +58,9 @@ namespace DB\Utils {
 
 		public function assoc() {
 
-			if (!is_object($this->result)) return array();
+			if (!is_object($this->result)) return [];
 
-			$assoc = array();
+			$assoc = [];
 
 			while (null !== ($row = $this->row())) $assoc[] = $row;
 

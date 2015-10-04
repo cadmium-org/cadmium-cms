@@ -4,7 +4,7 @@ namespace {
 
 	abstract class DB {
 
-		private static $link = false, $last = null, $log = array(), $time = 0;
+		private static $link = false, $last = null, $log = [], $time = 0;
 
 		# Connect to database
 
@@ -101,7 +101,7 @@ namespace {
 
 			$value = strval($value); $add_slashes = boolval($add_slashes);
 
-			$value_encoded = str_replace(' ', '%', str_replace(array('%', '_'), array('\%', '\_'), $value));
+			$value_encoded = str_replace(' ', '%', str_replace(['%', '_'], ['\%', '\_'], $value));
 
 			# ------------------------
 
@@ -112,7 +112,7 @@ namespace {
 
 		public static function log() {
 
-			$log = array();
+			$log = [];
 
 			foreach (self::$log as $result) {
 
@@ -120,7 +120,7 @@ namespace {
 
 				$summary = ($status ? ($result->rows . ' row(s)') : ('(' . $result->errno . ') ' . $result->error));
 
-				$log[] = array('status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary);
+				$log[] = ['status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary];
 			}
 
 			return $log;

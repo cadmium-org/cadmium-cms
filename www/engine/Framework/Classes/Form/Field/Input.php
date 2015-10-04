@@ -14,21 +14,21 @@ namespace Form\Field {
 
 		private function getHidden() {
 
-			return $this->getTag('input', array('type' => 'hidden', 'value' => $this->value));
+			return $this->getTag('input', ['type' => 'hidden', 'value' => $this->value]);
 		}
 
 		# Get password input tag
 
 		private function getPassword() {
 
-			return $this->getTag('input', array('type' => 'password', 'value' => ''));
+			return $this->getTag('input', ['type' => 'password', 'value' => '']);
 		}
 
 		# Get textarea tag
 
 		private function getTextarea() {
 
-			return $this->getTag('textarea', array(), $this->value);
+			return $this->getTag('textarea', [], $this->value);
 		}
 
 		# Get text input tag
@@ -37,7 +37,7 @@ namespace Form\Field {
 
 			$value = (($this->type !== FORM_INPUT_CAPTCHA) ? $this->value : '');
 
-			return $this->getTag('input', array('type' => 'text', 'value' => $value));
+			return $this->getTag('input', ['type' => 'text', 'value' => $value]);
 		}
 
 		# Constructor

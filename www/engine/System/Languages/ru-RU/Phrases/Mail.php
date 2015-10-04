@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	'MAIL_SUBJECT_REGISTER'                     => 'Регистрация',
 	'MAIL_SUBJECT_RESET'                        => 'Восстановление пароля',
@@ -16,4 +16,4 @@ return array (
 
 	'MAIL_TEXT_FOOTER_NOREPLY'                  => 'Это сообщение сгенерировано автоматически. Отвечать на него не нужно',
 	'MAIL_TEXT_FOOTER_REPLY_TO'                 => 'По всем имеющимся у вас вопросам пишите по адресу'
-);
+];

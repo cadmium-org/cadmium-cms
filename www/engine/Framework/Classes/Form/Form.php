@@ -4,7 +4,7 @@ namespace {
 
 	class Form {
 
-		private $name = '', $posted = false, $errors = false, $fields = array();
+		private $name = '', $posted = false, $errors = false, $fields = [];
 
 		# Get field configuration
 
@@ -12,7 +12,7 @@ namespace {
 
 			$config = array_reverse(str_split(decbin(intval($config))));
 
-			$options = array();
+			$options = [];
 
 			$options[FORM_FIELD_REQUIRED]       = false;
 			$options[FORM_FIELD_DISABLED]       = false;
@@ -155,7 +155,7 @@ namespace {
 
 			if ($this->posted || !$this->check()) return false;
 
-			$errors = false; $post = array();
+			$errors = false; $post = [];
 
 			foreach ($this->fields as $field) {
 

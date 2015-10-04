@@ -14,7 +14,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			if (null === $color) $color = array(0, 0, 0); else if (!is_array($color) || (count($color) !== 3)) return false;
+			if (null === $color) $color = [0, 0, 0]; else if (!is_array($color) || (count($color) !== 3)) return false;
 
 			foreach (array_values($color) as $key => $value) $color[$key] = Number::format($value, 0, 255);
 
@@ -102,9 +102,9 @@ namespace System\Utils\Tools {
 
 			for ($i = 0; $i < $count; $i++) {
 
-				$point_0 = array(0, mt_rand(0, ($this->height - 1)));
+				$point_0 = [0, mt_rand(0, ($this->height - 1))];
 
-				$point_1 = array(($this->width - 1), mt_rand(0, ($this->height - 1)));
+				$point_1 = [($this->width - 1), mt_rand(0, ($this->height - 1))];
 
 				imageline($this->captcha, $point_0[0], $point_0[1], $point_1[0], $point_1[1], $color);
 			}

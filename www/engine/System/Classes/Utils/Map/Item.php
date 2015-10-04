@@ -12,7 +12,7 @@ namespace System\Utils\Map {
 
 			if (!preg_match('/^\/(.*)$/', $string, $matches)) return false;
 
-			$items = preg_split('/\//', $matches[1], 0, PREG_SPLIT_NO_EMPTY); $parsed = array();
+			$items = preg_split('/\//', $matches[1], 0, PREG_SPLIT_NO_EMPTY); $parsed = [];
 
 			foreach ($items as $name) if (preg_match($regexp, $name)) $parsed[] = $name; else return false;
 

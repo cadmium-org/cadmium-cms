@@ -58,7 +58,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Create user
 
-			$data = array();
+			$data = [];
 
 			$data['name']               = $name;
 			$data['email']              = $email;

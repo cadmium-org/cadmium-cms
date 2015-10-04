@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Errors
 
@@ -28,4 +28,4 @@ return array (
 	# Groups
 
 	'PAGE_GROUP_ADDITIONAL'                         => 'Дополнительные настройки'
-);
+];

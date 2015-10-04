@@ -2,7 +2,7 @@
 
 # Timezones list
 
-return array (
+return [
 
 	'UTC' => '(UTC+00:00) UTC',
 	'Pacific/Midway' => '(UTC-11:00) Pacific/Midway',
@@ -421,4 +421,4 @@ return array (
 	'Pacific/Chatham' => '(UTC+13:45) Pacific/Chatham',
 	'Pacific/Apia' => '(UTC+14:00) Pacific/Apia',
 	'Pacific/Kiritimati' => '(UTC+14:00) Pacific/Kiritimati'
-);
+];

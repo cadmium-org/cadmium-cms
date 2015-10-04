@@ -2,7 +2,7 @@
 
 # Robots list
 
-return array (
+return [
 
 	'1c+enterprise',
 	'aihitbot',
@@ -47,4 +47,4 @@ return array (
 	'wotbox',
 	'yahoo',
 	'yandex'
-);
+];

@@ -12,13 +12,13 @@ namespace System\Handlers\Site {
 
 		private function getPath() {
 
-			$path = array(); $id = 0; $link = '';
+			$path = []; $id = 0; $link = '';
 
 			foreach ($this->path as $name) {
 
 				# Select item
 
-				$selection = array('id', 'name', 'title');
+				$selection = ['id', 'name', 'title'];
 
 				$access = (Auth::check() ? Auth::user()->rank : RANK_GUEST);
 
@@ -34,7 +34,7 @@ namespace System\Handlers\Site {
 
 				$id = intabs($page['id']); $link .= ('/' . strval($page['name'])); $title = strval($page['title']);
 
-				$path[] = array('id' => $id, 'link' => $link, 'title' => $title);
+				$path[] = ['id' => $id, 'link' => $link, 'title' => $title];
 			}
 
 			# ------------------------

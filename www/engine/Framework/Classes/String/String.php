@@ -17,7 +17,7 @@ namespace {
 
 			if (!$multiline) $string = implode(' ', $string); else {
 
-				$pattern = array("/^(\r\n)+/", "/(\r\n)+$/", "/(\r\n){2,}/"); $replacement = array("", "", "\r\n\r\n");
+				$pattern = ["/^(\r\n)+/", "/(\r\n)+$/", "/(\r\n){2,}/"]; $replacement = ["", "", "\r\n\r\n"];
 
 				$string = preg_replace($pattern, $replacement, implode("\r\n", $string));
 			}
@@ -118,7 +118,7 @@ namespace {
 
 			$string = strval($string); $maxlength = intabs($maxlength);
 
-			$pattern = array (
+			$pattern = [
 
 				'А' => 'A',     'Б' => 'B',     'В' => 'V',     'Г' => 'G',
 				'Д' => 'D',     'Е' => 'E',     'Ж' => 'ZH',    'З' => 'Z',
@@ -139,11 +139,11 @@ namespace {
 				'ш' => 'sh',    'щ' => 'sch',   'ъ' => '',      'ь' => '',
 				'ы' => 'y',     'э' => 'e',     'ю' => 'ju',    'я' => 'ja',
 				'і' => 'i',     'ї' => 'ji',    'ё' => 'jo'
-			);
+			];
 
 			$string = preg_replace('/[^a-zA-Z0-9\-]/', '-', strtr($string, $pattern));
 
-			$string = preg_replace(array('/^[\-]+/', '/[\-]+$/', '/[\-]{2,}/'), array('', '', '-'), $string);
+			$string = preg_replace(['/^[\-]+/', '/[\-]+$/', '/[\-]{2,}/'], ['', '', '-'], $string);
 
 			$string = self::cut($string, $maxlength);
 

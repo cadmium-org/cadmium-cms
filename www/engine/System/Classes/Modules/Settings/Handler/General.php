@@ -31,7 +31,7 @@ namespace System\Modules\Settings\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(array('System\Modules\Settings\Controller\General', 'process'))) {
+			if ($this->form->submit(['System\Modules\Settings\Controller\General', 'process'])) {
 
 				Request::redirect('/admin/system/settings?submitted');
 

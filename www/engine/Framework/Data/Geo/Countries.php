@@ -2,7 +2,7 @@
 
 # Counties list
 
-return array (
+return [
 
 	'ad' => 'Andorra',
 	'ae' => 'United Arab Emirates',
@@ -254,4 +254,4 @@ return array (
 	'za' => 'South Africa',
 	'zm' => 'Zambia',
 	'zw' => 'Zimbabwe'
-);
+];

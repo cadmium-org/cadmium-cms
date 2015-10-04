@@ -4,7 +4,7 @@ namespace {
 
 	abstract class Agent {
 
-		private static $robots = array(), $mobiles = array();
+		private static $robots = [], $mobiles = [];
 
 		# Process agents array
 

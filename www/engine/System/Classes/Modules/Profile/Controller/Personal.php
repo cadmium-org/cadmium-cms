@@ -34,7 +34,7 @@ namespace System\Modules\Profile\Controller {
 
 			# Update user
 
-			$data = array();
+			$data = [];
 
 			$data['email']              = $email;
 			$data['first_name']         = $first_name;

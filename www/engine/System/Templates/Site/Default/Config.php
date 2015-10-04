@@ -1,8 +1,8 @@
 <?php
 
-return array (
+return [
 
 	'name'      => 'Default',
 	'title'     => 'Default',
 	'author'    => 'Anton Romanov'
-);
+];

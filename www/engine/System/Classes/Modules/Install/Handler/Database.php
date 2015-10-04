@@ -33,7 +33,7 @@ namespace System\Modules\Install\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(array('System\Modules\Install\Controller\Database', 'process'))) {
+			if ($this->form->submit(['System\Modules\Install\Controller\Database', 'process'])) {
 
 				Request::redirect('/admin/register');
 			}

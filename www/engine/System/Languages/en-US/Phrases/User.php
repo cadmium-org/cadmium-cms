@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
 
 	# Errors
 
@@ -62,4 +62,4 @@ return array (
 	# Other
 
 	'USER_UNKNOWN'                                  => 'Unknown user'
-);
+];

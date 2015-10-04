@@ -32,7 +32,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Update user
 
-			$data = array('auth_key' => $auth_key, 'password' => $password);
+			$data = ['auth_key' => $auth_key, 'password' => $password];
 
 			if (!Auth::user()->edit($data)) return 'USER_ERROR_AUTH_RECOVER';
 

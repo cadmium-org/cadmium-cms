@@ -4,7 +4,7 @@ namespace {
 
 	abstract class Lister {
 
-		protected static $list = array();
+		protected static $list = [];
 
 		# Load list
 

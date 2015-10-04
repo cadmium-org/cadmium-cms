@@ -11,15 +11,15 @@ namespace System\Modules\Extend {
 
 		protected static $name = 'language', $root_dir = DIR_SYSTEM_LANGUAGES, $separate = false;
 
-		protected static $selectable = array(SECTION_ADMIN => true, SECTION_SITE => false);
+		protected static $selectable = [SECTION_ADMIN => true, SECTION_SITE => false];
 
-		protected static $param = array(SECTION_ADMIN => 'admin_language', SECTION_SITE => 'site_language');
+		protected static $param = [SECTION_ADMIN => 'admin_language', SECTION_SITE => 'site_language'];
 
-		protected static $default = array(SECTION_ADMIN => CONFIG_ADMIN_LANGUAGE_DEFAULT, SECTION_SITE => CONFIG_SITE_LANGUAGE_DEFAULT);
+		protected static $default = [SECTION_ADMIN => CONFIG_ADMIN_LANGUAGE_DEFAULT, SECTION_SITE => CONFIG_SITE_LANGUAGE_DEFAULT];
 
 		protected static $regex_name = REGEX_LANGUAGE_NAME;
 
-		protected static $data = array('name', 'iso', 'country', 'title', 'author');
+		protected static $data = ['name', 'iso', 'country', 'title', 'author'];
 
 		protected static $cookie_expires = CONFIG_LANGUAGE_COOKIE_EXPIRES;
 	}

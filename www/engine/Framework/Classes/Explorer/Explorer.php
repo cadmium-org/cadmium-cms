@@ -10,9 +10,9 @@ namespace {
 
 			$dir_name = strval($dir_name);
 
-			if (!self::isDir($dir_name)) return array();
+			if (!self::isDir($dir_name)) return [];
 
-			$list = array(); $handler = @opendir($dir_name);
+			$list = []; $handler = @opendir($dir_name);
 
 			while (false !== ($name = readdir($handler))) {
 
