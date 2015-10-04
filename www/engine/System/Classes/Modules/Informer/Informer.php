@@ -6,6 +6,20 @@ namespace System\Modules {
 
 	abstract class Informer {
 
+		# Count table entries
+
+		private static function countEntries($table_name, $false_on_error = false) {
+
+			if (!(DB::select($table_name, 'COUNT(id) as count') && (DB::last()->rows === 1))) {
+
+				return (!$false_on_error ? 0 : false);
+			}
+
+			# ------------------------
+
+			return intabs(DB::last()->row()['count']);
+		}
+
         # Check if install file exists
 
         public static function checkInstallFile() {
@@ -24,20 +38,20 @@ namespace System\Modules {
 
 		# Get pages count
 
-		public static function countPages() {
+		public static function countPages($false_on_error = false) {
 
-			if (!(DB::select(TABLE_PAGES, 'COUNT(id) as count') && (DB::last()->rows === 1))) return 0;
+			$false_on_error = boolval($false_on_error);
 
-			return intabs(DB::last()->row()['count']);
+			return self::countEntries(TABLE_PAGES, $false_on_error);
 		}
 
 		# Get users count
 
-		public static function countUsers() {
+		public static function countUsers($false_on_error = false) {
 
-			if (!(DB::select(TABLE_USERS, 'COUNT(id) as count') && (DB::last()->rows === 1))) return 0;
+			$false_on_error = boolval($false_on_error);
 
-			return intabs(DB::last()->row()['count']);
+			return self::countEntries(TABLE_USERS, $false_on_error);
 		}
 	}
 }
