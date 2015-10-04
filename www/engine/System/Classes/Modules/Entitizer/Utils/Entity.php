@@ -71,6 +71,21 @@ namespace System\Modules\Entitizer\Utils {
             # Create definition object
 
 			$this->definition = Entitizer::definition(static::$type);
+
+			# Preset data array
+
+			foreach ($this->definition->params() as $name => $param) {
+
+				$this->data[$name] = $param->validate(null);
+			}
+
+			# Preset path
+
+            if (static::$nesting) $this->data['path'] = [];
+
+			# Implement entity
+
+			$this->implement();
 		}
 
         # Init entity
@@ -173,12 +188,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$this->id = DB::last()->id;
 
-			foreach ($this->definition->params() as $name => $param) {
-
-				$value = (isset($set[$name]) ? $set[$name] : null);
-
-                $this->data[$name] = $param->validate($value);
-            }
+			foreach ($set as $name => $value) $this->data[$name] = $value;
 
 			if (static::$nesting) $this->data['path'] = $this->getPath();
 
