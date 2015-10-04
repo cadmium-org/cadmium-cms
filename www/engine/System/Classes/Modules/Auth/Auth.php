@@ -119,9 +119,7 @@ namespace System\Modules {
 
         public static function initial() {
 
-			$user = Entitizer::user(1);
-
-			return (!$user->error() && (0 === $user->id));
+			return (0 === Informer::countUsers(true));
         }
 
 		# Check if authorized
