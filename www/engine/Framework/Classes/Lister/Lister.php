@@ -28,9 +28,9 @@ namespace {
 
 		public static function validate($key) {
 
-			$key = strval($key);
+			$key = strval($key); $range = array_keys(static::$list);
 
-			return (isset(static::$list[$key]) ? $key : false);
+			return (false !== ($key = array_search($key, $range)) ? $range[$key] : null);
 		}
 
 		# Get item by key
