@@ -7,5 +7,5 @@ namespace System\Views\Site\Blocks\Auth {
 	class Login extends Views\Site\View {
 
 		protected static $file_name = 'Blocks/Auth/Login.tpl';
-    }
+	}
 }

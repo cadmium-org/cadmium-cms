@@ -25,7 +25,7 @@ namespace System\Modules\Entitizer\Controller {
 
 	class Page extends Entitizer\Utils\Controller {
 
-        # Constructor
+		# Constructor
 
 		public function __construct($id) {
 
@@ -80,5 +80,5 @@ namespace System\Modules\Entitizer\Controller {
 
 			return true;
 		}
-    }
+	}
 }

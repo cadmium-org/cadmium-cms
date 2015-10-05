@@ -2,7 +2,7 @@
 
 namespace System\Modules {
 
-    use DB, Explorer;
+	use DB, Explorer;
 
 	abstract class Informer {
 
@@ -20,14 +20,14 @@ namespace System\Modules {
 			return intabs(DB::last()->row()['count']);
 		}
 
-        # Check if install file exists
+		# Check if install file exists
 
-        public static function checkInstallFile() {
+		public static function checkInstallFile() {
 
-            return Explorer::isFile(DIR_WWW . 'install.php');
-        }
+			return Explorer::isFile(DIR_WWW . 'install.php');
+		}
 
-        # Get MySQL version
+		# Get MySQL version
 
 		public static function mysqlVersion() {
 

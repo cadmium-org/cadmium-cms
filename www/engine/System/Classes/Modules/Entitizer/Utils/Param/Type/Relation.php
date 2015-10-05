@@ -2,29 +2,29 @@
 
 namespace System\Modules\Entitizer\Utils\Param\Type {
 
-    use System\Modules\Entitizer;
+	use System\Modules\Entitizer;
 
 	class Relation extends Entitizer\Utils\Param\General\Number {
 
-        # Constructor
+		# Constructor
 
-        public function __construct($name) {
+		public function __construct($name) {
 
-            parent::__construct($name);
-        }
+			parent::__construct($name);
+		}
 
-        # Get field statement
+		# Get field statement
 
-        public function fieldStatement() {
+		public function fieldStatement() {
 
-            return ("`" . $this->name . "` int(10) unsigned NOT NULL DEFAULT '0'");
-        }
+			return ("`" . $this->name . "` int(10) unsigned NOT NULL DEFAULT '0'");
+		}
 
-        # Get key statement
+		# Get key statement
 
-        public function keyStatement() {
+		public function keyStatement() {
 
-            return ("KEY `" . $this->name . "` (`" . $this->name . "`)");
-        }
-    }
+			return ("KEY `" . $this->name . "` (`" . $this->name . "`)");
+		}
+	}
 }

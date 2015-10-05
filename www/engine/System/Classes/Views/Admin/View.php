@@ -7,5 +7,5 @@ namespace System\Views\Admin {
 	abstract class View extends Views\Templatable {
 
 		const SECTION = SECTION_ADMIN;
-    }
+	}
 }

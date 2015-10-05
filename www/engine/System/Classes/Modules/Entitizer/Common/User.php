@@ -9,5 +9,5 @@ namespace System\Modules\Entitizer\Common {
 		protected static $auto_increment = true, $nesting = false, $super = true;
 
 		protected static $extensions = [ENTITY_TYPE_USER_SECRET, ENTITY_TYPE_USER_SESSION];
-    }
+	}
 }

@@ -4,7 +4,7 @@ namespace Lister {
 
 	use Language, Lister;
 
-    abstract class Translatable extends Lister {
+	abstract class Translatable extends Lister {
 
 		# Get item by key
 
@@ -17,7 +17,7 @@ namespace Lister {
 
 		# Get list
 
-        public static function range() {
+		public static function range() {
 
 			$list = [];
 
@@ -27,6 +27,6 @@ namespace Lister {
 			}
 
 			return $list;
-        }
-    }
+		}
+	}
 }

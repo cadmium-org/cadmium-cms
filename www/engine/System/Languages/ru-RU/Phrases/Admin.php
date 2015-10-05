@@ -160,6 +160,6 @@ return [
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версия Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версия CKEditor',
 
-	'INFORMATION_GROUP_CORE'					=> 'Ядро',
-	'INFORMATION_GROUP_EXTERNAL'				=> 'Стороннее ПО'
+	'INFORMATION_GROUP_CORE'                    => 'Ядро',
+	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО'
 ];

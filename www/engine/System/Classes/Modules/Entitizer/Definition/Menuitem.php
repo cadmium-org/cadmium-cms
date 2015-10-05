@@ -8,16 +8,16 @@ namespace System\Modules\Entitizer\Definition {
 
 		use Entitizer\Common\Menuitem;
 
-        # Define presets
+		# Define presets
 
-        protected function define() {
+		protected function define() {
 
 			# Add params
 
-            $this->range        ('position', 0, true);
-            $this->varchar      ('link');
-            $this->varchar      ('text');
-            $this->range        ('target');
-        }
-    }
+			$this->range        ('position', 0, true);
+			$this->varchar      ('link');
+			$this->varchar      ('text');
+			$this->range        ('target');
+		}
+	}
 }

@@ -160,6 +160,6 @@ return [
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Semantic UI version',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'CKEditor version',
 
-	'INFORMATION_GROUP_CORE'					=> 'Core',
-	'INFORMATION_GROUP_EXTERNAL'				=> 'Third-party software'
+	'INFORMATION_GROUP_CORE'                    => 'Core',
+	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software'
 ];

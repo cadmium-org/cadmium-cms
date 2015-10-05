@@ -71,7 +71,7 @@ namespace {
 
 		public static function random(array $array) {
 
-		    return $array[array_rand($array)];
+			return $array[array_rand($array)];
 		}
 
 		# Encode array

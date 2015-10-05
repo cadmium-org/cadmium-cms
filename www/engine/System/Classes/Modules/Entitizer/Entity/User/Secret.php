@@ -17,6 +17,6 @@ namespace System\Modules\Entitizer\Entity\User {
 
 		# Implement entity
 
-        protected function implement() {}
-    }
+		protected function implement() {}
+	}
 }

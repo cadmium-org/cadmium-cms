@@ -20,7 +20,7 @@ namespace System\Frames {
 
 			# Init configuration
 
-            Settings::init();
+			Settings::init();
 
 			# Set timezone
 

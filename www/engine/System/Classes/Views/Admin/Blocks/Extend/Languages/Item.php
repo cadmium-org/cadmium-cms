@@ -7,5 +7,5 @@ namespace System\Views\Admin\Blocks\Extend\Languages {
 	class Item extends Views\Admin\View {
 
 		protected static $file_name = 'Blocks/Extend/Languages/Item.tpl';
-    }
+	}
 }

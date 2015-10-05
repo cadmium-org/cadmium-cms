@@ -49,5 +49,5 @@ namespace System\Modules\Entitizer\Entity {
 
 			$this->data['canonical'] = $this->getCanonical();
 		}
-    }
+	}
 }

@@ -2,29 +2,29 @@
 
 namespace System\Modules\Extend\Utils {
 
-    use Error, System\Modules\Settings, Cookie, Explorer, Request;
+	use Error, System\Modules\Settings, Cookie, Explorer, Request;
 
-    trait Extension {
+	trait Extension {
 
-        private static $section = '', $dir_name = '', $items = [], $active = '';
+		private static $section = '', $dir_name = '', $items = [], $active = '';
 
-        # Get section
+		# Get section
 
-        private static function getSection($section) {
+		private static function getSection($section) {
 
-            return (($section === SECTION_ADMIN) ? SECTION_ADMIN : SECTION_SITE);
-        }
+			return (($section === SECTION_ADMIN) ? SECTION_ADMIN : SECTION_SITE);
+		}
 
-        # Get directory name
+		# Get directory name
 
-        private static function getDirName($section) {
+		private static function getDirName($section) {
 
-            return (self::$root_dir . (self::$separate ? ($section . '/') : ''));
-        }
+			return (self::$root_dir . (self::$separate ? ($section . '/') : ''));
+		}
 
-        # Parse configuration file
+		# Parse configuration file
 
-        private static function parseConfig($file_name, array $params) {
+		private static function parseConfig($file_name, array $params) {
 
 			$file_name = strval($file_name);
 
@@ -44,9 +44,9 @@ namespace System\Modules\Extend\Utils {
 			return $config;
 		}
 
-        # Get items
+		# Get items
 
-        private static function getItems($dir_name) {
+		private static function getItems($dir_name) {
 
 			$items = [];
 
@@ -61,12 +61,12 @@ namespace System\Modules\Extend\Utils {
 				$items[$name] = $config;
 			}
 
-            # ------------------------
+			# ------------------------
 
 			ksort($items); return $items;
 		}
 
-        # Get user defined extension name
+		# Get user defined extension name
 
 		private static function getUserDefined() {
 
@@ -81,7 +81,7 @@ namespace System\Modules\Extend\Utils {
 			return $name;
 		}
 
-        # Check if name valid
+		# Check if name valid
 
 		public static function valid($name) {
 
@@ -108,17 +108,17 @@ namespace System\Modules\Extend\Utils {
 			return (self::valid($name) && isset(self::$items[$name]));
 		}
 
-        # Init extensions list
+		# Init extensions list
 
-        public static function init($section) {
+		public static function init($section) {
 
-            $section = self::getSection($section); $dir_name = self::getDirName($section);
+			$section = self::getSection($section); $dir_name = self::getDirName($section);
 
 			if (!Explorer::isDir($dir_name)) throw new Error\General(self::$error_directory);
 
 			self::$section = $section; self::$dir_name = $dir_name; self::$items = self::getItems($dir_name);
 
-            $selectable = self::$selectable[$section]; $param = self::$param[$section]; $default = self::$default[$section];
+			$selectable = self::$selectable[$section]; $param = self::$param[$section]; $default = self::$default[$section];
 
 			if ($selectable && (false !== ($name = self::getUserDefined()))) $name_valid = true;
 
@@ -129,7 +129,7 @@ namespace System\Modules\Extend\Utils {
 			# ------------------------
 
 			self::$active = $name;
-        }
+		}
 
 		# Return active section
 
@@ -138,20 +138,20 @@ namespace System\Modules\Extend\Utils {
 			return self::$section;
 		}
 
-        # Return directory name
+		# Return directory name
 
 		public static function dirName() {
 
 			return self::$dir_name;
 		}
 
-        # Return items
+		# Return items
 
 		public static function items($section = null) {
 
-            if (null === $section) return self::$items;
+			if (null === $section) return self::$items;
 
-            $section = self::getSection($section); $dir_name = self::getDirName($section);
+			$section = self::getSection($section); $dir_name = self::getDirName($section);
 
 			return (($dir_name !== self::$dir_name) ? self::getItems($dir_name) : self::$items);
 		}
@@ -163,7 +163,7 @@ namespace System\Modules\Extend\Utils {
 			return self::$active;
 		}
 
-        # Get active extension path
+		# Get active extension path
 
 		public static function path() {
 
@@ -172,7 +172,7 @@ namespace System\Modules\Extend\Utils {
 			return (self::$dir_name . self::$active . '/');
 		}
 
-        # Get active extension data
+		# Get active extension data
 
 		public static function data($name = null) {
 
@@ -180,9 +180,9 @@ namespace System\Modules\Extend\Utils {
 
 			if (null === $name) return self::$items[self::$active];
 
-            $name = strval($name);
+			$name = strval($name);
 
 			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : null);
 		}
-    }
+	}
 }

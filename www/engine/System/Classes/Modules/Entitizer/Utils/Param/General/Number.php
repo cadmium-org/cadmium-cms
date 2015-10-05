@@ -2,22 +2,22 @@
 
 namespace System\Modules\Entitizer\Utils\Param\General {
 
-    use System\Modules\Entitizer;
+	use System\Modules\Entitizer;
 
 	abstract class Number extends Entitizer\Utils\Param {
 
-        # Constructor
+		# Constructor
 
-        public function __construct($name) {
+		public function __construct($name) {
 
-            $this->name = strval($name);
-        }
+			$this->name = strval($name);
+		}
 
-        # Validate value
+		# Validate value
 
-        public function validate($value) {
+		public function validate($value) {
 
-            return intabs($value);
-        }
-    }
+			return intabs($value);
+		}
+	}
 }

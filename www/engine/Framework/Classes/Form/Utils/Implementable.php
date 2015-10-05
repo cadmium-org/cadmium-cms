@@ -2,7 +2,7 @@
 
 namespace Form\Utils {
 
-    use Tag;
+	use Tag;
 
 	abstract class Implementable extends Field {
 
@@ -12,23 +12,23 @@ namespace Form\Utils {
 
 		protected function getTag($name, array $attributes = [], $contents = null) {
 
-            $tag = new Tag($name, $attributes, $contents);
+			$tag = new Tag($name, $attributes, $contents);
 
-            $tag->set('name', $this->name);
+			$tag->set('name', $this->name);
 
-            $tag->set('id', str_replace('_', '-', $this->name));
+			$tag->set('id', str_replace('_', '-', $this->name));
 
 			# Set config
 
 			if ($this->error) $tag->set('data-error', 'error');
 
-            if ($this->required) $tag->set('data-required', 'required');
+			if ($this->required) $tag->set('data-required', 'required');
 
 			if ($this->disabled) $tag->set('disabled', 'disabled');
 
 			# ------------------------
 
-            return $tag;
+			return $tag;
 		}
 
 		# Get value
@@ -37,11 +37,11 @@ namespace Form\Utils {
 
 			if ($this->disabled() || !parent::post()) return false;
 
-            if (!$this->set($this->value)) $this->error = true;
+			if (!$this->set($this->value)) $this->error = true;
 
-            # ------------------------
+			# ------------------------
 
-            return true;
+			return true;
 		}
 
 		# Check if error
@@ -69,12 +69,12 @@ namespace Form\Utils {
 			if (boolval($value)) $this->required = true;
 		}
 
-        # Setter interface
+		# Setter interface
 
-        abstract public function set($value);
+		abstract public function set($value);
 
-        # Block getter interface
+		# Block getter interface
 
-        abstract public function block();
+		abstract public function block();
 	}
 }

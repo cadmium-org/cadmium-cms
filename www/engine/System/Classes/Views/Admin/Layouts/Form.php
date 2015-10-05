@@ -7,5 +7,5 @@ namespace System\Views\Admin\Layouts {
 	class Form extends Views\Admin\View {
 
 		protected static $file_name = 'Layouts/Form.tpl';
-    }
+	}
 }

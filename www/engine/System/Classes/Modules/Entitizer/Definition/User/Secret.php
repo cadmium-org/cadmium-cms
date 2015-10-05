@@ -10,13 +10,13 @@ namespace System\Modules\Entitizer\Definition\User {
 
 		# Define presets
 
-        protected function define() {
+		protected function define() {
 
 			# Add params
 
-            $this->hash         ('code');
-            $this->varchar      ('ip', null, true);
-            $this->time         ('time');
-        }
-    }
+			$this->hash         ('code');
+			$this->varchar      ('ip', null, true);
+			$this->time         ('time');
+		}
+	}
 }

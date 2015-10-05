@@ -7,5 +7,5 @@ namespace System\Views\Site\Blocks\Profile {
 	class Edit extends Views\Site\View {
 
 		protected static $file_name = 'Blocks/Profile/Edit.tpl';
-    }
+	}
 }

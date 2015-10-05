@@ -2,40 +2,40 @@
 
 namespace System\Modules\Entitizer\Utils {
 
-    use System\Modules\Entitizer, System\Utils\Pagination, System\Utils\View, Ajax, Form, Language, Number, Request, Template, Url;
+	use System\Modules\Entitizer, System\Utils\Pagination, System\Utils\View, Ajax, Form, Language, Number, Request, Template, Url;
 
-    abstract class Listview {
+	abstract class Listview {
 
-        protected $index = 0, $parent = null, $items = [];
+		protected $index = 0, $parent = null, $items = [];
 
-        # Process parent block
+		# Process parent block
 
-        private function processParent(Template\Utils\Block $parent) {
+		private function processParent(Template\Utils\Block $parent) {
 
-            # Set parent id
+			# Set parent id
 
-            $parent->id = $this->parent->id;
+			$parent->id = $this->parent->id;
 
-            # Set parent naming
+			# Set parent naming
 
-            $naming = ((0 !== $this->parent->id) ? $this->parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
+			$naming = ((0 !== $this->parent->id) ? $this->parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
 
-            $parent->set(static::$naming, $naming);
+			$parent->set(static::$naming, $naming);
 
-            # Set create button
+			# Set create button
 
-            $parent->block('create')->id = $this->parent->id;
+			$parent->block('create')->id = $this->parent->id;
 
-            # Set edit button
+			# Set edit button
 
-            if (0 === $this->parent->id) $parent->block('edit')->disable();
+			if (0 === $this->parent->id) $parent->block('edit')->disable();
 
-            else $parent->block('edit')->id = $this->parent->id;
+			else $parent->block('edit')->id = $this->parent->id;
 		}
 
-        # Get items block
+		# Get items block
 
-        private function getItemsBlock($ajax = false) {
+		private function getItemsBlock($ajax = false) {
 
 			$items = Template::group();
 
@@ -43,50 +43,50 @@ namespace System\Modules\Entitizer\Utils {
 
 				$items->add($view = View::get($ajax ? static::$view_ajax_item : static::$view_item));
 
-                # Set data
+				# Set data
 
 				$view->id = $item['id']; $view->set(static::$naming, $item[static::$naming]);
 
-                # Set remove button
+				# Set remove button
 
-                $super = (static::$super && ($item['id'] === 1));
+				$super = (static::$super && ($item['id'] === 1));
 
-                $has_children = (static::$nesting && ($item['children'] > 0));
+				$has_children = (static::$nesting && ($item['children'] > 0));
 
 				$view->block('remove')->class = ((!$super && !$has_children) ? 'negative' : 'disabled');
 
-                # Add item additional data
+				# Add item additional data
 
-                $this->processItem($view, $item);
+				$this->processItem($view, $item);
 			}
 
-            # ------------------------
+			# ------------------------
 
 			return $items;
 		}
 
-        # Get pagination
+		# Get pagination
 
-        private function getPaginationBlock() {
+		private function getPaginationBlock() {
 
 			$url = new Url(static::$link . (static::$nesting ? ('?parent_id=' . $this->parent->id) : ''));
 
 			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
 		}
 
-        # Get contents
+		# Get contents
 
-        private function getContents($ajax = false) {
+		private function getContents($ajax = false) {
 
 			$contents = View::get($ajax ? static::$view_ajax_main : static::$view_main);
 
-            # Set path
+			# Set path
 
 			if (static::$nesting) $contents->path = $this->parent->path;
 
-            # Process parent block
+			# Process parent block
 
-            if (static::$nesting) $this->processParent($contents->block('parent'));
+			if (static::$nesting) $this->processParent($contents->block('parent'));
 
 			# Set items
 
@@ -98,47 +98,47 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (!$ajax) $contents->pagination = $this->getPaginationBlock();
 
-            # Add additional data for specific entity
+			# Add additional data for specific entity
 
-            $this->processEntity($contents);
+			$this->processEntity($contents);
 
 			# ------------------------
 
 			return $contents;
 		}
 
-        # Handle ajax request
+		# Handle ajax request
 
-        private function handleAjax() {
+		private function handleAjax() {
 
-            $ajax = Ajax::dataset();
+			$ajax = Ajax::dataset();
 
-            # Process form
+			# Process form
 
 			$form = new Form('ajax'); $form->virtual('id');
 
 			if (false === ($post = $form->post())) return $ajax->error();
 
-            # Create parent entity
+			# Create parent entity
 
-            if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('parent_id'));
+			if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('parent_id'));
 
-            # Get children items
+			# Get children items
 
 			$lister = Entitizer::lister(static::$type);
 
-            $this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), $post['id']);
+			$this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), $post['id']);
 
-            # ------------------------
+			# ------------------------
 
-            return $ajax->set('contents', $this->getContents(true)->contents(true));
-        }
+			return $ajax->set('contents', $this->getContents(true)->contents(true));
+		}
 
-        # Handle common request
+		# Handle common request
 
-        public function handle() {
+		public function handle() {
 
-            if (Request::isAjax()) return $this->handleAjax();
+			if (Request::isAjax()) return $this->handleAjax();
 
 			$this->index = Number::format(Request::get('index'), 1, 999999);
 
@@ -156,5 +156,5 @@ namespace System\Modules\Entitizer\Utils {
 
 			return $this->getContents();
 		}
-    }
+	}
 }

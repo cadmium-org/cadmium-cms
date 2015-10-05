@@ -17,12 +17,12 @@ namespace Form\Field {
 
 		# Set value
 
-        public function set($value) {
+		public function set($value) {
 
-            $this->value = boolval($value);
+			$this->value = boolval($value);
 
 			return (!($this->required && (false === $this->value)));
-        }
+		}
 
 		# Get block
 

@@ -7,5 +7,5 @@ namespace System\Views\Site\Main\Status {
 	class Maintenance extends Views\Site\View {
 
 		protected static $file_name = 'Main/Status/Maintenance.tpl';
-    }
+	}
 }

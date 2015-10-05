@@ -7,5 +7,5 @@ namespace System\Views\Admin\Blocks\Install {
 	class Database extends Views\Admin\View {
 
 		protected static $file_name = 'Blocks/Install/Database.tpl';
-    }
+	}
 }

@@ -6,9 +6,9 @@ namespace System\Modules\Profile\Handler {
 
 	class Edit {
 
-        private $form_personal = null, $form_password = null;
+		private $form_personal = null, $form_password = null;
 
-        # Get contents
+		# Get contents
 
 		private function getContents() {
 
@@ -25,7 +25,7 @@ namespace System\Modules\Profile\Handler {
 			return $contents;
 		}
 
-        # Handle request
+		# Handle request
 
 		public function handle() {
 

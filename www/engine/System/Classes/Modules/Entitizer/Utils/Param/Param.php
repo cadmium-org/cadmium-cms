@@ -4,14 +4,14 @@ namespace System\Modules\Entitizer\Utils {
 
 	abstract class Param {
 
-        protected $name = '';
+		protected $name = '';
 
 		# Return name
 
-        public function name() {
+		public function name() {
 
-            return $this->name;
-        }
+			return $this->name;
+		}
 
 		# Constructor interface
 
@@ -28,5 +28,5 @@ namespace System\Modules\Entitizer\Utils {
 		# Key statement getter interface
 
 		abstract public function keyStatement();
-    }
+	}
 }

@@ -4,7 +4,7 @@ return [
 
 	'BROWSE'                                    => 'Browse',
 	'CONTINUE'                                  => 'Continue',
-	'DEFAULT'									=> 'Default',
+	'DEFAULT'                                   => 'Default',
 	'EDIT'                                      => 'Edit',
 	'LOGIN'                                     => 'Log in',
 	'LOGOUT'                                    => 'Log out',
@@ -33,7 +33,7 @@ return [
 
 	# Forms
 
-	'FORM_ERROR_REQUIRED'						=> 'Please fill in all required fields',
+	'FORM_ERROR_REQUIRED'                       => 'Please fill in all required fields',
 
 	# Modals
 

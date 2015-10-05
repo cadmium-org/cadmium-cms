@@ -6,13 +6,13 @@ namespace System\Modules\Entitizer\Form {
 
 	class Menuitem extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct(Entitizer\Controller\Menuitem $menuitem) {
+		public function __construct(Entitizer\Controller\Menuitem $menuitem) {
 
-            parent::__construct('menuitem');
+			parent::__construct('menuitem');
 
-            # Add fields
+			# Add fields
 
 			$this->input('parent_id', $menuitem->parent_id, FORM_INPUT_HIDDEN);
 
@@ -23,6 +23,6 @@ namespace System\Modules\Entitizer\Form {
 			$this->select('target', $menuitem->target, Lister\Target::range());
 
 			$this->input('position', $menuitem->position, FORM_INPUT_TEXT, CONFIG_MENUITEM_POSITION_MAX_LENGTH);
-        }
-    }
+		}
+	}
 }

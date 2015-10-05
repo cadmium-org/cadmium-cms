@@ -7,5 +7,5 @@ namespace System\Views\Site\Blocks {
 	class Page extends Views\Site\View {
 
 		protected static $file_name = 'Blocks/Page.tpl';
-    }
+	}
 }

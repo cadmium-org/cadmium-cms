@@ -10,7 +10,7 @@ namespace System\Modules\Profile\Handler {
 
 		private function getContents() {
 
-            $contents = View::get('Blocks\Profile\Overview');
+			$contents = View::get('Blocks\Profile\Overview');
 
 			# Set general
 

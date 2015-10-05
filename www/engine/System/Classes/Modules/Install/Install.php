@@ -4,11 +4,11 @@ namespace System\Modules {
 
 	abstract class Install {
 
-        private static $requirements = [], $status = false;
+		private static $requirements = [], $status = false;
 
-        # Autoloader
+		# Autoloader
 
-        public static function __autoload() {
+		public static function __autoload() {
 
 			# Check extensions
 
@@ -28,23 +28,23 @@ namespace System\Modules {
 
 			foreach ($writables as $name => $dir) self::$requirements[$name] = is_writable($dir);
 
-            # Set checking status
+			# Set checking status
 
 			self::$status = (!in_array(false, self::$requirements));
-        }
+		}
 
 		# Return list
 
 		public static function requirements() {
 
-            return self::$requirements;
+			return self::$requirements;
 		}
 
-        # Return status
+		# Return status
 
-        public static function status() {
+		public static function status() {
 
-            return self::$status;
-        }
+			return self::$status;
+		}
 	}
 }

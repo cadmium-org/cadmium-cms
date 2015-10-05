@@ -6,13 +6,13 @@ namespace System\Modules\Entitizer\Form {
 
 	class Page extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct(Entitizer\Controller\Page $page) {
+		public function __construct(Entitizer\Controller\Page $page) {
 
-            parent::__construct('page');
+			parent::__construct('page');
 
-            # Add fields
+			# Add fields
 
 			$this->input('parent_id', $page->parent_id, FORM_INPUT_HIDDEN);
 
@@ -33,6 +33,6 @@ namespace System\Modules\Entitizer\Form {
 			$this->checkbox('robots_follow', $page->robots_follow);
 
 			$this->input('contents', $page->contents, FORM_INPUT_TEXTAREA);
-        }
-    }
+		}
+	}
 }

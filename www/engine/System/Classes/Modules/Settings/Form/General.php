@@ -6,15 +6,15 @@ namespace System\Modules\Settings\Form {
 
 	class General extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct('settings');
+			parent::__construct('settings');
 
-            # Add fields
+			# Add fields
 
-            $this->input('site_title', Settings::get('site_title'), FORM_INPUT_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->input('site_title', Settings::get('site_title'), FORM_INPUT_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$this->select('site_status', Settings::get('site_status'), Lister\Status::range());
 
@@ -29,6 +29,6 @@ namespace System\Modules\Settings\Form {
 			$this->select('system_timezone', Settings::get('system_timezone'), Timezone::range(), null, FORM_FIELD_SEARCH);
 
 			$this->checkbox('users_registration', Settings::get('users_registration'));
-        }
-    }
+		}
+	}
 }

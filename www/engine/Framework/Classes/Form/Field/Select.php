@@ -45,7 +45,7 @@ namespace Form\Field {
 
 		# Set value
 
-        public function set($value) {
+		public function set($value) {
 
 			$this->value = strval($value);
 
@@ -56,21 +56,21 @@ namespace Form\Field {
 			# ------------------------
 
 			return (!($this->required && empty($this->value)));
-	    }
+		}
 
 		# Set search
 
 		public function search($value) {
 
-            $this->search = boolval($value);
-        }
+			$this->search = boolval($value);
+		}
 
 		# Set auto
 
 		public function auto($value) {
 
-            $this->auto = boolval($value);
-        }
+			$this->auto = boolval($value);
+		}
 
 		# Get block
 

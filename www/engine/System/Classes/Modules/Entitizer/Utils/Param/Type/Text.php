@@ -6,18 +6,18 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
 
 	class Text extends Entitizer\Utils\Param\General\String {
 
-        # Get field statement
+		# Get field statement
 
-        public function fieldStatement() {
+		public function fieldStatement() {
 
-            return ("`" . $this->name . "` text NOT NULL");
-        }
+			return ("`" . $this->name . "` text NOT NULL");
+		}
 
-        # Get key statement
+		# Get key statement
 
-        public function keyStatement() {
+		public function keyStatement() {
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 }

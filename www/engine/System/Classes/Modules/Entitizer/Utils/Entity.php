@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Utils {
 
-    use System\Modules\Entitizer, DB;
+	use System\Modules\Entitizer, DB;
 
 	abstract class Entity {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		protected $error = false, $id = 0, $data = [];
 
-        # Init parent entities
+		# Init parent entities
 
 		private function getPath() {
 
@@ -22,7 +22,7 @@ namespace System\Modules\Entitizer\Utils {
 
 				if (0 === $entity->id) return [];
 
-                $path[] = array_merge(['id' => $entity->id], $entity->data);
+				$path[] = array_merge(['id' => $entity->id], $entity->data);
 			}
 
 			# ------------------------
@@ -30,13 +30,13 @@ namespace System\Modules\Entitizer\Utils {
 			return array_reverse($path);
 		}
 
-        # Get dataset
+		# Get dataset
 
 		private function getDataset(array $data, $initial = false) {
 
 			$set = [];
 
-            if ($initial && isset($data['id'])) {
+			if ($initial && isset($data['id'])) {
 
 				$set['id'] = $this->definition->id()->validate($data['id']);
 			}
@@ -51,7 +51,7 @@ namespace System\Modules\Entitizer\Utils {
 			return $set;
 		}
 
-        # Count children
+		# Count children
 
 		private function countChildren() {
 
@@ -68,7 +68,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		public function __construct() {
 
-            # Create definition object
+			# Create definition object
 
 			$this->definition = Entitizer::definition(static::$type);
 
@@ -81,33 +81,33 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Preset path
 
-            if (static::$nesting) $this->data['path'] = [];
+			if (static::$nesting) $this->data['path'] = [];
 
 			# Implement entity
 
 			$this->implement();
 		}
 
-        # Init entity
+		# Init entity
 
-        public function init($value, $name = 'id') {
+		public function init($value, $name = 'id') {
 
-            if (0 !== $this->id) return true;
+			if (0 !== $this->id) return true;
 
-            $name = strval($name);
+			$name = strval($name);
 
-            # Check param name
+			# Check param name
 
-            if ($name === 'id') $param = $this->definition->id(); else {
+			if ($name === 'id') $param = $this->definition->id(); else {
 
-                if (false === ($param = $this->definition->get($name))) return false;
+				if (false === ($param = $this->definition->get($name))) return false;
 
 				if (!($param instanceof Entitizer\Utils\Param\Type\Hash) &&
 
 				    !($param instanceof Entitizer\Utils\Param\Type\Unique)) return false;
-            }
+			}
 
-            # Select entity from DB
+			# Select entity from DB
 
 			$selection = array_merge(['id'], array_keys($this->definition->params()));
 
@@ -125,12 +125,12 @@ namespace System\Modules\Entitizer\Utils {
 
 			foreach ($this->definition->params() as $name => $param) {
 
-                $this->data[$name] = $param->validate($data[$name]);
-            }
+				$this->data[$name] = $param->validate($data[$name]);
+			}
 
-            # Init path
+			# Init path
 
-            if (static::$nesting) $this->data['path'] = $this->getPath();
+			if (static::$nesting) $this->data['path'] = $this->getPath();
 
 			# Implement entity
 
@@ -170,11 +170,11 @@ namespace System\Modules\Entitizer\Utils {
 			return ((DB::last() && DB::last()->status) ? DB::last()->rows : false);
 		}
 
-        # Create entity entry in DB
+		# Create entity entry in DB
 
 		public function create(array $data) {
 
-            if (0 !== $this->id) return false;
+			if (0 !== $this->id) return false;
 
 			$set = $this->getDataset($data, true);
 
@@ -192,7 +192,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (static::$nesting) $this->data['path'] = $this->getPath();
 
-            # Implement entity
+			# Implement entity
 
 			$this->implement();
 
@@ -205,7 +205,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		public function edit(array $data) {
 
-            if (0 === $this->id) return false;
+			if (0 === $this->id) return false;
 
 			$set = $this->getDataset($data);
 
@@ -221,7 +221,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (static::$nesting) $this->data['path'] = $this->getPath();
 
-            # Implement entity
+			# Implement entity
 
 			$this->implement();
 
@@ -236,13 +236,13 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (0 === $this->id) return false;
 
-            # Check if entity is removable
+			# Check if entity is removable
 
-            if (static::$super && ($this->id === 1)) return false;
+			if (static::$super && ($this->id === 1)) return false;
 
-            if (static::$nesting && ($this->countChildren() !== 0)) return false;
+			if (static::$nesting && ($this->countChildren() !== 0)) return false;
 
-            # Remove extension entries
+			# Remove extension entries
 
 			foreach (static::$extensions as $extension) {
 
@@ -271,7 +271,7 @@ namespace System\Modules\Entitizer\Utils {
 			return $this->error;
 		}
 
-        # Return data
+		# Return data
 
 		public function __get($name) {
 

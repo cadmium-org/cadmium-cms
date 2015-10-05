@@ -7,5 +7,5 @@ namespace System\Views\Admin\Main {
 	class Form extends Views\Admin\View {
 
 		protected static $file_name = 'Main/Form.tpl';
-    }
+	}
 }

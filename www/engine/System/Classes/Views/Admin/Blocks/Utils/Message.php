@@ -7,5 +7,5 @@ namespace System\Views\Admin\Blocks\Utils {
 	class Message extends Views\Admin\View {
 
 		protected static $file_name = 'Blocks/Utils/Message.tpl';
-    }
+	}
 }

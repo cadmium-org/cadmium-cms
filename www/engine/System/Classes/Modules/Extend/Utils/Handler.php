@@ -21,7 +21,7 @@ namespace System\Modules\Extend\Utils {
 
 			$items = self::items($this->section); $active = key($items);
 
-            $name = Settings::get(self::$param[$this->section]); $default = self::$default[$this->section];
+			$name = Settings::get(self::$param[$this->section]); $default = self::$default[$this->section];
 
 			if (self::valid($name) && isset($items[$name])) $active = $name;
 
@@ -85,7 +85,7 @@ namespace System\Modules\Extend\Utils {
 			return $contents;
 		}
 
-        # Handle ajax request
+		# Handle ajax request
 
 		private function handleAjax() {
 
@@ -120,7 +120,7 @@ namespace System\Modules\Extend\Utils {
 
 			$this->items = $this->getHandlerItems();
 
-            if (Request::isAjax()) return $this->handleAjax();
+			if (Request::isAjax()) return $this->handleAjax();
 
 			# ------------------------
 

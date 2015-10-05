@@ -6,11 +6,11 @@ namespace System\Views {
 
 	abstract class View extends Template\Utils\Block {
 
-        # Constructor
+		# Constructor
 
-        public function __construct($file_name) {
+		public function __construct($file_name) {
 
-            if (false !== ($contents = Explorer::contents($file_name))) parent::__construct($contents);
-        }
-    }
+			if (false !== ($contents = Explorer::contents($file_name))) parent::__construct($contents);
+		}
+	}
 }

@@ -55,7 +55,7 @@ namespace Form\Field {
 
 		# Set value
 
-        public function set($value) {
+		public function set($value) {
 
 			$this->value = strval($value);
 
@@ -67,41 +67,41 @@ namespace Form\Field {
 
 				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
 
-    			$this->value = String::input($this->value, $multiline, $this->maxlength);
+				$this->value = String::input($this->value, $multiline, $this->maxlength);
 
-    			if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
-            }
+				if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
+			}
 
-            return (!($this->required && ('' === $this->value)));
-	    }
+			return (!($this->required && ('' === $this->value)));
+		}
 
 		# Set readonly
 
-        public function readonly($value) {
+		public function readonly($value) {
 
-            $this->readonly = boolval($value);
-        }
+			$this->readonly = boolval($value);
+		}
 
 		# Set translit
 
 		public function translit($value) {
 
-            $this->translit = boolval($value);
-        }
+			$this->translit = boolval($value);
+		}
 
 		# Set autofocus
 
 		public function autofocus($value) {
 
-            $this->autofocus = boolval($value);
-        }
+			$this->autofocus = boolval($value);
+		}
 
 		# Set autocomplete
 
 		public function autocomplete($value) {
 
-            $this->autocomplete = boolval($value);
-        }
+			$this->autocomplete = boolval($value);
+		}
 
 		# Get block
 
@@ -119,7 +119,7 @@ namespace Form\Field {
 
 				else $tag = $this->getText();
 
-	            # Set appearance
+				# Set appearance
 
 				if (0 !== $this->maxlength) $tag->set('maxlength', $this->maxlength);
 

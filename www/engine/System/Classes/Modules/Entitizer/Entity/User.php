@@ -33,11 +33,11 @@ namespace System\Modules\Entitizer\Entity {
 			return trim($this->data['first_name'] . ' ' . $this->data['last_name']);
 		}
 
-        # Implement entity
+		# Implement entity
 
-        protected function implement() {
+		protected function implement() {
 
-            $this->data['full_name'] = $this->getFullName();
-        }
+			$this->data['full_name'] = $this->getFullName();
+		}
 	}
 }

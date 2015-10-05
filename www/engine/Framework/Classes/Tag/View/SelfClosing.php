@@ -2,9 +2,9 @@
 
 namespace Tag\View {
 
-    use Template;
+	use Template;
 
-    /**
+	/**
 	 * @property-write string $name
 	 * @property-write array $attributes
 	 */

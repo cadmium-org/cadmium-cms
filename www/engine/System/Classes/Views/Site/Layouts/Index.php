@@ -7,5 +7,5 @@ namespace System\Views\Site\Layouts {
 	class Index extends Views\Site\View {
 
 		protected static $file_name = 'Layouts/Index.tpl';
-    }
+	}
 }

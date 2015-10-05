@@ -6,18 +6,18 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
 
 	class Unique extends Varchar {
 
-        # Constructor
+		# Constructor
 
-        public function __construct($name, $maxlength = null) {
+		public function __construct($name, $maxlength = null) {
 
-            parent::__construct($name, $maxlength);
-        }
+			parent::__construct($name, $maxlength);
+		}
 
-        # Get key statement
+		# Get key statement
 
-        public function keyStatement() {
+		public function keyStatement() {
 
-            return ("UNIQUE KEY `" . $this->name . "` (`" . $this->name . "`)");
-        }
-    }
+			return ("UNIQUE KEY `" . $this->name . "` (`" . $this->name . "`)");
+		}
+	}
 }

@@ -24,7 +24,7 @@ namespace System\Modules\Entitizer\Controller {
 
 	class User extends Entitizer\Utils\Controller {
 
-        # Constructor
+		# Constructor
 
 		public function __construct($id) {
 
@@ -78,7 +78,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			$data['name']               = $name;
 			$data['email']              = $email;
-            $data['rank']               = $rank;
+			$data['rank']               = $rank;
 			$data['first_name']         = $first_name;
 			$data['last_name']          = $last_name;
 			$data['sex']                = $sex;

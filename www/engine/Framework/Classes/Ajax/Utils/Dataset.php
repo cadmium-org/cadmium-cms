@@ -16,34 +16,34 @@ namespace Ajax\Utils {
 
 			# ------------------------
 
-    		return $this;
+			return $this;
 		}
 
-    	# Set error
+		# Set error
 
-    	public function error($value = null) {
+		public function error($value = null) {
 
-    		if (null !== $value) $this->set('error', $value);
+			if (null !== $value) $this->set('error', $value);
 
 			$this->status = false;
 
 			# ------------------------
 
-    		return $this;
-    	}
+			return $this;
+		}
 
-        # Return data
+		# Return data
 
-        public function data() {
+		public function data() {
 
-            return $this->data;
-        }
+			return $this->data;
+		}
 
-        # Return status
+		# Return status
 
-        public function status() {
+		public function status() {
 
-            return $this->status;
-        }
+			return $this->status;
+		}
 	}
 }

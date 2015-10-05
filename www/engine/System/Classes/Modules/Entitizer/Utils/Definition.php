@@ -35,65 +35,65 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Add relation param
 
-        protected function relation($name) {
+		protected function relation($name) {
 
 			$this->addParam(new Param\Type\Relation($name));
-        }
+		}
 
 		# Add boolean param
 
-        protected function boolean($name, $default = false, $index = false) {
+		protected function boolean($name, $default = false, $index = false) {
 
 			$this->addParam(new Param\Type\Boolean($name, $default, $index));
-        }
+		}
 
 		# Add range param
 
-        protected function range($name, $default = 0, $index = false) {
+		protected function range($name, $default = 0, $index = false) {
 
-            $this->addParam(new Param\Type\Range($name, $default, $index));
-        }
+			$this->addParam(new Param\Type\Range($name, $default, $index));
+		}
 
 		# Add varchar param
 
-        protected function varchar($name, $maxlength = null, $index = false) {
+		protected function varchar($name, $maxlength = null, $index = false) {
 
-            $this->addParam(new Param\Type\Varchar($name, $maxlength, $index));
-        }
+			$this->addParam(new Param\Type\Varchar($name, $maxlength, $index));
+		}
 
 		# Add unique param
 
-        protected function unique($name, $maxlength = null) {
+		protected function unique($name, $maxlength = null) {
 
-            $this->addParam(new Param\Type\Unique($name, $maxlength));
-        }
+			$this->addParam(new Param\Type\Unique($name, $maxlength));
+		}
 
 		# Add hash param
 
-        protected function hash($name) {
+		protected function hash($name) {
 
-            $this->addParam(new Param\Type\Hash($name));
-        }
+			$this->addParam(new Param\Type\Hash($name));
+		}
 
 		# Add text param
 
-        protected function text($name) {
+		protected function text($name) {
 
-            $this->addParam(new Param\Type\Text($name));
-        }
+			$this->addParam(new Param\Type\Text($name));
+		}
 
 		# Add time param
 
-        protected function time($name) {
+		protected function time($name) {
 
-            $this->addParam(new Param\Type\Time($name));
-        }
+			$this->addParam(new Param\Type\Time($name));
+		}
 
 		# Constructor
 
 		public function __construct() {
 
-            $this->id = new Param\Type\Id('id', static::$auto_increment);
+			$this->id = new Param\Type\Id('id', static::$auto_increment);
 
 			if (static::$nesting) $this->relation('parent_id');
 
@@ -106,15 +106,15 @@ namespace System\Modules\Entitizer\Utils {
 
 		public function createTable() {
 
-            $set = array_merge($this->getStatements('fieldStatement'), $this->getStatements('keyStatement'));
+			$set = array_merge($this->getStatements('fieldStatement'), $this->getStatements('keyStatement'));
 
-            $query = ("CREATE TABLE IF NOT EXISTS `" . static::$table . "`") .
+			$query = ("CREATE TABLE IF NOT EXISTS `" . static::$table . "`") .
 
-                     ("(" . implode(", ", $set) . ") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+					 ("(" . implode(", ", $set) . ") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-            # ------------------------
+			# ------------------------
 
-            return (DB::send($query) && DB::last()->status);
+			return (DB::send($query) && DB::last()->status);
 		}
 
 		# Return id param
@@ -133,15 +133,15 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Return param by name
 
-        public function get($name) {
+		public function get($name) {
 
 			$name = strval($name);
 
 			return (isset($this->params[$name]) ? $this->params[$name] : false);
-        }
+		}
 
 		# Definer interface
 
 		abstract protected function define();
-    }
+	}
 }

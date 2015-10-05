@@ -7,5 +7,5 @@ namespace System\Views\Site\Blocks\Auth\Mail {
 	class Register extends Views\Site\View {
 
 		protected static $file_name = 'Blocks/Auth/Mail/Register.tpl';
-    }
+	}
 }

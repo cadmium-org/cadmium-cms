@@ -9,5 +9,5 @@ namespace System\Modules\Entitizer\Common {
 		protected static $auto_increment = true, $nesting = true, $super = false;
 
 		protected static $extensions = [];
-    }
+	}
 }

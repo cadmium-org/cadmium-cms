@@ -6,25 +6,25 @@ namespace System\Modules\Auth\Utils {
 
 	abstract class Handler {
 
-        protected $view = '', $code = '', $form = null;
+		protected $view = '', $code = '', $form = null;
 
-        # Get contents
+		# Get contents
 
-        protected function getContents() {
+		protected function getContents() {
 
-            $contents = View::get($this->view);
+			$contents = View::get($this->view);
 
-            # Set code
+			# Set code
 
 			$contents->code = $this->code;
 
-            # Implement form
+			# Implement form
 
-            if (null !== $this->form) $this->form->implement($contents);
+			if (null !== $this->form) $this->form->implement($contents);
 
-            # ------------------------
+			# ------------------------
 
-            return $contents;
-        }
+			return $contents;
+		}
 	}
 }

@@ -6,7 +6,7 @@ namespace System\Modules\Install\Form {
 
 	class Check extends Form {
 
-        # Get languages list
+		# Get languages list
 
 		private function getLanguages() {
 
@@ -32,17 +32,17 @@ namespace System\Modules\Install\Form {
 			return $templates;
 		}
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct();
+			parent::__construct();
 
-            # Add fields
+			# Add fields
 
-            $this->select('language', Extend\Languages::active(), $this->getLanguages(), null, FORM_FIELD_AUTO);
+			$this->select('language', Extend\Languages::active(), $this->getLanguages(), null, FORM_FIELD_AUTO);
 
 			$this->select('template', Extend\Templates::active(), $this->getTemplates(), null, FORM_FIELD_AUTO);
-        }
-    }
+		}
+	}
 }

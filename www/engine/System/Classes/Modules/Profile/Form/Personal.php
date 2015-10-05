@@ -6,15 +6,15 @@ namespace System\Modules\Profile\Form {
 
 	class Personal extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct('edit');
+			parent::__construct('edit');
 
-            # Add fields
+			# Add fields
 
-            $this->input('email', Auth::user()->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->input('email', Auth::user()->email, FORM_INPUT_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$this->input('first_name', Auth::user()->first_name, FORM_INPUT_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 
@@ -27,6 +27,6 @@ namespace System\Modules\Profile\Form {
 			$this->select('country', Auth::user()->country, Country::range(), '----', FORM_FIELD_SEARCH);
 
 			$this->select('timezone', Auth::user()->timezone, Timezone::range(), null, FORM_FIELD_SEARCH);
-        }
-    }
+		}
+	}
 }

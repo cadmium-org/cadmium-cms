@@ -70,7 +70,7 @@ namespace System\Modules\Install\Utils {
 			return (DB::insert(TABLE_MENU, $menu, true) && DB::last()->status);
 		}
 
-        # Create tables
+		# Create tables
 
 		public static function create() {
 

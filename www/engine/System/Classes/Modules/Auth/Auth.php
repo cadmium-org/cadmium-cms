@@ -117,10 +117,10 @@ namespace System\Modules {
 
 		# Check if initial registration required
 
-        public static function initial() {
+		public static function initial() {
 
 			return (0 === Informer::countUsers(true));
-        }
+		}
 
 		# Check if authorized
 

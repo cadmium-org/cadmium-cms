@@ -7,5 +7,5 @@ namespace System\Views\Admin\Blocks\Auth {
 	class Reset extends Views\Admin\View {
 
 		protected static $file_name = 'Blocks/Auth/Reset.tpl';
-    }
+	}
 }

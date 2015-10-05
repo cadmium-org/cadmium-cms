@@ -2,17 +2,17 @@
 
 namespace System\Modules\Entitizer\Utils {
 
-    abstract class Controller {
+	abstract class Controller {
 
-        protected $entity = null;
+		protected $entity = null;
 
-        # Return entity data
+		# Return entity data
 
-        public function __get($name) {
+		public function __get($name) {
 
-            if (null === $this->entity) return null;
+			if (null === $this->entity) return null;
 
-            return $this->entity->$name;
-        }
-    }
+			return $this->entity->$name;
+		}
+	}
 }

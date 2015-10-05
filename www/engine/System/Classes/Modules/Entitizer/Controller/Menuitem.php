@@ -15,7 +15,7 @@ namespace System\Modules\Entitizer\Controller {
 
 	class Menuitem extends Entitizer\Utils\Controller {
 
-        # Constructor
+		# Constructor
 
 		public function __construct($id) {
 

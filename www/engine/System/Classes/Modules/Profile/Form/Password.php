@@ -6,19 +6,19 @@ namespace System\Modules\Profile\Form {
 
 	class Password extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct('edit');
+			parent::__construct('edit');
 
-            # Add fields
+			# Add fields
 
-            $this->input('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->input('password', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$this->input('password_new', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
 			$this->input('password_retype', '', FORM_INPUT_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-        }
-    }
+		}
+	}
 }

@@ -14,7 +14,7 @@ return [
 	'USER_ERROR_EDIT_PERSONAL'                      => 'Error saving personal data',
 	'USER_ERROR_EDIT_PASSWORD'                      => 'Error changing password',
 
-	'USER_ERROR_NAME_INVALID'                 		=> 'Invalid user name',
+	'USER_ERROR_NAME_INVALID'                       => 'Invalid user name',
 	'USER_ERROR_NAME_INCORRECT'                     => 'User name not found',
 	'USER_ERROR_NAME_DUPLICATE'                     => 'User name is already in use',
 	'USER_ERROR_EMAIL_INVALID'                      => 'Invalid e-mail',

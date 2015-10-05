@@ -7,5 +7,5 @@ namespace System\Views\Admin\Blocks\Informer {
 	class Dashboard extends Views\Admin\View {
 
 		protected static $file_name = 'Blocks/Informer/Dashboard.tpl';
-    }
+	}
 }

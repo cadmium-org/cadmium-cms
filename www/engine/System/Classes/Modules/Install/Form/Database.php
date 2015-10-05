@@ -6,13 +6,13 @@ namespace System\Modules\Install\Form {
 
 	class Database extends Form {
 
-        # Constructor
+		# Constructor
 
-        public function __construct() {
+		public function __construct() {
 
-            parent::__construct();
+			parent::__construct();
 
-            # Add fields
+			# Add fields
 
 			$this->input('database_server', 'localhost', FORM_INPUT_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
@@ -21,6 +21,6 @@ namespace System\Modules\Install\Form {
 			$this->input('database_password', '', FORM_INPUT_TEXT, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '');
 
 			$this->input('database_name', '', FORM_INPUT_TEXT, CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
-        }
-    }
+		}
+	}
 }
