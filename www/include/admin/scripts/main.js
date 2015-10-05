@@ -482,7 +482,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, false, { 'ajax_action': 'remove', 'ajax_id' : item.id });
+			Main.ajax(this, ('/admin/system/users/edit?id=' + item.id), { 'ajax_action': 'remove' });
 		},
 
 		'handle' : function(data) {
