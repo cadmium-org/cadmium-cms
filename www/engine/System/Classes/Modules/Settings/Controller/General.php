@@ -10,7 +10,7 @@ namespace System\Modules\Settings\Controller {
 
 		public static function process(array $post) {
 
-			$errors = []
+			$errors = [];
 
 			$errors['system_url']       = 'SETTINGS_ERROR_SYSTEM_URL';
 			$errors['system_email']     = 'SETTINGS_ERROR_SYSTEM_EMAIL';
