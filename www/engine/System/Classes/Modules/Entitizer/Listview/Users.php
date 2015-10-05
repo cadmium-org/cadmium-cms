@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Listview {
 
-	use System\Modules\Entitizer, System\Utils\Lister, Template;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Lister, Template;
 
 	class Users extends Entitizer\Utils\Listview {
 
@@ -33,6 +33,8 @@ namespace System\Modules\Entitizer\Listview {
 		protected function processItem(Template\Utils\Block $view, array $data) {
 
 			$view->rank = Lister\Rank::get($data['rank']);
+
+			if ($data['id'] === Auth::user()->id) $view->block('remove')->class = 'disabled';
 		}
 	}
 }
