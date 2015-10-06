@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Controller {
 
-	use System\Modules\Entitizer, DB, String, Validate;
+	use System\Modules\Auth, System\Modules\Entitizer, DB, String, Validate;
 
 	/**
 	 * @property-read int $id
@@ -53,7 +53,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Validate password
 
-			if ((0 !== $this->entity->id) && ('' !== $password)) {
+			if ((0 === $this->entity->id) || ('' !== $password)) {
 
 				if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
@@ -86,7 +86,7 @@ namespace System\Modules\Entitizer\Controller {
 			$data['country']            = $country;
 			$data['timezone']           = $timezone;
 
-			if ((0 !== $this->entity->id) && ('' !== $password)) {
+			if ((0 === $this->entity->id) || ('' !== $password)) {
 
 				$data['auth_key']           = String::random(40);
 				$data['password']           = String::encode($auth_key, $password);
