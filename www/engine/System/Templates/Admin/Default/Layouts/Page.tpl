@@ -130,7 +130,7 @@
 
 	</div>
 
-	<div class="ui long large modal" id="modal-lister">
+	<div class="ui large modal" id="modal-lister">
 
 		<i class="close icon"></i>
 
