@@ -84,7 +84,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Process parent block
 
-			if (static::$nesting) $this->processParent($contents->block('parent'));
+			if (static::$nesting && !$ajax) $this->processParent($contents->block('parent'));
 
 			# Set items
 

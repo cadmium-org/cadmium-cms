@@ -66,6 +66,8 @@
 
 					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.load();"><i class="search icon"></i></a>
 
+					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.select(0);"><i class="close icon"></i></a>
+
 				</div>
 
 			</div>

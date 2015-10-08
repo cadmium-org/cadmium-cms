@@ -1,4 +1,4 @@
-<div class="ui top attached segment">
+<div class="ui segment">
 
 	<div class="ui breadcrumb">
 
@@ -17,22 +17,6 @@
 	</div>
 
 </div>
-
-{ block:parent }
-
-<div class="ui bottom attached stackable menu">
-
-	<a class="item" onclick="Main.PagesLoader.select($id$, '$title$', '$link$');"><i class="checkmark icon"></i> %PAGES_ITEM_SELECT%</a>
-
-	{ block:browse }
-
-	<a class="item" href="$link$" target="_blank"><i class="external icon"></i> %PAGES_ITEM_BROWSE%</a>
-
-	{ / block:browse }
-
-</div>
-
-{ / block:parent }
 
 <table class="ui table">
 
