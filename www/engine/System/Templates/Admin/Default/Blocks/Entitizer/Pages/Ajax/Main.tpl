@@ -22,7 +22,7 @@
 
 <div class="ui bottom attached stackable menu">
 
-	<a class="item" onclick="Main.PagesLoader.select($id$, '$title$');"><i class="checkmark icon"></i> %PAGES_ITEM_SELECT%</a>
+	<a class="item" onclick="Main.PagesLoader.select($id$, '$title$', '$link$');"><i class="checkmark icon"></i> %PAGES_ITEM_SELECT%</a>
 
 	{ block:browse }
 

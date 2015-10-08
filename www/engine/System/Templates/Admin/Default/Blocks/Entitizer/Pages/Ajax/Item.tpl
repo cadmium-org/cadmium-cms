@@ -1,4 +1,4 @@
-<tr data-id="$id$" data-title="$title$">
+<tr data-id="$id$" data-title="$title$" data-link="$link$">
 
 	<td><i class="$icon$ icon"></i> <a href="#" onclick="Main.PagesLoader.load($id$);">$title$</a></td>
 

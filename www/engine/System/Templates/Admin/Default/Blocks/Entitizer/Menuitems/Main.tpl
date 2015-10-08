@@ -78,7 +78,13 @@
 
 				<label for="menuitem-text">%MENUITEM_FIELD_TEXT%</label>
 
-				{ block:field_menuitem_text / }
+				<div class="ui action input">
+
+					{ block:field_menuitem_text / }
+
+					<a class="ui teal icon button" onclick="Main.PagesLoader.load();"><i class="file text outline icon"></i></a>
+
+				</div>
 
 			</div>
 
