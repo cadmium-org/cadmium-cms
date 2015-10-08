@@ -62,7 +62,7 @@
 
 				<div class="ui action input">
 
-					<input type="text" id="page-parent-title" value="$title$" readonly="readonly" />
+					<input type="text" id="page-parent-title" value="$title$" placeholder="%NONE%" readonly="readonly" />
 
 					<a class="ui teal icon button" onclick="Main.PagesLoader.load();"><i class="search icon"></i></a>
 

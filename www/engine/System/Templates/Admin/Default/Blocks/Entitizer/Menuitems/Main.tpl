@@ -62,7 +62,7 @@
 
 				<div class="ui action input">
 
-					<input type="text" id="menuitem-parent-text" value="$text$" readonly="readonly" />
+					<input type="text" id="menuitem-parent-text" value="$text$" placeholder="%NONE%" readonly="readonly" />
 
 					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.load();"><i class="search icon"></i></a>
 

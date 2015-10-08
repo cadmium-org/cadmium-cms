@@ -18,9 +18,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Set parent naming
 
-			$naming = ((0 !== $this->parent->id) ? $this->parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
-
-			$parent->set(static::$naming, $naming);
+			$parent->set(static::$naming, $this->parent->__get(static::$naming));
 
 			# Set create button
 
