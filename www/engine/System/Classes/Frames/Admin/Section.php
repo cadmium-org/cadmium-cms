@@ -165,7 +165,7 @@ namespace System\Frames\Admin {
 
 					if (Template::isSettable($result = $this->handle())) return $this->displayPage($result);
 
-					if (Ajax::isDataset($result)) return Ajax::output($result);
+					if (Ajax::isResponse($result)) return Ajax::output($result);
 				}
 			}
 

@@ -89,7 +89,7 @@ namespace System\Modules\Extend\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::dataset();
+			$ajax = Ajax::response();
 
 			# Create form
 

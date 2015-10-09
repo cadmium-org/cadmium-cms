@@ -90,7 +90,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::dataset();
+			$ajax = Ajax::response();
 
 			# Process form
 
