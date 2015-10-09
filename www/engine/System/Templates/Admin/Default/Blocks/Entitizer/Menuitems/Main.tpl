@@ -62,9 +62,11 @@
 
 				<div class="ui action input">
 
-					<input type="text" id="menuitem-parent-text" value="$text$" readonly="readonly" />
+					<input type="text" id="menuitem-parent-text" value="$text$" placeholder="%NONE%" readonly="readonly" />
 
 					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.load();"><i class="search icon"></i></a>
+
+					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.select(0);"><i class="close icon"></i></a>
 
 				</div>
 
@@ -78,7 +80,13 @@
 
 				<label for="menuitem-text">%MENUITEM_FIELD_TEXT%</label>
 
-				{ block:field_menuitem_text / }
+				<div class="ui action input">
+
+					{ block:field_menuitem_text / }
+
+					<a class="ui teal icon button" onclick="Main.PagesLoader.load();"><i class="file text outline icon"></i></a>
+
+				</div>
 
 			</div>
 

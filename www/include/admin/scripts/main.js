@@ -176,6 +176,8 @@ var Main = {
 
 		'locked' : false, 'id' : false, 'parent_id' : false, 'parent_title' : false,
 
+		'menuitem_text' : false, 'menuitem_link' : false,
+
 		'init' : function() {
 
 			this.id = parseInt($('input:hidden#page-id[name=id]').val());
@@ -183,6 +185,10 @@ var Main = {
 			this.parent_id = $('input#page-parent-id');
 
 			this.parent_title = $('input#page-parent-title');
+
+			this.menuitem_text = $('input#menuitem-text');
+
+			this.menuitem_link = $('input#menuitem-link');
 		},
 
 		'load' : function(parent_id) {
@@ -204,13 +210,13 @@ var Main = {
 
 				content.html(data.contents).find('table tbody tr').each(function() {
 
-					var row = $(this), id = row.data('id'), title = row.data('title');
+					var row = $(this), id = row.data('id'), title = row.data('title'), link = row.data('link');
 
 					var selector = row.find('a[data-action=select]');
 
 					if (id == handler.parent_id.val()) selector.addClass('positive');
 
-					selector.click(function() { handler.select(id, title); });
+					selector.click(function() { handler.select(id, title, link); });
 
 				}).find('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
 
@@ -220,11 +226,11 @@ var Main = {
 			this.locked = false; return null;
 		},
 
-		'select' : function(parent_id, title) {
+		'select' : function(parent_id, title, link) {
 
-			this.parent_id.val(parent_id);
+			this.parent_id.val(parent_id); this.parent_title.val(title);
 
-			this.parent_title.val(title);
+			this.menuitem_text.val(title); this.menuitem_link.val(link);
 
 			$('#modal-lister').modal('hide');
 		}
@@ -327,9 +333,7 @@ var Main = {
 
 		'select' : function(parent_id, text) {
 
-			this.parent_id.val(parent_id);
-
-			this.parent_text.val(text);
+			this.parent_id.val(parent_id); this.parent_text.val(text);
 
 			$('#modal-lister').modal('hide');
 		}

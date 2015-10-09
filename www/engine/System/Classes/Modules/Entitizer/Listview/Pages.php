@@ -28,6 +28,8 @@ namespace System\Modules\Entitizer\Listview {
 
 		protected function processEntity(Template\Utils\Block $contents) {
 
+			$contents->block('parent')->link = $this->parent->link;
+
 			if (0 === $this->parent->id) $contents->block('parent')->block('browse')->disable();
 
 			else $contents->block('parent')->block('browse')->link = $this->parent->link;
@@ -37,13 +39,17 @@ namespace System\Modules\Entitizer\Listview {
 
 		protected function processItem(Template\Utils\Block $view, array $data) {
 
+			$view->link = ($link = ($this->parent->link . '/' . $data['name']));
+
 			$view->icon = ((0 === $data['children']) ? 'file text outline' : 'folder');
 
 			$view->access = Lister\Access::get($data['access']);
 
+			# Set browse button
+
 			$view->block('browse')->class = (('' !== $data['visibility']) ? 'primary' : 'disabled');
 
-			$view->block('browse')->link = ($this->parent->link . '/' . $data['name']);
+			$view->block('browse')->link = $link;
 		}
 	}
 }

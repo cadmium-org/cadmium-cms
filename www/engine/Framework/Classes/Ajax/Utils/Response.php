@@ -2,7 +2,7 @@
 
 namespace Ajax\Utils {
 
-	class Dataset {
+	class Response {
 
 		private $data = [], $status = true;
 

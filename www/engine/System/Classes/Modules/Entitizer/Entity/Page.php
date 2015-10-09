@@ -31,14 +31,14 @@ namespace System\Modules\Entitizer\Entity {
 
 		private function getLink() {
 
-			return ('/' . implode('/', Arr::subvalExtract($this->data['path'], 'name')));
+			return (($this->id !== 0) ? ('/' . implode('/', Arr::subvalExtract($this->data['path'], 'name'))) : '');
 		}
 
 		# Get canonical
 
 		private function getCanonical() {
 
-			return (($this->id !== 1) ? $this->data['link'] : '');
+			return (($this->id !== 0) ? (($this->id !== 1) ? $this->data['link'] : '') : '');
 		}
 
 		# Implement entity

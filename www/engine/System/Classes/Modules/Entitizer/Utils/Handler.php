@@ -40,9 +40,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$parent = Entitizer::create(static::$type, $this->entity->parent_id);
 
-			$title = ((0 !== $parent->id) ? $parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
-
-			$selector->set(static::$naming, $title);
+			$selector->set(static::$naming, $parent->__get(static::$naming));
 		}
 
 		# Get contents
@@ -92,7 +90,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::dataset();
+			$ajax = Ajax::response();
 
 			# Process form
 

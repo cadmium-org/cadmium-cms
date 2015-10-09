@@ -41,6 +41,8 @@ namespace System\Modules\Entitizer\Listview {
 
 			$view->position = $data['position'];
 
+			# Set browse button
+
 			$view->block('browse')->class = (('' !== $data['link']) ? 'primary' : 'disabled');
 
 			$view->block('browse')->link = $data['link'];

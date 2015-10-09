@@ -18,9 +18,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Set parent naming
 
-			$naming = ((0 !== $this->parent->id) ? $this->parent->__get(static::$naming) : ('- ' . Language::get('NONE')));
-
-			$parent->set(static::$naming, $naming);
+			$parent->set(static::$naming, $this->parent->__get(static::$naming));
 
 			# Set create button
 
@@ -86,7 +84,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Process parent block
 
-			if (static::$nesting) $this->processParent($contents->block('parent'));
+			if (static::$nesting && !$ajax) $this->processParent($contents->block('parent'));
 
 			# Set items
 
@@ -111,7 +109,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::dataset();
+			$ajax = Ajax::response();
 
 			# Process form
 

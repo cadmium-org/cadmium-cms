@@ -4,27 +4,27 @@ namespace {
 
 	abstract class Ajax {
 
-		# Create new dataset
+		# Create new response
 
-		public static function dataset() {
+		public static function response() {
 
-			return new Ajax\Utils\Dataset();
+			return new Ajax\Utils\Response();
 		}
 
-		# Check if object is dataset
+		# Check if object is response
 
-		public static function isDataset($object) {
+		public static function isResponse($object) {
 
-			return ($object instanceof Ajax\Utils\Dataset);
+			return ($object instanceof Ajax\Utils\Response);
 		}
 
 		# Output JSON data
 
-		public static function output(Ajax\Utils\Dataset $dataset) {
+		public static function output(Ajax\Utils\Response $response) {
 
 			Headers::nocache(); Headers::status(STATUS_CODE_200); Headers::content(MIME_TYPE_JSON);
 
-			echo json_encode(array_merge(['status' => intval($dataset->status())], $dataset->data()));
+			echo json_encode(array_merge(['status' => intval($response->status())], $response->data()));
 		}
 	}
 }
