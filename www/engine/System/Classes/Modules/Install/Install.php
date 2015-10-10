@@ -18,7 +18,7 @@ namespace System\Modules {
 
 			# Check mod_rewrite
 
-			$rewrite = (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()));
+			$rewrite = (getenv('HTTP_MOD_REWRITE') === 'on');
 
 			self::$requirements['rewrite'] = $rewrite;
 
