@@ -57,6 +57,8 @@ var Main = {
 			sidebar.append(items.children().clone());
 
 			sidebar.find('.ui.dropdown').removeClass('ui dropdown');
+
+			sidebar.find('.item').click(function() { sidebar.sidebar('hide'); });
 		}
 
 		if (width < 768) { items.hide(); launcher.show(); }
