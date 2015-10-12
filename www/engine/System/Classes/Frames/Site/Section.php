@@ -76,6 +76,13 @@ namespace System\Frames\Site {
 
 			$layout->copyright = Date::year();
 
+			# Set CMS info
+
+			$layout->cadmium_home       = CADMIUM_HOME;
+			$layout->cadmium_copy       = CADMIUM_COPY;
+			$layout->cadmium_name       = CADMIUM_NAME;
+			$layout->cadmium_version    = CADMIUM_VERSION;
+
 			# ------------------------
 
 			return $layout;
