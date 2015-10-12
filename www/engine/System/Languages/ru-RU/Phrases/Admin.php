@@ -53,7 +53,8 @@ return [
 	'DASHBOARD_GROUP_DATABASE'                  => 'База данных',
 
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <b>install.php</b> по-прежнему находится в корневой директории сайта. Рекомендуется удалить его.',
-	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'Похоже, Вы пока не редактировали конфигурацию сайта. Перейдите на страницу <a href="/admin/system/settings">Настроек</a> для ввода актуальных значений.',
+	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'Похоже, Вы пока не редактировали конфигурацию сайта. '.
+	                                               'Перейдите на страницу <a href="/admin/system/settings">Настроек</a> для ввода актуальных значений.',
 
 	# Pages
 
@@ -133,6 +134,7 @@ return [
 	'SETTINGS_GROUP_EXTRA'                      => 'Extra settings',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название сайта',
+	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган сайта',
 	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус сайта',
 	'SETTINGS_FIELD_SITE_DESCRIPTION'           => 'Описание',
 	'SETTINGS_FIELD_SITE_KEYWORDS'              => 'Ключевые слова',
@@ -161,5 +163,9 @@ return [
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версия CKEditor',
 
 	'INFORMATION_GROUP_CORE'                    => 'Ядро',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО'
+	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+
+	# Other
+
+	'FEATURE_NOT_AVAILABLE'                     => 'Функция находится в разработке'
 ];

@@ -60,7 +60,5 @@ return [
 	'STATUS_TEXT_UPDATE'                        => 'На сайте проводится обновление. Пожалуйста, зайдите позже.',
 
 	'STATUS_LINK_MAIN'                          => 'Главная страница',
-	'STATUS_LINK_RELOAD'                        => 'Обновить страницу',
-
-	'FEATURE_NOT_AVAILABLE'                     => 'Функция находится в разработке'
+	'STATUS_LINK_RELOAD'                        => 'Обновить страницу'
 ];

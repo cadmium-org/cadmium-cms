@@ -60,7 +60,5 @@ return [
 	'STATUS_TEXT_UPDATE'                        => 'Sorry, site is down for update. Please, try again later.',
 
 	'STATUS_LINK_MAIN'                          => 'Main page',
-	'STATUS_LINK_RELOAD'                        => 'Reload page',
-
-	'FEATURE_NOT_AVAILABLE'                     => 'Feature is currently in development'
+	'STATUS_LINK_RELOAD'                        => 'Reload page'
 ];

@@ -25,5 +25,9 @@ return [
 	'PROFILE_OVERVIEW_COUNTRY'                  => 'Страна',
 
 	'PROFILE_EDIT_GROUP_PERSONAL'               => 'Персональная информация',
-	'PROFILE_EDIT_GROUP_PASSWORD'               => 'Изменение пароля'
+	'PROFILE_EDIT_GROUP_PASSWORD'               => 'Изменение пароля',
+
+	# Other
+
+	'POWERED_BY'                                => 'Работает на'
 ];

@@ -53,7 +53,8 @@ return [
 	'DASHBOARD_GROUP_DATABASE'                  => 'Database',
 
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <b>install.php</b> still exists in the root of your site. It\'s recommended to remove it.',
-	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'It seems you have not yet edited site configuration. Go to <a href="/admin/system/settings">Settings</a> page to provide actual values.',
+	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'It seems you have not yet edited site configuration. ' .
+	                                               'Go to <a href="/admin/system/settings">Settings</a> page to provide actual values.',
 
 	# Pages
 
@@ -133,6 +134,7 @@ return [
 	'SETTINGS_GROUP_EXTRA'                      => 'Extra settings',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Site title',
+	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Site slogan',
 	'SETTINGS_FIELD_SITE_STATUS'                => 'Site status',
 	'SETTINGS_FIELD_SITE_DESCRIPTION'           => 'Description',
 	'SETTINGS_FIELD_SITE_KEYWORDS'              => 'Keywords',
@@ -161,5 +163,9 @@ return [
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'CKEditor version',
 
 	'INFORMATION_GROUP_CORE'                    => 'Core',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software'
+	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
+
+	# Other
+
+	'FEATURE_NOT_AVAILABLE'                     => 'Feature is currently in development'
 ];

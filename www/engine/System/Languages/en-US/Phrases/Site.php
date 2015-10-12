@@ -25,5 +25,9 @@ return [
 	'PROFILE_OVERVIEW_COUNTRY'                  => 'Country',
 
 	'PROFILE_EDIT_GROUP_PERSONAL'               => 'Personal information',
-	'PROFILE_EDIT_GROUP_PASSWORD'               => 'Change password'
+	'PROFILE_EDIT_GROUP_PASSWORD'               => 'Change password',
+
+	# Other
+
+	'POWERED_BY'                                => 'Powered by'
 ];
