@@ -16,6 +16,14 @@
 
 			<div class="field">
 
+				<label for="settings-site-slogan">%SETTINGS_FIELD_SITE_SLOGAN%</label>
+
+				{ block:field_settings_site_slogan / }
+
+			</div>
+
+			<div class="field">
+
 				<label for="settings-site-status">%SETTINGS_FIELD_SITE_STATUS%</label>
 
 				{ block:field_settings_site_status / }

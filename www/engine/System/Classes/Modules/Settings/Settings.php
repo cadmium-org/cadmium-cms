@@ -19,6 +19,7 @@ namespace System\Modules {
 			'site_template'         => CONFIG_SITE_TEMPLATE_DEFAULT,
 
 			'site_title'            => CONFIG_SITE_TITLE_DEFAULT,
+			'site_slogan'           => CONFIG_SITE_SLOGAN_DEFAULT,
 
 			'site_status'           => STATUS_ONLINE,
 
@@ -77,23 +78,23 @@ namespace System\Modules {
 
 			if (!isset(self::$settings[$name])) return false;
 
-			# Validate admin language
+			# Validate language
 
 			if (($name === 'admin_language') || ($name === 'site_language')) {
 
 				if (false === ($value = Extend\Languages::validate($value))) return false;
 			}
 
-			# Validate admin template
+			# Validate template
 
 			else if (($name === 'admin_template') || ($name === 'site_template')) {
 
 				if (false === ($value = Extend\Templates::validate($value))) return false;
 			}
 
-			# Validate site title
+			# Validate site title & slogan
 
-			else if ($name === 'site_title') {
+			else if (($name === 'site_title') || ($name === 'site_slogan')) {
 
 				if ('' === ($value = strval($value))) return false;
 			}

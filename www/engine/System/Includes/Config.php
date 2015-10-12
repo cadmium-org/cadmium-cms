@@ -76,8 +76,10 @@ define('CONFIG_SITE_LANGUAGE_DEFAULT',              'en-US');
 define('CONFIG_SITE_TEMPLATE_DEFAULT',              'Default');
 
 define('CONFIG_SITE_TITLE_DEFAULT',                 'Demo Site');
+define('CONFIG_SITE_SLOGAN_DEFAULT',                'A place for site slogan');
 
 define('CONFIG_SITE_TITLE_MAX_LENGTH',              128);
+define('CONFIG_SITE_SLOGAN_MAX_LENGTH',             255);
 define('CONFIG_SITE_DESCRIPTION_MAX_LENGTH',        512);
 define('CONFIG_SITE_KEYWORDS_MAX_LENGTH',           512);
 

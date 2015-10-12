@@ -16,6 +16,8 @@ namespace System\Modules\Settings\Form {
 
 			$this->input('site_title', Settings::get('site_title'), FORM_INPUT_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
 
+			$this->input('site_slogan', Settings::get('site_slogan'), FORM_INPUT_TEXT, CONFIG_SITE_SLOGAN_MAX_LENGTH);
+
 			$this->select('site_status', Settings::get('site_status'), Lister\Status::range());
 
 			$this->input('site_description', Settings::get('site_description'), FORM_INPUT_TEXTAREA, CONFIG_SITE_DESCRIPTION_MAX_LENGTH);

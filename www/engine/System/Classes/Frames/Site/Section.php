@@ -56,6 +56,10 @@ namespace System\Frames\Site {
 
 			$layout->title = (('' !== $this->title) ? $this->title : Settings::get('site_title'));
 
+			# Set slogan
+
+			$layout->slogan = Settings::get('site_slogan');
+
 			# Set messages
 
 			$layout->messages = Messages::block();
