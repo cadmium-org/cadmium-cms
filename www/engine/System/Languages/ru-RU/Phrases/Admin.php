@@ -52,9 +52,9 @@ return [
 	'DASHBOARD_GROUP_GENERAL'                   => 'Основное',
 	'DASHBOARD_GROUP_DATABASE'                  => 'База данных',
 
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <b>install.php</b> по-прежнему находится в корневой директории сайта. Рекомендуется удалить его.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <b>install.php</b> по-прежнему находится в корневой директории сайта. Необходимо удалить его.',
 	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'Похоже, Вы пока не редактировали конфигурацию сайта. '.
-	                                               'Перейдите на страницу <a href="/admin/system/settings">Настроек</a> для ввода актуальных значений.',
+	                                               'Перейдите на <a href="/admin/system/settings">страницу настроек</a> для ввода актуальных значений.',
 
 	# Pages
 

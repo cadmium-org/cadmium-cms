@@ -57,11 +57,44 @@ return [
 
 	'INSTALL_PAGE_INDEX_TITLE'                  => 'Home',
 
-	'INSTALL_PAGE_INDEX_CONTENTS'               => '<p>Welcome! This is demo site, powered by <strong>Cadmium CMS</strong>.</p>' .
-	                                               '<p>You can log in to admin panel by following <a href="/admin">this link</a>.</p>' .
-	                                               '<p><a href="http://cadmium-cms.com" target="_blank">Cadmium CMS official site</a></p>' .
-	                                               '<p><a href="http://cadmium-cms.com/documentation" target="_blank">Official documentation</a></p>',
+	'INSTALL_PAGE_INDEX_CONTENTS'               => '<h2>Welcome!</h2>' .
+	                                               '<p>This is demo site, powered by <strong>Cadmium CMS</strong>.</p>' .
+	                                               '<p>You can log into admin panel by following <a href="/admin">this link</a>.</p>' .
+	                                               '<h2>Links</h2>' .
+	                                               '<ul><li><a href="http://cadmium-cms.com" target="_blank">Official website</a></li>' .
+	                                               '<li><a href="https://github.com/junepaik/cadmium-cms" target="_blank">GitHub project page</a></ul>',
 
 	'INSTALL_PAGE_DEMO_TITLE'                   => 'Page',
-	'INSTALL_PAGE_DEMO_CONTENTS'                => '<p>This is demo page.</p>'
+
+	'INSTALL_PAGE_DEMO_CONTENTS'                => '<h2>Lorem ipsum</h2>' .
+
+	                                               '<p>Lorem ipsum dolor sit amet, ex etiam facilis vim. ' .
+	                                               'Qui etiam soluta nostro no, te praesent consulatu eos. ' .
+	                                               'His at modus diceret referrentur, exerci viderer aperiri et sed. ' .
+	                                               'Ne errem appareat apeirian has, ut has eligendi comprehensam. ' .
+	                                               'His ea adipisci eloquentiam, nec id temporibus appellantur. ' .
+	                                               'Pri ut inermis persequeris contentiones, vel vidit ponderum cu.</p>' .
+
+	                                               '<h3>Vix no suas populo</h3>' .
+
+	                                               '<p>Vix no suas populo. Mea inani utinam ex. Duo vocibus noluisse partiendo ei. ' .
+	                                               'Impedit voluptatibus pro ut, ea probatus reformidans pri. ' .
+	                                               'An vix repudiandae complectitur, ex soluta numquam splendide nam.</p>' .
+
+	                                               '<p>Mea ex novum contentiones, eleifend ocurreret voluptaria et usu. ' .
+	                                               'No mel illum nonumy maiorum, pro saperet disputando in. Cum ei tritani accusam incorrupte. ' .
+	                                               'Per animal saperet suavitate id, vim ex quod delicatissimi.</p>' .
+
+	                                               '<h3>Ea mea tantas delenit</h3>' .
+
+	                                               '<p>Ea mea tantas delenit, ut usu alii commune. ' .
+	                                               'Te vix decore dolore scribentur. Ad pri malis invidunt ullamcorper, ' .
+	                                               'qui eu laboramus vulputate scriptorem, id veri audiam integre pro. ' .
+	                                               'Saperet luptatum recusabo quo cu, ' .'vix facer dolores persecuti no. ' .
+	                                               'Eos id omnes affert possim. Vix id commune urbanitas.</p>' .
+
+	                                               '<p>Cu eum quod prodesset, vix sale democritum delicatissimi et, ' .
+	                                               'putant viderer inimicus pro ut. Sea ut tamquam hendrerit definitionem, ' .
+	                                               'an quo illud persecuti, debet affert vis te. Mei ea omnes saepe nostrum. ' .
+	                                               'In sed denique iudicabit. Id eos equidem scribentur.</p>'
 ];

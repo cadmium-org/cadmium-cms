@@ -52,9 +52,9 @@ return [
 	'DASHBOARD_GROUP_GENERAL'                   => 'General',
 	'DASHBOARD_GROUP_DATABASE'                  => 'Database',
 
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <b>install.php</b> still exists in the root of your site. It\'s recommended to remove it.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <b>install.php</b> still exists in the root of your site. It\'s necessary to remove it.',
 	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'It seems you have not yet edited site configuration. ' .
-	                                               'Go to <a href="/admin/system/settings">Settings</a> page to provide actual values.',
+	                                               'Go to <a href="/admin/system/settings">settings page</a> to provide actual values.',
 
 	# Pages
 
