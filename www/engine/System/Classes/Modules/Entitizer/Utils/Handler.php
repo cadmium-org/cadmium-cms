@@ -96,7 +96,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$form = new Form('ajax'); $form->virtual('action');
 
-			if (false === ($post = $form->post())) return $ajax->error();
+			if (false === ($post = $form->post())) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
 
 			# Create entity
 
@@ -104,7 +104,10 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Process remove action
 
-			if ($post['action'] == 'remove') if (!$this->entity->remove()) return $ajax->error();
+			if ($post['action'] == 'remove') {
+
+				if (!$this->entity->remove()) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_REMOVE'));
+			}
 
 			# ------------------------
 

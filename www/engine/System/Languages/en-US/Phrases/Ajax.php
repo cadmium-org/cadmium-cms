@@ -2,6 +2,11 @@
 
 return [
 
+	# Process errors
+
+	'AJAX_PROCESS_ERROR_DATA'                   => 'Error processing recieved data',
+	'AJAX_PROCESS_ERROR_REMOVE'                 => 'Error removing entry',
+
 	# Response errors
 
 	'AJAX_RESPONSE_ERROR_400'                   => 'Invalid request format',

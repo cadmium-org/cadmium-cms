@@ -97,7 +97,7 @@ namespace System\Modules\Extend\Utils {
 
 			# Post form
 
-			if (false === ($post = $form->post())) return $ajax->error();
+			if (false === ($post = $form->post())) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
 
 			# Save configuration
 

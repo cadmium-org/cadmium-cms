@@ -115,7 +115,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$form = new Form('ajax'); $form->virtual('id');
 
-			if (false === ($post = $form->post())) return $ajax->error();
+			if (false === ($post = $form->post())) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
 
 			# Create parent entity
 
