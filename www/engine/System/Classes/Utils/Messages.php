@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use Template;
+	use Arr, Template;
 
 	abstract class Messages {
 
@@ -30,7 +30,7 @@ namespace System\Utils {
 
 		public static function info($text = null, $header = null) {
 
-			if (null === $text) return self::$messages['info'];
+			if (null === $text) return Arr::get(self::$messages, ['info']);
 
 			self::setMessage('info', $text, $header);
 		}
@@ -39,7 +39,7 @@ namespace System\Utils {
 
 		public static function warning($text = null, $header = null) {
 
-			if (null === $text) return self::$messages['warning'];
+			if (null === $text) return Arr::get(self::$messages, ['warning']);
 
 			self::setMessage('warning', $text, $header);
 		}
@@ -48,7 +48,7 @@ namespace System\Utils {
 
 		public static function error($text = null, $header = null) {
 
-			if (null === $text) return self::$messages['error'];
+			if (null === $text) return Arr::get(self::$messages, ['error']);
 
 			self::setMessage('error', $text, $header);
 		}
@@ -57,7 +57,7 @@ namespace System\Utils {
 
 		public static function success($text = null, $header = null) {
 
-			if (null === $text) return self::$messages['success'];
+			if (null === $text) return Arr::get(self::$messages, ['success']);
 
 			self::setMessage('success', $text, $header);
 		}
