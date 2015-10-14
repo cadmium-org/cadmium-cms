@@ -1,4 +1,4 @@
-<div class="ui left vertical sidebar menu"></div>
+<div class="ui top vertical sidebar menu"></div>
 
 <div class="pusher">
 
@@ -62,13 +62,17 @@
 
 	</nav>
 
-	<header class="ui one column page grid masthead">
+	<header class="masthead">
 
-		<div class="center aligned column">
+		<h1>$title$</h1>
 
-			<h1>$title$</h1>
+		<p class="slogan">$slogan$</p>
 
-		</div>
+		<a class="big ui labeled icon button">
+
+			<i class="rocket icon"></i>Get started
+
+		</a>
 
 	</header>
 
@@ -80,14 +84,24 @@
 
 			{ block:contents / }
 
-			<footer class="ui basic segment">
-
-				<a href="$system_url$">$site_title$</a> &copy; $copyright$
-
-			</footer>
-
 		</div>
 
 	</section>
+
+	<footer class="ui two column stackable footer page grid">
+
+		<div class="left aligned column">
+
+			$copyright$ &copy; <a href="$system_url$">$site_title$</a></a>
+
+		</div>
+
+		<div class="right aligned column">
+
+			%POWERED_BY% <a href="$cadmium_home$">$cadmium_name$</a>
+
+		</div>
+
+	</footer>
 
 </div>
