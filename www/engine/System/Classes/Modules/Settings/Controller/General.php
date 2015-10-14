@@ -2,13 +2,19 @@
 
 namespace System\Modules\Settings\Controller {
 
-	use System\Modules\Settings;
+	use System\Modules\Informer, System\Modules\Settings;
 
 	abstract class General {
 
 		# Process post data
 
 		public static function process(array $post) {
+
+			# Check for demo mode
+
+			if (Informer::isDemoMode()) return 'DEMO_MODE_RESTRICTION';
+
+			# Define errors list
 
 			$errors = [];
 

@@ -2,7 +2,7 @@
 
 namespace System\Modules\Extend\Utils {
 
-	use System\Modules\Settings, System\Utils\View, Ajax, Arr, Form, Language, Request, Template;
+	use System\Modules\Informer, System\Modules\Settings, System\Utils\View, Ajax, Arr, Form, Language, Request, Template;
 
 	trait Handler {
 
@@ -90,6 +90,10 @@ namespace System\Modules\Extend\Utils {
 		private function handleAjax() {
 
 			$ajax = Ajax::response();
+
+			# Check for demo mode
+
+			if (Informer::isDemoMode()) return $ajax->error(Language::get('DEMO_MODE_RESTRICTION'));
 
 			# Create form
 
