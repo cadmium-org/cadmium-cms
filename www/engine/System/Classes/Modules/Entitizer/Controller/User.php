@@ -88,7 +88,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			if ((0 === $this->entity->id) || ('' !== $password)) {
 
-				$data['auth_key']           = String::random(40);
+				$data['auth_key']           = ($auth_key = String::random(40));
 				$data['password']           = String::encode($auth_key, $password);
 			}
 
