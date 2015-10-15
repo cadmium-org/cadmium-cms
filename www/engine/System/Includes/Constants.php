@@ -5,7 +5,7 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.1.0');
+define('CADMIUM_VERSION',                           '0.1.1');
 define('CADMIUM_COPY',                              '2015');
 
 # External
