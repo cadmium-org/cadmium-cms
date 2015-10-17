@@ -1,1 +1,1 @@
-<a class="item" href="$link$">$text$</a>
+<a class="item" target="$target$" href="$link$">$text$</a>

@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use DB, Template;
+	use System\Utils\Lister, DB, Template;
 
 	class Menu {
 
@@ -25,6 +25,8 @@ namespace System\Utils {
 			} else {
 
 				$item = View::get('Blocks\Utils\Menu\Item');
+
+				$item->target = (($this->items[$id]['target'] === TARGET_BLANK) ? '_blank' : '_self');
 
 				$item->link = $this->items[$id]['link'];
 
