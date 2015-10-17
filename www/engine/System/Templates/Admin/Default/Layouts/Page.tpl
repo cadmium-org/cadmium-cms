@@ -30,7 +30,7 @@
 
 				<div class="menu">
 
-					<a class="item" href="/admin/system/users/item?id=$id$"><i class="user icon"></i>%TITLE_PROFILE%</a>
+					<a class="item" href="/admin/system/users/edit?id=$id$"><i class="user icon"></i>%TITLE_PROFILE%</a>
 
 					<a class="item" href="/admin/logout"><i class="sign out icon"></i>%LOGOUT%</a>
 
