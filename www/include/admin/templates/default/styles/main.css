@@ -3,17 +3,29 @@
 
 @charset "UTF-8";
 
+/* Wrapper */
+
 .wrapper { margin:0 !important; padding-top:55px !important; }
+
+/* Breadcrumbs */
 
 .breadcrumb .section:last-of-type { font-weight:bold; }
 
 .breadcrumb .divider:last-child { display:none; }
 
-#captcha { background-color:#FFF !important; }
+/* Tables */
 
-#modal-lister { top:0px; margin-top:3.5rem !important; }
+.table { table-layout: fixed; }
+
+.table td { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 @media only screen and (max-width:767px) {
 
     .table:not(.unstackable) td.right.aligned, .right.aligned.column { text-align:left !important; }
 }
+
+/* Other */
+
+#captcha { background-color:#FFF !important; }
+
+#modal-lister { top:0px; margin-top:3.5rem !important; }
