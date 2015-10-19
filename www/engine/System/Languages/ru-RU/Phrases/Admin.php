@@ -60,8 +60,6 @@ return [
 
 	'PAGES_NOT_FOUND'                           => 'Страницы не найдены',
 
-	'PAGES_BACK'                                => 'Назад к списку страниц',
-
 	'PAGES_COLUMN_TITLE'                        => 'Заголовок',
 	'PAGES_COLUMN_ACCESS'                       => 'Доступ',
 
@@ -77,8 +75,6 @@ return [
 	# Menuitems
 
 	'MENUITEMS_NOT_FOUND'                       => 'Элементы не найдены',
-
-	'MENUITEMS_BACK'                            => 'Назад к списку элементов',
 
 	'MENUITEMS_COLUMN_TEXT'                     => 'Текст',
 	'MENUITEMS_COLUMN_POSITION'                 => 'Позиция',

@@ -60,8 +60,6 @@ return [
 
 	'PAGES_NOT_FOUND'                           => 'Pages not found',
 
-	'PAGES_BACK'                                => 'Back to pages list',
-
 	'PAGES_COLUMN_TITLE'                        => 'Title',
 	'PAGES_COLUMN_ACCESS'                       => 'Access',
 
@@ -77,8 +75,6 @@ return [
 	# Menuitems
 
 	'MENUITEMS_NOT_FOUND'                       => 'Items not found',
-
-	'MENUITEMS_BACK'                            => 'Back to items list',
 
 	'MENUITEMS_COLUMN_TEXT'                     => 'Text',
 	'MENUITEMS_COLUMN_POSITION'                 => 'Position',
