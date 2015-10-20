@@ -2,7 +2,8 @@
 
 namespace System\Frames {
 
-	use System\Modules\Auth, System\Modules\Extend, System\Utils\Messages, System\Utils\View, Language;
+	use System\Modules\Auth, System\Modules\Extend, System\Modules\Settings;
+	use System\Utils\Messages, System\Utils\Path, System\Utils\View, Language, Template;
 
 	abstract class Section extends Main {
 
@@ -28,13 +29,19 @@ namespace System\Frames {
 
 			Extend\Templates::init(static::SECTION);
 
+			# Init utils
+
+			Messages::init(); Path::init(); View::init(static::SECTION);
+
 			# Load language phrases
 
 			Language::init(Extend\Languages::path()); Language::phrases(static::$phrases);
 
-			# Init utils
+			# Set template globals
 
-			View::init(static::SECTION); Messages::init();
+			foreach (Settings::get() as $name => $value) Template::set($name, $value);
+
+			Template::set('system_path', Path::get());
 
 			# Set timezone
 
