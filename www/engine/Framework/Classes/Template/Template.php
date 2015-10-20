@@ -4,11 +4,28 @@ namespace {
 
 	abstract class Template {
 
+		private static $globals = [];
+
+		# Set global variable
+
+		public static function set($name, $value) {
+
+			$name = strval($name); $value = strval($value);
+
+			self::$globals[$name] = $value;
+		}
+
 		# Create block
 
 		public static function block($contents = '', $parse = true) {
 
-			return new Template\Utils\Block($contents, $parse);
+			$block = new Template\Utils\Block($contents, $parse);
+
+			foreach (self::$globals as $name => $value) $block->set($name, $value);
+
+			# ------------------------
+
+			return $block;
 		}
 
 		# Create group
