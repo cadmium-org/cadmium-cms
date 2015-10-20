@@ -158,5 +158,12 @@ namespace System\Modules {
 
 			return (isset(self::$settings[$name]) ? self::$settings[$name] : null);
 		}
+
+		# Get range
+
+		public static function range() {
+
+			return self::$settings;
+		}
 	}
 }
