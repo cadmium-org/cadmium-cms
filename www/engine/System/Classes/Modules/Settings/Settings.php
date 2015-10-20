@@ -152,18 +152,13 @@ namespace System\Modules {
 
 		# Get value
 
-		public static function get($name) {
+		public static function get($name = null) {
+
+			if (null === $name) return self::$settings;
 
 			$name = strval($name);
 
 			return (isset(self::$settings[$name]) ? self::$settings[$name] : null);
-		}
-
-		# Get range
-
-		public static function range() {
-
-			return self::$settings;
 		}
 	}
 }
