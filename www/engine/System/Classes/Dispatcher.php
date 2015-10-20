@@ -23,9 +23,15 @@ namespace System {
 				$this->database['password'], $this->database['name']
 			);
 
+			# Define constants
+
+			define('SYSTEM_INSTALL_ROOT', $this->root);
+
+			define('SYSTEM_INSTALL_TIME', $this->time);
+
 			# Create url
 
-			$url = new Url(getenv('REQUEST_URI'));
+			$url = new Url(Request::get('url'));
 
 			# Create map
 
