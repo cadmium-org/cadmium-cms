@@ -11,6 +11,15 @@ namespace {
 			return (0 === strcmp(getenv('HTTP_X_REQUESTED_WITH'), 'XMLHttpRequest'));
 		}
 
+		# Check if request is secure
+
+		public static function isSecure() {
+
+			$https = (!empty(getenv('HTTPS')) && (getenv('HTTPS') !== 'off'));
+
+			return ($https || (getenv('SERVER_PORT') === '443'));
+		}
+
 		# Return GET variable by name
 
 		public static function get($name) {
