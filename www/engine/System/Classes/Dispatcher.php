@@ -25,7 +25,7 @@ namespace System {
 
 			# Create url
 
-			$url = new Url(getenv('REQUEST_URI'));
+			$url = new Url(Request::get('url'));
 
 			# Create map
 
