@@ -47,7 +47,7 @@ namespace System\Modules\Entitizer\Listview {
 
 			$view->block('browse')->class = (('' !== $data['link']) ? 'primary' : 'disabled');
 
-			$view->block('browse')->link = $data['link'];
+			$view->block('browse')->link = (INSTALL_PATH . $data['link']);
 		}
 	}
 }

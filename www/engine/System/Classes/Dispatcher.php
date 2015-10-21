@@ -12,7 +12,7 @@ namespace System {
 
 			# Check installation
 
-			if (!$this->installed) Request::redirect('/install.php');
+			if (!$this->installed) Request::redirect(INSTALL_PATH . '/install.php');
 
 			# Connect to database
 

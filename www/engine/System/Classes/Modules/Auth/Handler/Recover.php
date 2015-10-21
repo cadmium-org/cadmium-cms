@@ -16,7 +16,7 @@ namespace System\Modules\Auth\Handler {
 
 			if (false !== ($code = Auth::secret())) $this->code = $code;
 
-			else Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset');
+			else Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/reset');
 
 			# Create form
 
@@ -26,7 +26,7 @@ namespace System\Modules\Auth\Handler {
 
 			if ($this->form->submit(['System\Modules\Auth\Controller\Recover', 'process'])) {
 
-				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/login?submitted=recover');
+				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=recover');
 			}
 
 			# ------------------------

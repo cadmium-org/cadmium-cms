@@ -49,7 +49,7 @@ namespace System\Modules\Entitizer\Listview {
 
 			$view->block('browse')->class = ($data['visibility'] ? 'primary' : 'disabled');
 
-			$view->block('browse')->link = $link;
+			$view->block('browse')->link = (INSTALL_PATH . $link);
 		}
 	}
 }

@@ -143,9 +143,9 @@ namespace System\Frames\Site {
 
 				if (!Settings::get('users_registration')) return Status::error404();
 
-				if (($this instanceof Component\Profile\Auth)) { if (Auth::check()) Request::redirect('/profile'); }
+				if (($this instanceof Component\Profile\Auth)) { if (Auth::check()) Request::redirect(INSTALL_PATH . '/profile'); }
 
-				else if (!Auth::check()) Request::redirect('/profile/login');
+				else if (!Auth::check()) Request::redirect(INSTALL_PATH . '/profile/login');
 			}
 
 			return (Template::isSettable($result = $this->handle()) ? $this->displayPage($result) : Status::error404());
