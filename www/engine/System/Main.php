@@ -24,4 +24,4 @@ require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
 
 # Process environment variables
 
-define('INSTALL_DIR', rtrim(getenv('INSTALL_DIR'), '/'));
+define('INSTALL_PATH', rtrim(getenv('INSTALL_PATH'), '/'));
