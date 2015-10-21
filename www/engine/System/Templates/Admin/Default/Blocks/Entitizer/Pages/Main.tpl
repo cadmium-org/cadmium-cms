@@ -10,7 +10,7 @@
 
 		{ for:path }
 
-		<a class="section" href="$install_path$/admin/content/pages?id=$id$">$title$</a>
+		<a class="section" href="$install_path$/admin/content/pages?parent_id=$id$">$title$</a>
 
 		<i class="divider"> / </i>
 
