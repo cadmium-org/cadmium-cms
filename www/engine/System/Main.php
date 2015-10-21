@@ -24,4 +24,6 @@ require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
 
 # Process environment variables
 
+define('HTTP_MOD_REWRITE', (getenv('HTTP_MOD_REWRITE') === 'on'));
+
 define('INSTALL_PATH', rtrim(getenv('INSTALL_PATH'), '/'));
