@@ -33,7 +33,7 @@ namespace System\Modules\Auth\Utils {
 
 		public static function reset($code) {
 
-			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin/recover?code=' : '/profile/recover?code=') . $code);
+			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile') . '/recover?code=' . $code);
 
 			return self::send('Blocks\Auth\Mail\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
 		}
