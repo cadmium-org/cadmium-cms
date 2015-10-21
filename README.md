@@ -5,6 +5,8 @@
 
 Cadmium CMS is PHP-based content management system for creating shiny and responsive websites!
 
+*CMS is currently in BETA stage. If you'll find a bug or have any question or suggestion, please [create an issue](https://github.com/junepaik/cadmium-cms/issues/new).*
+
 ## Features
 
  - Simple and lightweight.
@@ -14,8 +16,6 @@ Cadmium CMS is PHP-based content management system for creating shiny and respon
  - Unlimited users.
  - SEO friendly.
  - Open-source.
-
-Cadmium CMS is currently in active development. We're planning to add a lot of new features soon!
 
 ## Coming soon
 
