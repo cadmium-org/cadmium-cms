@@ -12,18 +12,18 @@
 
 		<title>$title$</title>
 
-		<link rel="icon" type="image/png" href="/include/admin/favicon.png" />
+		<link rel="icon" type="image/png" href="$install_path$/include/admin/favicon.png" />
 
-		<link rel="stylesheet" type="text/css" href="/include/semantic/semantic.min.css" />
-		<link rel="stylesheet" type="text/css" href="/include/admin/templates/default/styles/main.css" />
+		<link rel="stylesheet" type="text/css" href="$install_path$/include/semantic/semantic.min.css" />
+		<link rel="stylesheet" type="text/css" href="$install_path$/include/admin/templates/default/styles/main.css" />
 
-		<script src="/include/common/jquery.core.js"></script>
+		<script src="$install_path$/include/common/jquery.core.js"></script>
 
-		<script src="/include/semantic/semantic.min.js"></script>
+		<script src="$install_path$/include/semantic/semantic.min.js"></script>
 
-		<script src="/include/admin/editor/ckeditor.js"></script>
+		<script src="$install_path$/include/admin/editor/ckeditor.js"></script>
 
-		<script src="/include/admin/scripts/main.js"></script>
+		<script src="$install_path$/include/admin/scripts/main.js"></script>
 
 		<script>
 

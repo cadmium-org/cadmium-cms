@@ -1,6 +1,6 @@
 <div class="ui segment">
 
-	<form class="ui auth form" method="post" action="/profile/login" autocomplete="off">
+	<form class="ui auth form" method="post" action="$install_path$/profile/login" autocomplete="off">
 
 		<div class="field">
 
@@ -28,7 +28,7 @@
 
 			<div class="field">
 
-				<a class="ui basic button" href="/profile/reset">%RESET_TEXT%</a>
+				<a class="ui basic button" href="$install_path$/profile/reset">%RESET_TEXT%</a>
 
 			</div>
 

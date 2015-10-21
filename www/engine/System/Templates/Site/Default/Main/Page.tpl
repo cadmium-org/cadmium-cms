@@ -16,16 +16,16 @@
 
 		{ block:canonical }<link rel="canonical" href="$link$" />{ / block:canonical }
 
-		<link rel="icon" type="image/png" href="/include/favicon.png" />
+		<link rel="icon" type="image/png" href="$install_path$/include/favicon.png" />
 
-		<link rel="stylesheet" type="text/css" href="/include/semantic/semantic.min.css" />
-		<link rel="stylesheet" type="text/css" href="/include/site/templates/default/styles/main.css" />
+		<link rel="stylesheet" type="text/css" href="$install_path$/include/semantic/semantic.min.css" />
+		<link rel="stylesheet" type="text/css" href="$install_path$/include/site/templates/default/styles/main.css" />
 
-		<script src="/include/common/jquery.core.js"></script>
+		<script src="$install_path$/include/common/jquery.core.js"></script>
 
-		<script src="/include/semantic/semantic.min.js"></script>
+		<script src="$install_path$/include/semantic/semantic.min.js"></script>
 
-		<script src="/include/site/scripts/main.js"></script>
+		<script src="$install_path$/include/site/scripts/main.js"></script>
 
 		<script>
 

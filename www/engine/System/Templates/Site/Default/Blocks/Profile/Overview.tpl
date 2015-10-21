@@ -1,8 +1,8 @@
 <div class="ui menu">
 
-	<a class="active item" href="/profile">%PROFILE_TAB_OVERVIEW%</a>
+	<a class="active item" href="$install_path$/profile">%PROFILE_TAB_OVERVIEW%</a>
 
-	<a class="item" href="/profile/edit">%PROFILE_TAB_EDIT%</a>
+	<a class="item" href="$install_path$/profile/edit">%PROFILE_TAB_EDIT%</a>
 
 </div>
 
@@ -92,6 +92,6 @@
 
 	</table>
 
-	<p><a href="/profile/edit"><i class="edit icon"></i>%PROFILE_TAB_EDIT%</a></p>
+	<p><a href="$install_path$/profile/edit"><i class="edit icon"></i>%PROFILE_TAB_EDIT%</a></p>
 
 </div>

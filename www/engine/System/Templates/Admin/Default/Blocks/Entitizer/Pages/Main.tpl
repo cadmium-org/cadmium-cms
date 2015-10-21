@@ -4,13 +4,13 @@
 
 	<div class="ui breadcrumb">
 
-		<a class="section" href="/admin/content/pages">%TITLE_CONTENT_PAGES%</a>
+		<a class="section" href="$install_path$/admin/content/pages">%TITLE_CONTENT_PAGES%</a>
 
 		<i class="divider"> / </i>
 
 		{ for:path }
 
-		<a class="section" href="/admin/content/pages?id=$id$">$title$</a>
+		<a class="section" href="$install_path$/admin/content/pages?id=$id$">$title$</a>
 
 		<i class="divider"> / </i>
 
@@ -24,17 +24,17 @@
 
 <div class="ui stackable menu">
 
-	<a class="item" href="/admin/content/pages?parent_id=$id$"><i class="list icon"></i> %PAGES_ITEM_LIST%</a>
+	<a class="item" href="$install_path$/admin/content/pages?parent_id=$id$"><i class="list icon"></i> %PAGES_ITEM_LIST%</a>
 
 	{ block:create }
 
-	<a class="$class$" href="/admin/content/pages/create?id=$id$"><i class="add icon"></i> %PAGES_ITEM_CREATE%</a>
+	<a class="$class$" href="$install_path$/admin/content/pages/create?id=$id$"><i class="add icon"></i> %PAGES_ITEM_CREATE%</a>
 
 	{ / block:create }
 
 	{ block:edit }
 
-	<a class="$class$" href="/admin/content/pages/edit?id=$id$"><i class="edit icon"></i> %PAGES_ITEM_EDIT%</a>
+	<a class="$class$" href="$install_path$/admin/content/pages/edit?id=$id$"><i class="edit icon"></i> %PAGES_ITEM_EDIT%</a>
 
 	{ / block:edit }
 

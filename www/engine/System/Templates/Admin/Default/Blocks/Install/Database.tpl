@@ -1,4 +1,4 @@
-<form class="ui form" method="post" action="/install.php?checked=1">
+<form class="ui form" method="post" action="$install_path$/install.php?checked=1">
 
 	<div class="field">
 

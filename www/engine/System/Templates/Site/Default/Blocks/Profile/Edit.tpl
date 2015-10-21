@@ -1,8 +1,8 @@
 <div class="ui menu">
 
-	<a class="item" href="/profile">%PROFILE_TAB_OVERVIEW%</a>
+	<a class="item" href="$install_path$/profile">%PROFILE_TAB_OVERVIEW%</a>
 
-	<a class="active item" href="/profile/edit">%PROFILE_TAB_EDIT%</a>
+	<a class="active item" href="$install_path$/profile/edit">%PROFILE_TAB_EDIT%</a>
 
 </div>
 
@@ -14,7 +14,7 @@
 
 			<h4 class="ui dividing header">%PROFILE_EDIT_GROUP_PERSONAL%</h4>
 
-			<form class="ui form" method="post" action="/profile/edit" autocomplete="off">
+			<form class="ui form" method="post" action="$install_path$/profile/edit" autocomplete="off">
 
 				<div class="field">
 
@@ -86,7 +86,7 @@
 
 			<h4 class="ui dividing header">%PROFILE_EDIT_GROUP_PASSWORD%</h4>
 
-			<form class="ui form" method="post" action="/profile/edit" autocomplete="off">
+			<form class="ui form" method="post" action="$install_path$/profile/edit" autocomplete="off">
 
 				<div class="field">
 

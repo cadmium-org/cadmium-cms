@@ -1,6 +1,6 @@
 <div class="ui stackable menu">
 
-	<a class="item" href="/admin/system/users/create"><i class="add icon"></i> %USERS_ITEM_CREATE%</a>
+	<a class="item" href="$install_path$/admin/system/users/create"><i class="add icon"></i> %USERS_ITEM_CREATE%</a>
 
 </div>
 

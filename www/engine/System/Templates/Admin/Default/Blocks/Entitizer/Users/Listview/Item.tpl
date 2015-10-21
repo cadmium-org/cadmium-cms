@@ -6,7 +6,7 @@
 
 	<td class="right aligned">
 
-		<a class="ui mini positive icon button" href="/admin/system/users/edit?id=$id$" title="%USERS_ITEM_EDIT%"><i class="edit icon"></i></a>
+		<a class="ui mini positive icon button" href="$install_path$/admin/system/users/edit?id=$id$" title="%USERS_ITEM_EDIT%"><i class="edit icon"></i></a>
 
 		{ block:remove }
 

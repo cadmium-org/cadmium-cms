@@ -4,11 +4,11 @@
 
 	<div class="menu">
 
-		<a class="item" href="/admin/content/pages"><i class="file text outline icon"></i>%TITLE_CONTENT_PAGES%</a>
+		<a class="item" href="$install_path$/admin/content/pages"><i class="file text outline icon"></i>%TITLE_CONTENT_PAGES%</a>
 
-		<a class="item" href="/admin/content/menuitems"><i class="list icon"></i>%TITLE_CONTENT_MENUITEMS%</a>
+		<a class="item" href="$install_path$/admin/content/menuitems"><i class="list icon"></i>%TITLE_CONTENT_MENUITEMS%</a>
 
-		<a class="item" href="/admin/content/filemanager"><i class="disk outline icon"></i>%TITLE_CONTENT_FILEMANAGER%</a>
+		<a class="item" href="$install_path$/admin/content/filemanager"><i class="disk outline icon"></i>%TITLE_CONTENT_FILEMANAGER%</a>
 
 	</div>
 
@@ -20,9 +20,9 @@
 
 	<div class="menu">
 
-		<a class="item" href="/admin/extend/languages"><i class="flag icon"></i>%TITLE_EXTEND_LANGUAGES%</a>
+		<a class="item" href="$install_path$/admin/extend/languages"><i class="flag icon"></i>%TITLE_EXTEND_LANGUAGES%</a>
 
-		<a class="item" href="/admin/extend/templates"><i class="theme icon"></i>%TITLE_EXTEND_TEMPLATES%</a>
+		<a class="item" href="$install_path$/admin/extend/templates"><i class="theme icon"></i>%TITLE_EXTEND_TEMPLATES%</a>
 
 	</div>
 
@@ -34,11 +34,11 @@
 
 	<div class="menu">
 
-		<a class="item" href="/admin/system/users"><i class="users icon"></i>%TITLE_SYSTEM_USERS%</a>
+		<a class="item" href="$install_path$/admin/system/users"><i class="users icon"></i>%TITLE_SYSTEM_USERS%</a>
 
-		<a class="item" href="/admin/system/settings"><i class="settings icon"></i>%TITLE_SYSTEM_SETTINGS%</a>
+		<a class="item" href="$install_path$/admin/system/settings"><i class="settings icon"></i>%TITLE_SYSTEM_SETTINGS%</a>
 
-		<a class="item" href="/admin/system/information"><i class="info circle icon"></i>%TITLE_SYSTEM_INFORMATION%</a>
+		<a class="item" href="$install_path$/admin/system/information"><i class="info circle icon"></i>%TITLE_SYSTEM_INFORMATION%</a>
 
 	</div>
 
