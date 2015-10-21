@@ -29,6 +29,8 @@
 
 		<script>
 
+			var install_path = '$install_path$';
+
 			$(document).ready(function() { Main.init(); });
 
 		</script>

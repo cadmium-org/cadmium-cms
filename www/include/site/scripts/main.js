@@ -29,7 +29,7 @@ var Main = {
 
 		$('.ui.accordion').accordion();
 
-		$('#captcha').click(function() { $(this).find('img').attr('src', '/captcha.png?unique=' + Math.random()); });
+		$('#captcha').click(function() { $(this).find('img').attr('src', install_path + '/captcha.png?unique=' + Math.random()); });
 
 		$('.ui.modal').modal('setting', 'transition', 'fade down');
 
