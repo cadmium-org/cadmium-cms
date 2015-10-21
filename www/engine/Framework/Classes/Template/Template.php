@@ -15,17 +15,18 @@ namespace {
 			self::$globals[$name] = $value;
 		}
 
+		# Get globals list
+
+		public static function globals() {
+
+			return self::$globals;
+		}
+
 		# Create block
 
 		public static function block($contents = '', $parse = true) {
 
-			$block = new Template\Utils\Block($contents, $parse);
-
-			foreach (self::$globals as $name => $value) $block->set($name, $value);
-
-			# ------------------------
-
-			return $block;
+			return new Template\Utils\Block($contents, $parse);
 		}
 
 		# Create group
