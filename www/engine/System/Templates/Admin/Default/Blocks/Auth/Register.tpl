@@ -1,4 +1,4 @@
-<form class="ui form" method="post" action="/admin/register" autocomplete="off">
+<form class="ui form" method="post" action="$install_path$/admin/register" autocomplete="off">
 
 	<div class="field">
 
@@ -66,7 +66,7 @@
 
 			<i class="refresh icon"></i>
 
-			<img class="ui centered image" width="150" height="40" src="/captcha.png" />
+			<img class="ui centered image" width="150" height="40" src="$install_path$/captcha.png" />
 
 		</a>
 

@@ -33,7 +33,7 @@ namespace System\Modules\Settings\Handler {
 
 			if ($this->form->submit(['System\Modules\Settings\Controller\General', 'process'])) {
 
-				Request::redirect('/admin/system/settings?submitted');
+				Request::redirect(INSTALL_PATH . '/admin/system/settings?submitted');
 
 			} else if (null !== Request::get('submitted')) Messages::success(Language::get('SETTINGS_SUCCESS'));
 

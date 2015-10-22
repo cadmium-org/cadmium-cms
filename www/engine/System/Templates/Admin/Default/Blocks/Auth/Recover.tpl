@@ -1,4 +1,4 @@
-<form class="ui form" method="post" action="/admin/recover?code=$code$" autocomplete="off">
+<form class="ui form" method="post" action="$install_path$/admin/recover?code=$code$" autocomplete="off">
 
 	<div class="field">
 

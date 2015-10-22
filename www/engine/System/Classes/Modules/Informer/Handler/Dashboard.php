@@ -39,11 +39,21 @@ namespace System\Modules\Informer\Handler {
 
 			# Check if install file exists
 
-			if (Informer::checkInstallFile()) Messages::error(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
+			if (Informer::checkInstallFile()) {
+
+				$message = Language::get('DASHBOARD_MESSAGE_INSTALL_FILE');
+
+				Messages::error(str_replace('$install_path$', INSTALL_PATH, $message));
+			}
 
 			# Check if configuration file is loaded
 
-			if (!Settings::loaded()) Messages::warning(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
+			if (!Settings::loaded()) {
+
+				$message = Language::get('DASHBOARD_MESSAGE_CONFIG_FILE');
+
+				Messages::warning(str_replace('$install_path$', INSTALL_PATH, $message));
+			}
 
 			# ------------------------
 

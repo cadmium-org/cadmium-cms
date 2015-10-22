@@ -67,7 +67,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function getPaginationBlock() {
 
-			$url = new Url(static::$link . (static::$nesting ? ('?parent_id=' . $this->parent->id) : ''));
+			$url = new Url(INSTALL_PATH . static::$link . (static::$nesting ? ('?parent_id=' . $this->parent->id) : ''));
 
 			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
 		}

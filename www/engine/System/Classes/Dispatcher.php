@@ -12,7 +12,7 @@ namespace System {
 
 			# Check installation
 
-			if (!$this->installed) Request::redirect('/install.php');
+			if (!$this->installed) Request::redirect(INSTALL_PATH . '/install.php');
 
 			# Connect to database
 
@@ -25,7 +25,7 @@ namespace System {
 
 			# Create url
 
-			$url = new Url(getenv('REQUEST_URI'));
+			$url = new Url(Request::get('url'));
 
 			# Create map
 

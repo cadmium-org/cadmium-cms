@@ -20,7 +20,7 @@ namespace System\Modules\Auth\Handler {
 
 			if ($this->form->submit(['System\Modules\Auth\Controller\Reset', 'process'])) {
 
-				Request::redirect((Auth::admin() ? '/admin' : '/profile') . '/reset?submitted');
+				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/reset?submitted');
 
 			} else if (null !== Request::get('submitted')) {
 

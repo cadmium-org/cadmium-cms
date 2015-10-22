@@ -1,4 +1,4 @@
-<form class="ui form" method="get" action="/install.php">
+<form class="ui form" method="get" action="$install_path$/install.php">
 
 	<div class="field">
 
@@ -50,7 +50,7 @@
 
 <div class="field">
 
-	<a class="ui fluid teal button" href="/install.php?checked=$checked$">$text$</a>
+	<a class="ui fluid teal button" href="$install_path$/install.php?checked=$checked$">$text$</a>
 
 </div>
 

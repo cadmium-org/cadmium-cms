@@ -1,4 +1,4 @@
-<form class="ui form" method="post" action="/admin/reset" autocomplete="off">
+<form class="ui form" method="post" action="$install_path$/admin/reset" autocomplete="off">
 
 	<div class="field">
 
@@ -30,7 +30,7 @@
 
 			<i class="refresh icon"></i>
 
-			<img class="ui centered image" width="150" height="40" src="/captcha.png" />
+			<img class="ui centered image" width="150" height="40" src="$install_path$/captcha.png" />
 
 		</a>
 
@@ -44,7 +44,7 @@
 
 	<div class="field">
 
-		<a class="ui fluid basic button" href="/admin/login">%LOGIN%</a>
+		<a class="ui fluid basic button" href="$install_path$/admin/login">%LOGIN%</a>
 
 	</div>
 

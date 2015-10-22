@@ -18,9 +18,7 @@ namespace System\Modules {
 
 			# Check mod_rewrite
 
-			$rewrite = (getenv('HTTP_MOD_REWRITE') === 'on');
-
-			self::$requirements['rewrite'] = $rewrite;
+			self::$requirements['rewrite'] = HTTP_MOD_REWRITE;
 
 			# Check writables
 

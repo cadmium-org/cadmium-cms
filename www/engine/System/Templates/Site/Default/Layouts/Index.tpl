@@ -4,9 +4,9 @@
 
 	<nav class="ui page grid fixed main menu">
 
-		<a class="brand item" id="menu-brand" href="/">
+		<a class="brand item" id="menu-brand" href="$install_path$/">
 
-			<img src="/include/site/templates/default/images/brand.png" />
+			<img src="$install_path$/include/site/templates/default/images/brand.png" />
 
 		</a>
 
@@ -30,9 +30,9 @@
 
 				<div class="menu">
 
-					<a class="item" href="/profile"><i class="user icon"></i>%TITLE_PROFILE%</a>
+					<a class="item" href="$install_path$/profile"><i class="user icon"></i>%TITLE_PROFILE%</a>
 
-					<a class="item" href="/profile/logout"><i class="sign out icon"></i>%LOGOUT%</a>
+					<a class="item" href="$install_path$/profile/logout"><i class="sign out icon"></i>%LOGOUT%</a>
 
 				</div>
 
@@ -40,7 +40,7 @@
 
 			{ ! block:admin }
 
-			<a class="item" href="/admin" target="_blank" id="section-button" title="%SECTION_ADMIN%"><i class="setting icon"></i></a>
+			<a class="item" href="$install_path$/admin" target="_blank" id="section-button" title="%SECTION_ADMIN%"><i class="setting icon"></i></a>
 
 			{ / block:admin }
 
@@ -52,9 +52,9 @@
 
 		<div class="right menu">
 
-			<a class="item" href="/profile/login">%LOGIN%</a>
+			<a class="item" href="$install_path$/profile/login">%LOGIN%</a>
 
-			<a class="item" href="/profile/register">%REGISTER%</a>
+			<a class="item" href="$install_path$/profile/register">%REGISTER%</a>
 
 		</div>
 

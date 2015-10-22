@@ -4,7 +4,7 @@
 
 	<div class="ui breadcrumb">
 
-		<a class="section" href="/admin/system/users">%TITLE_SYSTEM_USERS%</a>
+		<a class="section" href="$install_path$/admin/system/users">%TITLE_SYSTEM_USERS%</a>
 
 		<div class="divider"> / </div>
 

@@ -4,7 +4,7 @@
 
 		<h1 class="image header">
 
-			<a href="/"><img class="image" src="/include/admin/templates/default/images/logo.png" /></a>
+			<a href="$install_path$/"><img class="image" src="$install_path$/include/admin/templates/default/images/logo.png" /></a>
 
 		</h1>
 

@@ -52,7 +52,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Send mail
 
-			Auth\Utils\Mail::reset($code);
+			Auth\Utils\Mail::reset($user, $code);
 
 			# ------------------------
 

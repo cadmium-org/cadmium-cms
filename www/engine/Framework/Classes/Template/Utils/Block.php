@@ -2,7 +2,7 @@
 
 namespace Template\Utils {
 
-	use Language, String;
+	use Language, Template, String;
 
 	class Block implements Settable {
 
@@ -165,11 +165,13 @@ namespace Template\Utils {
 
 			# Insert variables
 
-			$variables = ['stack' => &$this->variables, 'symbol' => '$', 'language' => false];
+			$globals = ['stack' => Template::globals(), 'symbol' => '$', 'language' => false];
+
+			$locals = ['stack' => &$this->variables, 'symbol' => '$', 'language' => false];
 
 			$phrases = ['stack' => &$this->phrases, 'symbol' => '%', 'language' => true];
 
-			foreach ([$variables, $phrases] as $variables) {
+			foreach ([$globals, $locals, $phrases] as $variables) {
 
 				foreach ($variables['stack'] as $name => $value) {
 
