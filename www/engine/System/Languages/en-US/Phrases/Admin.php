@@ -52,9 +52,10 @@ return [
 	'DASHBOARD_GROUP_GENERAL'                   => 'General',
 	'DASHBOARD_GROUP_DATABASE'                  => 'Database',
 
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <b>install.php</b> still exists in the root of your site. It\'s necessary to remove it.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
+	                                               'still exists in the root of your site. It\'s necessary to remove it.',
 	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'It seems you have not yet edited site configuration. ' .
-	                                               'Go to <a href="/admin/system/settings">settings page</a> to provide actual values.',
+	                                               'Go to <a href="$install_path$/admin/system/settings">settings page</a> to provide actual values.',
 
 	# Pages
 
@@ -87,6 +88,13 @@ return [
 	'MENUITEMS_ITEM_SELECT'                     => 'Select',
 
 	'MENUITEMS_ITEM_CONFIRM_REMOVE'             => 'Are you sure you want to remove selected item?',
+
+	# File manager
+
+	'FILEMANAGER_FILES_NOT_FOUND'               => 'Directory is empty',
+
+	'FILEMANAGER_COLUMN_NAME'                   => 'File name',
+	'FILEMANAGER_COLUMN_SIZE'                   => 'Size',
 
 	# Languages
 
