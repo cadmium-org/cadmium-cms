@@ -23,7 +23,7 @@ namespace System\Modules\Auth\Utils {
 			# ------------------------
 
 			$to = $user->email; $sender = Settings::get('site_title'); $reply_to = Settings::get('system_email');
-var_dump($message->contents(true));exit();
+
 			$from = ((false !== ($host = parse_url(Settings::get('system_url'), PHP_URL_HOST))) ? ('noreply@' . $host) : '');
 
 			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(true), true);
