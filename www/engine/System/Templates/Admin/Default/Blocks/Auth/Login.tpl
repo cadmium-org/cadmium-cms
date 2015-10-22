@@ -1,4 +1,4 @@
-<form class="ui form" method="post" action="/admin/login" autocomplete="off">
+<form class="ui form" method="post" action="$install_path$/admin/login" autocomplete="off">
 
 	<div class="field">
 
@@ -32,7 +32,7 @@
 
 	<div class="field">
 
-		<a class="ui fluid basic button" href="/admin/reset">%RESET%</a>
+		<a class="ui fluid basic button" href="$install_path$/admin/reset">%RESET%</a>
 
 	</div>
 

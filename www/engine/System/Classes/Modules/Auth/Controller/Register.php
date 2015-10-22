@@ -73,7 +73,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Send mail
 
-			Auth\Utils\Mail::register();
+			Auth\Utils\Mail::register($user);
 
 			# ------------------------
 

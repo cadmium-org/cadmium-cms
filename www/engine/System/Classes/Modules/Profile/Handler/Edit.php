@@ -43,7 +43,7 @@ namespace System\Modules\Profile\Handler {
 
 			if ($this->form_personal->submit($controller_personal) || $this->form_password->submit($controller_password)) {
 
-				Request::redirect('/profile/edit?submitted');
+				Request::redirect(INSTALL_PATH . '/profile/edit?submitted');
 
 			} else if (null !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_EDIT'));
 

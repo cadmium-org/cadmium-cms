@@ -35,7 +35,7 @@ namespace System\Modules\Install\Handler {
 
 			if ($this->form->submit(['System\Modules\Install\Controller\Database', 'process'])) {
 
-				Request::redirect('/admin/register');
+				Request::redirect(INSTALL_PATH . '/admin/register');
 			}
 
 			# ------------------------

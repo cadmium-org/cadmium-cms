@@ -1,12 +1,12 @@
 <tr data-id="$id$" data-text="$text$">
 
-	<td><i class="$icon$ icon"></i> <a href="/admin/content/menuitems?parent_id=$id$">$text$</a></td>
+	<td><i class="$icon$ icon"></i> <a href="$install_path$/admin/content/menuitems?parent_id=$id$">$text$</a></td>
 
 	<td># $position$</td>
 
 	<td class="right aligned">
 
-		<a class="ui mini positive icon button" href="/admin/content/menuitems/edit?id=$id$" title="%MENUITEMS_ITEM_EDIT%"><i class="edit icon"></i></a>
+		<a class="ui mini positive icon button" href="$install_path$/admin/content/menuitems/edit?id=$id$" title="%MENUITEMS_ITEM_EDIT%"><i class="edit icon"></i></a>
 
 		{ block:browse }
 

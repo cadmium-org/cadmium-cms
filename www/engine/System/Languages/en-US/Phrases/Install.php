@@ -59,7 +59,7 @@ return [
 
 	'INSTALL_PAGE_INDEX_CONTENTS'               => '<h2>Welcome!</h2>' .
 	                                               '<p>This is demo site, powered by <strong>Cadmium CMS</strong>.</p>' .
-	                                               '<p>You can log into admin panel by following <a href="/admin">this link</a>.</p>' .
+	                                               '<p>You can log into admin panel by following <a href="$install_path$/admin">this link</a>.</p>' .
 	                                               '<h2>See also</h2>' .
 	                                               '<ul><li><a href="http://cadmium-cms.com" target="_blank">Official website</a></li>' .
 	                                               '<li><a href="https://github.com/junepaik/cadmium-cms" target="_blank">GitHub project page</a></ul>',

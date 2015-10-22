@@ -26,9 +26,11 @@ namespace System\Modules\Entitizer\Handler {
 
 		protected function processEntity(Template\Utils\Block $contents) {
 
-			if (0 === $this->parent->id) $contents->block('parent')->block('browse')->disable();
+			if ((0 === $this->parent->id) || !$this->parent->visibility) {
 
-			else $contents->block('parent')->block('browse')->link = $this->parent->link;
+				$contents->block('parent')->block('browse')->disable();
+
+			} else $contents->block('parent')->block('browse')->link = (INSTALL_PATH . $this->parent->link);
 		}
 	}
 }

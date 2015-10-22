@@ -28,11 +28,11 @@ namespace System\Modules\Entitizer\Listview {
 
 		protected function processEntity(Template\Utils\Block $contents) {
 
-			$contents->block('parent')->link = $this->parent->link;
+			if ((0 === $this->parent->id) || !$this->parent->visibility) {
 
-			if (0 === $this->parent->id) $contents->block('parent')->block('browse')->disable();
+				$contents->block('parent')->block('browse')->disable();
 
-			else $contents->block('parent')->block('browse')->link = $this->parent->link;
+			} else $contents->block('parent')->block('browse')->link = (INSTALL_PATH . $this->parent->link);
 		}
 
 		# Add item additional data
@@ -47,9 +47,9 @@ namespace System\Modules\Entitizer\Listview {
 
 			# Set browse button
 
-			$view->block('browse')->class = (('' !== $data['visibility']) ? 'primary' : 'disabled');
+			$view->block('browse')->class = ($data['visibility'] ? 'primary' : 'disabled');
 
-			$view->block('browse')->link = $link;
+			$view->block('browse')->link = (INSTALL_PATH . $link);
 		}
 	}
 }

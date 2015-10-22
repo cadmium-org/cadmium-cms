@@ -52,9 +52,10 @@ return [
 	'DASHBOARD_GROUP_GENERAL'                   => 'Основное',
 	'DASHBOARD_GROUP_DATABASE'                  => 'База данных',
 
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <b>install.php</b> по-прежнему находится в корневой директории сайта. Необходимо удалить его.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
+	                                               'по-прежнему находится в корневой директории сайта. Необходимо удалить его.',
 	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'Похоже, Вы пока не редактировали конфигурацию сайта. '.
-	                                               'Перейдите на <a href="/admin/system/settings">страницу настроек</a> для ввода актуальных значений.',
+	                                               'Перейдите на <a href="$install_path$/admin/system/settings">страницу настроек</a> для ввода актуальных значений.',
 
 	# Pages
 
@@ -87,6 +88,13 @@ return [
 	'MENUITEMS_ITEM_SELECT'                     => 'Выбрать',
 
 	'MENUITEMS_ITEM_CONFIRM_REMOVE'             => 'Вы действительно хотите удалить выбранный элемент?',
+
+	# File manager
+
+	'FILEMANAGER_FILES_NOT_FOUND'               => 'Папка пуста',
+
+	'FILEMANAGER_COLUMN_NAME'                   => 'Название файла',
+	'FILEMANAGER_COLUMN_SIZE'                   => 'Размер',
 
 	# Languages
 

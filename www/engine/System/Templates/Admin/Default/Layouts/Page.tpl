@@ -4,9 +4,9 @@
 
 	<nav class="ui page grid fixed inverted main menu">
 
-		<a class="brand item" id="menu-brand" href="/admin">
+		<a class="brand item" id="menu-brand" href="$install_path$/admin">
 
-			<img src="/include/admin/templates/default/images/brand.png" />
+			<img src="$install_path$/include/admin/templates/default/images/brand.png" />
 
 		</a>
 
@@ -30,9 +30,9 @@
 
 				<div class="menu">
 
-					<a class="item" href="/admin/system/users/edit?id=$id$"><i class="user icon"></i>%TITLE_PROFILE%</a>
+					<a class="item" href="$install_path$/admin/system/users/edit?id=$id$"><i class="user icon"></i>%TITLE_PROFILE%</a>
 
-					<a class="item" href="/admin/logout"><i class="sign out icon"></i>%LOGOUT%</a>
+					<a class="item" href="$install_path$/admin/logout"><i class="sign out icon"></i>%LOGOUT%</a>
 
 				</div>
 
@@ -40,7 +40,7 @@
 
 			{ block:site }
 
-			<a class="item" href="/" target="_blank" id="section-button" title="%SECTION_SITE%"><i class="globe icon"></i></a>
+			<a class="item" href="$install_path$/" target="_blank" id="section-button" title="%SECTION_SITE%"><i class="globe icon"></i></a>
 
 			{ / block:site }
 
@@ -121,8 +121,6 @@
 					{ / block:template }
 
 				</div>
-
-
 
 			</div>
 

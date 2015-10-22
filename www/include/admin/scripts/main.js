@@ -29,7 +29,7 @@ var Main = {
 
 		$('.ui.accordion').accordion();
 
-		$('#captcha').click(function() { $(this).find('img').attr('src', '/captcha.png?unique=' + Math.random()); });
+		$('#captcha').click(function() { $(this).find('img').attr('src', install_path + '/captcha.png?unique=' + Math.random()); });
 
 		$('.ui.modal').modal('setting', 'transition', 'fade down');
 
@@ -156,7 +156,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, ('/admin/content/pages/edit?id=' + item.id), { 'ajax_action': 'remove' });
+			Main.ajax(this, (install_path + '/admin/content/pages/edit?id=' + item.id), { 'ajax_action': 'remove' });
 		},
 
 		'handle' : function(data) {
@@ -199,7 +199,7 @@ var Main = {
 
 			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
 
-			Main.ajax(this, ('/admin/content/pages?parent_id=' + parent_id), { 'ajax_id' : this.id });
+			Main.ajax(this, (install_path + '/admin/content/pages?parent_id=' + parent_id), { 'ajax_id' : this.id });
 		},
 
 		'handle' : function(data) {
@@ -267,7 +267,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, ('/admin/content/menuitems/edit?id=' + item.id), { 'ajax_action': 'remove' });
+			Main.ajax(this, (install_path + '/admin/content/menuitems/edit?id=' + item.id), { 'ajax_action': 'remove' });
 		},
 
 		'handle' : function(data) {
@@ -304,7 +304,7 @@ var Main = {
 
 			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
 
-			Main.ajax(this, ('/admin/content/menuitems?parent_id=' + parent_id), { 'ajax_id' : this.id });
+			Main.ajax(this, (install_path + '/admin/content/menuitems?parent_id=' + parent_id), { 'ajax_id' : this.id });
 		},
 
 		'handle' : function(data) {
@@ -486,7 +486,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, ('/admin/system/users/edit?id=' + item.id), { 'ajax_action': 'remove' });
+			Main.ajax(this, (install_path + '/admin/system/users/edit?id=' + item.id), { 'ajax_action': 'remove' });
 		},
 
 		'handle' : function(data) {

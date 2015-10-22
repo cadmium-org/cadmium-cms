@@ -16,7 +16,7 @@ namespace System\Modules\Auth\Handler {
 
 			# Redirect to login page
 
-			Request::redirect(Auth::admin() ? '/admin/login' : '/profile/login');
+			Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login');
 		}
 	}
 }

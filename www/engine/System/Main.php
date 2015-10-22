@@ -12,7 +12,7 @@ define('DIR_SYSTEM_PLUGINS',        (DIR_SYSTEM . 'Plugins/'));
 define('DIR_SYSTEM_TEMPLATES',      (DIR_SYSTEM . 'Templates/'));
 
 # Require classes
-                    
+
 require_once (DIR_SYSTEM . 'System.php');
 
 # Require configuration
@@ -21,3 +21,9 @@ require_once (DIR_SYSTEM_INCLUDES . 'Config.php');
 require_once (DIR_SYSTEM_INCLUDES . 'Constants.php');
 require_once (DIR_SYSTEM_INCLUDES . 'Regex.php');
 require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
+
+# Process environment variables
+
+define('HTTP_MOD_REWRITE', (getenv('HTTP_MOD_REWRITE') === 'on'));
+
+define('INSTALL_PATH', rtrim(getenv('INSTALL_PATH'), '/'));

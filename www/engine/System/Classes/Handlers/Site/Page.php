@@ -12,7 +12,7 @@ namespace System\Handlers\Site {
 
 		private function getPath() {
 
-			$path = []; $id = 0; $link = '';
+			$path = []; $id = 0; $link = INSTALL_PATH;
 
 			foreach ($this->path as $name) {
 

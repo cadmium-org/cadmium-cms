@@ -2,7 +2,7 @@
 
 	{ for:sections }
 
-	<a href="/admin/extend/languages?list=$name$" class="$class$">$title$</a>
+	<a href="$install_path$/admin/extend/languages?list=$name$" class="$class$">$title$</a>
 
 	{ / for:sections }
 

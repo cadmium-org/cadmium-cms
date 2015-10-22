@@ -4,6 +4,24 @@ namespace {
 
 	abstract class Template {
 
+		private static $globals = [];
+
+		# Set global variable
+
+		public static function set($name, $value) {
+
+			$name = strval($name); $value = strval($value);
+
+			self::$globals[$name] = $value;
+		}
+
+		# Get globals list
+
+		public static function globals() {
+
+			return self::$globals;
+		}
+
 		# Create block
 
 		public static function block($contents = '', $parse = true) {

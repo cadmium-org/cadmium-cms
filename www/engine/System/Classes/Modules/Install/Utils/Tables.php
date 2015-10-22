@@ -26,7 +26,7 @@ namespace System\Modules\Install\Utils {
 
 				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
-				'contents' => Language::get('INSTALL_PAGE_INDEX_CONTENTS'),
+				'contents' => str_replace('$install_path$', INSTALL_PATH, Language::get('INSTALL_PAGE_INDEX_CONTENTS')),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
@@ -36,7 +36,7 @@ namespace System\Modules\Install\Utils {
 
 				'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
 
-				'contents' => Language::get('INSTALL_PAGE_DEMO_CONTENTS'),
+				'contents' => str_replace('$install_path$', INSTALL_PATH, Language::get('INSTALL_PAGE_DEMO_CONTENTS')),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 

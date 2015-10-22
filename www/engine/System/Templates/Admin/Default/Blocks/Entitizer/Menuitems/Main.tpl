@@ -4,13 +4,13 @@
 
 	<div class="ui breadcrumb">
 
-		<a class="section" href="/admin/content/menuitems">%TITLE_CONTENT_MENUITEMS%</a>
+		<a class="section" href="$install_path$/admin/content/menuitems">%TITLE_CONTENT_MENUITEMS%</a>
 
 		<i class="divider"> / </i>
 
 		{ for:path }
 
-		<a class="section" href="/admin/content/menuitems?id=$id$">$text$</a>
+		<a class="section" href="$install_path$/admin/content/menuitems?parent_id=$id$">$text$</a>
 
 		<i class="divider"> / </i>
 
@@ -24,17 +24,17 @@
 
 <div class="ui stackable menu">
 
-	<a class="item" href="/admin/content/menuitems?parent_id=$id$"><i class="list icon"></i> %MENUITEMS_ITEM_LIST%</a>
+	<a class="item" href="$install_path$/admin/content/menuitems?parent_id=$id$"><i class="list icon"></i> %MENUITEMS_ITEM_LIST%</a>
 
 	{ block:create }
 
-	<a class="$class$" href="/admin/content/menuitems/create?id=$id$"><i class="add icon"></i> %MENUITEMS_ITEM_CREATE%</a>
+	<a class="$class$" href="$install_path$/admin/content/menuitems/create?id=$id$"><i class="add icon"></i> %MENUITEMS_ITEM_CREATE%</a>
 
 	{ / block:create }
 
 	{ block:edit }
 
-	<a class="$class$" href="/admin/content/menuitems/edit?id=$id$"><i class="edit icon"></i> %MENUITEMS_ITEM_EDIT%</a>
+	<a class="$class$" href="$install_path$/admin/content/menuitems/edit?id=$id$"><i class="edit icon"></i> %MENUITEMS_ITEM_EDIT%</a>
 
 	{ / block:edit }
 

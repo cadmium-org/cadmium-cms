@@ -61,9 +61,11 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Set link
 
-			if (static::$nesting) $contents->link = (($this->create ? 'create' : 'edit') . '?id=' . $this->parent->id);
+			$link = (INSTALL_PATH . static::$link . '/');
 
-			else $contents->link = (static::$link . '/' . ($this->create ? 'create' : ('edit?id=' . $this->entity->id)));
+			if (static::$nesting) $contents->link = ($link . ($this->create ? 'create' : 'edit') . '?id=' . $this->parent->id);
+
+			else $contents->link = ($link . ($this->create ? 'create' : ('edit?id=' . $this->entity->id)));
 
 			# Process parent block
 
@@ -130,7 +132,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Redirect if entity not found
 
-			if (!$this->create && (0 === $this->entity->id)) return Request::redirect(static::$link);
+			if (!$this->create && (0 === $this->entity->id)) return Request::redirect(INSTALL_PATH . static::$link);
 
 			# Create form
 
@@ -142,7 +144,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			if ($this->form->submit([$this->entity, 'process'])) {
 
-				Request::redirect(static::$link . '/edit?id=' . $this->entity->id . '&submitted');
+				Request::redirect(INSTALL_PATH . static::$link . '/edit?id=' . $this->entity->id . '&submitted');
 
 			} else if (!$this->create && (null !== Request::get('submitted'))) {
 

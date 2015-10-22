@@ -28,7 +28,7 @@ namespace System\Utils {
 
 				$item->target = (($this->items[$id]['target'] === TARGET_BLANK) ? '_blank' : '_self');
 
-				$item->link = $this->items[$id]['link'];
+				$item->link = (INSTALL_PATH . $this->items[$id]['link']);
 
 				$item->text = $this->items[$id]['text'];
 			}

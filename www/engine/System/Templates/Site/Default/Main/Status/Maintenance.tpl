@@ -10,9 +10,9 @@
 
 		<title>$title$</title>
 
-		<link rel="icon" type="image/png" href="/include/favicon.png" />
+		<link rel="icon" type="image/png" href="$install_path$/include/favicon.png" />
 
-		<link rel="stylesheet" type="text/css" href="/include/semantic/semantic.min.css" />
+		<link rel="stylesheet" type="text/css" href="$install_path$/include/semantic/semantic.min.css" />
 
 		<style type="text/css">
 

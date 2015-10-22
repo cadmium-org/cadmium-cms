@@ -6,7 +6,7 @@
 /* masthead */
 
 .masthead { padding:106px 1rem 50px 1rem; margin-bottom:1rem;
-	background:#1B1C1D url('/include/site/templates/default/images/header.png') fixed repeat top center; text-align:center; }
+	background:#1B1C1D url('../images/header.png') fixed repeat top center; text-align:center; }
 
 .masthead h1 { font-size:3rem; color:#FFF; }
 
@@ -17,7 +17,7 @@
 /* heading */
 
 .heading { padding:86px 1rem 30px 1rem; margin-bottom:1rem;
-	background:#1B1C1D url('/include/site/templates/default/images/header.png') fixed repeat top center; text-align:center; }
+	background:#1B1C1D url('../images/header.png') fixed repeat top center; text-align:center; }
 
 .heading h1 { font-size:2.5rem; color:#FFF; }
 

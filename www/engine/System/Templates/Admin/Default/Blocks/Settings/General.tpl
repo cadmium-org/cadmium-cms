@@ -1,4 +1,4 @@
-<form class="ui form segment" method="post" action="/admin/system/settings" autocomplete="off">
+<form class="ui form segment" method="post" action="$install_path$/admin/system/settings" autocomplete="off">
 
 	<div class="ui two column stackable grid">
 

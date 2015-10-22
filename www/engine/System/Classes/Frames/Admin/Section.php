@@ -148,11 +148,11 @@ namespace System\Frames\Admin {
 
 				else if ($this instanceof Component\Auth) {
 
-					if (Auth::check()) Request::redirect('/admin');
+					if (Auth::check()) Request::redirect(INSTALL_PATH . '/admin');
 
-					if ($this instanceof Component\Auth\Initial) { if (!Auth::initial()) Request::redirect('/admin/login'); }
+					if ($this instanceof Component\Auth\Initial) { if (!Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/login'); }
 
-					else if (Auth::initial()) Request::redirect('/admin/register');
+					else if (Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/register');
 
 					if (Template::isSettable($result = $this->handle())) return $this->displayForm($result, STATUS_CODE_401);
 				}
@@ -161,7 +161,7 @@ namespace System\Frames\Admin {
 
 				else if ($this instanceof Component\Panel) {
 
-					if (!Auth::check()) Request::redirect('/admin/login');
+					if (!Auth::check()) Request::redirect(INSTALL_PATH . '/admin/login');
 
 					if (Template::isSettable($result = $this->handle())) return $this->displayPage($result);
 
