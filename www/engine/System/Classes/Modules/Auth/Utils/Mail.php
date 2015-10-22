@@ -2,13 +2,13 @@
 
 namespace System\Modules\Auth\Utils {
 
-	use System\Modules\Auth, System\Modules\Settings, System\Utils\View, Date, Language, Mailer;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Modules\Settings, System\Utils\View, Date, Language, Mailer;
 
 	abstract class Mail {
 
 		# Send mail
 
-		private static function send($view, $subject, $link) {
+		private static function send(Entitizer\Entity\User $user, $view, $subject, $link) {
 
 			$message = View::get($view);
 
@@ -16,14 +16,14 @@ namespace System\Modules\Auth\Utils {
 
 			$message->system_url = Settings::get('system_url');
 
-			$message->name = Auth::user()->name; $message->link = $link;
+			$message->name = $user->name; $message->link = $link;
 
 			$message->system_email = Settings::get('system_email'); $message->copyright = Date::year();
 
 			# ------------------------
 
-			$to = Auth::user()->email; $sender = Settings::get('site_title'); $reply_to = Settings::get('system_email');
-
+			$to = $user->email; $sender = Settings::get('site_title'); $reply_to = Settings::get('system_email');
+var_dump($message->contents(true));exit();
 			$from = ((false !== ($host = parse_url(Settings::get('system_url'), PHP_URL_HOST))) ? ('noreply@' . $host) : '');
 
 			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(true), true);
@@ -31,20 +31,20 @@ namespace System\Modules\Auth\Utils {
 
 		# Send reset mail
 
-		public static function reset($code) {
+		public static function reset(Entitizer\Entity\User $user, $code) {
 
 			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile') . '/recover?code=' . $code);
 
-			return self::send('Blocks\Auth\Mail\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
+			return self::send($user, 'Blocks\Auth\Mail\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
 		}
 
 		# Send register mail
 
-		public static function register() {
+		public static function register(Entitizer\Entity\User $user) {
 
 			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile'));
 
-			return self::send('Blocks\Auth\Mail\Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
+			return self::send($user, 'Blocks\Auth\Mail\Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
 		}
 	}
 }
