@@ -2,8 +2,7 @@
 
 namespace System\Frames {
 
-	use System\Modules\Auth, System\Modules\Extend, System\Modules\Settings;
-	use System\Utils\Messages, System\Utils\View, Language, Template;
+	use System\Modules\Auth, System\Modules\Extend, System\Utils\Messages, System\Utils\View, Language, Template;
 
 	abstract class Section extends Main {
 
@@ -34,8 +33,6 @@ namespace System\Frames {
 			Language::init(Extend\Languages::path()); Language::phrases(static::$phrases);
 
 			# Set template globals
-
-			foreach (Settings::get() as $name => $value) Template::set($name, $value);
 
 			Template::set('install_path', INSTALL_PATH);
 
