@@ -79,6 +79,8 @@ namespace Template\Utils {
 		public function __clone() {
 
 			foreach ($this->blocks as $name => $block) $this->blocks[$name] = clone $block;
+
+			foreach ($this->loops as $name => $loop) $this->loops[$name] = clone $loop;
 		}
 
 		# Setter
