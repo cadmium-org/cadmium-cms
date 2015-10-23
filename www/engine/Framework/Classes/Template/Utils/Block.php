@@ -40,13 +40,13 @@ namespace Template\Utils {
 
 				$this->contents = str_replace($matches[0][$key], ('{ for:' . $name . ' / }'), $this->contents);
 
-				$this->loops[$name] = ['block' => new Block($matches[2][$key]), 'range' => [], 'separator' => ''];
+				$this->loops[$name] = new Loop(new Block($matches[2][$key]));
 			}
 		}
 
-		# Parse variables
+		# Parse variables & phrases
 
-		private function parseVariables() {
+		private function parseElementaries() {
 
 			$variables = ['stack' => &$this->variables, 'pattern' => REGEX_TEMPLATE_VARIABLE];
 
@@ -65,29 +65,13 @@ namespace Template\Utils {
 			}
 		}
 
-		# Get loop contents
-
-		private function getLoopContents($block, $range) {
-
-			$loop = new Group();
-
-			foreach ($range as $item) {
-
-				$loop->add($block = clone($block));
-
-				foreach ($item as $name => $value) $block->set($name, $value);
-			}
-
-			return $loop->contents();
-		}
-
 		# Constructor
 
 		public function __construct($contents = '', $parse = true) {
 
 			$this->contents = strval($contents); $parse = boolval($parse);
 
-			if ($parse) { $this->parseBlocks(); $this->parseLoops(); $this->parseVariables(); }
+			if ($parse) { $this->parseBlocks(); $this->parseLoops(); $this->parseElementaries(); }
 		}
 
 		# Cloner
@@ -125,13 +109,13 @@ namespace Template\Utils {
 
 		# Set loop
 
-		public function loop($name, array $range, $separator = '') {
+		public function loop($name, array $range) {
 
-			$name = strval($name); $separator = strval($separator);
+			$name = strval($name);
 
 			if (!isset($this->loops[$name])) return false;
 
-			$this->loops[$name]['range'] = $range; $this->loops[$name]['separator'] = $separator;
+			$this->loops[$name]->set($range);
 
 			# ------------------------
 
@@ -161,48 +145,43 @@ namespace Template\Utils {
 
 			if (!$this->enabled) return '';
 
-			$format = boolval($format); $contents = $this->contents;
+			$format = boolval($format); $contents = $this->contents; $insertions = [];
 
-			# Insert variables
+			# Process variables
 
-			$globals = ['stack' => Template::globals(), 'symbol' => '$', 'language' => false];
+			foreach ($this->variables as $name => $value) {
 
-			$locals = ['stack' => &$this->variables, 'symbol' => '$', 'language' => false];
+				$value = ((null === $value) ? Template::get($name) : $value);
 
-			$phrases = ['stack' => &$this->phrases, 'symbol' => '%', 'language' => true];
-
-			foreach ([$globals, $locals, $phrases] as $variables) {
-
-				foreach ($variables['stack'] as $name => $value) {
-
-					if (null === ($value = ($variables['language'] ? Language::get($name) : $value))) continue;
-
-					$contents = str_replace(($variables['symbol'] . $name . $variables['symbol']), $value, $contents);
-				}
+				if (null !== $value) $insertions['$' . $name . '$'] = $value;
 			}
 
-			# Insert phrases
+			# Process phrases
 
 			foreach ($this->phrases as $name => $value) {
 
-				if (null !== ($value = Language::get($name))) $contents = str_replace(('%' . $name . '%'), $value, $contents);
+				$value = Language::get($name);
+
+				if (null !== $value) $insertions['%' . $name . '%'] = $value;
 			}
 
-			# Insert loops
+			# Process loops
 
 			foreach ($this->loops as $name => $loop) {
 
-				$replace = $this->getLoopContents($loop['block'], $loop['range']);
-
-				$contents = str_replace('{ for:' . $name . ' / }', $replace, $contents);
+				$insertions['{ for:' . $name . ' / }'] = $loop->contents();
 			}
 
-			# Insert blocks
+			# Process blocks
 
 			foreach ($this->blocks as $name => $block) {
 
-				$contents = str_replace('{ block:' . $name . ' / }', $block->contents(), $contents);
+				$insertions['{ block:' . $name . ' / }'] = $block->contents();
 			}
+
+			# Insert values
+
+			$contents = str_replace(array_keys($insertions), array_values($insertions), $contents);
 
 			# ------------------------
 
