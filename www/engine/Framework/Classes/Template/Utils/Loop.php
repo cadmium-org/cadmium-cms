@@ -15,24 +15,35 @@ namespace Template\Utils {
 
 		# Set range
 
-		public function set(array $range) {
+		public function range(array $range) {
 
 			$this->range = $range;
+		}
+
+		# Set separator
+
+		public function separator($separator) {
+
+			$this->separator = strval($separator);
 		}
 
 		# Get contents
 
 		public function contents() {
 
-			$group = new Group();
+			$group = new Group(); $added = 0; $total = count($this->range);
 
 			foreach ($this->range as $item) {
 
-				if (!is_array($item)) continue;
+				$group->add($block = clone($this->block)); $added++;
 
-				$group->add($block = clone($this->block));
+				# Set variables
 
-				foreach ($item as $name => $value) $block->set($name, $value);
+				if (is_array($item)) foreach ($item as $name => $value) $block->set($name, $value);
+
+				# Add separator
+
+				if (('' !== $this->separator) && ($added < $total)) $group->add(new Block($this->separator, false));
 			}
 
 			# ------------------------

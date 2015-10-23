@@ -111,13 +111,13 @@ namespace Template\Utils {
 
 		# Set loop
 
-		public function loop($name, array $range) {
+		public function loop($name, array $range, $separator = '') {
 
 			$name = strval($name);
 
 			if (!isset($this->loops[$name])) return false;
 
-			$this->loops[$name]->set($range);
+			$this->loops[$name]->range($range); $this->loops[$name]->separator($separator);
 
 			# ------------------------
 
