@@ -15,7 +15,7 @@ namespace {
 
 		public static function isSecure() {
 
-			$https = ((false != getenv('HTTPS')) && (getenv('HTTPS') !== 'off'));
+			$https = (!empty(getenv('HTTPS')) && (getenv('HTTPS') !== 'off'));
 
 			return ($https || (getenv('SERVER_PORT') === '443'));
 		}

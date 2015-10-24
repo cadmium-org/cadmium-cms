@@ -8,17 +8,17 @@ namespace {
 
 		public static function ip() {
 
-			if (false != getenv('HTTP_CLIENT_IP'))          return getenv('HTTP_CLIENT_IP');
+			if (!empty(getenv('HTTP_CLIENT_IP')))           return getenv('HTTP_CLIENT_IP');
 
-			if (false != getenv('HTTP_X_FORWARDED_FOR'))    return getenv('HTTP_X_FORWARDED_FOR');
+			if (!empty(getenv('HTTP_X_FORWARDED_FOR')))     return getenv('HTTP_X_FORWARDED_FOR');
 
-			if (false != getenv('HTTP_X_FORWARDED'))        return getenv('HTTP_X_FORWARDED');
+			if (!empty(getenv('HTTP_X_FORWARDED')))         return getenv('HTTP_X_FORWARDED');
 
-			if (false != getenv('HTTP_FORWARDED_FOR'))      return getenv('HTTP_FORWARDED_FOR');
+			if (!empty(getenv('HTTP_FORWARDED_FOR')))       return getenv('HTTP_FORWARDED_FOR');
 
-			if (false != getenv('HTTP_FORWARDED'))          return getenv('HTTP_FORWARDED');
+			if (!empty(getenv('HTTP_FORWARDED')))           return getenv('HTTP_FORWARDED');
 
-			if (false != getenv('REMOTE_ADDR'))             return getenv('REMOTE_ADDR');
+			if (!empty(getenv('REMOTE_ADDR')))              return getenv('REMOTE_ADDR');
 
 			# ------------------------
 
