@@ -35,12 +35,16 @@ var Main = {
 
 		$('#menu-launcher').click(function() { $('.sidebar').sidebar('show'); });
 
-		/* Window resize handler */
+		/* Handle window resize */
 
 		$(window).resize(function(event) { event.preventDefault(); Main.resize(); }).resize();
 
+		/* Init objects */
+
 		for (object in this) if (typeof this[object] === 'object') this[object].init();
 	},
+
+	/* Resize handler */
 
 	'resize' : function() {
 

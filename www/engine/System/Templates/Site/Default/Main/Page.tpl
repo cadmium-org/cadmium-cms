@@ -25,7 +25,7 @@
 
 		<script src="$install_path$/include/semantic/semantic.min.js"></script>
 
-		<script src="$install_path$/include/site/scripts/main.js"></script>
+		<script src="$install_path$/include/site/templates/default/scripts/main.js"></script>
 
 		<script>
 
