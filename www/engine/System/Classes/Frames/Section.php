@@ -36,6 +36,8 @@ namespace System\Frames {
 
 			Template::set('install_path', INSTALL_PATH);
 
+			Template::set('template_name', strtolower(Extend\Templates::active()));
+
 			# Init utils
 
 			View::init(static::SECTION); Messages::init();

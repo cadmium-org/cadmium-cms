@@ -6,7 +6,7 @@
 
 		<a class="brand item" id="menu-brand" href="$install_path$/admin">
 
-			<img src="$install_path$/include/admin/templates/default/images/brand.png" />
+			<img src="$install_path$/include/admin/templates/$template_name$/images/brand.png" />
 
 		</a>
 
