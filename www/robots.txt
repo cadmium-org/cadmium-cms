@@ -1,7 +1,6 @@
 User-agent: *
 
 Disallow: /admin/
-Disallow: /demo/
 Disallow: /engine/
 Disallow: /profile/
 Disallow: /install.php
