@@ -30,7 +30,7 @@ namespace {
 
 			$key = strval($key); $range = array_keys(static::$list);
 
-			return (false !== ($key = array_search($key, $range)) ? $range[$key] : null);
+			return (false !== ($key = array_search($key, $range)) ? $range[$key] : false);
 		}
 
 		# Get item by key
@@ -39,7 +39,7 @@ namespace {
 
 			$key = strval($key);
 
-			return (isset(static::$list[$key]) ? static::$list[$key] : false);
+			return (isset(static::$list[$key]) ? static::$list[$key] : null);
 		}
 
 		# Get list

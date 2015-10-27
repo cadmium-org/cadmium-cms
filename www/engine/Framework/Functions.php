@@ -2,6 +2,13 @@
 
 namespace {
 
+    # Check if value is empty
+
+    function is_empty($value) {
+
+        return empty($value);
+    }
+
 	# Cast variable to unsigned integer
 
 	function intabs($value) {

@@ -16,7 +16,7 @@ namespace Form\Field {
 
 			foreach ($this->options as $value => $text) {
 
-				$selected = (($this->value === $value) ? ' selected="selected"' : '');
+				$selected = (($this->value === $value) ? ' selected' : '');
 
 				$options[] = ['value' => $value, 'selected' => $selected, 'text' => $text];
 			}

@@ -15,7 +15,7 @@
 		<link rel="icon" type="image/png" href="$install_path$/include/admin/favicon.png" />
 
 		<link rel="stylesheet" type="text/css" href="$install_path$/include/semantic/semantic.min.css" />
-		<link rel="stylesheet" type="text/css" href="$install_path$/include/admin/templates/default/styles/main.css" />
+		<link rel="stylesheet" type="text/css" href="$install_path$/include/admin/templates/$template_name$/styles/main.css" />
 
 		<script src="$install_path$/include/common/jquery.core.js"></script>
 

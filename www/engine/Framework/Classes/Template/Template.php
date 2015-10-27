@@ -15,11 +15,11 @@ namespace {
 			self::$globals[$name] = $value;
 		}
 
-		# Get globals list
+		# Set global variable
 
-		public static function globals() {
+		public static function get($name) {
 
-			return self::$globals;
+			return (isset(self::$globals[$name]) ? self::$globals[$name] : null);
 		}
 
 		# Create block
