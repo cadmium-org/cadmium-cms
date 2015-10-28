@@ -38,6 +38,26 @@ namespace {
 			return $number;
 		}
 
+		# Format number as file size
+
+		public static function size($number) {
+
+			$number = intabs($number);
+
+			$exponents = [0 => 'Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+			foreach ($exponents as $exponent => $text) if ($number < pow(1024, ($exponent + 1))) {
+
+				$number = number_format(($number / pow(1024, $exponent)), (($exponent > 1) ? 2 : $exponent));
+
+				return ($number . ' ' . $text);
+			}
+
+			# ------------------------
+
+			return '> 1 PB';
+		}
+
 		# Format text containing number (ukrainian/russian language only)
 
 		public static function text($number, $variant_1, $variant_3, $variant_5) {
