@@ -53,7 +53,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$parent_id = intabs($parent_id); $disable_id = intabs($disable_id);
 
-			$items = ['items' => [], 'total' => 0];
+			$items = ['list' => [], 'total' => 0];
 
 			# Create definition
 
@@ -75,7 +75,7 @@ namespace System\Modules\Entitizer\Utils {
 
 				if (static::$nesting) $item['children'] = intabs($row['children']);
 
-				$items['items'][] = $item;
+				$items['list'][] = $item;
 			}
 
 			# Count total

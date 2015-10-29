@@ -33,7 +33,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$items = Template::group();
 
-			foreach ($this->items['items'] as $item) {
+			foreach ($this->items['list'] as $item) {
 
 				$items->add($view = View::get($ajax ? static::$view_ajax_item : static::$view_item));
 
