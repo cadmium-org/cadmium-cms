@@ -16,10 +16,6 @@ namespace System\Modules\Entitizer\Utils {
 
 			$parent->id = $this->parent->id;
 
-			# Set parent naming
-
-			$parent->set(static::$naming, $this->parent->__get(static::$naming));
-
 			# Set create button
 
 			$parent->block('create')->id = $this->parent->id;
