@@ -2,7 +2,7 @@
 
 namespace System\Handlers\Admin\Content {
 
-	use System, System\Utils\Messages, Language, Template;
+	use System, System\Modules, Language;
 
 	class Filemanager extends System\Frames\Admin\Component\Panel {
 
@@ -12,9 +12,11 @@ namespace System\Handlers\Admin\Content {
 
 			$this->title = Language::get('TITLE_CONTENT_FILEMANAGER');
 
-			Messages::info(Language::get('FEATURE_NOT_AVAILABLE'));
+			$filemanager = new Modules\Filemanager\Handler\Uploads();
 
-			return Template::block();
+			# ------------------------
+
+			return $filemanager->handle();
 		}
 	}
 }

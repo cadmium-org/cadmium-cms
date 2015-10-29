@@ -68,6 +68,7 @@ define('CONFIG_ADMIN_TEMPLATE_DEFAULT',             'Default');
 
 define('CONFIG_ADMIN_PAGES_DISPLAY',                50);
 define('CONFIG_ADMIN_MENUITEMS_DISPLAY',            50);
+define('CONFIG_ADMIN_FILES_DISPLAY',                50);
 define('CONFIG_ADMIN_USERS_DISPLAY',                50);
 
 # Site
