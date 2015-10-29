@@ -4,7 +4,7 @@ namespace {
 
 	abstract class Agent {
 
-		private static $robots = [], $mobiles = [];
+		private static $mobiles = [], $robots = [];
 
 		# Process agents array
 
@@ -23,20 +23,13 @@ namespace {
 
 		public static function __autoload() {
 
-			$file_robots = (DIR_DATA . 'Agent/Robots.php');
-
 			$file_mobiles = (DIR_DATA . 'Agent/Mobiles.php');
 
-			if (is_array($robots = Explorer::php($file_robots))) self::$robots = $robots;
+			$file_robots = (DIR_DATA . 'Agent/Robots.php');
 
 			if (is_array($mobiles = Explorer::php($file_mobiles))) self::$mobiles = $mobiles;
-		}
 
-		# Check if user agent is robot
-
-		public static function isRobot() {
-
-			return self::processArray(self::$robots);
+			if (is_array($robots = Explorer::php($file_robots))) self::$robots = $robots;
 		}
 
 		# Check if user agent is mobile
@@ -44,6 +37,13 @@ namespace {
 		public static function isMobile() {
 
 			return self::processArray(self::$mobiles);
+		}
+
+		# Check if user agent is robot
+
+		public static function isRobot() {
+
+			return self::processArray(self::$robots);
 		}
 	}
 }
