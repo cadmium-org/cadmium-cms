@@ -59,11 +59,15 @@ namespace System\Modules\Entitizer\Utils {
 			return $items;
 		}
 
-		# Get pagination
+		# Get pagination block
 
 		private function getPaginationBlock() {
 
-			$url = new Url(INSTALL_PATH . static::$link . (static::$nesting ? ('?parent_id=' . $this->parent->id) : ''));
+			$query = (static::$nesting ? ('?parent_id=' . $this->parent->id) : '');
+
+			$url = new Url(INSTALL_PATH . static::$link . $query);
+
+			# ------------------------
 
 			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
 		}
