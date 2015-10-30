@@ -28,21 +28,13 @@ namespace System\Frames {
 
 			Extend\Templates::init(static::SECTION);
 
-			# Load primary language phrases
+			# Load language phrases
 
-			foreach (static::$phrases as $name) {
+			$languages = [Extend\Languages::pathPrimary(), Extend\Languages::path()];
 
-				Language::load(Extend\Languages::pathPrimary() . 'Phrases/' . $name . '.php');
-			}
+			foreach (array_unique($languages) as $path) foreach (static::$phrases as $name) {
 
-			# Load active language phrases
-
-			if (Extend\Languages::active() !== Extend\Languages::primary()) {
-
-				foreach (static::$phrases as $name) {
-
-					Language::load(Extend\Languages::path() . 'Phrases/' . $name . '.php');
-				}
+				Language::load($path . 'Phrases/' . $name . '.php');
 			}
 
 			# Set template globals
