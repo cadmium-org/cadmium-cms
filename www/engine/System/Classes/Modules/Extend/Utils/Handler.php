@@ -21,11 +21,11 @@ namespace System\Modules\Extend\Utils {
 
 			$items = self::items($this->section); $active = key($items);
 
-			$name = Settings::get(self::$param[$this->section]); $default = self::$default[$this->section];
+			$name = Settings::get(self::$param[$this->section]); $primary = self::$default[$this->section];
 
 			if (self::valid($name) && isset($items[$name])) $active = $name;
 
-			else if (self::valid($default) && isset($items[$default])) $active = $default;
+			else if (self::valid($primary) && isset($items[$primary])) $active = $primary;
 
 			foreach (array_keys($items) as $name) $items[$name]['active'] = ($name === $active);
 

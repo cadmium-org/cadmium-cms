@@ -6,7 +6,7 @@ namespace System\Modules\Extend\Utils {
 
 	trait Extension {
 
-		private static $section = '', $dir_name = '', $items = [], $active = '';
+		private static $section = '', $dir_name = '', $items = [], $active = '', $primary = '';
 
 		# Get section
 
@@ -118,17 +118,17 @@ namespace System\Modules\Extend\Utils {
 
 			self::$section = $section; self::$dir_name = $dir_name; self::$items = self::getItems($dir_name);
 
-			$selectable = self::$selectable[$section]; $param = self::$param[$section]; $default = self::$default[$section];
+			$selectable = self::$selectable[$section]; $param = self::$param[$section]; $primary = self::$default[$section];
 
 			if ($selectable && (false !== ($name = self::getUserDefined()))) $name_valid = true;
 
-			else $name_valid = (self::exists($name = Settings::get($param)) || self::exists($name = $default));
+			else $name_valid = (self::exists($name = Settings::get($param)) || self::exists($name = $primary));
 
 			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Error\General(self::$error_select);
 
 			# ------------------------
 
-			self::$active = $name;
+			self::$active = $name; self::$primary = $primary;
 		}
 
 		# Return active section
@@ -163,6 +163,13 @@ namespace System\Modules\Extend\Utils {
 			return self::$active;
 		}
 
+		# Return primary extension name
+
+		public static function primary() {
+
+			return self::$primary;
+		}
+
 		# Get active extension path
 
 		public static function path() {
@@ -170,6 +177,15 @@ namespace System\Modules\Extend\Utils {
 			if ('' === self::$active) return false;
 
 			return (self::$dir_name . self::$active . '/');
+		}
+
+		# Get primary extension path
+
+		public static function pathPrimary() {
+
+			if ('' === self::$primary) return false;
+
+			return (self::$dir_name . self::$primary . '/');
 		}
 
 		# Get active extension data
