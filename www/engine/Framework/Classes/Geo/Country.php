@@ -12,7 +12,7 @@ namespace Geo {
 
 		public static function __autoload() {
 
-			self::init('Geo/Countries.php');
+			self::init(DIR_DATA . 'Geo/Countries.php');
 		}
 	}
 }

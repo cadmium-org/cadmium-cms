@@ -12,7 +12,7 @@ namespace Geo {
 
 		public static function __autoload() {
 
-			self::init('Geo/Timezones.php');
+			self::init(DIR_DATA . 'Geo/Timezones.php');
 		}
 	}
 }

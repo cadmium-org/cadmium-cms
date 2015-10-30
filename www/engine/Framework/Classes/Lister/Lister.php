@@ -10,8 +10,6 @@ namespace {
 
 		protected static function init($file_name) {
 
-			$file_name = (DIR_DATA . $file_name);
-
 			if (is_array($list = Explorer::php($file_name))) static::$list = $list;
 		}
 

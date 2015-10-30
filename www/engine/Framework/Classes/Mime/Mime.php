@@ -19,7 +19,7 @@ namespace {
 
 		public static function __autoload() {
 
-			self::init('Mime.php');
+			self::init(DIR_DATA . 'Mime.php');
 		}
 
 		# Check if extension is image
