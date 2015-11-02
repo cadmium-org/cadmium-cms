@@ -30,7 +30,7 @@ namespace {
 
 			$value = filter_var($value, FILTER_VALIDATE_URL);
 
-			return ((false !== $value) ? preg_replace('/\/*$/', '', $value) : false);
+			return ((false !== $value) ? rtrim('/') : false);
 		}
 	}
 }
