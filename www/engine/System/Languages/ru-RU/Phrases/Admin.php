@@ -96,6 +96,17 @@ return [
 	'FILEMANAGER_COLUMN_NAME'                   => 'Название файла',
 	'FILEMANAGER_COLUMN_SIZE'                   => 'Размер',
 
+	'FILEMANAGER_DIR_CREATE'                    => 'Создать директорию',
+
+	'FILEMANAGER_ITEM_INFO'                     => 'Информация',
+	'FILEMANAGER_ITEM_REMOVE'                   => 'Удалить',
+
+	'FILEMANAGER_ITEM_CONFIRM_REMOVE'           => 'Вы действительно хотите удалить выбранный элемент?',
+
+	'FILEMANAGER_ERROR_CREATE'                  => 'Ошибка создания директории',
+	'FILEMANAGER_ERROR_EXISTS'                  => 'Директория или файл с указанным названием уже существует',
+	'FILEMANAGER_ERROR_INVALID'                 => 'Название директории не может содержать следующих символов: \\ / ? % * : | " < > ',
+
 	# Languages
 
 	'LANGUAGES_NOT_FOUND'                       => 'Языки не найдены',

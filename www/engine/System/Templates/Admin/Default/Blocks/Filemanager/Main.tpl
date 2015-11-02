@@ -1,3 +1,5 @@
+<input type="hidden" id="filemanager-dir" name="dir" value="$dir$" />
+
 <div class="ui segment">
 
 	<div class="ui breadcrumb">
@@ -13,6 +15,22 @@
 		<i class="divider"> / </i>
 
 		{ / for:path }
+
+	</div>
+
+</div>
+
+<div class="ui stackable menu">
+
+	<div class="item">
+
+		<div class="ui transparent icon input" id="filemanager-dir-create">
+
+			<input type="text" placeholder="%FILEMANAGER_DIR_CREATE%" />
+
+			<i class="add link icon submitter"></i>
+
+		</div>
 
 	</div>
 

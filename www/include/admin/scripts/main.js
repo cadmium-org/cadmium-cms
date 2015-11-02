@@ -343,6 +343,45 @@ var Main = {
 		}
 	},
 
+	'Filemanager' : {
+
+		'locked' : false, 'dir' : false, 'item' : false, 'input' : false,
+
+		'init' : function() {
+
+			var handler = this;
+
+			this.dir = $('input:hidden#filemanager-dir[name=dir]').val();
+
+			this.item = $('#filemanager-dir-create'); this.input = this.item.find('input');
+
+			this.input.change(function(event) { $(this).val($(this).val().trim()); });
+
+			this.input.keypress(function(event) { if (event.keyCode == 13) { $(this).change(); handler.create(); } });
+
+			this.item.find('.submitter').click(function() { handler.create(); });
+		},
+
+		'create' : function() {
+
+			if (!this.locked && this.input && (this.input.val() != '')) {
+
+				this.locked = true; this.item.addClass('loading');
+
+				var params = { 'ajax_action' : 'makedir', 'ajax_name' : this.input.val() };
+
+				Main.ajax(this, (install_path + '/admin/content/filemanager?dir=' + this.dir), params);
+			}
+		},
+
+		'handle' : function(data) {
+
+			if (parseInt(data.status) == 1) location.reload();
+
+			else { this.locked = false; this.item.removeClass('loading'); }
+		}
+	},
+
 	'Languages' : {
 
 		'section' : false, 'list' : [], 'locked' : false, 'sender' : false,

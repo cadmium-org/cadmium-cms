@@ -2,7 +2,8 @@
 
 namespace System\Modules\Filemanager\Handler {
 
-	use System\Utils\Pagination, System\Utils\View, Request, Explorer, Mime, Number, Template, Url;
+	use System\Modules\Filemanager, System\Utils\Pagination, System\Utils\View;
+	use Ajax, Explorer, Form, Language, Mime, Number, Request, Template, Url;
 
 	class Uploads {
 
@@ -165,6 +166,10 @@ namespace System\Modules\Filemanager\Handler {
 
 			$contents = View::get('Blocks\Filemanager\Main');
 
+			# Set current directory
+
+			$contents->dir = $this->dir;
+
 			# Set path
 
 			$contents->path = $this->getPath();
@@ -184,13 +189,54 @@ namespace System\Modules\Filemanager\Handler {
 			return $contents;
 		}
 
+		# Handle ajax request
+
+		private function handleAjax() {
+
+			$ajax = Ajax::response();
+
+			# Get requested data
+
+			if (false === ($data = Ajax::request(['action', 'name']))) {
+
+				return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
+			}
+
+			# Process makedir action
+
+			if ($data['action'] == 'makedir') {
+
+				if (false === ($name = Filemanager::validate($data['name']))) {
+
+					return $ajax->error(Language::get('FILEMANAGER_ERROR_INVALID'));
+				}
+
+				$dir_name = (DIR_UPLOADS . $this->dir . '/' . $name);
+
+				if (Explorer::isDir($dir_name) || Explorer::isFile($dir_name)) {
+
+					return $ajax->error(Language::get('FILEMANAGER_ERROR_EXISTS'));
+				}
+
+				if (!@mkdir($dir_name)) return $ajax->error(Language::get('FILEMANAGER_ERROR_CREATE'));
+			}
+
+			# ------------------------
+
+			return $ajax;
+		}
+
 		# Handle request
 
 		public function handle() {
 
+			$this->dir = $this->getDir();
+
+			if (Request::isAjax()) return $this->handleAjax();
+
 			$this->index = Number::format(Request::get('index'), 1, 999999);
 
-			$this->dir = $this->getDir();
+			# Get items
 
 			$this->items = $this->getItems();
 

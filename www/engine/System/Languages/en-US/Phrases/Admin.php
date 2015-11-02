@@ -96,6 +96,17 @@ return [
 	'FILEMANAGER_COLUMN_NAME'                   => 'File name',
 	'FILEMANAGER_COLUMN_SIZE'                   => 'Size',
 
+	'FILEMANAGER_DIR_CREATE'                    => 'Create directory',
+
+	'FILEMANAGER_ITEM_INFO'                     => 'Information',
+	'FILEMANAGER_ITEM_REMOVE'                   => 'Remove',
+
+	'FILEMANAGER_ITEM_CONFIRM_REMOVE'           => 'Are you sure you want to remove selected item?',
+
+	'FILEMANAGER_ERROR_CREATE'                  => 'Error creating directory',
+	'FILEMANAGER_ERROR_EXISTS'                  => 'Directory or file with specified name already exists',
+	'FILEMANAGER_ERROR_INVALID'                 => 'Directory name cannot contain any of the following characters: \\ / ? % * : | " < > ',
+
 	# Languages
 
 	'LANGUAGES_NOT_FOUND'                       => 'Languages not found',

@@ -30,6 +30,10 @@ define('CONFIG_MENUITEM_TEXT_MAX_LENGTH',           255);
 define('CONFIG_MENUITEM_LINK_MAX_LENGTH',           255);
 define('CONFIG_MENUITEM_POSITION_MAX_LENGTH',       2);
 
+# File
+
+define('CONFIG_FILE_NAME_MAX_LENGTH',               128);
+
 # User
 
 define('CONFIG_USER_SESSION_LIFETIME',              604800);        # 7 days
