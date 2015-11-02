@@ -2,7 +2,7 @@
 
 namespace System\Modules\Profile\Controller {
 
-	use System\Modules\Auth, DB, Text, Validate;
+	use System\Modules\Auth, Validate;
 
 	abstract class Personal {
 
