@@ -10,9 +10,9 @@ define('DIR_INCLUDES',      (DIR_FRAMEWORK . 'Includes/'));
 define('DIR_TEMPLATES',     (DIR_FRAMEWORK . 'Templates/'));
 
 # Require classes
-                    
+
 require_once (DIR_FRAMEWORK . 'Engine.php');
-require_once (DIR_FRAMEWORK . 'Error.php');
+require_once (DIR_FRAMEWORK . 'Exception.php');
 require_once (DIR_FRAMEWORK . 'Functions.php');
 
 # Require configuration
@@ -36,3 +36,7 @@ define('REQUEST_CLIENT_IP', Engine::ip());
 define('REQUEST_TIME', $_SERVER['REQUEST_TIME']);
 
 define('REQUEST_TIME_FLOAT', $_SERVER['REQUEST_TIME_FLOAT']);
+
+# Set exception handler
+
+set_exception_handler('Engine::exception');
