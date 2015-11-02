@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use Error;
+	use Exception;
 
 	abstract class View {
 
@@ -19,7 +19,7 @@ namespace System\Utils {
 
 		public static function get($name) {
 
-			if ('' === self::$section) throw new Error\General(self::$error);
+			if ('' === self::$section) throw new Exception\General(self::$error);
 
 			$class_name = ('System\Views\\' . self::$section . '\\' . $name);
 

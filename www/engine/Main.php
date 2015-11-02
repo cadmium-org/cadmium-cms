@@ -45,7 +45,7 @@ spl_autoload_register(function($class_name) {
 
 	# Check if class exists
 
-	if (!class_exists($class_name) && !interface_exists($class_name) && !trait_exists($class_name)) throw new Error\ClassLoad($class_name);
+	if (!class_exists($class_name) && !interface_exists($class_name) && !trait_exists($class_name)) throw new Exception\ClassLoad($class_name);
 
 	# Call autoload method
 

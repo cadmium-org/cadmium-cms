@@ -1,12 +1,10 @@
 <?php
 
-namespace Error {
-
-	use Exception;
+namespace Exception {
 
 	# Error parent class
 
-	abstract class Error extends Exception {
+	abstract class Exception extends \Exception {
 
 		protected $message = 'Default error exception thrown';
 
@@ -29,7 +27,7 @@ namespace Error {
 
 	# General error
 
-	class General extends Error {
+	class General extends Exception {
 
 		# Constructor override
 
@@ -41,35 +39,35 @@ namespace Error {
 
 	# Class load error
 
-	class ClassLoad extends Error  {
+	class ClassLoad extends Exception  {
 
 		protected $message = 'Class \'$value$\' not found';
 	}
 
 	# Database connect error
 
-	class DBConnect extends Error  {
+	class DBConnect extends Exception  {
 
 		protected $message = 'Unable to connect to database';
 	}
 
 	# Database select error
 
-	class DBSelect extends Error  {
+	class DBSelect extends Exception  {
 
 		protected $message = 'Unable to select database';
 	}
 
 	# Database charset error
 
-	class DBCharset extends Error  {
+	class DBCharset extends Exception  {
 
 		protected $message = 'Unable to set database charset';
 	}
 
 	# Language init error
 
-	class LanguageInit extends Error {
+	class LanguageInit extends Exception {
 
 		protected $message = 'Unable to init language \'$value$\'';
 	}

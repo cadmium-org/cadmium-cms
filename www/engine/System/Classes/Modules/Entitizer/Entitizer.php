@@ -2,7 +2,7 @@
 
 namespace System\Modules {
 
-	use Error;
+	use Exception;
 
 	abstract class Entitizer {
 
@@ -59,7 +59,7 @@ namespace System\Modules {
 
 			$type = strval($type); $id = intabs($id);
 
-			if (!isset(self::$types[$type])) throw new Error\General(self::ERROR_TYPE);
+			if (!isset(self::$types[$type])) throw new Exception\General(self::ERROR_TYPE);
 
 			if (isset(self::$cache[$type][$id]) && (0 !== self::$cache[$type][$id]->id)) return self::$cache[$type][$id];
 
@@ -76,7 +76,7 @@ namespace System\Modules {
 
 			$type = strval($type);
 
-			if (!isset(self::$definitions[$type])) throw new Error\General(self::ERROR_DEFINITION);
+			if (!isset(self::$definitions[$type])) throw new Exception\General(self::ERROR_DEFINITION);
 
 			# ------------------------
 
@@ -89,7 +89,7 @@ namespace System\Modules {
 
 			$type = strval($type);
 
-			if (!isset(self::$listers[$type])) throw new Error\General(self::ERROR_LISTER);
+			if (!isset(self::$listers[$type])) throw new Exception\General(self::ERROR_LISTER);
 
 			# ------------------------
 
@@ -102,7 +102,7 @@ namespace System\Modules {
 
 			$type = strval($type); $id = intabs($id);
 
-			if (!isset(self::$controllers[$type])) throw new Error\General(self::ERROR_CONTROLLER);
+			if (!isset(self::$controllers[$type])) throw new Exception\General(self::ERROR_CONTROLLER);
 
 			# ------------------------
 

@@ -25,19 +25,17 @@ namespace {
 			return 'unknown';
 		}
 
-		# Display error screen
+		# Display exception screen
 
-		public static function error($message = '') {
-
-			$message = (('' !== ($message = strval($message))) ? ('Engine error: ' . $message) : 'Unknown error');
+		public static function exception(Exception $exc) {
 
 			# Load template
 
-			$file_name = (DIR_TEMPLATES . 'Error.tpl'); $contents = false;
+			$file_name = (DIR_TEMPLATES . 'Exception.tpl'); $contents = false;
 
 			if (@file_exists($file_name)) $contents = @file_get_contents($file_name);
 
-			$output = ($contents ? str_replace('$message$', $message, $contents) : $message);
+			$output = ($contents ? str_replace('$message$', $exc->message(), $contents) : $exc->message());
 
 			# Set headers
 

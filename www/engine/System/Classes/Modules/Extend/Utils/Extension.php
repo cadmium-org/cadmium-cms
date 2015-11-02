@@ -2,7 +2,7 @@
 
 namespace System\Modules\Extend\Utils {
 
-	use Error, System\Modules\Settings, Cookie, Explorer, Request;
+	use Exception, System\Modules\Settings, Cookie, Explorer, Request;
 
 	trait Extension {
 
@@ -114,7 +114,7 @@ namespace System\Modules\Extend\Utils {
 
 			$section = self::getSection($section); $dir_name = self::getDirName($section);
 
-			if (!Explorer::isDir($dir_name)) throw new Error\General(self::$error_directory);
+			if (!Explorer::isDir($dir_name)) throw new Exception\General(self::$error_directory);
 
 			self::$section = $section; self::$dir_name = $dir_name; self::$items = self::getItems($dir_name);
 
@@ -124,7 +124,7 @@ namespace System\Modules\Extend\Utils {
 
 			else $name_valid = (self::exists($name = Settings::get($param)) || self::exists($name = $primary));
 
-			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Error\General(self::$error_select);
+			if (!($name_valid || (null !== ($name = key(self::$items))))) throw new Exception\General(self::$error_select);
 
 			# ------------------------
 
