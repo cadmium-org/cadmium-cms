@@ -4,7 +4,7 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
 
 	use System\Modules\Entitizer, Number;
 
-	class Varchar extends Entitizer\Utils\Param\General\String {
+	class Varchar extends Entitizer\Utils\Param\General\Text {
 
 		protected $maxlength = 0, $index = false;
 

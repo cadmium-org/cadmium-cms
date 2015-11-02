@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, DB, Session, String;
+	use System\Modules\Auth, System\Modules\Entitizer, DB, Session, Text;
 
 	abstract class Login {
 
@@ -38,7 +38,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Check password
 
-			$password = String::encode($user->auth_key, $password);
+			$password = Text::encode($user->auth_key, $password);
 
 			if (0 !== strcmp($user->password, $password)) return 'USER_ERROR_PASSWORD_INCORRECT';
 
@@ -50,7 +50,7 @@ namespace System\Modules\Auth\Controller {
 
 			$session = Entitizer::userSession($user->id); $session->remove();
 
-			$code = String::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
+			$code = Text::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
 
 			$data = ['id' => $user->id, 'code' => $code, 'ip' => $ip, 'time' => $time];
 

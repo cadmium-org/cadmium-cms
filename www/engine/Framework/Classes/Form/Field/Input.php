@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, String;
+	use Form\Utils, Text;
 
 	class Input extends Utils\Implementable {
 
@@ -61,15 +61,15 @@ namespace Form\Field {
 
 			if ($this->type === FORM_INPUT_PASSWORD) {
 
-				$this->value = String::cut($this->value, $this->maxlength);
+				$this->value = Text::cut($this->value, $this->maxlength);
 
 			} else {
 
 				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
 
-				$this->value = String::input($this->value, $multiline, $this->maxlength);
+				$this->value = Text::input($this->value, $multiline, $this->maxlength);
 
-				if ($this->translit) $this->value = String::translit($this->value, $this->maxlength);
+				if ($this->translit) $this->value = Text::translit($this->value, $this->maxlength);
 			}
 
 			return (!($this->required && ('' === $this->value)));

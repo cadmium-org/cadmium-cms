@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, DB, String, Validate;
+	use System\Modules\Auth, System\Modules\Entitizer, DB, Text, Validate;
 
 	/**
 	 * @property-read int $id
@@ -88,8 +88,8 @@ namespace System\Modules\Entitizer\Controller {
 
 			if ((0 === $this->entity->id) || ('' !== $password)) {
 
-				$data['auth_key']           = ($auth_key = String::random(40));
-				$data['password']           = String::encode($auth_key, $password);
+				$data['auth_key']           = ($auth_key = Text::random(40));
+				$data['password']           = Text::encode($auth_key, $password);
 			}
 
 			if (0 === $this->entity->id) {

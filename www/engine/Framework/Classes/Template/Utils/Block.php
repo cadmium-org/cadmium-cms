@@ -2,7 +2,7 @@
 
 namespace Template\Utils {
 
-	use Language, Template, String;
+	use Language, Template, Text;
 
 	class Block implements Settable {
 
@@ -134,7 +134,7 @@ namespace Template\Utils {
 
 			$value = strval($value); $raw = boolval($raw); $maxlength = intabs($maxlength);
 
-			$this->variables[$name] = ($raw ? $value : String::output($value, $maxlength));
+			$this->variables[$name] = ($raw ? $value : Text::output($value, $maxlength));
 
 			# ------------------------
 

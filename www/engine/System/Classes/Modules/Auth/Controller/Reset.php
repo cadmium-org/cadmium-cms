@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB, String;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB, Text;
 
 	abstract class Reset {
 
@@ -44,7 +44,7 @@ namespace System\Modules\Auth\Controller {
 
 			$secret = Entitizer::userSecret($user->id); $secret->remove();
 
-			$code = String::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
+			$code = Text::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
 
 			$data = ['id' => $user->id, 'code' => $code, 'ip' => $ip, 'time' => $time];
 

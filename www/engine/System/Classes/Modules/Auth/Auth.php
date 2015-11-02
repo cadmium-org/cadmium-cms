@@ -2,7 +2,7 @@
 
 namespace System\Modules {
 
-	use DB, Request, Session, String;
+	use DB, Request, Session, Text;
 
 	abstract class Auth {
 

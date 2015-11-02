@@ -2,7 +2,7 @@
 
 namespace System\Modules {
 
-	use System\Utils\Lister, Explorer, Geo\Timezone, String, Validate;
+	use System\Utils\Lister, Explorer, Geo\Timezone, Text, Validate;
 
 	abstract class Settings {
 

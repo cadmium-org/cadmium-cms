@@ -45,7 +45,7 @@ namespace {
 
 			if (Template::isSettable($contents)) $this->contents = $contents;
 
-			else $this->contents = Template::block(String::output($contents), false);
+			else $this->contents = Template::block(Text::output($contents), false);
 		}
 
 		# Get block

@@ -2,7 +2,7 @@
 
 namespace {
 
-	abstract class String {
+	abstract class Text {
 
 		# Format input string
 
@@ -92,7 +92,7 @@ namespace {
 
 		# Get random string
 
-		public static function random($length, $pool = STRING_POOL_DEFAULT) {
+		public static function random($length, $pool = TEXT_POOl_DEFAULT) {
 
 			$length = intabs($length); $pool = strval($pool); $pool_length = strlen($pool);
 

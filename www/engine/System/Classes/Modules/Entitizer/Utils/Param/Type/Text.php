@@ -4,7 +4,7 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
 
 	use System\Modules\Entitizer;
 
-	class Text extends Entitizer\Utils\Param\General\String {
+	class Text extends Entitizer\Utils\Param\General\Text {
 
 		# Get field statement
 

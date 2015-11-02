@@ -31,10 +31,10 @@ define('FORM_FIELD_AUTOCOMPLETE',                   32);
 define('FORM_FIELD_SEARCH',                         64);
 define('FORM_FIELD_AUTO',                           128);
 
-# String pools
+# Text pools
 
-define('STRING_POOL_DEFAULT',                       'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-define('STRING_POOL_LATIN',                         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-define('STRING_POOL_LATIN_LOWER',                   'abcdefghijklmnopqrstuvwxyz');
-define('STRING_POOL_LATIN_UPPER',                   'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-define('STRING_POOL_NUMERIC',                       '0123456789');
+define('TEXT_POOl_DEFAULT',                         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+define('TEXT_POOl_LATIN',                           'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+define('TEXT_POOl_LATIN_LOWER',                     'abcdefghijklmnopqrstuvwxyz');
+define('TEXT_POOl_LATIN_UPPER',                     'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+define('TEXT_POOl_NUMERIC',                         '0123456789');
