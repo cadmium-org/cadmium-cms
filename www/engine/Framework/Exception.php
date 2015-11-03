@@ -16,13 +16,6 @@ namespace Exception {
 
 			$this->message = str_replace('$value$', $value, $this->message);
 		}
-
-		# Return message
-
-		public function message() {
-
-			return $this->message;
-		}
 	}
 
 	# General error
