@@ -4,19 +4,6 @@ namespace {
 
 	abstract class Ajax {
 
-		# Get requested data
-
-		public static function request(array $params) {
-
-			$form = new Form('ajax');
-
-			foreach ($params as $name) $form->virtual($name);
-
-			# ------------------------
-
-			return $form->post();
-		}
-
 		# Create new response
 
 		public static function response() {
