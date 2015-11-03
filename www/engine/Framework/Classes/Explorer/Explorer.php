@@ -10,9 +10,9 @@ namespace {
 
 			$dir_name = strval($dir_name);
 
-			if (!self::isDir($dir_name)) return [];
+			if (false === ($handler = @opendir($dir_name))) return [];
 
-			$list = []; $handler = @opendir($dir_name);
+			$list = [];
 
 			while (false !== ($name = readdir($handler))) {
 
@@ -57,6 +57,38 @@ namespace {
 			$dir_name = strval($dir_name);
 
 			return (@file_exists($dir_name) && @is_dir($dir_name));
+		}
+
+		# Remove file
+
+		public static function removeFile($file_name) {
+
+			$file_name = strval($file_name);
+
+			return @unlink($file_name);
+		}
+
+		# Remove directory
+
+		public static function removeDir($dir_name, $recursive = false) {
+
+			$dir_name = strval($dir_name); $recursive = boolval($recursive);
+
+			if ($recursive && (false !== ($list = @scandir($dir_name)))) {
+
+				foreach (array_diff($list, ['.', '..']) as $name) {
+
+					$name = ($dir_name . '/' . $name);
+
+					if (@is_dir($name)) self::removeDir($name, true);
+
+					else if (@is_file($name)) self::removeFile($name);
+				}
+			}
+
+			# ------------------------
+
+			return @rmdir($dir_name);
 		}
 
 		# Get files list
@@ -107,10 +139,6 @@ namespace {
 
 			$file_name = strval($file_name);
 
-			if (!self::isFile($file_name)) return false;
-
-			# ------------------------
-
 			return ((false !== ($contents = @file_get_contents($file_name))) ? $contents : false);
 		}
 
@@ -120,16 +148,7 @@ namespace {
 
 			if ((strtolower(self::extension($file_name)) !== 'php')) return false;
 
-			return include strval($file_name);
-		}
-
-		# Get JSON file data
-
-		public static function json($file_name) {
-
-			if ((strtolower(self::extension($file_name)) !== 'json')) return false;
-
-			return json_decode(@file_get_contents(strval($file_name)), true);
+			return include $file_name;
 		}
 
 		# Get XML file data
@@ -138,7 +157,16 @@ namespace {
 
 			if ((strtolower(self::extension($file_name)) !== 'xml')) return false;
 
-			return @simplexml_load_file(strval($file_name));
+			return @simplexml_load_file($file_name);
+		}
+
+		# Get JSON file data
+
+		public static function json($file_name) {
+
+			if ((strtolower(self::extension($file_name)) !== 'json')) return false;
+
+			return json_decode(@file_get_contents($file_name), true);
 		}
 
 		# Save data to file
