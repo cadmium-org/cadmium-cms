@@ -160,7 +160,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, (install_path + '/admin/content/pages/edit?id=' + item.id), { 'ajax_action': 'remove' });
+			Main.ajax(this, (install_path + '/admin/content/pages/edit?id=' + item.id), { 'action': 'remove' });
 		},
 
 		'handle' : function(data) {
@@ -203,7 +203,7 @@ var Main = {
 
 			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
 
-			Main.ajax(this, (install_path + '/admin/content/pages?parent_id=' + parent_id), { 'ajax_id' : this.id });
+			Main.ajax(this, (install_path + '/admin/content/pages?parent_id=' + parent_id), { 'id' : this.id });
 		},
 
 		'handle' : function(data) {
@@ -271,7 +271,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, (install_path + '/admin/content/menuitems/edit?id=' + item.id), { 'ajax_action': 'remove' });
+			Main.ajax(this, (install_path + '/admin/content/menuitems/edit?id=' + item.id), { 'action': 'remove' });
 		},
 
 		'handle' : function(data) {
@@ -308,7 +308,7 @@ var Main = {
 
 			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
 
-			Main.ajax(this, (install_path + '/admin/content/menuitems?parent_id=' + parent_id), { 'ajax_id' : this.id });
+			Main.ajax(this, (install_path + '/admin/content/menuitems?parent_id=' + parent_id), { 'id' : this.id });
 		},
 
 		'handle' : function(data) {
@@ -368,7 +368,7 @@ var Main = {
 
 				this.locked = true; this.item.addClass('loading');
 
-				var params = { 'ajax_action' : 'makedir', 'ajax_name' : this.input.val() };
+				var params = { 'action' : 'makedir', 'name' : this.input.val() };
 
 				Main.ajax(this, (install_path + '/admin/content/filemanager?dir=' + this.dir), params);
 			}
@@ -414,7 +414,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; checker.addClass('loading');
 
-			Main.ajax(this, false, { 'ajax_name': item.name });
+			Main.ajax(this, (install_path + '/admin/extend/languages?list=' + this.section), { 'name': item.name });
 		},
 
 		'handle' : function(data) {
@@ -472,7 +472,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; checker.addClass('loading');
 
-			Main.ajax(this, false, { 'ajax_name': item.name });
+			Main.ajax(this, (install_path + '/admin/extend/templates?list=' + this.section), { 'name': item.name });
 		},
 
 		'handle' : function(data) {
@@ -529,7 +529,7 @@ var Main = {
 
 			this.locked = true; this.sender = index; button.addClass('loading');
 
-			Main.ajax(this, (install_path + '/admin/system/users/edit?id=' + item.id), { 'ajax_action': 'remove' });
+			Main.ajax(this, (install_path + '/admin/system/users/edit?id=' + item.id), { 'action': 'remove' });
 		},
 
 		'handle' : function(data) {

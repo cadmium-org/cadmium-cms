@@ -111,11 +111,9 @@ namespace System\Modules\Entitizer\Utils {
 
 			$ajax = Ajax::response();
 
-			# Process form
+			# Catch post data
 
-			$form = new Form('ajax'); $form->virtual('id');
-
-			if (false === ($post = $form->post())) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
+			$data = Request::post(['id']);
 
 			# Create parent entity
 
@@ -125,7 +123,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$lister = Entitizer::lister(static::$type);
 
-			$this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), $post['id']);
+			$this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), $data['id']);
 
 			# ------------------------
 

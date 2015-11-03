@@ -95,19 +95,15 @@ namespace System\Modules\Extend\Utils {
 
 			if (Informer::isDemoMode()) return $ajax->error(Language::get('DEMO_MODE_RESTRICTION'));
 
-			# Create form
+			# Catch post data
 
-			$form = new Form('ajax'); $form->virtual('name');
-
-			# Post form
-
-			if (false === ($post = $form->post())) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
+			$data = Request::post(['name']);
 
 			# Save configuration
 
 			$param = self::$param[$this->section];
 
-			if (false === Settings::set($param, $post['name'])) return $ajax->error(Language::get(self::$error_name));
+			if (false === Settings::set($param, $data['name'])) return $ajax->error(Language::get(self::$error_name));
 
 			if (false === Settings::save()) return $ajax->error(Language::get(self::$error_save));
 

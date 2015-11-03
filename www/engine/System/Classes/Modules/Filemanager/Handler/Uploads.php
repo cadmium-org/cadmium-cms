@@ -195,12 +195,9 @@ namespace System\Modules\Filemanager\Handler {
 
 			$ajax = Ajax::response();
 
-			# Get requested data
+			# Catch post data
 
-			if (false === ($data = Ajax::request(['action', 'name']))) {
-
-				return $ajax->error(Language::get('AJAX_PROCESS_ERROR_DATA'));
-			}
+			$data = Request::post(['action', 'name']);
 
 			# Process makedir action
 
