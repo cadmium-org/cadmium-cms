@@ -17,6 +17,19 @@ namespace {
 			return $value;
 		}
 
+		# Select a set of elements from array
+
+		public static function select(array $array, array $params) {
+
+			$array_selected = [];
+
+			foreach ($params as $name) $array_selected[$name] = (isset($array[$name]) ? $array[$name] : null);
+
+			# ------------------------
+
+			return $array_selected;
+		}
+
 		# Transform associative array to indexed
 
 		public static function index(array $array, $key_name, $value_name) {
