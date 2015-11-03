@@ -24,6 +24,8 @@ namespace {
 
 		public static function get($name) {
 
+			if (is_array($name)) return Arr::select($_GET, $name);
+
 			$name = strval($name);
 
 			return (isset($_GET[$name]) ? strval($_GET[$name]) : null);
@@ -32,6 +34,8 @@ namespace {
 		# Return POST variable by name
 
 		public static function post($name) {
+
+			if (is_array($name)) return Arr::select($_POST, $name);
 
 			$name = strval($name);
 
