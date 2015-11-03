@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Controller {
 
-	use Error, System\Modules\Install, DB, Explorer;
+	use Exception, System\Modules\Install, DB, Explorer;
 
 	abstract class Database {
 
@@ -20,11 +20,11 @@ namespace System\Modules\Install\Controller {
 
 			try { DB::connect($database_server, $database_user, $database_password, $database_name); }
 
-			catch (Error\DBConnect $error) { return 'INSTALL_ERROR_DATABASE_CONNECT'; }
+			catch (Exception\DBConnect $error) { return 'INSTALL_ERROR_DATABASE_CONNECT'; }
 
-			catch (Error\DBSelect $error) { return 'INSTALL_ERROR_DATABASE_SELECT'; }
+			catch (Exception\DBSelect $error) { return 'INSTALL_ERROR_DATABASE_SELECT'; }
 
-			catch (Error\DBCharset $error) { return 'INSTALL_ERROR_DATABASE_CHARSET'; }
+			catch (Exception\DBCharset $error) { return 'INSTALL_ERROR_DATABASE_CHARSET'; }
 
 			# Create tables
 
