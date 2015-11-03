@@ -96,7 +96,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Catch post data
 
-			$data = Request::post(['action']);
+			$data = Request::postArray(['action']);
 
 			# Create entity
 

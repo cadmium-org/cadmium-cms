@@ -97,7 +97,7 @@ namespace System\Modules\Extend\Utils {
 
 			# Catch post data
 
-			$data = Request::post(['name']);
+			$data = Request::postArray(['name']);
 
 			# Save configuration
 

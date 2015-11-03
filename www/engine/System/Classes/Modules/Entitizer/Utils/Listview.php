@@ -113,7 +113,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Catch post data
 
-			$data = Request::post(['id']);
+			$data = Request::postArray(['id']);
 
 			# Create parent entity
 

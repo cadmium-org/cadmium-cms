@@ -20,26 +20,36 @@ namespace {
 			return ($https || (getenv('SERVER_PORT') === '443'));
 		}
 
-		# Return GET variable by name
+		# Return GET param by name
 
 		public static function get($name) {
-
-			if (is_array($name)) return Arr::select($_GET, $name);
 
 			$name = strval($name);
 
 			return (isset($_GET[$name]) ? strval($_GET[$name]) : null);
 		}
 
-		# Return POST variable by name
+		# Return POST param by name
 
 		public static function post($name) {
-
-			if (is_array($name)) return Arr::select($_POST, $name);
 
 			$name = strval($name);
 
 			return (isset($_POST[$name]) ? strval($_POST[$name]) : null);
+		}
+
+		# Return GET params by array of names
+
+		public static function getArray(array $params) {
+
+			return Arr::select($_GET, $params);
+		}
+
+		# Return POST params by array of names
+
+		public static function postArray(array $params) {
+
+			return Arr::select($_POST, $params);
 		}
 
 		# Redirect to specified url

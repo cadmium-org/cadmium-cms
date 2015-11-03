@@ -197,7 +197,7 @@ namespace System\Modules\Filemanager\Handler {
 
 			# Catch post data
 
-			$data = Request::post(['action', 'name']);
+			$data = Request::postArray(['action', 'name']);
 
 			# Process makedir action
 
