@@ -10,7 +10,7 @@ namespace {
 
 		private static function processArray(array &$array) {
 
-			if (!($agent = getenv('HTTP_USER_AGENT'))) return false;
+			if (empty($agent = getenv('HTTP_USER_AGENT'))) return false;
 
 			foreach ($array as $item) if (false !== stripos($agent, $item)) return true;
 
