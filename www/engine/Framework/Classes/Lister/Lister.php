@@ -8,7 +8,7 @@ namespace {
 
 		# Load list
 
-		protected static function init($file_name) {
+		protected static function init(string $file_name) {
 
 			if (is_array($list = Explorer::php($file_name))) static::$list = $list;
 		}
@@ -17,8 +17,6 @@ namespace {
 
 		public static function exists($key) {
 
-			$key = strval($key);
-
 			return isset(static::$list[$key]);
 		}
 
@@ -26,23 +24,21 @@ namespace {
 
 		public static function validate($key) {
 
-			$key = strval($key); $range = array_keys(static::$list);
+			$range = array_keys(static::$list);
 
-			return (false !== ($key = array_search($key, $range)) ? $range[$key] : false);
+			return ((false !== ($key = array_search($key, $range))) ? $range[$key] : false);
 		}
 
 		# Get item by key
 
 		public static function get($key) {
 
-			$key = strval($key);
-
 			return (isset(static::$list[$key]) ? static::$list[$key] : null);
 		}
 
 		# Get list
 
-		public static function range() {
+		public static function list() {
 
 			return static::$list;
 		}

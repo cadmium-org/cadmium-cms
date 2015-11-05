@@ -10,23 +10,19 @@ namespace Lister {
 
 		public static function get($key) {
 
-			if (false === ($value = parent::get($key))) return false;
+			if (null === ($value = parent::get($key))) return null;
 
 			return ((null !== ($translated = Language::get($value))) ? $translated : $value);
 		}
 
 		# Get list
 
-		public static function range() {
+		public static function list() {
 
-			$list = [];
+			foreach (parent::list() as $key => $value) {
 
-			foreach (parent::range() as $key => $value) {
-
-				$list[$key] = ((null !== ($translated = Language::get($value))) ? $translated : $value);
+				yield ((null !== ($translated = Language::get($value))) ? $translated : $value);
 			}
-
-			return $list;
 		}
 	}
 }
