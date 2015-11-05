@@ -6,97 +6,77 @@ namespace {
 
 		# Format input string
 
-		public static function input($string, $multiline = false, $maxlength = 0) {
-
-			$string = strval($string); $multiline = boolval($multiline); $maxlength = intabs($maxlength);
+		public static function input(string $string, bool $multiline = false, int $maxlength = 0) {
 
 			foreach (($string = explode("\n", $string)) as $key => $line) {
 
 				$string[$key] = self::singleSpaces(trim(preg_replace('/[\t\n\r\0\x0B]+/', '', $line)));
 			}
 
-			if (!$multiline) $string = implode(' ', $string); else {
+			if (!$multiline) $string = self::singleSpaces(trim(implode(' ', $string)));
 
-				$pattern = ["/^(\r\n)+/", "/(\r\n)+$/", "/(\r\n){2,}/"]; $replacement = ["", "", "\r\n\r\n"];
-
-				$string = preg_replace($pattern, $replacement, implode("\r\n", $string));
-			}
-
-			$string = self::cut($string, $maxlength);
+			else $string = preg_replace('/(\r\n){3,}/', "\r\n\r\n", trim(implode("\r\n", $string)));
 
 			# ------------------------
 
-			return $string;
+			return self::cut($string, $maxlength);
 		}
 
 		# Format output string
 
-		public static function output($string, $maxlength = 0) {
+		public static function output(string $string, int $maxlength = 0) {
 
-			$string = strval($string); $maxlength = intabs($maxlength);
-
-			$string = str_replace("\r\n", "&#13;&#10;", htmlspecialchars(self::cut($string, $maxlength)));
-
-			# ------------------------
-
-			return $string;
+			return str_replace("\r\n", '&#13;&#10;', htmlspecialchars(self::cut($string, $maxlength)));
 		}
 
 		# Convert string to no spaces
 
-		public static function stripSpaces($string) {
+		public static function stripSpaces(string $string) {
 
-			$string = strval($string);
-
-			return preg_replace('/ */', '', $string);
+			return preg_replace('/ +/', '', $string);
 		}
 
 		# Convert string to single spaces
 
-		public static function singleSpaces($string) {
+		public static function singleSpaces(string $string) {
 
-			$string = strval($string);
+			return preg_replace('/ +/', ' ', $string);
+		}
 
-			return preg_replace('/  +/', ' ', $string);
+		# Get string length
+
+		public static function length(string $string) {
+
+			return (function_exists('mb_strlen') ? mb_strlen($string) : strlen($string));
 		}
 
 		# Check if string length is between given values
 
-		public static function between($string, $min, $max) {
+		public static function between(string $string, int $min, int $max) {
 
-			$string = strval($string); $min = intabs($min); $max = intabs($max);
-
-			if ($min > $max) return false;
-
-			return (preg_match(('/^(?=.{' . $min . ',' . $max . '}$).+$/'), $string) ? true : false);
+			return ((($length = self::length($string)) >= $min) && ($length <= $max));
 		}
 
 		# Cut string
 
-		public static function cut($string, $maxlength, $ellipsis = false) {
+		public static function cut(string $string, int $maxlength, bool $ellipsis = false) {
 
-			$string = strval($string); $maxlength = intabs($maxlength); $ellipsis = boolval($ellipsis);
-
-			$length = (function_exists('mb_strlen') ? mb_strlen($string) : strlen($string));
-
-			if ((0 === $maxlength) || ($length <= $maxlength)) return $string;
+			if (($maxlength < 1) || (self::length($string = trim($string)) <= $maxlength)) return $string;
 
 			$string = (function_exists('mb_substr') ? mb_substr($string, 0, $maxlength) : substr($string, 0, $maxlength));
 
-			$string = (trim($string) . ($ellipsis ? '...' : ''));
-
 			# ------------------------
 
-			return $string;
+			return (rtrim($string) . ($ellipsis ? '...' : ''));
 		}
 
-		# Get random string
+		# Get random string (only non-cyrillic pools)
 
-		public static function random($length, $pool = TEXT_POOl_DEFAULT) {
+		public static function random(int $length, string $pool = TEXT_POOl_DEFAULT) {
 
-			$length = intabs($length); $pool = strval($pool); $pool_length = strlen($pool);
+			if (($length < 1) || (0 === ($pool_length = strlen($pool)))) return '';
 
-			$string = ''; for ($i = 0; $i < $length; $i++) $string .= substr($pool, mt_rand(0, ($pool_length - 1)), 1);
+			$string = ''; for ($i = 0; $i < $length; $i++) $string .= substr($pool, random_int(0, ($pool_length - 1)), 1);
 
 			# ------------------------
 
@@ -105,18 +85,14 @@ namespace {
 
 		# Encode string
 
-		public static function encode($key, $string) {
-
-			$key = strval($key); $string = strval($string);
+		public static function encode(string $key, string $string) {
 
 			return sha1($key . substr(sha1($string), 8, 32));
 		}
 
 		# Translit string
 
-		public static function translit($string, $maxlength) {
-
-			$string = strval($string); $maxlength = intabs($maxlength);
+		public static function translit(string $string, int $maxlength) {
 
 			$pattern = [
 
@@ -145,11 +121,9 @@ namespace {
 
 			$string = preg_replace(['/^[\-]+/', '/[\-]+$/', '/[\-]{2,}/'], ['', '', '-'], $string);
 
-			$string = self::cut($string, $maxlength);
-
 			# ------------------------
 
-			return $string;
+			return self::cut($string, $maxlength);
 		}
 	}
 }
