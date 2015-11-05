@@ -4,12 +4,6 @@ namespace Tag\View {
 
 	use Template;
 
-	/**
-	 * @property-write string $name
-	 * @property-write array $attributes
-	 * @property-write \Template\Utils\Settable $contents
-	 */
-
 	class Regular extends Template\Utils\Block {
 
 		private static $contents_raw = '<$name${ for:attributes } $name$="$value$"{ / for:attributes }>{ block:contents / }</$name$>';

@@ -19,9 +19,9 @@ namespace {
 
 		# Constructor
 
-		public function __construct($name, array $attributes = [], $contents = null) {
+		public function __construct(string $name, array $attributes = [], $contents = null) {
 
-			$this->name = strval($name);
+			$this->name = $name;
 
 			foreach ($attributes as $name => $value) $this->set($name, $value);
 
@@ -30,9 +30,7 @@ namespace {
 
 		# Set attribute
 
-		public function set($name, $value) {
-
-			$name = strval($name); $value = strval($value);
+		public function set(string $name, string $value) {
 
 			$this->attributes[$name] = $value;
 		}
@@ -43,7 +41,7 @@ namespace {
 
 			if (null === $contents) $this->contents = null;
 
-			if (Template::isSettable($contents)) $this->contents = $contents;
+			else if (Template::isSettable($contents)) $this->contents = $contents;
 
 			else $this->contents = Template::block(Text::output($contents), false);
 		}
