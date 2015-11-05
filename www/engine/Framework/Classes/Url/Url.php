@@ -4,21 +4,19 @@ namespace {
 
 	class Url {
 
-		private $path = array(), $query = array();
+		private $path = [], $query = [];
 
 		# Consructor
 
-		public function __construct($url = '') {
-
-			$url = strval($url);
+		public function __construct(string $url = '') {
 
 			if (false === ($url = parse_url($url))) return;
 
 			# Parse path
 
-			if (isset($url['path'])) foreach (explode('/', $url['path']) as $item) {
+			if (isset($url['path'])) foreach (explode('/', $url['path']) as $part) {
 
-				if ('' !== $item) $this->path[] = urldecode($item);
+				if ('' !== $part) $this->path[] = urldecode($part);
 			}
 
 			# Parse query
@@ -42,9 +40,7 @@ namespace {
 
 		# Set query variable
 
-		public function set($name, $value) {
-
-			$name = strval($name); $value = strval($value);
+		public function set(string $name, string $value) {
 
 			$this->query[$name] = $value;
 		}
@@ -53,7 +49,7 @@ namespace {
 
 		public function get() {
 
-			$path = array();
+			$path = [];
 
 			foreach ($this->path as $value) $path[] = urlencode($value);
 
