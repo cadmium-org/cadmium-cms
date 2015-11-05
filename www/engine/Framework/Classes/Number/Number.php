@@ -6,9 +6,7 @@ namespace {
 
 		# Format number
 
-		public static function format($number, $min = 0, $max = 0) {
-
-			$number = intabs($number); $min = intabs($min); $max = intabs($max);
+		public static function format(int $number, int $min = 0, int $max = 0) {
 
 			if (($min > 0) && ($number < $min)) return $min;
 
@@ -21,11 +19,7 @@ namespace {
 
 		# Format float number
 
-		public static function formatFloat($number, $min = 0, $max = 0, $decimals = 0) {
-
-			$number = floatabs($number); $min = floatabs($min); $max = floatabs($max);
-
-			$decimals = intabs($decimals);
+		public static function formatFloat(float $number, float $min = 0, float $max = 0, int $decimals = 0) {
 
 			if (($min > 0) && ($number < $min)) $number = $min;
 
@@ -40,9 +34,9 @@ namespace {
 
 		# Format number as file size
 
-		public static function size($number) {
+		public static function size(int $number) {
 
-			$number = intabs($number);
+			if ($number < 0) $number = 0;
 
 			$exponents = [0 => 'Bytes', 'KB', 'MB', 'GB', 'TB'];
 
@@ -60,11 +54,9 @@ namespace {
 
 		# Format text containing number (ukrainian/russian language only)
 
-		public static function text($number, $variant_1, $variant_3, $variant_5) {
+		public static function text(int $number, string $variant_1, string $variant_3, string $variant_5) {
 
-			$number = intabs($number); $length = strlen($number);
-
-			$variant_1 = strval($variant_1); $variant_3 = strval($variant_3); $variant_5 = strval($variant_5);
+			$number = abs($number); $length = strlen($number);
 
 			$last_1 = substr($number, ($length - 1), 1); $last_2 = substr($number, ($length - 2), 2);
 
