@@ -19,65 +19,27 @@ namespace {
 
 		# Select a set of elements from array
 
-		public static function select(array $array, array $params) {
+		public static function select(array $array, array $keys) {
 
-			$array_selected = [];
-
-			foreach ($params as $name) $array_selected[$name] = (isset($array[$name]) ? $array[$name] : null);
-
-			# ------------------------
-
-			return $array_selected;
+			foreach ($keys as $key) if (is_scalar($key)) yield $key => (isset($array[$key]) ? $array[$key] : null);
 		}
 
 		# Transform associative array to indexed
 
-		public static function index(array $array, $key_name, $value_name) {
+		public static function index(array $array, string $key_name, string $value_name) {
 
-			$key_name = strval($key_name); $value_name = strval($value_name);
-
-			$array_indexed = [];
-
-			foreach ($array as $key => $value) $array_indexed[] = [$key_name => $key, $value_name => $value];
-
-			# ------------------------
-
-			return $array_indexed;
+			foreach ($array as $key => $value) yield [$key_name => $key, $value_name => $value];
 		}
 
-		# Extract subvalue
+		# Sort array by subvalue
 
-		public static function subvalExtract(array $array, $sub_key) {
+		public static function subvalSort(array $array, $sub_key, bool $descending = false) {
 
-			$sub_key = strval($sub_key);
+			$column = array_column($array, $sub_key);
 
-			$array_extracted = [];
+			if (!$descending) asort($column); else arsort($column);
 
-			foreach ($array as $key => $sub_array) {
-
-				if (is_array($sub_array) && isset($sub_array[$sub_key])) $array_extracted[$key] = $sub_array[$sub_key];
-			}
-
-			# ------------------------
-
-			return $array_extracted;
-		}
-
-		# Sort by subvalue
-
-		public static function subvalSort(array $array, $sub_key, $descending = false) {
-
-			$sub_key = strval($sub_key); $descending = boolval($descending);
-
-			$array_extracted = self::subvalExtract($array, $sub_key); $array_sorted = [];
-
-			if (!$descending) asort($array_extracted); else arsort($array_extracted);
-
-			foreach (array_keys($array_extracted) as $key) $array_sorted[$key] = $array[$key];
-
-			# ------------------------
-
-			return $array_sorted;
+			foreach (array_keys($column) as $key) yield $key => $array[$key];
 		}
 
 		# Get random value
