@@ -4,27 +4,25 @@ namespace {
 
 	abstract class Mailer {
 
-		# Send message
+		# Send mail
 
-		public static function send($to, $sender, $from, $reply_to, $subject, $message, $is_html = false) {
+		public static function send(string $to, string $sender, string $from, string $reply_to,
 
-			$to = strval($to); $sender = strval($sender); $from = strval($from); $reply_to = strval($reply_to);
-
-			$subject = strval($subject); $message = strval($message); $is_html = boolval($is_html);
+			string $subject, string $message, bool $is_html = false) {
 
 			# Set headers
 
-			$headers  = ('MIME-Version: 1.0' . "\r\n");
+			$headers  = ('MIME-Version: 1.0' . PHP_EOL);
 
-			$headers .= ('Content-Type: ' . ($is_html ? 'text/html' : 'text/plain') . '; charset=' . CONFIG_DEFAULT_CHARSET . "\r\n");
+			$headers .= ('Content-Type: ' . ($is_html ? 'text/html' : 'text/plain') . '; charset=' . CONFIG_DEFAULT_CHARSET . PHP_EOL);
 
-			$headers .= ('From: ' . $sender . ' <' . $from . '>' . "\r\n") .
+			$headers .= ('From: ' . $sender . ' <' . $from . '>' . PHP_EOL);
 
-			$headers .= ('Reply-To: ' . $sender . ' <' . $reply_to . '>' . "\r\n");
+			$headers .= ('Reply-To: ' . $sender . ' <' . $reply_to . '>' . PHP_EOL);
 
-			$headers .= ('X-Mailer: PHP/' . phpversion() . "\r\n");
+			$headers .= ('X-Mailer: PHP/' . phpversion() . PHP_EOL);
 
-			# Send mail
+			# Send message
 
 			return @mail($to, $subject, $message, $headers);
 		}
