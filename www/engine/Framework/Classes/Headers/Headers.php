@@ -83,54 +83,42 @@ namespace {
 
 		# Check if string is status code
 
-		public static function isStatusCode($string) {
-
-			$string = strval($string);
+		public static function isStatusCode(string $string) {
 
 			return isset(self::$status_codes[$string]);
 		}
 
 		# Check if string is content type
 
-		public static function isContentType($string) {
-
-			$string = strval($string);
+		public static function isContentType(string $string) {
 
 			return (self::isContentTypeText($string) || self::isContentTypeMedia($string));
 		}
 
 		# Check if string is text content type
 
-		public static function isContentTypeText($string) {
-
-			$string = strval($string);
+		public static function isContentTypeText(string $string) {
 
 			return isset(self::$content_types_text[$string]);
 		}
 
 		# Check if string is media content type
 
-		public static function isContentTypeMedia($string) {
-
-			$string = strval($string);
+		public static function isContentTypeMedia(string $string) {
 
 			return isset(self::$content_types_media[$string]);
 		}
 
 		# Send status header
 
-		public static function status($code) {
-
-			$code = strval($code);
+		public static function status(string $code) {
 
 			if (self::isStatusCode($code)) header(getenv('SERVER_PROTOCOL') . ' ' . self::$status_codes[$code]);
 		}
 
 		# Send content header
 
-		public static function content($type) {
-
-			$type = strval($type);
+		public static function content(string $type) {
 
 			if (self::isContentTypeText($type)) {
 
@@ -145,11 +133,9 @@ namespace {
 
 		# Send cache headers
 
-		public static function cache($limiter, $expires) {
+		public static function cache(string $limiter, int $expires) {
 
 			if (self::$cache_send) return;
-
-			$limiter = strval($limiter); $expires = intabs($expires);
 
 			if (!in_array($limiter, [CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC], true)) return;
 
