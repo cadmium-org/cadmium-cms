@@ -6,86 +6,66 @@ namespace {
 
 		# Validate date using format
 
-		public static function validate($date, $format) {
+		public static function validate(string $date, string $format) {
 
-			$date = strval($date); $format = strval($format);
+			if (false === ($date_object = date_create_from_format($format, $date))) return false;
 
-			if (false === ($dt_object = date_create_from_format($format, $date))) return false;
-
-			if (false === ($dt_formatted = $dt_object->format($format))) return false;
+			if (false === ($date_formatted = $date_object->format($format))) return false;
 
 			# ------------------------
 
-			return (($dt_formatted == $date) ? $dt_formatted : false);
+			return (($date_formatted === $date) ? $date_formatted : false);
 		}
 
 		# Validate day
 
-		public static function validateDay($day) {
+		public static function validateDay(int $day) {
 
-			return ((false !== ($day = self::validate($day, 'd'))) ? $day : false);
+			return self::validate($day, 'd');
 		}
 
 		# Validate month
 
-		public static function validateMonth($month) {
+		public static function validateMonth(int $month) {
 
-			return ((false !== ($month = self::validate($month, 'm'))) ? $month : false);
+			return self::validate($month, 'm');
 		}
 
 		# Validate year
 
-		public static function validateYear($year) {
+		public static function validateYear(int $year) {
 
 			if (false === ($year = self::validate($year, 'Y'))) return false;
 
-			if ($year < '1900') return '1900'; else if ($year > self::year()) return self::year(); else return $year;
+			return (($year > '1900') ? (($year > self::year()) ? self::year() : $year) : '1900');
 		}
 
 		# Get formatted date from timestamp
 
-		public static function get($format = DATE_FORMAT_STANDART, $time = null) {
+		public static function get(string $format = DATE_FORMAT_STANDART, int $time = null) {
 
-			$format = strval($format); $time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
-
-			if ($format === DATE_FORMAT_STANDART) return date(DATE_FORMAT_STANDART, $time);
-
-			if ($format === DATE_FORMAT_MYSQL) return date(DATE_FORMAT_MYSQL, $time);
-
-			if ($format === DATE_FORMAT_DATETIME) return date(DATE_FORMAT_DATETIME, $time);
-
-			if ($format === DATE_FORMAT_W3C) return date(DATE_FORMAT_W3C, $time);
-
-			# ------------------------
-
-			return false;
+			return date($format, ((null !== $time) ? $time : REQUEST_TIME));
 		}
 
 		# Get day from timestamp
 
-		public static function day($time = null) {
+		public static function day(int $time = null) {
 
-			$time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
-
-			return date('d', $time);
+			return date('d', ((null !== $time) ? $time : REQUEST_TIME));
 		}
 
 		# Get month from timestamp
 
-		public static function month($time = null) {
+		public static function month(int $time = null) {
 
-			$time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
-
-			return date('m', $time);
+			return date('m', ((null !== $time) ? $time : REQUEST_TIME));
 		}
 
 		# Get year from timestamp
 
-		public static function year($time = null) {
+		public static function year(int $time = null) {
 
-			$time = ((null !== $time) ? intabs($time) : REQUEST_TIME);
-
-			return date('Y', $time);
+			return date('Y', ((null !== $time) ? $time : REQUEST_TIME));
 		}
 	}
 }
