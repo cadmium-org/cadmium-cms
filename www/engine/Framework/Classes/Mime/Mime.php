@@ -8,9 +8,9 @@ namespace {
 
 		# Check mime type
 
-		private static function check($extension, $type) {
+		private static function check(string $extension, string $type) {
 
-			if (null === ($mime = self::get($extension))) return false;
+			if (false === ($mime = self::get($extension))) return false;
 
 			return (preg_match('/^' . $type . '\//', $mime) ? true : false);
 		}
@@ -24,21 +24,21 @@ namespace {
 
 		# Check if extension is image
 
-		public static function isImage($extension) {
+		public static function isImage(string $extension) {
 
 			return self::check($extension, 'image');
 		}
 
 		# Check if extension is audio
 
-		public static function isAudio($extension) {
+		public static function isAudio(string $extension) {
 
 			return self::check($extension, 'audio');
 		}
 
 		# Check if extension is video
 
-		public static function isVideo($extension) {
+		public static function isVideo(string $extension) {
 
 			return self::check($extension, 'video');
 		}
