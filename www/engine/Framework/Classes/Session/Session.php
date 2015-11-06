@@ -16,8 +16,6 @@ namespace {
 
 			session_cache_expire(0); session_cache_limiter('nocache');
 
-
-
 			# ------------------------
 
 			return @session_start();
