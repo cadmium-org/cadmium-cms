@@ -4,7 +4,7 @@ namespace Template\Utils {
 
 	class Group implements Settable {
 
-		private $blocks = array(), $count = 0;
+		private $blocks = [], $count = 0;
 
 		# Add block
 
@@ -12,14 +12,12 @@ namespace Template\Utils {
 
 			$this->blocks[] = $block; $this->count++;
 
-			# ------------------------
-
 			return true;
 		}
 
 		# Get contents
 
-		public function contents($format = true) {
+		public function contents(bool $format = true) {
 
 			$contents = '';
 

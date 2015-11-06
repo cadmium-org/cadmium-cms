@@ -8,23 +8,21 @@ namespace {
 
 		# Set global variable
 
-		public static function set($name, $value) {
-
-			$name = strval($name); $value = strval($value);
+		public static function set(string $name, string $value) {
 
 			self::$globals[$name] = $value;
 		}
 
-		# Set global variable
+		# Get global variable
 
-		public static function get($name) {
+		public static function get(string $name) {
 
-			return (isset(self::$globals[$name]) ? self::$globals[$name] : null);
+			return (isset(self::$globals[$name]) ? self::$globals[$name] : false);
 		}
 
 		# Create block
 
-		public static function block($contents = '', $parse = true) {
+		public static function block(string $contents = '', bool $parse = true) {
 
 			return new Template\Utils\Block($contents, $parse);
 		}

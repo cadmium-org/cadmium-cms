@@ -60,16 +60,16 @@ namespace Template\Utils {
 
 					if (!preg_match(REGEX_TEMPLATE_ITEM_NAME, $name)) continue;
 
-					$variables['stack'][$name] = null;
+					$variables['stack'][$name] = false;
 				}
 			}
 		}
 
 		# Constructor
 
-		public function __construct($contents = '', $parse = true) {
+		public function __construct(string $contents = '', bool $parse = true) {
 
-			$this->contents = strval($contents); $parse = boolval($parse);
+			$this->contents = $contents;
 
 			if ($parse) { $this->parseBlocks(); $this->parseLoops(); $this->parseElementaries(); }
 		}
@@ -85,7 +85,7 @@ namespace Template\Utils {
 
 		# Setter
 
-		public function __set($name, $value) {
+		public function __set(string $name, $value) {
 
 			if ($value instanceof Settable) $this->block($name, $value);
 
@@ -94,9 +94,7 @@ namespace Template\Utils {
 
 		# Set block
 
-		public function block($name, Settable $block = null) {
-
-			$name = strval($name);
+		public function block(string $name, Settable $block = null) {
 
 			if (!isset($this->blocks[$name])) return ((null === $block) ? new Block() : false);
 
@@ -111,9 +109,7 @@ namespace Template\Utils {
 
 		# Set loop
 
-		public function loop($name, array $range, $separator = '') {
-
-			$name = strval($name);
+		public function loop(string $name, array $range, string $separator = '') {
 
 			if (!isset($this->loops[$name])) return false;
 
@@ -126,15 +122,11 @@ namespace Template\Utils {
 
 		# Set variable
 
-		public function set($name, $value, $raw = false, $maxlength = 0) {
+		public function set(string $name, string $value, bool $raw = false, int $maxlength = 0) {
 
-			$name = strval($name);
+			if (!isset($this->variables[$name])) return false;
 
-			if (!array_key_exists($name, $this->variables)) return false;
-
-			$value = strval($value); $raw = boolval($raw); $maxlength = intabs($maxlength);
-
-			$this->variables[$name] = ($raw ? $value : Text::output($value, $maxlength));
+			$this->variables[$name] = (!$raw ? Text::output($value, $maxlength) : $value);
 
 			# ------------------------
 
@@ -143,19 +135,19 @@ namespace Template\Utils {
 
 		# Get contents
 
-		public function contents($format = false) {
+		public function contents(bool $format = false) {
 
 			if (!$this->enabled) return '';
 
-			$format = boolval($format); $contents = $this->contents; $insertions = [];
+			$contents = $this->contents; $insertions = [];
 
 			# Process variables
 
 			foreach ($this->variables as $name => $value) {
 
-				$value = ((null === $value) ? Template::get($name) : $value);
+				$value = ((false === $value) ? Template::get($name) : $value);
 
-				if (null !== $value) $insertions['$' . $name . '$'] = $value;
+				if (false !== $value) $insertions['$' . $name . '$'] = $value;
 			}
 
 			# Process phrases
@@ -164,7 +156,7 @@ namespace Template\Utils {
 
 				$value = Language::get($name);
 
-				if (null !== $value) $insertions['%' . $name . '%'] = $value;
+				if (false !== $value) $insertions['%' . $name . '%'] = $value;
 			}
 
 			# Process loops

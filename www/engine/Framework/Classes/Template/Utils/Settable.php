@@ -6,6 +6,6 @@ namespace Template\Utils {
 
 		# Get contents
 
-		public function contents($format = true);
+		public function contents(bool $format = true);
 	}
 }

@@ -22,9 +22,9 @@ namespace Template\Utils {
 
 		# Set separator
 
-		public function separator($separator) {
+		public function separator(string $separator) {
 
-			$this->separator = strval($separator);
+			$this->separator = $separator;
 		}
 
 		# Get contents
