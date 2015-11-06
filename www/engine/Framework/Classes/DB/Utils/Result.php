@@ -2,26 +2,13 @@
 
 namespace DB\Utils {
 
-	/**
-	 * @property-read boolean $status
-	 * @property-read mixed $result
-	 * @property-read string $query
-	 * @property-read int $time
-	 * @property-read int $rows
-	 * @property-read int $id
-	 * @property-read string $error
-	 * @property-read int $errno
-	 */
-
 	class Result {
 
-		private $status, $result, $query, $time, $rows, $id, $error, $errno;
+		private $result, $query, $time, $rows, $id, $error, $errno;
 
 		# Constructor
 
-		public function __construct($link, $result, $query, $time) {
-
-			$this->status       = (false !== $result);
+		public function __construct(\mysqli $link, $result, string $query, int $time) {
 
 			$this->result       = $result;
 
@@ -40,7 +27,7 @@ namespace DB\Utils {
 
 		# Getter
 
-		public function __get($var) {
+		public function __get(string $var) {
 
 			return (isset($this->$var) ? $this->$var : null);
 		}
@@ -60,13 +47,7 @@ namespace DB\Utils {
 
 			if (!is_object($this->result)) return [];
 
-			$assoc = [];
-
-			while (null !== ($row = $this->row())) $assoc[] = $row;
-
-			# ------------------------
-
-			return $assoc;
+			while (null !== ($row = $this->row())) yield $row;
 		}
 	}
 }

@@ -8,9 +8,7 @@ namespace {
 
 		# Connect to database
 
-		public static function connect($server, $user, $password, $name) {
-
-			$server = strval($server); $user = strval($user); $password = strval($password); $name = strval($name);
+		public static function connect(string $server, string $user, string $password, string $name) {
 
 			# Establish connection
 
@@ -35,26 +33,22 @@ namespace {
 
 		# Send new query
 
-		public static function send($query) {
+		public static function send(string $query) {
 
 			if (false === self::$link) return (self::$last = false);
 
-			$query = strval($query);
-
 			$time = microtime(true); $result = mysqli_query(self::$link, $query); $time = (microtime(true) - $time);
 
-			$holder = new DB\Utils\Result(self::$link, $result, $query, $time);
-
-			self::$last = $holder; self::$log[] = $holder; self::$time += $time;
+			self::$log[] = (self::$last = new DB\Utils\Result(self::$link, $result, $query, $time)); self::$time += $time;
 
 			# ------------------------
 
-			return $holder;
+			return self::$last;
 		}
 
 		# Generate & send select query
 
-		public static function select($table, $selection, $condition = null, $order = null, $limit = 0) {
+		public static function select(string $table, $selection, $condition = null, $order = null, int $limit = 0) {
 
 			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit);
 
@@ -63,7 +57,7 @@ namespace {
 
 		# Generate & send insert query
 
-		public static function insert($table, array $dataset, $multiple = false) {
+		public static function insert(string $table, array $dataset, bool $multiple = false) {
 
 			$query = new DB\Query\Insert($table, $dataset, $multiple);
 
@@ -72,7 +66,7 @@ namespace {
 
 		# Generate & send update query
 
-		public static function update($table, array $dataset, $condition = null) {
+		public static function update(string $table, array $dataset, $condition = null) {
 
 			$query = new DB\Query\Update($table, $dataset, $condition);
 
@@ -81,7 +75,7 @@ namespace {
 
 		# Generate & send delete query
 
-		public static function delete($table, $condition = null) {
+		public static function delete(string $table, $condition = null) {
 
 			$query = new DB\Query\Delete($table, $condition);
 
@@ -97,22 +91,16 @@ namespace {
 
 		# Encode search value
 
-		public static function encodeSearchValue($value, $add_slashes = true) {
+		public static function encodeSearchValue(string $value, bool $add_slashes = true) {
 
-			$value = strval($value); $add_slashes = boolval($add_slashes);
+			$value = str_replace(' ', '%', str_replace(['%', '_'], ['\%', '\_'], $value));
 
-			$value_encoded = str_replace(' ', '%', str_replace(['%', '_'], ['\%', '\_'], $value));
-
-			# ------------------------
-
-			return ($add_slashes ? addslashes($value_encoded) : $value_encoded);
+			return ($add_slashes ? addslashes($value) : $value);
 		}
 
 		# Get process log
 
 		public static function log() {
-
-			$log = [];
 
 			foreach (self::$log as $result) {
 
@@ -120,10 +108,8 @@ namespace {
 
 				$summary = ($status ? ($result->rows . ' row(s)') : ('(' . $result->errno . ') ' . $result->error));
 
-				$log[] = ['status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary];
+				yield ['status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary];
 			}
-
-			return $log;
 		}
 
 		# Get process time

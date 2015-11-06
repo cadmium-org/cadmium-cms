@@ -8,34 +8,30 @@ namespace DB\Utils {
 
 		# Get field/table name
 
-		protected function getName($name) {
+		protected function getName(string $name) {
 
-			$name = strval($name);
-
-			return trim(preg_replace('/[^a-zA-Z0-9_]/', '_', $name));
+			return preg_replace('/[^a-zA-Z0-9_]/', '_', trim($name));
 		}
 
 		# Get field value
 
-		protected function getValue($value) {
-
-			$value = strval($value);
+		protected function getValue(string $value) {
 
 			return ("'" . addslashes($value) . "'");
 		}
 
 		# Get field sort
 
-		protected function getSort($sort) {
+		protected function getSort(string $sort) {
 
-			$sort = strval($sort);
-
-			return ((strtoupper($sort) === 'DESC') ? 'DESC' : 'ASC');
+			return ((strtoupper($sort) !== 'DESC') ? 'ASC' : 'DESC');
 		}
 
 		# Convert data array to string
 
-		protected function getString($source, $key_parser, $value_parser, $concat, $separator) {
+		protected function getString($source = null, string $key_parser = null, string $value_parser = null,
+
+			                         string $concat = '', string $separator = '') {
 
 			if (!is_array($source)) return strval($source);
 

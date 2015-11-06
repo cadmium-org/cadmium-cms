@@ -8,11 +8,11 @@ namespace DB\Query {
 
 		# Constructor
 
-		public function __construct($table, array $dataset, $multiple = false) {
+		public function __construct(string $table, array $dataset, bool $multiple = false) {
 
 			# Process arguments
 
-			$table = $this->getName($table); $multiple = boolval($multiple);
+			$table = $this->getName($table);
 
 			$dataset = (!$multiple ? [$dataset] : array_values($dataset));
 

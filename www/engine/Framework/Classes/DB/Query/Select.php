@@ -8,7 +8,7 @@ namespace DB\Query {
 
 		# Constructor
 
-		public function __construct($table, $selection, $condition = null, $order = null, $limit = 0) {
+		public function __construct(string $table, $selection, $condition = null, $order = null, int $limit = 0) {
 
 			# Process arguments
 
@@ -19,8 +19,6 @@ namespace DB\Query {
 			$condition = $this->getString($condition, 'name', 'value', ' = ', ' AND ');
 
 			$order = $this->getString($order, 'name', 'sort', ' ', ', ');
-
-			$limit = intabs($limit);
 
 			# Build query
 
