@@ -8,20 +8,16 @@ namespace Ajax\Utils {
 
 		# Set variable
 
-		public function set($name, $value) {
-
-			$name = strval($name); $value = strval($value);
+		public function set(string $name, string $value) {
 
 			$this->data[$name] = $value;
-
-			# ------------------------
 
 			return $this;
 		}
 
 		# Set error
 
-		public function error($value = null) {
+		public function error(string $value = null) {
 
 			if (null !== $value) $this->set('error', $value);
 
