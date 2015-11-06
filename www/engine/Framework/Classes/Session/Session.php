@@ -47,7 +47,7 @@ namespace {
 
 			$name = strval($name);
 
-			return ((session_id() && isset($_SESSION[$name])) ? $_SESSION[$name] : null);
+			return ((session_id() && isset($_SESSION[$name])) ? $_SESSION[$name] : false);
 		}
 
 		# Set variable

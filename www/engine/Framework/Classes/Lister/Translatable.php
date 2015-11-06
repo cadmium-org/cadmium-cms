@@ -10,9 +10,9 @@ namespace Lister {
 
 		public static function get($key) {
 
-			if (null === ($value = parent::get($key))) return null;
+			if (false === ($value = parent::get($key))) return false;
 
-			return ((null !== ($translated = Language::get($value))) ? $translated : $value);
+			return ((false !== ($translated = Language::get($value))) ? $translated : $value);
 		}
 
 		# Get list
@@ -21,7 +21,7 @@ namespace Lister {
 
 			foreach (parent::list() as $key => $value) {
 
-				yield ((null !== ($translated = Language::get($value))) ? $translated : $value);
+				yield ((false !== ($translated = Language::get($value))) ? $translated : $value);
 			}
 		}
 	}

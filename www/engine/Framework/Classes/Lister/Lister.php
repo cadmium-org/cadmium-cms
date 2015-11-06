@@ -33,7 +33,7 @@ namespace {
 
 		public static function get($key) {
 
-			return (isset(static::$list[$key]) ? static::$list[$key] : null);
+			return (isset(static::$list[$key]) ? static::$list[$key] : false);
 		}
 
 		# Get list

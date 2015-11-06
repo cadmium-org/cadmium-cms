@@ -21,7 +21,7 @@ namespace {
 
 		public static function select(array $array, array $keys) {
 
-			foreach ($keys as $key) if (is_scalar($key)) yield $key => (isset($array[$key]) ? $array[$key] : null);
+			foreach ($keys as $key) if (is_scalar($key)) yield $key => (isset($array[$key]) ? $array[$key] : false);
 		}
 
 		# Transform associative array to indexed

@@ -24,14 +24,14 @@ namespace {
 
 		public static function get(string $name) {
 
-			return (isset($_GET[$name]) ? $_GET[$name] : null);
+			return (isset($_GET[$name]) ? $_GET[$name] : false);
 		}
 
 		# Return POST param by name
 
 		public static function post(string $name) {
 
-			return (isset($_POST[$name]) ? $_POST[$name] : null);
+			return (isset($_POST[$name]) ? $_POST[$name] : false);
 		}
 
 		# Return GET params by list of names
