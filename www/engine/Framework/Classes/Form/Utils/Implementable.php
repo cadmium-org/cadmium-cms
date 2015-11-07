@@ -10,7 +10,7 @@ namespace Form\Utils {
 
 		# Get tag
 
-		protected function getTag($name, array $attributes = [], $contents = null) {
+		protected function getTag(string $name, array $attributes = [], $contents = null) {
 
 			$tag = new Tag($name, $attributes, $contents);
 
@@ -53,28 +53,20 @@ namespace Form\Utils {
 
 		# Check if field is disabled
 
-		public function disabled($value = null) {
+		public function disabled(bool $value = null) {
 
 			if (null === $value) return $this->disabled;
 
-			if (boolval($value)) $this->disabled = true;
+			$this->disabled = $value;
 		}
 
 		# Check if field is disabled
 
-		public function required($value = null) {
+		public function required(bool $value = null) {
 
 			if (null === $value) return $this->required;
 
-			if (boolval($value)) $this->required = true;
+			$this->required = $value;
 		}
-
-		# Setter interface
-
-		abstract public function set($value);
-
-		# Block getter interface
-
-		abstract public function block();
 	}
 }

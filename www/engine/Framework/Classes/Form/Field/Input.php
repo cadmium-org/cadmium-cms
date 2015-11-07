@@ -42,22 +42,20 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value = null, $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '') {
+		public function __construct(Form $form, string $key, string $value = null, string $type = FORM_INPUT_TEXT,
 
-			parent::__construct($form, $name);
+			int $maxlength = 0, string $placeholder = '') {
 
-			$this->type = strval($type); $this->maxlength = intabs($maxlength);
+			parent::__construct($form, $key);
 
-			$this->placeholder = strval($placeholder);
+			$this->type = $type; $this->maxlength = $maxlength; $this->placeholder = $placeholder;
 
 			$this->set($value);
 		}
 
 		# Set value
 
-		public function set($value) {
-
-			$this->value = strval($value);
+		public function set(string $value) {
 
 			if ($this->type === FORM_INPUT_PASSWORD) {
 
@@ -77,30 +75,30 @@ namespace Form\Field {
 
 		# Set readonly
 
-		public function readonly($value) {
+		public function readonly(bool $value) {
 
-			$this->readonly = boolval($value);
+			$this->readonly = $value;
 		}
 
 		# Set translit
 
-		public function translit($value) {
+		public function translit(bool $value) {
 
-			$this->translit = boolval($value);
+			$this->translit = $value;
 		}
 
 		# Set autofocus
 
-		public function autofocus($value) {
+		public function autofocus(bool $value) {
 
-			$this->autofocus = boolval($value);
+			$this->autofocus = $value;
 		}
 
 		# Set autocomplete
 
-		public function autocomplete($value) {
+		public function autocomplete(bool $value) {
 
-			$this->autocomplete = boolval($value);
+			$this->autocomplete = $value;
 		}
 
 		# Get block
@@ -131,6 +129,8 @@ namespace Form\Field {
 
 				if ($this->autocomplete) $tag->set('autocomplete', 'on');
 			}
+
+			# ------------------------
 
 			return $tag->block();
 		}

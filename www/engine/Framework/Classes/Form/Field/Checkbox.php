@@ -8,18 +8,16 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value = null) {
+		public function __construct(Form $form, string $key, bool $value = null) {
 
-			parent::__construct($form, $name);
+			parent::__construct($form, $key);
 
 			$this->set($value);
 		}
 
 		# Set value
 
-		public function set($value) {
-
-			$this->value = boolval($value);
+		public function set(bool $value) {
 
 			return (!($this->required && (false === $this->value)));
 		}

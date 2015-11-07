@@ -32,22 +32,18 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct($form, $name, $value, array $options, $default = null) {
+		public function __construct(Form $form, $string $key, string $value, array $options, string $default = null) {
 
-			parent::__construct($form, $name);
+			parent::__construct($form, $key);
 
-			$default = ((null !== $default) ? ['' => strval($default)] : []);
-
-			$this->options = array_merge($default, $options);
+			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
 
 			$this->set($value);
 		}
 
 		# Set value
 
-		public function set($value) {
-
-			$this->value = strval($value);
+		public function set(string $value) {
 
 			$key = array_search($this->value, ($range = array_keys($this->options)));
 
@@ -60,16 +56,16 @@ namespace Form\Field {
 
 		# Set search
 
-		public function search($value) {
+		public function search(bool $value) {
 
-			$this->search = boolval($value);
+			$this->search = $value;
 		}
 
 		# Set auto
 
-		public function auto($value) {
+		public function auto(bool $value) {
 
-			$this->auto = boolval($value);
+			$this->auto = $value;
 		}
 
 		# Get block

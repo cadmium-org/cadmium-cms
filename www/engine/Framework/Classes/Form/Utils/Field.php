@@ -12,11 +12,9 @@ namespace Form\Utils {
 
 		# Validate form
 
-		public function __construct($form, $key) {
+		public function __construct(Form $form, string $key) {
 
-			if ($form instanceof Form) $this->form = $form;
-
-			$key = strval($key);
+			$this->form = $form;
 
 			if (preg_match(REGEX_FORM_FIELD_KEY, $key)) {
 

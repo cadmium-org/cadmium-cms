@@ -8,9 +8,9 @@ namespace {
 
 		# Get field configuration
 
-		private function getConfig($config) {
+		private function getConfig(int $config) {
 
-			$config = array_reverse(str_split(decbin(intval($config))));
+			$config = array_reverse(str_split(decbin($config)));
 
 			$options = [];
 
@@ -46,16 +46,16 @@ namespace {
 
 		# Constructor
 
-		public function __construct($name = '') {
-
-			$name = strval($name);
+		public function __construct(string $name = '') {
 
 			if (preg_match(REGEX_FORM_NAME, $name)) $this->name = $name;
 		}
 
 		# Add input field
 
-		public function input($key, $value = null, $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '', $config = 0) {
+		public function input(string $key, string $value = null, string $type = FORM_INPUT_TEXT,
+
+			int $maxlength = 0, string $placeholder = '', int $config = 0) {
 
 			$field = new Form\Field\Input($this, $key, $value, $type, $maxlength, $placeholder);
 
@@ -82,7 +82,7 @@ namespace {
 
 		# Add select field
 
-		public function select($key, $value, array $options, $default = null, $config = 0) {
+		public function select(string $key, string $value, array $options, string $default = null, int $config = 0) {
 
 			$field = new Form\Field\Select($this, $key, $value, $options, $default);
 
@@ -105,7 +105,7 @@ namespace {
 
 		# Add checkbox field
 
-		public function checkbox($key, $value = null, $config = 0) {
+		public function checkbox(string $key, bool $value = null, int $config = 0) {
 
 			$field = new Form\Field\Checkbox($this, $key, $value);
 
@@ -124,7 +124,7 @@ namespace {
 
 		# Add virtual field
 
-		public function virtual($key) {
+		public function virtual(string $key) {
 
 			$field = new Form\Utils\Field($this, $key);
 
@@ -145,6 +145,8 @@ namespace {
 
 				if (null !== ($value = Request::post($field->name()))) $check = true; else return false;
 			}
+
+			# ------------------------
 
 			return $check;
 		}
@@ -194,9 +196,7 @@ namespace {
 
 		# Get field object
 
-		public function get($key) {
-
-			$key = strval($key);
+		public function get(string $key) {
 
 			return (isset($this->fields[$key]) ? $this->fields[$key] : null);
 		}
