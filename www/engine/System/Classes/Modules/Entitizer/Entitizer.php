@@ -57,7 +57,7 @@ namespace System\Modules {
 
 		public static function create($type, $id = 0) {
 
-			$type = strval($type); $id = intabs($id);
+			$type = strval($type); $id = intval($id);
 
 			if (!isset(self::$types[$type])) throw new Exception\General(self::ERROR_TYPE);
 
@@ -100,7 +100,7 @@ namespace System\Modules {
 
 		public static function controller($type, $id = 0) {
 
-			$type = strval($type); $id = intabs($id);
+			$type = strval($type); $id = intval($id);
 
 			if (!isset(self::$controllers[$type])) throw new Exception\General(self::ERROR_CONTROLLER);
 

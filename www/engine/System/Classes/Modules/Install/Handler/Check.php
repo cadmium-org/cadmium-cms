@@ -46,7 +46,7 @@ namespace System\Modules\Install\Handler {
 
 			# Set button
 
-			$contents->block('button')->checked = intabs(Install::status());
+			$contents->block('button')->checked = intval(Install::status());
 
 			$contents->block('button')->text = Language::get(Install::status() ? 'CONTINUE' : 'RECHECK');
 

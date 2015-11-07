@@ -32,7 +32,7 @@ namespace System\Handlers\Site {
 
 				# Validate item
 
-				$id = intabs($page['id']); $link .= ('/' . strval($page['name'])); $title = strval($page['title']);
+				$id = intval($page['id']); $link .= ('/' . strval($page['name'])); $title = strval($page['title']);
 
 				$path[] = ['id' => $id, 'link' => $link, 'title' => $title];
 			}

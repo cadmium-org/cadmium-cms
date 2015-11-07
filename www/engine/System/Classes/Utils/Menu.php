@@ -46,15 +46,15 @@ namespace System\Utils {
 
 			if (!(DB::send($query) && DB::last()->status)) return;
 
-			while (null !== ($item = DB::last()->row())) $this->items[intabs($item['id'])] = [
+			while (null !== ($item = DB::last()->row())) $this->items[intval($item['id'])] = [
 
-				'parent_id'     => intabs($item['parent_id']),
+				'parent_id'     => intval($item['parent_id']),
 
 				'link'          => strval($item['link']),
 
 				'text'          => strval($item['text']),
 
-				'target'        => intabs($item['target'])
+				'target'        => intval($item['target'])
 			];
 
 			foreach ($this->items as $id => $item) if (0 === $item['parent_id']) $this->menu[] = $id;

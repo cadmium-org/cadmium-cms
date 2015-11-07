@@ -27,7 +27,7 @@ namespace System\Utils\Tools {
 
 		public function __construct($width, $height, $bg_color = null) {
 
-			$width = intabs($width); $height = intabs($height);
+			$width = intval($width); $height = intval($height);
 
 			if (false === ($captcha = imagecreatetruecolor($width, $height))) return;
 
@@ -45,9 +45,9 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			$font = strval($font); $size = ((($size = intabs($size)) < 8) ? 8 : $size);
+			$font = strval($font); $size = ((($size = intval($size)) < 8) ? 8 : $size);
 
-			$indent = intabs($indent); $step = intabs($step); $text = strval($text);
+			$indent = intval($indent); $step = intval($step); $text = strval($text);
 
 			if (!Explorer::isFile($font)) return false;
 
@@ -73,7 +73,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			$rate = intabs($rate);
+			$rate = intval($rate);
 
 			if (false === ($color = $this->allocateColor($color))) return false;
 
@@ -96,7 +96,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			$count = intabs($count);
+			$count = intval($count);
 
 			if (false === ($color = $this->allocateColor($color))) return false;
 
@@ -120,7 +120,7 @@ namespace System\Utils\Tools {
 
 			if (!is_resource($this->captcha)) return false;
 
-			if (($quality = intabs($quality)) > 9) $quality = 9;
+			if (($quality = intval($quality)) > 9) $quality = 9;
 
 			Headers::nocache(); Headers::content(MIME_TYPE_PNG);
 

@@ -61,7 +61,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return intabs(DB::last()->row()['count']);
+			return intval(DB::last()->row()['count']);
 		}
 
 		# Constructor

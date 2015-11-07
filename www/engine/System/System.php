@@ -23,7 +23,7 @@ namespace {
 
 			# Parse installation details
 
-			$this->time = intabs(Arr::get($data, ['time']));
+			$this->time = intval(Arr::get($data, ['time']));
 		}
 
 		# Constructor

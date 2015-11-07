@@ -14,7 +14,7 @@ namespace System\Modules\Install\Utils {
 
 			if (!(DB::select(TABLE_PAGES, 'COUNT(id) as count') && (DB::last()->rows === 1))) return false;
 
-			if (intabs(DB::last()->row()['count']) > 0) return true;
+			if (intval(DB::last()->row()['count']) > 0) return true;
 
 			# Insert initial pages
 
@@ -53,7 +53,7 @@ namespace System\Modules\Install\Utils {
 
 			if (!(DB::select(TABLE_MENU, 'COUNT(id) as count') && (DB::last()->rows === 1))) return false;
 
-			if (intabs(DB::last()->row()['count']) > 0) return true;
+			if (intval(DB::last()->row()['count']) > 0) return true;
 
 			# Insert initial menuitems
 

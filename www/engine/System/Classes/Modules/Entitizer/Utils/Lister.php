@@ -49,9 +49,9 @@ namespace System\Modules\Entitizer\Utils {
 
 		public function select($index = 0, $display = 0, $parent_id = 0, $disable_id = 0) {
 
-			$index = intabs($index); $display = intabs($display);
+			$index = intval($index); $display = intval($display);
 
-			$parent_id = intabs($parent_id); $disable_id = intabs($disable_id);
+			$parent_id = intval($parent_id); $disable_id = intval($disable_id);
 
 			$items = ['list' => [], 'total' => 0];
 
@@ -73,7 +73,7 @@ namespace System\Modules\Entitizer\Utils {
 
 				foreach ($params as $name => $param) $item[$name] = $param->validate($row[$name]);
 
-				if (static::$nesting) $item['children'] = intabs($row['children']);
+				if (static::$nesting) $item['children'] = intval($row['children']);
 
 				$items['list'][] = $item;
 			}
@@ -82,7 +82,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (DB::send("SELECT FOUND_ROWS() as total") && (DB::last()->rows === 1)) {
 
-				$items['total'] = intabs(DB::last()->row()['total']);
+				$items['total'] = intval(DB::last()->row()['total']);
 			}
 
 			# ------------------------

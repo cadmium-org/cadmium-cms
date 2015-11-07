@@ -17,7 +17,7 @@ namespace System\Modules\Entitizer\Utils\Param\General {
 
 		public function validate($value) {
 
-			return intabs($value);
+			return intval($value);
 		}
 	}
 }

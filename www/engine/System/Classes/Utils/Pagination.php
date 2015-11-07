@@ -12,7 +12,7 @@ namespace System\Utils {
 
 			$pagination = View::get('Blocks\Utils\Pagination');
 
-			$index = intabs($index); $display = intabs($display); $total = intabs($total);
+			$index = intval($index); $display = intval($display); $total = intval($total);
 
 			$url = (($url instanceof Url) ? $url : new Url());
 

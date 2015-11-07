@@ -17,7 +17,7 @@ namespace System\Modules {
 
 			# ------------------------
 
-			return intabs(DB::last()->row()['count']);
+			return intval(DB::last()->row()['count']);
 		}
 
 		# Check if install file exists
