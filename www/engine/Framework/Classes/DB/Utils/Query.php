@@ -31,7 +31,7 @@ namespace DB\Utils {
 
 		protected function getString($source = null, string $key_parser = null, string $value_parser = null,
 
-			                         string $concat = '', string $separator = '') {
+			string $concat = '', string $separator = '') {
 
 			if (!is_array($source)) return strval($source);
 
