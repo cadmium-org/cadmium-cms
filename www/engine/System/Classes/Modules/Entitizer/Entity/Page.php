@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Entity {
 
-	use System\Modules\Entitizer, Arr;
+	use System\Modules\Entitizer;
 
 	/**
 	 * @property-read int $id
@@ -31,7 +31,7 @@ namespace System\Modules\Entitizer\Entity {
 
 		private function getLink() {
 
-			return (($this->id !== 0) ? ('/' . implode('/', Arr::subvalExtract($this->data['path'], 'name'))) : '');
+			return (($this->id !== 0) ? ('/' . implode('/', array_column($this->data['path'], 'name'))) : '');
 		}
 
 		# Get canonical
