@@ -4,6 +4,8 @@ namespace {
 
 	abstract class Image {
 
+		# Output image
+
 		private static function output($image, string $mime, callable $outputter, array $params) {
 
 			if (!is_resource($this->captcha)) return false;
