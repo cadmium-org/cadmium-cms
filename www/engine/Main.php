@@ -2,7 +2,7 @@
 
 # Check PHP version
 
-if (version_compare(PHP_VERSION, '5.4.0') < 0) exit('PHP version 5.4.0 or higher is required.');
+if (version_compare(PHP_VERSION, '7.0.0') < 0) exit('PHP version 7 or higher is required.');
 
 # Set error reporting
 
