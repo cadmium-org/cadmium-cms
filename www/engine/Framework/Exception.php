@@ -10,7 +10,7 @@ namespace Exception {
 
 		# Constructor
 
-		public function __construct($value = '') {
+		public function __construct(string $value = '') {
 
 			$value = htmlspecialchars($value);
 
@@ -24,9 +24,9 @@ namespace Exception {
 
 		# Constructor override
 
-		public function __construct($message = '') {
+		public function __construct(string $message = '') {
 
-			if ('' !== ($message = strval($message))) $this->message = $message;
+			if ('' !== ($message = $message)) $this->message = $message;
 		}
 	}
 
@@ -56,12 +56,5 @@ namespace Exception {
 	class DBCharset extends Exception  {
 
 		protected $message = 'Unable to set database charset';
-	}
-
-	# Language init error
-
-	class LanguageInit extends Exception {
-
-		protected $message = 'Unable to init language \'$value$\'';
 	}
 }
