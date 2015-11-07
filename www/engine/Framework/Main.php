@@ -13,7 +13,6 @@ define('DIR_TEMPLATES',     (DIR_FRAMEWORK . 'Templates/'));
 
 require_once (DIR_FRAMEWORK . 'Engine.php');
 require_once (DIR_FRAMEWORK . 'Exception.php');
-require_once (DIR_FRAMEWORK . 'Functions.php');
 
 # Require configuration
 
