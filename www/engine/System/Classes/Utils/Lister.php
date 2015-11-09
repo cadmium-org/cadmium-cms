@@ -2,9 +2,9 @@
 
 namespace Lister {
 
-	use Language, Lister;
+	use Language;
 
-	abstract class Translatable extends Lister {
+	abstract class Lister extends \Lister {
 
 		# Get item by key
 
