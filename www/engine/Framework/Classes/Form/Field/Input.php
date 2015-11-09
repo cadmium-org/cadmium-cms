@@ -4,11 +4,21 @@ namespace Form\Field {
 
 	use Form\Utils, Text;
 
-	class Input extends Utils\Implementable {
+	class Input extends Utils\Field {
 
-		private $type = FORM_INPUT_TEXT, $maxlength = 0, $placeholder = '';
+		# Field data
 
-		private $readonly = false, $translit = false, $autofocus = false, $autocomplete = false;
+		private $type = FORM_INPUT_TEXT, $maxlength = 0;
+
+		# Field configuration
+
+		protected $config = [
+
+			'placeholder'       = '',
+			'readonly'          = false,
+			'autofocus'         = false,
+			'translit'          = false
+		];
 
 		# Get hidden input tag
 
@@ -31,26 +41,27 @@ namespace Form\Field {
 			return $this->getTag('textarea', [], $this->value);
 		}
 
+		# Get captcha input tag
+
+		private function getCaptcha() {
+
+			return $this->getTag('input', ['type' => 'text', 'value' => '']);
+		}
+
 		# Get text input tag
 
 		private function getText() {
 
-			$value = (($this->type !== FORM_INPUT_CAPTCHA) ? $this->value : '');
-
-			return $this->getTag('input', ['type' => 'text', 'value' => $value]);
+			return $this->getTag('input', ['type' => 'text', 'value' => $this->value]);
 		}
 
 		# Constructor
 
-		public function __construct(Form $form, string $key, string $value = null, string $type = FORM_INPUT_TEXT,
+		public function __construct(Form $form, string $key, string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
-			int $maxlength = 0, string $placeholder = '') {
+			self::init($form, $key, $config);
 
-			parent::__construct($form, $key);
-
-			$this->type = $type; $this->maxlength = $maxlength; $this->placeholder = $placeholder;
-
-			$this->set($value);
+			$this->type = $type; $this->maxlength = $maxlength;
 		}
 
 		# Set value
@@ -59,46 +70,46 @@ namespace Form\Field {
 
 			if ($this->type === FORM_INPUT_PASSWORD) {
 
-				$this->value = Text::cut($this->value, $this->maxlength);
+				$this->value = Text::cut($value, $this->maxlength);
 
 			} else {
 
 				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
 
-				$this->value = Text::input($this->value, $multiline, $this->maxlength);
+				$this->value = Text::input($value, $multiline, $this->maxlength);
 
-				if ($this->translit) $this->value = Text::translit($this->value, $this->maxlength);
+				if ($this->config['translit']) $this->value = Text::translit($this->value, $this->maxlength);
 			}
 
 			return (!($this->required && ('' === $this->value)));
+		}
+
+		# Set placeholder
+
+		public function placeholder(string $value = null) {
+
+			$this->config['placeholder'] = $value;
 		}
 
 		# Set readonly
 
 		public function readonly(bool $value) {
 
-			$this->readonly = $value;
-		}
-
-		# Set translit
-
-		public function translit(bool $value) {
-
-			$this->translit = $value;
+			$this->config['readonly'] = $value;
 		}
 
 		# Set autofocus
 
 		public function autofocus(bool $value) {
 
-			$this->autofocus = $value;
+			$this->config['autofocus'] = $value;
 		}
 
-		# Set autocomplete
+		# Set translit
 
-		public function autocomplete(bool $value) {
+		public function translit(bool $value) {
 
-			$this->autocomplete = $value;
+			$this->config['translit'] = $value;
 		}
 
 		# Get block
@@ -115,19 +126,19 @@ namespace Form\Field {
 
 				else if ($this->type === FORM_INPUT_TEXTAREA) $tag = $this->getTextarea();
 
+				else if ($this->type === FORM_INPUT_CAPTCHA) $tag = $this->getCaptcha();
+
 				else $tag = $this->getText();
 
 				# Set appearance
 
-				if (0 !== $this->maxlength) $tag->set('maxlength', $this->maxlength);
+				if (0 < $this->maxlength) $tag->set('maxlength', $this->maxlength);
 
-				if ('' !== $this->placeholder) $tag->set('placeholder', $this->placeholder);
+				if ('' !== $this->config['placeholder']) $tag->set('placeholder', $this->config['placeholder']);
 
-				if ($this->readonly) $tag->set('readonly', 'readonly');
+				if ($this->config['readonly']) $tag->set('readonly', 'readonly');
 
-				if ($this->autofocus) $tag->set('autofocus', 'autofocus');
-
-				if ($this->autocomplete) $tag->set('autocomplete', 'on');
+				if ($this->config['autofocus']) $tag->set('autofocus', 'autofocus');
 			}
 
 			# ------------------------

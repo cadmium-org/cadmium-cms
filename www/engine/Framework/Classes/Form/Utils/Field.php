@@ -2,35 +2,68 @@
 
 namespace Form\Utils {
 
-	use Form, Request;
+	use Form, Request, Tag;
 
 	class Field {
 
 		private $form = null, $posted = false;
 
-		protected $key = '', $name = '', $value = null;
+		protected $key = '', $name = '', $value = null, $params = [];
+
+		protected $disabled = false, $required = false, $error = false;
+
+		# Get tag
+
+		protected function getTag(string $name, array $attributes = [], $contents = null) {
+
+			$tag = new Tag($name, $attributes, $contents);
+
+			$tag->set('name', $this->name);
+
+			$tag->set('id', str_replace('_', '-', $this->name));
+
+			# Set config
+
+			if ($this->disabled) $tag->set('disabled', 'disabled');
+
+			if ($this->required) $tag->set('data-required', 'required');
+
+			if ($this->error) $tag->set('data-error', 'error');
+
+			# ------------------------
+
+			return $tag;
+		}
 
 		# Validate form
 
-		public function __construct(Form $form, string $key) {
+		public function __construct(Form $form, string $key, array $config = []) {
 
 			$this->form = $form;
 
+			# Set field key & name
+
 			if (preg_match(REGEX_FORM_FIELD_KEY, $key)) {
 
-				$prefix = ((null !== $this->form) ? $this->form->name() : '');
+				$prefix = ((null !== $this->form) ? ($this->form->name() . '_') : '');
 
-				$this->key = $key; $this->name = (($prefix ? ($prefix . '_') : '') . $key);
+				$this->key = $key; $this->name = ($prefix . $key);
 			}
+
+			# Set field params
+
+			$params = array_merge(['disabled', 'required'], array_keys(isset($this->params) ? $this->params : []));
+
+			foreach ($params as $name) if (isset($config[$name])) call_user_method($name, $this, $config[$name]);
 		}
 
 		# Post value
 
 		public function post() {
 
-			if ($this->posted || ('' === $this->key)) return false;
+			if ($this->posted || $this->disabled || ('' === $this->key)) return false;
 
-			$this->value = Request::post($this->name);
+			if (!$this->set(Request::post($this->name))) $this->error = true;
 
 			# ------------------------
 
@@ -56,6 +89,31 @@ namespace Form\Utils {
 		public function value() {
 
 			return $this->value;
+		}
+
+		# Check if error
+
+		public function error() {
+
+			return $this->error;
+		}
+
+		# Set/check if field is disabled
+
+		public function disabled(bool $value = null) {
+
+			if (null === $value) return $this->disabled;
+
+			$this->disabled = $value;
+		}
+
+		# Set/check if field is required
+
+		public function required(bool $value = null) {
+
+			if (null === $value) return $this->required;
+
+			$this->required = $value;
 		}
 	}
 }

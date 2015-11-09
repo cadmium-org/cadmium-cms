@@ -6,31 +6,6 @@ namespace {
 
 		private $name = '', $posted = false, $errors = false, $fields = [];
 
-		# Get field configuration
-
-		private function getConfig(int $config) {
-
-			$config = array_reverse(str_split(decbin($config)));
-
-			$options = [];
-
-			$options[FORM_FIELD_REQUIRED]       = false;
-			$options[FORM_FIELD_DISABLED]       = false;
-			$options[FORM_FIELD_READONLY]       = false;
-			$options[FORM_FIELD_TRANSLIT]       = false;
-			$options[FORM_FIELD_AUTOFOCUS]      = false;
-			$options[FORM_FIELD_AUTOCOMPLETE]   = false;
-			$options[FORM_FIELD_SEARCH]         = false;
-			$options[FORM_FIELD_AUTO]           = false;
-
-			foreach (array_keys($options) as $key => $value) {
-
-				if (isset($config[$key]) && ($config[$key] === '1')) $options[$value] = true;
-			}
-
-			return $options;
-		}
-
 		# Add field to form
 
 		private function addField(Form\Utils\Field $field) {
@@ -53,80 +28,27 @@ namespace {
 
 		# Add input field
 
-		public function input(string $key, string $value = null, string $type = FORM_INPUT_TEXT,
+		public function input(string $key, string $value = '', string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
-			int $maxlength = 0, string $placeholder = '', int $config = 0) {
-
-			$field = new Form\Field\Input($this, $key, $value, $type, $maxlength, $placeholder);
-
-			# Configure field
-
-			$config = $this->getConfig($config);
-
-			$field->required        ($config[FORM_FIELD_REQUIRED]);
-
-			$field->disabled        ($config[FORM_FIELD_DISABLED]);
-
-			$field->readonly        ($config[FORM_FIELD_READONLY]);
-
-			$field->translit        ($config[FORM_FIELD_TRANSLIT]);
-
-			$field->autofocus       ($config[FORM_FIELD_AUTOFOCUS]);
-
-			$field->autocomplete    ($config[FORM_FIELD_AUTOCOMPLETE]);
-
-			# ------------------------
+			($field = new Form\Field\Input($this, $key, $type, $maxlength, $config))->set($value);
 
 			return $this->addField($field);
 		}
 
 		# Add select field
 
-		public function select(string $key, string $value, array $options, string $default = null, int $config = 0) {
+		public function select(string $key, string $value = '', array $options = [], string $default = null, array $config = []) {
 
-			$field = new Form\Field\Select($this, $key, $value, $options, $default);
-
-			# Configure field
-
-			$config = $this->getConfig($config);
-
-			$field->required        ($config[FORM_FIELD_REQUIRED]);
-
-			$field->disabled        ($config[FORM_FIELD_DISABLED]);
-
-			$field->search          ($config[FORM_FIELD_SEARCH]);
-
-			$field->auto            ($config[FORM_FIELD_AUTO]);
-
-			# ------------------------
+			($field = new Form\Field\Select($this, $key, $options, $default, $config))->set($value);
 
 			return $this->addField($field);
 		}
 
 		# Add checkbox field
 
-		public function checkbox(string $key, bool $value = null, int $config = 0) {
+		public function checkbox(string $key, bool $value = false) {
 
-			$field = new Form\Field\Checkbox($this, $key, $value);
-
-			# Configure field
-
-			$config = $this->getConfig($config);
-
-			$field->required        ($config[FORM_FIELD_REQUIRED]);
-
-			$field->disabled        ($config[FORM_FIELD_DISABLED]);
-
-			# ------------------------
-
-			return $this->addField($field);
-		}
-
-		# Add virtual field
-
-		public function virtual(string $key) {
-
-			$field = new Form\Utils\Field($this, $key);
+			($field = new Form\Field\Checkbox($this, $key))->set($value);
 
 			return $this->addField($field);
 		}
@@ -139,11 +61,9 @@ namespace {
 
 			foreach ($this->fields as $field) {
 
-				if (($field instanceof Form\Field\Checkbox)) continue;
+				if (($field instanceof Form\Field\Checkbox) || $field->disabled()) continue;
 
-				if (($field instanceof Form\Utils\Implementable) && $field->disabled()) continue;
-
-				if (null !== ($value = Request::post($field->name()))) $check = true; else return false;
+				if (false !== ($value = Request::post($field->name()))) $check = true; else return false;
 			}
 
 			# ------------------------
@@ -163,7 +83,7 @@ namespace {
 
 				$field->post(); $post[$field->key()] = $field->value();
 
-				if (($field instanceof Form\Utils\Implementable) && $field->error()) $errors = true;
+				if ($field->error()) $errors = true;
 			}
 
 			$this->posted = true; $this->errors = $errors;
@@ -198,7 +118,7 @@ namespace {
 
 		public function get(string $key) {
 
-			return (isset($this->fields[$key]) ? $this->fields[$key] : null);
+			return (isset($this->fields[$key]) ? $this->fields[$key] : false);
 		}
 
 		# Implement fields
@@ -206,8 +126,6 @@ namespace {
 		public function implement(Template\Utils\Block $block) {
 
 			foreach ($this->fields as $field) {
-
-				if (!($field instanceof Form\Utils\Implementable)) continue;
 
 				$block->block(('field_' . $field->name()), $field->block());
 			}

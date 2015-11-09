@@ -4,20 +4,20 @@ namespace Form\Field {
 
 	use Form\Utils;
 
-	class Checkbox extends Utils\Implementable {
+	class Checkbox extends Utils\Field {
 
 		# Constructor
 
-		public function __construct(Form $form, string $key, bool $value = null) {
+		public function __construct(Form $form, string $key) {
 
-			parent::__construct($form, $key);
-
-			$this->set($value);
+			self::init($form, $key);
 		}
 
 		# Set value
 
 		public function set(bool $value) {
+
+			$this->value = $value;
 
 			return (!($this->required && (false === $this->value)));
 		}

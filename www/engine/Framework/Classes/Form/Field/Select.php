@@ -2,11 +2,21 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Form\View;
+	use Form\Utils, Tag;
 
-	class Select extends Utils\Implementable {
+	class Select extends Utils\Field {
 
-		private $options = [], $search = false, $auto = false;
+		# Field data
+
+		private $options = [];
+
+		# Field configuration
+
+		protected $config = [
+
+			'search'            = false,
+			'auto'              = false
+		];
 
 		# Get options
 
@@ -32,20 +42,18 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct(Form $form, $string $key, string $value, array $options, string $default = null) {
+		public function __construct(Form $form, $string $key, array $options = [], string $default = null) {
 
-			parent::__construct($form, $key);
+			self::init($form, $key, $config);
 
 			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
-
-			$this->set($value);
 		}
 
 		# Set value
 
 		public function set(string $value) {
 
-			$key = array_search($this->value, ($range = array_keys($this->options)));
+			$key = array_search($value, ($range = array_keys($this->options)));
 
 			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
 
@@ -58,14 +66,14 @@ namespace Form\Field {
 
 		public function search(bool $value) {
 
-			$this->search = $value;
+			$this->config['search'] = $value;
 		}
 
 		# Set auto
 
 		public function auto(bool $value) {
 
-			$this->auto = $value;
+			$this->config['auto'] = $value;
 		}
 
 		# Get block
@@ -74,9 +82,9 @@ namespace Form\Field {
 
 			$tag = $this->getTag('select');
 
-			if ($this->search) $tag->set('data-search', 'search');
+			if ($this->config['search']) $tag->set('data-search', 'search');
 
-			if ($this->auto) $tag->set('data-auto', 'auto');
+			if ($this->config['auto']) $tag->set('data-auto', 'auto');
 
 			$tag->contents($this->getOptions());
 
