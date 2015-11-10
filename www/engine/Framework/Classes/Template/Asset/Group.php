@@ -1,8 +1,8 @@
 <?php
 
-namespace Template\Utils {
+namespace Template\Asset {
 
-	class Group implements Settable {
+	class Group implements Template\Utils\Settable {
 
 		private $blocks = [], $count = 0;
 

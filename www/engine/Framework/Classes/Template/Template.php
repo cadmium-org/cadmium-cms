@@ -24,28 +24,28 @@ namespace {
 
 		public static function block(string $contents = '', bool $parse = true) {
 
-			return new Template\Utils\Block($contents, $parse);
+			return new Template\Asset\Block($contents, $parse);
 		}
 
 		# Create group
 
 		public static function group() {
 
-			return new Template\Utils\Group();
+			return new Template\Asset\Group();
 		}
 
 		# Check if object is block
 
 		public static function isBlock($object) {
 
-			return ($object instanceof Template\Utils\Block);
+			return ($object instanceof Template\Asset\Block);
 		}
 
 		# Check if object is group
 
 		public static function isGroup($object) {
 
-			return ($object instanceof Template\Utils\Group);
+			return ($object instanceof Template\Asset\Group);
 		}
 
 		# Check if object is settable

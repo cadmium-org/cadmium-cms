@@ -1,10 +1,10 @@
 <?php
 
-namespace Template\Utils {
+namespace Template\Asset {
 
 	use Language, Template, Text;
 
-	class Block implements Settable {
+	class Block implements Template\Utils\Settable {
 
 		private $contents = '', $enabled = true;
 
@@ -40,7 +40,7 @@ namespace Template\Utils {
 
 				$this->contents = str_replace($matches[0][$key], ('{ for:' . $name . ' / }'), $this->contents);
 
-				$this->loops[$name] = new Loop(new Block($matches[2][$key]));
+				$this->loops[$name] = new Template\Utils\Loop(new Block($matches[2][$key]));
 			}
 		}
 
@@ -87,14 +87,14 @@ namespace Template\Utils {
 
 		public function __set(string $name, $value) {
 
-			if ($value instanceof Settable) $this->block($name, $value);
+			if ($value instanceof Template\Utils\Settable) $this->block($name, $value);
 
 			else if (is_array($value)) $this->loop($name, $value); else $this->set($name, $value);
 		}
 
 		# Set block
 
-		public function block(string $name, Settable $block = null) {
+		public function block(string $name, Template\Utils\Settable $block = null) {
 
 			if (!isset($this->blocks[$name])) return ((null === $block) ? new Block() : false);
 
@@ -109,9 +109,11 @@ namespace Template\Utils {
 
 		# Set loop
 
-		public function loop(string $name, array $range, string $separator = '') {
+		public function loop(string $name, array $range = null, string $separator = '') {
 
-			if (!isset($this->loops[$name])) return false;
+			if (!isset($this->loops[$name])) return ((null === $range) ? new Template\Utils\Loop() : false);
+
+			if (null === $range) return $this->loops[$name];
 
 			$this->loops[$name]->range($range); $this->loops[$name]->separator($separator);
 

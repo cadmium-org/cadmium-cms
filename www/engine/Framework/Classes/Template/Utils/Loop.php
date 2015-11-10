@@ -13,6 +13,13 @@ namespace Template\Utils {
 			$this->block = $block;
 		}
 
+		# Add item to range
+
+		public function add(array $item) {
+
+			$this->range[] = $item;
+		}
+
 		# Set range
 
 		public function range(array $range) {
