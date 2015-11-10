@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Tag;
+	use Form\Utils, Form\View;
 
 	class Select extends Utils\Field {
 
