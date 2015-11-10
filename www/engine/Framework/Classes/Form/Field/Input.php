@@ -63,7 +63,7 @@ namespace Form\Field {
 
 		public function __construct(Form $form, string $key, string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
-			self::init($form, $key, $config); $this->value = '';
+			self::init($form, $key, $config);
 
 			$this->type = $type; $this->maxlength = $maxlength;
 		}

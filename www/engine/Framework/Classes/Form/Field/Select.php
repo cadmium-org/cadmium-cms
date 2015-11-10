@@ -44,7 +44,7 @@ namespace Form\Field {
 
 		public function __construct(Form $form, $string $key, array $options = [], string $default = null) {
 
-			self::init($form, $key, $config); $this->value = '';
+			self::init($form, $key, $config);
 
 			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
 		}
