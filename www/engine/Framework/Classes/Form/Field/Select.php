@@ -22,18 +22,14 @@ namespace Form\Field {
 
 		private function getOptions() {
 
-			$options = [];
+			$block = new View\Options(); $options = $block->loop('options');
 
 			foreach ($this->options as $value => $text) {
 
 				$selected = (($this->value === $value) ? ' selected' : '');
 
-				$options[] = ['value' => $value, 'selected' => $selected, 'text' => $text];
+				$options->add(['value' => $value, 'selected' => $selected, 'text' => $text]);
 			}
-
-			$block = new View\Options();
-
-			$block->options = $options;
 
 			# ------------------------
 
