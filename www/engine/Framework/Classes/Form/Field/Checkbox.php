@@ -6,6 +6,10 @@ namespace Form\Field {
 
 	class Checkbox extends Utils\Field {
 
+		# Field default value
+
+		protected $value = false;
+
 		# Constructor
 
 		public function __construct(Form $form, string $key) {

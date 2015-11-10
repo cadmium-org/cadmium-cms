@@ -8,7 +8,7 @@ namespace Form\Utils {
 
 		private $form = null, $posted = false;
 
-		protected $key = '', $name = '', $value = null, $params = [];
+		protected $key = '', $name = '', $value = null;
 
 		protected $disabled = false, $required = false, $error = false;
 
@@ -37,7 +37,7 @@ namespace Form\Utils {
 
 		# Validate form
 
-		public function __construct(Form $form, string $key, array $config = []) {
+		public function init(Form $form, string $key, array $config = []) {
 
 			$this->form = $form;
 
@@ -52,7 +52,7 @@ namespace Form\Utils {
 
 			# Set field params
 
-			$params = array_merge(['disabled', 'required'], array_keys(isset($this->params) ? $this->params : []));
+			$params = array_merge(['disabled', 'required'], array_keys(isset($this->config) ? $this->config : []));
 
 			foreach ($params as $name) if (isset($config[$name])) call_user_method($name, $this, $config[$name]);
 		}

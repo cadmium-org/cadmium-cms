@@ -6,6 +6,10 @@ namespace Form\Field {
 
 	class Select extends Utils\Field {
 
+		# Field default value
+
+		protected $value = '';
+
 		# Field data
 
 		private $options = [];
@@ -40,7 +44,7 @@ namespace Form\Field {
 
 		public function __construct(Form $form, $string $key, array $options = [], string $default = null) {
 
-			self::init($form, $key, $config);
+			self::init($form, $key, $config); $this->value = '';
 
 			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
 		}

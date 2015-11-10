@@ -6,6 +6,10 @@ namespace Form\Field {
 
 	class Input extends Utils\Field {
 
+		# Field default value
+
+		protected $value = '';
+
 		# Field data
 
 		private $type = FORM_INPUT_TEXT, $maxlength = 0;
@@ -59,7 +63,7 @@ namespace Form\Field {
 
 		public function __construct(Form $form, string $key, string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
-			self::init($form, $key, $config);
+			self::init($form, $key, $config); $this->value = '';
 
 			$this->type = $type; $this->maxlength = $maxlength;
 		}
