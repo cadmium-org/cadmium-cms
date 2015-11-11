@@ -40,7 +40,7 @@ namespace Template\Asset {
 
 				$this->contents = str_replace($matches[0][$key], ('{ for:' . $name . ' / }'), $this->contents);
 
-				$this->loops[$name] = new Template\Utils\Loop(new Block($matches[2][$key]));
+				$this->loops[$name] = new Loop(new Block($matches[2][$key]));
 			}
 		}
 
@@ -111,7 +111,7 @@ namespace Template\Asset {
 
 		public function loop(string $name, array $range = null, string $separator = '') {
 
-			if (!isset($this->loops[$name])) return ((null === $range) ? new Template\Utils\Loop() : false);
+			if (!isset($this->loops[$name])) return ((null === $range) ? new Loop() : false);
 
 			if (null === $range) return $this->loops[$name];
 
