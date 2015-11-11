@@ -33,9 +33,9 @@ namespace {
 
 			# Load template
 
-			$file_name = (DIR_TEMPLATES . 'Exception.tpl'); $contents = false;
+			$file_name = (DIR_TEMPLATES . 'Exception.tpl');
 
-			if (@file_exists($file_name)) $contents = @file_get_contents($file_name);
+			$contents = ((@file_exists($file_name)) ? @file_get_contents($file_name) : false);
 
 			$output = ($contents ? str_replace('$message$', $message, $contents) : $message);
 
