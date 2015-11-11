@@ -46,6 +46,8 @@ namespace DB\Utils {
 				$output[] = trim($key . $concat . $value);
 			}
 
+			# ------------------------
+
 			return implode($separator, $output);
 		}
 
