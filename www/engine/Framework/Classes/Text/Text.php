@@ -47,7 +47,7 @@ namespace {
 
 		public static function length(string $string) {
 
-			return (function_exists('mb_strlen') ? mb_strlen($string) : strlen($string));
+			return call_user_func((function_exists('mb_strlen') ? 'mb_strlen' : 'strlen'), $string);
 		}
 
 		# Check if string length is between given values
@@ -63,7 +63,7 @@ namespace {
 
 			if (($maxlength < 1) || (self::length($string = trim($string)) <= $maxlength)) return $string;
 
-			$string = (function_exists('mb_substr') ? mb_substr($string, 0, $maxlength) : substr($string, 0, $maxlength));
+			$string = call_user_func((function_exists('mb_substr') ? 'mb_substr' : 'substr'), $string, 0, $maxlength);
 
 			# ------------------------
 
