@@ -4,11 +4,15 @@ namespace DB\Utils {
 
 	class Result {
 
-		private $result = null, $query = '', $time = 0, $rows = 0, $id = 0, $error = '', $errno = 0;
+		private $status = false, $result = null, $query = '', $time = 0;
+
+		private $rows = 0, $id = 0, $error = '', $errno = 0;
 
 		# Constructor
 
 		public function __construct(\mysqli $link, $result, string $query, int $time) {
+
+			$this->status       = (false !== $result);
 
 			$this->result       = $result;
 
