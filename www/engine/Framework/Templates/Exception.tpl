@@ -6,7 +6,7 @@
 
 		<meta charset="UTF-8" />
 
-		<title>Error</title>
+		<title>Exception</title>
 
 		<style type="text/css">
 
