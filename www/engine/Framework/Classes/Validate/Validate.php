@@ -18,6 +18,20 @@ namespace {
 			return filter_var($value, FILTER_VALIDATE_EMAIL);
 		}
 
+		# Validate regular expression
+
+		public static function regex(string $value) {
+
+			return filter_var($value, FILTER_VALIDATE_REGEXP);
+		}
+
+		# Validate mac address
+
+		public static function mac(string $value) {
+
+			return filter_var($value, FILTER_VALIDATE_MAC);
+		}
+
 		# Validate url
 
 		public static function url(string $value) {
