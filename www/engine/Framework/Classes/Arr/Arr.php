@@ -33,7 +33,7 @@ namespace {
 
 		# Sort array by subvalue
 
-		public static function subvalSort(array $array, $sub_key, bool $descending = false) {
+		public static function sortby(array $array, $sub_key, bool $descending = false) {
 
 			$column = array_column($array, $sub_key);
 
