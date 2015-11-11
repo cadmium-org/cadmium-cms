@@ -8,7 +8,7 @@ namespace {
 
 		# Add phrase to list
 
-		private static function addPhrase(string $name, string $value) {
+		private static function add(string $name, string $value) {
 
 			if (preg_match(REGEX_LANGUAGE_PHRASE_NAME, $name)) self::$phrases[$name] = $value;
 		}
@@ -19,7 +19,7 @@ namespace {
 
 			if (!is_array($phrases = Explorer::php($file_name))) return false;
 
-			foreach ($phrases as $name => $value) self::addPhrase($name, $value);
+			foreach ($phrases as $name => $value) self::add($name, $value);
 
 			# ------------------------
 
