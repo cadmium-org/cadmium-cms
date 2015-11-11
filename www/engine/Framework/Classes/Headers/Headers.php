@@ -6,6 +6,8 @@ namespace {
 
 		private static $cache_send = false;
 
+		# Status codes
+
 		private static $status_codes = [
 
 			STATUS_CODE_100     => '100 Continue',
@@ -66,6 +68,8 @@ namespace {
 			STATUS_CODE_509     => '509 Bandwidth Limit Exceeded',
 			STATUS_CODE_510     => '510 Not Extended'
 		];
+
+		# Content types
 
 		private static $content_types_text = [
 
