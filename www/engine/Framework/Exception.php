@@ -26,7 +26,7 @@ namespace Exception {
 
 		public function __construct(string $message = '') {
 
-			if ('' !== ($message = $message)) $this->message = $message;
+			if ('' !== $message) $this->message = $message;
 		}
 	}
 
