@@ -2,11 +2,11 @@
 
 namespace Exception {
 
-	# Error parent class
+	# Exception parent class
 
 	abstract class Exception extends \Exception {
 
-		protected $message = 'Default error exception thrown';
+		protected $message = 'Default exception thrown';
 
 		# Constructor
 
@@ -18,7 +18,7 @@ namespace Exception {
 		}
 	}
 
-	# General error
+	# General exception
 
 	class General extends Exception {
 
@@ -30,28 +30,28 @@ namespace Exception {
 		}
 	}
 
-	# Class load error
+	# Class load exception
 
 	class ClassLoad extends Exception  {
 
 		protected $message = 'Class \'$value$\' not found';
 	}
 
-	# Database connect error
+	# Database connect exception
 
 	class DBConnect extends Exception  {
 
 		protected $message = 'Unable to connect to database';
 	}
 
-	# Database select error
+	# Database select exception
 
 	class DBSelect extends Exception  {
 
 		protected $message = 'Unable to select database';
 	}
 
-	# Database charset error
+	# Database charset exception
 
 	class DBCharset extends Exception  {
 
