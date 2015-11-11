@@ -4,7 +4,7 @@ namespace {
 
 	class Tag {
 
-		private static $block_regular, $block_self_closing;
+		private static $block_regular = null, $block_self_closing = null;
 
 		private $name = '', $attributes = [], $contents = null;
 
