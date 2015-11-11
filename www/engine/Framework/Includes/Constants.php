@@ -18,7 +18,6 @@ define('FORM_INPUT_TEXT',                           'text');
 define('FORM_INPUT_CAPTCHA',                        'captcha');
 define('FORM_INPUT_PASSWORD',                       'password');
 define('FORM_INPUT_HIDDEN',                         'hidden');
-define('FORM_INPUT_TEXTAREA',                       'textarea');
 
 # Text pools
 

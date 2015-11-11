@@ -38,13 +38,6 @@ namespace Form\Field {
 			return $this->getTag('input', ['type' => 'password', 'value' => '']);
 		}
 
-		# Get textarea tag
-
-		private function getTextarea() {
-
-			return $this->getTag('textarea', [], $this->value);
-		}
-
 		# Get captcha input tag
 
 		private function getCaptcha() {
@@ -78,12 +71,12 @@ namespace Form\Field {
 
 			} else {
 
-				$multiline = ($this->type === FORM_INPUT_TEXTAREA);
-
-				$this->value = Text::input($value, $multiline, $this->maxlength);
+				$this->value = Text::input($value, false, $this->maxlength);
 
 				if ($this->config['translit']) $this->value = Text::translit($this->value, $this->maxlength);
 			}
+
+			# ------------------------
 
 			return (!($this->required && ('' === $this->value)));
 		}
@@ -127,8 +120,6 @@ namespace Form\Field {
 			} else {
 
 				if ($this->type === FORM_INPUT_PASSWORD) $tag = $this->getPassword();
-
-				else if ($this->type === FORM_INPUT_TEXTAREA) $tag = $this->getTextarea();
 
 				else if ($this->type === FORM_INPUT_CAPTCHA) $tag = $this->getCaptcha();
 

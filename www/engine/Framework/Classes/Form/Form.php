@@ -35,6 +35,15 @@ namespace {
 			return $this->addField($field);
 		}
 
+		# Add textarea field
+
+		public function textarea(string $key, string $value = '', int $maxlength = 0, int $rows = 0, array $config = []) {
+
+			($field = new Form\Field\Textarea($this, $key, $maxlength, $rows, $config))->set($value);
+
+			return $this->addField($field);
+		}
+
 		# Add select field
 
 		public function select(string $key, string $value = '', array $options = [], string $default = null, array $config = []) {
