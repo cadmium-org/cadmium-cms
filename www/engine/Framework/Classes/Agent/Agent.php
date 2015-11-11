@@ -6,13 +6,13 @@ namespace {
 
 		private static $mobiles = [], $robots = [];
 
-		# Process agents array
+		# Search agent in list
 
-		private static function processArray(array &$array) {
+		private static function search(array &$list) {
 
 			if (empty($agent = getenv('HTTP_USER_AGENT'))) return false;
 
-			foreach ($array as $item) if (false !== stripos($agent, $item)) return true;
+			foreach ($list as $item) if (false !== stripos($agent, $item)) return true;
 
 			# ------------------------
 
@@ -36,14 +36,14 @@ namespace {
 
 		public static function isMobile() {
 
-			return self::processArray(self::$mobiles);
+			return self::search(self::$mobiles);
 		}
 
 		# Check if user agent is robot
 
 		public static function isRobot() {
 
-			return self::processArray(self::$robots);
+			return self::search(self::$robots);
 		}
 	}
 }
