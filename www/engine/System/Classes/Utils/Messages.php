@@ -10,13 +10,13 @@ namespace System\Utils {
 
 		# Set message
 
-		private static function setMessage($type, $text, $header) {
+		private static function setMessage(string $type, string $text, string $header = null) {
 
-			if (isset(self::$messages[$type])) return;
+			if (('' === $text) || isset(self::$messages[$type])) return;
 
-			$text = strval($text); $header = strval($header);
+			self::$messages[$type] = ['text' => $text, 'header' => null];
 
-			self::$messages[$type] = ['text' => $text, 'header' => $header];
+			if ((null !== $header) && ('' !== $header)) self::$messages[$type]['header'] = $header;
 		}
 
 		# Init messages
@@ -28,7 +28,7 @@ namespace System\Utils {
 
 		# Set info message
 
-		public static function info($text = null, $header = null) {
+		public static function info(string $text = null, string $header = null) {
 
 			if (null === $text) return Arr::get(self::$messages, ['info']);
 
@@ -37,7 +37,7 @@ namespace System\Utils {
 
 		# Set warning message
 
-		public static function warning($text = null, $header = null) {
+		public static function warning(string $text = null, string $header = null) {
 
 			if (null === $text) return Arr::get(self::$messages, ['warning']);
 
@@ -46,7 +46,7 @@ namespace System\Utils {
 
 		# Set error message
 
-		public static function error($text = null, $header = null) {
+		public static function error(string $text = null, string $header = null) {
 
 			if (null === $text) return Arr::get(self::$messages, ['error']);
 
@@ -55,7 +55,7 @@ namespace System\Utils {
 
 		# Set success message
 
-		public static function success($text = null, $header = null) {
+		public static function success(string $text = null, string $header = null) {
 
 			if (null === $text) return Arr::get(self::$messages, ['success']);
 
@@ -74,7 +74,7 @@ namespace System\Utils {
 
 				$block->type = $type; $block->set('text', $message['text'], true); $header = $block->block('header');
 
-				if ('' !== $message['header']) $header->set('text', $message['header'], true); else $header->disable();
+				if (isset($message['header'])) $header->set('text', $message['header'], true); else $header->disable();
 			}
 
 			# ------------------------
