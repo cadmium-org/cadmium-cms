@@ -2,9 +2,9 @@
 
 namespace System\Utils\Lister {
 
-	use Lister;
+	use System\Utils\Lister;
 
-	abstract class Sex extends Lister\Translatable {
+	abstract class Sex extends Lister {
 
 		protected static $list = [
 

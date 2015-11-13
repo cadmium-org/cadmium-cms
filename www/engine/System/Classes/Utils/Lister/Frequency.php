@@ -2,9 +2,9 @@
 
 namespace System\Utils\Lister {
 
-	use Lister;
+	use System\Utils\Lister;
 
-	abstract class Frequency extends Lister\Translatable {
+	abstract class Frequency extends Lister {
 
 		protected static $list = [
 

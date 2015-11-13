@@ -2,9 +2,9 @@
 
 namespace System\Utils\Lister {
 
-	use Lister;
+	use System\Utils\Lister;
 
-	abstract class Visibility extends Lister\Translatable {
+	abstract class Visibility extends Lister {
 
 		protected static $list = [
 
