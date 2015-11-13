@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use Explorer;
+	use Explorer, Url;
 
 	class Map {
 
@@ -25,13 +25,13 @@ namespace System\Utils {
 			}
 		}
 
-		# Get handler by path
+		# Get handler by url
 
-		public function handler(array $path) {
+		public function handler(Url $url) {
 
 			foreach ($this->map as $item) {
 
-				if (false !== ($handler = $item->handler($path))) return $handler;
+				if (false !== ($handler = $item->handler($url->path()))) return $handler;
 			}
 
 			# ------------------------

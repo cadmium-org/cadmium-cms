@@ -8,24 +8,18 @@ namespace System\Utils\Map {
 
 		# Parse string
 
-		private function parse($string, $regexp) {
+		private function parse(string $string, string $regex) {
 
-			if (!preg_match('/^\/(.*)$/', $string, $matches)) return false;
+			if (!preg_match('/^\//', $string, $matches)) return false;
 
-			$items = preg_split('/\//', $matches[1], 0, PREG_SPLIT_NO_EMPTY); $parsed = [];
+			$items = preg_split('/\//', $matches[1], 0, PREG_SPLIT_NO_EMPTY);
 
-			foreach ($items as $name) if (preg_match($regexp, $name)) $parsed[] = $name; else return false;
-
-			# ------------------------
-
-			return $parsed;
+			foreach ($items as $name) if (preg_match($regex, $name)) yield $name; else return false;
 		}
 
 		# Constructor
 
-		public function __construct($path, $handler) {
-
-			$path = strval($path); $handler = strval($handler);
+		public function __construct(string $path, string $handler) {
 
 			if (false !== ($path = $this->parse($path, REGEX_MAP_PATH_ITEM_NAME))) $this->path = $path;
 
@@ -38,11 +32,7 @@ namespace System\Utils\Map {
 
 		public function handler(array $path) {
 
-			if (!$this->parsed) return false;
-
-			if ($path !== $this->path) return false;
-
-			# ------------------------
+			if (!$this->parsed || ($path !== $this->path)) return false;
 
 			return implode('\\', $this->handler);
 		}
