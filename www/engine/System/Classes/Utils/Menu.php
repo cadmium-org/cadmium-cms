@@ -8,9 +8,16 @@ namespace System\Utils {
 
 		private $items = [], $menu = [];
 
+		# Add item
+
+		private function addItem(int $id, int $parent_id, string $link, string $text, int $target) {
+
+			$this->items[$id] = ['parent_id' => $parent_id, 'link' => $link, 'text' => $text, 'target' => $target];
+		}
+
 		# Parse item
 
-		private function parseItem($id) {
+		private function parseItem(int $id) {
 
 			if (isset($this->items[$id]['children'])) {
 
@@ -33,6 +40,8 @@ namespace System\Utils {
 				$item->text = $this->items[$id]['text'];
 			}
 
+			# ------------------------
+
 			return $item;
 		}
 
@@ -40,22 +49,20 @@ namespace System\Utils {
 
 		public function __construct() {
 
+			# Process selection
+
 			$query = ("SELECT men.id, men.parent_id, men.link, men.text, men.target ") .
 
 					 ("FROM " . TABLE_MENU . " men ORDER BY men.parent_id ASC, men.position ASC, men.id ASC");
 
 			if (!(DB::send($query) && DB::last()->status)) return;
 
-			while (null !== ($item = DB::last()->row())) $this->items[intval($item['id'])] = [
+			# Process results
 
-				'parent_id'     => intval($item['parent_id']),
+			while (null !== ($item = DB::last()->row())) {
 
-				'link'          => strval($item['link']),
-
-				'text'          => strval($item['text']),
-
-				'target'        => intval($item['target'])
-			];
+				$this->addItem($item['id'], $item['parent_id'], $item['link'], $item['text'], $item['target']);
+			}
 
 			foreach ($this->items as $id => $item) if (0 === $item['parent_id']) $this->menu[] = $id;
 
