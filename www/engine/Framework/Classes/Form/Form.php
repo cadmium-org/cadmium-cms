@@ -4,7 +4,7 @@ namespace {
 
 	class Form {
 
-		private $name = '', $posted = false, $errors = false, $fields = [];
+		private $name = '', $posted = false, $errors = [], $fields = [];
 
 		# Add field to form
 
@@ -86,13 +86,13 @@ namespace {
 
 			if ($this->posted || !$this->check()) return false;
 
-			$errors = false; $post = [];
+			$errors = []; $post = [];
 
 			foreach ($this->fields as $field) {
 
 				$field->post(); $post[$field->key()] = $field->value();
 
-				if ($field->error()) $errors = true;
+				if (false !== $field->error()) $errors[] = ['key' => $field->key(), 'error' = $field->error()];
 			}
 
 			$this->posted = true; $this->errors = $errors;

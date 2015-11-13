@@ -10,7 +10,7 @@ namespace Form\Utils {
 
 		protected $key = '', $name = '', $value = null;
 
-		protected $disabled = false, $required = false, $error = false;
+		protected $disabled = false, $required = false, $error = null;
 
 		# Get tag
 
@@ -63,7 +63,7 @@ namespace Form\Utils {
 
 			if ($this->posted || $this->disabled || ('' === $this->key)) return false;
 
-			if (!$this->set(Request::post($this->name))) $this->error = true;
+			$this->error = ((true !== ($result = $this->set(Request::post($this->name)))) ? $result : null);
 
 			# ------------------------
 
@@ -95,7 +95,7 @@ namespace Form\Utils {
 
 		public function error() {
 
-			return $this->error;
+			return ((null !== $this->error) ? $this->error : false);
 		}
 
 		# Set/check if field is disabled

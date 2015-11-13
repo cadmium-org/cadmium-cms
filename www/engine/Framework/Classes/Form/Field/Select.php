@@ -57,9 +57,13 @@ namespace Form\Field {
 
 			$this->value = ((false !== $key) ? $range[$key] : key($this->options));
 
+			# Check for errors
+
+			if ($this->required && empty($this->value)) return 'required';
+
 			# ------------------------
 
-			return (!($this->required && empty($this->value)));
+			return true;
 		}
 
 		# Set search

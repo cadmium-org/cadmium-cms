@@ -76,9 +76,13 @@ namespace Form\Field {
 				if ($this->config['translit']) $this->value = Text::translit($this->value, $this->maxlength);
 			}
 
+			# Check for errors
+
+			if ($this->required && ('' === $this->value)) return 'required';
+
 			# ------------------------
 
-			return (!($this->required && ('' === $this->value)));
+			return true;
 		}
 
 		# Set placeholder

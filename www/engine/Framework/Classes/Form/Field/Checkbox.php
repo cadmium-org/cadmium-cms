@@ -23,7 +23,13 @@ namespace Form\Field {
 
 			$this->value = $value;
 
-			return (!($this->required && (false === $this->value)));
+			# Check for errors
+
+			if ($this->required && (false === $this->value)) return 'required';
+
+			# ------------------------
+
+			return true;
 		}
 
 		# Get block
