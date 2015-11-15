@@ -2,7 +2,7 @@
 
 namespace System\Utils\Tools {
 
-	use System\Utils\Lister, Date, Headers, Number, Validate;
+	use System\Utils\Lister, Date, Number, Validate, XML;
 
 	class Sitemap {
 
@@ -12,50 +12,34 @@ namespace System\Utils\Tools {
 
 		public function __construct() {
 
-			$version = '1.0'; $encoding = CONFIG_DEFAULT_CHARSET;
-
-			$this->sitemap = simplexml_load_string (
-
-				'<?xml version="' . $version .'" encoding="' . $encoding . '" ?>' .
-
-				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />'
-			);
+			$this->sitemap = XML::create();
 		}
 
 		# Add item
 
-		public function add($loc, $lastmod = null, $changefreq = null, $priority = null) {
+		public function add(string $loc, string $lastmod = null, string $changefreq = null, float $priority = null) {
 
 			if (false === ($loc = Validate::url($loc))) return false;
 
-			$lastmod = Date::validate($lastmod, DATE_FORMAT_W3C);
-
-			$changefreq = Lister\Frequency::validate($changefreq);
-
-			$priority = ((null !== $priority) ? Number::formatFloat($priority, 0, 1, 1) : false);
-
-			# Append data
-
 			$url = $this->sitemap->addChild('url'); $url->addChild('loc', $loc);
 
-			if (false !== $lastmod) $url->addChild('lastmod', $lastmod);
+			# Set last modified
 
-			if (false !== $changefreq) $url->addChild('changefreq', $changefreq);
+			if ((null !== $lastmod) && (false !== ($lastmod = Date::validate($lastmod, DATE_FORMAT_W3C)))) {
 
-			if (false !== $priority) $url->addChild('priority', $priority);
+				$url->addChild('lastmod', $lastmod);
+			}
 
-			# ------------------------
+			# Set change frequency
 
-			return true;
-		}
+			if ((null !== $changefreq) && (false !== ($changefreq = Lister\Frequency::validate($changefreq)))) {
 
-		# Output XML data
+				$url->addChild('changefreq', $changefreq);
+			}
 
-		public function output() {
+			# Set priority
 
-			Headers::nocache(); Headers::content(MIME_TYPE_XML);
-
-			echo $this->sitemap->asXML();
+			if (null !== priority) $url->addChild('priority', Number::formatFloat($priority, 0, 1, 1));
 
 			# ------------------------
 
