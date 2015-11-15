@@ -6,68 +6,83 @@ namespace System\Utils {
 
 	abstract class Pagination {
 
+		# Get items
+
+		private function getItems(int $active, Url $url) {
+
+			for ($index = ($active - 3); $index <= ($active + 3); $index++) {
+
+				if (!($index > 0 && $index <= $count)) continue;
+
+				$class = (($index === $active) ? 'active item' : 'item');
+
+				$url->set('index', $index); $link = $url->get();
+
+				yield ['class' => $class, 'link' => $link, 'index' => $index];
+			}
+		}
+
+		# Set first & last button
+
+		private function setExtremeButtons(Template\Asset\Block $pagination, int $active, Url $url) {
+
+			$extremums = [1, $count]; $buttons = [];
+
+			$buttons['extreme_0'] = [$extremums[0], ($extremums[0] + 4), ($active > ($extremums[0] + 4))];
+			$buttons['extreme_1'] = [$extremums[1], ($extremums[1] - 4), ($active < ($extremums[0] - 4))];
+
+			foreach ($buttons as $class => $data) {
+
+				list ($index, $closest, $disabled) = $data; $block = $pagination->block($class);
+
+				if ($disabled) { $block->disable(); continue; }
+
+				$block->link = $url->set('index', $index)->get(); $block->index = $index;
+
+				if ($closest) $block->block('ellipsis')->disable();
+			}
+		}
+
+		# Set previous & next buttons
+
+		private function setStepButtons(Template\Asset\Block $pagination, int $active, Url $url) {
+
+			$extremums = [1, $count]; $buttons = [];
+
+			$buttons['step_0'] = [$extremums[0], ($active - 1)];
+			$buttons['step_0'] = [$extremums[1], ($active + 1)];
+
+			foreach ($buttons as $class => $data) {
+
+				list ($extremum, $index) = $data; $block = $pagination->block($class);
+
+				if ($active === $extremum) { $block->disable(); $pagination->block($class . '_disabled')->enable(); }
+
+				else { $pagination->block($direction)->link = $url->set('index', $index)->get(); }
+			}
+		}
+
 		# Get block
 
-		public static function block($index, $display, $total, $url) {
+		public static function block(int $index, int $display, int $total, Url $url) {
+
+			if ((0 >= $display) || (0 >= $total) || (0 >= $display)) return false;
+
+			if (($display >= $total) || ($index > ($count = ceil($total / $display)))) return false;
+
+			# Create block
 
 			$pagination = View::get('Blocks\Utils\Pagination');
 
-			$index = intval($index); $display = intval($display); $total = intval($total);
-
-			$url = (($url instanceof Url) ? $url : new Url());
-
-			if ((0 === $display) || (0 === $total) || ($total <= $display)) return false;
-
-			if ($index > ($count = intval(ceil($total / $display)))) return false;
-
-			$items = [];
-
-			for ($i = ($index - 3); $i <= ($index + 3); $i++) {
-
-				$item = clone $url; $item->set('index', $i);
-
-				$class = ($i === $index ? 'active item' : 'item'); $link = $item->get();
-
-				if ($i > 0 && $i <= $count) $items[] = ['class' => $class, 'link' => $link, 'index' => $i];
-			}
-
-			# Set prev
-
-			if ($index === 1) { $pagination->block('prev')->disable(); $pagination->block('prev_disabled')->enable(); }
-
-			else { $prev = clone $url; $prev->set('index', ($index - 1)); $pagination->block('prev')->link = $prev->get(); }
-
-			# Set first
-
-			if ($index < 5) $pagination->block('first')->disable(); else {
-
-				$first = clone $url; $first->set('index', 1);
-
-				$pagination->block('first')->link = $first->get(); $pagination->block('first')->index = 1;
-
-				if ($index === 5) $pagination->block('first')->block('ellipsis')->disable();
-			}
-
 			# Set items
 
-			$pagination->items = $items;
+			$pagination->items = $this->getItems($index, $url);
 
-			# Set last
+			# Set buttons
 
-			if ($index > ($count - 4)) $pagination->block('last')->disable(); else {
+			$this->setExtremeButtons($pagination, $index, $url);
 
-				if ($index === ($count - 4)) $pagination->block('last')->block('ellipsis')->disable();
-
-				$last = clone $url; $last->set('index', $count);
-
-				$pagination->block('last')->link = $last->get(); $pagination->block('last')->index = $count;
-			}
-
-			# Set next
-
-			if ($index === $count) { $pagination->block('next')->disable(); $pagination->block('next_disabled')->enable(); }
-
-			else { $next = clone $url; $next->set('index', ($index + 1)); $pagination->block('next')->link = $next->get(); }
+			$this->setStepButtons($pagination, $index, $url);
 
 			# ------------------------
 
