@@ -21,9 +21,7 @@ namespace System\Utils {
 
 		# Check captcha
 
-		public static function checkCaptcha($captcha) {
-
-			$captcha = strval($captcha);
+		public static function checkCaptcha(string $captcha) {
 
 			return (0 === strcasecmp(Session::get('captcha'), $captcha));
 		}
