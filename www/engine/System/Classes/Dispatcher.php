@@ -2,7 +2,7 @@
 
 namespace System {
 
-	use System, System\Utils\Map, DB, Request, Url;
+	use System, System\Utils\Map, DB, Explorer, Request, Url;
 
 	class Dispatcher extends System {
 
@@ -14,6 +14,10 @@ namespace System {
 
 			if (!$this->installed) Request::redirect(INSTALL_PATH . '/install.php');
 
+			# Try to remove install file
+
+			// Explorer::removeFile(DIR_WWW . 'install.php');
+
 			# Connect to database
 
 			DB::connect (
@@ -23,13 +27,9 @@ namespace System {
 				$this->database['password'], $this->database['name']
 			);
 
-			# Create url
+			# Get handler by requested url
 
-			$url = new Url(Request::get('url'));
-
-			# Create map
-
-			$map = new Map(); $handler = $map->handler($url->path());
+			$handler = (new Map())->handler($url = new Url(Request::get('url')));
 
 			# Determine handler class
 
@@ -37,7 +37,7 @@ namespace System {
 
 			# ------------------------
 
-			new $class($url->path());
+			new $class($url);
 		}
 	}
 }
