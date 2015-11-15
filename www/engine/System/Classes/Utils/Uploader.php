@@ -2,6 +2,8 @@
 
 namespace {
 
+	use Explorer;
+
 	abstract class Uploader {
 
 		# Translate error code
