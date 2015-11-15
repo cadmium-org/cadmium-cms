@@ -104,3 +104,7 @@ define('CONFIG_DATABASE_SERVER_MAX_LENGTH',         128);
 define('CONFIG_DATABASE_USER_MAX_LENGTH',           64);
 define('CONFIG_DATABASE_PASSWORD_MAX_LENGTH',       64);
 define('CONFIG_DATABASE_NAME_MAX_LENGTH',           64);
+
+# Other
+
+define('CONFIG_UPLOADS_MAX_SIZE',                   107374182400);  # 100 MB
