@@ -96,7 +96,7 @@ namespace Template\Asset {
 
 		public function block(string $name, Template\Utils\Settable $block = null) {
 
-			if (!isset($this->blocks[$name])) return ((null === $block) ? new Block() : false);
+			if (!isset($this->blocks[$name])) return ((null === $block) ? new Block() : $this);
 
 			if (null === $block) return $this->blocks[$name];
 
@@ -104,14 +104,14 @@ namespace Template\Asset {
 
 			# ------------------------
 
-			return true;
+			return $this;
 		}
 
 		# Set loop
 
 		public function loop(string $name, array $range = null, string $separator = '') {
 
-			if (!isset($this->loops[$name])) return ((null === $range) ? new Loop() : false);
+			if (!isset($this->loops[$name])) return ((null === $range) ? new Loop() : $this);
 
 			if (null === $range) return $this->loops[$name];
 
@@ -119,20 +119,21 @@ namespace Template\Asset {
 
 			# ------------------------
 
-			return true;
+			return $this;
 		}
 
 		# Set variable
 
 		public function set(string $name, string $value, bool $raw = false, int $maxlength = 0) {
 
-			if (!isset($this->variables[$name])) return false;
+			if (isset($this->variables[$name])) {
 
-			$this->variables[$name] = (!$raw ? Text::output($value, $maxlength) : $value);
+				$this->variables[$name] = (!$raw ? Text::output($value, $maxlength) : $value);
+			}
 
 			# ------------------------
 
-			return true;
+			return $this;
 		}
 
 		# Get contents
@@ -189,6 +190,8 @@ namespace Template\Asset {
 		public function disable() {
 
 			$this->enabled = false;
+
+			return $this;
 		}
 
 		# Enable block
@@ -196,6 +199,8 @@ namespace Template\Asset {
 		public function enable() {
 
 			$this->enabled = true;
+
+			return $this;
 		}
 
 		# Check if enabled

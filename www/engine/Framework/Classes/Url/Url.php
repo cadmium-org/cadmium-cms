@@ -43,6 +43,8 @@ namespace {
 		public function set(string $name, string $value) {
 
 			$this->query[$name] = $value;
+
+			return $this;
 		}
 
 		# Get url as string

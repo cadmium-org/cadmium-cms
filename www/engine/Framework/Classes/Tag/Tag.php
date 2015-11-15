@@ -33,6 +33,8 @@ namespace {
 		public function set(string $name, string $value) {
 
 			$this->attributes[$name] = $value;
+
+			return $this;
 		}
 
 		# Set contents
@@ -44,6 +46,10 @@ namespace {
 			else if (Template::isSettable($contents)) $this->contents = $contents;
 
 			else $this->contents = Template::block(Text::output($contents), false);
+
+			# ------------------------
+
+			return $this;
 		}
 
 		# Get block
