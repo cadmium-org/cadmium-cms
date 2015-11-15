@@ -8,9 +8,23 @@ namespace {
 
 		protected $database = ['server' => '', 'user' => '', 'password' => '', 'name' => ''], $time = 0;
 
+		# Set database value
+
+		private function setDatabase(string $key, $string $value) {
+
+			$this->database[$key] = $value;
+		}
+
+		# Set time
+
+		private function setTime(int $value) {
+
+			$this->time = $value;
+		}
+
 		# Parse system file
 
-		private function parse($data) {
+		private function parse(array $data) {
 
 			$this->installed = true;
 
@@ -18,12 +32,12 @@ namespace {
 
 			foreach (array_keys($this->database) as $key) {
 
-				$this->database[$key] = strval(Arr::get($data, ['database', $key]));
+				$this->setDatabase($key, Arr::get($data, ['database', $key]));
 			}
 
 			# Parse installation details
 
-			$this->time = intval(Arr::get($data, ['time']));
+			$this->setTime(Arr::get($data, ['time']));
 		}
 
 		# Constructor
