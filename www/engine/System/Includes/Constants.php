@@ -5,7 +5,7 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.1.4');
+define('CADMIUM_VERSION',                           '0.2.0');
 define('CADMIUM_COPY',                              '2015');
 
 # External
@@ -26,7 +26,6 @@ define('ENTITY_TYPE_MENUITEM',                      'Menuitem');
 define('ENTITY_TYPE_USER',                          'User');
 define('ENTITY_TYPE_USER_SECRET',                   'User\Secret');
 define('ENTITY_TYPE_USER_SESSION',                  'User\Session');
-
 
 # Access
 
