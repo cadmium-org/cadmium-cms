@@ -2,17 +2,17 @@
 
 namespace System\Frames {
 
-	use System\Modules\Settings, Session;
+	use System\Modules\Settings, Session, Url;
 
 	abstract class Main {
 
-		protected $path = [];
+		protected $url = null;
 
 		# Constructor
 
-		public function __construct(array $path = []) {
+		public function __construct(Url $url = null) {
 
-			$this->path = $path;
+			$this->url = $url;
 
 			# Start session
 

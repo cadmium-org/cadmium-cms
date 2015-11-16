@@ -12,9 +12,9 @@ namespace System\Frames\Site {
 
 		const SECTION = SECTION_SITE;
 
-		# Define phrases list (change to constant in PHP 5.6+)
+		# Define phrases list
 
-		protected static $phrases = ['Common', 'Lister', 'Mail', 'Site', 'User'];
+		const PHRASES = ['Common', 'Lister', 'Mail', 'Site', 'User'];
 
 		# Section settings
 
@@ -68,18 +68,17 @@ namespace System\Frames\Site {
 
 			$layout->contents = $contents;
 
-			# Set footer
+			# Set copyright
+
+			$layout->copyright = Date::year();
 
 			$layout->system_url = Settings::get('system_url');
 
 			$layout->site_title = Settings::get('site_title');
 
-			$layout->copyright = Date::year();
-
-			# Set CMS info
+			# Set powered by
 
 			$layout->cadmium_home       = CADMIUM_HOME;
-			$layout->cadmium_copy       = CADMIUM_COPY;
 			$layout->cadmium_name       = CADMIUM_NAME;
 			$layout->cadmium_version    = CADMIUM_VERSION;
 
@@ -100,10 +99,6 @@ namespace System\Frames\Site {
 
 			$page->language = Extend\Languages::data('iso');
 
-			# Set title
-
-			$page->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . Settings::get('site_title'));
-
 			# Set SEO data
 
 			$page->description = ('' !== $this->description) ? $this->description : Settings::get('site_description');
@@ -111,6 +106,10 @@ namespace System\Frames\Site {
 			$page->keywords = ('' !== $this->keywords) ? $this->keywords : Settings::get('site_keywords');
 
 			$page->robots = (($this->robots_index ? 'INDEX' : 'NOINDEX') . ',' . ($this->robots_follow ? 'FOLLOW' : 'NOFOLLOW'));
+
+			# Set title
+
+			$page->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . Settings::get('site_title'));
 
 			# Set canonical
 
@@ -147,6 +146,8 @@ namespace System\Frames\Site {
 
 				else if (!Auth::check()) Request::redirect(INSTALL_PATH . '/profile/login');
 			}
+
+			# ------------------------
 
 			return (Template::isSettable($result = $this->handle()) ? $this->displayPage($result) : Status::error404());
 		}

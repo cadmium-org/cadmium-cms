@@ -12,9 +12,9 @@ namespace System\Frames\Admin {
 
 		const SECTION = SECTION_ADMIN;
 
-		# Define phrases list (change to constant in PHP 5.6+)
+		# Define phrases list
 
-		protected static $phrases = ['Admin', 'Ajax', 'Common', 'Install', 'Lister', 'Mail', 'Menuitem', 'Page', 'User'];
+		const PHRASES = ['Admin', 'Ajax', 'Common', 'Install', 'Lister', 'Mail', 'Menuitem', 'Page', 'User'];
 
 		# Section settings
 
@@ -22,7 +22,7 @@ namespace System\Frames\Admin {
 
 		# Display form
 
-		private function displayForm(Template\Utils\Settable $contents, $status) {
+		private function displayForm(Template\Utils\Settable $contents, string $status) {
 
 			$form = View::get('Main\Form');
 
@@ -38,17 +38,23 @@ namespace System\Frames\Admin {
 
 			$form->layout = ($layout = View::get('Layouts\Form'));
 
-			# Set messages
-
-			$layout->messages = Messages::block();
-
 			# Set title
 
 			$layout->title = $this->title;
 
+			# Set messages
+
+			$layout->messages = Messages::block();
+
 			# Set contents
 
 			$layout->contents = $contents;
+
+			# Set report
+
+			$layout->block('report')->script_time = Debug::time();
+
+			$layout->block('report')->db_time = DB::time();
 
 			# ------------------------
 
@@ -97,7 +103,7 @@ namespace System\Frames\Admin {
 
 			$layout->contents = $contents;
 
-			# Set footer
+			# Set copyright
 
 			$layout->cadmium_home       = CADMIUM_HOME;
 			$layout->cadmium_copy       = CADMIUM_COPY;
@@ -135,7 +141,7 @@ namespace System\Frames\Admin {
 
 			# Check for restricted access
 
-			if (('' === CONFIG_ADMIN_IP) || (false !== stripos(REQUEST_CLIENT_IP, CONFIG_ADMIN_IP))) {
+			if (('' === CONFIG_ADMIN_IP) || in_array(REQUEST_CLIENT_IP, preg_split('/ +/', CONFIG_ADMIN_IP))) {
 
 				# Handle install component request
 
@@ -168,6 +174,8 @@ namespace System\Frames\Admin {
 					if (Ajax::isResponse($result)) return Ajax::output($result);
 				}
 			}
+
+			# ------------------------
 
 			return Status::error404();
 		}

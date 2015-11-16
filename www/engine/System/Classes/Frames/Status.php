@@ -4,11 +4,11 @@ namespace System\Frames {
 
 	use System\Modules\Extend, System\Modules\Settings, System\Utils\View, Date, Language, Template;
 
-	abstract class Status  {
+	abstract class Status {
 
 		# Display status screen
 
-		private static function display($view, $title, $code) {
+		private static function display(string $view, string $title, string $code) {
 
 			$status = View::get($view);
 

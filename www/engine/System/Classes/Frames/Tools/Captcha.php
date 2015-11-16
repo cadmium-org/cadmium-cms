@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Frames\Status, System\Utils\Tools;
+	use System, System\Frames\Status, System\Utils\Tools, Image;
 
 	abstract class Captcha extends System\Frames\Main {
 
@@ -16,7 +16,7 @@ namespace System\Frames\Tools {
 
 			# ------------------------
 
-			$captcha->output();
+			Image::outputPNG($captcha->image());
 		}
 
 		# Handler interface

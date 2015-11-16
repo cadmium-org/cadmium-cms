@@ -10,9 +10,9 @@ namespace System\Frames {
 
 		const SECTION = '';
 
-		# Phrases list interface (change to constant in PHP 5.6+)
+		# Phrases list interface
 
-		protected static $phrases = [];
+		const PHRASES = [];
 
 		# Constructor
 
@@ -32,7 +32,7 @@ namespace System\Frames {
 
 			$languages = [Extend\Languages::pathPrimary(), Extend\Languages::path()];
 
-			foreach (array_unique($languages) as $path) foreach (static::$phrases as $name) {
+			foreach (array_unique($languages) as $path) foreach (static::PHRASES as $name) {
 
 				Language::load($path . 'Phrases/' . $name . '.php');
 			}

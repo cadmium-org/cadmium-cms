@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Frames\Status, System\Utils\Tools;
+	use System, System\Frames\Status, System\Utils\Tools, XML;
 
 	abstract class Sitemap extends System\Frames\Main {
 
@@ -16,7 +16,7 @@ namespace System\Frames\Tools {
 
 			# ------------------------
 
-			$sitemap->output();
+			XML::output($sitemap);
 		}
 
 		# Handler interface
