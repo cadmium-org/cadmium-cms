@@ -6,23 +6,32 @@ namespace System\Handlers\Site {
 
 	class Page extends System\Frames\Site\Section {
 
-		private $page = false;
+		private $path = [], $page = false;
 
 		# Get path
 
 		private function getPath() {
 
-			$path = []; $id = 0; $link = INSTALL_PATH;
+			$parent_id = 0; $link = INSTALL_PATH;
 
-			foreach ($this->path as $name) {
+			# Validate page data
 
-				# Select item
+			$validate_page = function(int $id, string $name, string $title) use ($parent_id, $link) {
+
+				$parent_id = $id; $link .= ('/' . $name);
+
+				return ['id' => $id, 'link' => $link, 'title' => $title];
+			}
+
+			# Process url path items
+
+			foreach ($this->url->path() as $name) {
 
 				$selection = ['id', 'name', 'title'];
 
 				$access = (Auth::check() ? Auth::user()->rank : RANK_GUEST);
 
-				$condition = ("parent_id = " . $id . " AND visibility = " . VISIBILITY_PUBLISHED . " ") .
+				$condition = ("parent_id = " . $parent_id . " AND visibility = " . VISIBILITY_PUBLISHED . " ") .
 
 				             ("AND access <= " . $access . " AND name = '" . addslashes($name) . "'");
 
@@ -30,16 +39,8 @@ namespace System\Handlers\Site {
 
 				$page = DB::last()->row();
 
-				# Validate item
-
-				$id = intval($page['id']); $link .= ('/' . strval($page['name'])); $title = strval($page['title']);
-
-				$path[] = ['id' => $id, 'link' => $link, 'title' => $title];
+				yield $validate_page($page['id'], $page['name'], $page['title']);
 			}
-
-			# ------------------------
-
-			return $path;
 		}
 
 		# Get contents
@@ -50,9 +51,9 @@ namespace System\Handlers\Site {
 
 			# Set breadcrumbs
 
-			if (count($this->path) > 1) $contents->block('breadcrumbs')->path = $this->path;
+			if (count($this->path) <= 1) $contents->block('breadcrumbs')->disable();
 
-			else $contents->block('breadcrumbs')->disable();
+			else $contents->block('breadcrumbs')->path = $this->path;
 
 			# Set contents
 
@@ -67,7 +68,9 @@ namespace System\Handlers\Site {
 
 		protected function handle() {
 
-			if (false !== ($path = $this->getPath())) $this->path = $path; else return false;
+			if ((null === $this->url) || (false === ($path = $this->getPath()))) return false;
+
+			$this->path = $path;
 
 			# Create page
 
