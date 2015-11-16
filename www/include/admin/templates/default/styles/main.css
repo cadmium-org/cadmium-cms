@@ -3,6 +3,12 @@
 
 @charset "UTF-8";
 
+/* Condensed grid */
+
+.condensed.grid { padding:3rem 0 !important; }
+
+.condensed.grid .column { max-width:400px; }
+
 /* Wrapper */
 
 .wrapper { margin:0 !important; padding-top:55px !important; }

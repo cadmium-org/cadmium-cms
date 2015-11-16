@@ -49,14 +49,6 @@
 
 		</script>
 
-		<style type="text/css">
-
-			body > .grid { padding:3em 0 !important; }
-
-			.column { max-width:400px; }
-
-		</style>
-
 	</head>
 
 	<body>
