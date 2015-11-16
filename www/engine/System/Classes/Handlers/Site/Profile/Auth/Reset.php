@@ -12,11 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_RESET');
 
-			$reset = new Modules\Auth\Handler\Reset();
-
-			# ------------------------
-
-			return $reset->handle();
+			return (new Modules\Auth\Handler\Reset())->handle();
 		}
 	}
 }

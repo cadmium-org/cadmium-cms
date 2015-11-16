@@ -12,11 +12,7 @@ namespace System\Handlers\Admin {
 
 			$this->title = Language::get('TITLE_DASHBOARD');
 
-			$dashboard = new Modules\Informer\Handler\Dashboard();
-
-			# ------------------------
-
-			return $dashboard->handle();
+			return (new Modules\Informer\Handler\Dashboard())->handle();
 		}
 	}
 }

@@ -12,11 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_RECOVER');
 
-			$recover = new Modules\Auth\Handler\Recover();
-
-			# ------------------------
-
-			return $recover->handle();
+			return (new Modules\Auth\Handler\Recover())->handle();
 		}
 	}
 }

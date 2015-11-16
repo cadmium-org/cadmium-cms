@@ -12,11 +12,7 @@ namespace System\Handlers\Admin\Content {
 
 			$this->title = Language::get('TITLE_CONTENT_FILEMANAGER');
 
-			$filemanager = new Modules\Filemanager\Handler\Uploads();
-
-			# ------------------------
-
-			return $filemanager->handle();
+			return (new Modules\Filemanager\Handler\Uploads())->handle();
 		}
 	}
 }

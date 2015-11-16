@@ -12,11 +12,7 @@ namespace System\Handlers\Admin\Content\Pages {
 
 			$this->title = Language::get('TITLE_CONTENT_PAGES_CREATE');
 
-			$page = new Modules\Entitizer\Handler\Page();
-
-			# ------------------------
-
-			return $page->handle(true);
+			return (new Modules\Entitizer\Handler\Page())->handle(true);
 		}
 	}
 }

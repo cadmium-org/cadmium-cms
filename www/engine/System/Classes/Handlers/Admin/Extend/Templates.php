@@ -12,11 +12,7 @@ namespace System\Handlers\Admin\Extend {
 
 			$this->title = Language::get('TITLE_EXTEND_TEMPLATES');
 
-			$templates = new Modules\Extend\Handler\Templates();
-
-			# ------------------------
-
-			return $templates->handle();
+			return (new Modules\Extend\Handler\Templates())->handle();
 		}
 	}
 }

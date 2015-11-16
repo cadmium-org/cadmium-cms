@@ -12,11 +12,7 @@ namespace System\Handlers\Admin\Install {
 
 			$this->title = Language::get('TITLE_INSTALL_DATABASE');
 
-			$database = new Modules\Install\Handler\Database();
-
-			# ------------------------
-
-			return $database->handle();
+			return (new Modules\Install\Handler\Database())->handle();
 		}
 	}
 }

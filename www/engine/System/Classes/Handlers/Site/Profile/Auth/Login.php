@@ -12,11 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_LOGIN');
 
-			$login = new Modules\Auth\Handler\Login();
-
-			# ------------------------
-
-			return $login->handle();
+			return (new Modules\Auth\Handler\Login())->handle();
 		}
 	}
 }

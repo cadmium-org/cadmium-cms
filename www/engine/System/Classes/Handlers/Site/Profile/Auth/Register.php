@@ -12,11 +12,7 @@ namespace System\Handlers\Site\Profile\Auth {
 
 			$this->title = Language::get('TITLE_PROFILE_AUTH_REGISTER');
 
-			$register = new Modules\Auth\Handler\Register();
-
-			# ------------------------
-
-			return $register->handle();
+			return (new Modules\Auth\Handler\Register())->handle();
 		}
 	}
 }

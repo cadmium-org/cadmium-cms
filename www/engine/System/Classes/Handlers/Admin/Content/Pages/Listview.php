@@ -12,11 +12,7 @@ namespace System\Handlers\Admin\Content\Pages {
 
 			$this->title = Language::get('TITLE_CONTENT_PAGES');
 
-			$pages = new Modules\Entitizer\Listview\Pages();
-
-			# ------------------------
-
-			return $pages->handle();
+			return (new Modules\Entitizer\Listview\Pages())->handle();
 		}
 	}
 }
