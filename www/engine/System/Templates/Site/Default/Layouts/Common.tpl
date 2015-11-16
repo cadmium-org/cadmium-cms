@@ -84,13 +84,13 @@
 
 		<div class="left aligned column">
 
-			$copyright$ &copy; <a href="$system_url$">$site_title$</a></a>
+			$copyright$ &copy; <a href="$system_url$">$site_title$</a>
 
 		</div>
 
 		<div class="right aligned column">
 
-			%POWERED_BY% <a href="$cadmium_home$">$cadmium_name$</a>
+			%POWERED_BY% <a href="$cadmium_home$">$cadmium_name$</a> v.$cadmium_version$
 
 		</div>
 
