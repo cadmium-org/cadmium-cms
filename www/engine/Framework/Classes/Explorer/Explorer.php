@@ -8,16 +8,17 @@ namespace {
 
 		private static function getList(string $dir_name, bool $dirs = false) {
 
-			if (false === ($handler = @opendir($dir_name))) return [];
+			if (false !== ($handler = @opendir($dir_name))) {
 
-			while (false !== ($name = readdir($handler))) {
+				while (false !== ($name = readdir($handler))) {
 
-				if (($name === '.') || ($name === '..')) continue;
+					if (($name === '.') || ($name === '..')) continue;
 
-				if ($dirs ? @is_dir($dir_name . $name) : @is_file($dir_name . $name)) yield $name;
+					if ($dirs ? @is_dir($dir_name . $name) : @is_file($dir_name . $name)) yield $name;
+				}
+
+				closedir($handler);
 			}
-
-			closedir($handler);
 		}
 
 		# Get file info
@@ -75,14 +76,14 @@ namespace {
 
 		public static function listFiles(string $dir_name) {
 
-			return self::getList($dir_name, false);
+			return iterator_to_array(self::getList($dir_name, false));
 		}
 
 		# Get directories list
 
 		public static function listDirs(string $dir_name) {
 
-			return self::getList($dir_name, true);
+			return iterator_to_array(self::getList($dir_name, true));
 		}
 
 		# Get file dirname
