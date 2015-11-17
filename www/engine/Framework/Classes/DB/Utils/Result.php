@@ -47,11 +47,15 @@ namespace DB\Utils {
 
 		# Get rows array
 
-		public function assoc() {
+		public function array() {
 
 			if (!is_object($this->result)) return [];
 
-			while (null !== ($row = $this->row())) yield $row;
+			$array = []; while (null !== ($row = $this->row())) $array[] = $row;
+
+			# ------------------------
+
+			return $array;
 		}
 	}
 }

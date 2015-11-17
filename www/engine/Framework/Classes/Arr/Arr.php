@@ -6,7 +6,7 @@ namespace {
 
 		# Get array value by path
 
-		public static function get(array &$array, array $path) {
+		public static function get(array $array, array $path) {
 
 			$value = false;
 
@@ -21,25 +21,41 @@ namespace {
 
 		public static function select(array &$array, array $keys) {
 
-			foreach ($keys as $key) if (is_scalar($key)) yield $key => (isset($array[$key]) ? $array[$key] : false);
+			$result = [];
+
+			foreach ($keys as $key) if (is_scalar($key)) $result[$key] = (isset($array[$key]) ? $array[$key] : false);
+
+			# ------------------------
+
+			return $result;
 		}
 
 		# Transform associative array to indexed
 
 		public static function index(array &$array, string $key_name, string $value_name) {
 
-			foreach ($array as $key => $value) yield [$key_name => $key, $value_name => $value];
+			$result = [];
+
+			foreach ($array as $key => $value) $result[] = [$key_name => $key, $value_name => $value];
+
+			# ------------------------
+
+			return $result;
 		}
 
 		# Sort array by subvalue
 
 		public static function sortby(array &$array, $sub_key, bool $descending = false) {
 
-			$column = array_column($array, $sub_key);
+			$column = array_column($array, $sub_key); $result = [];
 
 			if (!$descending) asort($column); else arsort($column);
 
-			foreach (array_keys($column) as $key) yield $key => $array[$key];
+			foreach (array_keys($column) as $key) $result[$key] = $array[$key];
+
+			# ------------------------
+
+			return $result;
 		}
 
 		# Get random value

@@ -102,14 +102,20 @@ namespace {
 
 		public static function log() {
 
+			$log = [];
+
 			foreach (self::$log as $result) {
 
 				$status = $result->status; $query = $result->query; $time = number_format($result->time, 10);
 
 				$summary = ($status ? ($result->rows . ' row(s)') : ('(' . $result->errno . ') ' . $result->error));
 
-				yield ['status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary];
+				$log[] = ['status' => $status, 'query' => $query, 'time' => $time, 'summary' => $summary];
 			}
+
+			# ------------------------
+
+			return $log;
 		}
 
 		# Get process time
