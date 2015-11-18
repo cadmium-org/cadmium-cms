@@ -59,6 +59,8 @@ namespace System\Modules\Install\Handler {
 
 		public function handle() {
 
+			# Create form
+
 			$this->form = new Install\Form\Check();
 
 			# ------------------------

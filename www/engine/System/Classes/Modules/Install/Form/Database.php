@@ -10,17 +10,17 @@ namespace System\Modules\Install\Form {
 
 		public function __construct() {
 
-			parent::__construct();
+			parent::__construct('database');
 
 			# Add fields
 
-			$this->input('database_server', 'localhost', FORM_INPUT_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->input('server', 'localhost', FORM_INPUT_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, [ 'required' => true ]);
 
-			$this->input('database_user', '', FORM_INPUT_TEXT, CONFIG_DATABASE_USER_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->input('user', '', FORM_INPUT_TEXT, CONFIG_DATABASE_USER_MAX_LENGTH, [ 'required' => true ]);
 
-			$this->input('database_password', '', FORM_INPUT_TEXT, CONFIG_DATABASE_PASSWORD_MAX_LENGTH, '');
+			$this->input('password', '', FORM_INPUT_TEXT, CONFIG_DATABASE_PASSWORD_MAX_LENGTH);
 
-			$this->input('database_name', '', FORM_INPUT_TEXT, CONFIG_DATABASE_NAME_MAX_LENGTH, '', FORM_FIELD_REQUIRED);
+			$this->input('name', '', FORM_INPUT_TEXT, CONFIG_DATABASE_NAME_MAX_LENGTH, [ 'required' => true ]);
 		}
 	}
 }

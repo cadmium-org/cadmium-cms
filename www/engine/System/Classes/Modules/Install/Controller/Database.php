@@ -2,15 +2,15 @@
 
 namespace System\Modules\Install\Controller {
 
-	use Exception, System\Modules\Install, DB, Explorer;
+	use System\Modules\Install, DB, Exception, Explorer;
 
-	abstract class Database {
+	class Database {
 
-		# Process post data
+		# Invoker
 
-		public static function process($post) {
+		public function __invoke(array $post) {
 
-			$database_server = null; $database_user = null; $database_password = null; $database_name = null;
+			$server = ''; $user = ''; $password = ''; $name = '';
 
 			# Extract post array
 
@@ -18,7 +18,7 @@ namespace System\Modules\Install\Controller {
 
 			# Connect to DB
 
-			try { DB::connect($database_server, $database_user, $database_password, $database_name); }
+			try { DB::connect($server, $user, $password, $name); }
 
 			catch (Exception\DBConnect $error) { return 'INSTALL_ERROR_DATABASE_CONNECT'; }
 
@@ -38,10 +38,10 @@ namespace System\Modules\Install\Controller {
 
 			$system = [];
 
-			$system['database']['server']       = $database_server;
-			$system['database']['user']         = $database_user;
-			$system['database']['password']     = $database_password;
-			$system['database']['name']         = $database_name;
+			$system['database']['server']       = $server;
+			$system['database']['user']         = $user;
+			$system['database']['password']     = $password;
+			$system['database']['name']         = $name;
 
 			$system['time'] = REQUEST_TIME;
 

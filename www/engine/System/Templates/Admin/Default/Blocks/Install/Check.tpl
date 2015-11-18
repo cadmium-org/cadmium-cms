@@ -1,4 +1,4 @@
-<form class="ui form" method="get" action="$install_path$/install.php">
+<form class="ui form" method="get" action="$install_path$/install.php" autocomplete="off">
 
 	<div class="field">
 

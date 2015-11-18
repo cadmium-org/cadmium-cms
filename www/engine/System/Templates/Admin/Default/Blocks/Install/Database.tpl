@@ -1,8 +1,8 @@
-<form class="ui form" method="post" action="$install_path$/install.php?checked=1">
+<form class="ui form" method="post" action="$install_path$/install.php?checked=1" autocomplete="off">
 
 	<div class="field">
 
-		<label for="install-database-server">%INSTALL_FIELD_DATABASE_SERVER%</label>
+		<label for="database-server">%INSTALL_FIELD_DATABASE_SERVER%</label>
 
 		{ block:field_database_server / }
 
@@ -10,7 +10,7 @@
 
 	<div class="field">
 
-		<label for="install-database-user">%INSTALL_FIELD_DATABASE_USER%</label>
+		<label for="database-user">%INSTALL_FIELD_DATABASE_USER%</label>
 
 		{ block:field_database_user / }
 
@@ -18,7 +18,7 @@
 
 	<div class="field">
 
-		<label for="install-database-password">%INSTALL_FIELD_DATABASE_PASSWORD%</label>
+		<label for="database-password">%INSTALL_FIELD_DATABASE_PASSWORD%</label>
 
 		{ block:field_database_password / }
 
@@ -26,7 +26,7 @@
 
 	<div class="field">
 
-		<label for="install-database-name">%INSTALL_FIELD_DATABASE_NAME%</label>
+		<label for="database-name">%INSTALL_FIELD_DATABASE_NAME%</label>
 
 		{ block:field_database_name / }
 

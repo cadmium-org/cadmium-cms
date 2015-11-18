@@ -36,13 +36,11 @@ namespace System\Modules\Install\Form {
 
 		public function __construct() {
 
-			parent::__construct();
-
 			# Add fields
 
-			$this->select('language', Extend\Languages::active(), $this->getLanguages(), null, FORM_FIELD_AUTO);
+			$this->select('language', Extend\Languages::active(), $this->getLanguages(), null, [ 'auto' => true ]);
 
-			$this->select('template', Extend\Templates::active(), $this->getTemplates(), null, FORM_FIELD_AUTO);
+			$this->select('template', Extend\Templates::active(), $this->getTemplates(), null, [ 'auto' => true ]);
 		}
 	}
 }

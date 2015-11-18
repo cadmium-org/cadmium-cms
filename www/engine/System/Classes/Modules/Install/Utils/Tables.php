@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Utils {
 
-	use System\Modules\Entitizer, Arr, DB, Language;
+	use System\Modules\Entitizer, Arr, DB, Language, Template;
 
 	abstract class Tables {
 
@@ -26,7 +26,7 @@ namespace System\Modules\Install\Utils {
 
 				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
-				'contents' => str_replace('$install_path$', INSTALL_PATH, Language::get('INSTALL_PAGE_INDEX_CONTENTS')),
+				'contents' => Template::block(Language::get('INSTALL_PAGE_INDEX_CONTENTS'))->contents(),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
@@ -36,7 +36,7 @@ namespace System\Modules\Install\Utils {
 
 				'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
 
-				'contents' => str_replace('$install_path$', INSTALL_PATH, Language::get('INSTALL_PAGE_DEMO_CONTENTS')),
+				'contents' => Template::block(Language::get('INSTALL_PAGE_DEMO_CONTENTS'))->contents(),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 

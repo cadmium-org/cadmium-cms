@@ -2,7 +2,7 @@
 
 namespace System\Modules\Install\Handler {
 
-	use System\Modules\Install, System\Utils\Messages, System\Utils\View, Language, Request;
+	use System\Modules\Install, System\Utils\View, Request;
 
 	class Database {
 
@@ -33,7 +33,7 @@ namespace System\Modules\Install\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(['System\Modules\Install\Controller\Database', 'process'])) {
+			if ($this->form->submit(new Install\Controller\Database())) {
 
 				Request::redirect(INSTALL_PATH . '/admin/register');
 			}
