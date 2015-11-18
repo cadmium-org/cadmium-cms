@@ -19,7 +19,7 @@ namespace {
 
 		# Select a set of elements from array
 
-		public static function select(array &$array, array $keys) {
+		public static function select(array $array, array $keys) {
 
 			$result = [];
 
@@ -32,7 +32,7 @@ namespace {
 
 		# Transform associative array to indexed
 
-		public static function index(array &$array, string $key_name, string $value_name) {
+		public static function index(array $array, string $key_name, string $value_name) {
 
 			$result = [];
 
@@ -45,7 +45,7 @@ namespace {
 
 		# Sort array by subvalue
 
-		public static function sortby(array &$array, $sub_key, bool $descending = false) {
+		public static function sortby(array $array, $sub_key, bool $descending = false) {
 
 			$column = array_column($array, $sub_key); $result = [];
 
@@ -60,14 +60,14 @@ namespace {
 
 		# Get random value
 
-		public static function random(array &$array) {
+		public static function random(array $array) {
 
 			return $array[array_rand($array)];
 		}
 
 		# Encode array
 
-		public static function encode(array &$array) {
+		public static function encode(array $array) {
 
 			return sha1(serialize($array));
 		}
