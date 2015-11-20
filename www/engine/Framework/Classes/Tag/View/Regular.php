@@ -4,7 +4,7 @@ namespace Tag\View {
 
 	use Template;
 
-	class Regular extends Template\Utils\Block {
+	class Regular extends Template\Asset\Block {
 
 		private static $contents_raw = '<$name${ for:attributes } $name$="$value$"{ / for:attributes }>{ block:contents / }</$name$>';
 

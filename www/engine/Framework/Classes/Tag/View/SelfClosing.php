@@ -4,7 +4,7 @@ namespace Tag\View {
 
 	use Template;
 
-	class SelfClosing extends Template\Utils\Block {
+	class SelfClosing extends Template\Asset\Block {
 
 		private static $contents_raw = '<$name${ for:attributes } $name$="$value$"{ / for:attributes } />';
 
