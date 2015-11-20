@@ -30,7 +30,7 @@ namespace {
 
 		public function input(string $key, string $value = '', string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
-			($field = new Form\Field\Input($this, $key, $type, $maxlength, $config))->set($value);
+			$field = new Form\Field\Input($this, $key, $value, $type, $maxlength, $config);
 
 			return $this->addField($field);
 		}
@@ -39,7 +39,7 @@ namespace {
 
 		public function textarea(string $key, string $value = '', int $maxlength = 0, int $rows = 0, array $config = []) {
 
-			($field = new Form\Field\Textarea($this, $key, $maxlength, $rows, $config))->set($value);
+			$field = new Form\Field\Textarea($this, $key, $value, $maxlength, $rows, $config);
 
 			return $this->addField($field);
 		}
@@ -48,7 +48,7 @@ namespace {
 
 		public function select(string $key, string $value = '', array $options = [], string $default = null, array $config = []) {
 
-			($field = new Form\Field\Select($this, $key, $options, $default, $config))->set($value);
+			$field = new Form\Field\Select($this, $key, $value, $options, $default, $config);
 
 			return $this->addField($field);
 		}
@@ -57,7 +57,7 @@ namespace {
 
 		public function checkbox(string $key, bool $value = false) {
 
-			($field = new Form\Field\Checkbox($this, $key))->set($value);
+			$field = new Form\Field\Checkbox($this, $key, $value);
 
 			return $this->addField($field);
 		}
@@ -92,7 +92,7 @@ namespace {
 
 				$field->post(); $post[$field->key()] = $field->value();
 
-				if (false !== $field->error()) $errors[] = ['key' => $field->key(), 'error' = $field->error()];
+				if (false !== $field->error()) $errors[] = ['key' => $field->key(), 'error' => $field->error()];
 			}
 
 			$this->posted = true; $this->errors = $errors;
@@ -132,7 +132,7 @@ namespace {
 
 		# Implement fields
 
-		public function implement(Template\Utils\Block $block) {
+		public function implement(Template\Asset\Block $block) {
 
 			foreach ($this->fields as $field) {
 

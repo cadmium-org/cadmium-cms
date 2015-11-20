@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Text;
+	use Form, Form\Utils, Text;
 
 	class Textarea extends Utils\Field {
 
@@ -18,19 +18,29 @@ namespace Form\Field {
 
 		protected $config = [
 
-			'placeholder'       = '',
-			'readonly'          = false,
-			'autofocus'         = false,
-			'translit'          = false
+			'placeholder'       => '',
+			'readonly'          => false,
+			'autofocus'         => false,
+			'translit'          => false
 		];
 
 		# Constructor
 
-		public function __construct(Form $form, string $key, int $maxlength = 0, int $rows = 0, array $config = []) {
+		public function __construct(Form $form, string $key, string $value = '',
+
+			int $maxlength = 0, int $rows = 0, array $config = []) {
+
+			# Init field
 
 			self::init($form, $key, $config);
 
+			# Set data
+
 			$this->maxlength = $maxlength; $this->rows = $rows;
+
+			# Set value
+
+			$this->set($value);
 		}
 
 		# Set value
@@ -52,7 +62,7 @@ namespace Form\Field {
 
 		# Set placeholder
 
-		public function placeholder(string $value = null) {
+		public function placeholder(string $value) {
 
 			$this->config['placeholder'] = $value;
 		}

@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Text;
+	use Form, Form\Utils, Text;
 
 	class Input extends Utils\Field {
 
@@ -18,10 +18,10 @@ namespace Form\Field {
 
 		protected $config = [
 
-			'placeholder'       = '',
-			'readonly'          = false,
-			'autofocus'         = false,
-			'translit'          = false
+			'placeholder'       => '',
+			'readonly'          => false,
+			'autofocus'         => false,
+			'translit'          => false
 		];
 
 		# Get hidden input tag
@@ -54,18 +54,28 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct(Form $form, string $key, string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
+		public function __construct(Form $form, string $key, string $value = '',
+
+			string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
+
+			# Init field
 
 			self::init($form, $key, $config);
 
+			# Set data
+
 			$this->type = $type; $this->maxlength = $maxlength;
+
+			# Set value
+
+			$this->set($value);
 		}
 
 		# Set value
 
 		public function set(string $value) {
 
-			if ($this->type === FORM_INPUT_PASSWORD) {
+			if (($this->type === FORM_INPUT_PASSWORD) || ($this->type === FORM_INPUT_CAPTCHA)) {
 
 				$this->value = Text::cut($value, $this->maxlength);
 
@@ -87,7 +97,7 @@ namespace Form\Field {
 
 		# Set placeholder
 
-		public function placeholder(string $value = null) {
+		public function placeholder(string $value) {
 
 			$this->config['placeholder'] = $value;
 		}
@@ -117,28 +127,23 @@ namespace Form\Field {
 
 		public function block() {
 
-			if ($this->type === FORM_INPUT_HIDDEN) {
+			if ($this->type === FORM_INPUT_HIDDEN) return $this->getHidden()->block();
 
-				$tag = $this->getHidden();
+			else if ($this->type === FORM_INPUT_PASSWORD) $tag = $this->getPassword();
 
-			} else {
+			else if ($this->type === FORM_INPUT_CAPTCHA) $tag = $this->getCaptcha();
 
-				if ($this->type === FORM_INPUT_PASSWORD) $tag = $this->getPassword();
+			else $tag = $this->getText();
 
-				else if ($this->type === FORM_INPUT_CAPTCHA) $tag = $this->getCaptcha();
+			# Set appearance
 
-				else $tag = $this->getText();
+			if (0 < $this->maxlength) $tag->set('maxlength', $this->maxlength);
 
-				# Set appearance
+			if ('' !== $this->config['placeholder']) $tag->set('placeholder', $this->config['placeholder']);
 
-				if (0 < $this->maxlength) $tag->set('maxlength', $this->maxlength);
+			if ($this->config['readonly']) $tag->set('readonly', 'readonly');
 
-				if ('' !== $this->config['placeholder']) $tag->set('placeholder', $this->config['placeholder']);
-
-				if ($this->config['readonly']) $tag->set('readonly', 'readonly');
-
-				if ($this->config['autofocus']) $tag->set('autofocus', 'autofocus');
-			}
+			if ($this->config['autofocus']) $tag->set('autofocus', 'autofocus');
 
 			# ------------------------
 

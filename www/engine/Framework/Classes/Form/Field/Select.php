@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils, Form\View;
+	use Form, Form\Utils, Form\View;
 
 	class Select extends Utils\Field {
 
@@ -18,8 +18,8 @@ namespace Form\Field {
 
 		protected $config = [
 
-			'search'            = false,
-			'auto'              = false
+			'search'            => false,
+			'auto'              => false
 		];
 
 		# Get options
@@ -42,11 +42,21 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct(Form $form, $string $key, array $options = [], string $default = null) {
+		public function __construct(Form $form, string $key, string $value = '',
+
+			array $options = [], string $default = null, array $config = []) {
+
+			# Init field
 
 			self::init($form, $key, $config);
 
+			# Set data
+
 			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
+
+			# Set value
+
+			$this->set($value);
 		}
 
 		# Set value

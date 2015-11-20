@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form\Utils;
+	use Form, Form\Utils;
 
 	class Checkbox extends Utils\Field {
 
@@ -12,9 +12,15 @@ namespace Form\Field {
 
 		# Constructor
 
-		public function __construct(Form $form, string $key) {
+		public function __construct(Form $form, string $key, bool $value = false) {
+
+			# Init field
 
 			self::init($form, $key);
+
+			# Set value
+
+			$this->set($value);
 		}
 
 		# Set value

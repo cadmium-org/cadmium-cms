@@ -35,26 +35,26 @@ namespace Form\Utils {
 			return $tag;
 		}
 
-		# Validate form
+		# Init field
 
-		public function init(Form $form, string $key, array $config = []) {
+		protected function init(Form $form, string $key, array $config = []) {
 
 			$this->form = $form;
 
-			# Set field key & name
+			# Set key & name
 
 			if (preg_match(REGEX_FORM_FIELD_KEY, $key)) {
 
-				$prefix = ((null !== $this->form) ? ($this->form->name() . '_') : '');
+				$prefix = (('' !== $this->form->name()) ? ($this->form->name() . '_') : '');
 
 				$this->key = $key; $this->name = ($prefix . $key);
 			}
 
-			# Set field params
+			# Set params
 
 			$params = array_merge(['disabled', 'required'], array_keys(isset($this->config) ? $this->config : []));
 
-			foreach ($params as $name) if (isset($config[$name])) call_user_method($name, $this, $config[$name]);
+			foreach ($params as $name) if (isset($config[$name])) call_user_func([$this, $name], $config[$name]);
 		}
 
 		# Post value
@@ -91,7 +91,7 @@ namespace Form\Utils {
 			return $this->value;
 		}
 
-		# Check if error
+		# Check for error
 
 		public function error() {
 
