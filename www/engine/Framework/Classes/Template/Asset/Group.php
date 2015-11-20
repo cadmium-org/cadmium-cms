@@ -2,13 +2,15 @@
 
 namespace Template\Asset {
 
+	use Template;
+
 	class Group implements Template\Utils\Settable {
 
 		private $blocks = [], $count = 0;
 
 		# Add block
 
-		public function add(Settable $block) {
+		public function add(Template\Utils\Settable $block) {
 
 			$this->blocks[] = $block; $this->count++;
 
