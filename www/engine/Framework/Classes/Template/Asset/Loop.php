@@ -1,6 +1,6 @@
 <?php
 
-namespace Template\Utils {
+namespace Template\Asset {
 
 	class Loop {
 
