@@ -32,7 +32,7 @@
 
 					<a class="item" href="$install_path$/admin/system/users/edit?id=$id$"><i class="user icon"></i>%TITLE_PROFILE%</a>
 
-					<a class="item" href="$install_path$/admin/logout"><i class="sign out icon"></i>%LOGOUT%</a>
+					<a class="item" href="$install_path$/admin?logout"><i class="sign out icon"></i>%LOGOUT%</a>
 
 				</div>
 

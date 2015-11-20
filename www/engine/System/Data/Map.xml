@@ -79,10 +79,6 @@
 	</item>
 
 	<item>
-		<path>/admin/logout</path>
-		<handler>/Admin/Logout</handler>
-	</item>
-	<item>
 		<path>/admin</path>
 		<handler>/Admin/Dashboard</handler>
 	</item>
@@ -109,10 +105,6 @@
 	<item>
 		<path>/profile/edit</path>
 		<handler>/Site/Profile/Edit</handler>
-	</item>
-	<item>
-		<path>/profile/logout</path>
-		<handler>/Site/Profile/Logout</handler>
 	</item>
 	<item>
 		<path>/profile</path>

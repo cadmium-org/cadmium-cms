@@ -142,9 +142,14 @@ namespace System\Frames\Site {
 
 				if (!Settings::get('users_registration')) return Status::error404();
 
-				if (($this instanceof Component\Profile\Auth)) { if (Auth::check()) Request::redirect(INSTALL_PATH . '/profile'); }
+				if (($this instanceof Component\Profile\Auth)) {
 
-				else if (!Auth::check()) Request::redirect(INSTALL_PATH . '/profile/login');
+					if (Auth::check()) Request::redirect(INSTALL_PATH . '/profile');
+
+				} else if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
+
+					Request::redirect(INSTALL_PATH . '/profile/login');
+				}
 			}
 
 			# ------------------------

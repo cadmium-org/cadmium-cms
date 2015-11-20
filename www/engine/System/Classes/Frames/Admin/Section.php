@@ -167,7 +167,10 @@ namespace System\Frames\Admin {
 
 				else if ($this instanceof Component\Panel) {
 
-					if (!Auth::check()) Request::redirect(INSTALL_PATH . '/admin/login');
+					if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
+
+						Request::redirect(INSTALL_PATH . '/admin/login');
+					}
 
 					if (Template::isSettable($result = $this->handle())) return $this->displayPage($result);
 
