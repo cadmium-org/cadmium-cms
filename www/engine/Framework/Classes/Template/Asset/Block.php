@@ -89,7 +89,9 @@ namespace Template\Asset {
 
 			if ($value instanceof Template\Utils\Settable) $this->block($name, $value);
 
-			else if (is_array($value)) $this->loop($name, $value); else $this->set($name, $value);
+			else if (is_array($value)) $this->loop($name, $value);
+
+			else if (is_scalar($value)) $this->set($name, $value);
 		}
 
 		# Set block
