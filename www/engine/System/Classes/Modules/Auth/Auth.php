@@ -10,7 +10,7 @@ namespace System\Modules {
 
 		# Get auth
 
-		private static function getAuth($code, $type, $lifetime) {
+		private static function getAuth(string $code, string $type, int $lifetime) {
 
 			$auth = Entitizer::create($type);
 
@@ -25,7 +25,7 @@ namespace System\Modules {
 
 		# Get user
 
-		private static function getUser($id) {
+		private static function getUser(int $id) {
 
 			$user = Entitizer::user($id);
 
@@ -38,7 +38,7 @@ namespace System\Modules {
 
 		# Authorize with session code
 
-		public static function init($section) {
+		public static function init(string $section) {
 
 			self::$admin = ($section === SECTION_ADMIN); self::$user = Entitizer::user();
 

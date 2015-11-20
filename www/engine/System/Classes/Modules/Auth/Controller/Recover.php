@@ -2,19 +2,19 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, DB, Text;
+	use System\Modules\Auth, System\Modules\Entitizer, Text;
 
-	abstract class Recover {
+	class Recover {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
+		public function __invoke(array $post) {
 
 			if (!Auth::check()) return false;
 
 			# Declare variables
 
-			$password_new = null; $password_retype = null;
+			$password_new = ''; $password_retype = '';
 
 			# Extract post array
 

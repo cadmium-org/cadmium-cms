@@ -2,19 +2,19 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB, Text, Validate;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, Text, Validate;
 
-	abstract class Register {
+	class Register {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
+		public function __invoke(array $post) {
 
 			if (Auth::check()) return true;
 
 			# Declare variables
 
-			$name = null; $password = null; $password_retype = null; $email = null; $captcha = null;
+			$name = ''; $password = ''; $password_retype = ''; $email = ''; $captcha = '';
 
 			# Extract post array
 

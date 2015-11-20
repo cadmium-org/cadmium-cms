@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Request;
+	use System\Modules\Auth, Request;
 
 	class Register extends Auth\Utils\Handler {
 
@@ -18,7 +18,7 @@ namespace System\Modules\Auth\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(['System\Modules\Auth\Controller\Register', 'process'])) {
+			if ($this->form->submit(new Auth\Controller\Register())) {
 
 				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=register');
 			}

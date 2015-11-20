@@ -2,19 +2,19 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, DB, Text;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, Text;
 
-	abstract class Reset {
+	class Reset {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
+		public function __invoke(array $post) {
 
 			if (Auth::check()) return true;
 
 			# Declare variables
 
-			$name = null; $captcha = null;
+			$name = ''; $captcha = '';
 
 			# Extract post array
 

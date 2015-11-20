@@ -2,19 +2,19 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, DB, Session, Text;
+	use System\Modules\Auth, System\Modules\Entitizer, Session, Text;
 
-	abstract class Login {
+	class Login {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
+		public function __invoke(array $post) {
 
 			if (Auth::check()) return true;
 
 			# Declare variables
 
-			$name = null; $password = null;
+			$name = ''; $password = '';
 
 			# Extract post array
 

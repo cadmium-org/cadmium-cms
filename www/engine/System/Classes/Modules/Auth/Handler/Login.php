@@ -18,17 +18,22 @@ namespace System\Modules\Auth\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(['System\Modules\Auth\Controller\Login', 'process'])) {
+			if ($this->form->submit(new Auth\Controller\Login())) {
 
 				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile'));
+
+			} else if (Request::get('submitted') === 'reset') {
+
+				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
+
+			} else if (Request::get('submitted') === 'recover') {
+
+				Messages::success(Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
 
 			} else if (Request::get('submitted') === 'register') {
 
 				Messages::success(Language::get('USER_SUCCESS_REGISTER_TEXT'), Language::get('USER_SUCCESS_REGISTER'));
 
-			} else if (Request::get('submitted') === 'recover') {
-
-				Messages::success(Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
 			}
 
 			# ------------------------

@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Language, Request;
+	use System\Modules\Auth, Request;
 
 	class Reset extends Auth\Utils\Handler {
 
@@ -18,13 +18,9 @@ namespace System\Modules\Auth\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(['System\Modules\Auth\Controller\Reset', 'process'])) {
+			if ($this->form->submit(new Auth\Controller\Reset())) {
 
-				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/reset?submitted');
-
-			} else if (null !== Request::get('submitted')) {
-
-				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
+				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=reset');
 			}
 
 			# ------------------------
