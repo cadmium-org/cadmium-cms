@@ -8,11 +8,11 @@ namespace {
 
 		private static function output($image, string $mime, callable $outputter, array $params) {
 
-			if (!is_resource($this->captcha)) return false;
+			if (!is_resource($image)) return false;
 
 			Headers::nocache(); Headers::content($mime);
 
-			call_user_func($outputter, ...$params); imagedestroy($image);
+			call_user_func($outputter, $image, ...$params); imagedestroy($image);
 
 			# ------------------------
 
