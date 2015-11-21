@@ -8,14 +8,18 @@ namespace {
 
 		# Create XML object
 
-		public static function create() {
+		public static function create(string $data) {
 
 			$version = self::VERSION; $encoding = CONFIG_DEFAULT_CHARSET;
 
-			return @simplexml_load_string('<?xml version="' . $version .'" encoding="' . $encoding . '" ?>');
+			$data = ('<?xml version="' . $version . '" encoding="' . $encoding . '" ?>' . $data);
+
+			# ------------------------
+
+			return @simplexml_load_string($data);
 		}
 
-		# Output XML
+		# Output XML data
 
 		public static function output(SimpleXMLElement $xml) {
 
