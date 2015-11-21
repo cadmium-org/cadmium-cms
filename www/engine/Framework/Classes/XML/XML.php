@@ -12,7 +12,7 @@ namespace {
 
 			$version = self::VERSION; $encoding = CONFIG_DEFAULT_CHARSET;
 
-			return simplexml_load_string('<?xml version="' . $version .'" encoding="' . $encoding . '" ?>');
+			return @simplexml_load_string('<?xml version="' . $version .'" encoding="' . $encoding . '" ?>');
 		}
 
 		# Output XML
