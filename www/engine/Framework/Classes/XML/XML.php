@@ -10,12 +10,9 @@ namespace {
 
 		public static function create() {
 
-			return simplexml_load_string (
+			$version = self::VERSION; $encoding = CONFIG_DEFAULT_CHARSET;
 
-				'<?xml version="' . self::VERSION .'" encoding="' . CONFIG_DEFAULT_CHARSET . '" ?>' .
-
-				'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />'
-			);
+			return simplexml_load_string('<?xml version="' . $version .'" encoding="' . $encoding . '" ?>');
 		}
 
 		# Output XML

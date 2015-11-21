@@ -6,13 +6,15 @@ namespace System\Utils\Tools {
 
 	class Sitemap {
 
-		private $sitemap = null;
+		private $xml = null;
 
 		# Constructor
 
 		public function __construct() {
 
-			$this->sitemap = XML::create();
+			$this->xml = XML::create();
+
+			'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />'
 		}
 
 		# Add item
@@ -21,7 +23,7 @@ namespace System\Utils\Tools {
 
 			if (false === ($loc = Validate::url($loc))) return false;
 
-			$url = $this->sitemap->addChild('url'); $url->addChild('loc', $loc);
+			$url = $this->xml->addChild('url'); $url->addChild('loc', $loc);
 
 			# Set last modified
 
@@ -44,6 +46,13 @@ namespace System\Utils\Tools {
 			# ------------------------
 
 			return true;
+		}
+
+		# Return XMl
+
+		public function xml() {
+
+			return $this->xml;
 		}
 	}
 }
