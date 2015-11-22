@@ -38,7 +38,7 @@ namespace {
 
 			$value = filter_var($value, FILTER_VALIDATE_URL);
 
-			return ((false !== $value) ? rtrim('/') : false);
+			return ((false !== $value) ? rtrim($value, '/') : false);
 		}
 	}
 }
