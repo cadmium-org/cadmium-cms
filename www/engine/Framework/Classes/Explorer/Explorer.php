@@ -114,6 +114,13 @@ namespace {
 			return self::getInfo($file_name, PATHINFO_EXTENSION, $check_exists);
 		}
 
+		# Get file modification time
+
+		public static function modified(string $file_name) {
+
+			return @filemtime($file_name);
+		}
+
 		# Get file contents
 
 		public static function contents(string $file_name) {
