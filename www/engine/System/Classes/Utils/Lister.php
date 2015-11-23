@@ -1,28 +1,30 @@
 <?php
 
-namespace Lister {
+namespace System\Utils {
 
 	use Language;
 
 	abstract class Lister extends \Lister {
 
+		# Translate value
+
+		private static function translate($value) {
+
+			return ((false !== ($translated = Language::get($value))) ? $translated : $value);
+		}
+
 		# Get item by key
 
 		public static function get($key) {
 
-			if (false === ($value = parent::get($key))) return false;
-
-			return ((false !== ($translated = Language::get($value))) ? $translated : $value);
+			return ((false !== ($value = parent::get($key))) ? self::translate($value) : false);
 		}
 
 		# Get list
 
 		public static function list() {
 
-			foreach (parent::list() as $key => $value) {
-
-				yield ((false !== ($translated = Language::get($value))) ? $translated : $value);
-			}
+			return array_map('self::translate', parent::list());
 		}
 	}
 }
