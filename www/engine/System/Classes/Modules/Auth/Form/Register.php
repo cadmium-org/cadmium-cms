@@ -30,7 +30,7 @@ namespace System\Modules\Auth\Form {
 
 				['placeholder' => (Auth::admin() ? Language::get('USER_FIELD_EMAIL') : ''), 'required' => true]);
 
-			$this->input('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_CAPTCHA_LENGTH,
+			$this->input('captcha', '', FORM_INPUT_CAPTCHA, CONFIG_USER_CAPTCHA_MAX_LENGTH,
 
 				['placeholder' => (Auth::admin() ? Language::get('USER_FIELD_CAPTCHA') : ''), 'required' => true]);
 		}

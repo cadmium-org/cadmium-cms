@@ -12,11 +12,9 @@ namespace System\Modules {
 
 		private static function getAuth(string $code, string $type, int $lifetime) {
 
-			$auth = Entitizer::create($type);
+			if (!($auth = Entitizer::create($type))->init($code, 'code')) return false;
 
-			if (!$auth->init($code, 'code') || ($auth->ip !== REQUEST_CLIENT_IP)) return false;
-
-			if ($auth->time < (REQUEST_TIME - $lifetime)) return false;
+			if (($auth->ip !== REQUEST_CLIENT_IP) || ($auth->time < (REQUEST_TIME - $lifetime))) return false;
 
 			# ------------------------
 
@@ -27,9 +25,9 @@ namespace System\Modules {
 
 		private static function getUser(int $id) {
 
-			$user = Entitizer::user($id);
+			if (0 === ($user = Entitizer::user($id))->id) return false;
 
-			if ((0 === $user->id) || ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER))) return false;
+			if ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER)) return false;
 
 			# ------------------------
 
@@ -73,9 +71,7 @@ namespace System\Modules {
 
 		public static function secret() {
 
-			if (null === self::$user) return false;
-
-			if (0 !== self::$user->id) return true;
+			if ((null === self::$user) || (0 !== self::$user->id)) return false;
 
 			# Check secret code
 

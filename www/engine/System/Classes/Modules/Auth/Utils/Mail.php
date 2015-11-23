@@ -8,7 +8,7 @@ namespace System\Modules\Auth\Utils {
 
 		# Send mail
 
-		private static function send(Entitizer\Entity\User $user, $view, $subject, $link) {
+		private static function send(Entitizer\Entity\User $user, string $view, string $subject, string $link) {
 
 			$message = View::get($view);
 
@@ -31,7 +31,7 @@ namespace System\Modules\Auth\Utils {
 
 		# Send reset mail
 
-		public static function reset(Entitizer\Entity\User $user, $code) {
+		public static function reset(Entitizer\Entity\User $user, string $code) {
 
 			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile') . '/recover?code=' . $code);
 
