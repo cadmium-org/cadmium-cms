@@ -38,9 +38,9 @@ namespace System\Modules\Install\Form {
 
 			# Add fields
 
-			$this->select('language', Extend\Languages::active(), $this->getLanguages(), null, [ 'auto' => true ]);
+			$this->select('language', Extend\Languages::active(), $this->getLanguages(), null, ['auto' => true]);
 
-			$this->select('template', Extend\Templates::active(), $this->getTemplates(), null, [ 'auto' => true ]);
+			$this->select('template', Extend\Templates::active(), $this->getTemplates(), null, ['auto' => true]);
 		}
 	}
 }
