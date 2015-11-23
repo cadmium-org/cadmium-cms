@@ -2,15 +2,27 @@
 
 namespace System\Views {
 
-	use Explorer, Template;
+	use System\Modules\Extend, Explorer, Template;
 
-	abstract class View extends Template\Utils\Block {
+	abstract class View extends Template\Asset\Block {
+
+		# Section interface
+
+		const SECTION = '';
+
+		# File name interface
+
+		protected static $file_name = '';
 
 		# Constructor
 
-		public function __construct($file_name) {
+		public function __construct() {
 
-			if (false !== ($contents = Explorer::contents($file_name))) parent::__construct($contents);
+			if (static::SECTION !== Extend\Templates::section()) return;
+
+			$file_name = (Extend\Templates::path() . static::$file_name);
+
+			parent::__construct(Explorer::contents($file_name));
 		}
 	}
 }
