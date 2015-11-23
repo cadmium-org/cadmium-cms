@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Frames\Status, System\Utils\Tools, Image;
+	use System, System\Utils\Tools, Exception, Image;
 
 	abstract class Captcha extends System\Frames\Main {
 
@@ -12,11 +12,14 @@ namespace System\Frames\Tools {
 
 			$captcha = $this->handle();
 
-			if (!($captcha instanceof Tools\Captcha)) return Status::error404();
+			if (($captcha instanceof Tools\Captcha) && (null !== $captcha->image())) {
+
+				return Image::outputPNG($captcha->image());
+			}
 
 			# ------------------------
 
-			Image::outputPNG($captcha->image());
+			throw new Exception\Captcha();
 		}
 	}
 }
