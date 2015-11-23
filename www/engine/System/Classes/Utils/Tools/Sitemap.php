@@ -2,30 +2,62 @@
 
 namespace System\Utils\Tools {
 
-	use System\Utils\Lister, Date, Number, Validate, XML;
+	use System\Utils\Lister, Date, Explorer, Number, Validate, XML;
 
 	class Sitemap {
 
-		private $xml = null, $urlset = null;
+		private $xml = null, $loaded = false;
 
 		# Constructor
 
 		public function __construct() {
 
-			if (false === ($xml = XML::create())) return;
+			$urlset = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" />';
 
-			$this->xml = $xml; $this->urlset = $this->xml->addChild('urlset');
+			if (false !== ($xml = XML::create($urlset))) $this->xml = $xml;
+		}
 
-			$this->urlset->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+		# Load sitemap
+
+		public function load(int $time) {
+
+			$file_name = (DIR_SYSTEM_DATA . 'Sitemap.xml');
+
+			$modified = Explorer::modified($file_name);
+
+			if ((false === $modified) || ($modified <= $time)) return false;
+
+			if (false === ($xml = Explorer::xml($file_name))) return false;
+
+			# ------------------------
+
+			return (($this->xml = $xml) && ($this->loaded = true));
+		}
+
+		# Save sitemap
+
+		public function save() {
+
+			if ((null === $this->xml) || $this->loaded) return false;
+
+			$file_name = (DIR_SYSTEM_DATA . 'Sitemap.xml');
+
+			# ------------------------
+
+			return Explorer::save($file_name, $this->xml->asXML(), true);
 		}
 
 		# Add item
 
 		public function add(string $loc, string $lastmod = null, string $changefreq = null, float $priority = null) {
 
+			if ((null === $this->xml) || $this->loaded) return false;
+
 			if (false === ($loc = Validate::url($loc))) return false;
 
-			$url = $this->urlset->addChild('url'); $url->addChild('loc', $loc);
+			# Create url object
+
+			($url = $this->xml->addChild('url'))->addChild('loc', $loc);
 
 			# Set last modified
 
