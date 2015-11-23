@@ -2,7 +2,7 @@
 
 namespace System\Frames\Tools {
 
-	use System, System\Frames\Status, System\Utils\Tools, XML;
+	use System, System\Utils\Tools, Exception, XML;
 
 	abstract class Sitemap extends System\Frames\Main {
 
@@ -12,11 +12,14 @@ namespace System\Frames\Tools {
 
 			$sitemap = $this->handle();
 
-			if (!($sitemap instanceof Tools\Sitemap)) return Status::error404();
+			if (($sitemap instanceof Tools\Sitemap) && (null !== $sitemap->xml())) {
+
+				return XML::output($sitemap->xml());
+			}
 
 			# ------------------------
 
-			XML::output($sitemap);
+			throw new Exception\Sitemap();
 		}
 	}
 }
