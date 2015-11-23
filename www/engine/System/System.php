@@ -10,7 +10,7 @@ namespace {
 
 		# Set database value
 
-		private function setDatabase(string $key, $string $value) {
+		private function setDatabase(string $key, string $value) {
 
 			$this->database[$key] = $value;
 		}
