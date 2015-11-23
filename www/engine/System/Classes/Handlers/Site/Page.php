@@ -12,16 +12,16 @@ namespace System\Handlers\Site {
 
 		private function getPath() {
 
-			$parent_id = 0; $link = INSTALL_PATH;
+			$parent_id = 0; $link = INSTALL_PATH; $path = [];
 
-			# Validate page data
+			# Page validator
 
-			$validate_page = function(int $id, string $name, string $title) use ($parent_id, $link) {
+			$page = function(int $id, string $name, string $title) use (&$parent_id, &$link) {
 
 				$parent_id = $id; $link .= ('/' . $name);
 
 				return ['id' => $id, 'link' => $link, 'title' => $title];
-			}
+			};
 
 			# Process url path items
 
@@ -37,10 +37,12 @@ namespace System\Handlers\Site {
 
 				if (!(DB::select(TABLE_PAGES, $selection, $condition, null, 1) && (DB::last()->rows === 1))) return false;
 
-				$page = DB::last()->row();
-
-				yield $validate_page($page['id'], $page['name'], $page['title']);
+				$path[] = $page(...array_values(DB::last()->row()));
 			}
+
+			# ------------------------
+
+			return $path;
 		}
 
 		# Get contents
@@ -68,7 +70,7 @@ namespace System\Handlers\Site {
 
 		protected function handle() {
 
-			if ((null === $this->url) || (false === ($path = $this->getPath()))) return false;
+			if (false === ($path = $this->getPath())) return false;
 
 			$this->path = $path;
 
