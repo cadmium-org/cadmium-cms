@@ -18,9 +18,5 @@ namespace System\Frames\Tools {
 
 			XML::output($sitemap);
 		}
-
-		# Handler interface
-
-		abstract protected function handle();
 	}
 }

@@ -55,13 +55,5 @@ namespace System\Frames {
 
 			$this->section();
 		}
-
-		# Section method interface
-
-		abstract protected function section();
-
-		# Handler interface
-
-		abstract protected function handle();
 	}
 }

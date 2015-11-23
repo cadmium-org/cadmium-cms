@@ -18,9 +18,5 @@ namespace System\Frames\Tools {
 
 			Image::outputPNG($captcha->image());
 		}
-
-		# Handler interface
-
-		abstract protected function handle();
 	}
 }
