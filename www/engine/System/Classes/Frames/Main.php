@@ -12,7 +12,7 @@ namespace System\Frames {
 
 		public function __construct(Url $url = null) {
 
-			$this->url = $url;
+			$this->url = ((null !== $url) ? $url : new Url());
 
 			# Start session
 
