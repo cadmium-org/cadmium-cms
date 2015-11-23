@@ -6,6 +6,19 @@ namespace System\Handlers\Tools {
 
 	class Sitemap extends System\Frames\Tools\Sitemap {
 
+		# Get last modified
+
+		private function getLastModified() {
+
+			$selection = 'MAX(time_modified) as last_modified';
+
+			if (!(DB::select(TABLE_PAGES, $selection) && (DB::last()->rows === 1))) return 0;
+
+			# ------------------------
+
+			return intval(DB::last()->row()['last_modified']);
+		}
+
 		# Get pages
 
 		private function getPages() {
@@ -31,7 +44,7 @@ namespace System\Handlers\Tools {
 
 			# ------------------------
 
-			return Arr::subvalSort($pages, 'canonical');
+			return Arr::sortby($pages, 'canonical');
 		}
 
 		# Handle request
@@ -41,6 +54,12 @@ namespace System\Handlers\Tools {
 			# Create sitemap
 
 			$sitemap = new Tools\Sitemap();
+
+			# Get last modification time
+
+			$last_modified = $this->getLastModified();
+
+			if ($sitemap->load($last_modified)) return $sitemap;
 
 			# Fill sitemap
 
@@ -52,6 +71,10 @@ namespace System\Handlers\Tools {
 
 				$sitemap->add($loc, $lastmod, FREQUENCY_WEEKLY, 0.5);
 			}
+
+			# Save sitemap
+
+			$sitemap->save();
 
 			# ------------------------
 
