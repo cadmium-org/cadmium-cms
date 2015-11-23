@@ -14,6 +14,7 @@ define('DIR_SYSTEM_TEMPLATES',      (DIR_SYSTEM . 'Templates/'));
 # Require classes
 
 require_once (DIR_SYSTEM . 'System.php');
+require_once (DIR_SYSTEM . 'Exception.php');
 
 # Require configuration
 
