@@ -10,11 +10,15 @@ namespace System\Utils\Map {
 
 		private function parse(string $string, string $regex) {
 
-			if (!preg_match('/^\//', $string, $matches)) return false;
+			if (!preg_match('/^\//', $string)) return false;
 
-			$items = preg_split('/\//', $matches[1], 0, PREG_SPLIT_NO_EMPTY);
+			$items = preg_split('/\//', $string, 0, PREG_SPLIT_NO_EMPTY);
 
-			foreach ($items as $name) if (preg_match($regex, $name)) yield $name; else return false;
+			foreach ($items as $name) if (!preg_match($regex, $name)) return false;
+
+			# ------------------------
+
+			return $items;
 		}
 
 		# Constructor
