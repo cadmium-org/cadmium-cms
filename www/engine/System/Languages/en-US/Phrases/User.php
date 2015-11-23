@@ -32,13 +32,13 @@ return [
 	'USER_SUCCESS_SAVE'                             => 'User data has been saved successfully!',
 
 	'USER_SUCCESS_RESET'                            => 'You have requested password reset!',
-	'USER_SUCCESS_RESET_TEXT'                       => 'Further instructions have been send to your e-mail address',
+	'USER_SUCCESS_RESET_TEXT'                       => 'Further instructions have been sent to your e-mail',
 
-	'USER_SUCCESS_RECOVER'                          => 'Password has been recovered succesfully!',
-	'USER_SUCCESS_RECOVER_TEXT'                     => 'You can authorize using your new password',
+	'USER_SUCCESS_RECOVER'                          => 'Password has been recovered!',
+	'USER_SUCCESS_RECOVER_TEXT'                     => 'You can log in using your new password',
 
-	'USER_SUCCESS_REGISTER'                         => 'Registration has been completed succesfully!',
-	'USER_SUCCESS_REGISTER_TEXT'                    => 'You can authorize using your new user name and password',
+	'USER_SUCCESS_REGISTER'                         => 'Registration has been completed!',
+	'USER_SUCCESS_REGISTER_TEXT'                    => 'You can log in using your user name and password',
 
 	'USER_SUCCESS_EDIT'                             => 'Data has been saved successfully!',
 
