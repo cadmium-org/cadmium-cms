@@ -52,6 +52,8 @@ define('CONFIG_USER_LAST_NAME_MAX_LENGTH',          32);
 
 define('CONFIG_USER_CITY_MAX_LENGTH',               32);
 
+define('CONFIG_USER_CAPTCHA_MAX_LENGTH',            16);
+
 # Captcha
 
 define('CONFIG_CAPTCHA_LENGTH',                     5);
