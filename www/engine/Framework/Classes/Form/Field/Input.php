@@ -77,7 +77,7 @@ namespace Form\Field {
 
 			if (($this->type === FORM_INPUT_PASSWORD) || ($this->type === FORM_INPUT_CAPTCHA)) {
 
-				$this->value = Text::cut($value, $this->maxlength);
+				$this->value = $value;
 
 			} else {
 
