@@ -8,7 +8,9 @@ namespace System\Utils {
 
 		# Get items
 
-		private function getItems(int $active, Url $url) {
+		private function getItems(Template\Asset\Block $pagination, int $active, Url $url) {
+
+			$items = $pagination->loop('items');
 
 			for ($index = ($active - 3); $index <= ($active + 3); $index++) {
 
@@ -18,7 +20,7 @@ namespace System\Utils {
 
 				$url->set('index', $index); $link = $url->get();
 
-				yield ['class' => $class, 'link' => $link, 'index' => $index];
+				$items->add(['class' => $class, 'link' => $link, 'index' => $index]);
 			}
 		}
 
@@ -28,8 +30,8 @@ namespace System\Utils {
 
 			$extremums = [1, $count]; $buttons = [];
 
-			$buttons['extreme_0'] = [$extremums[0], ($extremums[0] + 4), ($active > ($extremums[0] + 4))];
-			$buttons['extreme_1'] = [$extremums[1], ($extremums[1] - 4), ($active < ($extremums[0] - 4))];
+			$buttons['first'] = [$extremums[0], ($extremums[0] + 4), ($active > ($extremums[0] + 4))];
+			$buttons['last']  = [$extremums[1], ($extremums[1] - 4), ($active < ($extremums[0] - 4))];
 
 			foreach ($buttons as $class => $data) {
 
@@ -49,8 +51,8 @@ namespace System\Utils {
 
 			$extremums = [1, $count]; $buttons = [];
 
-			$buttons['step_0'] = [$extremums[0], ($active - 1)];
-			$buttons['step_0'] = [$extremums[1], ($active + 1)];
+			$buttons['prev'] = [$extremums[0], ($active - 1)];
+			$buttons['next'] = [$extremums[1], ($active + 1)];
 
 			foreach ($buttons as $class => $data) {
 
@@ -76,7 +78,7 @@ namespace System\Utils {
 
 			# Set items
 
-			$pagination->items = $this->getItems($index, $url);
+			$this->setItems($pagination, $index, $url);
 
 			# Set buttons
 
