@@ -2,7 +2,7 @@
 
 namespace System\Modules\Profile\Handler {
 
-	use System\Modules\Auth, System\Utils\Lister, System\Utils\View, Date, Geo\Country, Geo\Timezone;
+	use System\Modules\Auth, System\Utils\Lister, System\Utils\View, Date, Geo\Country;
 
 	class Overview {
 
@@ -24,7 +24,7 @@ namespace System\Modules\Profile\Handler {
 
 			# Set sex
 
-			$contents->block('sex')->text = Lister\Sex::get(Auth::user()->sex);
+			$contents->sex = Lister\Sex::get(Auth::user()->sex);
 
 			# Set full name & city
 

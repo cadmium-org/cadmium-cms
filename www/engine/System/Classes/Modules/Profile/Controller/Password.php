@@ -4,17 +4,15 @@ namespace System\Modules\Profile\Controller {
 
 	use System\Modules\Auth, DB, Text;
 
-	abstract class Password {
+	class Password {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
-
-			if (!Auth::check()) return false;
+		public function __invoke(array $post) {
 
 			# Declare variables
 
-			$password = null; $password_new = null; $password_retype = null;
+			$password = ''; $password_new = ''; $password_retype = '';
 
 			# Extract post array
 

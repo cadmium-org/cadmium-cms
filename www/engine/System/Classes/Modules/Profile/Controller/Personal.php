@@ -4,19 +4,15 @@ namespace System\Modules\Profile\Controller {
 
 	use System\Modules\Auth, Validate;
 
-	abstract class Personal {
+	class Personal {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
-
-			if (!Auth::check()) return false;
+		public function __invoke(array $post) {
 
 			# Declare variables
 
-			$email = null; $first_name = null; $last_name = null; $sex = null;
-
-			$city = null; $country = null; $timezone = null;
+			$email = ''; $first_name = ''; $last_name = ''; $sex = ''; $city = ''; $country = ''; $timezone = '';
 
 			# Extract post array
 

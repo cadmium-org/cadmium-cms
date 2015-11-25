@@ -35,17 +35,19 @@ namespace System\Modules\Profile\Handler {
 
 			$this->form_password = new Profile\Form\Password();
 
+			# Create controllers
+
+			$controller_personal = new Profile\Controller\Personal();
+
+			$controller_password = new Profile\Controller\Password();
+
 			# Submit forms
-
-			$controller_personal = ['System\Modules\Profile\Controller\Personal', 'process'];
-
-			$controller_password = ['System\Modules\Profile\Controller\Password', 'process'];
 
 			if ($this->form_personal->submit($controller_personal) || $this->form_password->submit($controller_password)) {
 
 				Request::redirect(INSTALL_PATH . '/profile/edit?submitted');
 
-			} else if (null !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_EDIT'));
+			} else if (false !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_EDIT'));
 
 			# ------------------------
 

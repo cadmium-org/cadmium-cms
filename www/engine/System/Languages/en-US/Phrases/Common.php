@@ -26,6 +26,8 @@ return [
 	'USERS_2'                                   => 'users',
 	'USERS_3'                                   => 'users',
 
+	'COUNTRY_NOT_SELECTED'                      => 'Not selected',
+
 	# Sections
 
 	'SECTION_ADMIN'                             => 'Admin panel',

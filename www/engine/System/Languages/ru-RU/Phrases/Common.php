@@ -26,6 +26,8 @@ return [
 	'USERS_2'                                   => 'пользователя',
 	'USERS_3'                                   => 'пользователей',
 
+	'COUNTRY_NOT_SELECTED'                      => 'Не выбрана',
+
 	# Sections
 
 	'SECTION_ADMIN'                             => 'Панель управления',

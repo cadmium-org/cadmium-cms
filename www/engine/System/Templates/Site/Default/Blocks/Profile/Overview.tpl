@@ -40,17 +40,13 @@
 
 			</tr>
 
-			{ block:sex }
-
 			<tr>
 
 				<td class="four wide">%PROFILE_OVERVIEW_SEX%</td>
 
-				<td>$text$</td>
+				<td>$sex$</td>
 
 			</tr>
-
-			{ / block:sex }
 
 			{ block:full_name }
 
