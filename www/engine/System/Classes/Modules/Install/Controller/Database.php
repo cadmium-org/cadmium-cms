@@ -10,6 +10,8 @@ namespace System\Modules\Install\Controller {
 
 		public function __invoke(array $post) {
 
+			# Declare variables
+
 			$server = ''; $user = ''; $password = ''; $name = '';
 
 			# Extract post array
