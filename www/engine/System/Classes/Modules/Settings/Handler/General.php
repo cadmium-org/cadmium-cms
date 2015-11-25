@@ -10,9 +10,11 @@ namespace System\Modules\Settings\Handler {
 
 		# Get contents
 
-		public function getContents() {
+		private function getContents() {
 
 			$contents = View::get('Blocks\Settings\General');
+
+			# Implement form
 
 			$this->form->implement($contents);
 
@@ -31,11 +33,11 @@ namespace System\Modules\Settings\Handler {
 
 			# Submit form
 
-			if ($this->form->submit(['System\Modules\Settings\Controller\General', 'process'])) {
+			if ($this->form->submit(new Settings\Controller\General())) {
 
 				Request::redirect(INSTALL_PATH . '/admin/system/settings?submitted');
 
-			} else if (null !== Request::get('submitted')) Messages::success(Language::get('SETTINGS_SUCCESS'));
+			} else if (false !== Request::get('submitted')) Messages::success(Language::get('SETTINGS_SUCCESS'));
 
 			# ------------------------
 

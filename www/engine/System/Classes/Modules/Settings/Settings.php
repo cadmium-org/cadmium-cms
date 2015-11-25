@@ -72,9 +72,7 @@ namespace System\Modules {
 
 		# Set value
 
-		public static function set($name, $value) {
-
-			$name = strval($name);
+		public static function set(string $name, $value) {
 
 			if (!isset(self::$settings[$name])) return false;
 
@@ -92,11 +90,11 @@ namespace System\Modules {
 				if (false === ($value = Extend\Templates::validate($value))) return false;
 			}
 
-			# Validate site title & slogan
+			# Validate site title
 
-			else if (($name === 'site_title') || ($name === 'site_slogan')) {
+			else if ($name === 'site_title') {
 
-				if ('' === ($value = strval($value))) return false;
+				if ('' === ($value = (function(string $value) { return $value; })($value))) return false;
 			}
 
 			# Validate site status
@@ -106,11 +104,11 @@ namespace System\Modules {
 				if (false === ($value = Lister\Status::validate($value))) return false;
 			}
 
-			# Validate site description
+			# Validate site slogan/description/keywords
 
-			else if (($name === 'site_description') || ($name === 'site_keywords')) {
+			else if (($name === 'site_slogan') || ($name === 'site_description') || ($name === 'site_keywords')) {
 
-				$value = strval($value);
+				$value = (function(string $value) { return $value; })($value);
 			}
 
 			# Validate system url
@@ -138,10 +136,10 @@ namespace System\Modules {
 
 			else if ($name === 'users_registration') {
 
-				$value = boolval($value);
+				$value = (function(bool $value) { return $value; })($value);
 			}
 
-			# Validate value
+			# Set value
 
 			self::$settings[$name] = $value;
 
@@ -152,11 +150,9 @@ namespace System\Modules {
 
 		# Get value
 
-		public static function get($name = null) {
+		public static function get(string $name = null) {
 
 			if (null === $name) return self::$settings;
-
-			$name = strval($name);
 
 			return (isset(self::$settings[$name]) ? self::$settings[$name] : null);
 		}

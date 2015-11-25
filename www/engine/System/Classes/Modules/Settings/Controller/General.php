@@ -4,11 +4,11 @@ namespace System\Modules\Settings\Controller {
 
 	use System\Modules\Informer, System\Modules\Settings;
 
-	abstract class General {
+	class General {
 
-		# Process post data
+		# Invoker
 
-		public static function process(array $post) {
+		public function __invoke(array $post) {
 
 			# Check for demo mode
 
