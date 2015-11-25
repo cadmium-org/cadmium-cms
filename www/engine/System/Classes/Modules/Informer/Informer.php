@@ -8,7 +8,7 @@ namespace System\Modules {
 
 		# Count table entries
 
-		private static function countEntries($table_name, $false_on_error = false) {
+		private static function countEntries(string $table_name, bool $false_on_error = false) {
 
 			if (!(DB::select($table_name, 'COUNT(id) as count') && (DB::last()->rows === 1))) {
 
@@ -52,18 +52,14 @@ namespace System\Modules {
 
 		# Get pages count
 
-		public static function countPages($false_on_error = false) {
-
-			$false_on_error = boolval($false_on_error);
+		public static function countPages(bool $false_on_error = false) {
 
 			return self::countEntries(TABLE_PAGES, $false_on_error);
 		}
 
 		# Get users count
 
-		public static function countUsers($false_on_error = false) {
-
-			$false_on_error = boolval($false_on_error);
+		public static function countUsers(bool $false_on_error = false) {
 
 			return self::countEntries(TABLE_USERS, $false_on_error);
 		}

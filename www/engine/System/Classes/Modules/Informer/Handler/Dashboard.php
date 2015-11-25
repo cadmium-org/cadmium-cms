@@ -2,7 +2,7 @@
 
 namespace System\Modules\Informer\Handler {
 
-	use System\Modules\Informer, System\Modules\Settings, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
+	use System\Modules\Informer, System\Modules\Settings, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language, Template;
 
 	class Dashboard {
 
@@ -41,18 +41,18 @@ namespace System\Modules\Informer\Handler {
 
 			if (Informer::checkInstallFile()) {
 
-				$message = Language::get('DASHBOARD_MESSAGE_INSTALL_FILE');
+				$message = Template::block(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
 
-				Messages::error(str_replace('$install_path$', INSTALL_PATH, $message));
+				Messages::error($message->contents());
 			}
 
 			# Check if configuration file is loaded
 
 			if (!Settings::loaded()) {
 
-				$message = Language::get('DASHBOARD_MESSAGE_CONFIG_FILE');
+				$message = Template::block(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
 
-				Messages::warning(str_replace('$install_path$', INSTALL_PATH, $message));
+				Messages::warning($message->contents());
 			}
 
 			# ------------------------
