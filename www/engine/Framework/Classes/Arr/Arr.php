@@ -47,11 +47,16 @@ namespace {
 
 		public static function sortby(array $array, $sub_key, bool $descending = false) {
 
-			$column = array_column($array, $sub_key); $result = [];
+			$select_key = function($element) use($sub_key) {
+
+				return ((is_array($element) && isset($element[$sub_key])) ? $element[$sub_key] : false);
+			};
+
+			$column = array_map($select_key, $array);
 
 			if (!$descending) asort($column); else arsort($column);
 
-			foreach (array_keys($column) as $key) $result[$key] = $array[$key];
+			$result = []; foreach (array_keys($column) as $key) $result[$key] = $array[$key];
 
 			# ------------------------
 
