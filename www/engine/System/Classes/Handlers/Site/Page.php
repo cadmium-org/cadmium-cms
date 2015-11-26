@@ -16,7 +16,7 @@ namespace System\Handlers\Site {
 
 			# Page validator
 
-			$page = function(int $id, string $name, string $title) use (&$parent_id, &$link) {
+			$page = function(int $id, string $name, string $title) use(&$parent_id, &$link) {
 
 				$parent_id = $id; $link .= ('/' . $name);
 
