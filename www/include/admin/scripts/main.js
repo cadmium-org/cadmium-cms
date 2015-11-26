@@ -425,14 +425,14 @@ var Main = {
 
 				if (parseInt(data.status) == 1) {
 
-					if (this.section == 'admin') return location.reload();
-
 					for (var index in this.list) {
 
 						if (index == this.sender) this.list[index].checker.data('value', 1).addClass('positive');
 
 						else this.list[index].checker.data('value', 0).removeClass('positive');
 					}
+
+					if (this.section == 'admin') return location.reload();
 				}
 			}
 
@@ -483,14 +483,14 @@ var Main = {
 
 				if (parseInt(data.status) == 1) {
 
-					if (this.section == 'admin') return location.reload();
-
 					for (var index in this.list) {
 
 						if (index == this.sender) this.list[index].checker.data('value', 1).addClass('positive');
 
 						else this.list[index].checker.data('value', 0).removeClass('positive');
 					}
+
+					if (this.section == 'admin') return location.reload();
 				}
 			}
 
