@@ -2,7 +2,7 @@
 
 namespace System\Modules\Extend\Utils {
 
-	use System\Modules\Informer, System\Modules\Settings, System\Utils\View, Ajax, Arr, Form, Language, Request, Template;
+	use System\Modules\Informer, System\Modules\Settings, System\Utils\View, Ajax, Arr, Language, Request, Template;
 
 	trait Handler {
 
@@ -12,7 +12,7 @@ namespace System\Modules\Extend\Utils {
 
 		private function getHandlerSection() {
 
-			return ((strcasecmp(Request::get('list'), SECTION_ADMIN) === 0) ? SECTION_ADMIN : SECTION_SITE);
+			return (0 === (strcasecmp(Request::get('list'), SECTION_ADMIN)) ? SECTION_ADMIN : SECTION_SITE);
 		}
 
 		# Get items
@@ -31,7 +31,7 @@ namespace System\Modules\Extend\Utils {
 
 			# ------------------------
 
-			return Arr::subvalSort($items, 'title');
+			return Arr::sortby($items, 'title');
 		}
 
 		# Get sections loop
