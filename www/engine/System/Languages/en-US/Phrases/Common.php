@@ -36,6 +36,7 @@ return [
 	# Forms
 
 	'FORM_ERROR_REQUIRED'                       => 'Please fill in all required fields',
+	'FORM_ERROR_FORMAT'                         => 'Some fields contain invalid values',
 
 	# Modals
 

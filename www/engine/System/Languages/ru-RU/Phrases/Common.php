@@ -36,6 +36,7 @@ return [
 	# Forms
 
 	'FORM_ERROR_REQUIRED'                       => 'Необходимо заполнить все обязательные поля',
+	'FORM_ERROR_FORMAT'                         => 'Некоторые поля содержат неверные значения',
 
 	# Modals
 
