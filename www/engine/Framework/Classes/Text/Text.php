@@ -47,7 +47,14 @@ namespace {
 
 		public static function length(string $string) {
 
-			return call_user_func((function_exists('mb_strlen') ? 'mb_strlen' : 'strlen'), $string);
+			return (function_exists('mb_strlen') ? 'mb_strlen' : 'strlen')($string);
+		}
+
+		# Get substring
+
+		public static function substr(string $string, int $start, int $length) {
+
+			return (function_exists('mb_substr') ? 'mb_substr' : 'substr')($string, $start, $length);
 		}
 
 		# Check if string length is between given values
@@ -63,20 +70,20 @@ namespace {
 
 			if (($maxlength < 1) || (self::length($string = trim($string)) <= $maxlength)) return $string;
 
-			$string = call_user_func((function_exists('mb_substr') ? 'mb_substr' : 'substr'), $string, 0, $maxlength);
+			$string = (rtrim(self::substr($string, 0, $maxlength)) . ($ellipsis ? '...' : ''));
 
 			# ------------------------
 
-			return (rtrim($string) . ($ellipsis ? '...' : ''));
+			return $string;
 		}
 
-		# Get random string (only non-cyrillic pools)
+		# Get random string
 
 		public static function random(int $length, string $pool = TEXT_POOl_DEFAULT) {
 
-			if (($length < 1) || (0 === ($pool_length = strlen($pool)))) return '';
+			if (($length < 1) || (0 === ($pool_length = self::length($pool)))) return '';
 
-			$string = ''; for ($i = 0; $i < $length; $i++) $string .= substr($pool, random_int(0, ($pool_length - 1)), 1);
+			$string = ''; for ($i = 0; $i < $length; $i++) $string .= self::substr($pool, random_int(0, ($pool_length - 1)), 1);
 
 			# ------------------------
 
