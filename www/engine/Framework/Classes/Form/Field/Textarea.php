@@ -21,7 +21,8 @@ namespace Form\Field {
 			'placeholder'       => '',
 			'readonly'          => false,
 			'autofocus'         => false,
-			'translit'          => false
+			'translit'          => false,
+			'callback'          => null
 		];
 
 		# Constructor
@@ -55,6 +56,8 @@ namespace Form\Field {
 
 			if ($this->required && ('' === $this->value)) return 'required';
 
+			if ((null !== $this->callback) && (false === $this->callback($value))) return 'format';
+
 			# ------------------------
 
 			return true;
@@ -86,6 +89,13 @@ namespace Form\Field {
 		public function translit(bool $value) {
 
 			$this->config['translit'] = $value;
+		}
+
+		# Set callback
+
+		public function callback(callable $value) {
+
+			$this->config['callback'] = $value;
 		}
 
 		# Get block

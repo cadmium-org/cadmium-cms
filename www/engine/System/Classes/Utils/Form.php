@@ -6,6 +6,15 @@ namespace System\Utils {
 
 	abstract class Form extends \Form {
 
+		# Parse errors
+
+		private function parseErrors(array $errors) {
+
+			if (isset($errors['required'])) return Messages::error(Language::get('FORM_ERROR_REQUIRED'));
+
+			if (isset($errors['format'])) return Messages::error(Language::get('FORM_ERROR_FORMAT'));
+		}
+
 		# Submit form
 
 		public function submit(callable $callback) {
@@ -14,13 +23,11 @@ namespace System\Utils {
 
 			# Check form for errors and set an appropriate message
 
-			if ($this->errors()) { Messages::error(Language::get('FORM_ERROR_REQUIRED')); return false; }
+			if ([] !== ($errors = $this->errors())) { $this->parseErrors($errors); return false; }
 
 			# Call controller method
 
-			$result = call_user_func($callback, $post);
-
-			if (true !== $result) { Messages::error(Language::get($result)); return false; }
+			if (true !== $callback($post)) { Messages::error(Language::get($result)); return false; }
 
 			# ------------------------
 

@@ -92,7 +92,7 @@ namespace {
 
 				$field->post(); $post[$field->key()] = $field->value();
 
-				if (false !== $field->error()) $errors[] = ['key' => $field->key(), 'error' => $field->error()];
+				if (false !== $field->error()) $errors[$field->error()][] = $field->key();
 			}
 
 			$this->posted = true; $this->errors = $errors;
