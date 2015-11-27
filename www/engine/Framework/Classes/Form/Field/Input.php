@@ -78,7 +78,7 @@ namespace Form\Field {
 
 			if (($this->type === FORM_INPUT_PASSWORD) || ($this->type === FORM_INPUT_CAPTCHA)) {
 
-				$this->value = $value;
+				$this->value = Text::substr($value, 0, $this->maxlength);
 
 			} else {
 
