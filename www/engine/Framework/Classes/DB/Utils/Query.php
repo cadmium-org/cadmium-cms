@@ -29,22 +29,31 @@ namespace DB\Utils {
 
 		# Convert data array to string
 
-		protected function getString($source = null, string $key_parser = null, string $value_parser = null,
-
-			string $concat = '', string $separator = '') {
+		protected function getString($source = null, string $pattern = '', string $separator = '') {
 
 			if (!is_array($source)) return strval($source);
 
+			$regexs = ['key' => '/\^([a-z]+)/', 'value' => '/\$([a-z]+)/']; $matches = ['key' => [], 'value' => []];
+
 			$parsers = ['name' => 'getName', 'value' => 'getValue', 'sort' => 'getSort']; $output = [];
 
-			foreach ($source as $key => $value) {
+			# Parse pattern
 
-				$key = ((null !== $key_parser) ? call_user_func([$this, $parsers[$key_parser]], $key) : '');
+			foreach ($regexs as $name => $regex) preg_match($regex, $pattern, $matches[$name]);
 
-				$value = ((null !== $value_parser) ? call_user_func([$this, $parsers[$value_parser]], $value) : '');
+			# Process replacements
 
-				$output[] = trim($key . $concat . $value);
-			}
+			$replace = function(string $key, string $value) use($matches, $parsers, $pattern) {
+
+				foreach ($matches as $name => $match) if (isset($parsers[$match[1]])) {
+
+					$pattern = str_replace($match[0], [$this, $parsers[$match[1]]]($$name), $pattern);
+				}
+
+				return $pattern;
+			};
+
+			foreach ($source as $key => $value) $output[] = $replace($key, $value);
 
 			# ------------------------
 

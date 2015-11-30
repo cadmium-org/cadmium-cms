@@ -14,9 +14,9 @@ namespace DB\Query {
 
 			$table = $this->getName($table);
 
-			$dataset = $this->getString($dataset, 'name', 'value', ' = ', ', ');
+			$dataset = $this->getString($dataset, '^name = $value', ', ');
 
-			$condition = $this->getString($condition, 'name', 'value', ' = ', ' AND ');
+			$condition = $this->getString($condition, '^name = $value', ' AND ');
 
 			# Build query
 

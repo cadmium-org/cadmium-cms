@@ -14,11 +14,11 @@ namespace DB\Query {
 
 			$table = $this->getName($table);
 
-			$selection = $this->getString($selection, null, 'name', '', ', ');
+			$selection = $this->getString($selection, '$name', ', ');
 
-			$condition = $this->getString($condition, 'name', 'value', ' = ', ' AND ');
+			$condition = $this->getString($condition, '^name = $value', ' AND ');
 
-			$order = $this->getString($order, 'name', 'sort', ' ', ', ');
+			$order = $this->getString($order, '^name $sort', ', ');
 
 			# Build query
 

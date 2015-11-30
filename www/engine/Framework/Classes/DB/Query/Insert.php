@@ -22,9 +22,9 @@ namespace DB\Query {
 
 			foreach ($dataset as $key => $row) {
 
-				if (0 === $key) $names = $this->getString(array_keys($row), null, 'name', '', ', ');
+				if (0 === $key) $names = $this->getString(array_keys($row), '$name', ', ');
 
-				$values[] = ('(' . $this->getString(array_values($row), null, 'value', '', ', ') . ')');
+				$values[] = ('(' . $this->getString(array_values($row), '$value', ', ') . ')');
 			}
 
 			# Build query
