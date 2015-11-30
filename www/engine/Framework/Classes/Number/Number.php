@@ -42,9 +42,9 @@ namespace {
 
 			foreach ($exponents as $exponent => $text) if ($number < pow(1024, ($exponent + 1))) {
 
-				$number = number_format(($number / pow(1024, $exponent)), (($exponent > 1) ? 2 : $exponent));
+				$number = number_format(($number / pow(1024, $exponent)), (($exponent < 2) ? $exponent : 2));
 
-				return ($number . ' ' . $text);
+				return (floatval($number) . ' ' . $text);
 			}
 
 			# ------------------------
