@@ -54,7 +54,7 @@ namespace Form\Utils {
 
 			$params = array_merge(['disabled', 'required'], array_keys(isset($this->config) ? $this->config : []));
 
-			foreach ($params as $name) if (isset($config[$name])) call_user_func([$this, $name], $config[$name]);
+			foreach ($params as $name) if (isset($config[$name])) $this->$name($config[$name]);
 		}
 
 		# Post value

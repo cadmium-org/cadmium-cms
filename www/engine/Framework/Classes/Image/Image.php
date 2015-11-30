@@ -12,7 +12,7 @@ namespace {
 
 			Headers::nocache(); Headers::content($mime);
 
-			call_user_func($outputter, $image, ...$params); imagedestroy($image);
+			$outputter($image, ...$params); imagedestroy($image);
 
 			# ------------------------
 
