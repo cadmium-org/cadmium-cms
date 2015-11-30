@@ -28,7 +28,9 @@ namespace {
 
 		# Add input field
 
-		public function input(string $key, string $value = '', string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
+		public function input(string $key, string $value = '',
+
+			string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
 			$field = new Form\Field\Input($this, $key, $value, $type, $maxlength, $config);
 
@@ -37,7 +39,9 @@ namespace {
 
 		# Add textarea field
 
-		public function textarea(string $key, string $value = '', int $maxlength = 0, int $rows = 0, array $config = []) {
+		public function textarea(string $key, string $value = '',
+
+			int $maxlength = 0, int $rows = 0, array $config = []) {
 
 			$field = new Form\Field\Textarea($this, $key, $value, $maxlength, $rows, $config);
 
@@ -46,7 +50,9 @@ namespace {
 
 		# Add select field
 
-		public function select(string $key, string $value = '', array $options = [], string $default = null, array $config = []) {
+		public function select(string $key, string $value = '',
+
+			array $options = [], string $default = null, array $config = []) {
 
 			$field = new Form\Field\Select($this, $key, $value, $options, $default, $config);
 
