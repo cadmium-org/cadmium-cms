@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, Text;
+	use System\Modules\Auth, System\Modules\Entitizer, Str;
 
 	class Recover {
 
@@ -28,7 +28,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Encode password
 
-			$auth_key = Text::random(40); $password = Text::encode($auth_key, $password_new);
+			$auth_key = Str::random(40); $password = Str::encode($auth_key, $password_new);
 
 			# Update user
 

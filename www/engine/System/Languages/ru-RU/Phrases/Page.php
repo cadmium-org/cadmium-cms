@@ -5,12 +5,12 @@ return [
 	# Errors
 
 	'PAGE_ERROR_MODIFY'                             => 'Ошибка сохранения данных страницы',
+	'PAGE_ERROR_REMOVE'                             => 'Ошибка удаления страницы',
 
 	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Страница с таким URL уже существует',
 
 	# Success messages
 
-	'PAGE_SUCCESS_CREATE'                           => 'Страница была успешно создана!',
 	'PAGE_SUCCESS_SAVE'                             => 'Данные страницы были успешно сохранены!',
 
 	# Fields

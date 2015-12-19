@@ -40,7 +40,7 @@ namespace {
 
 		# Set query variable
 
-		public function set(string $name, string $value) {
+		public function set(string $name, string $value = '') {
 
 			$this->query[$name] = $value;
 

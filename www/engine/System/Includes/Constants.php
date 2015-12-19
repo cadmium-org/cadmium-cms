@@ -21,11 +21,16 @@ define('SECTION_SITE',                              'Site');
 
 # Entity types
 
-define('ENTITY_TYPE_PAGE',                          'Page');
-define('ENTITY_TYPE_MENUITEM',                      'Menuitem');
-define('ENTITY_TYPE_USER',                          'User');
-define('ENTITY_TYPE_USER_SECRET',                   'User\Secret');
-define('ENTITY_TYPE_USER_SESSION',                  'User\Session');
+define('ENTITY_TYPE_PAGE',                          'page');
+define('ENTITY_TYPE_MENUITEM',                      'menuitem');
+define('ENTITY_TYPE_USER',                          'user');
+define('ENTITY_TYPE_USER_SECRET',                   'user_secret');
+define('ENTITY_TYPE_USER_SESSION',                  'user_session');
+
+# Filemanager types
+
+define('FILEMANAGER_TYPE_DIR',                      'dir');
+define('FILEMANAGER_TYPE_FILE',                     'file');
 
 # Access
 

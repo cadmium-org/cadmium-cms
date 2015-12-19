@@ -2,44 +2,28 @@
 
 namespace System\Modules\Entitizer\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, DB, Text, Validate;
+	use System\Modules\Auth, System\Modules\Entitizer, Str, Validate;
 
-	/**
-	 * @property-read int $id
-	 * @property-read int $rank
-	 * @property-read string $name
-	 * @property-read string $email
-	 * @property-read string $auth_key
-	 * @property-read string $password
-	 * @property-read string $first_name
-	 * @property-read string $last_name
-	 * @property-read int $sex
-	 * @property-read string $city
-	 * @property-read string $country
-	 * @property-read string $timezone
-	 * @property-read int $time_registered
-	 * @property-read int $time_logged
-	 * @property-read string $full_name
-	 */
+	class User {
 
-	class User extends Entitizer\Utils\Controller {
+		private $user = null;
 
 		# Constructor
 
-		public function __construct($id) {
+		public function __construct(Entitizer\Entity\User $user) {
 
-			$this->entity = Entitizer::user($id);
+			$this->user = $user;
 		}
 
-		# Process post data
+		# Invoker
 
-		public function process($post) {
+		public function __invoke(array $post) {
 
 			# Declare variables
 
-			$name = null; $email = null; $rank = null; $first_name = null; $last_name = null; $sex = null;
+			$name = ''; $email = ''; $rank = ''; $first_name = ''; $last_name = ''; $sex = '';
 
-			$city = null; $country = null; $timezone = null; $password = null; $password_retype = null;
+			$city = ''; $country = ''; $timezone = ''; $password = ''; $password_retype = '';
 
 			# Extract post array
 
@@ -53,7 +37,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Validate password
 
-			if ((0 === $this->entity->id) || ('' !== $password)) {
+			if ((0 === $this->user->id) || ('' !== $password)) {
 
 				if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
@@ -62,13 +46,13 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			if (false === ($check_name = $this->entity->check('name', $name))) return 'USER_ERROR_MODIFY';
+			if (false === ($check_name = $this->user->check('name', $name))) return 'USER_ERROR_MODIFY';
 
 			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
 
 			# Check email exists
 
-			if (false === ($check_email = $this->entity->check('email', $email))) return 'USER_ERROR_MODIFY';
+			if (false === ($check_email = $this->user->check('email', $email))) return 'USER_ERROR_MODIFY';
 
 			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
 
@@ -86,21 +70,21 @@ namespace System\Modules\Entitizer\Controller {
 			$data['country']            = $country;
 			$data['timezone']           = $timezone;
 
-			if ((0 === $this->entity->id) || ('' !== $password)) {
+			if ((0 === $this->user->id) || ('' !== $password)) {
 
-				$data['auth_key']           = ($auth_key = Text::random(40));
-				$data['password']           = Text::encode($auth_key, $password);
+				$data['auth_key']           = ($auth_key = Str::random(40));
+				$data['password']           = Str::encode($auth_key, $password);
 			}
 
-			if (0 === $this->entity->id) {
+			if (0 === $this->user->id) {
 
 				$data['time_registered']    = REQUEST_TIME;
 				$data['time_logged']        = REQUEST_TIME;
 			}
 
-			$modifier = ((0 === $this->entity->id) ? 'create' : 'edit');
+			$modifier = ((0 === $this->user->id) ? 'create' : 'edit');
 
-			if (!call_user_func([$this->entity, $modifier], $data)) return 'USER_ERROR_MODIFY';
+			if (!$this->user->$modifier($data)) return 'USER_ERROR_MODIFY';
 
 			# ------------------------
 

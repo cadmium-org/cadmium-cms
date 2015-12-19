@@ -2,11 +2,6 @@
 
 return [
 
-	# Process errors
-
-	'AJAX_PROCESS_ERROR_DATA'                   => 'Ошибка обработки полученных данных',
-	'AJAX_PROCESS_ERROR_REMOVE'                 => 'Ошибка удаления записи',
-
 	# Response errors
 
 	'AJAX_RESPONSE_ERROR_400'                   => 'Неверный формат запроса',

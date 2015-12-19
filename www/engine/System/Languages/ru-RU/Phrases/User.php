@@ -5,6 +5,7 @@ return [
 	# Errors
 
 	'USER_ERROR_MODIFY'                             => 'Ошибка сохранения данных пользователя',
+	'USER_ERROR_REMOVE'                             => 'Ошибка удаления пользователя',
 
 	'USER_ERROR_AUTH_LOGIN'                         => 'Ошибка авторизации',
 	'USER_ERROR_AUTH_RESET'                         => 'Ошибка восстановления пароля',

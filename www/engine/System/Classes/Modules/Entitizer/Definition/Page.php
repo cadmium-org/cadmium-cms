@@ -14,18 +14,19 @@ namespace System\Modules\Entitizer\Definition {
 
 			# Add params
 
-			$this->range        ('visibility', VISIBILITY_DRAFT, true);
-			$this->range        ('access', ACCESS_PUBLIC, true);
-			$this->unique       ('hash');
-			$this->varchar      ('name', null, true);
-			$this->varchar      ('title', null, true);
-			$this->text         ('contents');
-			$this->text         ('description');
-			$this->text         ('keywords');
-			$this->boolean      ('robots_index', true);
-			$this->boolean      ('robots_follow', true);
-			$this->time         ('time_created');
-			$this->time         ('time_modified');
+			$this->numeric      ('parent_id',       false, 10, 0, true, false);
+			$this->numeric      ('visibility',      true, 1, VISIBILITY_DRAFT, true, false);
+			$this->numeric      ('access',          true, 1, ACCESS_PUBLIC, true, false);
+			$this->textual      ('hash',            true, 40, true, true, true);
+			$this->textual      ('name',            true, 255, false, true, false);
+			$this->textual      ('title',           true, 255, false, true, false);
+			$this->textual      ('contents',        false, 0, false, false, false);
+			$this->textual      ('description',     false, 0, false, false, false);
+			$this->textual      ('keywords',        false, 0, false, false, false);
+			$this->numeric      ('robots_index',    true, 1, 1, false, false);
+			$this->numeric      ('robots_follow',   true, 1, 1, false, false);
+			$this->numeric      ('time_created',    false, 10, 0, true, false);
+			$this->numeric      ('time_modified',   false, 10, 0, true, false);
 		}
 	}
 }

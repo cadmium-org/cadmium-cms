@@ -10,23 +10,19 @@
 
 		</a>
 
-		<a class="item" id="menu-launcher" style="display:none;"><i class="bars icon"></i></a>
+		<a class="launcher item"><i class="bars icon"></i></a>
 
-		<div class="menu" id="menu-items" style="display:none; padding:0;">
-
-			{ block:menu / }
-
-		</div>
+		{ block:menu / }
 
 		{ ! block:user }
 
 		<div class="right menu">
 
-			<div class="ui dropdown item">
+			<div class="ui user dropdown item">
 
 				<img class="ui right spaced avatar image" src="http://www.gravatar.com/avatar/$gravatar$?s=28&d=mm" />
 
-				<b>$name$</b><i class="dropdown icon"></i>
+				<b class="name">$name$</b><i class="dropdown icon"></i>
 
 				<div class="menu">
 

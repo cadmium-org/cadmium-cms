@@ -4,6 +4,13 @@ namespace {
 
 	abstract class Validate {
 
+		# Validate boolean
+
+		public function boolean($value) {
+
+			return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+		}
+
 		# Validate ip
 
 		public static function ip(string $value) {

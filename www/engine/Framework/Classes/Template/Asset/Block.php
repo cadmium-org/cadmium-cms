@@ -2,7 +2,7 @@
 
 namespace Template\Asset {
 
-	use Language, Template, Text;
+	use Language, Str, Template;
 
 	class Block implements Template\Utils\Settable {
 
@@ -130,7 +130,7 @@ namespace Template\Asset {
 
 			if (isset($this->variables[$name])) {
 
-				$this->variables[$name] = (!$raw ? Text::output($value, $maxlength) : $value);
+				$this->variables[$name] = (!$raw ? Str::output($value, $maxlength) : $value);
 			}
 
 			# ------------------------

@@ -6,9 +6,7 @@ namespace System\Modules\Entitizer\Utils {
 
 	abstract class Entity {
 
-		protected $definition = null;
-
-		protected $error = false, $id = 0, $data = [];
+		protected $definition = null, $error = false, $id = 0, $data = [];
 
 		# Init parent entities
 
@@ -18,7 +16,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			while (0 !== $entity->data['parent_id']) {
 
-				$entity = Entitizer::create(static::$type, $entity->data['parent_id']);
+				$entity = Entitizer::get(static::$type, $entity->data['parent_id']);
 
 				if (0 === $entity->id) return [];
 
@@ -32,18 +30,18 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Get dataset
 
-		private function getDataset(array $data, $initial = false) {
+		private function getDataset(array $data, bool $initial = false) {
 
 			$set = [];
 
 			if ($initial && isset($data['id'])) {
 
-				$set['id'] = $this->definition->id()->validate($data['id']);
+				$set['id'] = $this->definition->id()->cast($data['id']);
 			}
 
 			foreach ($this->definition->params() as $name => $param) {
 
-				if (isset($data[$name])) $set[$name] = $param->validate($data[$name]);
+				if (isset($data[$name])) $set[$name] = $param->cast($data[$name]);
 			}
 
 			# ------------------------
@@ -66,18 +64,15 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Constructor
 
-		public function __construct() {
+		public function __construct($id = null) {
 
 			# Create definition object
 
-			$this->definition = Entitizer::definition(static::$type);
+			$this->definition = Entitizer\Definition::get(static::$type);
 
 			# Preset data array
 
-			foreach ($this->definition->params() as $name => $param) {
-
-				$this->data[$name] = $param->validate(null);
-			}
+			foreach ($this->definition->params() as $name => $param) $this->data[$name] = $param->cast(null);
 
 			# Preset path
 
@@ -86,32 +81,31 @@ namespace System\Modules\Entitizer\Utils {
 			# Implement entity
 
 			$this->implement();
+
+			# Init entity
+
+			$id = $this->definition->id()->cast($id);
+
+			if ($id > 0) $this->init($id);
 		}
 
 		# Init entity
 
-		public function init($value, $name = 'id') {
+		public function init($value, string $name = 'id') {
 
-			if (0 !== $this->id) return true;
-
-			$name = strval($name);
+			if (0 !== $this->id) return false;
 
 			# Check param name
 
-			if ($name === 'id') $param = $this->definition->id(); else {
+			if ($name === 'id') $param = $this->definition->id();
 
-				if (false === ($param = $this->definition->get($name))) return false;
-
-				if (!($param instanceof Entitizer\Utils\Param\Type\Hash) &&
-
-				    !($param instanceof Entitizer\Utils\Param\Type\Unique)) return false;
-			}
+			else if ((false === ($param = $this->definition->get($name))) || !$param->unique()) return false;
 
 			# Select entity from DB
 
 			$selection = array_merge(['id'], array_keys($this->definition->params()));
 
-			$name = $param->name(); $value = $param->validate($value);
+			$name = $param->name(); $value = $param->cast($value);
 
 			DB::select(static::$table, $selection, [$name => $value], null, 1);
 
@@ -119,14 +113,11 @@ namespace System\Modules\Entitizer\Utils {
 
 			$data = DB::last()->row();
 
-			# Validate data
+			# Cast data
 
-			$this->id = $this->definition->id()->validate($data['id']);
+			$this->id = $this->definition->id()->cast($data['id']);
 
-			foreach ($this->definition->params() as $name => $param) {
-
-				$this->data[$name] = $param->validate($data[$name]);
-			}
+			foreach ($this->definition->params() as $name => $param) $this->data[$name] = $param->cast($data[$name]);
 
 			# Init path
 
@@ -147,19 +138,13 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Check if unique param value exists
 
-		public function check($name, $value) {
+		public function check(string $name, $value) {
 
-			$name = strval($name);
-
-			if (false === ($param = $this->definition->get($name))) return false;
-
-				if (!($param instanceof Entitizer\Utils\Param\Type\Hash) &&
-
-				    !($param instanceof Entitizer\Utils\Param\Type\Unique)) return false;
+			if ((false === ($param = $this->definition->get($name))) || !$param->unique()) return false;
 
 			# Select entity from DB
 
-			$name = $param->name(); $value = $param->validate($value);
+			$name = $param->name(); $value = $param->cast($value);
 
 			$condition = ($name . " = '" . addslashes($value) . "' AND id != " . $this->id);
 
@@ -186,7 +171,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Re-init entity
 
-			$this->id = DB::last()->id;
+			$this->error = false; $this->id = DB::last()->id;
 
 			foreach ($set as $name => $value) $this->data[$name] = $value;
 
@@ -195,6 +180,10 @@ namespace System\Modules\Entitizer\Utils {
 			# Implement entity
 
 			$this->implement();
+
+			# Cache entity
+
+			Entitizer::cache($this);
 
 			# ------------------------
 
@@ -240,13 +229,13 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (static::$super && ($this->id === 1)) return false;
 
-			if (static::$nesting && ($this->countChildren() !== 0)) return false;
+			if (static::$nesting && (0 !== $this->countChildren())) return false;
 
 			# Remove extension entries
 
 			foreach (static::$extensions as $extension) {
 
-				$entity = Entitizer::create($extension, $this->id);
+				$entity = Entitizer::get($extension, $this->id);
 
 				if ($entity->error() || ((0 !== $entity->id) && !$entity->remove())) return false;
 			}
@@ -273,17 +262,11 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Return data
 
-		public function __get($name) {
-
-			$name = strval($name);
+		public function __get(string $name) {
 
 			if ($name === 'id') return $this->id;
 
-			return (isset($this->data[$name]) ? $this->data[$name] : null);
+			return (isset($this->data[$name]) ? $this->data[$name] : false);
 		}
-
-		# Implementor interface
-
-		abstract protected function implement();
 	}
 }

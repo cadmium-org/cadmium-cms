@@ -10,7 +10,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Process parent block
 
-		private function processParent(Template\Utils\Block $parent) {
+		private function processParent(Template\Asset\Block $parent) {
 
 			# Set parent id
 
@@ -29,7 +29,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Get items block
 
-		private function getItemsBlock($ajax = false) {
+		private function getItemsBlock(bool $ajax = false) {
 
 			$items = Template::group();
 
@@ -74,7 +74,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Get contents
 
-		private function getContents($ajax = false) {
+		private function getContents(bool $ajax = false) {
 
 			$contents = View::get($ajax ? static::$view_ajax_main : static::$view_main);
 
@@ -111,19 +111,15 @@ namespace System\Modules\Entitizer\Utils {
 
 			$ajax = Ajax::response();
 
-			# Catch post data
-
-			$data = Request::postArray(['id']);
-
 			# Create parent entity
 
-			if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('parent_id'));
+			if (static::$nesting) $this->parent = Entitizer::get(static::$type, Request::get('parent_id'));
 
 			# Get children items
 
-			$lister = Entitizer::lister(static::$type);
+			$lister = new static::$lister(static::$type);
 
-			$this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), $data['id']);
+			$this->items = $lister->select(0, 0, (static::$nesting ? $this->parent->id : 0), Request::post('id'));
 
 			# ------------------------
 
@@ -140,11 +136,11 @@ namespace System\Modules\Entitizer\Utils {
 
 			# Create parent entity
 
-			if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('parent_id'));
+			if (static::$nesting) $this->parent = Entitizer::get(static::$type, Request::get('parent_id'));
 
 			# Get children items
 
-			$lister = Entitizer::lister(static::$type);
+			$lister = new static::$lister(static::$type);
 
 			$this->items = $lister->select($this->index, static::$display, (static::$nesting ? $this->parent->id : 0));
 

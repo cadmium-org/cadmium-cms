@@ -45,7 +45,15 @@
 	</item>
 	<item>
 		<path>/admin/content/filemanager</path>
-		<handler>/Admin/Content/Filemanager</handler>
+		<handler>/Admin/Content/Filemanager/Listview</handler>
+	</item>
+	<item>
+		<path>/admin/content/filemanager/dir</path>
+		<handler>/Admin/Content/Filemanager/Dir</handler>
+	</item>
+	<item>
+		<path>/admin/content/filemanager/file</path>
+		<handler>/Admin/Content/Filemanager/File</handler>
 	</item>
 
 	<item>

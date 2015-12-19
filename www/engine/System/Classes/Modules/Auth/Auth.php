@@ -12,7 +12,7 @@ namespace System\Modules {
 
 		private static function getAuth(string $code, string $type, int $lifetime) {
 
-			if (!($auth = Entitizer::create($type))->init($code, 'code')) return false;
+			if (!($auth = Entitizer::get($type))->init($code, 'code')) return false;
 
 			if (($auth->ip !== REQUEST_CLIENT_IP) || ($auth->time < (REQUEST_TIME - $lifetime))) return false;
 

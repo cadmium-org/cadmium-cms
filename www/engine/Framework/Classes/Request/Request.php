@@ -34,18 +34,11 @@ namespace {
 			return (isset($_POST[$name]) ? $_POST[$name] : false);
 		}
 
-		# Return GET params by list of names
+		# Return file by name
 
-		public static function getArray(array $params) {
+		public static function file(string $name) {
 
-			return Arr::select($_GET, $params);
-		}
-
-		# Return POST params by list of names
-
-		public static function postArray(array $params) {
-
-			return Arr::select($_POST, $params);
+			return (isset($_FILES[$name]) ? $_FILES[$name] : false);
 		}
 
 		# Redirect to specified url

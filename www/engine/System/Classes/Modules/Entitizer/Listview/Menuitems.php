@@ -10,6 +10,8 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Listview configuration
 
+		protected static $lister = 'System\Modules\Entitizer\Lister\Menuitems';
+
 		protected static $link = '/admin/content/menuitems';
 
 		protected static $naming = 'text';
@@ -26,7 +28,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Add additional data for specific entity
 
-		protected function processEntity(Template\Utils\Block $contents) {
+		protected function processEntity(Template\Asset\Block $contents) {
 
 			if ((0 === $this->parent->id) || ('' === $this->parent->link)) {
 
@@ -37,7 +39,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Add item additional data
 
-		protected function processItem(Template\Utils\Block $view, array $data) {
+		protected function processItem(Template\Asset\Block $view, array $data) {
 
 			$view->icon = ((0 === $data['children']) ? 'file text outline' : 'folder');
 

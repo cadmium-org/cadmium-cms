@@ -76,15 +76,15 @@ namespace System\Modules\Install\Utils {
 
 			$definitions = [];
 
-			$definitions[] = Entitizer::definition(ENTITY_TYPE_PAGE);
+			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_PAGE);
 
-			$definitions[] = Entitizer::definition(ENTITY_TYPE_MENUITEM);
+			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_MENUITEM);
 
-			$definitions[] = Entitizer::definition(ENTITY_TYPE_USER);
+			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_USER);
 
-			$definitions[] = Entitizer::definition(ENTITY_TYPE_USER_SECRET);
+			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_USER_SECRET);
 
-			$definitions[] = Entitizer::definition(ENTITY_TYPE_USER_SESSION);
+			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_USER_SESSION);
 
 			foreach ($definitions as $definition) if (!$definition->createTable()) return false;
 

@@ -5,6 +5,7 @@ return [
 	# Errors
 
 	'USER_ERROR_MODIFY'                             => 'Error saving user data',
+	'USER_ERROR_REMOVE'                             => 'Error removing user',
 
 	'USER_ERROR_AUTH_LOGIN'                         => 'Authorization error',
 	'USER_ERROR_AUTH_RESET'                         => 'Error resetting password',
@@ -29,7 +30,7 @@ return [
 
 	# Success messages
 
-	'USER_SUCCESS_SAVE'                             => 'User data has been saved successfully!',
+	'USER_SUCCESS_SAVE'                             => 'User data has been successfully saved!',
 
 	'USER_SUCCESS_RESET'                            => 'You have requested password reset!',
 	'USER_SUCCESS_RESET_TEXT'                       => 'Further instructions have been sent to your e-mail',
@@ -40,7 +41,7 @@ return [
 	'USER_SUCCESS_REGISTER'                         => 'Registration has been completed!',
 	'USER_SUCCESS_REGISTER_TEXT'                    => 'You can log in using your user name and password',
 
-	'USER_SUCCESS_EDIT'                             => 'Data has been saved successfully!',
+	'USER_SUCCESS_EDIT'                             => 'Data has been successfully saved!',
 
 	# Fields
 

@@ -4,31 +4,24 @@ namespace System\Modules\Entitizer\Controller {
 
 	use System\Modules\Entitizer;
 
-	/**
-	 * @property-read int $id
-	 * @property-read int $position
-	 * @property-read string $link
-	 * @property-read string $text
-	 * @property-read int $target
-	 * @property-read array $path
-	 */
+	class Menuitem {
 
-	class Menuitem extends Entitizer\Utils\Controller {
+		private $menuitem = null;
 
 		# Constructor
 
-		public function __construct($id) {
+		public function __construct(Entitizer\Entity\Menuitem $menuitem) {
 
-			$this->entity = Entitizer::menuitem($id);
+			$this->menuitem = $menuitem;
 		}
 
-		# Process post data
+		# Invoker
 
-		public function process($post) {
+		public function __invoke(array $post) {
 
 			# Declare variables
 
-			$parent_id = null; $text = null; $link = null; $target = null; $position = null;
+			$parent_id = ''; $text = ''; $link = ''; $target = ''; $position = '';
 
 			# Extract post array
 
@@ -44,9 +37,9 @@ namespace System\Modules\Entitizer\Controller {
 			$data['target']             = $target;
 			$data['position']           = $position;
 
-			$modifier = ((0 === $this->entity->id) ? 'create' : 'edit');
+			$modifier = ((0 === $this->menuitem->id) ? 'create' : 'edit');
 
-			if (!call_user_func([$this->entity, $modifier], $data)) return 'MENUITEM_ERROR_MODIFY';
+			if (!$this->menuitem->$modifier($data)) return 'MENUITEM_ERROR_MODIFY';
 
 			# ------------------------
 

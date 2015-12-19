@@ -44,7 +44,7 @@ namespace Form\Field {
 
 		public function __construct(Form $form, string $key, string $value = '',
 
-			array $options = [], string $default = null, array $config = []) {
+		    array $options = [], string $default = null, array $config = []) {
 
 			# Init field
 

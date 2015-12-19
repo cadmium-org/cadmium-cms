@@ -4,33 +4,33 @@ namespace System\Modules\Entitizer\Utils\Param\Type {
 
 	use System\Modules\Entitizer;
 
-	class Id extends Entitizer\Utils\Param\General\Number {
+	class Id extends Entitizer\Utils\Param {
 
-		private $auto_increment = true;
+		protected $auto_increment = true;
 
 		# Constructor
 
-		public function __construct($name, $auto_increment = true) {
+		public function __construct(string $name, bool $auto_increment = true) {
 
-			parent::__construct($name);
+			$this->name = $name; $this->auto_increment = $auto_increment;
 
-			$this->auto_increment = boolval($auto_increment);
+			$this->index = true; $this->unique = true; $this->primary = true;
 		}
 
 		# Get field statement
 
 		public function fieldStatement() {
 
-			$auto_increment = ($this->auto_increment ? " AUTO_INCREMENT" : "");
+			return ("`" . $this->name . "` int(10) unsigned NOT NULL") .
 
-			return ("`" . $this->name . "` int(10) unsigned NOT NULL" . $auto_increment);
+			       ($this->auto_increment ? " AUTO_INCREMENT" : "");
 		}
 
-		# Get key statement
+		# Cast value
 
-		public function keyStatement() {
+		public function cast($value = null) {
 
-			return ("PRIMARY KEY (`" . $this->name . "`)");
+			return ((($value !== null) && is_numeric($value)) ? intval($value) : 0);
 		}
 	}
 }

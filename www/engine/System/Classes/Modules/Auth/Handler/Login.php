@@ -16,13 +16,16 @@ namespace System\Modules\Auth\Handler {
 
 			$this->form = new Auth\Form\Login();
 
-			# Submit form
+			# Handle form
 
-			if ($this->form->submit(new Auth\Controller\Login())) {
+			if ($this->form->handle(new Auth\Controller\Login())) {
 
 				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile'));
+			}
 
-			} else if (Request::get('submitted') === 'reset') {
+			# Display success message
+
+			if (Request::get('submitted') === 'reset') {
 
 				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
 

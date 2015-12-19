@@ -15,9 +15,9 @@ namespace System\Utils {
 			if (isset($errors['format'])) return Messages::error(Language::get('FORM_ERROR_FORMAT'));
 		}
 
-		# Submit form
+		# Handle form
 
-		public function submit(callable $callback) {
+		public function handle(callable $callback) {
 
 			if (false === ($post = $this->post())) return false;
 
@@ -27,7 +27,7 @@ namespace System\Utils {
 
 			# Call controller method
 
-			if (true !== $callback($post)) { Messages::error(Language::get($result)); return false; }
+			if (true !== ($result = $callback($post))) { Messages::error(Language::get($result)); return false; }
 
 			# ------------------------
 

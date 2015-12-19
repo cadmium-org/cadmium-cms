@@ -14,19 +14,19 @@ namespace System\Modules\Entitizer\Definition {
 
 			# Add params
 
-			$this->range        ('rank', RANK_USER);
-			$this->unique       ('name');
-			$this->unique       ('email');
-			$this->varchar      ('auth_key', 40);
-			$this->varchar      ('password', 40);
-			$this->varchar      ('first_name');
-			$this->varchar      ('last_name');
-			$this->range        ('sex');
-			$this->varchar      ('city');
-			$this->varchar      ('country', 2);
-			$this->varchar      ('timezone', 40);
-			$this->time         ('time_registered');
-			$this->time         ('time_logged');
+			$this->numeric      ('rank',            true, 1, RANK_USER, true, false);
+			$this->textual      ('name',            true, 16, false, true, true);
+			$this->textual      ('email',           true, 128, false, true, true);
+			$this->textual      ('auth_key',        true, 40, true, false, false);
+			$this->textual      ('password',        true, 40, true, false, false);
+			$this->textual      ('first_name',      true, 255, false, false, false);
+			$this->textual      ('last_name',       true, 255, false, false, false);
+			$this->numeric      ('sex',             true, 1, SEX_NOT_SELECTED, false, false);
+			$this->textual      ('city',            true, 255, false, false, false);
+			$this->textual      ('country',         true, 2, false, false, false);
+			$this->textual      ('timezone',        true, 40, false, false, false);
+			$this->numeric      ('time_registered', false, 10, 0, true, false);
+			$this->numeric      ('time_logged',     false, 10, 0, true, false);
 		}
 	}
 }

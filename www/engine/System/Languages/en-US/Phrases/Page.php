@@ -5,13 +5,13 @@ return [
 	# Errors
 
 	'PAGE_ERROR_MODIFY'                             => 'Error saving page data',
+	'PAGE_ERROR_REMOVE'                             => 'Error removing page',
 
 	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Page URL is already in use',
 
 	# Success messages
 
-	'PAGE_SUCCESS_CREATE'                           => 'Page has been created successfully!',
-	'PAGE_SUCCESS_SAVE'                             => 'Page data has been saved successfully!',
+	'PAGE_SUCCESS_SAVE'                             => 'Page data has been successfully saved!',
 
 	# Fields
 

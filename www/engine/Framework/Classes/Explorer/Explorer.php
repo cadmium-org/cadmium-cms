@@ -30,13 +30,6 @@ namespace {
 			return pathinfo($file_name, $param);
 		}
 
-		# Check if file exists
-
-		public static function isFile(string $file_name) {
-
-			return (@file_exists($file_name) && @is_file($file_name));
-		}
-
 		# Check if directory exists
 
 		public static function isDir(string $dir_name) {
@@ -44,11 +37,25 @@ namespace {
 			return (@file_exists($dir_name) && @is_dir($dir_name));
 		}
 
-		# Remove file
+		# Check if file exists
 
-		public static function removeFile(string $file_name) {
+		public static function isFile(string $file_name) {
 
-			return @unlink($file_name);
+			return (@file_exists($file_name) && @is_file($file_name));
+		}
+
+		# Create directory
+
+		public static function createDir(string $dir_name) {
+
+			return @mkdir($dir_name);
+		}
+
+		# Create file
+
+		public static function createFile(string $file_name) {
+
+			return @touch($file_name);
 		}
 
 		# Remove directory
@@ -72,11 +79,11 @@ namespace {
 			return @rmdir($dir_name);
 		}
 
-		# Get files list
+		# Remove file
 
-		public static function listFiles(string $dir_name) {
+		public static function removeFile(string $file_name) {
 
-			return iterator_to_array(self::getList($dir_name, false));
+			return @unlink($file_name);
 		}
 
 		# Get directories list
@@ -84,6 +91,13 @@ namespace {
 		public static function listDirs(string $dir_name) {
 
 			return iterator_to_array(self::getList($dir_name, true));
+		}
+
+		# Get files list
+
+		public static function listFiles(string $dir_name) {
+
+			return iterator_to_array(self::getList($dir_name, false));
 		}
 
 		# Get file dirname

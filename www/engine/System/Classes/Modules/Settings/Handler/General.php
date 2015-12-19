@@ -31,13 +31,16 @@ namespace System\Modules\Settings\Handler {
 
 			$this->form = new Settings\Form\General();
 
-			# Submit form
+			# Handle form
 
-			if ($this->form->submit(new Settings\Controller\General())) {
+			if ($this->form->handle(new Settings\Controller\General())) {
 
 				Request::redirect(INSTALL_PATH . '/admin/system/settings?submitted');
+			}
 
-			} else if (false !== Request::get('submitted')) Messages::success(Language::get('SETTINGS_SUCCESS'));
+			# Display success message
+
+			if (false !== Request::get('submitted')) Messages::success(Language::get('SETTINGS_SUCCESS'));
 
 			# ------------------------
 

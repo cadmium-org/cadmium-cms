@@ -10,23 +10,19 @@
 
 		</a>
 
-		<a class="item" id="menu-launcher" style="display:none;"><i class="bars icon"></i></a>
+		<a class="launcher item"><i class="bars icon"></i></a>
 
-		<div class="menu" id="menu-items" style="display:none; padding:0;">
-
-			{ block:menu / }
-
-		</div>
+		{ block:menu / }
 
 		{ block:user }
 
 		<div class="right menu">
 
-			<div class="ui dropdown item">
+			<div class="ui user dropdown item">
 
 				<img class="ui right spaced avatar image" src="http://www.gravatar.com/avatar/$gravatar$?s=28&d=mm" />
 
-				<b>$name$</b><i class="dropdown icon"></i>
+				<b class="name">$name$</b><i class="dropdown icon"></i>
 
 				<div class="menu">
 
@@ -66,15 +62,13 @@
 
 				<div class="nine wide column">
 
-					<a class="ui small basic labeled icon button" href="$cadmium_home$" target="_blank">
+					<a class="ui small basic button" href="$cadmium_home$" target="_blank">
 
-						<i class="copyright icon"></i>
-
-						Copyright $cadmium_copy$ <b>$cadmium_name$</b>
+						&copy; $cadmium_copy$ <b>$cadmium_name$</b>
 
 					</a>
 
-					<a class="ui small disabled button">ver. $cadmium_version$</a>
+					<a class="ui small disabled button">v. $cadmium_version$</a>
 
 				</div>
 
@@ -146,9 +140,9 @@
 
 		<div class="actions">
 
-			<div class="ui deny black button">%MODAL_ACTION_NO%</div>
+			<div class="ui black deny button">%MODAL_ACTION_NO%</div>
 
-			<div class="ui negative approve right labeled icon button"><i class="remove icon"></i>%MODAL_ACTION_YES%</div>
+			<div class="ui right labeled icon approve button"><i class="remove icon"></i>%MODAL_ACTION_YES%</div>
 
 		</div>
 

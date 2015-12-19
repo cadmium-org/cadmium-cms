@@ -8,7 +8,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Get query
 
-		private function getQuery($select, $index, $display, $parent_id, $disable_id) {
+		private function getQuery(array $select, int $index, int $display, int $parent_id, int $disable_id) {
 
 			$selection = []; $order_by = [];
 
@@ -47,17 +47,13 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Get items
 
-		public function select($index = 0, $display = 0, $parent_id = 0, $disable_id = 0) {
-
-			$index = intval($index); $display = intval($display);
-
-			$parent_id = intval($parent_id); $disable_id = intval($disable_id);
+		public function select(int $index = 0, int $display = 0, int $parent_id = 0, int $disable_id = 0) {
 
 			$items = ['list' => [], 'total' => 0];
 
 			# Create definition
 
-			$definition = Entitizer::definition(static::$type); $params = $definition->params();
+			$definition = Entitizer\Definition::get(static::$type); $params = $definition->params();
 
 			# Select entities
 
@@ -69,9 +65,9 @@ namespace System\Modules\Entitizer\Utils {
 
 			while (null !== ($row = DB::last()->row())) {
 
-				$item = ['id' => $definition->id()->validate($row['id'])];
+				$item = ['id' => $definition->id()->cast($row['id'])];
 
-				foreach ($params as $name => $param) $item[$name] = $param->validate($row[$name]);
+				foreach ($params as $name => $param) $item[$name] = $param->cast($row[$name]);
 
 				if (static::$nesting) $item['children'] = intval($row['children']);
 

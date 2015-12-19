@@ -30,9 +30,9 @@ define('CONFIG_MENUITEM_TEXT_MAX_LENGTH',           255);
 define('CONFIG_MENUITEM_LINK_MAX_LENGTH',           255);
 define('CONFIG_MENUITEM_POSITION_MAX_LENGTH',       2);
 
-# File
+# Filemanager
 
-define('CONFIG_FILE_NAME_MAX_LENGTH',               128);
+define('CONFIG_FILEMANAGER_NAME_MAX_LENGTH',        128);
 
 # User
 
@@ -74,8 +74,9 @@ define('CONFIG_ADMIN_TEMPLATE_DEFAULT',             'Default');
 
 define('CONFIG_ADMIN_PAGES_DISPLAY',                50);
 define('CONFIG_ADMIN_MENUITEMS_DISPLAY',            50);
-define('CONFIG_ADMIN_FILES_DISPLAY',                50);
 define('CONFIG_ADMIN_USERS_DISPLAY',                50);
+
+define('CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY',    50);
 
 # Site
 
@@ -109,4 +110,4 @@ define('CONFIG_DATABASE_NAME_MAX_LENGTH',           64);
 
 # Other
 
-define('CONFIG_UPLOADS_MAX_SIZE',                   107374182400);  # 100 MB
+define('CONFIG_UPLOADS_MAX_SIZE',                   104857600);  # 100 MB

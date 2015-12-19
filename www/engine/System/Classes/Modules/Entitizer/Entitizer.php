@@ -6,16 +6,15 @@ namespace System\Modules {
 
 	abstract class Entitizer {
 
-		const ERROR_TYPE                    = 'Invalid entity type';
-		const ERROR_DEFINITION              = 'Entity definition does not exists';
-		const ERROR_LISTER                  = 'Entity lister does not exists';
-		const ERROR_CONTROLLER              = 'Entity controller does not exists';
+		const ERROR_MESSAGE = 'Invalid entity type';
+
+		# Objects cache
 
 		private static $cache = [];
 
-		# Registred types
+		# Entities classes
 
-		private static $types = [
+		private static $classes = [
 
 			ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Entity\Page',
 			ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Entity\Menuitem',
@@ -24,89 +23,17 @@ namespace System\Modules {
 			ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Entity\User\Session'
 		];
 
-		# Definitions
+		# Get entity
 
-		private static $definitions = [
+		public static function get(string $type, $id = null) {
 
-			ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Definition\Page',
-			ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Definition\Menuitem',
-			ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Definition\User',
-			ENTITY_TYPE_USER_SECRET         => 'System\Modules\Entitizer\Definition\User\Secret',
-			ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Definition\User\Session'
-		];
+			if (!isset(self::$classes[$type])) throw new Exception\General(self::ERROR_MESSAGE);
 
-		# Listers
-
-		private static $listers = [
-
-			ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Lister\Pages',
-			ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Lister\Menuitems',
-			ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Lister\Users'
-		];
-
-		# Controlles
-
-		private static $controllers = [
-
-			ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Controller\Page',
-			ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Controller\Menuitem',
-			ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Controller\User'
-		];
-
-		# Create new entity
-
-		public static function create($type, $id = 0) {
-
-			$type = strval($type); $id = intval($id);
-
-			if (!isset(self::$types[$type])) throw new Exception\General(self::ERROR_TYPE);
-
-			if (isset(self::$cache[$type][$id]) && (0 !== self::$cache[$type][$id]->id)) return self::$cache[$type][$id];
-
-			$entity = new self::$types[$type]; $entity->init($id);
+			$cached = (isset(self::$cache[$type][$id]) && (0 !== self::$cache[$type][$id]->id));
 
 			# ------------------------
 
-			return $entity;
-		}
-
-		# Create new entity definition
-
-		public static function definition($type) {
-
-			$type = strval($type);
-
-			if (!isset(self::$definitions[$type])) throw new Exception\General(self::ERROR_DEFINITION);
-
-			# ------------------------
-
-			return new self::$definitions[$type];
-		}
-
-		# Create new entity lister
-
-		public static function lister($type) {
-
-			$type = strval($type);
-
-			if (!isset(self::$listers[$type])) throw new Exception\General(self::ERROR_LISTER);
-
-			# ------------------------
-
-			return new self::$listers[$type];
-		}
-
-		# Create new entity controller
-
-		public static function controller($type, $id = 0) {
-
-			$type = strval($type); $id = intval($id);
-
-			if (!isset(self::$controllers[$type])) throw new Exception\General(self::ERROR_CONTROLLER);
-
-			# ------------------------
-
-			return new self::$controllers[$type]($id);
+			return (!$cached ? new self::$classes[$type]($id) : self::$cache[$type][$id]);
 		}
 
 		# Cache entity
@@ -115,7 +42,7 @@ namespace System\Modules {
 
 			$class = get_class($entity);
 
-			if (false === ($type = array_search($class, self::$types, true))) return false;
+			if (false === ($type = array_search($class, self::$classes, true))) return false;
 
 			if (0 !== $entity->id) self::$cache[$type][$entity->id] = $entity;
 
@@ -124,39 +51,39 @@ namespace System\Modules {
 			return true;
 		}
 
-		# Create new page entity
+		# Create page entity
 
-		public static function page($id = 0) {
+		public static function page($id = null) {
 
-			return self::create(ENTITY_TYPE_PAGE, $id);
+			return self::get(ENTITY_TYPE_PAGE, $id);
 		}
 
-		# Create new menuitem entity
+		# Create menuitem entity
 
-		public static function menuitem($id = 0) {
+		public static function menuitem($id = null) {
 
-			return self::create(ENTITY_TYPE_MENUITEM, $id);
+			return self::get(ENTITY_TYPE_MENUITEM, $id);
 		}
 
-		# Create new user entity
+		# Create user entity
 
-		public static function user($id = 0) {
+		public static function user($id = null) {
 
-			return self::create(ENTITY_TYPE_USER, $id);
+			return self::get(ENTITY_TYPE_USER, $id);
 		}
 
-		# Create new user secret entity
+		# Create user secret entity
 
-		public static function userSecret($id = 0) {
+		public static function userSecret($id = null) {
 
-			return self::create(ENTITY_TYPE_USER_SECRET, $id);
+			return self::get(ENTITY_TYPE_USER_SECRET, $id);
 		}
 
-		# Create new user session entity
+		# Create user session entity
 
-		public static function userSession($id = 0) {
+		public static function userSession($id = null) {
 
-			return self::create(ENTITY_TYPE_USER_SESSION, $id);
+			return self::get(ENTITY_TYPE_USER_SESSION, $id);
 		}
 	}
 }

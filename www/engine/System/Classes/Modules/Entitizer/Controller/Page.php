@@ -2,45 +2,28 @@
 
 namespace System\Modules\Entitizer\Controller {
 
-	use System\Modules\Entitizer, Arr, DB;
+	use System\Modules\Entitizer, Arr;
 
-	/**
-	 * @property-read int $id
-	 * @property-read int $visibility
-	 * @property-read int $access
-	 * @property-read string $hash
-	 * @property-read string $name
-	 * @property-read string $title
-	 * @property-read string $contents
-	 * @property-read string $description
-	 * @property-read string $keywrods
-	 * @property-read int $robots_index
-	 * @property-read int $robots_follow
-	 * @property-read int $time_created
-	 * @property-read int $time_modified
-	 * @property-read array $path
-	 * @property-read string $link
-	 * @property-read string $canonical
-	 */
+	class Page {
 
-	class Page extends Entitizer\Utils\Controller {
+		private $page = null;
 
 		# Constructor
 
-		public function __construct($id) {
+		public function __construct(Entitizer\Entity\Page $page) {
 
-			$this->entity = Entitizer::page($id);
+			$this->page = $page;
 		}
 
-		# Process post data
+		# Invoker
 
-		public function process($post) {
+		public function __invoke(array $post) {
 
 			# Declare variables
 
-			$parent_id = null; $title = null; $name = null; $visibility = null; $access = null;
+			$parent_id = ''; $title = ''; $name = ''; $visibility = ''; $access = '';
 
-			$description = null; $keywords = null; $robots_index = null; $robots_follow = null; $contents = null;
+			$description = ''; $keywords = ''; $robots_index = ''; $robots_follow = ''; $contents = '';
 
 			# Extract post array
 
@@ -52,7 +35,7 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			if (false === ($check_name = $this->entity->check('hash', $hash))) return 'PAGE_ERROR_MODIFY';
+			if (false === ($check_name = $this->page->check('hash', $hash))) return 'PAGE_ERROR_MODIFY';
 
 			if ($check_name === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
 
@@ -72,9 +55,9 @@ namespace System\Modules\Entitizer\Controller {
 			$data['contents']           = $contents;
 			$data['hash']               = $hash;
 
-			$modifier = ((0 === $this->entity->id) ? 'create' : 'edit');
+			$modifier = ((0 === $this->page->id) ? 'create' : 'edit');
 
-			if (!call_user_func([$this->entity, $modifier], $data)) return 'PAGE_ERROR_MODIFY';
+			if (!$this->page->$modifier($data)) return 'PAGE_ERROR_MODIFY';
 
 			# ------------------------
 

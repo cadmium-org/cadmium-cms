@@ -10,9 +10,9 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Add param to set
 
-		private function addParam($param) {
+		private function addParam(Param $param) {
 
-			if (('' === $param->name()) || isset($this->params[$param->name()])) return false;
+			if (('' === $param->name()) || isset($this->params[$param->name()])) return;
 
 			$this->params[$param->name()] = $param;
 		}
@@ -21,11 +21,11 @@ namespace System\Modules\Entitizer\Utils {
 
 		private function getStatements($method) {
 
-			$statements = [call_user_func([$this->id, $method])];
+			$statements = [$this->id->$method()];
 
 			foreach ($this->params as $param) {
 
-				if (false !== ($statement = call_user_func([$param, $method]))) $statements[] = $statement;
+				if (false !== ($statement = $param->$method())) $statements[] = $statement;
 			}
 
 			# ------------------------
@@ -33,60 +33,22 @@ namespace System\Modules\Entitizer\Utils {
 			return $statements;
 		}
 
-		# Add relation param
+		# Add numeric param
 
-		protected function relation($name) {
+		protected function numeric(string $name, bool $short = false, int $maxlength = 0,
 
-			$this->addParam(new Param\Type\Relation($name));
+			int $default = 0, bool $index = false, bool $unique = false) {
+
+			$this->addParam(new Param\Type\Numeric($name, $short, $maxlength, $default, $index, $unique));
 		}
 
-		# Add boolean param
+		# Add textual param
 
-		protected function boolean($name, $default = false, $index = false) {
+		protected function textual(string $name, bool $text = false, int $maxlength = 0,
 
-			$this->addParam(new Param\Type\Boolean($name, $default, $index));
-		}
+			bool $binary = false, bool $index = false, bool $unique = false) {
 
-		# Add range param
-
-		protected function range($name, $default = 0, $index = false) {
-
-			$this->addParam(new Param\Type\Range($name, $default, $index));
-		}
-
-		# Add varchar param
-
-		protected function varchar($name, $maxlength = null, $index = false) {
-
-			$this->addParam(new Param\Type\Varchar($name, $maxlength, $index));
-		}
-
-		# Add unique param
-
-		protected function unique($name, $maxlength = null) {
-
-			$this->addParam(new Param\Type\Unique($name, $maxlength));
-		}
-
-		# Add hash param
-
-		protected function hash($name) {
-
-			$this->addParam(new Param\Type\Hash($name));
-		}
-
-		# Add text param
-
-		protected function text($name) {
-
-			$this->addParam(new Param\Type\Text($name));
-		}
-
-		# Add time param
-
-		protected function time($name) {
-
-			$this->addParam(new Param\Type\Time($name));
+			$this->addParam(new Param\Type\Textual($name, $text, $maxlength, $binary, $index, $unique));
 		}
 
 		# Constructor
@@ -95,9 +57,7 @@ namespace System\Modules\Entitizer\Utils {
 
 			$this->id = new Param\Type\Id('id', static::$auto_increment);
 
-			if (static::$nesting) $this->relation('parent_id');
-
-			# ------------------------
+			# Define specific entity params
 
 			$this->define();
 		}
@@ -133,15 +93,25 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Return param by name
 
-		public function get($name) {
-
-			$name = strval($name);
+		public function get(string $name) {
 
 			return (isset($this->params[$name]) ? $this->params[$name] : false);
 		}
 
-		# Definer interface
+		# Cast data to be suitable with current definition
 
-		abstract protected function define();
+		public function cast(array $data) {
+
+			$params = [];
+
+			foreach ($data as $name => $value) if (isset($this->params[$name])) {
+
+				$params[$name] = $this->params[$name]->cast($value);
+			}
+
+			# ------------------------
+
+			return $params;
+		}
 	}
 }

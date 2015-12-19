@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth {
 
-	use Text;
+	use Str;
 
 	abstract class Validate {
 
@@ -12,7 +12,7 @@ namespace System\Modules\Auth {
 
 			if (!preg_match($regex, $string)) return false;
 
-			return ((Text::between($string, $min, $max)) ? $string : false);
+			return ((Str::between($string, $min, $max)) ? $string : false);
 		}
 
 		# Validate auth code

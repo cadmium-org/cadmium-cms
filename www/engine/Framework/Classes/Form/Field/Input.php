@@ -2,7 +2,7 @@
 
 namespace Form\Field {
 
-	use Form, Form\Utils, Text;
+	use Form, Form\Utils, Str;
 
 	class Input extends Utils\Field {
 
@@ -57,7 +57,7 @@ namespace Form\Field {
 
 		public function __construct(Form $form, string $key, string $value = '',
 
-			string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
+		    string $type = FORM_INPUT_TEXT, int $maxlength = 0, array $config = []) {
 
 			# Init field
 
@@ -78,20 +78,20 @@ namespace Form\Field {
 
 			if (($this->type === FORM_INPUT_PASSWORD) || ($this->type === FORM_INPUT_CAPTCHA)) {
 
-				$this->value = Text::substr($value, 0, $this->maxlength);
+				$this->value = Str::substr($value, 0, $this->maxlength);
 
 			} else {
 
-				$this->value = Text::input($value, false, $this->maxlength);
+				$this->value = Str::input($value, false, $this->maxlength);
 
-				if ($this->config['translit']) $this->value = Text::translit($this->value, $this->maxlength);
+				if ($this->config['translit']) $this->value = Str::translit($this->value, $this->maxlength);
 			}
 
 			# Check for errors
 
 			if ($this->required && ('' === $this->value)) return 'required';
 
-			if ((null !== $this->callback) && (false === $this->callback($value))) return 'format';
+			if (isset($this->config['callback']) && (false === $this->config['callback']($value))) return 'format';
 
 			# ------------------------
 
@@ -147,7 +147,7 @@ namespace Form\Field {
 
 			# Set appearance
 
-			if (0 < $this->maxlength) $tag->set('maxlength', $this->maxlength);
+			if ($this->maxlength > 0) $tag->set('maxlength', $this->maxlength);
 
 			if ('' !== $this->config['placeholder']) $tag->set('placeholder', $this->config['placeholder']);
 

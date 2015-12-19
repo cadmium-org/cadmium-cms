@@ -41,13 +41,16 @@ namespace System\Modules\Profile\Handler {
 
 			$controller_password = new Profile\Controller\Password();
 
-			# Submit forms
+			# Handle forms
 
-			if ($this->form_personal->submit($controller_personal) || $this->form_password->submit($controller_password)) {
+			if ($this->form_personal->handle($controller_personal) || $this->form_password->handle($controller_password)) {
 
 				Request::redirect(INSTALL_PATH . '/profile/edit?submitted');
+			}
 
-			} else if (false !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_EDIT'));
+			# Display success message
+
+			if (false !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_EDIT'));
 
 			# ------------------------
 

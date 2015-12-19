@@ -22,9 +22,9 @@ namespace System\Modules\Auth\Handler {
 
 			$this->form = new Auth\Form\Recover();
 
-			# Submit form
+			# Handle form
 
-			if ($this->form->submit(new Auth\Controller\Recover())) {
+			if ($this->form->handle(new Auth\Controller\Recover())) {
 
 				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=recover');
 			}

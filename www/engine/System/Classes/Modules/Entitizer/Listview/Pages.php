@@ -10,6 +10,8 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Listview configuration
 
+		protected static $lister = 'System\Modules\Entitizer\Lister\Pages';
+
 		protected static $link = '/admin/content/pages';
 
 		protected static $naming = 'title';
@@ -26,7 +28,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Add additional data for specific entity
 
-		protected function processEntity(Template\Utils\Block $contents) {
+		protected function processEntity(Template\Asset\Block $contents) {
 
 			if ((0 === $this->parent->id) || !$this->parent->visibility) {
 
@@ -37,7 +39,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Add item additional data
 
-		protected function processItem(Template\Utils\Block $view, array $data) {
+		protected function processItem(Template\Asset\Block $view, array $data) {
 
 			$view->link = ($link = ($this->parent->link . '/' . $data['name']));
 

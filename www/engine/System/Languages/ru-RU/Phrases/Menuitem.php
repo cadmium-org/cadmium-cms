@@ -5,10 +5,10 @@ return [
 	# Errors
 
 	'MENUITEM_ERROR_MODIFY'                         => 'Ошибка сохранения данных элемента',
+	'MENUITEM_ERROR_REMOVE'                         => 'Ошибка удаления элемента',
 
 	# Success messages
 
-	'MENUITEM_SUCCESS_CREATE'                       => 'Элемент был успешно создан!',
 	'MENUITEM_SUCCESS_SAVE'                         => 'Данные элемента были успешно сохранены!',
 
 	# Fields

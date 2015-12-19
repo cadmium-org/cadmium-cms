@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use Session, Text;
+	use Session, Str;
 
 	class Security {
 
@@ -10,7 +10,7 @@ namespace System\Utils {
 
 		public static function generateCaptcha() {
 
-			$captcha = Text::random(CONFIG_CAPTCHA_LENGTH, TEXT_POOl_LATIN_UPPER);
+			$captcha = Str::random(CONFIG_CAPTCHA_LENGTH, TEXT_POOl_LATIN_UPPER);
 
 			Session::set('captcha', $captcha);
 

@@ -3,6 +3,8 @@
 namespace System\Modules\Entitizer\Common\User {
 
 	trait Session {
+		
+		# Common configuration
 
 		protected static $type = ENTITY_TYPE_USER_SESSION, $table = TABLE_USERS_SESSIONS;
 

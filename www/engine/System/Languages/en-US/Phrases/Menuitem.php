@@ -5,11 +5,11 @@ return [
 	# Errors
 
 	'MENUITEM_ERROR_MODIFY'                         => 'Error saving item data',
+	'MENUITEM_ERROR_REMOVE'                         => 'Error removing item',
 
 	# Success messages
 
-	'MENUITEM_SUCCESS_CREATE'                       => 'Item has been created successfully!',
-	'MENUITEM_SUCCESS_SAVE'                         => 'Item data has been saved successfully!',
+	'MENUITEM_SUCCESS_SAVE'                         => 'Item data has been successfully saved!',
 
 	# Fields
 

@@ -9,63 +9,52 @@ var Main = {
 
 		$('#section-button').popup({ 'position': 'bottom right', 'variation': 'inverted' });
 
-		$('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
+		$('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
 
 		var items = $('.ui.form').find('input, textarea, select');
 
 		items.filter('textarea').css({ 'height' : '6em', 'min-height' : '6em' });
 
-		items.filter('select').not(':disabled').addClass('ui dropdown').filter('[data-search=search]').addClass('search');
+		items.filter('select').addClass('ui dropdown').filter('[data-search=search]').addClass('search');
 
-		items.filter('[data-error=error]').closest('div.field').addClass('error');
+		items.filter('[data-error=error]').closest('.field').addClass('error');
 
-		items.filter(':disabled').closest('div.field').addClass('disabled');
+		items.filter(':disabled').closest('.field').addClass('disabled');
 
 		var onChange = function() { if ($(this).is('select[data-auto=auto]')) $(this).closest('form').submit(); };
 
-		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange, 'placeholder' : '----' });
+		$('.ui.dropdown').dropdown({ 'duration' : 0, 'onChange' : onChange, 'placeholder' : false });
 
 		$('.ui.checkbox').checkbox();
 
 		$('.ui.accordion').accordion();
 
-		$('#captcha').click(function() { $(this).find('img').attr('src', install_path + '/captcha.png?unique=' + Math.random()); });
+		$('.ui.sticky').sticky({ 'offset' : 60 });
 
 		$('.ui.modal').modal('setting', 'transition', 'fade down');
 
-		$('#menu-launcher').click(function() { $('.sidebar').sidebar('show'); });
+		/* Main menu */
 
-		/* Handle window resize */
+		$('.main.menu .launcher').click(function() { $('.sidebar').sidebar('show'); });
 
-		$(window).resize(function(event) { event.preventDefault(); Main.resize(); }).resize();
+		$('.sidebar').append($('.main.menu').children('.item').not('.brand').not('.launcher').clone());
+
+		$('.sidebar').find('.ui.dropdown').removeClass('ui dropdown');
+
+		/* Auto hide sidebar */
+
+		$(window).resize(function(event) {
+			
+			event.preventDefault(); if (window.matchMedia('(min-width: 768px)').matches) $('.sidebar').sidebar('hide');
+		});
+
+		/* Captcha */
+
+		$('#captcha').click(function() { $(this).find('img').attr('src', install_path + '/captcha.png?unique=' + Math.random()); });
 
 		/* Init objects */
 
 		for (object in this) if (typeof this[object] === 'object') this[object].init();
-	},
-
-	/* Resize handler */
-
-	'resize' : function() {
-
-		var width = $(window).width(), sidebar = $('.sidebar');
-
-		var menu = $('.ui.main.menu');
-
-		var brand = menu.find('#menu-brand'), launcher = menu.find('#menu-launcher');
-
-		var items = menu.find('#menu-items');
-
-		if (sidebar.children().length == 0) {
-
-			sidebar.append(items.children().clone());
-
-			sidebar.find('.ui.dropdown').removeClass('ui dropdown');
-		}
-
-		if (width < 768) { items.hide(); launcher.show(); }
-
-		else { launcher.hide(); items.show(); sidebar.sidebar('hide'); }
 	},
 
 	'ajax' : function(handler, url, data) {
@@ -113,25 +102,29 @@ var Main = {
 		});
 	},
 
-	'confirm' : function(text, name, callback) {
+	'confirm' : function(text, name, type, callback) {
 
-		$('#modal-confirm').find('.content').html('<p>' + text + '</p><p><strong>' + name + '</strong></p>');
+		var modal = $('#modal-confirm');
 
-		$('#modal-confirm').modal('setting', 'onApprove', callback);
+		modal.find('.content').html('<p>' + text + '</p><p><strong>' + name + '</strong></p>');
 
-		$('#modal-confirm').modal('show');
+		modal.find('.approve').off().addClass(type).click(callback);
+
+		modal.modal('show');
 	},
 
 	'error' : function(text) {
 
-		$('#modal-error').find('.content').html(text);
+		var modal = $('#modal-error');
 
-		$('#modal-error').modal('show');
+		modal.find('.content').html(text);
+
+		modal.modal('show');
 	},
 
 	'Pages' : {
 
-		'list' : [], 'locked' : false, 'sender' : false,
+		'locked' : false, 'sender' : false, 'list' : [],
 
 		'init' : function() {
 
@@ -145,7 +138,7 @@ var Main = {
 
 					var element = $(this), callback = function() { handler.remove(index, element); };
 
-					Main.confirm(lang['PAGES_CONFIRM_REMOVE'], title, callback);
+					if (!handler.locked) Main.confirm(lang['PAGES_CONFIRM_REMOVE'], title, 'negative', callback);
 				});
 
 				handler.list[index] = { 'row' : row, 'id' : id, 'title' : title, 'remove' : remove };
@@ -256,7 +249,7 @@ var Main = {
 
 					var element = $(this), callback = function() { handler.remove(index, element); };
 
-					Main.confirm(lang['MENUITEMS_CONFIRM_REMOVE'], text, callback);
+					if (!handler.locked) Main.confirm(lang['MENUITEMS_CONFIRM_REMOVE'], text, 'negative', callback);
 				});
 
 				handler.list[index] = { 'row' : row, 'id' : id, 'text' : text, 'remove' : remove };
@@ -327,7 +320,7 @@ var Main = {
 
 					selector.click(function() { handler.select(id, text); });
 
-				}).find('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
+				}).find('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
 
 				content.removeClass('loading'); modal.modal('show');
 			}
@@ -345,46 +338,145 @@ var Main = {
 
 	'Filemanager' : {
 
-		'locked' : false, 'dir' : false, 'item' : false, 'input' : false,
+		'locked' : false, 'sender' : false, 'list' : [], 'parent' : false, 'link' : false,
+
+		'upload_form' : false, 'upload_select' : false, 'upload_submit' : false,
+
+		'button_create' : false, 'button_reload' : false, 'modal' : false, 'submitted' : false,
 
 		'init' : function() {
 
 			var handler = this;
 
-			this.dir = $('input:hidden#filemanager-dir[name=dir]').val();
+			this.parent = $('input:hidden#filemanager-parent[name=parent]').val();
 
-			this.item = $('#filemanager-dir-create'); this.input = this.item.find('input');
+			this.link = (install_path + '/admin/content/filemanager' + (this.parent ? ('?parent=' + this.parent) : ''));
 
-			this.input.change(function(event) { $(this).val($(this).val().trim()); });
+			this.upload_form = $('#filemanager-upload-form');
 
-			this.input.keypress(function(event) { if (event.keyCode == 13) { $(this).change(); handler.create(); } });
+			this.upload_select = $('#filemanager-upload-select').click(function() { handler.uploadSelect() });
 
-			this.item.find('.submitter').click(function() { handler.create(); });
+			this.upload_submit = $('#filemanager-upload-submit').click(function() { handler.uploadSubmit() });
+
+			this.button_create = $('#filemanager-button-create').click(function() { handler.create(); });
+
+			this.button_reload = $('#filemanager-button-reload').click(function() { handler.reload(); });
+
+			this.upload_form.submit(function() { handler.upload_submit.addClass('loading'); });
+
+			this.modal_create = $('#filemanager-modal-create').each(function() {
+
+				var form = $(this).find('form'), deny = $(this).find('.deny'), approve = $(this).find('.approve');
+
+				var select = form.find('select#create-type'), input = form.find('input#create-name');
+
+				input.change(function() { $(this).val($(this).val().trim()); });
+
+				form.submit(function() {
+
+					if (input.change().val() != '') handler.submitted = true; else return false;
+
+					select.blur().parent().addClass('disabled'); input.blur().parent().addClass('disabled');
+
+					deny.addClass('disabled'); approve.addClass('disabled').addClass('loading');
+				});
+
+				$(this).modal('setting', 'onShow', function() {
+
+					form.trigger('reset'); select.parent().dropdown({ 'duration' : 0 });
+				});
+
+				$(this).modal('setting', 'onHide', function() { if (!handler.submitted) handler.enableControls(); });
+
+				$(this).modal('setting', 'onApprove', function() { form.submit(); return false; });
+			});
+
+			$('table#filemanager-list tbody tr').each(function() {
+
+				var row = $(this), index = handler.list.length, type = row.data('type'), name = row.data('name');
+
+				var remove = row.find('a[data-action=remove]').click(function() {
+
+					var element = $(this), callback = function() { handler.remove(index, element); };
+
+					var text = ((type == 'dir') ? 'FILEMANAGER_CONFIRM_DIR_REMOVE' : 'FILEMANAGER_CONFIRM_FILE_REMOVE');
+
+					if (!handler.locked) Main.confirm(lang[text], name, 'negative', callback);
+				});
+
+				handler.list[index] = { 'row' : row, 'type' : type, 'name' : name, 'remove' : remove };
+			});
+		},
+
+		'disableControls' : function() {
+
+			this.locked = true;
+
+			this.upload_select.addClass('disabled'); this.upload_submit.addClass('disabled');
+
+			this.button_create.addClass('disabled'); this.button_reload.addClass('disabled');
+		},
+
+		'enableControls' : function() {
+
+			this.locked = false;
+
+			this.upload_select.removeClass('disabled'); this.upload_submit.removeClass('disabled');
+
+			this.button_create.removeClass('disabled'); this.button_reload.removeClass('disabled');
+		},
+
+		'uploadSelect' : function() {
+
+			if (!this.locked) { this.upload_form.find('input[type=file]').click(); }
+		},
+
+		'uploadSubmit' : function() {
+
+			if (!this.locked) { this.disableControls(); this.upload_form.submit(); }
 		},
 
 		'create' : function() {
 
-			if (!this.locked && this.input && (this.input.val() != '')) {
+			if (!this.locked) { this.disableControls(); this.modal_create.modal('show'); }
+		},
 
-				this.locked = true; this.item.addClass('loading');
+		'reload' : function() {
 
-				var params = { 'action' : 'makedir', 'name' : this.input.val() };
+			if (!this.locked) { this.disableControls(); window.location.replace(this.link); }
+		},
 
-				Main.ajax(this, (install_path + '/admin/content/filemanager?dir=' + this.dir), params);
-			}
+		'remove' : function(index, button) {
+
+			if (this.locked || typeof this.list[index] == 'undefined') return;
+
+			var item = this.list[index]; if (!item.remove.is(button)) return;
+
+			this.disableControls(); this.sender = index; button.addClass('loading');
+
+			var path = (install_path + '/admin/content/filemanager/' + item.type);
+
+			var query = ('?parent=' + this.parent + '&name=' + item.name);
+
+			Main.ajax(this, (path + query), { 'action': 'remove' });
 		},
 
 		'handle' : function(data) {
 
-			if (parseInt(data.status) == 1) location.reload();
+			if (typeof this.list[this.sender] != 'undefined') {
 
-			else { this.locked = false; this.item.removeClass('loading'); }
+				this.list[this.sender].remove.removeClass('loading');
+
+				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+			}
+
+			this.sender = false; this.enableControls(); return null;
 		}
 	},
 
 	'Languages' : {
 
-		'section' : false, 'list' : [], 'locked' : false, 'sender' : false,
+		'list' : [], 'locked' : false, 'sender' : false, 'section' : false,
 
 		'init' : function() {
 
@@ -432,7 +524,7 @@ var Main = {
 						else this.list[index].checker.data('value', 0).removeClass('positive');
 					}
 
-					if (this.section == 'admin') return location.reload();
+					if (this.section == 'admin') return window.location.reload();
 				}
 			}
 
@@ -442,7 +534,7 @@ var Main = {
 
 	'Templates' : {
 
-		'section' : false, 'list' : [], 'locked' : false, 'sender' : false,
+		'list' : [], 'locked' : false, 'sender' : false, 'section' : false,
 
 		'init' : function() {
 
@@ -490,7 +582,7 @@ var Main = {
 						else this.list[index].checker.data('value', 0).removeClass('positive');
 					}
 
-					if (this.section == 'admin') return location.reload();
+					if (this.section == 'admin') return window.location.reload();
 				}
 			}
 
@@ -514,7 +606,7 @@ var Main = {
 
 					var element = $(this), callback = function() { handler.remove(index, element); };
 
-					Main.confirm(lang['USERS_CONFIRM_REMOVE'], name, callback);
+					if (!handler.locked) Main.confirm(lang['USERS_CONFIRM_REMOVE'], name, 'negative', callback);
 				});
 
 				handler.list[index] = { 'row' : row, 'id' : id, 'name' : name, 'remove' : remove };
@@ -549,9 +641,7 @@ var Main = {
 
 		'init' : function() {
 
-			var container = $('#editor-container');
-
-			if (!container.length) return;
+			var container = $('#editor-container'); if (!container.length) return;
 
 			var language = $('html').attr('lang'), instanceReady = function (event) { container.show(); };
 

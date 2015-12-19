@@ -16,9 +16,9 @@ namespace System\Modules\Auth\Handler {
 
 			$this->form = new Auth\Form\Reset();
 
-			# Submit form
+			# Handle form
 
-			if ($this->form->submit(new Auth\Controller\Reset())) {
+			if ($this->form->handle(new Auth\Controller\Reset())) {
 
 				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=reset');
 			}

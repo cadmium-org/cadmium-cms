@@ -2,7 +2,7 @@
 
 namespace System\Modules\Profile\Controller {
 
-	use System\Modules\Auth, DB, Text;
+	use System\Modules\Auth, DB, Str;
 
 	class Password {
 
@@ -28,13 +28,13 @@ namespace System\Modules\Profile\Controller {
 
 			# Check password
 
-			$password = Text::encode(Auth::user()->auth_key, $password);
+			$password = Str::encode(Auth::user()->auth_key, $password);
 
 			if (0 !== strcmp(Auth::user()->password, $password)) return 'USER_ERROR_PASSWORD_INCORRECT';
 
 			# Encode password
 
-			$auth_key = Text::random(40); $password = Text::encode($auth_key, $password_new);
+			$auth_key = Str::random(40); $password = Str::encode($auth_key, $password_new);
 
 			# Update user
 

@@ -170,11 +170,11 @@ namespace System\Modules\Extend\Utils {
 
 		public static function data(string $name = null) {
 
-			if ('' === self::$active) return null;
+			if ('' === self::$active) return false;
 
 			if (null === $name) return self::$items[self::$active];
 
-			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : null);
+			return (isset(self::$items[self::$active][$name]) ? self::$items[self::$active][$name] : false);
 		}
 	}
 }

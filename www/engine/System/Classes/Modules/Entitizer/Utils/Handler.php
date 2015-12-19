@@ -2,7 +2,7 @@
 
 namespace System\Modules\Entitizer\Utils {
 
-	use System\Modules\Entitizer, System\Utils\Messages, System\Utils\View, Ajax, Form, Language, Request, Template;
+	use System\Modules\Entitizer, System\Utils\Messages, System\Utils\View, Ajax, Language, Request, Template;
 
 	abstract class Handler {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Process parent block
 
-		private function processParent(Template\Utils\Block $parent) {
+		private function processParent(Template\Asset\Block $parent) {
 
 			# Set parent id
 
@@ -34,11 +34,11 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Process selector block
 
-		private function processSelector(Template\Utils\Block $selector) {
+		private function processSelector(Template\Asset\Block $selector) {
 
 			if ($this->create) return $selector->disable();
 
-			$parent = Entitizer::create(static::$type, $this->entity->parent_id);
+			$parent = Entitizer::get(static::$type, $this->entity->parent_id);
 
 			$selector->set(static::$naming, $parent->__get(static::$naming));
 		}
@@ -94,19 +94,15 @@ namespace System\Modules\Entitizer\Utils {
 
 			$ajax = Ajax::response();
 
-			# Catch post data
-
-			$data = Request::postArray(['action']);
-
 			# Create entity
 
-			$this->entity = Entitizer::create(static::$type, Request::get('id'));
+			$this->entity = Entitizer::get(static::$type, Request::get('id'));
 
 			# Process remove action
 
-			if ($data['action'] == 'remove') {
+			if (Request::post('action') === 'remove') {
 
-				if (!$this->entity->remove()) return $ajax->error(Language::get('AJAX_PROCESS_ERROR_REMOVE'));
+				if (!$this->entity->remove()) return $ajax->error(Language::get(static::$message_error_remove));
 			}
 
 			# ------------------------
@@ -116,17 +112,15 @@ namespace System\Modules\Entitizer\Utils {
 
 		# Handle request
 
-		public function handle($create = false) {
+		public function handle(bool $create = false) {
 
-			$this->create = boolval($create);
-
-			if (!$this->create && Request::isAjax()) return $this->handleAjax();
+			if (!($this->create = $create) && Request::isAjax()) return $this->handleAjax();
 
 			# Create entity
 
-			if (static::$nesting) $this->parent = Entitizer::create(static::$type, Request::get('id'));
+			if (static::$nesting) $this->parent = Entitizer::get(static::$type, Request::get('id'));
 
-			$this->entity = Entitizer::controller(static::$type, (!$this->create ? Request::get('id') : 0));
+			$this->entity = Entitizer::get(static::$type, (!$this->create ? Request::get('id') : 0));
 
 			# Redirect if entity not found
 
@@ -138,13 +132,16 @@ namespace System\Modules\Entitizer\Utils {
 
 			if (static::$nesting && $this->create) $this->form->get('parent_id')->set($this->parent->id);
 
-			# Submit form
+			# Handle form
 
-			if ($this->form->submit([$this->entity, 'process'])) {
+			if ($this->form->handle(new static::$controller($this->entity))) {
 
 				Request::redirect(INSTALL_PATH . static::$link . '/edit?id=' . $this->entity->id . '&submitted');
+			}
 
-			} else if (!$this->create && (null !== Request::get('submitted'))) {
+			# Display success message
+
+			if (!$this->create && (false !== Request::get('submitted'))) {
 
 				Messages::success(Language::get(static::$message_success_save));
 			}

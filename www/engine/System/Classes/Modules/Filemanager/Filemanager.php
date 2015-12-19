@@ -2,17 +2,42 @@
 
 namespace System\Modules {
 
-	use Text;
-
 	abstract class Filemanager {
 
-		# Validate file or directory name
+		private static $classes = [
 
-		public static function validate($name) {
+			FILEMANAGER_TYPE_DIR            => 'System\Modules\Filemanager\Entity\Dir',
+			FILEMANAGER_TYPE_FILE           => 'System\Modules\Filemanager\Entity\File'
+		];
 
-			$name = Text::input($name, false, CONFIG_FILE_NAME_MAX_LENGTH);
+		# Open container
 
-			return (!preg_match('/[\\/?%*:|"<>]/', $name) ? $name : false);
+		public static function open(string $path = '') {
+
+			return new Filemanager\Utils\Container($path);
+		}
+
+		# Get entity
+
+		public static function get(string $type, Filemanager\Utils\Container $parent, string $name = '') {
+
+			$class = (($type === FILEMANAGER_TYPE_DIR) ? FILEMANAGER_TYPE_DIR : FILEMANAGER_TYPE_FILE);
+
+			return new self::$classes[$type]($parent, $name);
+		}
+
+		# Get directory entity
+
+		public static function dir(Filemanager\Utils\Container $parent, string $name = '') {
+
+			return self::get(FILEMANAGER_TYPE_DIR, $parent, $name);
+		}
+
+		# Get file entity
+
+		public static function file(Filemanager\Utils\Container $parent, string $name = '') {
+
+			return self::get(FILEMANAGER_TYPE_FILE, $parent, $name);
 		}
 	}
 }

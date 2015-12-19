@@ -45,7 +45,7 @@ namespace DB\Utils {
 
 			$replace = function(string $key, string $value) use($matches, $parsers, $pattern) {
 
-				foreach ($matches as $name => $match) if (isset($parsers[$match[1]])) {
+				foreach ($matches as $name => $match) if (isset($match[1]) && isset($parsers[$match[1]])) {
 
 					$pattern = str_replace($match[0], [$this, $parsers[$match[1]]]($$name), $pattern);
 				}

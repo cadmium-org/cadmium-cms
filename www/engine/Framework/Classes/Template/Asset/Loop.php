@@ -46,7 +46,10 @@ namespace Template\Asset {
 
 				# Set variables
 
-				if (is_array($item)) foreach ($item as $name => $value) $block->set($name, $value);
+				if (is_array($item)) foreach ($item as $name => $value) {
+
+					if (is_scalar($name) && is_scalar($value)) $block->set($name, $value);
+				}
 
 				# Add separator
 

@@ -10,6 +10,8 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Listview configuration
 
+		protected static $lister = 'System\Modules\Entitizer\Lister\Users';
+
 		protected static $link = '/admin/system/users';
 
 		protected static $naming = 'name';
@@ -30,7 +32,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Add item additional data
 
-		protected function processItem(Template\Utils\Block $view, array $data) {
+		protected function processItem(Template\Asset\Block $view, array $data) {
 
 			$view->rank = Lister\Rank::get($data['rank']);
 

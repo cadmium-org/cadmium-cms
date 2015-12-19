@@ -4,7 +4,7 @@ namespace System\Modules\Entitizer\Utils {
 
 	abstract class Param {
 
-		protected $name = '';
+		protected $name = '', $index = false, $unique = false, $primary = false;
 
 		# Return name
 
@@ -13,20 +13,27 @@ namespace System\Modules\Entitizer\Utils {
 			return $this->name;
 		}
 
-		# Constructor interface
+		# Check if param is index
 
-		abstract public function __construct($name);
+		public function index() {
 
-		# Validator interface
+			return $this->index;
+		}
 
-		abstract public function validate($value);
+		# Check if param is unique
 
-		# Field statement getter interface
+		public function unique() {
 
-		abstract public function fieldStatement();
+			return $this->unique;
+		}
 
-		# Key statement getter interface
+		# Get key statement
 
-		abstract public function keyStatement();
+		public function keyStatement() {
+
+			return ($this->index ? (($this->unique ? ($this->primary ? "PRIMARY " : "UNIQUE ") : "") .
+
+			       ("KEY `" . $this->name . "` (`" . $this->name . "`)")) : false);
+		}
 	}
 }

@@ -3,6 +3,8 @@
 return [
 
 	'BROWSE'                                    => 'Browse',
+	'CANCEL'									=> 'Cancel',
+	'CREATE'                                    => 'Create',
 	'CONTINUE'                                  => 'Continue',
 	'DEFAULT'                                   => 'Default',
 	'EDIT'                                      => 'Edit',
@@ -12,6 +14,7 @@ return [
 	'RECHECK'                                   => 'Recheck',
 	'REFRESH'                                   => 'Refresh',
 	'REMOVE'                                    => 'Remove',
+	'RENAME'                                    => 'Rename',
 	'REGISTER'                                  => 'Register',
 	'RESET'                                     => 'Reset password',
 	'RESET_TEXT'                                => 'Forgot your password?',

@@ -29,15 +29,30 @@ namespace {
 
 		public static function exception(Throwable $exc) {
 
-			$message = $exc->getMessage();
+			# Contents parser
+
+			$parse_contents = function(string $contents) use($exc) {
+
+				$contents = str_replace('$message$', $exc->getMessage(), $contents);
+
+				$contents = str_replace('$file$', $exc->getFile(), $contents);
+
+				$contents = str_replace('$line$', $exc->getLine(), $contents);
+
+				$contents = str_replace('$trace$', nl2br($exc->getTraceAsString()), $contents);
+
+				# ------------------------
+
+				return $contents;
+			};
 
 			# Load template
 
 			$file_name = (DIR_TEMPLATES . 'Exception.tpl');
 
-			$contents = ((@file_exists($file_name)) ? @file_get_contents($file_name) : false);
+			if (false === ($contents = @file_get_contents($file_name))) $output = nl2br($exc);
 
-			$output = ($contents ? str_replace('$message$', $message, $contents) : $message);
+			else $output = $parse_contents($contents);
 
 			# Set headers
 

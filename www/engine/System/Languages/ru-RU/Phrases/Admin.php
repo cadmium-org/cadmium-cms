@@ -10,20 +10,22 @@ return [
 	'TITLE_AUTH_REGISTER'                       => 'Регистрация',
 
 	'TITLE_CONTENT_PAGES'                       => 'Страницы',
-	'TITLE_CONTENT_PAGES_CREATE'                => 'Добавление страницы',
+	'TITLE_CONTENT_PAGES_CREATE'                => 'Создание страницы',
 	'TITLE_CONTENT_PAGES_EDIT'                  => 'Редактирование страницы',
 
 	'TITLE_CONTENT_MENUITEMS'                   => 'Меню',
-	'TITLE_CONTENT_MENUITEMS_CREATE'            => 'Добавление элемента',
+	'TITLE_CONTENT_MENUITEMS_CREATE'            => 'Создание элемента',
 	'TITLE_CONTENT_MENUITEMS_EDIT'              => 'Редактирование элемента',
 
 	'TITLE_CONTENT_FILEMANAGER'                 => 'Файлы',
+	'TITLE_CONTENT_FILEMANAGER_DIR'             => 'Редактирование директории',
+	'TITLE_CONTENT_FILEMANAGER_FILE'            => 'Редактирование файла',
 
 	'TITLE_EXTEND_LANGUAGES'                    => 'Языки',
 	'TITLE_EXTEND_TEMPLATES'                    => 'Шаблоны',
 
 	'TITLE_SYSTEM_USERS'                        => 'Пользователи',
-	'TITLE_SYSTEM_USERS_CREATE'                 => 'Добавление пользователя',
+	'TITLE_SYSTEM_USERS_CREATE'                 => 'Создание пользователя',
 	'TITLE_SYSTEM_USERS_EDIT'                   => 'Редактирование пользователя',
 
 	'TITLE_SYSTEM_SETTINGS'                     => 'Настройки',
@@ -89,23 +91,79 @@ return [
 
 	'MENUITEMS_ITEM_CONFIRM_REMOVE'             => 'Вы действительно хотите удалить выбранный элемент?',
 
-	# File manager
+	# Filemanager
 
-	'FILEMANAGER_FILES_NOT_FOUND'               => 'Папка пуста',
+	'FILEMANAGER_UPLOAD_SELECT'                 => 'Выбрать файл...',
+
+	'FILEMANAGER_DIR'                           => 'Директория',
+
+	'FILEMANAGER_DIR_NAME'                      => 'Название директории',
+	'FILEMANAGER_DIR_INFO'                      => 'Информация о директории',
+
+	'FILEMANAGER_DIR_ROW_TIME_CREATED'          => 'Время создания',
+	'FILEMANAGER_DIR_ROW_TIME_MODIFIED'         => 'Время изменения',
+	'FILEMANAGER_DIR_ROW_PERMISSIONS'           => 'Права доступа',
+
+	'FILEMANAGER_FILE'                          => 'Файл',
+
+	'FILEMANAGER_FILE_NAME'                     => 'Название файла',
+	'FILEMANAGER_FILE_INFO'                     => 'Информация о файле',
+
+	'FILEMANAGER_FILE_ROW_TIME_CREATED'         => 'Время создания',
+	'FILEMANAGER_FILE_ROW_TIME_MODIFIED'        => 'Время изменения',
+	'FILEMANAGER_FILE_ROW_PERMISSIONS'          => 'Права доступа',
+	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Размер',
+	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME-тип',
+
+	'FILEMANAGER_ITEMS_NOT_FOUND'               => 'Папка пуста',
+
+	'FILEMANAGER_ACTION_CREATE'                 => 'Создать...',
+	'FILEMANAGER_ACTION_RELOAD'                 => 'Обновить',
 
 	'FILEMANAGER_COLUMN_NAME'                   => 'Название файла',
 	'FILEMANAGER_COLUMN_SIZE'                   => 'Размер',
 
-	'FILEMANAGER_DIR_CREATE'                    => 'Создать директорию',
-
-	'FILEMANAGER_ITEM_INFO'                     => 'Информация',
+	'FILEMANAGER_ITEM_EDIT'                     => 'Редактировать',
 	'FILEMANAGER_ITEM_REMOVE'                   => 'Удалить',
 
 	'FILEMANAGER_ITEM_CONFIRM_REMOVE'           => 'Вы действительно хотите удалить выбранный элемент?',
 
-	'FILEMANAGER_ERROR_CREATE'                  => 'Ошибка создания директории',
+	'FILEMANAGER_FIELD_NAME'                    => 'Введите название...',
+
+	'FILEMANAGER_SUCCESS_DIR_RENAME'            => 'Директория была успешно переименована!',
+	'FILEMANAGER_SUCCESS_FILE_RENAME'           => 'Файл был успешно переименован!',
+
+	'FILEMANAGER_ERROR_NAME_INVALID'            => 'Название не может содержать следующих символов: \\ / ? % * : | " < >',
 	'FILEMANAGER_ERROR_EXISTS'                  => 'Директория или файл с указанным названием уже существует',
-	'FILEMANAGER_ERROR_INVALID'                 => 'Название директории не может содержать следующих символов: \\ / ? % * : | " < > ',
+
+	'FILEMANAGER_ERROR_DIR_CREATE'              => 'Ошибка создания директории',
+	'FILEMANAGER_ERROR_FILE_CREATE'             => 'Ошибка создания файла',
+
+	'FILEMANAGER_ERROR_DIR_RENAME'              => 'Ошибка переименования директории',
+	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Ошибка переименования файла',
+
+	'FILEMANAGER_ERROR_DIR_REMOVE'              => 'Ошибка удаления директории',
+	'FILEMANAGER_ERROR_FILE_REMOVE'             => 'Ошибка удаления файла',
+
+	'FILEMANAGER_CONFIRM_DIR_REMOVE'            => 'Вы действительно хотите удалить выбранную директорию и все ее содержимое?',
+	'FILEMANAGER_CONFIRM_FILE_REMOVE'           => 'Вы действительно хотите удалить выбранный файл?',
+
+	# Uploader
+
+	'UPLOADER_ERROR_INI_SIZE'                   => 'Размер загруженного файла превысил значение upload_max_filesize в php.ini',
+	'UPLOADER_ERROR_FORM_SIZE'                  => 'Размер загруженного файла превысил значение MAX_FILE_SIZE, указанное в форме',
+	'UPLOADER_ERROR_PARTIAL'                    => 'Загружаемый файл был получен только частично',
+	'UPLOADER_ERROR_NO_FILE'                    => 'Файл не был загружен',
+	'UPLOADER_ERROR_NO_TMP_DIR'                 => 'Отсутствует временная директория',
+	'UPLOADER_ERROR_CANT_WRITE'                 => 'Не удалось записать файл на диск',
+	'UPLOADER_ERROR_EXTENSION'                  => 'PHP-расширение остановило загрузку файла',
+
+	'UPLOADER_ERROR_SIZE'                       => 'Размер загруженного файла не должен превышать 100 MB',
+	'UPLOADER_ERROR_TYPE'                       => 'PHP-файлы не разрешены для загрузки',
+	'UPLOADER_ERROR_DIR'                        => 'Отсутствует целевая директория',
+	'UPLOADER_ERROR_EXISTS'                     => 'Файл или директория с таким именем уже существует',
+	'UPLOADER_ERROR_SAVE'                       => 'Ошибка сохранения файла',
+	'UPLOADER_ERROR_UNKNOWN'                    => 'Ошибка загрузки файла',
 
 	# Languages
 
@@ -134,7 +192,7 @@ return [
 
 	'USERS_ITEM_EDIT'                           => 'Редактировать',
 	'USERS_ITEM_REMOVE'                         => 'Удалить',
-	'USERS_ITEM_CREATE'                         => 'Добавить пользователя',
+	'USERS_ITEM_CREATE'                         => 'Создать пользователя',
 	'USERS_ITEM_NEW'                            => 'Новый пользователь',
 
 	'USERS_ITEM_INFO_ROW_TIME_REGISTERED'       => 'Дата регистрации',

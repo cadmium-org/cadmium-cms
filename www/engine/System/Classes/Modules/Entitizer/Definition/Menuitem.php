@@ -14,10 +14,11 @@ namespace System\Modules\Entitizer\Definition {
 
 			# Add params
 
-			$this->range        ('position', 0, true);
-			$this->varchar      ('link');
-			$this->varchar      ('text');
-			$this->range        ('target');
+			$this->numeric      ('parent_id',       false, 10, 0, true, false);
+			$this->numeric      ('position',        true, 2, 0, true, false);
+			$this->textual      ('link',            true, 255, false, false, false);
+			$this->textual      ('text',            true, 255, false, false, false);
+			$this->numeric      ('target',          true, 1, TARGET_SELF, false, false);
 		}
 	}
 }

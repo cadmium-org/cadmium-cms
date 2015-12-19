@@ -6,13 +6,15 @@ namespace System\Utils {
 
 	abstract class Pagination {
 
-		# Get items
+		# Set items
 
-		private function getItems(Template\Asset\Block $pagination, int $active, Url $url) {
+		private static function setItems(Template\Asset\Block $pagination, int $active, int $count, Url $url) {
 
 			$items = $pagination->loop('items');
 
-			for ($index = ($active - 3); $index <= ($active + 3); $index++) {
+			$extremums = [1, $count];
+
+			for ($index = ($active - 2); $index <= ($active + 2); $index++) {
 
 				if (!($index > 0 && $index <= $count)) continue;
 
@@ -26,12 +28,12 @@ namespace System\Utils {
 
 		# Set first & last button
 
-		private function setExtremeButtons(Template\Asset\Block $pagination, int $active, Url $url) {
+		private static function setExtremeButtons(Template\Asset\Block $pagination, int $active, int $count, Url $url) {
 
 			$extremums = [1, $count]; $buttons = [];
 
-			$buttons['first'] = [$extremums[0], ($extremums[0] + 4), ($active > ($extremums[0] + 4))];
-			$buttons['last']  = [$extremums[1], ($extremums[1] - 4), ($active < ($extremums[0] - 4))];
+			$buttons['first'] = [$extremums[0], ($active < ($extremums[0] + 4)), ($active < ($extremums[0] + 3))];
+			$buttons['last']  = [$extremums[1], ($active > ($extremums[1] - 4)), ($active > ($extremums[1] - 3))];
 
 			foreach ($buttons as $class => $data) {
 
@@ -47,7 +49,7 @@ namespace System\Utils {
 
 		# Set previous & next buttons
 
-		private function setStepButtons(Template\Asset\Block $pagination, int $active, Url $url) {
+		private static function setStepButtons(Template\Asset\Block $pagination, int $active, int $count, Url $url) {
 
 			$extremums = [1, $count]; $buttons = [];
 
@@ -60,7 +62,7 @@ namespace System\Utils {
 
 				if ($active === $extremum) { $block->disable(); $pagination->block($class . '_disabled')->enable(); }
 
-				else { $pagination->block($direction)->link = $url->set('index', $index)->get(); }
+				else $block->link = $url->set('index', $index)->get();
 			}
 		}
 
@@ -68,7 +70,7 @@ namespace System\Utils {
 
 		public static function block(int $index, int $display, int $total, Url $url) {
 
-			if ((0 >= $display) || (0 >= $total) || (0 >= $display)) return false;
+			if (($index <= 0) || ($display <= 0) || ($total <= 0)) return false;
 
 			if (($display >= $total) || ($index > ($count = ceil($total / $display)))) return false;
 
@@ -78,13 +80,13 @@ namespace System\Utils {
 
 			# Set items
 
-			$this->setItems($pagination, $index, $url);
+			self::setItems($pagination, $index, $count, $url);
 
 			# Set buttons
 
-			$this->setExtremeButtons($pagination, $index, $url);
+			self::setExtremeButtons($pagination, $index, $count, $url);
 
-			$this->setStepButtons($pagination, $index, $url);
+			self::setStepButtons($pagination, $index, $count, $url);
 
 			# ------------------------
 

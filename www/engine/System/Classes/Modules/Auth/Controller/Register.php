@@ -2,7 +2,7 @@
 
 namespace System\Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, Text, Validate;
+	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, Str, Validate;
 
 	class Register {
 
@@ -50,7 +50,7 @@ namespace System\Modules\Auth\Controller {
 
 			# Encode password
 
-			$auth_key = Text::random(40); $password = Text::encode($auth_key, $password);
+			$auth_key = Str::random(40); $password = Str::encode($auth_key, $password);
 
 			# Determine rank
 

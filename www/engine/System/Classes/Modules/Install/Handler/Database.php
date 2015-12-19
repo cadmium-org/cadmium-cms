@@ -31,9 +31,9 @@ namespace System\Modules\Install\Handler {
 
 			$this->form = new Install\Form\Database();
 
-			# Submit form
+			# Handle form
 
-			if ($this->form->submit(new Install\Controller\Database())) {
+			if ($this->form->handle(new Install\Controller\Database())) {
 
 				Request::redirect(INSTALL_PATH . '/admin/register');
 			}
