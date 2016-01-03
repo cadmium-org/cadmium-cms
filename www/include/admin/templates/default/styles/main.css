@@ -1,0 +1,74 @@
+
+/* Admin Main CSS */
+
+@charset "UTF-8";
+
+/* Condensed grid */
+
+.condensed.grid { padding:3rem 0 !important; }
+
+.condensed.grid .column { max-width:458px; }
+
+/* Main menu */
+
+.main.menu { min-width:320px; }
+
+.main.menu .launcher { display:none !important; }
+
+@media only screen and (max-width:767px) {
+
+	.main.menu .launcher { display:flex !important; }
+
+	.main.menu > .item:not(.brand):not(.launcher) { display:none; }
+
+    .main.menu .user .name { display:none; }
+}
+
+/* Wrapper */
+
+.wrapper { margin:0 !important; padding-top:55px !important; }
+
+/* Breadcrumbs */
+
+.breadcrumb .section:last-of-type { font-weight:bold; }
+
+.breadcrumb .divider:last-child { display:none; }
+
+/* Uploader */
+
+.uploader > form input { position:absolute; width:0; height:0; opacity:0; overflow:hidden; z-index:-1; }
+
+@media only screen and (max-width:767px) {
+
+	.uploader .column > * { width:100% }
+}
+
+/* Tables */
+
+.table { table-layout: fixed; }
+
+.table td { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+@media only screen and (max-width:767px) {
+
+    .table:not(.unstackable) td.right.aligned, .right.aligned.column { text-align:left !important; }
+}
+
+/* Pagination */
+
+@media only screen and (max-width:767px) {
+
+	.pagination .item:not(.active):not(.step) { display:none !important; }
+}
+
+/* Modal */
+
+.ui.modal { min-width:304px; }
+
+.ui.modal .actions > .button { margin-left:0; }
+
+/* Other */
+
+#captcha { background-color:#FFF !important; }
+
+#modal-lister { top:0px; margin-top:3.5rem !important; }
