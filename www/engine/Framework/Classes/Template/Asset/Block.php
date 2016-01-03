@@ -149,9 +149,11 @@ namespace Template\Asset {
 
 			foreach ($this->widgets as $name) {
 
-				if (false === ($widget = Template::widget($name))) continue;
+				$widget = Template::widget($name);
 
-				$insertions['{ widget:' . $name . ' / }'] = $widget->contents();
+				$contents = ((false !== $widget) ? $widget->contents() : '');
+
+				$insertions['{ widget:' . $name . ' / }'] = $contents;
 			}
 
 			# Process variables
@@ -160,7 +162,7 @@ namespace Template\Asset {
 
 				$value = ((false === $value) ? Template::global($name) : $value);
 
-				if (false !== $value) $insertions['$' . $name . '$'] = Str::output($value);
+				$insertions['$' . $name . '$'] = Str::output($value);
 			}
 
 			# Process phrases
@@ -169,7 +171,7 @@ namespace Template\Asset {
 
 				$value = Language::get($name);
 
-				if (false !== $value) $insertions['%' . $name . '%'] = Str::output($value);
+				$insertions['%' . $name . '%'] = Str::output($value);
 			}
 
 			# Unlock and process insertions
