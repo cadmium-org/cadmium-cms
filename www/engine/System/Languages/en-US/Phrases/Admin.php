@@ -279,6 +279,6 @@ return [
 
 	# Other
 
-	'DEMO_MODE_RESTRICTION'                     => 'You are not allowed to edit values on this page in demo mode',
+	'DEMO_MODE_RESTRICTION'                     => 'You are not allowed to make changes on this page in demo mode',
 	'FEATURE_NOT_AVAILABLE'                     => 'Feature is currently in development'
 ];

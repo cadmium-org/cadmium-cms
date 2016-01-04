@@ -2,7 +2,7 @@
 
 namespace System\Modules\Filemanager\Utils {
 
-	use System\Modules\Filemanager, System\Utils\Messages, System\Utils\View, Ajax, Language, Request;
+	use System\Modules\Filemanager, System\Modules\Informer, System\Utils\Messages, System\Utils\View, Ajax, Language, Request;
 
 	abstract class Handler {
 
@@ -44,6 +44,10 @@ namespace System\Modules\Filemanager\Utils {
 		private function handleAjax() {
 
 			$ajax = Ajax::response();
+
+			# Check for demo mode
+
+			if (Informer::isDemoMode()) return $ajax->error(Language::get('DEMO_MODE_RESTRICTION'));
 
 			# Remove item
 

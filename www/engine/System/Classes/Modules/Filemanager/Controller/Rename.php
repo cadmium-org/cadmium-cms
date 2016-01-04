@@ -2,7 +2,7 @@
 
 namespace System\Modules\Filemanager\Controller {
 
-	use System\Modules\Filemanager;
+	use System\Modules\Filemanager, System\Modules\Informer;
 
 	class Rename {
 
@@ -26,6 +26,10 @@ namespace System\Modules\Filemanager\Controller {
 			# Extract post array
 
 			extract($post);
+
+			# Check for demo mode
+
+			if (Informer::isDemoMode()) return 'DEMO_MODE_RESTRICTION';
 
 			# Validate name
 

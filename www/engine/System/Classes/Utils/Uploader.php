@@ -2,7 +2,7 @@
 
 namespace System\Utils {
 
-	use System\Utils\Messages, Explorer, Language, Request;
+	use System\Modules\Informer, System\Utils\Messages, Explorer, Language, Request;
 
 	abstract class Uploader {
 
@@ -34,6 +34,10 @@ namespace System\Utils {
 		public static function save(string $name, string $dir_name) {
 
 			if ((false === ($file = Request::file($name))) || !is_uploaded_file($file['tmp_name'])) return false;
+
+			# Check for demo mode
+
+			if (Informer::isDemoMode()) return 'DEMO_MODE_RESTRICTION';
 
 			# Check for upload errors
 
