@@ -12,15 +12,13 @@ namespace {
 
 			# Set headers
 
-			$headers  = ('MIME-Version: 1.0' . PHP_EOL);
+			$headers  = ('MIME-Version: 1.0' . "\r\n");
 
-			$headers .= ('Content-Type: ' . ($is_html ? 'text/html' : 'text/plain') . '; charset=UTF-8' . PHP_EOL);
+			$headers .= ('Content-Type: ' . ($is_html ? 'text/html' : 'text/plain') . '; charset=UTF-8' . "\r\n");
 
-			$headers .= ('From: ' . $sender . ' <' . $from . '>' . PHP_EOL);
+			$headers .= ('From: ' . $sender . ' <' . $from . '>' . "\r\n" . 'Reply-To: ' . $reply_to . "\r\n");
 
-			$headers .= ('Reply-To: ' . $sender . ' <' . $reply_to . '>' . PHP_EOL);
-
-			$headers .= ('X-Mailer: PHP/' . phpversion() . PHP_EOL);
+			$headers .= ('X-Mailer: PHP/' . phpversion() . "\r\n");
 
 			# Send message
 
