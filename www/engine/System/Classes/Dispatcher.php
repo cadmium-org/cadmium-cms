@@ -16,12 +16,7 @@ namespace System {
 
 			# Connect to database
 
-			DB::connect (
-
-				$this->database['server'], $this->database['user'],
-
-				$this->database['password'], $this->database['name']
-			);
+			DB::connect(...array_values($this->database));
 
 			# Get handler by requested url
 
