@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils {
+namespace Utils\Template {
 
 	use DB, Template;
 

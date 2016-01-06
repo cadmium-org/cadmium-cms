@@ -3,7 +3,7 @@
 namespace Frames\Site {
 
 	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Modules\Settings, Utils\Menu, Utils\Messages, Utils\View;
-	use Utils\Variables, Utils\Widgets, Date, Request, Template;
+	use Utils\Template\Variables, Utils\Template\Widgets, Date, Request, Template;
 
 	abstract class Section extends Frames\Section {
 
