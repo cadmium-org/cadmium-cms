@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Entity {
+namespace Modules\Entitizer\Entity {
 
-	use System\Modules\Entitizer, Validate;
+	use Modules\Entitizer, Validate;
 
 	class Menuitem extends Entitizer\Utils\Entity {
 

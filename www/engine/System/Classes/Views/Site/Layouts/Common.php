@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Layouts {
+namespace Views\Site\Layouts {
 
-	use System\Views;
+	use Views;
 
 	class Common extends Views\Site\View {
 

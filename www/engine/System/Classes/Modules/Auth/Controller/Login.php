@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Controller {
+namespace Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, Session, Str;
+	use Modules\Auth, Modules\Entitizer, Session, Str;
 
 	class Login {
 

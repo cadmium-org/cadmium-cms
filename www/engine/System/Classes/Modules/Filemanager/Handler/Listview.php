@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Handler {
+namespace Modules\Filemanager\Handler {
 
-	use System\Modules\Filemanager, System\Utils\Messages, System\Utils\Pagination, System\Utils\Uploader, System\Utils\View;
+	use Modules\Filemanager, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
 	use Ajax, Arr, Explorer, Language, Number, Request, Template, Url;
 
 	class Listview {

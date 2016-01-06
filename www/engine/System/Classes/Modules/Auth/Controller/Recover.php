@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Controller {
+namespace Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, Str;
+	use Modules\Auth, Modules\Entitizer, Str;
 
 	class Recover {
 

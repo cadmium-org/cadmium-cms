@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames {
+namespace Frames {
 
-	use System\Modules\Auth, System\Modules\Extend, System\Modules\Settings, System\Utils\Messages, System\Utils\View, Language, Template;
+	use Modules\Auth, Modules\Extend, Modules\Settings, Utils\Messages, Utils\View, Language, Template;
 
 	abstract class Section extends Main {
 

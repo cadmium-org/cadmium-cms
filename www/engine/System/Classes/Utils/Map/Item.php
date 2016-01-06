@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Map {
+namespace Utils\Map {
 
 	class Item {
 

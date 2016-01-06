@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Utils {
+namespace Utils {
 
-	use System\Modules\Informer, System\Utils\Messages, Explorer, Language, Request;
+	use Modules\Informer, Utils\Messages, Explorer, Language, Request;
 
 	abstract class Uploader {
 

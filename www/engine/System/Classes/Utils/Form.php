@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Utils {
+namespace Utils {
 
-	use System\Utils\Messages, Language;
+	use Utils\Messages, Language;
 
 	abstract class Form extends \Form {
 

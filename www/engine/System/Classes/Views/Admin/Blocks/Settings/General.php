@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Settings {
+namespace Views\Admin\Blocks\Settings {
 
-	use System\Views;
+	use Views;
 
 	class General extends Views\Admin\View {
 

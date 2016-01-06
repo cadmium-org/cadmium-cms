@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Install\Controller {
+namespace Modules\Install\Controller {
 
-	use System\Modules\Install, DB, Exception, Explorer;
+	use Modules\Install, DB, Exception, Explorer;
 
 	class Database {
 

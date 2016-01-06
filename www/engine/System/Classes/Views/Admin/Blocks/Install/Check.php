@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Install {
+namespace Views\Admin\Blocks\Install {
 
-	use System\Views;
+	use Views;
 
 	class Check extends Views\Admin\View {
 

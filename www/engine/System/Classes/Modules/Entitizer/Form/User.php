@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Form {
+namespace Modules\Entitizer\Form {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Form, System\Utils\Lister, Geo\Country, Geo\Timezone, Language;
+	use Modules\Auth, Modules\Entitizer, Utils\Form, Utils\Lister, Geo\Country, Geo\Timezone, Language;
 
 	class User extends Form {
 

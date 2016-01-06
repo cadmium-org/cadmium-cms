@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Blocks {
+namespace Views\Site\Blocks {
 
-	use System\Views;
+	use Views;
 
 	class Page extends Views\Site\View {
 

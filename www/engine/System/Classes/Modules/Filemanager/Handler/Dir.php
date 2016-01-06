@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Handler {
+namespace Modules\Filemanager\Handler {
 
-	use System\Modules\Filemanager, Date, Template;
+	use Modules\Filemanager, Date, Template;
 
 	class Dir extends Filemanager\Utils\Handler {
 

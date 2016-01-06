@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Entitizer\Common {
+namespace Modules\Entitizer\Common {
 
 	trait Widget {
 

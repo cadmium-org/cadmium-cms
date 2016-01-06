@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Controller {
+namespace Modules\Entitizer\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, Str, Validate;
+	use Modules\Auth, Modules\Entitizer, Str, Validate;
 
 	class User {
 

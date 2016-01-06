@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Controller {
+namespace Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, Str;
+	use Modules\Auth, Modules\Entitizer, Utils\Security, Str;
 
 	class Reset {
 

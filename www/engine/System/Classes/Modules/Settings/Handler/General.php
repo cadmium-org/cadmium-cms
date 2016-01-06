@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Settings\Handler {
+namespace Modules\Settings\Handler {
 
-	use System\Modules\Settings, System\Utils\Messages, System\Utils\View, Language, Request;
+	use Modules\Settings, Utils\Messages, Utils\View, Language, Request;
 
 	class General {
 

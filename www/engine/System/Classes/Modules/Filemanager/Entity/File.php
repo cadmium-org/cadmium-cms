@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Entity {
+namespace Modules\Filemanager\Entity {
 
-	use System\Modules\Filemanager;
+	use Modules\Filemanager;
 
 	class File extends Filemanager\Utils\Entity {
 

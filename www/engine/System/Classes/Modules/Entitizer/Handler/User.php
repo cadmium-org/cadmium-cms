@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Handler {
+namespace Modules\Entitizer\Handler {
 
-	use System\Modules\Entitizer, Template, Date;
+	use Modules\Entitizer, Template, Date;
 
 	class User extends Entitizer\Utils\Handler {
 
@@ -10,13 +10,13 @@ namespace System\Modules\Entitizer\Handler {
 
 		# Handler configuration
 
-		protected static $controller = 'System\Modules\Entitizer\Controller\User';
+		protected static $controller = 'Modules\Entitizer\Controller\User';
 
 		protected static $link = '/admin/system/users';
 
 		protected static $naming = 'name', $naming_new = 'USERS_ITEM_NEW';
 
-		protected static $form_class = 'System\Modules\Entitizer\Form\User';
+		protected static $form_class = 'Modules\Entitizer\Form\User';
 
 		protected static $message_success_save = 'USER_SUCCESS_SAVE';
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules {
+namespace Modules {
 
-	use System\Utils\Lister, Explorer, Geo\Timezone, Validate;
+	use Utils\Lister, Explorer, Geo\Timezone, Validate;
 
 	abstract class Settings {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils {
+namespace Utils {
 
 	use Exception;
 
@@ -21,7 +21,7 @@ namespace System\Utils {
 
 			if ('' === self::$section) throw new Exception\View();
 
-			$class_name = ('System\Views\\' . self::$section . '\\' . $name);
+			$class_name = ('Views\\' . self::$section . '\\' . $name);
 
 			if (isset(self::$cache[$class_name])) $view = clone self::$cache[$class_name];
 

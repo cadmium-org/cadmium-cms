@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Entitizer\Users {
+namespace Views\Admin\Blocks\Entitizer\Users {
 
-	use System\Views;
+	use Views;
 
 	class Main extends Views\Admin\View {
 

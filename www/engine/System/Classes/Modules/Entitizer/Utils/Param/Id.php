@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils\Param {
+namespace Modules\Entitizer\Utils\Param {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Id extends Entitizer\Utils\Param {
 

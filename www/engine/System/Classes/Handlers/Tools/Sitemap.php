@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Tools {
+namespace Handlers\Tools {
 
-	use System, System\Modules\Entitizer, System\Modules\Settings, System\Utils\Tools, Arr, Date, DB;
+	use Frames, Modules\Entitizer, Modules\Settings, Utils\Tools, Arr, Date, DB;
 
-	class Sitemap extends System\Frames\Tools\Sitemap {
+	class Sitemap extends Frames\Tools\Sitemap {
 
 		# Get last modified
 

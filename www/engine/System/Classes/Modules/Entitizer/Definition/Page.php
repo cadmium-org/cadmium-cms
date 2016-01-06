@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Definition {
+namespace Modules\Entitizer\Definition {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Page extends Entitizer\Utils\Definition {
 

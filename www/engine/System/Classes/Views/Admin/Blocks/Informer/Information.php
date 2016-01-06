@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Informer {
+namespace Views\Admin\Blocks\Informer {
 
-	use System\Views;
+	use Views;
 
 	class Information extends Views\Admin\View {
 

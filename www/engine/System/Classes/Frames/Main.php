@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames {
+namespace Frames {
 
-	use System\Modules\Settings, Session, Url;
+	use Modules\Settings, Session, Url;
 
 	abstract class Main {
 

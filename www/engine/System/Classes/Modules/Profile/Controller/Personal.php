@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Profile\Controller {
+namespace Modules\Profile\Controller {
 
-	use System\Modules\Auth, Validate;
+	use Modules\Auth, Validate;
 
 	class Personal {
 

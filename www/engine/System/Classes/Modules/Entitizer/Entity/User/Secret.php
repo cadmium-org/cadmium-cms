@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Entity\User {
+namespace Modules\Entitizer\Entity\User {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Secret extends Entitizer\Utils\Entity {
 

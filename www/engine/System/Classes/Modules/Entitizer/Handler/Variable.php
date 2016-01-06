@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Handler {
+namespace Modules\Entitizer\Handler {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Variable extends Entitizer\Utils\Handler {
 
@@ -10,13 +10,13 @@ namespace System\Modules\Entitizer\Handler {
 
 		# Handler configuration
 
-		protected static $controller = 'System\Modules\Entitizer\Controller\Variable';
+		protected static $controller = 'Modules\Entitizer\Controller\Variable';
 
 		protected static $link = '/admin/content/variables';
 
 		protected static $naming = 'title', $naming_new = 'VARIABLES_ITEM_NEW';
 
-		protected static $form_class = 'System\Modules\Entitizer\Form\Variable';
+		protected static $form_class = 'Modules\Entitizer\Form\Variable';
 
 		protected static $message_success_save = 'VARIABLE_SUCCESS_SAVE';
 

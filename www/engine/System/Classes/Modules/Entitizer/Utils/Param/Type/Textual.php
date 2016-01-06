@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils\Param\Type {
+namespace Modules\Entitizer\Utils\Param\Type {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Textual extends Entitizer\Utils\Param {
 

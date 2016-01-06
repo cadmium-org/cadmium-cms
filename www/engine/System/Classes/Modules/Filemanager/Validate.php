@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Filemanager {
+namespace Modules\Filemanager {
 
 	abstract class Validate {
 

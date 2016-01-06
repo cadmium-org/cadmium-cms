@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils {
+namespace Modules\Entitizer\Utils {
 
 	abstract class Param {
 

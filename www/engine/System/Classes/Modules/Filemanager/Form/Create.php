@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Form {
+namespace Modules\Filemanager\Form {
 
-	use System\Utils\Form, Language;
+	use Utils\Form, Language;
 
 	class Create extends Form {
 

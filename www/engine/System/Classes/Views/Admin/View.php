@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin {
+namespace Views\Admin {
 
-	use System\Views;
+	use Views;
 
 	abstract class View extends Views\View {
 

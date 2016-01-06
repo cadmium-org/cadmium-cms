@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Auth {
+namespace Modules\Auth {
 
 	use Str;
 

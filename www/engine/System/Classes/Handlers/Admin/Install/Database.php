@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\Install {
+namespace Handlers\Admin\Install {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Database extends System\Frames\Admin\Component\Install {
+	class Database extends Frames\Admin\Component\Install {
 
 		# Handle request
 

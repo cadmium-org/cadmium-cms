@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views {
+namespace Views {
 
-	use System\Modules\Extend, Explorer, Template;
+	use Modules\Extend, Explorer, Template;
 
 	abstract class View extends Template\Asset\Block {
 

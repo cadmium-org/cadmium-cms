@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\Extend {
+namespace Handlers\Admin\Extend {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Templates extends System\Frames\Admin\Component\Panel {
+	class Templates extends Frames\Admin\Component\Panel {
 
 		# Handle request
 

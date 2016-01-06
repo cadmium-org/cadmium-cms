@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Profile\Form {
+namespace Modules\Profile\Form {
 
-	use System\Modules\Auth, System\Utils\Form, System\Utils\Lister, Geo\Country, Geo\Timezone, Language;
+	use Modules\Auth, Utils\Form, Utils\Lister, Geo\Country, Geo\Timezone, Language;
 
 	class Personal extends Form {
 

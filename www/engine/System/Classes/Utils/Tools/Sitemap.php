@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Utils\Tools {
+namespace Utils\Tools {
 
-	use System\Utils\Lister, Date, Explorer, Number, Validate, XML;
+	use Utils\Lister, Date, Explorer, Number, Validate, XML;
 
 	class Sitemap {
 

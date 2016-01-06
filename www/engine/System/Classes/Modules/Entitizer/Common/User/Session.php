@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Entitizer\Common\User {
+namespace Modules\Entitizer\Common\User {
 
 	trait Session {
 		

@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\Auth {
+namespace Handlers\Admin\Auth {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Register extends System\Frames\Admin\Component\Auth\Initial {
+	class Register extends Frames\Admin\Component\Auth\Initial {
 
 		# Handle request
 

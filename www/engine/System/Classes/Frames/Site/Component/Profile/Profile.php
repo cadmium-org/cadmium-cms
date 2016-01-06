@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames\Site\Component {
+namespace Frames\Site\Component {
 
-	use System;
+	use Frames;
 
-	abstract class Profile extends System\Frames\Site\Section {}
+	abstract class Profile extends Frames\Site\Section {}
 }

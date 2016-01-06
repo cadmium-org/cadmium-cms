@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames {
+namespace Frames {
 
-	use System\Modules\Extend, System\Modules\Settings, System\Utils\View, Date, Language, Template;
+	use Modules\Extend, Modules\Settings, Utils\View, Date, Language, Template;
 
 	abstract class Status {
 

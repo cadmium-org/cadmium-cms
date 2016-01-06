@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Site\Profile\Auth {
+namespace Handlers\Site\Profile\Auth {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Login extends System\Frames\Site\Component\Profile\Auth {
+	class Login extends Frames\Site\Component\Profile\Auth {
 
 		# Handle request
 

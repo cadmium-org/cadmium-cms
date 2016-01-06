@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Blocks\Utils {
+namespace Views\Site\Blocks\Utils {
 
-	use System\Views;
+	use Views;
 
 	class Message extends Views\Site\View {
 

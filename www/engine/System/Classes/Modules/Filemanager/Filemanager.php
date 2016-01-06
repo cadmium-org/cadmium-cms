@@ -1,13 +1,13 @@
 <?php
 
-namespace System\Modules {
+namespace Modules {
 
 	abstract class Filemanager {
 
 		private static $classes = [
 
-			FILEMANAGER_TYPE_DIR            => 'System\Modules\Filemanager\Entity\Dir',
-			FILEMANAGER_TYPE_FILE           => 'System\Modules\Filemanager\Entity\File'
+			FILEMANAGER_TYPE_DIR            => 'Modules\Filemanager\Entity\Dir',
+			FILEMANAGER_TYPE_FILE           => 'Modules\Filemanager\Entity\File'
 		];
 
 		# Open container

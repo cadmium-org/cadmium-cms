@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Form {
+namespace Modules\Auth\Form {
 
-	use System\Modules\Auth, System\Utils\Form, Language;
+	use Modules\Auth, Utils\Form, Language;
 
 	class Login extends Form {
 

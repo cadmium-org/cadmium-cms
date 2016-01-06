@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Profile\Form {
+namespace Modules\Profile\Form {
 
-	use System\Utils\Form;
+	use Utils\Form;
 
 	class Password extends Form {
 

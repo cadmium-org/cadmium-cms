@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules {
+namespace Modules {
 
 	use DB, Explorer;
 

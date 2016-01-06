@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Entitizer\Menuitems\Listview {
+namespace Views\Admin\Blocks\Entitizer\Menuitems\Listview {
 
-	use System\Views;
+	use Views;
 
 	class Main extends Views\Admin\View {
 

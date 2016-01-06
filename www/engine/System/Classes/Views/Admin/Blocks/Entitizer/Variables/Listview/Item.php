@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Entitizer\Variables\Listview {
+namespace Views\Admin\Blocks\Entitizer\Variables\Listview {
 
-	use System\Views;
+	use Views;
 
 	class Item extends Views\Admin\View {
 

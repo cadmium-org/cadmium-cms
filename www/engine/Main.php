@@ -31,11 +31,9 @@ spl_autoload_register(function($class_name) {
 
 	# Determine class path
 
-	if ($path[0] === 'System') $path = (DIR_SYSTEM_CLASSES . implode('/', array_slice($path, 1)));
+	$system_classes = ['Frames', 'Handlers', 'Modules', 'Utils', 'Views', 'Dispatcher', 'Installer'];
 
-	else if ($path[0] === 'Plugins') $path = (DIR_SYSTEM_PLUGINS . implode('/', array_slice($path, 1)));
-
-	else $path = (DIR_CLASSES . implode('/', $path));
+	$path = ((in_array($path[0], $system_classes) ? DIR_SYSTEM_CLASSES : DIR_CLASSES) . implode('/', $path));
 
 	# Require class file
 
@@ -45,7 +43,10 @@ spl_autoload_register(function($class_name) {
 
 	# Check if class exists
 
-	if (!class_exists($class_name) && !interface_exists($class_name) && !trait_exists($class_name)) throw new Exception\ClassLoad($class_name);
+	if (!class_exists($class_name) && !interface_exists($class_name) && !trait_exists($class_name)) {
+
+		throw new Exception\ClassLoad($class_name);
+	}
 
 	# Call autoload method
 

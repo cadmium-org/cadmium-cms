@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Utils {
+namespace Views\Admin\Blocks\Utils {
 
-	use System\Views;
+	use Views;
 
 	class Menu extends Views\Admin\View {
 

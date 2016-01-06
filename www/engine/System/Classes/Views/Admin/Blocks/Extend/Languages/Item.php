@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Extend\Languages {
+namespace Views\Admin\Blocks\Extend\Languages {
 
-	use System\Views;
+	use Views;
 
 	class Item extends Views\Admin\View {
 

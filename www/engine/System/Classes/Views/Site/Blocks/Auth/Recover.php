@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Blocks\Auth {
+namespace Views\Site\Blocks\Auth {
 
-	use System\Views;
+	use Views;
 
 	class Recover extends Views\Site\View {
 

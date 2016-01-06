@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Auth {
+namespace Views\Admin\Blocks\Auth {
 
-	use System\Views;
+	use Views;
 
 	class Reset extends Views\Admin\View {
 

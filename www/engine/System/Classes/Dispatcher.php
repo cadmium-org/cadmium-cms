@@ -1,8 +1,8 @@
 <?php
 
-namespace System {
+namespace {
 
-	use System, System\Utils\Map, DB, Request, Url;
+	use Utils\Map;
 
 	class Dispatcher extends System {
 
@@ -24,7 +24,7 @@ namespace System {
 
 			# Determine handler class
 
-			$class = ((false !== $handler) ? ('System\Handlers\\' . $handler) : 'System\Handlers\Site\Page');
+			$class = ((false !== $handler) ? ('Handlers\\' . $handler) : 'Handlers\Site\Page');
 
 			# ------------------------
 

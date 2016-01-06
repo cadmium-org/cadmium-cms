@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Controller {
+namespace Modules\Filemanager\Controller {
 
-	use System\Modules\Filemanager, System\Modules\Informer;
+	use Modules\Filemanager, Modules\Informer;
 
 	class Rename {
 

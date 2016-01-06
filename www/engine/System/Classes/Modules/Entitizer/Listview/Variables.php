@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Listview {
+namespace Modules\Entitizer\Listview {
 
-	use System\Modules\Entitizer, Template;
+	use Modules\Entitizer, Template;
 
 	class Variables extends Entitizer\Utils\Listview {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Listview configuration
 
-		protected static $lister = 'System\Modules\Entitizer\Lister\Variables';
+		protected static $lister = 'Modules\Entitizer\Lister\Variables';
 
 		protected static $link = '/admin/content/variables';
 

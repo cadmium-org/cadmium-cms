@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Filemanager\Listview {
+namespace Views\Admin\Blocks\Filemanager\Listview {
 
-	use System\Views;
+	use Views;
 
 	class Main extends Views\Admin\View {
 

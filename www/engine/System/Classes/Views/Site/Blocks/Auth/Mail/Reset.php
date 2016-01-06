@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Blocks\Auth\Mail {
+namespace Views\Site\Blocks\Auth\Mail {
 
-	use System\Views;
+	use Views;
 
 	class Reset extends Views\Site\View {
 

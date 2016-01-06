@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils {
+namespace Modules\Entitizer\Utils {
 
-	use System\Modules\Entitizer, System\Utils\Pagination, System\Utils\View, Ajax, Number, Request, Template, Url;
+	use Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
 
 	abstract class Listview {
 
