@@ -17,41 +17,41 @@ namespace Utils {
 
 		# Validate auth code
 
-		public static function authCode(string $code) {
+		public static function authCode(string $value) {
 
-			return (preg_match(REGEX_USER_AUTH_CODE, $code) ? $code : false);
+			return (preg_match(REGEX_USER_AUTH_CODE, $value) ? $code : false);
 		}
 
 		# Validate user name
 
-		public static function userName(string $name) {
+		public static function userName(string $value) {
 
 			$min = CONFIG_USER_NAME_MIN_LENGTH; $max = CONFIG_USER_NAME_MAX_LENGTH;
 
-			return self::string($name, REGEX_USER_NAME, $min, $max);
+			return self::string($value, REGEX_USER_NAME, $min, $max);
 		}
 
 		# Validate user password
 
-		public static function userPassword(string $password) {
+		public static function userPassword(string $value) {
 
 			$min = CONFIG_USER_PASSWORD_MIN_LENGTH; $max = CONFIG_USER_PASSWORD_MAX_LENGTH;
 
-			return self::string($password, REGEX_USER_PASSWORD, $min, $max);
+			return self::string($value, REGEX_USER_PASSWORD, $min, $max);
 		}
 
 		# Validate user email
 
-		public static function userEmail(string $email) {
+		public static function userEmail(string $value) {
 
-			return self::email($email);
+			return self::email($value);
 		}
 
 		# Validate file or directory name
 
-		public static function fileName(string $name) {
+		public static function fileName(string $value) {
 
-			return (preg_match(REGEX_FILE_NAME, $name) ? $name : false);
+			return (preg_match(REGEX_FILE_NAME, $value) ? $name : false);
 		}
 
 		# Validate url
