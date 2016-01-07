@@ -24,21 +24,21 @@ namespace {
 
 		public static function get(string $name) {
 
-			return (isset($_GET[$name]) ? $_GET[$name] : false);
+			return ($_GET[$name] ?? false);
 		}
 
 		# Return POST param by name
 
 		public static function post(string $name) {
 
-			return (isset($_POST[$name]) ? $_POST[$name] : false);
+			return ($_POST[$name] ?? false);
 		}
 
 		# Return file by name
 
 		public static function file(string $name) {
 
-			return (isset($_FILES[$name]) ? $_FILES[$name] : false);
+			return ($_FILES[$name] ?? false);
 		}
 
 		# Redirect to specified url
