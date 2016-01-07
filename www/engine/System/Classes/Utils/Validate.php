@@ -42,7 +42,7 @@ namespace Utils {
 
 		public static function fileName(string $value) {
 
-			return (preg_match(REGEX_FILE_NAME, $value) ? $name : false);
+			return (preg_match(REGEX_FILE_NAME, $value) ? $value : false);
 		}
 
 		# Validate url
