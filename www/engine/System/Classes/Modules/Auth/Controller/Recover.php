@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Controller {
 
-	use Modules\Auth, Modules\Entitizer, Str;
+	use Modules\Auth, Modules\Entitizer, Utils\Validate, Str;
 
 	class Recover {
 
@@ -22,7 +22,7 @@ namespace Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
+			if (false === ($password_new = Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
 
 			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 

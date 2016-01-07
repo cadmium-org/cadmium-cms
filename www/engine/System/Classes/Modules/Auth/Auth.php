@@ -2,7 +2,7 @@
 
 namespace Modules {
 
-	use Request, Session;
+	use Utils\Validate, Request, Session;
 
 	abstract class Auth {
 
@@ -42,7 +42,7 @@ namespace Modules {
 
 			# Check session code
 
-			if (false === ($code = Auth\Validate::code(Session::get('code')))) return false;
+			if (false === ($code = Validate::authCode(Session::get('code')))) return false;
 
 			# Get auth
 
@@ -75,7 +75,7 @@ namespace Modules {
 
 			# Check secret code
 
-			if (false === ($code = Auth\Validate::code(Request::get('code')))) return false;
+			if (false === ($code = Validate::authCode(Request::get('code')))) return false;
 
 			# Get auth
 

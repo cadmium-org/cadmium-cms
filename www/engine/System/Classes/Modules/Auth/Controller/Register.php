@@ -22,9 +22,9 @@ namespace Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
 			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
 

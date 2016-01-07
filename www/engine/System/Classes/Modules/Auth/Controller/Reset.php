@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Controller {
 
-	use Modules\Auth, Modules\Entitizer, Utils\Security, Str;
+	use Modules\Auth, Modules\Entitizer, Utils\Security, Utils\Validate, Str;
 
 	class Reset {
 
@@ -22,7 +22,7 @@ namespace Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
 			if (false === Security::checkCaptcha($captcha)) return 'USER_ERROR_CAPTCHA_INCORRECT';
 
