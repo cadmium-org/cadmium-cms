@@ -20,7 +20,7 @@ namespace Modules\Profile\Controller {
 
 			# Validate values
 
-			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
 
 			# Check email exists
 

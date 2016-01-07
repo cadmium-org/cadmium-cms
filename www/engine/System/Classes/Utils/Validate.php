@@ -40,6 +40,13 @@ namespace Utils {
 			return self::string($password, REGEX_USER_PASSWORD, $min, $max);
 		}
 
+		# Validate user email
+
+		public static function userEmail(string $email) {
+
+			return self::email($email);
+		}
+
 		# Validate file or directory name
 
 		public static function fileName(string $name) {

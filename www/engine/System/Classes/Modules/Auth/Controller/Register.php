@@ -26,7 +26,7 @@ namespace Modules\Auth\Controller {
 
 			if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
-			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
 
 			if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 

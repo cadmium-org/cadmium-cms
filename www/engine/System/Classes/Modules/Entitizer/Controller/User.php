@@ -33,7 +33,7 @@ namespace Modules\Entitizer\Controller {
 
 			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
 
 			# Validate password
 
