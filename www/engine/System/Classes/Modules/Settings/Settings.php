@@ -2,7 +2,7 @@
 
 namespace Modules {
 
-	use Utils\Lister, Explorer, Geo\Timezone, Request, Validate;
+	use Utils\Lister, Utils\Validate, Explorer, Geo\Timezone, Request;
 
 	abstract class Settings {
 

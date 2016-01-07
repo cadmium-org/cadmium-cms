@@ -43,9 +43,7 @@ namespace {
 
 		public static function url(string $value) {
 
-			$value = filter_var($value, FILTER_VALIDATE_URL);
-
-			return ((false !== $value) ? rtrim($value, '/') : false);
+			return filter_var($value, FILTER_VALIDATE_URL);
 		}
 	}
 }

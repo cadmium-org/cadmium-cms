@@ -2,7 +2,7 @@
 
 namespace Utils\Tools {
 
-	use Utils\Lister, Date, Explorer, Number, Validate, XML;
+	use Utils\Lister, Utils\Validate, Date, Explorer, Number, XML;
 
 	class Sitemap {
 

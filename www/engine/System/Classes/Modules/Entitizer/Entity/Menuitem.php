@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Entity {
 
-	use Modules\Entitizer, Validate;
+	use Modules\Entitizer, Utils\Validate;
 
 	class Menuitem extends Entitizer\Utils\Entity {
 
