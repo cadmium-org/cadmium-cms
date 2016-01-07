@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Auth, Modules\Entitizer, Str, Validate;
+	use Modules\Auth, Modules\Entitizer, Utils\Validate, Str;
 
 	class User {
 

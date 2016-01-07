@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Controller {
 
-	use Modules\Auth, Modules\Entitizer, Utils\Security, Str, Validate;
+	use Modules\Auth, Modules\Entitizer, Utils\Security, Utils\Validate, Str;
 
 	class Register {
 

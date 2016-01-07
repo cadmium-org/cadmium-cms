@@ -2,7 +2,7 @@
 
 namespace Modules\Profile\Controller {
 
-	use Modules\Auth, Validate;
+	use Modules\Auth, Utils\Validate;
 
 	class Personal {
 
