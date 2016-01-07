@@ -6,15 +6,6 @@ namespace Utils {
 
 	class Validate extends \Validate {
 
-		# Validate string using regex and length limitors
-
-		private static function string(string $string, string $regex, int $min, int $max) {
-
-			if (!preg_match($regex, $string)) return false;
-
-			return ((Str::between($string, $min, $max)) ? $string : false);
-		}
-
 		# Validate auth code
 
 		public static function authCode(string $value) {
@@ -28,7 +19,7 @@ namespace Utils {
 
 			$min = CONFIG_USER_NAME_MIN_LENGTH; $max = CONFIG_USER_NAME_MAX_LENGTH;
 
-			return self::string($value, REGEX_USER_NAME, $min, $max);
+			return ((preg_match(REGEX_USER_NAME, $value) && Str::between($value, $min, $max)) ? $value : false);
 		}
 
 		# Validate user password
@@ -37,7 +28,7 @@ namespace Utils {
 
 			$min = CONFIG_USER_PASSWORD_MIN_LENGTH; $max = CONFIG_USER_PASSWORD_MAX_LENGTH;
 
-			return self::string($value, REGEX_USER_PASSWORD, $min, $max);
+			return ((preg_match(REGEX_USER_PASSWORD, $value) && Str::between($value, $min, $max)) ? $value : false);
 		}
 
 		# Validate user email
