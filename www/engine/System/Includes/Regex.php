@@ -12,3 +12,5 @@ define('REGEX_USER_AUTH_CODE',                      '/^[a-zA-Z0-9]{40}$/');
 
 define('REGEX_USER_NAME',                           '/^(?!_)(?!.*_$)(?!.*_{2,})[a-zA-Z0-9_]+$/');
 define('REGEX_USER_PASSWORD',                       '/^.+$/');
+
+define('REGEX_FILE_NAME',                           '/^[^\/?%*:|"<>\\\]+$/');

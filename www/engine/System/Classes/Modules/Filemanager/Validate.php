@@ -8,7 +8,7 @@ namespace Modules\Filemanager {
 
 		public static function name(string $name) {
 
-			return (preg_match('/^[^\/?%*:|"<>\\\]+$/', $name) ? $name : false);
+			return (preg_match(REGEX_FILE_NAME, $name) ? $name : false);
 		}
 	}
 }
