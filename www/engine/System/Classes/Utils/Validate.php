@@ -19,7 +19,7 @@ namespace Utils {
 
 		public static function authCode(string $value) {
 
-			return (preg_match(REGEX_USER_AUTH_CODE, $value) ? $code : false);
+			return (preg_match(REGEX_USER_AUTH_CODE, $value) ? $value : false);
 		}
 
 		# Validate user name
