@@ -18,19 +18,11 @@
 
 		</div>
 
-		<div class="inline fields">
+		<div class="field">
 
-			<div class="field">
+			<input class="ui button" type="submit" value="%LOGIN%" />
 
-				<input class="ui button" type="submit" value="%LOGIN%" />
-
-			</div>
-
-			<div class="field">
-
-				<a class="ui basic button" href="$install_path$/profile/reset">%RESET_TEXT%</a>
-
-			</div>
+			<a class="ui basic button" href="$install_path$/profile/reset">%RESET_TEXT%</a>
 
 		</div>
 
