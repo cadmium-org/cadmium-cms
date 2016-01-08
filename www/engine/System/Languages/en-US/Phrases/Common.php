@@ -19,7 +19,7 @@ return [
 	'RENAME'                                    => 'Rename',
 	'REGISTER'                                  => 'Register',
 	'RESET'                                     => 'Reset password',
-	'RESET_TEXT'                                => 'Forgot your password?',
+	'RESET_TEXT'                                => 'Forgot password?',
 	'SAVE'                                      => 'Save',
 	'SUBMIT'                                    => 'Submit',
 	'YES'                                       => 'Yes',
