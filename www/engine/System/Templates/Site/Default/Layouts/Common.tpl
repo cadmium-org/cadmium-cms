@@ -52,6 +52,20 @@
 
 			<a class="item" href="$install_path$/profile/register">%REGISTER%</a>
 
+			<div class="ui collapsing dropdown icon item">
+
+				<i class="user icon"></i>
+
+				<div class="menu">
+
+					<a class="item" href="$install_path$/profile/login">%LOGIN%</a>
+
+					<a class="item" href="$install_path$/profile/register">%REGISTER%</a>
+
+				</div>
+
+			</div>
+
 		</div>
 
 		{ / block:auth }
