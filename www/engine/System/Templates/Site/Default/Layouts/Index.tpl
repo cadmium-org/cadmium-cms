@@ -48,11 +48,11 @@
 
 		<div class="right menu">
 
-			<a class="item" href="$install_path$/profile/login">%LOGIN%</a>
+			<a class="expanded item" href="$install_path$/profile/login">%LOGIN%</a>
 
-			<a class="item" href="$install_path$/profile/register">%REGISTER%</a>
+			<a class="expanded item" href="$install_path$/profile/register">%REGISTER%</a>
 
-			<div class="ui collapsing dropdown icon item">
+			<div class="ui collapsed dropdown icon item">
 
 				<i class="user icon"></i>
 

@@ -9,7 +9,7 @@
 
 .main.menu .launcher.item { display:none; }
 
-.main.menu .right.menu .collapsing.item { display:none; }
+.main.menu .right.menu .collapsed.item { display:none; }
 
 @media only screen and (max-width:767px) {
 
@@ -19,9 +19,9 @@
 
     .main.menu .right.menu .user.item .name { display:none; }
 
-	.main.menu .right.menu .collapsing.item { display:flex; }
+	.main.menu .right.menu .expanded.item { display:none; }
 
-	.main.menu .right.menu .item:not(.collapsing) { display:none; }
+	.main.menu .right.menu .collapsed.item { display:flex; }
 }
 
 /* Masthead */
