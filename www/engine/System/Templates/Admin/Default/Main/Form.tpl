@@ -21,6 +21,8 @@
 
 		<script src="$install_path$/include/semantic/semantic.min.js"></script>
 
+		<script src="$install_path$/include/admin/ace/ace.js"></script>
+
 		<script src="$install_path$/include/admin/ckeditor/ckeditor.js"></script>
 
 		<script src="$install_path$/include/admin/scripts/main.js"></script>

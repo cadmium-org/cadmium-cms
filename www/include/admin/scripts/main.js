@@ -770,6 +770,36 @@ var Main = {
 
 		'init' : function() {
 
+			this.initAce(); this.initCKEditor();
+		},
+
+		'initAce' : function() {
+
+			var container = $('#ace-container'); if (!container.length) return;
+
+			var textarea = container.find('textarea').hide(), holder = container.find('.holder');
+
+			var mode = holder.data('mode'), minLines = holder.data('min-lines'), maxLines = holder.data('max-lines');
+
+			var editor = ace.edit(holder.attr('id'));
+
+			editor.setTheme('ace/theme/clouds'); editor.session.setMode('ace/mode/' + mode);
+
+			editor.setOptions({ 'minLines' : minLines, 'maxLines' : maxLines });
+
+			editor.setOptions({ 'showPrintMargin' : false, 'useWorker' : false });
+
+			editor.renderer.setScrollMargin(5, 5, 0, 0);
+
+			editor.setValue(textarea.val()); editor.gotoLine(1, 0);
+
+			editor.session.on('change', function() { textarea.val(editor.getValue()); });
+
+			container.show();
+		},
+
+		'initCKEditor' : function() {
+
 			var container = $('#ckeditor-container'); if (!container.length) return;
 
 			var language = $('html').attr('lang'), instanceReady = function (event) { container.show(); };

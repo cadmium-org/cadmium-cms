@@ -67,6 +67,10 @@
 
 .ui.modal .actions > .button { margin-left:0; }
 
+/* Ace Editor */
+
+.ace_editor { border:1px solid rgba(34, 36, 38, 0.15); border-radius:4px; }
+
 /* Other */
 
 #captcha { background-color:#FFF !important; }
