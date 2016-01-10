@@ -1,12 +1,11 @@
 <?php
 
-namespace System\Frames\Site {
+namespace Frames\Site {
 
-	use System, System\Frames\Status;
-	use System\Modules\Auth, System\Modules\Extend, System\Modules\Settings, System\Utils\Menu, System\Utils\Messages, System\Utils\View;
-	use System\Utils\Variables, System\Utils\Widgets, Date, Request, Template;
+	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Modules\Settings, Utils\Menu, Utils\Messages, Utils\View;
+	use Utils\Template\Variables, Utils\Template\Widgets, Date, Request, Template;
 
-	abstract class Section extends System\Frames\Section {
+	abstract class Section extends Frames\Section {
 
 		# Define active section
 

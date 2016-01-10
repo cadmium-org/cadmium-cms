@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Blocks\Utils\Menu {
+namespace Views\Site\Blocks\Utils\Menu {
 
-	use System\Views;
+	use Views;
 
 	class Container extends Views\Site\View {
 

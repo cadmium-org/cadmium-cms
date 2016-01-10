@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\Content\Filemanager {
+namespace Handlers\Admin\Content\Filemanager {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class File extends System\Frames\Admin\Component\Panel {
+	class File extends Frames\Admin\Component\Panel {
 
 		# Handle request
 

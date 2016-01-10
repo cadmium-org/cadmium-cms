@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Controller {
+namespace Modules\Auth\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Security, Str, Validate;
+	use Modules\Auth, Modules\Entitizer, Utils\Security, Utils\Validate, Str;
 
 	class Register {
 
@@ -22,11 +22,11 @@ namespace System\Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
-			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
 
 			if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Utils {
+namespace Modules\Auth\Utils {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Modules\Settings, System\Utils\View, Date, Language, Mailer;
+	use Modules\Auth, Modules\Entitizer, Modules\Settings, Utils\View, Date, Language, Mailer;
 
 	abstract class Mail {
 

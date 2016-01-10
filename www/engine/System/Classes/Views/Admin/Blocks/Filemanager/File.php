@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Filemanager {
+namespace Views\Admin\Blocks\Filemanager {
 
-	use System\Views;
+	use Views;
 
 	class File extends Views\Admin\View {
 

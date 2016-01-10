@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Install\Handler {
+namespace Modules\Install\Handler {
 
-	use System\Modules\Install, System\Utils\View, Language;
+	use Modules\Install, Utils\View, Language;
 
 	class Check {
 

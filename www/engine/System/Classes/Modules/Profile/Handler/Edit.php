@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Profile\Handler {
+namespace Modules\Profile\Handler {
 
-	use System\Modules\Profile, System\Utils\Messages, System\Utils\View, Language, Request;
+	use Modules\Profile, Utils\Messages, Utils\View, Language, Request;
 
 	class Edit {
 

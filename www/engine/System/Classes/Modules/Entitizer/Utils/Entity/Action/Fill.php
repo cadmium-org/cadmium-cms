@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils\Entity\Action {
+namespace Modules\Entitizer\Utils\Entity\Action {
 
 	// use DB;
 

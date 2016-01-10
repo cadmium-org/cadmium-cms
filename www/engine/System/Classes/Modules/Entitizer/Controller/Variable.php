@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Controller {
+namespace Modules\Entitizer\Controller {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Variable {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Handler {
+namespace Modules\Auth\Handler {
 
-	use System\Modules\Auth, System\Utils\Messages, Language, Request;
+	use Modules\Auth, Utils\Messages, Language, Request;
 
 	class Login extends Auth\Utils\Handler {
 

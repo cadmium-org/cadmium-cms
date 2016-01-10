@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Layouts {
+namespace Views\Admin\Layouts {
 
-	use System\Views;
+	use Views;
 
 	class Page extends Views\Admin\View {
 

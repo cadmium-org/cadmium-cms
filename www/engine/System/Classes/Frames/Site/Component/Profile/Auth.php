@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames\Site\Component\Profile {
+namespace Frames\Site\Component\Profile {
 
-	use System;
+	use Frames;
 
-	abstract class Auth extends System\Frames\Site\Component\Profile {}
+	abstract class Auth extends Frames\Site\Component\Profile {}
 }

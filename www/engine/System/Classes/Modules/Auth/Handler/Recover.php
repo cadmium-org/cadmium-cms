@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Handler {
+namespace Modules\Auth\Handler {
 
-	use System\Modules\Auth, Request;
+	use Modules\Auth, Request;
 
 	class Recover extends Auth\Utils\Handler {
 

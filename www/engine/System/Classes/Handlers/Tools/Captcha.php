@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Tools {
+namespace Handlers\Tools {
 
-	use System, System\Utils\Security, System\Utils\Tools;
+	use Frames, Utils\Security, Utils\Tools;
 
-	class Captcha extends System\Frames\Tools\Captcha {
+	class Captcha extends Frames\Tools\Captcha {
 
 		# Handle request
 

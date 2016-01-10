@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Form {
+namespace Modules\Entitizer\Form {
 
-	use System\Modules\Entitizer, System\Utils\Form;
+	use Modules\Entitizer, Utils\Form;
 
 	class Widget extends Form {
 

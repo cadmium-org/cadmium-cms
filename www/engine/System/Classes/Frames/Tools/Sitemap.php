@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Frames\Tools {
+namespace Frames\Tools {
 
-	use System, System\Utils\Tools, Exception, XML;
+	use Frames, Utils\Tools, Exception, XML;
 
-	abstract class Sitemap extends System\Frames\Main {
+	abstract class Sitemap extends Frames\Main {
 
 		# Captcha main method
 

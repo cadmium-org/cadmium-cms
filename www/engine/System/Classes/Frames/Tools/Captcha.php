@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Frames\Tools {
+namespace Frames\Tools {
 
-	use System, System\Utils\Tools, Exception, Image;
+	use Frames, Utils\Tools, Exception, Image;
 
-	abstract class Captcha extends System\Frames\Main {
+	abstract class Captcha extends Frames\Main {
 
 		# Captcha main method
 

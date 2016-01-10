@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\Auth {
+namespace Handlers\Admin\Auth {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Recover extends System\Frames\Admin\Component\Auth {
+	class Recover extends Frames\Admin\Component\Auth {
 
 		# Handle request
 

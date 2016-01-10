@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Utils\Tools {
+namespace Utils\Tools {
 
 	use Explorer, Number;
 

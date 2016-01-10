@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Site\Profile {
+namespace Handlers\Site\Profile {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Overview extends System\Frames\Site\Component\Profile {
+	class Overview extends Frames\Site\Component\Profile {
 
 		# Handle request
 

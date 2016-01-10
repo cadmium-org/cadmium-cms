@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Listview {
+namespace Modules\Entitizer\Listview {
 
-	use System\Modules\Entitizer, System\Utils\Lister, Template;
+	use Modules\Entitizer, Utils\Lister, Template;
 
 	class Pages extends Entitizer\Utils\Listview {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Listview configuration
 
-		protected static $lister = 'System\Modules\Entitizer\Lister\Pages';
+		protected static $lister = 'Modules\Entitizer\Lister\Pages';
 
 		protected static $link = '/admin/content/pages';
 

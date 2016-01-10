@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Settings\Form {
+namespace Modules\Settings\Form {
 
-	use System\Modules\Settings, System\Utils\Form, System\Utils\Lister, Geo\Timezone;
+	use Modules\Settings, Utils\Form, Utils\Lister, Geo\Timezone;
 
 	class General extends Form {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Definition\User {
+namespace Modules\Entitizer\Definition\User {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Session extends Entitizer\Utils\Definition {
 

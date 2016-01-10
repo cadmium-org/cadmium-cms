@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Listview {
+namespace Modules\Entitizer\Listview {
 
-	use System\Modules\Auth, System\Modules\Entitizer, System\Utils\Lister, Template;
+	use Modules\Auth, Modules\Entitizer, Utils\Lister, Template;
 
 	class Users extends Entitizer\Utils\Listview {
 
@@ -10,7 +10,7 @@ namespace System\Modules\Entitizer\Listview {
 
 		# Listview configuration
 
-		protected static $lister = 'System\Modules\Entitizer\Lister\Users';
+		protected static $lister = 'Modules\Entitizer\Lister\Users';
 
 		protected static $link = '/admin/system/users';
 

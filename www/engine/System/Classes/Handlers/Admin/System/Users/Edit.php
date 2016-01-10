@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\System\Users {
+namespace Handlers\Admin\System\Users {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Edit extends System\Frames\Admin\Component\Panel {
+	class Edit extends Frames\Admin\Component\Panel {
 
 		# Handle request
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Site\Profile\Auth {
+namespace Handlers\Site\Profile\Auth {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Reset extends System\Frames\Site\Component\Profile\Auth {
+	class Reset extends Frames\Site\Component\Profile\Auth {
 
 		# Handle request
 

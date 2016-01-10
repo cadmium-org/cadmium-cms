@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin\Content\Menuitems {
+namespace Handlers\Admin\Content\Menuitems {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Create extends System\Frames\Admin\Component\Panel {
+	class Create extends Frames\Admin\Component\Panel {
 
 		# Handle request
 

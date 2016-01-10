@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Informer\Handler {
+namespace Modules\Informer\Handler {
 
-	use System\Modules\Informer, System\Utils\View;
+	use Modules\Informer, Utils\View;
 
 	class Information {
 

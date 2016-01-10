@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Install\Form {
+namespace Modules\Install\Form {
 
-	use System\Modules\Extend, System\Utils\Form;
+	use Modules\Extend, Utils\Form;
 
 	class Check extends Form {
 

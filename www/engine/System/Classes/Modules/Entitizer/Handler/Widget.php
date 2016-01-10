@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Handler {
+namespace Modules\Entitizer\Handler {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Widget extends Entitizer\Utils\Handler {
 
@@ -10,13 +10,13 @@ namespace System\Modules\Entitizer\Handler {
 
 		# Handler configuration
 
-		protected static $controller = 'System\Modules\Entitizer\Controller\Widget';
+		protected static $controller = 'Modules\Entitizer\Controller\Widget';
 
 		protected static $link = '/admin/content/widgets';
 
 		protected static $naming = 'title', $naming_new = 'WIDGETS_ITEM_NEW';
 
-		protected static $form_class = 'System\Modules\Entitizer\Form\Widget';
+		protected static $form_class = 'Modules\Entitizer\Form\Widget';
 
 		protected static $message_success_save = 'WIDGET_SUCCESS_SAVE';
 

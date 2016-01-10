@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Extend {
+namespace Modules\Extend {
 
 	abstract class Templates {
 

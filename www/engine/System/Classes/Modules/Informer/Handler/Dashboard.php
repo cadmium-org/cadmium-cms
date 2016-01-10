@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Informer\Handler {
+namespace Modules\Informer\Handler {
 
-	use System\Modules\Informer, System\Modules\Settings, System\Utils\Lister, System\Utils\Messages, System\Utils\View, Geo\Timezone, Language;
+	use Modules\Informer, Modules\Settings, Utils\Lister, Utils\Messages, Utils\View, Geo\Timezone, Language;
 
 	class Dashboard {
 

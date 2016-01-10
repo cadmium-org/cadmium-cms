@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils {
+namespace Modules\Entitizer\Utils {
 
-	use System\Modules\Entitizer, DB;
+	use Modules\Entitizer, DB;
 
 	abstract class Lister {
 

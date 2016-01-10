@@ -1,8 +1,8 @@
 <?php
 
-namespace System {
+namespace {
 
-	use System, System\Modules\Install, Request, Validate;
+	use Modules\Install;
 
 	class Installer extends System {
 
@@ -14,7 +14,7 @@ namespace System {
 
 			$checked = (Install::status() && Validate::boolean(Request::get('checked')));
 
-			$class = ('System\Handlers\Admin\Install\\' . (!$checked ? 'Check' : 'Database'));
+			$class = ('Handlers\Admin\Install\\' . (!$checked ? 'Check' : 'Database'));
 
 			# ------------------------
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames\Admin\Component {
+namespace Frames\Admin\Component {
 
-	use System;
+	use Frames;
 
-	abstract class Panel extends System\Frames\Admin\Section {}
+	abstract class Panel extends Frames\Admin\Section {}
 }

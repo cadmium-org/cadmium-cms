@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Filemanager\Utils {
+namespace Modules\Filemanager\Utils {
 
 	use Explorer;
 

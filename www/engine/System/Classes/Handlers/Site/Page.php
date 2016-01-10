@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Site {
+namespace Handlers\Site {
 
-	use System, System\Modules\Auth, System\Modules\Entitizer, System\Utils\View, DB, Template;
+	use Frames, Modules\Auth, Modules\Entitizer, Utils\View, DB, Template;
 
-	class Page extends System\Frames\Site\Section {
+	class Page extends Frames\Site\Section {
 
 		private $path = [], $page = false;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Main\Status {
+namespace Views\Admin\Main\Status {
 
-	use System\Views;
+	use Views;
 
 	class Error404 extends Views\Admin\View {
 

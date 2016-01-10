@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site {
+namespace Views\Site {
 
-	use System\Views;
+	use Views;
 
 	abstract class View extends Views\View {
 

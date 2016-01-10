@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Frames\Admin\Component\Auth {
+namespace Frames\Admin\Component\Auth {
 
-	use System;
+	use Frames;
 
-	abstract class Initial extends System\Frames\Admin\Component\Auth {}
+	abstract class Initial extends Frames\Admin\Component\Auth {}
 }

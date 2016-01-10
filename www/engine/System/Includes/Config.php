@@ -107,10 +107,7 @@ define('CONFIG_SITE_KEYWORDS_MAX_LENGTH',           512);
 # System
 
 define('CONFIG_SYSTEM_URL_MAX_LENGTH',              128);
-define('CONFIG_SYSTEM_URL_DEFAULT',                 'http://example.com');
-
 define('CONFIG_SYSTEM_EMAIL_MAX_LENGTH',            128);
-define('CONFIG_SYSTEM_EMAIL_DEFAULT',               'admin@example.com');
 
 define('CONFIG_SYSTEM_TIMEZONE_DEFAULT',            'UTC');
 

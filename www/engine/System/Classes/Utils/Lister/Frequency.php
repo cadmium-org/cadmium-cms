@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Utils\Lister {
+namespace Utils\Lister {
 
-	use System\Utils\Lister;
+	use Utils\Lister;
 
 	abstract class Frequency extends Lister {
 

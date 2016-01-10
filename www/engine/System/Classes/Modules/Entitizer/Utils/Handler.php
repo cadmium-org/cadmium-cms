@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Utils {
+namespace Modules\Entitizer\Utils {
 
-	use System\Modules\Entitizer, System\Utils\Messages, System\Utils\View, Ajax, Language, Number, Request, Template;
+	use Modules\Entitizer, Utils\Messages, Utils\View, Ajax, Language, Number, Request, Template;
 
 	abstract class Handler {
 

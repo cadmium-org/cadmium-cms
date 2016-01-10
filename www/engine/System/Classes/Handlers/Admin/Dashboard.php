@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Handlers\Admin {
+namespace Handlers\Admin {
 
-	use System, System\Modules, Language;
+	use Frames, Modules, Language;
 
-	class Dashboard extends System\Frames\Admin\Component\Panel {
+	class Dashboard extends Frames\Admin\Component\Panel {
 
 		# Handle request
 

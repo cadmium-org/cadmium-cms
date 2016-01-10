@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Install\Utils {
+namespace Modules\Install\Utils {
 
-	use System\Modules\Entitizer, Arr, DB, Language, Template;
+	use Modules\Entitizer, Arr, DB, Language, Template;
 
 	abstract class Tables {
 

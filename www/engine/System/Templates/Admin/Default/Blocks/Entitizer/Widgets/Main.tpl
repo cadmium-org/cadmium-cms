@@ -16,41 +16,49 @@
 
 <div class="ui segment">
 
-	<form class="ui form" method="post" action="$link$" autocomplete="off">
+	<form method="post" action="$link$" autocomplete="off">
 
-		<div class="field">
+		<div class="ui form">
 
-			<label for="widget-title">%WIDGET_FIELD_TITLE%</label>
+			<div class="field">
 
-			{ block:field_widget_title / }
+				<label for="widget-title">%WIDGET_FIELD_TITLE%</label>
 
-		</div>
+				{ block:field_widget_title / }
 
-		<div class="field">
+			</div>
 
-			<label for="widget-name">%WIDGET_FIELD_NAME%</label>
+			<div class="field">
 
-			{ block:field_widget_name / }
+				<label for="widget-name">%WIDGET_FIELD_NAME%</label>
 
-		</div>
+				{ block:field_widget_name / }
 
-		<div class="field">
+			</div>
 
-			<div class="ui slider checkbox">
+			<div class="field">
 
-				{ block:field_widget_display / }
+				<div class="ui slider checkbox">
 
-				<label for="widget-display">%WIDGET_FIELD_DISPLAY%</label>
+					{ block:field_widget_display / }
+
+					<label for="widget-display">%WIDGET_FIELD_DISPLAY%</label>
+
+				</div>
 
 			</div>
 
 		</div>
 
-		<div class="field">
+		<div class="ui hidden divider"></div>
 
-			<label for="widget-contents">%WIDGET_FIELD_CONTENTS%</label>
+		<div id="ace-container" style="display:none;">
+
+			<h5 class="ui header">%WIDGET_FIELD_CONTENTS%</h5>
 
 			{ block:field_widget_contents / }
+
+			<div class="holder" id="ace-holder" data-mode="html" data-min-lines="5" data-max-lines="20"></div>
 
 		</div>
 

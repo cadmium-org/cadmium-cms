@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Auth\Utils {
+namespace Modules\Auth\Utils {
 
-	use System\Utils\View;
+	use Utils\View;
 
 	abstract class Handler {
 

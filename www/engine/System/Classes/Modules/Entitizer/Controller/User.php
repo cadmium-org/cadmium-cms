@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Controller {
+namespace Modules\Entitizer\Controller {
 
-	use System\Modules\Auth, System\Modules\Entitizer, Str, Validate;
+	use Modules\Auth, Modules\Entitizer, Utils\Validate, Str;
 
 	class User {
 
@@ -31,15 +31,15 @@ namespace System\Modules\Entitizer\Controller {
 
 			# Validate name & email
 
-			if (false === ($name = Auth\Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
 
-			if (false === ($email = Validate::email($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
 
 			# Validate password
 
 			if ((0 === $this->user->id) || ('' !== $password)) {
 
-				if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+				if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
 				if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 			}

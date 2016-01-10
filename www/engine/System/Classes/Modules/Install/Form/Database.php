@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Install\Form {
+namespace Modules\Install\Form {
 
-	use System\Utils\Form;
+	use Utils\Form;
 
 	class Database extends Form {
 

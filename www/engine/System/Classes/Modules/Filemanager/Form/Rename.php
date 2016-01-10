@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Form {
+namespace Modules\Filemanager\Form {
 
-	use System\Modules\Filemanager, System\Utils\Form, Language;
+	use Modules\Filemanager, Utils\Form, Language;
 
 	class Rename extends Form {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Handler {
+namespace Modules\Entitizer\Handler {
 
-	use System\Modules\Entitizer, Template;
+	use Modules\Entitizer, Template;
 
 	class Menuitem extends Entitizer\Utils\Handler {
 
@@ -10,13 +10,13 @@ namespace System\Modules\Entitizer\Handler {
 
 		# Handler configuration
 
-		protected static $controller = 'System\Modules\Entitizer\Controller\Menuitem';
+		protected static $controller = 'Modules\Entitizer\Controller\Menuitem';
 
 		protected static $link = '/admin/content/menuitems';
 
 		protected static $naming = 'text', $naming_new = '';
 
-		protected static $form_class = 'System\Modules\Entitizer\Form\Menuitem';
+		protected static $form_class = 'Modules\Entitizer\Form\Menuitem';
 
 		protected static $message_success_save = 'MENUITEM_SUCCESS_SAVE';
 

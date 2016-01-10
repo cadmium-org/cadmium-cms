@@ -13,15 +13,15 @@
 
 .main.menu { min-width:320px; }
 
-.main.menu .launcher { display:none !important; }
+.main.menu .launcher.item { display:none; }
 
 @media only screen and (max-width:767px) {
 
-	.main.menu .launcher { display:flex !important; }
+	.main.menu .launcher.item { display:flex; }
 
 	.main.menu > .item:not(.brand):not(.launcher) { display:none; }
 
-    .main.menu .user .name { display:none; }
+    .main.menu .right.menu .user.item .name { display:none; }
 }
 
 /* Wrapper */
@@ -66,6 +66,10 @@
 .ui.modal { min-width:304px; }
 
 .ui.modal .actions > .button { margin-left:0; }
+
+/* Ace Editor */
+
+.ace_editor { border:1px solid rgba(34, 36, 38, 0.15); border-radius:4px; }
 
 /* Other */
 

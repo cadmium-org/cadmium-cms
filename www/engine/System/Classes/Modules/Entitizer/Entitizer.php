@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules {
+namespace Modules {
 
 	use Exception;
 
@@ -16,13 +16,13 @@ namespace System\Modules {
 
 		protected static $classes = [
 
-			ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Entity\Page',
-			ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Entity\Menuitem',
-			ENTITY_TYPE_VARIABLE            => 'System\Modules\Entitizer\Entity\Variable',
-			ENTITY_TYPE_WIDGET              => 'System\Modules\Entitizer\Entity\Widget',
-			ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Entity\User',
-			ENTITY_TYPE_USER_SECRET         => 'System\Modules\Entitizer\Entity\User\Secret',
-			ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Entity\User\Session'
+			ENTITY_TYPE_PAGE                => 'Modules\Entitizer\Entity\Page',
+			ENTITY_TYPE_MENUITEM            => 'Modules\Entitizer\Entity\Menuitem',
+			ENTITY_TYPE_VARIABLE            => 'Modules\Entitizer\Entity\Variable',
+			ENTITY_TYPE_WIDGET              => 'Modules\Entitizer\Entity\Widget',
+			ENTITY_TYPE_USER                => 'Modules\Entitizer\Entity\User',
+			ENTITY_TYPE_USER_SECRET         => 'Modules\Entitizer\Entity\User\Secret',
+			ENTITY_TYPE_USER_SESSION        => 'Modules\Entitizer\Entity\User\Session'
 		];
 
 		# Get entity

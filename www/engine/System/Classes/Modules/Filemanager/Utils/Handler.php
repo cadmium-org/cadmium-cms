@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Utils {
+namespace Modules\Filemanager\Utils {
 
-	use System\Modules\Filemanager, System\Modules\Informer, System\Utils\Messages, System\Utils\View, Ajax, Language, Request;
+	use Modules\Filemanager, Modules\Informer, Utils\Messages, Utils\View, Ajax, Language, Request;
 
 	abstract class Handler {
 

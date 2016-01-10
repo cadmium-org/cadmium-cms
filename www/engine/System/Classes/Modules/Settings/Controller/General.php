@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Settings\Controller {
+namespace Modules\Settings\Controller {
 
-	use System\Modules\Informer, System\Modules\Settings;
+	use Modules\Informer, Modules\Settings;
 
 	class General {
 

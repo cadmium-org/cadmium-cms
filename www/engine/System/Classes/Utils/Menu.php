@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Utils {
+namespace Utils {
 
-	use System\Modules\Entitizer, DB, Template;
+	use Modules\Entitizer, DB, Template;
 
 	class Menu {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Form {
+namespace Modules\Entitizer\Form {
 
-	use System\Modules\Entitizer, System\Utils\Form, System\Utils\Lister;
+	use Modules\Entitizer, Utils\Form, Utils\Lister;
 
 	class Menuitem extends Form {
 

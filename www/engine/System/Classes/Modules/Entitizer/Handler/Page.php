@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Handler {
+namespace Modules\Entitizer\Handler {
 
-	use System\Modules\Entitizer, Template;
+	use Modules\Entitizer, Template;
 
 	class Page extends Entitizer\Utils\Handler {
 
@@ -10,13 +10,13 @@ namespace System\Modules\Entitizer\Handler {
 
 		# Handler configuration
 
-		protected static $controller = 'System\Modules\Entitizer\Controller\Page';
+		protected static $controller = 'Modules\Entitizer\Controller\Page';
 
 		protected static $link = '/admin/content/pages';
 
 		protected static $naming = 'title', $naming_new = '';
 
-		protected static $form_class = 'System\Modules\Entitizer\Form\Page';
+		protected static $form_class = 'Modules\Entitizer\Form\Page';
 
 		protected static $message_success_save = 'PAGE_SUCCESS_SAVE';
 

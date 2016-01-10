@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Controller {
+namespace Modules\Filemanager\Controller {
 
-	use System\Modules\Filemanager, System\Modules\Informer;
+	use Modules\Filemanager, Modules\Informer, Utils\Validate;
 
 	class Create {
 
@@ -33,7 +33,7 @@ namespace System\Modules\Filemanager\Controller {
 
 			# Validate name
 
-			if (false === ($name = Filemanager\Validate::name($name))) return 'FILEMANAGER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::fileName($name))) return 'FILEMANAGER_ERROR_NAME_INVALID';
 
 			# Check if item exists
 

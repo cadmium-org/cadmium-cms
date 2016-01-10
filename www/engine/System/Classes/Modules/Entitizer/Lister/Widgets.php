@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Lister {
+namespace Modules\Entitizer\Lister {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class Widgets extends Entitizer\Utils\Lister {
 

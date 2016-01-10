@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Entitizer\Definition {
+namespace Modules\Entitizer\Definition {
 
-	use System\Modules\Entitizer;
+	use Modules\Entitizer;
 
 	class User extends Entitizer\Utils\Definition {
 

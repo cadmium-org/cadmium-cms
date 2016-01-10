@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules {
+namespace Modules {
 
-	use System\Utils\Lister, Explorer, Geo\Timezone, Validate;
+	use Utils\Lister, Utils\Validate, Explorer, Geo\Timezone, Request;
 
 	abstract class Settings {
 
@@ -26,12 +26,23 @@ namespace System\Modules {
 			'site_description'      => '',
 			'site_keywords'         => '',
 
-			'system_url'            => CONFIG_SYSTEM_URL_DEFAULT,
-			'system_email'          => CONFIG_SYSTEM_EMAIL_DEFAULT,
+			'system_url'            => '',
+			'system_email'          => '',
 			'system_timezone'       => CONFIG_SYSTEM_TIMEZONE_DEFAULT,
 
 			'users_registration'    => false
 		];
+
+		# Autoloader
+
+		public static function __autoload() {
+
+			if (self::$loaded || empty($host = getenv('HTTP_HOST'))) return;
+
+			self::$settings['system_url'] = ((Request::isSecure() ? 'https://' : 'http://') . $host);
+
+			self::$settings['system_email'] = ('admin@' . $host);
+		}
 
 		# Init settings
 

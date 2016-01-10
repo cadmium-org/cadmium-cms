@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Modules\Entitizer {
+namespace Modules\Entitizer {
 
 	use Exception;
 
@@ -16,13 +16,13 @@ namespace System\Modules\Entitizer {
 
 		protected static $classes = [
 
-			ENTITY_TYPE_PAGE                => 'System\Modules\Entitizer\Definition\Page',
-			ENTITY_TYPE_MENUITEM            => 'System\Modules\Entitizer\Definition\Menuitem',
-			ENTITY_TYPE_VARIABLE            => 'System\Modules\Entitizer\Definition\Variable',
-			ENTITY_TYPE_WIDGET              => 'System\Modules\Entitizer\Definition\Widget',
-			ENTITY_TYPE_USER                => 'System\Modules\Entitizer\Definition\User',
-			ENTITY_TYPE_USER_SECRET         => 'System\Modules\Entitizer\Definition\User\Secret',
-			ENTITY_TYPE_USER_SESSION        => 'System\Modules\Entitizer\Definition\User\Session'
+			ENTITY_TYPE_PAGE                => 'Modules\Entitizer\Definition\Page',
+			ENTITY_TYPE_MENUITEM            => 'Modules\Entitizer\Definition\Menuitem',
+			ENTITY_TYPE_VARIABLE            => 'Modules\Entitizer\Definition\Variable',
+			ENTITY_TYPE_WIDGET              => 'Modules\Entitizer\Definition\Widget',
+			ENTITY_TYPE_USER                => 'Modules\Entitizer\Definition\User',
+			ENTITY_TYPE_USER_SECRET         => 'Modules\Entitizer\Definition\User\Secret',
+			ENTITY_TYPE_USER_SESSION        => 'Modules\Entitizer\Definition\User\Session'
 		];
 
 		# Get definition

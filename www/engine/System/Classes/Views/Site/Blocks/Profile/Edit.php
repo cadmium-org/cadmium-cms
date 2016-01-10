@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Site\Blocks\Profile {
+namespace Views\Site\Blocks\Profile {
 
-	use System\Views;
+	use Views;
 
 	class Edit extends Views\Site\View {
 

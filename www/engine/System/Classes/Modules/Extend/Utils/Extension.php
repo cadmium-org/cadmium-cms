@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Extend\Utils {
+namespace Modules\Extend\Utils {
 
-	use Exception, System\Modules\Settings, Arr, Cookie, Explorer, Request;
+	use Exception, Modules\Settings, Arr, Cookie, Explorer, Request;
 
 	trait Extension {
 

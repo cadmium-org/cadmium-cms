@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Profile\Handler {
+namespace Modules\Profile\Handler {
 
-	use System\Modules\Auth, System\Utils\Lister, System\Utils\View, Date, Geo\Country;
+	use Modules\Auth, Utils\Lister, Utils\View, Date, Geo\Country;
 
 	class Overview {
 

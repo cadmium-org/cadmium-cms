@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Views\Admin\Blocks\Entitizer\Pages\Ajax {
+namespace Views\Admin\Blocks\Entitizer\Pages\Ajax {
 
-	use System\Views;
+	use Views;
 
 	class Item extends Views\Admin\View {
 

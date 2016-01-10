@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Extend\Handler {
+namespace Modules\Extend\Handler {
 
-	use System\Modules\Extend;
+	use Modules\Extend;
 
 	class Templates extends Extend\Templates {
 

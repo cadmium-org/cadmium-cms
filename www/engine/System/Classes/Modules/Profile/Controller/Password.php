@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Profile\Controller {
+namespace Modules\Profile\Controller {
 
-	use System\Modules\Auth, Str;
+	use Modules\Auth, Utils\Validate, Str;
 
 	class Password {
 
@@ -20,9 +20,9 @@ namespace System\Modules\Profile\Controller {
 
 			# Validate values
 
-			if (false === ($password = Auth\Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
 
-			if (false === ($password_new = Auth\Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
+			if (false === ($password_new = Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
 
 			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
 

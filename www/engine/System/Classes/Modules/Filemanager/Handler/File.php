@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Filemanager\Handler {
+namespace Modules\Filemanager\Handler {
 
-	use System\Modules\Filemanager, Date, Explorer, Mime, Number, Template;
+	use Modules\Filemanager, Date, Explorer, Mime, Number, Template;
 
 	class File extends Filemanager\Utils\Handler {
 

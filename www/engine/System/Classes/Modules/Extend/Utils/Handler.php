@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Modules\Extend\Utils {
+namespace Modules\Extend\Utils {
 
-	use System\Modules\Informer, System\Modules\Settings, System\Utils\View, Ajax, Arr, Language, Request, Template;
+	use Modules\Informer, Modules\Settings, Utils\View, Ajax, Arr, Language, Request, Template;
 
 	trait Handler {
 
