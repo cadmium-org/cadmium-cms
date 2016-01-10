@@ -11,7 +11,7 @@ define('CADMIUM_COPY',                              '2016');
 # External
 
 define('JQUERY_VERSION',                            '2.2.0');
-define('SEMANTIC_UI_VERSION',                       '2.1.7');
+define('SEMANTIC_UI_VERSION',                       '2.1.8');
 define('CKEDITOR_VERSION',                          '4.5.6');
 
 # Sections
