@@ -31,10 +31,11 @@ Cadmium CMS is PHP-based content management system for creating shiny and respon
 
 ## Installation
 
- 1. Download the latest version of Cadmium CMS and unzip it.
- 2. Upload contents of ***www*** directory into ***www*** directory of your server.
- 3. CHMOD directories ***www/engine/System/Data*** and ***www/uploads*** to 755 (or 777).
- 4. Go to ***your-site.com/install.php*** and follow installation instructions.
+ 1. Download the [latest version](https://github.com/cadmium-org/cadmium-cms/releases) of Cadmium CMS and unzip it.
+ 2. Upload contents of ***www*** directory into root directory of your web server.
+ 3. CHMOD directories ***/engine/System/Data*** and ***/uploads*** to 755 (or 777).
+ 4. Create MySQL database.
+ 5. Go to ***your-site.com/install.php*** and follow installation instructions.
 
 Official website: http://cadmium-cms.com
 
