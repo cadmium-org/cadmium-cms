@@ -30,11 +30,11 @@ namespace Modules\Extend\Utils {
 
 			foreach (Explorer::listDirs($dir_name) as $name) {
 
-				$file_name = ($dir_name . $name . '/Config.php');
+				$file_name = ($dir_name . $name . '/Config.json');
 
-				if (!is_array($include = Explorer::php($file_name))) continue;
+				if (!is_array($config = Explorer::json($file_name))) continue;
 
-				$config = Arr::select($include, self::$data);
+				$config = Arr::select($config, self::$data);
 
 				if (!(self::valid($config['name']) && ($config['name'] === $name))) continue;
 
