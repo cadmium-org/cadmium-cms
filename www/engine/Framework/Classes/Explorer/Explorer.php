@@ -142,6 +142,15 @@ namespace {
 			return @file_get_contents($file_name);
 		}
 
+		# Get JSON file data
+
+		public static function json(string $file_name) {
+
+			if ((strtolower(self::extension($file_name)) !== 'json')) return false;
+
+			return (json_decode(@file_get_contents($file_name), true) ?? false);
+		}
+
 		# Get PHP file data
 
 		public static function php(string $file_name) {
@@ -158,15 +167,6 @@ namespace {
 			if ((strtolower(self::extension($file_name)) !== 'xml')) return false;
 
 			return @simplexml_load_file($file_name);
-		}
-
-		# Get JSON file data
-
-		public static function json(string $file_name) {
-
-			if ((strtolower(self::extension($file_name)) !== 'json')) return false;
-
-			return json_decode(@file_get_contents($file_name), true);
 		}
 
 		# Save data to file
