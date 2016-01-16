@@ -8,20 +8,6 @@ namespace {
 
 		protected $database = ['server' => '', 'user' => '', 'password' => '', 'name' => ''], $time = 0;
 
-		# Set database value
-
-		private function setDatabase(string $key, string $value) {
-
-			$this->database[$key] = $value;
-		}
-
-		# Set time
-
-		private function setTime(int $value) {
-
-			$this->time = $value;
-		}
-
 		# Parse system file
 
 		private function parse(array $data) {
@@ -32,12 +18,12 @@ namespace {
 
 			foreach (array_keys($this->database) as $key) {
 
-				$this->setDatabase($key, Arr::get($data, ['database', $key]));
+				if (is_scalar($value = Arr::get($data, ['database', $key]))) $this->database[$key] = strval($value);
 			}
 
 			# Parse installation details
 
-			$this->setTime(Arr::get($data, ['time']));
+			if (is_numeric($time = Arr::get($data, ['time']))) $this->time = intval($time);
 		}
 
 		# Constructor
