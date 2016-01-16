@@ -85,7 +85,7 @@ namespace Modules {
 
 		public static function set(string $name, $value) {
 
-			if (!isset(self::$settings[$name])) return false;
+			if (!isset(self::$settings[$name]) || !is_scalar($value)) return false;
 
 			# Validate language
 
@@ -105,7 +105,7 @@ namespace Modules {
 
 			else if ($name === 'site_title') {
 
-				if ('' === ($value = (function(string $value) { return $value; })($value))) return false;
+				if ('' === ($value = strval($value))) return false;
 			}
 
 			# Validate site status
@@ -119,7 +119,7 @@ namespace Modules {
 
 			else if (($name === 'site_slogan') || ($name === 'site_description') || ($name === 'site_keywords')) {
 
-				$value = (function(string $value) { return $value; })($value);
+				$value = strval($value);
 			}
 
 			# Validate system url
@@ -147,7 +147,7 @@ namespace Modules {
 
 			else if ($name === 'users_registration') {
 
-				$value = (function(bool $value) { return $value; })($value);
+				$value = boolval($value);
 			}
 
 			# Set value

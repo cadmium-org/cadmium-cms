@@ -32,13 +32,13 @@ namespace Modules\Extend\Utils {
 
 				$file_name = ($dir_name . $name . '/Config.json');
 
-				if (!is_array($config = Explorer::json($file_name))) continue;
+				if (false === ($config = Explorer::json($file_name))) continue;
 
 				$config = Arr::select($config, self::$data);
 
 				if (!(self::valid($config['name']) && ($config['name'] === $name))) continue;
 
-				$items[$name] = $config;
+				$items[$name] = array_map('strval', $config);
 			}
 
 			# ------------------------
