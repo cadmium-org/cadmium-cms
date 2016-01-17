@@ -1,0 +1,142 @@
+[
+	{
+		"path": "admin/login",
+		"handler": "Admin/Auth/Login"
+	},
+	{
+		"path": "admin/reset",
+		"handler": "Admin/Auth/Reset"
+	},
+	{
+		"path": "admin/recover",
+		"handler": "Admin/Auth/Recover"
+	},
+	{
+		"path": "admin/register",
+		"handler": "Admin/Auth/Register"
+	},
+	{
+		"path": "admin/content/pages",
+		"handler": "Admin/Content/Pages/Listview"
+	},
+	{
+		"path": "admin/content/pages/create",
+		"handler": "Admin/Content/Pages/Create"
+	},
+	{
+		"path": "admin/content/pages/edit",
+		"handler": "Admin/Content/Pages/Edit"
+	},
+	{
+		"path": "admin/content/menuitems",
+		"handler": "Admin/Content/Menuitems/Listview"
+	},
+	{
+		"path": "admin/content/menuitems/create",
+		"handler": "Admin/Content/Menuitems/Create"
+	},
+	{
+		"path": "admin/content/menuitems/edit",
+		"handler": "Admin/Content/Menuitems/Edit"
+	},
+	{
+		"path": "admin/content/variables",
+		"handler": "Admin/Content/Variables/Listview"
+	},
+	{
+		"path": "admin/content/variables/create",
+		"handler": "Admin/Content/Variables/Create"
+	},
+	{
+		"path": "admin/content/variables/edit",
+		"handler": "Admin/Content/Variables/Edit"
+	},
+	{
+		"path": "admin/content/widgets",
+		"handler": "Admin/Content/Widgets/Listview"
+	},
+	{
+		"path": "admin/content/widgets/create",
+		"handler": "Admin/Content/Widgets/Create"
+	},
+	{
+		"path": "admin/content/widgets/edit",
+		"handler": "Admin/Content/Widgets/Edit"
+	},
+	{
+		"path": "admin/content/filemanager",
+		"handler": "Admin/Content/Filemanager/Listview"
+	},
+	{
+		"path": "admin/content/filemanager/dir",
+		"handler": "Admin/Content/Filemanager/Dir"
+	},
+	{
+		"path": "admin/content/filemanager/file",
+		"handler": "Admin/Content/Filemanager/File"
+	},
+	{
+		"path": "admin/extend/languages",
+		"handler": "Admin/Extend/Languages"
+	},
+	{
+		"path": "admin/extend/templates",
+		"handler": "Admin/Extend/Templates"
+	},
+	{
+		"path": "admin/system/settings",
+		"handler": "Admin/System/Settings"
+	},
+	{
+		"path": "admin/system/users",
+		"handler": "Admin/System/Users/Listview"
+	},
+	{
+		"path": "admin/system/users/create",
+		"handler": "Admin/System/Users/Create"
+	},
+	{
+		"path": "admin/system/users/edit",
+		"handler": "Admin/System/Users/Edit"
+	},
+	{
+		"path": "admin/system/information",
+		"handler": "Admin/System/Information"
+	},
+	{
+		"path": "admin",
+		"handler": "Admin/Dashboard"
+	},
+	{
+		"path": "profile/login",
+		"handler": "Site/Profile/Auth/Login"
+	},
+	{
+		"path": "profile/reset",
+		"handler": "Site/Profile/Auth/Reset"
+	},
+	{
+		"path": "profile/recover",
+		"handler": "Site/Profile/Auth/Recover"
+	},
+	{
+		"path": "profile/register",
+		"handler": "Site/Profile/Auth/Register"
+	},
+	{
+		"path": "profile/edit",
+		"handler": "Site/Profile/Edit"
+	},
+	{
+		"path": "profile",
+		"handler": "Site/Profile/Overview"
+	},
+	{
+		"path": "captcha.png",
+		"handler": "Tools/Captcha"
+	},
+	{
+		"path": "sitemap.xml",
+		"handler": "Tools/Sitemap"
+	}
+]
