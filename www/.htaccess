@@ -34,6 +34,6 @@ ErrorDocument 500 /500
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 
-	RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+	RewriteRule ^(.*)$ index.php [L]
 
 </IfModule>
