@@ -12,7 +12,7 @@ namespace {
 
 			if (null === $value) return (self::$globals[$name] ?? false);
 
-			self::$globals[$name] = $value;
+			if (!isset(self::$globals[$name])) self::$globals[$name] = $value;
 		}
 
 		# Set/get widget
@@ -21,7 +21,7 @@ namespace {
 
 			if (null === $block) return (self::$widgets[$name] ?? false);
 
-			self::$widgets[$name] = $block;
+			if (!isset(self::$widgets[$name])) self::$widgets[$name] = $block;
 		}
 
 		# Create block

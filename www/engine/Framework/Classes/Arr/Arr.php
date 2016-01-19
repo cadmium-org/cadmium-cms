@@ -17,13 +17,16 @@ namespace {
 			return $value;
 		}
 
-		# Select a set of elements from array
+		# Select a set of scalar elements from array
 
 		public static function select(array $array, array $keys) {
 
 			$result = [];
 
-			foreach ($keys as $key) if (is_scalar($key)) $result[$key] = (isset($array[$key]) ? $array[$key] : false);
+			foreach ($keys as $key) if (is_scalar($key)) {
+
+				$result[$key] = ((isset($array[$key]) && is_scalar($array[$key])) ? $array[$key] : false);
+			}
 
 			# ------------------------
 

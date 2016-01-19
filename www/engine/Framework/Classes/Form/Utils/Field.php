@@ -56,7 +56,7 @@ namespace Form\Utils {
 
 			foreach ($params as $name => $default) if (isset($config[$name])) {
 
-				$checker = ((0 === $default) ? 'is_numeric' : 'is_scalar');
+				$checker = (is_numeric($default) ? 'is_numeric' : 'is_scalar');
 
 				if ($checker($config[$name])) $this->$name($config[$name]);
 			}

@@ -49,7 +49,14 @@ namespace Modules\Filemanager\Utils {
 
 			if (Informer::isDemoMode()) return $ajax->error(Language::get('DEMO_MODE_RESTRICTION'));
 
-			# Remove item
+			# Init entity
+
+			if (!$this->entity->init(Request::get('name'))) {
+
+				return $ajax->error(Language::get(static::$message_error_remove));
+			}
+
+			# Process remove action
 
 			if (Request::post('action') === 'remove') {
 
@@ -73,6 +80,10 @@ namespace Modules\Filemanager\Utils {
 
 			$this->entity = Filemanager::get(static::$type, $this->parent);
 
+			# Handle ajax request
+
+			if (Request::isAjax()) return $this->handleAjax();
+
 			# Init entity
 
 			if (!$this->entity->init(Request::get('name'))) {
@@ -81,10 +92,6 @@ namespace Modules\Filemanager\Utils {
 
 				Request::redirect(INSTALL_PATH . '/admin/content/filemanager' . $query);
 			}
-
-			# Handle ajax request
-
-			if (Request::isAjax()) return $this->handleAjax();
 
 			# Create form
 
