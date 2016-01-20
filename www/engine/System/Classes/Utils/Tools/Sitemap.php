@@ -44,7 +44,7 @@ namespace Utils\Tools {
 
 			# ------------------------
 
-			return Explorer::save($file_name, $this->xml->asXML(), true);
+			return Explorer::save($file_name, XML::string($this->xml), true);
 		}
 
 		# Add item
