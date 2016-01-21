@@ -12,7 +12,7 @@ namespace Modules {
 
 			# Check extensions
 
-			$extensions = ['mysqli', 'mbstring', 'gd', 'simplexml'];
+			$extensions = ['mysqli', 'mbstring', 'gd', 'simplexml', 'dom'];
 
 			foreach ($extensions as $name) self::$requirements[$name] = extension_loaded($name);
 
