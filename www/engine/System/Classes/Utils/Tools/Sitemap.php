@@ -29,9 +29,11 @@ namespace Utils\Tools {
 
 			if (false === ($xml = Explorer::xml($file_name))) return false;
 
+			$this->xml = $xml; $this->loaded = true;
+
 			# ------------------------
 
-			return (($this->xml = $xml) && ($this->loaded = true));
+			return true;
 		}
 
 		# Save sitemap
@@ -42,9 +44,11 @@ namespace Utils\Tools {
 
 			$file_name = (DIR_SYSTEM_DATA . 'Sitemap.xml');
 
+			if (false === Explorer::save($file_name, XML::string($this->xml), true)) return false;
+
 			# ------------------------
 
-			return Explorer::save($file_name, XML::string($this->xml), true);
+			return true;
 		}
 
 		# Add item
@@ -57,7 +61,7 @@ namespace Utils\Tools {
 
 			# Create url object
 
-			($url = $this->xml->addChild('url'))->addChild('loc', $loc);
+			$url = $this->xml->addChild('url'); $url->addChild('loc', $loc);
 
 			# Set last modified
 

@@ -12,7 +12,7 @@ namespace Utils\Tools {
 
 		private function allocateColor(array $color = null) {
 
-			if (!is_resource($this->image)) return false;
+			if (null === $this->image) return false;
 
 			if (null === $color) $color = [0, 0, 0]; else if (count($color) !== 3) return false;
 
@@ -41,7 +41,7 @@ namespace Utils\Tools {
 
 		public function text(string $font, int $size, int $indent, int $step, string $text, array $color = null) {
 
-			if (!is_resource($this->image)) return false;
+			if (null === $this->image) return false;
 
 			if (!Explorer::isFile($font)) return false;
 
@@ -65,7 +65,7 @@ namespace Utils\Tools {
 
 		public function noise(int $rate, array $color = null) {
 
-			if (!is_resource($this->image)) return false;
+			if (null === $this->image) return false;
 
 			if (false === ($color = $this->allocateColor($color))) return false;
 
@@ -83,7 +83,7 @@ namespace Utils\Tools {
 
 		public function lines(int $count, array $color = null) {
 
-			if (!is_resource($this->image)) return false;
+			if (null === $this->image) return false;
 
 			if (false === ($color = $this->allocateColor($color))) return false;
 
