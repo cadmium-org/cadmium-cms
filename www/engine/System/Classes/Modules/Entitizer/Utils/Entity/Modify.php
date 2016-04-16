@@ -29,11 +29,11 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			         ("JOIN "  . static::$table_relations . " rlb ON rlb.descendant = rla.descendant ") .
 
-					 ("LEFT JOIN " . static::$table_relations . " rlx ") .
+			         ("LEFT JOIN " . static::$table_relations . " rlx ") .
 
-					 ("ON rlx.ancestor = rlb.ancestor AND rlx.descendant = rla.ancestor ") .
+			         ("ON rlx.ancestor = rlb.ancestor AND rlx.descendant = rla.ancestor ") .
 
-					 ("WHERE rlb.ancestor = " . $this->id . " AND rlx.ancestor IS NULL");
+			         ("WHERE rlb.ancestor = " . $this->id . " AND rlx.ancestor IS NULL");
 
 			if (!(DB::send($query) && DB::last()->status)) return false;
 
@@ -54,11 +54,11 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			         ("SELECT sup.ancestor, sub.descendant, sup.depth + sub.depth + 1 ") .
 
-					 ("FROM " . static::$table_relations . " sup ") .
+			         ("FROM " . static::$table_relations . " sup ") .
 
-					 ("JOIN " . static::$table_relations . " sub ") .
+			         ("JOIN " . static::$table_relations . " sub ") .
 
-					 ("WHERE sub.ancestor = " . $this->id . " AND sup.descendant = " . $parent_id);
+			         ("WHERE sub.ancestor = " . $this->id . " AND sup.descendant = " . $parent_id);
 
 			if (!(DB::send($query) && DB::last()->status)) return false;
 
