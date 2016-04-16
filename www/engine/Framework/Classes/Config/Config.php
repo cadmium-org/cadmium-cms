@@ -27,7 +27,7 @@ namespace {
 
 				try { $this->values[$name] = $this->config[$name]($value); }
 
-				catch (\TypeError $e) {}
+				catch (\TypeError $e) { /* Ignore setting value of illegal type */ }
 			}
 		}
 

@@ -56,7 +56,9 @@ namespace Form\Utils {
 
 			foreach ($params as $name => $default) if (isset($config[$name])) {
 
-				try { $this->$name($config[$name]); } catch (\TypeError $e) {}
+				try { $this->$name($config[$name]); }
+
+				catch (\TypeError $e) { /* Ignore setting value of illegal type */ }
 			}
 		}
 
