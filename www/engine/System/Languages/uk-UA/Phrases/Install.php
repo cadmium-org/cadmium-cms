@@ -23,6 +23,9 @@ return [
 	'INSTALL_REQUIREMENT_SIMPLEXML_SUCCESS'     => 'Розширення SimpleXML встановлене.',
 	'INSTALL_REQUIREMENT_SIMPLEXML_FAIL'        => 'Розширення SimpleXML не встановлене.',
 
+	'INSTALL_REQUIREMENT_DOM_SUCCESS'           => 'Розширення DOM встановлене.',
+	'INSTALL_REQUIREMENT_DOM_FAIL'              => 'Розширення DOM не встановлене.',
+
 	'INSTALL_REQUIREMENT_REWRITE_SUCCESS'       => 'Модуль Rewrite включений.',
 	'INSTALL_REQUIREMENT_REWRITE_FAIL'          => 'Модуль Rewrite не включений.',
 

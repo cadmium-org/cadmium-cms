@@ -23,6 +23,9 @@ return [
 	'INSTALL_REQUIREMENT_SIMPLEXML_SUCCESS'     => 'Extension SimpleXML is installed.',
 	'INSTALL_REQUIREMENT_SIMPLEXML_FAIL'        => 'Extension SimpleXML is not installed.',
 
+	'INSTALL_REQUIREMENT_DOM_SUCCESS'           => 'Extension DOM is installed.',
+	'INSTALL_REQUIREMENT_DOM_FAIL'              => 'Extension DOM is not installed.',
+
 	'INSTALL_REQUIREMENT_REWRITE_SUCCESS'       => 'Module Rewrite is enabled.',
 	'INSTALL_REQUIREMENT_REWRITE_FAIL'          => 'Module Rewrite is not enabled.',
 
