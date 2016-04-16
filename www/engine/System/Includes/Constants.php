@@ -5,7 +5,7 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.2.2');
+define('CADMIUM_VERSION',                           '0.3.0');
 define('CADMIUM_COPY',                              '2016');
 
 # External
@@ -18,16 +18,6 @@ define('CKEDITOR_VERSION',                          '4.5.6');
 
 define('SECTION_ADMIN',                             'Admin');
 define('SECTION_SITE',                              'Site');
-
-# Entity types
-
-define('ENTITY_TYPE_PAGE',                          'page');
-define('ENTITY_TYPE_MENUITEM',                      'menuitem');
-define('ENTITY_TYPE_VARIABLE',                      'variable');
-define('ENTITY_TYPE_WIDGET',                        'widget');
-define('ENTITY_TYPE_USER',                          'user');
-define('ENTITY_TYPE_USER_SECRET',                   'user_secret');
-define('ENTITY_TYPE_USER_SESSION',                  'user_session');
 
 # Filemanager types
 

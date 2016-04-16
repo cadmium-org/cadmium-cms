@@ -49,7 +49,7 @@ namespace {
 
 		# Get url as string
 
-		public function get() {
+		public function string() {
 
 			$path = [];
 

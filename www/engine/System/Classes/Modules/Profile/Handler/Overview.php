@@ -2,7 +2,7 @@
 
 namespace Modules\Profile\Handler {
 
-	use Modules\Auth, Utils\Lister, Utils\View, Date, Geo\Country;
+	use Modules\Auth, Utils\Range, Utils\View, Date, Geo\Country;
 
 	class Overview {
 
@@ -18,13 +18,13 @@ namespace Modules\Profile\Handler {
 
 			$contents->email = Auth::user()->email;
 
-			$contents->rank = Lister\Rank::get(Auth::user()->rank);
+			$contents->rank = Range\Rank::get(Auth::user()->rank);
 
 			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->time_registered);
 
 			# Set sex
 
-			$contents->sex = Lister\Sex::get(Auth::user()->sex);
+			$contents->sex = Range\Sex::get(Auth::user()->sex);
 
 			# Set full name & city
 

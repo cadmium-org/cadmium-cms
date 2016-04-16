@@ -20,19 +20,25 @@ namespace Modules\Entitizer\Handler {
 
 		protected static $message_success_save = 'MENUITEM_SUCCESS_SAVE';
 
+		protected static $message_error_move = 'MENUITEM_ERROR_MOVE';
+
 		protected static $message_error_remove = 'MENUITEM_ERROR_REMOVE';
 
 		protected static $view = 'Blocks\Entitizer\Menuitems\Main';
 
+		# Add parent additional data
+
+		protected function processEntityParent(Template\Asset\Block $parent) {
+
+			if (0 === $this->parent->id) {
+
+				$parent->block('browse')->disable(); $parent->block('browse_disabled')->enable();
+
+			} else $parent->block('browse')->link = $this->parent->link;
+		}
+
 		# Add additional data for specific entity
 
-		protected function processEntity(Template\Asset\Block $contents) {
-
-			if ((0 === $this->parent->id) || ('' === $this->parent->link)) {
-
-				$contents->block('parent')->block('browse')->disable();
-
-			} else $contents->block('parent')->block('browse')->link = $this->parent->link;
-		}
+		protected function processEntity(Template\Asset\Block $contents) {}
 	}
 }

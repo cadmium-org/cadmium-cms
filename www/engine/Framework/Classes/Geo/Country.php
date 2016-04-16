@@ -2,11 +2,11 @@
 
 namespace Geo {
 
-	use Lister;
+	use Range;
 
-	abstract class Country extends Lister {
+	abstract class Country extends Range {
 
-		protected static $list = [];
+		protected static $range = [];
 
 		# Autoloader
 

@@ -10,7 +10,7 @@ namespace Modules\Entitizer\Form {
 
 		public function __construct(Entitizer\Entity\Widget $widget) {
 
-			parent::__construct(ENTITY_TYPE_WIDGET);
+			parent::__construct('widget');
 
 			# Add fields
 
@@ -20,7 +20,7 @@ namespace Modules\Entitizer\Form {
 
 				['required' => true, 'convert' => 'var']);
 
-			$this->addCheckbox('display', $widget->display);
+			$this->addCheckbox('active', $widget->active);
 
 			$this->addText('contents', $widget->contents, FORM_FIELD_TEXTAREA, 0, ['multiline' => true, 'codestyle' => true]);
 		}

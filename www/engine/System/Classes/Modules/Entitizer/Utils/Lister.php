@@ -2,99 +2,186 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Modules\Entitizer, DB;
+	use Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
 
 	abstract class Lister {
 
-		private $definition = null;
+		protected $index = 0, $parent = null, $entity = null, $path = [], $depth = 0;
 
-		# Get query
+		protected $items = ['list' => [], 'total' => 0];
 
-		private function getQuery(int $index, int $display, int $parent_id, int $disable_id) {
+		# Process parent block
 
-			$selection = []; $order_by = [];
+		private function processParent(Template\Asset\Block $parent) {
 
-			# Process selection
+			# Set parent id
 
-			foreach (array_keys($this->definition->params()) as $field) {
+			$parent->id = $this->parent->id;
 
-				$selection[] = ('ent.' . $field);
-			}
+			# Set create button
 
-			# Process order
+			if (count($this->path) < CONFIG_ENTITIZER_MAX_DEPTH) $parent->block('create')->id = $this->parent->id;
 
-			foreach ($this->definition->orderers() as $field => $descending) {
+			else { $parent->block('create')->disable(); $parent->block('create_disabled')->enable(); }
 
-				$order_by[] = ('ent.' . $field . ' ' . ($descending ? 'DESC' : 'ASC'));
-			}
+			# Set edit button
 
-			# Process limit
+			if (0 !== $this->parent->id) $parent->block('edit')->id = $this->parent->id;
 
-			$limit = (($index > 0) ? ((($index - 1) * $display) . ", " . $display) : "");
+			else { $parent->block('edit')->disable(); $parent->block('edit_disabled')->enable(); }
 
-			# Process query
+			# Add parent additional data
 
-			$query = ("SELECT SQL_CALC_FOUND_ROWS ent.id, " . implode(', ', $selection)) .
-
-			         (static::$nesting ? ", COUNT(chd.id) as children " : " ") .
-
-			         ("FROM " . static::$table . " ent ") .
-
-			         (static::$nesting ? ("LEFT JOIN " . static::$table . " chd ON chd.parent_id = ent.id ") : "") .
-
-			         ("WHERE ent.id != " . $disable_id . " ") .
-
-			         (static::$nesting ? ("AND ent.parent_id = " . $parent_id . " GROUP BY ent.id ") : "") .
-
-			         ("ORDER BY " . implode(', ', $order_by) . ", ent.id ASC" . ($limit ? (" LIMIT " . $limit) : ""));
-
-			# ------------------------
-
-			return $query;
+			$this->processEntityParent($parent);
 		}
 
-		# Constructor
+		# Get items block
 
-		public function __construct() {
+		private function getItemsBlock(bool $ajax = false) {
 
-			$this->definition = Entitizer\Definition::get(static::$type);
-		}
+			$items = Template::group();
 
-		# Select items from DB
+			foreach ($this->items['list'] as $item) {
 
-		public function select(int $index = 0, int $display = 0, int $parent_id = 0, int $disable_id = 0) {
+				if ((null !== $this->entity) && ($item['entity']->id === $this->entity->id)) continue;
 
-			$items = ['list' => [], 'total' => 0];
+				$items->add($view = View::get(!$ajax ? static::$view_item : static::$view_ajax_item));
 
-			if (!(($index >= 0) && ($display >= 0) && ($parent_id >= 0) && ($disable_id >= 0))) return $items;
+				# Set data
 
-			# Select entities
+				$view->id = $item['entity']->id;
 
-			$query = $this->getQuery($index, $display, $parent_id, $disable_id);
+				$view->set(static::$naming, $item['entity']->get(static::$naming));
 
-			if (!(DB::send($query) && DB::last()->status)) return $items;
+				# Set buttons
 
-			# Process results
+				if (!$ajax) {
 
-			while (null !== ($data = DB::last()->row())) {
+					$super = (static::$super && ($item['entity']->id === 1));
 
-				$entity = Entitizer::get(static::$type); $entity->fill($data);
+					$has_children = (static::$nesting && ($item['children'] > 0));
 
-				$children = (static::$nesting ? ['children' => intval($data['children'])] : []);
+					$view->block('remove')->class = ((!$super && !$has_children) ? 'negative' : 'disabled');
 
-				$items['list'][] = array_merge(['entity' => $entity], $children);
-			}
+				} else {
 
-			# Count total
+					$selectable = ((count($this->path) + $this->depth + 1) < CONFIG_ENTITIZER_MAX_DEPTH);
 
-			if (DB::send("SELECT FOUND_ROWS() as total") && (DB::last()->rows === 1)) {
+					$view->block('select')->class = ($selectable ? 'grey' : 'disabled');
+				}
 
-				$items['total'] = intval(DB::last()->row()['total']);
+				# Add item additional data
+
+				$this->processItem($view, $item['entity'], (static::$nesting ? $item['children'] : 0));
 			}
 
 			# ------------------------
 
 			return $items;
+		}
+
+		# Get pagination block
+
+		private function getPaginationBlock() {
+
+			$query = (static::$nesting ? ('?parent_id=' . $this->parent->id) : '');
+
+			$url = new Url(INSTALL_PATH . static::$link . $query);
+
+			# ------------------------
+
+			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
+		}
+
+		# Get contents
+
+		private function getContents(bool $ajax = false) {
+
+			$contents = View::get(!$ajax ? static::$view_main : static::$view_ajax_main);
+
+			# Set path
+
+			if (static::$nesting) $contents->path = $this->path;
+
+			# Process parent block
+
+			if (static::$nesting && !$ajax) $this->processParent($contents->block('parent'));
+
+			# Set items
+
+			$items = $this->getItemsBlock($ajax);
+
+			if ($items->count() > 0) $contents->items = $items;
+
+			# Set pagination
+
+			if (!$ajax) $contents->pagination = $this->getPaginationBlock();
+
+			# ------------------------
+
+			return $contents;
+		}
+
+		# Handle ajax request
+
+		private function handleAjax() {
+
+			$ajax = Ajax::response();
+
+			# Create parent entity
+
+			$parent_id = (static::$nesting ? Number::format(Request::get('parent_id')) : 0);
+
+			$this->parent = Entitizer::get(static::$table, $parent_id);
+
+			# Create active entity
+
+			$this->entity = Entitizer::get(static::$table, Number::format(Request::post('id')));
+
+			# Get path and depth
+
+			if (false !== ($path = $this->parent->path())) $this->path = $path;
+
+			if ((0 !== $this->entity->id) && (false !== ($depth = $this->entity->subtreeDepth()))) $this->depth = $depth;
+
+			# Get items list
+
+			$lister = (static::$nesting ? 'children' : 'items');
+
+			if (false !== ($items = $this->parent->$lister())) $this->items = $items;
+
+			# ------------------------
+
+			return $ajax->set('contents', $this->getContents(true)->contents());
+		}
+
+		# Handle common request
+
+		public function handle() {
+
+			if (Request::isAjax()) return $this->handleAjax();
+
+			$this->index = Number::format(Request::get('index'), 1, 999999);
+
+			# Create parent entity
+
+			$parent_id = (static::$nesting ? Number::format(Request::get('parent_id')) : 0);
+
+			$this->parent = Entitizer::get(static::$table, $parent_id);
+
+			# Get path
+
+			if (false !== ($path = $this->parent->path())) $this->path = $path;
+
+			# Get items list
+
+			$lister = (static::$nesting ? 'children' : 'items'); $index = $this->index; $display = static::$display;
+
+			if (false !== ($items = $this->parent->$lister([], [], $index, $display))) $this->items = $items;
+
+			# ------------------------
+
+			return $this->getContents();
 		}
 	}
 }

@@ -4,38 +4,70 @@ namespace Modules {
 
 	use Exception;
 
-	abstract class Entitizer {
+	abstract class Entitizer extends Entitizer\Utils\Cache {
 
-		private static $error_message = 'Invalid entity type';
-
-		# Objects cache
-
-		protected static $cache = [];
+		private static $error_message = 'Entity class for given table does not exist';
 
 		# Entities classes
 
 		protected static $classes = [
 
-			ENTITY_TYPE_PAGE                => 'Modules\Entitizer\Entity\Page',
-			ENTITY_TYPE_MENUITEM            => 'Modules\Entitizer\Entity\Menuitem',
-			ENTITY_TYPE_VARIABLE            => 'Modules\Entitizer\Entity\Variable',
-			ENTITY_TYPE_WIDGET              => 'Modules\Entitizer\Entity\Widget',
-			ENTITY_TYPE_USER                => 'Modules\Entitizer\Entity\User',
-			ENTITY_TYPE_USER_SECRET         => 'Modules\Entitizer\Entity\User\Secret',
-			ENTITY_TYPE_USER_SESSION        => 'Modules\Entitizer\Entity\User\Session'
+			TABLE_PAGES             => 'Modules\Entitizer\Entity\Page',
+			TABLE_MENU              => 'Modules\Entitizer\Entity\Menuitem',
+			TABLE_VARIABLES         => 'Modules\Entitizer\Entity\Variable',
+			TABLE_WIDGETS           => 'Modules\Entitizer\Entity\Widget',
+			TABLE_USERS             => 'Modules\Entitizer\Entity\User',
+			TABLE_USERS_SECRETS     => 'Modules\Entitizer\Entity\User\Secret',
+			TABLE_USERS_SESSIONS    => 'Modules\Entitizer\Entity\User\Session'
 		];
 
 		# Get entity
 
-		public static function get(string $type, int $id = 0) {
+		public static function get(string $table, int $id = 0) {
 
-			if (!isset(self::$classes[$type])) throw new Exception\General(self::$error_message);
+			if (!isset(self::$classes[$table])) throw new Exception\General(self::$error_message);
 
-			$cached = isset(self::$cache[$type][$id]);
+			if (isset(self::$cache[$table][$id])) return self::$cache[$table][$id];
+
+			$entity = new self::$classes[$table]; $entity->init($id);
 
 			# ------------------------
 
-			return (!$cached ? new self::$classes[$type]($id) : self::$cache[$type][$id]);
+			return $entity;
+		}
+
+		# Create entity with custom dataset
+
+		public static function create(string $table, array $data = []) {
+
+			if (!isset(self::$classes[$table])) throw new Exception\General(self::$error_message);
+
+			$entity = new self::$classes[$table]($data);
+
+			# ------------------------
+
+			return $entity;
+		}
+
+		# Get definition
+
+		public static function definition(string $table) {
+
+			return Entitizer\Definition::get($table);
+		}
+
+		# Get listview
+
+		public static function listview(string $table) {
+
+			return Entitizer\Listview::get($table);
+		}
+
+		# Get treeview
+
+		public static function treeview(string $table) {
+
+			return Entitizer\Treeview::get($table);
 		}
 	}
 }

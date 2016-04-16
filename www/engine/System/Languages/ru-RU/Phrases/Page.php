@@ -5,9 +5,10 @@ return [
 	# Errors
 
 	'PAGE_ERROR_MODIFY'                             => 'Ошибка сохранения данных страницы',
+	'PAGE_ERROR_MOVE'                               => 'Ошибка перемещения страницы',
 	'PAGE_ERROR_REMOVE'                             => 'Ошибка удаления страницы',
 
-	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Страница с таким URL уже существует',
+	'PAGE_WARNING_NAME_DUPLICATE'                   => 'Введенный URL не уникален. Страница не будет отображена на сайте',
 
 	# Success messages
 

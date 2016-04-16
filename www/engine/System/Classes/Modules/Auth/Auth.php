@@ -25,7 +25,7 @@ namespace Modules {
 
 		private static function getUser(int $id) {
 
-			if (0 === ($user = Entitizer::get(ENTITY_TYPE_USER, $id))->id) return false;
+			if (0 === ($user = Entitizer::get(TABLE_USERS, $id))->id) return false;
 
 			if ($user->rank < (self::$admin ? RANK_ADMINISTRATOR : RANK_USER)) return false;
 
@@ -38,7 +38,7 @@ namespace Modules {
 
 		public static function init(string $section) {
 
-			self::$admin = ($section === SECTION_ADMIN); self::$user = Entitizer::get(ENTITY_TYPE_USER);
+			self::$admin = ($section === SECTION_ADMIN); self::$user = Entitizer::get(TABLE_USERS);
 
 			# Check session code
 
@@ -46,7 +46,7 @@ namespace Modules {
 
 			# Get auth
 
-			$type = ENTITY_TYPE_USER_SESSION; $lifetime = CONFIG_USER_SESSION_LIFETIME;
+			$type = TABLE_USERS_SESSIONS; $lifetime = CONFIG_USER_SESSION_LIFETIME;
 
 			if (false === ($session = self::getAuth($code, $type, $lifetime))) return false;
 
@@ -79,7 +79,7 @@ namespace Modules {
 
 			# Get auth
 
-			$type = ENTITY_TYPE_USER_SECRET; $lifetime = CONFIG_USER_SECRET_LIFETIME;
+			$type = TABLE_USERS_SECRETS; $lifetime = CONFIG_USER_SECRET_LIFETIME;
 
 			if (false === ($secret = self::getAuth($code, $type, $lifetime))) return false;
 
@@ -100,7 +100,7 @@ namespace Modules {
 
 			# Remove session
 
-			Entitizer::get(ENTITY_TYPE_USER_SESSION, self::$user->id)->remove();
+			Entitizer::get(TABLE_USERS_SESSIONS, self::$user->id)->remove();
 
 			# Remove session variable
 
@@ -115,7 +115,7 @@ namespace Modules {
 
 		public static function initial() {
 
-			return (0 === Informer::countUsers(true));
+			return (0 === Informer::countEntries(TABLE_USERS, true));
 		}
 
 		# Check if authorized

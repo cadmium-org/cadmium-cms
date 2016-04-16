@@ -3,7 +3,11 @@
 # Database tables
 
 define('TABLE_PAGES',                               'pages');
+define('TABLE_PAGES_RELATIONS',                     'pages_relations');
+
 define('TABLE_MENU',                                'menu');
+define('TABLE_MENU_RELATIONS',                      'menu_relations');
+
 define('TABLE_VARIABLES',                           'variables');
 define('TABLE_WIDGETS',                             'widgets');
 

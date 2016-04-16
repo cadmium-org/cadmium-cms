@@ -1,4 +1,4 @@
-<tr data-id="$id$" data-text="$text$">
+<tr class="$class$" data-id="$id$" data-text="$text$">
 
 	<td><i class="$icon$ icon"></i> <a href="#" onclick="Main.MenuitemsLoader.load($id$);">$text$</a></td>
 
@@ -12,7 +12,11 @@
 
 		{ / block:browse }
 
-		<a class="ui mini grey icon select button" title="%MENUITEMS_ITEM_SELECT%"><i class="checkmark icon"></i></a>
+		{ block:select }
+
+		<a class="ui mini $class$ icon select button" title="%MENUITEMS_ITEM_SELECT%"><i class="checkmark icon"></i></a>
+
+		{ / block:select }
 
 	</td>
 

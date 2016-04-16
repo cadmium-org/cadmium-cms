@@ -121,7 +121,6 @@ return [
 	'WIDGETS_NOT_FOUND'                         => 'Widgets not found',
 
 	'WIDGETS_COLUMN_TITLE'                      => 'Title',
-	'WIDGETS_COLUMN_DISPLAY'                    => 'Status',
 
 	'WIDGETS_ITEM_CREATE'                       => 'Create widget',
 	'WIDGETS_ITEM_NEW'                          => 'New widget',

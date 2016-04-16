@@ -14,14 +14,16 @@ namespace Modules\Entitizer\Definition {
 
 			# Add params
 
-			$this->addTextual       ('name',            true, 255, false, true, true);
-			$this->addTextual       ('title',           true, 255, false, true, false);
-			$this->addBoolean       ('display',         true, true);
-			$this->addTextual       ('contents',        false, 0, false, false, false);
+			$this->params->boolean      ('active',              false);
+			$this->params->textual      ('name',                true, 255, false, '');
+			$this->params->textual      ('title',               true, 255, false, '');
+			$this->params->textual      ('contents',            false, 0, false, '');
 
-			# Add orderers
+			# Add indexes
 
-			$this->addOrderer       ('title');
+			$this->indexes->add         ('active');
+			$this->indexes->add         ('name',                'UNIQUE');
+			$this->indexes->add         ('title');
 		}
 	}
 }

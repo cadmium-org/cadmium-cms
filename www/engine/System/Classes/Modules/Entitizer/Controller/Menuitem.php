@@ -21,7 +21,7 @@ namespace Modules\Entitizer\Controller {
 
 			# Declare variables
 
-			$parent_id = ''; $text = ''; $slug = ''; $target = ''; $position = '';
+			$text = ''; $slug = ''; $target = ''; $active = ''; $position = '';
 
 			# Extract post array
 
@@ -31,10 +31,10 @@ namespace Modules\Entitizer\Controller {
 
 			$data = [];
 
-			$data['parent_id']          = $parent_id;
 			$data['text']               = $text;
 			$data['slug']               = $slug;
 			$data['target']             = $target;
+			$data['active']             = $active;
 			$data['position']           = $position;
 
 			$modifier = ((0 === $this->menuitem->id) ? 'create' : 'edit');

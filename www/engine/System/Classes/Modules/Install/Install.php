@@ -28,7 +28,7 @@ namespace Modules {
 
 			# Set checking status
 
-			self::$status = (!in_array(false, self::$requirements));
+			self::$status = (!in_array(false, self::$requirements, true));
 		}
 
 		# Return list

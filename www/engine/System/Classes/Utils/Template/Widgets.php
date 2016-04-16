@@ -4,37 +4,21 @@ namespace Utils\Template {
 
 	use DB, Template;
 
-	class Widgets {
+	abstract class Widgets {
 
-		private $items = [];
+		# Generate widgets list
 
-		# Add item
-
-		private function addItem(string $name, string $contents) {
-
-			$this->items[$name] = Template::block($contents);
-		}
-
-		# Constructor
-
-		public function __construct() {
+		public static function generate() {
 
 			# Process selection
 
-			$selection = ['name', 'contents']; $condition = ['display' => 1]; $order = ['name' => 'ASC'];
+			$selection = ['name', 'contents']; $condition = ['active' => 1]; $order = ['name' => 'ASC'];
 
 			if (!(DB::select(TABLE_WIDGETS, $selection, $condition, $order) && DB::last()->status)) return;
 
 			# Process results
 
-			while (null !== ($widget = DB::last()->row())) $this->addItem($widget['name'], $widget['contents']);
-		}
-
-		# Return items
-
-		public function items() {
-
-			return $this->items;
+			while (null !== ($widget = DB::last()->row())) yield $widget['name'] => Template::block($widget['contents']);
 		}
 	}
 }

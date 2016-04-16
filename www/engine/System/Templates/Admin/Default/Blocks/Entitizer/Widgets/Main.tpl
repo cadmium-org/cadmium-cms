@@ -40,9 +40,9 @@
 
 				<div class="ui slider checkbox">
 
-					{ block:field_widget_display / }
+					{ block:field_widget_active / }
 
-					<label for="widget-display">%WIDGET_FIELD_DISPLAY%</label>
+					<label for="widget-active">%WIDGET_FIELD_ACTIVE%</label>
 
 				</div>
 

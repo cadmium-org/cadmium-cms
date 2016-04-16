@@ -23,28 +23,15 @@ namespace Handlers\Tools {
 
 		private function getPages() {
 
-			$pages = [];
+			$selection = ['slug', 'time_modified'];
 
-			# Select pages
+			$condition = ['visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC, 'locked' => 0];
 
-			$condition = ['visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC];
-
-			if (!(DB::select(TABLE_PAGES, 'id', $condition) && DB::last()->status)) return [];
-
-			while (null !== ($page = DB::last()->row())) $pages[] = $page['id'];
-
-			# Init pages
-
-			foreach ($pages as $key => $id) {
-
-				$page = Entitizer::get(ENTITY_TYPE_PAGE, $id);
-
-				$pages[$key] = ['canonical' => $page->canonical, 'modified' => $page->time_modified];
-			}
+			if (!(DB::select(TABLE_PAGES, $selection, $condition, 'slug') && DB::last()->status)) return;
 
 			# ------------------------
 
-			return Arr::sortby($pages, 'canonical');
+			while (null !== ($page = DB::last()->row())) yield Entitizer::create(TABLE_PAGES, $page);
 		}
 
 		# Handle request
@@ -57,15 +44,13 @@ namespace Handlers\Tools {
 
 			# Get last modification time
 
-			$last_modified = $this->getLastModified();
-
-			if ($sitemap->load($last_modified)) return $sitemap;
+			if ($sitemap->load($this->getLastModified())) return $sitemap;
 
 			# Fill sitemap
 
 			foreach ($this->getPages() as $page) {
 
-				$loc = $page['canonical']; $lastmod = Date::get(DATE_FORMAT_W3C, $page['modified']);
+				$loc = $page->canonical; $lastmod = Date::get(DATE_FORMAT_W3C, $page->time_modified);
 
 				$sitemap->add($loc, $lastmod, FREQUENCY_WEEKLY, 0.5);
 			}

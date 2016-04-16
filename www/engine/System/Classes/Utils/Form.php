@@ -2,23 +2,38 @@
 
 namespace Utils {
 
-	use Utils\Messages, Language;
+	use Utils\Messages, Utils\Popup, Language;
 
 	abstract class Form extends \Form {
 
+		# Display error
+
+		private function displayError(string $code, bool $popup) {
+
+			$text = Language::get($code);
+
+			if (!$popup) Messages::set('error', $text); else Popup::set('negative', $text);
+
+			# ------------------------
+
+			return false;
+		}
+
 		# Handle form
 
-		public function handle(callable $callback) {
+		public function handle(callable $callback, bool $popup = false) {
 
 			if (false === ($post = $this->post())) return false;
 
 			# Check form for errors
 
-			if ($this->errors()) { Messages::error(Language::get('FORM_ERROR_REQUIRED')); return false; }
+			if ($this->errors()) return $this->displayError('FORM_ERROR_REQUIRED', $popup);
 
 			# Call controller method
 
-			if (is_string($result = $callback($post))) { Messages::error(Language::get($result)); return false; }
+			if (is_string($result = $callback($post))) return $this->displayError($result, $popup);
+
+			if (is_array($result)) { $this->get($result[0])->error(true); return $this->displayError($result[1], $popup); }
 
 			# ------------------------
 

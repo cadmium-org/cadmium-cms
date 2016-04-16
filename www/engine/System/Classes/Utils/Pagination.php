@@ -18,7 +18,7 @@ namespace Utils {
 
 				$class = (($index === $active) ? 'active item' : 'item');
 
-				$url->set('index', $index); $link = $url->get();
+				$url->set('index', $index); $link = $url->string();
 
 				$items->add(['class' => $class, 'link' => $link, 'index' => $index]);
 			}
@@ -39,7 +39,7 @@ namespace Utils {
 
 				if ($disabled) { $block->disable(); continue; }
 
-				$block->link = $url->set('index', $index)->get(); $block->index = $index;
+				$block->link = $url->set('index', $index)->string(); $block->index = $index;
 
 				if ($closest) $block->block('ellipsis')->disable();
 			}
@@ -60,7 +60,7 @@ namespace Utils {
 
 				if ($active === $extremum) { $block->disable(); $pagination->block($class . '_disabled')->enable(); }
 
-				else $block->link = $url->set('index', $index)->get();
+				else $block->link = $url->set('index', $index)->string();
 			}
 		}
 

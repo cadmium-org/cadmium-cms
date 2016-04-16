@@ -14,23 +14,29 @@ namespace Modules\Entitizer\Definition {
 
 			# Add params
 
-			$this->addInteger       ('parent_id',       false, 10, 0, true, false);
-			$this->addInteger       ('visibility',      true, 1, VISIBILITY_DRAFT, true, false);
-			$this->addInteger       ('access',          true, 1, ACCESS_PUBLIC, true, false);
-			$this->addTextual       ('hash',            true, 40, true, true, true);
-			$this->addTextual       ('name',            true, 255, false, true, false);
-			$this->addTextual       ('title',           true, 255, false, true, false);
-			$this->addTextual       ('contents',        false, 0, false, false, false);
-			$this->addTextual       ('description',     false, 0, false, false, false);
-			$this->addTextual       ('keywords',        false, 0, false, false, false);
-			$this->addBoolean       ('robots_index',    true, false);
-			$this->addBoolean       ('robots_follow',   true, false);
-			$this->addInteger       ('time_created',    false, 10, 0, true, false);
-			$this->addInteger       ('time_modified',   false, 10, 0, true, false);
+			$this->params->integer      ('visibility',          true, 1, true, VISIBILITY_DRAFT);
+			$this->params->integer      ('access',              true, 1, true, ACCESS_PUBLIC);
+			$this->params->boolean      ('locked',              true);
+			$this->params->textual      ('slug',                true, 255, false, '');
+			$this->params->textual      ('name',                true, 255, false, '');
+			$this->params->textual      ('title',               true, 255, false, '');
+			$this->params->textual      ('contents',            false, 0, false, '');
+			$this->params->textual      ('description',         false, 0, false, '');
+			$this->params->textual      ('keywords',            false, 0, false, '');
+			$this->params->boolean      ('robots_index',        false);
+			$this->params->boolean      ('robots_follow',       false);
+			$this->params->integer      ('time_created',        false, 10, true, 0);
+			$this->params->integer      ('time_modified',       false, 10, true, 0);
 
-			# Add orderers
+			# Add indexes
 
-			$this->addOrderer       ('title');
+			$this->indexes->add         ('visibility');
+			$this->indexes->add         ('access');
+			$this->indexes->add         ('slug');
+			$this->indexes->add         ('name');
+			$this->indexes->add         ('title');
+			$this->indexes->add         ('time_created');
+			$this->indexes->add         ('time_modified');
 		}
 	}
 }

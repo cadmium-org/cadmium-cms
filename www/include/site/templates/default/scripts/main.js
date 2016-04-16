@@ -11,6 +11,8 @@ var Main = {
 
 		$('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
 
+		$('.fixed.button').popup({ 'position': 'left center', 'variation': 'inverted' }).transition('jiggle');
+
 		var items = $('.ui.form').find('input, textarea, select');
 
 		items.filter('textarea').css({ 'height' : '6em', 'min-height' : '6em' });

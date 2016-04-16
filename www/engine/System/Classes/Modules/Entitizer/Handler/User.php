@@ -28,11 +28,12 @@ namespace Modules\Entitizer\Handler {
 
 		protected function processEntity(Template\Asset\Block $contents) {
 
-			if ($this->create) return $contents->block('info')->disable();
+			if ($this->create) $contents->block('info')->disable(); else {
 
-			$contents->block('info')->time_registered = Date::get(DATE_FORMAT_DATETIME, $this->entity->time_registered);
+				$contents->block('info')->time_registered = Date::get(DATE_FORMAT_DATETIME, $this->entity->time_registered);
 
-			$contents->block('info')->time_logged = Date::get(DATE_FORMAT_DATETIME, $this->entity->time_logged);
+				$contents->block('info')->time_logged = Date::get(DATE_FORMAT_DATETIME, $this->entity->time_logged);
+			}
 		}
 	}
 }

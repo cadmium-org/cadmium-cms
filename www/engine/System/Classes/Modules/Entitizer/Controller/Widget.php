@@ -21,7 +21,7 @@ namespace Modules\Entitizer\Controller {
 
 			# Declare variables
 
-			$title = ''; $name = ''; $display = ''; $contents = '';
+			$title = ''; $name = ''; $active = ''; $contents = '';
 
 			# Extract post array
 
@@ -29,9 +29,9 @@ namespace Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			if (false === ($check_name = $this->widget->check('name', $name))) return 'WIDGET_ERROR_MODIFY';
+			if (false === ($check_name = $this->widget->check($name, 'name'))) return 'WIDGET_ERROR_MODIFY';
 
-			if ($check_name === 1) return 'WIDGET_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return ['name', 'WIDGET_ERROR_NAME_DUPLICATE'];
 
 			# Modify widget
 
@@ -39,7 +39,7 @@ namespace Modules\Entitizer\Controller {
 
 			$data['title']              = $title;
 			$data['name']               = $name;
-			$data['display']            = $display;
+			$data['active']             = $active;
 			$data['contents']           = $contents;
 
 			$modifier = ((0 === $this->widget->id) ? 'create' : 'edit');

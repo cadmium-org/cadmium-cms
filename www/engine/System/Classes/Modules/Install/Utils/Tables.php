@@ -2,9 +2,25 @@
 
 namespace Modules\Install\Utils {
 
-	use Modules\Entitizer, Arr, DB, Language, Template;
+	use Modules\Entitizer, Modules\Informer, DB, Language, Template;
 
 	abstract class Tables {
+
+		# Fill specific relations table
+
+		private static function fillRelationsTable(string $table, int $max_id) {
+
+			$relations = [];
+
+			for ($id = 1; $id <= $max_id; $id++) {
+
+				$relations[] = ['ancestor' => $id, 'descendant' => $id, 'depth' => 0];
+			}
+
+			# ------------------------
+
+			return (DB::insert($table, $relations, true, true) && DB::last()->status);
+		}
 
 		# Fill pages table
 
@@ -12,37 +28,41 @@ namespace Modules\Install\Utils {
 
 			# Count pages
 
-			if (!(DB::select(TABLE_PAGES, 'COUNT(id) as count') && (DB::last()->rows === 1))) return false;
+			$count = Informer::countEntries(TABLE_PAGES, true);
 
-			if (intval(DB::last()->row()['count']) > 0) return true;
+			if (false === $count) return false; else if ($count > 0) return true;
 
-			# Insert initial pages
+			# Process dataset
 
-			$pages = [];
+			$pages = [['id' => 1, 'visibility' => VISIBILITY_PUBLISHED,
 
-			$pages[] = ['visibility' => VISIBILITY_PUBLISHED,
+				'locked' => false, 'slug' => 'index', 'name' => 'index',
 
-				'hash' => Arr::encode(['index', 0]),
-
-				'name' => 'index', 'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
+				'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
 				'contents' => Template::block(Language::get('INSTALL_PAGE_INDEX_CONTENTS'))->contents(),
 
-				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
+				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME]];
 
-			for ($i = 1; $i <= 3; $i++) $pages[] = ['visibility' => VISIBILITY_PUBLISHED,
+			for ($id = 2; $id <= 4; $id++) $pages[] = ['id' => $id, 'visibility' => VISIBILITY_PUBLISHED,
 
-				'hash' => Arr::encode([('page-' . $i), 0]),
+				'locked' => false, 'slug' => ('page-' . ($id - 1)), 'name' => ('page-' . ($id - 1)),
 
-				'name' => ('page-' . $i), 'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i),
+				'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . ($id - 1)),
 
 				'contents' => Template::block(Language::get('INSTALL_PAGE_DEMO_CONTENTS'))->contents(),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
+			# Process insertion
+
+			if (!(DB::insert(TABLE_PAGES, $pages, true) && DB::last()->status)) return false;
+
+			self::fillRelationsTable(TABLE_PAGES_RELATIONS, 4);
+
 			# ------------------------
 
-			return (DB::insert(TABLE_PAGES, $pages, true) && DB::last()->status);
+			return true;
 		}
 
 		# Fill menu table
@@ -51,23 +71,29 @@ namespace Modules\Install\Utils {
 
 			# Count menuitems
 
-			if (!(DB::select(TABLE_MENU, 'COUNT(id) as count') && (DB::last()->rows === 1))) return false;
+			$count = Informer::countEntries(TABLE_MENU, true);
 
-			if (intval(DB::last()->row()['count']) > 0) return true;
+			if (false === $count) return false; else if ($count > 0) return true;
 
-			# Insert initial menuitems
+			# Process dataset
 
 			$menu = [];
 
-			for ($i = 1; $i <= 3; $i++) $menu[] = [
+			for ($id = 1; $id <= 3; $id++) $menu[] = [
 
-				'position' => ($i - 1), 'slug' => ('page-' . $i),
+				'id' => $id, 'active' => true, 'position' => ($id - 1), 'slug' => ('page-' . $id),
 
-				'text' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $i)];
+				'text' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . $id)];
+
+			# Process insertion
+
+			if (!(DB::insert(TABLE_MENU, $menu, true) && DB::last()->status)) return false;
+
+			self::fillRelationsTable(TABLE_MENU_RELATIONS, 3);
 
 			# ------------------------
 
-			return (DB::insert(TABLE_MENU, $menu, true) && DB::last()->status);
+			return true;
 		}
 
 		# Create tables
@@ -76,19 +102,19 @@ namespace Modules\Install\Utils {
 
 			$definitions = [];
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_PAGE);
+			$definitions[] = Entitizer::definition(TABLE_PAGES);
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_MENUITEM);
+			$definitions[] = Entitizer::definition(TABLE_MENU);
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_VARIABLE);
+			$definitions[] = Entitizer::definition(TABLE_VARIABLES);
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_WIDGET);
+			$definitions[] = Entitizer::definition(TABLE_WIDGETS);
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_USER);
+			$definitions[] = Entitizer::definition(TABLE_USERS);
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_USER_SECRET);
+			$definitions[] = Entitizer::definition(TABLE_USERS_SECRETS);
 
-			$definitions[] = Entitizer\Definition::get(ENTITY_TYPE_USER_SESSION);
+			$definitions[] = Entitizer::definition(TABLE_USERS_SESSIONS);
 
 			foreach ($definitions as $definition) if (!$definition->createTable()) return false;
 

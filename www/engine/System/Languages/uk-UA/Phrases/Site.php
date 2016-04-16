@@ -14,7 +14,7 @@ return [
 	# Profile
 
 	'PROFILE_TAB_OVERVIEW'                      => 'Огляд',
-	'PROFILE_TAB_EDIT'                          => 'Редагувати мої дані',
+	'PROFILE_TAB_EDIT'                          => 'Змінити мої дані',
 
 	'PROFILE_OVERVIEW_EMAIL'                    => 'E-mail',
 	'PROFILE_OVERVIEW_RANK'                     => 'Ранг',

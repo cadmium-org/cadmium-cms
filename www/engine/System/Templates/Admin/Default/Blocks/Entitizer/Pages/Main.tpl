@@ -32,11 +32,23 @@
 
 	{ / block:create }
 
+	{ ! block:create_disabled }
+
+	<a class="disabled item"><i class="add icon"></i> %PAGES_ITEM_CREATE%</a>
+
+	{ / block:create_disabled }
+
 	{ block:edit }
 
 	<a class="$class$" href="$install_path$/admin/content/pages/edit?id=$id$"><i class="edit icon"></i> %PAGES_ITEM_EDIT%</a>
 
 	{ / block:edit }
+
+	{ ! block:edit_disabled }
+
+	<a class="disabled item"><i class="edit icon"></i> %PAGES_ITEM_EDIT%</a>
+
+	{ / block:edit_disabled }
 
 	{ block:browse }
 
@@ -44,11 +56,23 @@
 
 	{ / block:browse }
 
+	{ ! block:browse_disabled }
+
+	<a class="disabled item"><i class="external icon"></i> %PAGES_ITEM_BROWSE%</a>
+
+	{ / block:browse_disabled }
+
 </div>
 
 { / block:parent }
 
 <div class="ui segment">
+
+	{ ! block:locked }
+
+	<div class="ui warning message">%PAGE_WARNING_NAME_DUPLICATE%</div>
+
+	{ / block:locked }
 
 	<form method="post" action="$link$" autocomplete="off">
 
@@ -62,19 +86,21 @@
 
 				<div class="ui action input">
 
-					<input type="text" id="page-parent-title" value="$title$" placeholder="%NONE%" readonly="readonly" />
+					<input type="hidden" id="page-parent-id" value="$parent_id$" />
 
-					<a class="ui teal icon button" onclick="Main.PagesLoader.load();"><i class="search icon"></i></a>
+					<input type="hidden" id="page-super-parent-id" value="$super_parent_id$" />
 
-					<a class="ui teal icon button" onclick="Main.PagesLoader.select(0);"><i class="close icon"></i></a>
+					<input type="text" value="$title$" placeholder="%NONE%" readonly="readonly" />
+
+					<a class="ui teal icon button" id="pages-selector-load" onclick="Main.PagesLoader.load();"><i class="search icon"></i></a>
+
+					<a class="ui teal icon button" id="pages-selector-reset" onclick="Main.PagesSelector.submit(0);"><i class="close icon"></i></a>
 
 				</div>
 
 			</div>
 
 			{ / block:selector }
-
-			{ block:field_page_parent_id / }
 
 			<div class="field">
 

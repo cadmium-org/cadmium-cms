@@ -50,7 +50,7 @@ namespace Modules\Profile\Handler {
 
 			# Display success message
 
-			if (false !== Request::get('submitted')) Messages::success(Language::get('USER_SUCCESS_EDIT'));
+			if (false !== Request::get('submitted')) Messages::set('success', Language::get('USER_SUCCESS_EDIT'));
 
 			# ------------------------
 

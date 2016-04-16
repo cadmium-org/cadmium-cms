@@ -46,6 +46,8 @@
 
 	</nav>
 
+	{ block:popup / }
+
 	<div class="ui one column page grid wrapper">
 
 		<div class="column">

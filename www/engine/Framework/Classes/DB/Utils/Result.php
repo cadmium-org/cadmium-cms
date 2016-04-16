@@ -10,7 +10,7 @@ namespace DB\Utils {
 
 		# Constructor
 
-		public function __construct(\mysqli $link, $result, string $query, int $time) {
+		public function __construct(\mysqli $link, $result, string $query, float $time) {
 
 			$this->status       = (false !== $result);
 
@@ -33,7 +33,7 @@ namespace DB\Utils {
 
 		public function __get(string $var) {
 
-			return (isset($this->$var) ? $this->$var : null);
+			return ($this->$var ?? null);
 		}
 
 		# Get next row

@@ -2,7 +2,7 @@
 
 namespace Modules\Informer\Handler {
 
-	use Modules\Informer, Modules\Settings, Utils\Lister, Utils\Messages, Utils\View, Geo\Timezone, Language;
+	use Modules\Informer, Modules\Settings, Utils\Range, Utils\Messages, Utils\View, Geo\Timezone, Language;
 
 	class Dashboard {
 
@@ -14,15 +14,15 @@ namespace Modules\Informer\Handler {
 
 			# Set general entries
 
-			$contents->site_status          = Lister\Status::get(Settings::get('site_status'));
+			$contents->site_status          = Range\Status::get(Settings::get('site_status'));
 
 			$contents->system_timezone      = Timezone::get(Settings::get('system_timezone'));
 
 			# Set database entries
 
-			$contents->pages_count          = Informer::countPages();
+			$contents->pages_count          = Informer::countEntries(TABLE_PAGES);
 
-			$contents->users_count          = Informer::countUsers();
+			$contents->users_count          = Informer::countEntries(TABLE_USERS);
 
 			# ------------------------
 
@@ -35,11 +35,11 @@ namespace Modules\Informer\Handler {
 
 			# Check if install file exists
 
-			if (Informer::checkInstallFile()) Messages::error(Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
+			if (Informer::checkInstallFile()) Messages::set('error', Language::get('DASHBOARD_MESSAGE_INSTALL_FILE'));
 
 			# Check if configuration file is loaded
 
-			if (!Settings::loaded()) Messages::warning(Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
+			if (!Settings::loaded()) Messages::set('warning', Language::get('DASHBOARD_MESSAGE_CONFIG_FILE'));
 
 			# ------------------------
 

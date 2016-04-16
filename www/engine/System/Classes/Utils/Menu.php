@@ -2,33 +2,35 @@
 
 namespace Utils {
 
-	use Modules\Entitizer, DB, Template;
+	use Modules\Entitizer, Template;
 
 	class Menu {
 
-		private $items = [], $menu = [];
+		private $menu = [0 => ['children' => []]];
 
 		# Parse item
 
 		private function parseItem(int $id) {
 
-			if (isset($this->items[$id]['children'])) {
+			if ([] !== $this->menu[$id]['children']) {
 
 				$item = View::get('Blocks\Utils\Menu\Container');
 
-				$item->text = $this->items[$id]['text'];
+				$item->text = $this->menu[$id]['entity']->text;
 
 				$item->children = ($children = Template::group());
 
-				foreach ($this->items[$id]['children'] as $child) $children->add($this->parseItem($child));
+				foreach ($this->menu[$id]['children'] as $child) $children->add($this->parseItem($child));
 
 			} else {
 
 				$item = View::get('Blocks\Utils\Menu\Item');
 
-				$item->target = (($this->items[$id]['target'] === TARGET_BLANK) ? '_blank' : '_self');
+				$item->target = (($this->menu[$id]['entity']->target === TARGET_BLANK) ? '_blank' : '_self');
 
-				$item->link = $this->items[$id]['link']; $item->text = $this->items[$id]['text'];
+				$item->link = $this->menu[$id]['entity']->link;
+
+				$item->text = $this->menu[$id]['entity']->text;
 			}
 
 			# ------------------------
@@ -40,26 +42,9 @@ namespace Utils {
 
 		public function __construct() {
 
-			# Process selection
+			$menu = Entitizer::treeview(TABLE_MENU)->subtree(0, ['active' => true]);
 
-			$query = ("SELECT men.id, men.parent_id, men.slug, men.text, men.target ") .
-
-					 ("FROM " . TABLE_MENU . " men ORDER BY men.parent_id ASC, men.position ASC, men.id ASC");
-
-			if (!(DB::send($query) && DB::last()->status)) return;
-
-			# Process results
-
-			while (null !== ($data = DB::last()->row())) {
-
-				$entity = Entitizer::get(ENTITY_TYPE_MENUITEM); $entity->fill($data);
-
-				$this->items[$entity->id()] = $entity->data();
-			}
-
-			foreach ($this->items as $id => $item) if (0 === $item['parent_id']) $this->menu[] = $id;
-
-			else if (isset($this->items[$item['parent_id']])) $this->items[$item['parent_id']]['children'][] = $id;
+			if (false !== $menu) $this->menu = $menu;
 		}
 
 		# Get block
@@ -68,7 +53,7 @@ namespace Utils {
 
 			$menu = Template::group();
 
-			foreach ($this->menu as $id) $menu->add($this->parseItem($id));
+			foreach ($this->menu[0]['children'] as $id) $menu->add($this->parseItem($id));
 
 			# ------------------------
 

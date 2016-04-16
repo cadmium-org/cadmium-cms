@@ -24,7 +24,7 @@ namespace {
 
 		public static function get(string $name) {
 
-			return (isset($_COOKIE[$name]) ? $_COOKIE[$name] : false);
+			return ($_COOKIE[$name] ?? false);
 		}
 
 		# Delete variable

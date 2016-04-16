@@ -8,22 +8,18 @@ namespace Ajax\Utils {
 
 		# Set variable
 
-		public function set(string $name, string $value) {
+		public function set(string $name, $value) {
 
-			$this->data[$name] = $value;
+			if (is_scalar($value)) $this->data[$name] = $value;
 
 			return $this;
 		}
 
 		# Set error
 
-		public function error(string $value = null) {
+		public function error($value) {
 
-			if (null !== $value) $this->set('error', $value);
-
-			$this->status = false;
-
-			# ------------------------
+			$this->set('error', $value); $this->status = false;
 
 			return $this;
 		}

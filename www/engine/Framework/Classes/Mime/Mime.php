@@ -2,9 +2,9 @@
 
 namespace {
 
-	abstract class Mime extends Lister {
+	abstract class Mime extends Range {
 
-		protected static $list = [];
+		protected static $range = [];
 
 		# Check mime type
 
@@ -12,7 +12,7 @@ namespace {
 
 			if (false === ($mime = self::get($extension))) return false;
 
-			return (preg_match('/^' . $type . '\//', $mime) ? true : false);
+			return (preg_match(('/^' . $type . '\//'), $mime) ? true : false);
 		}
 
 		# Autoloader
