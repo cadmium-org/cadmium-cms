@@ -4,7 +4,7 @@ namespace DB\Utils {
 
 	class Result {
 
-		private $status = false, $result = null, $query = '', $time = 0;
+		private $status = false, $result = null, $query = '', $time = 0.0;
 
 		private $rows = 0, $id = 0, $error = '', $errno = 0;
 
