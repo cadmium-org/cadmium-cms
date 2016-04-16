@@ -26,7 +26,7 @@ Cadmium CMS is PHP-based content management system for creating shiny and respon
 ## System requirements
 
  - Apache web server (mod_rewrite module required).
- - PHP 7.0 or higher (Multibyte String, GD, SimpleXML extensions required).
+ - PHP 7.0 or higher (Multibyte String, GD, SimpleXML, DOM extensions required).
  - MySQL database.
 
 ## Installation
