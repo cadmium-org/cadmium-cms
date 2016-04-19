@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Treeview {
 
 	class Users extends Entitizer\Utils\Treeview {
 
-		use Entitizer\Common\User, Entitizer\View\Users;
+		use Entitizer\Common\User, Entitizer\Collection\Users;
 	}
 }

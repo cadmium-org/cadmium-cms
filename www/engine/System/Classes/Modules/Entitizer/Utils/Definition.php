@@ -126,24 +126,6 @@ namespace Modules\Entitizer\Utils {
 			return $this->foreigns->get($name);
 		}
 
-		# Cast data to be suitable with definition
-
-		public function cast(array $data, bool $process_all = false) {
-
-			$cast = [];
-
-			foreach ($this->params->list() as $name => $param) {
-
-				if ($process_all) $cast[$name] = $param->cast($data[$name] ?? null);
-
-				else if (isset($data[$name])) $cast[$name] = $param->cast($data[$name]);
-			}
-
-			# ------------------------
-
-			return $cast;
-		}
-
 		# Create table(s)
 
 		public function createTable() {

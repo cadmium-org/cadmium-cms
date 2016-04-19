@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Listview {
 
 	class Variables extends Entitizer\Utils\Listview {
 
-		use Entitizer\Common\Variable, Entitizer\View\Variables;
+		use Entitizer\Common\Variable, Entitizer\Collection\Variables;
 	}
 }

@@ -4,9 +4,9 @@ namespace Modules\Entitizer\Utils\Entity {
 
 	use Modules\Entitizer;
 
-	trait View {
+	trait Collection {
 
-		protected $definition = null, $error = false, $modifiable = false, $data = [];
+		protected $definition = null, $dataset = null;
 
 		# Get items
 

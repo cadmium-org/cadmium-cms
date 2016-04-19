@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Entitizer\View {
+namespace Modules\Entitizer\Collection {
 
 	use Modules\Entitizer;
 
@@ -8,7 +8,7 @@ namespace Modules\Entitizer\View {
 
 		protected static $order_by = ['title' => 'ASC', 'id' => 'ASC'];
 
-		# Init view
+		# Init collection
 
 		protected function init() {
 

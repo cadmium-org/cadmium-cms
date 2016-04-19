@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Treeview {
 
 	class Widgets extends Entitizer\Utils\Treeview {
 
-		use Entitizer\Common\Widget, Entitizer\View\Widgets;
+		use Entitizer\Common\Widget, Entitizer\Collection\Widgets;
 	}
 }

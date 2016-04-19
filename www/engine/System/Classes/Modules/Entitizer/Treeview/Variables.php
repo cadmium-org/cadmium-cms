@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Treeview {
 
 	class Variables extends Entitizer\Utils\Treeview {
 
-		use Entitizer\Common\Variable, Entitizer\View\Variables;
+		use Entitizer\Common\Variable, Entitizer\Collection\Variables;
 	}
 }

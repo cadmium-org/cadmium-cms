@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Treeview {
 
 	class Pages extends Entitizer\Utils\Treeview {
 
-		use Entitizer\Common\Page, Entitizer\View\Pages;
+		use Entitizer\Common\Page, Entitizer\Collection\Pages;
 	}
 }

@@ -37,7 +37,7 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Entity\Page $page, int $children = 0) {
+		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\Page $page, int $children = 0) {
 
 			$view->class = ($page->locked ? 'inactive warning' : (!$page->active ? 'inactive' : ''));
 

@@ -4,7 +4,7 @@ namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, DB;
 
-	abstract class Treeview extends View {
+	abstract class Treeview extends Collection {
 
 		# Get join statement
 
@@ -29,7 +29,7 @@ namespace Modules\Entitizer\Utils {
 
 			       (('' !== ($condition = $this->getCondition($config))) ? ("WHERE " . $condition . " ") : "") .
 
-			       ("GROUP BY ent.id ORDER BY rel.depth ASC, " . $this->getOrderBy($order_by));
+			       ("GROUP BY ent.id ORDER BY MAX(rel.depth) ASC, " . $this->getOrderBy($order_by));
 		}
 
 		# Get count query
@@ -72,11 +72,11 @@ namespace Modules\Entitizer\Utils {
 
 			while (null !== ($data = DB::last()->row())) {
 
-				$entity = Entitizer::create(static::$table, $data);
+				$dataset = Entitizer::dataset(static::$table, $data);
 
-				$items[$entity->id] = ['entity' => $entity, 'children' => []];
+				$items[$dataset->id] = ['dataset' => $dataset, 'children' => []];
 
-				$items[intval($data['parent_id'])]['children'][] = $entity->id;
+				$items[intval($data['parent_id'])]['children'][] = $dataset->id;
 			}
 
 			# ------------------------
@@ -140,7 +140,7 @@ namespace Modules\Entitizer\Utils {
 
 			$path = [];
 
-			while (null !== ($data = DB::last()->row())) $path[] = Entitizer::create(static::$table, $data)->data();
+			while (null !== ($data = DB::last()->row())) $path[] = Entitizer::dataset(static::$table, $data)->data();
 
 			# ------------------------
 

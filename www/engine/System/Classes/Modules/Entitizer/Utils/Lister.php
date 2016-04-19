@@ -43,21 +43,21 @@ namespace Modules\Entitizer\Utils {
 
 			foreach ($this->items['list'] as $item) {
 
-				if ((null !== $this->entity) && ($item['entity']->id === $this->entity->id)) continue;
+				if ((null !== $this->entity) && ($item['dataset']->id === $this->entity->id)) continue;
 
 				$items->add($view = View::get(!$ajax ? static::$view_item : static::$view_ajax_item));
 
 				# Set data
 
-				$view->id = $item['entity']->id;
+				$view->id = $item['dataset']->id;
 
-				$view->set(static::$naming, $item['entity']->get(static::$naming));
+				$view->set(static::$naming, $item['dataset']->get(static::$naming));
 
 				# Set buttons
 
 				if (!$ajax) {
 
-					$super = (static::$super && ($item['entity']->id === 1));
+					$super = (static::$super && ($item['dataset']->id === 1));
 
 					$has_children = (static::$nesting && ($item['children'] > 0));
 
@@ -72,7 +72,7 @@ namespace Modules\Entitizer\Utils {
 
 				# Add item additional data
 
-				$this->processItem($view, $item['entity'], (static::$nesting ? $item['children'] : 0));
+				$this->processItem($view, $item['dataset'], (static::$nesting ? $item['children'] : 0));
 			}
 
 			# ------------------------

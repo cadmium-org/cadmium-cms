@@ -16,7 +16,7 @@ namespace Utils {
 
 				$item = View::get('Blocks\Utils\Menu\Container');
 
-				$item->text = $this->menu[$id]['entity']->text;
+				$item->text = $this->menu[$id]['dataset']->text;
 
 				$item->children = ($children = Template::group());
 
@@ -26,11 +26,11 @@ namespace Utils {
 
 				$item = View::get('Blocks\Utils\Menu\Item');
 
-				$item->target = (($this->menu[$id]['entity']->target === TARGET_BLANK) ? '_blank' : '_self');
+				$item->target = (($this->menu[$id]['dataset']->target === TARGET_BLANK) ? '_blank' : '_self');
 
-				$item->link = $this->menu[$id]['entity']->link;
+				$item->link = $this->menu[$id]['dataset']->link;
 
-				$item->text = $this->menu[$id]['entity']->text;
+				$item->text = $this->menu[$id]['dataset']->text;
 			}
 
 			# ------------------------

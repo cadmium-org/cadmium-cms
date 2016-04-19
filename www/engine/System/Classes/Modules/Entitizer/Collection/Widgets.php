@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Entitizer\View {
+namespace Modules\Entitizer\Collection {
 
 	use Modules\Entitizer;
 
-	trait Menuitems {
+	trait Widgets {
 
-		protected static $order_by = ['position' => 'ASC', 'id' => 'ASC'];
+		protected static $order_by = ['title' => 'ASC', 'id' => 'ASC'];
 
-		# Init view
+		# Init collection
 
 		protected function init() {
 

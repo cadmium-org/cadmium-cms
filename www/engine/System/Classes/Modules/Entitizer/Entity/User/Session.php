@@ -7,9 +7,5 @@ namespace Modules\Entitizer\Entity\User {
 	class Session extends Entitizer\Utils\Entity {
 
 		use Entitizer\Common\User\Session;
-
-		# Implement entity
-
-		protected function implement() {}
 	}
 }

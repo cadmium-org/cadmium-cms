@@ -30,7 +30,7 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Entity\Widget $widget) {
+		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\Widget $widget) {
 
 			$view->class = (!$widget->active ? 'inactive' : '');
 

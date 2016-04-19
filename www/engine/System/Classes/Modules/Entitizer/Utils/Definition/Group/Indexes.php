@@ -19,7 +19,7 @@ namespace Modules\Entitizer\Utils\Definition\Group {
 
 		public function add(string $name, string $type = null) {
 
-			if (!isset($this->definition->params()[$name]) || isset($this->list[$name])) return;
+			if ((false === $this->definition->param($name)) || isset($this->list[$name])) return;
 
 			$this->list[$name] = new Definition\Item\Index($name, $type);
 		}

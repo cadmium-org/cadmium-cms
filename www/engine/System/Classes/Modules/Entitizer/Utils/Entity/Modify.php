@@ -6,15 +6,15 @@ namespace Modules\Entitizer\Utils\Entity {
 
 	trait Modify {
 
-		protected $definition = null, $error = false, $modifiable = false, $data = [];
+		protected $definition = null, $dataset = null;
 
 		# Init entity subtree connection
 
 		private function initSubtree() {
 
-			$dataset = ['ancestor' => $this->id, 'descendant' => $this->id, 'depth' => 0];
+			$data = ['ancestor' => $this->id, 'descendant' => $this->id, 'depth' => 0];
 
-			DB::insert(static::$table_relations, $dataset, false, true);
+			DB::insert(static::$table_relations, $data, false, true);
 
 			# ------------------------
 
@@ -39,7 +39,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			# Set path
 
-			$this->data['parent_id'] = 0;
+			$this->dataset->update(['parent_id' => 0]);
 
 			# ------------------------
 
@@ -60,11 +60,11 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			         ("WHERE sub.ancestor = " . $this->id . " AND sup.descendant = " . $parent_id);
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && (DB::last()->rows > 0))) return false;
 
 			# Set path
 
-			$this->data['parent_id'] = $parent_id;
+			$this->dataset->update(['parent_id' => $parent_id]);
 
 			# ------------------------
 
@@ -75,11 +75,11 @@ namespace Modules\Entitizer\Utils\Entity {
 
 		public function create(array $data) {
 
-			if (!$this->modifiable || (0 !== $this->id)) return false;
+			if (0 !== $this->id) return false;
 
-			$data = $this->definition->cast($data);
+			$data = $this->dataset->cast($data);
 
-			if (static::$auto_increment && isset($data['id'])) unset($data['id']);
+			if (static::$auto_increment && isset($data['id'])) $data['id'] = 0;
 
 			# Insert entity
 
@@ -87,17 +87,11 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
-			# Set data
+			# Update data
 
-			$this->error = false;
+			if (static::$auto_increment) $data['id'] = DB::last()->id;
 
-			if (static::$auto_increment) $this->data['id'] = DB::last()->id;
-
-			foreach ($data as $name => $value) $this->data[$name] = $value;
-
-			# Implement entity
-
-			$this->implement();
+			$this->dataset->update($data);
 
 			# Init subtreee
 
@@ -116,9 +110,9 @@ namespace Modules\Entitizer\Utils\Entity {
 
 		public function edit(array $data) {
 
-			if (!$this->modifiable || (0 === $this->id)) return false;
+			if (0 === $this->id) return false;
 
-			$data = $this->definition->cast($data);
+			$data = $this->dataset->cast($data);
 
 			if (isset($data['id'])) unset($data['id']);
 
@@ -128,13 +122,9 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			if (!(DB::last() && DB::last()->status)) return false;
 
-			# Set data
+			# Update data
 
-			foreach ($data as $name => $value) $this->data[$name] = $value;
-
-			# Implement entity
-
-			$this->implement();
+			$this->dataset->update($data);
 
 			# Init subtreee
 
@@ -149,7 +139,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 		public function move(int $parent_id) {
 
-			if (!$this->modifiable || (0 === $this->id)) return false;
+			if (0 === $this->id) return false;
 
 			# Re-connect entity if not in tree
 
@@ -173,6 +163,37 @@ namespace Modules\Entitizer\Utils\Entity {
 			# Connect subtree under new position
 
 		 	if (0 !== $parent->id) $this->connectSubtree($parent->id);
+
+			# ------------------------
+
+			return true;
+		}
+
+		# Remove entity entry from DB
+
+		public function remove() {
+
+			if (0 === $this->id) return false;
+
+			# Check if entity is removable
+
+			if (static::$super && ($this->id === 1)) return false;
+
+			if (static::$nesting && (0 !== $this->subtreeCount())) return false;
+
+			# Remove entity
+
+			DB::delete(static::$table, ['id' => $this->id]);
+
+			if (!(DB::last() && DB::last()->status)) return false;
+
+			# Uncache entity
+
+			unset(self::$cache[static::$table][$this->id]);
+
+			# Reset data
+
+			$this->dataset->reset();
 
 			# ------------------------
 

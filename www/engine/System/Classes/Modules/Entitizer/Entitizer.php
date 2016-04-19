@@ -36,17 +36,11 @@ namespace Modules {
 			return $entity;
 		}
 
-		# Create entity with custom dataset
+		# Get dataset
 
-		public static function create(string $table, array $data = []) {
+		public static function dataset(string $table, array $data = []) {
 
-			if (!isset(self::$classes[$table])) throw new Exception\General(self::$error_message);
-
-			$entity = new self::$classes[$table]($data);
-
-			# ------------------------
-
-			return $entity;
+			return Entitizer\Dataset::get($table, $data);
 		}
 
 		# Get definition

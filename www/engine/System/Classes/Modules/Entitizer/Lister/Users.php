@@ -30,7 +30,7 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Entity\User $user) {
+		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\User $user) {
 
 			$view->class = (($user->rank === RANK_GUEST) ? 'inactive' : '');
 

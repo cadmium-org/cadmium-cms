@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Listview {
 
 	class Widgets extends Entitizer\Utils\Listview {
 
-		use Entitizer\Common\Widget, Entitizer\View\Widgets;
+		use Entitizer\Common\Widget, Entitizer\Collection\Widgets;
 	}
 }

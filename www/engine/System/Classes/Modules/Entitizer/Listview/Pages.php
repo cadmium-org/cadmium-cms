@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Listview {
 
 	class Pages extends Entitizer\Utils\Listview {
 
-		use Entitizer\Common\Page, Entitizer\View\Pages;
+		use Entitizer\Common\Page, Entitizer\Collection\Pages;
 	}
 }

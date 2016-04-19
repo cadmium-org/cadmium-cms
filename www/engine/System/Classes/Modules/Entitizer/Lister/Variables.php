@@ -30,7 +30,7 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Entity\Variable $variable) {
+		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\Variable $variable) {
 
 			$view->class = '';
 

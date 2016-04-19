@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Listview {
 
 	class Menuitems extends Entitizer\Utils\Listview {
 
-		use Entitizer\Common\Menuitem, Entitizer\View\Menuitems;
+		use Entitizer\Common\Menuitem, Entitizer\Collection\Menuitems;
 	}
 }

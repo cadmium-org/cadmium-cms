@@ -14,11 +14,11 @@ namespace Modules\Entitizer\Utils {
 
 			if (!isset(static::$classes[$table])) throw new Exception\General(static::$error_message);
 
-			if (isset(static::$cache[$table])) return static::$cache[$table];
+			if (!isset(static::$cache[$table])) static::$cache[$table] = new static::$classes[$table];
 
 			# ------------------------
 
-			return (static::$cache[$table] = new static::$classes[$table]);
+			return static::$cache[$table];
 		}
 	}
 }

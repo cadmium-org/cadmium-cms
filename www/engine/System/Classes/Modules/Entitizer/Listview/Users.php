@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Listview {
 
 	class Users extends Entitizer\Utils\Listview {
 
-		use Entitizer\Common\User, Entitizer\View\Users;
+		use Entitizer\Common\User, Entitizer\Collection\Users;
 	}
 }

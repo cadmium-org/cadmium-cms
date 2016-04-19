@@ -4,7 +4,7 @@ namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, DB;
 
-	abstract class Listview extends View {
+	abstract class Listview extends Collection {
 
 		# Get default select query
 
@@ -86,11 +86,11 @@ namespace Modules\Entitizer\Utils {
 
 			while (null !== ($data = DB::last()->row())) {
 
-				$entity = Entitizer::create(static::$table, $data);
+				$dataset = Entitizer::dataset(static::$table, $data);
 
-				$items['list'][$entity->id] = ['entity' => $entity];
+				$items['list'][$dataset->id]['dataset'] = $dataset;
 
-				if (null !== $parent_id) $items['list'][$entity->id]['children'] = intval($data['children']);
+				if (null !== $parent_id) $items['list'][$dataset->id]['children'] = intval($data['children']);
 			}
 
 			# Count total
@@ -128,14 +128,14 @@ namespace Modules\Entitizer\Utils {
 
 		public function items(array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
 
-			return $this->select(null, ...func_get_args());
+			return $this->select(null, $config, $order_by, $index, $display);
 		}
 
 		# Get items count
 
 		public function itemsCount(array $config = []) {
 
-			return $this->count(null, ...func_get_args());
+			return $this->count(null, $config);
 		}
 
 		# Get children
@@ -144,7 +144,7 @@ namespace Modules\Entitizer\Utils {
 
 			if (!static::$nesting) return false;
 
-			return $this->select(...func_get_args());
+			return $this->select($parent_id, $config, $order_by, $index, $display);
 		}
 
 		# Get children count
@@ -153,7 +153,7 @@ namespace Modules\Entitizer\Utils {
 
 			if (!static::$nesting) return false;
 
-			return $this->count(...func_get_args());
+			return $this->count($parent_id, $config);
 		}
 	}
 }

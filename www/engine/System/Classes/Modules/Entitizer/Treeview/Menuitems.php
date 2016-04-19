@@ -6,6 +6,6 @@ namespace Modules\Entitizer\Treeview {
 
 	class Menuitems extends Entitizer\Utils\Treeview {
 
-		use Entitizer\Common\Menuitem, Entitizer\View\Menuitems;
+		use Entitizer\Common\Menuitem, Entitizer\Collection\Menuitems;
 	}
 }

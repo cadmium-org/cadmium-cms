@@ -2,53 +2,17 @@
 
 namespace Modules\Entitizer\Entity {
 
-	use Modules\Auth, Modules\Entitizer, Modules\Settings, DB;
+	use Modules\Auth, Modules\Entitizer, DB;
 
 	class Page extends Entitizer\Utils\Entity {
 
 		use Entitizer\Common\Page;
 
-		# Check if active
-
-		private function getActive() {
-
-			return (($this->visibility === VISIBILITY_PUBLISHED) && !$this->locked);
-		}
-
-		# Get link
-
-		private function getLink() {
-
-			if ('' === $this->data['slug']) return '';
-
-			return (INSTALL_PATH . '/' . $this->data['slug']);
-		}
-
-		# Get canonical
-
-		private function getCanonical() {
-
-			if ('' === $this->data['slug']) return '';
-
-			return (Settings::get('system_url') . (($this->id !== 1) ? ('/' . $this->data['slug']) : ''));
-		}
-
-		# Implement entity
-
-		protected function implement() {
-
-			$this->data['active'] = $this->getActive();
-
-			$this->data['link'] = $this->getLink();
-
-			$this->data['canonical'] = $this->getCanonical();
-		}
-
 		# Init by slug
 
 		public function initBySlug(string $slug) {
 
-			if (!$this->modifiable || (0 !== $this->id)) return false;
+			if (0 !== $this->id) return false;
 
 			# Process value
 
@@ -74,7 +38,7 @@ namespace Modules\Entitizer\Entity {
 
 			# Select entity from DB
 
-			if (($this->error = !(DB::send($query) && DB::last()->status)) || (DB::last()->rows !== 1)) return false;
+			if (!(DB::send($query) && (DB::last()->rows === 1))) return false;
 
 			# ------------------------
 
@@ -85,7 +49,7 @@ namespace Modules\Entitizer\Entity {
 
 		public function updateSlugs() {
 
-			if (!$this->modifiable || (0 === $this->id)) return false;
+			if (0 === $this->id) return false;
 
 			# Send lock/update request
 

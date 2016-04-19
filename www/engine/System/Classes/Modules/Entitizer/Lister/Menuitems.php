@@ -37,7 +37,7 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Entity\Menuitem $menuitem, int $children = 0) {
+		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\Menuitem $menuitem, int $children = 0) {
 
 			$view->class = (!$menuitem->active ? 'inactive' : '');
 

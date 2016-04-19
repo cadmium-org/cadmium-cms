@@ -7,9 +7,5 @@ namespace Modules\Entitizer\Entity\User {
 	class Secret extends Entitizer\Utils\Entity {
 
 		use Entitizer\Common\User\Secret;
-
-		# Implement entity
-
-		protected function implement() {}
 	}
 }

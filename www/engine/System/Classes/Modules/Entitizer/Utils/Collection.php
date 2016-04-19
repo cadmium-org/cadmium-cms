@@ -4,7 +4,7 @@ namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, Config;
 
-	abstract class View {
+	abstract class Collection {
 
 		protected $definition = null, $config = null;
 

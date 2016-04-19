@@ -6,9 +6,18 @@ namespace Modules\Entitizer\Utils {
 
 	abstract class Entity extends Cache {
 
-		use Entity\Modify, Entity\Remove, Entity\View;
+		use Entity\Collection, Entity\Modify;
 
-		protected $definition = null, $error = false, $modifiable = false, $data = [];
+		protected $definition = null, $dataset = null;
+
+		# Select default entity from DB
+
+		private function selectDefault(string $name, string $value) {
+
+			$selection = array_keys($this->definition->params());
+
+			return DB::select(static::$table, $selection, [$name => $value], null, 1);
+		}
 
 		# Select nesting entity from DB
 
@@ -39,15 +48,18 @@ namespace Modules\Entitizer\Utils {
 
 		protected function setData(array $data) {
 
-			# Set data
+			$id = $this->definition->param('id')->cast($data['id']);
 
-			$this->data = $this->definition->cast($data, true);
+			# Import data
 
-			if (static::$nesting) $this->data['parent_id'] = intval($data['parent_id'] ?? 0);
+			if (isset(self::$cache[static::$table][$id])) {
 
-			# Implement entity
+				$this->dataset = self::$cache[static::$table][$id]->dataset;
+			}
 
-			$this->implement();
+			# Update data
+
+			$this->dataset->update($data);
 
 			# Cache entity
 
@@ -60,34 +72,22 @@ namespace Modules\Entitizer\Utils {
 
 		# Constructor
 
-		public function __construct(array $data = []) {
+		public function __construct() {
 
 			# Get definition
 
 			$this->definition = Entitizer::definition(static::$table);
 
-			# Check data
-
-			if ([] === $data) $this->modifiable = true;
-
 			# Preset data
 
-			$this->data = $this->definition->cast($data, true);
-
-			# Preset parent id
-
-			if (static::$nesting) $this->data['parent_id'] = 0;
-
-			# Implement entity
-
-			$this->implement();
+			$this->dataset = Entitizer::dataset(static::$table);
 		}
 
 		# Init entity
 
 		public function init($value, string $name = 'id') {
 
-			if (!$this->modifiable || (0 !== $this->id)) return false;
+			if (0 !== $this->id) return false;
 
 			# Get initiation index
 
@@ -101,25 +101,16 @@ namespace Modules\Entitizer\Utils {
 
 			# Select entity from DB
 
-			if (static::$nesting) $this->selectNesting($name, $value); else {
-
-				$selection = array_keys($this->definition->params());
-
-				DB::select(static::$table, $selection, [$name => $value], null, 1);
-			}
-
-			if (($this->error = !(DB::last() && DB::last()->status)) || (DB::last()->rows !== 1)) return false;
+			if (!static::$nesting) $this->selectDefault($name, $value); else $this->selectNesting($name, $value);
 
 			# ------------------------
 
-			return $this->setData(DB::last()->row());
+			return ((DB::last() && (DB::last()->rows === 1)) ? $this->setData(DB::last()->row()) : false);
 		}
 
 		# Check if unique param value exists
 
 		public function check($value, string $name) {
-
-			if (!$this->modifiable) return false;
 
 			# Get initiation index
 
@@ -142,39 +133,32 @@ namespace Modules\Entitizer\Utils {
 			return ((DB::last() && DB::last()->status) ? DB::last()->rows : false);
 		}
 
-		# Check for init errors
+		# Return definition
 
-		public function error() {
+		public function definition() {
 
-			return $this->error;
-		}
-
-		# Check if modifiable
-
-		public function modifiable() {
-
-			return $this->modifiable;
+			return $this->definition;
 		}
 
 		# Return data
 
 		public function data() {
 
-			return $this->data;
+			return $this->dataset->data();
 		}
 
 		# Return param value
 
 		public function get(string $name) {
 
-			return ($this->data[$name] ?? null);
+			return $this->dataset->get($name);
 		}
 
 		# Getter
 
 		public function __get(string $name) {
 
-			return $this->get($name);
+			return $this->dataset->get($name);
 		}
 	}
 }

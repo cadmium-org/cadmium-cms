@@ -7,9 +7,5 @@ namespace Modules\Entitizer\Entity {
 	class Variable extends Entitizer\Utils\Entity {
 
 		use Entitizer\Common\Variable;
-
-		# Implement entity
-
-		protected function implement() {}
 	}
 }

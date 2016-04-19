@@ -31,7 +31,7 @@ namespace Handlers\Tools {
 
 			# ------------------------
 
-			while (null !== ($page = DB::last()->row())) yield Entitizer::create(TABLE_PAGES, $page);
+			while (null !== ($page = DB::last()->row())) yield Entitizer::dataset(TABLE_PAGES, $page);
 		}
 
 		# Handle request
