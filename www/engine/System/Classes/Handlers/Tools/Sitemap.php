@@ -23,7 +23,7 @@ namespace Handlers\Tools {
 
 		private function getPages() {
 
-			$selection = ['slug', 'time_modified'];
+			$selection = ['id', 'slug', 'time_modified'];
 
 			$condition = ['visibility' => VISIBILITY_PUBLISHED, 'access' => ACCESS_PUBLIC, 'locked' => 0];
 
