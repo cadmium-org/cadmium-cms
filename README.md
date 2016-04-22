@@ -12,8 +12,8 @@ Cadmium CMS is PHP-based content management system for creating shiny and respon
  - Simple and lightweight.
  - Easy to install and use.
  - Fully mobile ready.
- - Unlimited pages nesting.
- - Unlimited users.
+ - Multi-level pages nesting.
+ - Multi-user.
  - SEO friendly.
  - Open-source.
 
