@@ -22,9 +22,13 @@ namespace Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($password_new = Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
+			if (false === ($password_new = Validate::userPassword($password_new)))
 
-			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
+				return ['password_new', 'USER_ERROR_PASSWORD_NEW_INVALID'];
+
+			if (0 !== strcmp($password_new, $password_retype))
+
+				return ['password_retype', 'USER_ERROR_PASSWORD_MISMATCH'];
 
 			# Encode password
 
@@ -38,7 +42,7 @@ namespace Modules\Auth\Controller {
 
 			# Remove secret
 
-			Entitizer::get(ENTITY_TYPE_USER_SECRET, Auth::user()->id)->remove();
+			Entitizer::get(TABLE_USERS_SECRETS, Auth::user()->id)->remove();
 
 			# ------------------------
 

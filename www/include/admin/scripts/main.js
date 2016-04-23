@@ -11,6 +11,8 @@ var Main = {
 
 		$('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
 
+		$('.fixed.button').popup({ 'position': 'left center', 'variation': 'inverted' }).transition('jiggle');
+
 		var items = $('.ui.form').find('input, textarea, select');
 
 		items.filter('textarea').css({ 'height' : '6em', 'min-height' : '6em' });
@@ -69,7 +71,7 @@ var Main = {
 
 				else return Main.error(lang['AJAX_ERROR_STATUS']);
 
-				if (parseInt(data.status) != 1) {
+				if (!data.status) {
 
 					if (typeof data.error != 'undefined') Main.error(data.error);
 
@@ -133,7 +135,7 @@ var Main = {
 
 	'Pages' : {
 
-		'locked' : false, 'sender' : false, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [],
 
 		'init' : function() {
 
@@ -173,80 +175,113 @@ var Main = {
 
 				this.list[this.sender].remove.removeClass('loading');
 
-				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+				if (data.status) this.list[this.sender].row.remove();
 			}
 
 			this.sender = false; this.locked = false; return null;
 		}
 	},
 
-	'PagesLoader' : {
+	'PagesSelector' : {
 
-		'locked' : false, 'id' : false, 'parent_id' : false, 'parent_title' : false,
+		'locked' : false, 'id' : null, 'parent_id' : null, 'super_parent_id' : null,
 
-		'menuitem_text' : false, 'menuitem_slug' : false,
+		'menuitem_text' : null, 'menuitem_slug' : null,
+
+		'button_load' : null, 'button_reset' : null,
 
 		'init' : function() {
 
 			this.id = parseInt($('input:hidden#page-id[name=id]').val());
 
-			this.parent_id = $('input#page-parent-id');
+			this.parent_id = $('input#page-parent-id'); this.super_parent_id = $('input#page-super-parent-id');
 
-			this.parent_title = $('input#page-parent-title');
+			this.menuitem_text = $('input#menuitem-text'); this.menuitem_slug = $('input#menuitem-slug');
 
-			this.menuitem_text = $('input#menuitem-text');
+			this.button_load = $('#pages-selector-load'); this.button_reset = $('#pages-selector-reset');
+		},
 
-			this.menuitem_slug = $('input#menuitem-slug');
+		'set' : function(title, slug) {
+
+			this.menuitem_text.val(title); this.menuitem_slug.val(slug);
+		},
+
+		'submit' : function(parent_id) {
+
+			if (this.locked) return;
+
+			this.locked = true; this.button_load.addClass('loading'); this.button_reset.addClass('disabled');
+
+			var data = { 'action' : 'move', 'parent_id': parent_id };
+
+			Main.ajax(this, (install_path + '/admin/content/pages/edit?id=' + this.id), data);
+		},
+
+		'handle' : function(data) {
+
+			if (data.status) return window.location.replace(install_path + '/admin/content/pages/edit?id=' + this.id);
+
+			this.button_load.removeClass('loading'); this.button_reset.removeClass('disabled');
+
+			this.locked = false; return null;
+		}
+	},
+
+	'PagesLoader' : {
+
+		'locked' : false, 'modal' : null,
+
+		'init' : function() {
+
+			this.modal = $('#modal-lister');
 		},
 
 		'load' : function(parent_id) {
 
 			if (this.locked) return;
 
-			parent_id = ((typeof parent_id != 'undefined') ? parseInt(parent_id) : this.parent_id);
+			var selector = Main.PagesSelector;
 
-			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
+			parent_id = ((typeof parent_id != 'undefined') ? parseInt(parent_id) : parseInt(selector.super_parent_id.val()));
 
-			Main.ajax(this, (install_path + '/admin/content/pages?parent_id=' + parent_id), { 'id' : this.id });
+			this.locked = true; this.modal.children('.segment').addClass('loading');
+
+			Main.ajax(this, (install_path + '/admin/content/pages?parent_id=' + parent_id), { 'id' : selector.id });
 		},
 
 		'handle' : function(data) {
 
-			if ((parseInt(data.status) == 1) && (typeof data.contents != 'undefined')) {
+			if (data.status && (typeof data.contents != 'undefined')) {
 
-				var handler = this, modal = $('#modal-lister'), content = modal.children('.segment');
+				var selector = Main.PagesSelector, handler = this, content = this.modal.children('.segment');
 
 				content.html(data.contents).find('table tbody tr').each(function() {
 
 					var row = $(this), id = row.data('id'), title = row.data('title'), slug = row.data('slug')
 
-					var selector = row.find('.select.button');
+					var button = row.find('.select.button');
 
-					if (id == handler.parent_id.val()) selector.addClass('positive');
+					if (id == selector.parent_id.val()) button.addClass('positive');
 
-					selector.click(function() { handler.select(id, title, slug); });
+					button.click(function() {
+
+						if (selector.id) selector.submit(id); else selector.set(title, slug);
+
+						handler.modal.modal('hide');
+					});
 
 				}).find('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
 
-				content.removeClass('loading'); modal.modal('show');
+				content.removeClass('loading'); this.modal.modal('show');
 			}
 
 			this.locked = false; return null;
 		},
-
-		'select' : function(parent_id, title, slug) {
-
-			this.parent_id.val(parent_id); this.parent_title.val(title);
-
-			this.menuitem_text.val(title); this.menuitem_slug.val(slug);
-
-			$('#modal-lister').modal('hide');
-		}
 	},
 
 	'Menuitems' : {
 
-		'list' : [], 'locked' : false, 'sender' : false,
+		'locked' : false, 'sender' : null, 'list' : [],
 
 		'init' : function() {
 
@@ -286,72 +321,99 @@ var Main = {
 
 				this.list[this.sender].remove.removeClass('loading');
 
-				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+				if (data.status) this.list[this.sender].row.remove();
 			}
 
 			this.sender = false; this.locked = false; return null;
 		}
 	},
 
-	'MenuitemsLoader' : {
+	'MenuitemsSelector' : {
 
-		'locked' : false, 'id' : false, 'parent_id' : false, 'parent_text' : false,
+		'locked' : false, 'id' : null, 'parent_id' : null, 'super_parent_id' : null,
+
+		'button_load' : null, 'button_reset' : null,
 
 		'init' : function() {
 
 			this.id = parseInt($('input:hidden#menuitem-id[name=id]').val());
 
-			this.parent_id = $('input#menuitem-parent-id');
+			this.parent_id = $('input#menuitem-parent-id'); this.super_parent_id = $('input#menuitem-super-parent-id');
 
-			this.parent_text = $('input#menuitem-parent-text');
+			this.button_load = $('#menuitems-selector-load'); this.button_reset = $('#menuitems-selector-reset');
+		},
+
+		'submit' : function(parent_id) {
+
+			if (this.locked) return;
+
+			this.locked = true; this.button_load.addClass('loading'); this.button_reset.addClass('disabled');
+
+			var data = { 'action' : 'move', 'parent_id': parent_id };
+
+			Main.ajax(this, (install_path + '/admin/content/menuitems/edit?id=' + this.id), data);
+		},
+
+		'handle' : function(data) {
+
+			if (data.status) return window.location.replace(install_path + '/admin/content/menuitems/edit?id=' + this.id);
+
+			this.button_load.removeClass('loading'); this.button_reset.removeClass('disabled');
+
+			this.locked = false; return null;
+		}
+	},
+
+	'MenuitemsLoader' : {
+
+		'locked' : false, 'modal' : null,
+
+		'init' : function() {
+
+			this.modal = $('#modal-lister');
 		},
 
 		'load' : function(parent_id) {
 
 			if (this.locked) return;
 
-			parent_id = ((typeof parent_id != 'undefined') ? parseInt(parent_id) : this.parent_id);
+			var selector = Main.MenuitemsSelector;
 
-			this.locked = true; $('#modal-lister').children('.segment').addClass('loading');
+			parent_id = ((typeof parent_id != 'undefined') ? parseInt(parent_id) : parseInt(selector.super_parent_id.val()));
 
-			Main.ajax(this, (install_path + '/admin/content/menuitems?parent_id=' + parent_id), { 'id' : this.id });
+			this.locked = true; this.modal.children('.segment').addClass('loading');
+
+			Main.ajax(this, (install_path + '/admin/content/menuitems?parent_id=' + parent_id), { 'id' : selector.id });
 		},
 
 		'handle' : function(data) {
 
-			if ((parseInt(data.status) == 1) && (typeof data.contents != 'undefined')) {
+			if (data.status && (typeof data.contents != 'undefined')) {
 
-				var handler = this, modal = $('#modal-lister'), content = modal.children('.segment');
+				var selector = Main.MenuitemsSelector, handler = this, content = this.modal.children('.segment');
 
 				content.html(data.contents).find('table tbody tr').each(function() {
 
 					var row = $(this), id = row.data('id'), text = row.data('text');
 
-					var selector = row.find('.select.button');
+					var button = row.find('.select.button');
 
-					if (id == handler.parent_id.val()) selector.addClass('positive');
+					if (id == selector.parent_id.val()) button.addClass('positive');
 
-					selector.click(function() { handler.select(id, text); });
+					button.click(function() { selector.submit(id); handler.modal.modal('hide'); });
 
 				}).find('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
 
-				content.removeClass('loading'); modal.modal('show');
+				content.removeClass('loading'); this.modal.modal('show');
 			}
 
 			this.locked = false; return null;
-		},
-
-		'select' : function(parent_id, text) {
-
-			this.parent_id.val(parent_id); this.parent_text.val(text);
-
-			$('#modal-lister').modal('hide');
 		}
 	},
 
 	'Variables' : {
 
-		'locked' : false, 'sender' : false, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [],
 
 		'init' : function() {
 
@@ -400,7 +462,7 @@ var Main = {
 
 				this.list[this.sender].remove.removeClass('loading');
 
-				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+				if (data.status) this.list[this.sender].row.remove();
 			}
 
 			this.sender = false; this.locked = false; return null;
@@ -409,7 +471,7 @@ var Main = {
 
 	'Widgets' : {
 
-		'locked' : false, 'sender' : false, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [],
 
 		'init' : function() {
 
@@ -458,7 +520,7 @@ var Main = {
 
 				this.list[this.sender].remove.removeClass('loading');
 
-				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+				if (data.status) this.list[this.sender].row.remove();
 			}
 
 			this.sender = false; this.locked = false; return null;
@@ -467,11 +529,11 @@ var Main = {
 
 	'Filemanager' : {
 
-		'locked' : false, 'sender' : false, 'list' : [], 'parent' : false, 'link' : false,
+		'locked' : false, 'sender' : null, 'list' : [], 'parent' : '', 'link' : '',
 
-		'upload_form' : false, 'upload_select' : false, 'upload_submit' : false,
+		'upload_form' : null, 'upload_select' : null, 'upload_submit' : null,
 
-		'button_create' : false, 'button_reload' : false, 'modal' : false, 'submitted' : false,
+		'button_create' : null, 'button_reload' : null, 'modal_create' : null, 'submitted' : false,
 
 		'init' : function() {
 
@@ -598,7 +660,7 @@ var Main = {
 
 				this.list[this.sender].remove.removeClass('loading');
 
-				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+				if (data.status) this.list[this.sender].row.remove();
 			}
 
 			this.sender = false; this.enableControls(); return null;
@@ -607,7 +669,7 @@ var Main = {
 
 	'Languages' : {
 
-		'list' : [], 'locked' : false, 'sender' : false, 'section' : false,
+		'locked' : false, 'sender' : null, 'list' : [], 'section' : '',
 
 		'init' : function() {
 
@@ -644,7 +706,7 @@ var Main = {
 
 				this.list[this.sender].checker.removeClass('loading');
 
-				if (parseInt(data.status) == 1) {
+				if (data.status) {
 
 					for (var index in this.list) {
 
@@ -663,7 +725,7 @@ var Main = {
 
 	'Templates' : {
 
-		'list' : [], 'locked' : false, 'sender' : false, 'section' : false,
+		'locked' : false, 'sender' : null, 'list' : [], 'section' : '',
 
 		'init' : function() {
 
@@ -700,7 +762,7 @@ var Main = {
 
 				this.list[this.sender].checker.removeClass('loading');
 
-				if (parseInt(data.status) == 1) {
+				if (data.status) {
 
 					for (var index in this.list) {
 
@@ -719,7 +781,7 @@ var Main = {
 
 	'Users' : {
 
-		'list' : [], 'locked' : false, 'sender' : false,
+		'locked' : false, 'sender' : null, 'list' : [],
 
 		'init' : function() {
 
@@ -759,7 +821,7 @@ var Main = {
 
 				this.list[this.sender].remove.removeClass('loading');
 
-				if (parseInt(data.status) == 1) this.list[this.sender].row.remove();
+				if (data.status) this.list[this.sender].row.remove();
 			}
 
 			this.sender = false; this.locked = false; return null;

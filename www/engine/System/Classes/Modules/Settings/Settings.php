@@ -2,7 +2,7 @@
 
 namespace Modules {
 
-	use Utils\Lister, Utils\Validate, Explorer, Geo\Timezone, Request;
+	use Utils\Range, Utils\Validate, Explorer, Geo\Timezone, Request;
 
 	abstract class Settings {
 
@@ -112,7 +112,7 @@ namespace Modules {
 
 			else if ($name === 'site_status') {
 
-				if (false === ($value = Lister\Status::validate($value))) return false;
+				if (false === ($value = Range\Status::validate($value))) return false;
 			}
 
 			# Validate site slogan/description/keywords

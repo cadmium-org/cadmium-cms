@@ -2,11 +2,9 @@
 
 namespace Modules\Entitizer {
 
-	use Exception;
+	abstract class Definition extends Utils\Factory {
 
-	abstract class Definition {
-
-		private static $error_message = 'Entity definition does not exist';
+		protected static $error_message = 'Definition class for given table does not exist';
 
 		# Objects cache
 
@@ -16,26 +14,13 @@ namespace Modules\Entitizer {
 
 		protected static $classes = [
 
-			ENTITY_TYPE_PAGE                => 'Modules\Entitizer\Definition\Page',
-			ENTITY_TYPE_MENUITEM            => 'Modules\Entitizer\Definition\Menuitem',
-			ENTITY_TYPE_VARIABLE            => 'Modules\Entitizer\Definition\Variable',
-			ENTITY_TYPE_WIDGET              => 'Modules\Entitizer\Definition\Widget',
-			ENTITY_TYPE_USER                => 'Modules\Entitizer\Definition\User',
-			ENTITY_TYPE_USER_SECRET         => 'Modules\Entitizer\Definition\User\Secret',
-			ENTITY_TYPE_USER_SESSION        => 'Modules\Entitizer\Definition\User\Session'
+			TABLE_PAGES             => 'Modules\Entitizer\Definition\Page',
+			TABLE_MENU              => 'Modules\Entitizer\Definition\Menuitem',
+			TABLE_VARIABLES         => 'Modules\Entitizer\Definition\Variable',
+			TABLE_WIDGETS           => 'Modules\Entitizer\Definition\Widget',
+			TABLE_USERS             => 'Modules\Entitizer\Definition\User',
+			TABLE_USERS_SECRETS     => 'Modules\Entitizer\Definition\User\Secret',
+			TABLE_USERS_SESSIONS    => 'Modules\Entitizer\Definition\User\Session'
 		];
-
-		# Get definition
-
-		public static function get(string $type) {
-
-			if (!isset(self::$classes[$type])) throw new Exception\General(self::$error_message);
-
-			$cached = isset(self::$cache[$type]);
-
-			# ------------------------
-
-			return (!$cached ? (self::$cache[$type] = new self::$classes[$type]) : self::$cache[$type]);
-		}
 	}
 }

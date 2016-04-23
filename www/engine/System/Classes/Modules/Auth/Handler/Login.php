@@ -27,16 +27,15 @@ namespace Modules\Auth\Handler {
 
 			if (Request::get('submitted') === 'reset') {
 
-				Messages::success(Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
+				Messages::set('success', Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
 
 			} else if (Request::get('submitted') === 'recover') {
 
-				Messages::success(Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
+				Messages::set('success', Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
 
 			} else if (Request::get('submitted') === 'register') {
 
-				Messages::success(Language::get('USER_SUCCESS_REGISTER_TEXT'), Language::get('USER_SUCCESS_REGISTER'));
-
+				Messages::set('success', Language::get('USER_SUCCESS_REGISTER_TEXT'), Language::get('USER_SUCCESS_REGISTER'));
 			}
 
 			# ------------------------

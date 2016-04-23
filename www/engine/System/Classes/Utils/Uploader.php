@@ -51,7 +51,9 @@ namespace Utils {
 
 			$extensions = ['php', 'phtml', 'php3', 'php4', 'php5', 'phps'];
 
-			if (in_array(Explorer::extension($file['name'], false), $extensions)) return 'UPLOADER_ERROR_TYPE';
+			$extension = strtolower(Explorer::extension($file['name'], false));
+
+			if (in_array($extension, $extensions, true)) return 'UPLOADER_ERROR_TYPE';
 
 			# Check target directory
 
@@ -78,7 +80,7 @@ namespace Utils {
 
 			$result = self::save($name, $dir_name);
 
-			if (is_string($result)) { Messages::error(Language::get($result)); return false; }
+			if (is_string($result)) { Messages::set('error', Language::get($result)); return false; }
 
 			# ------------------------
 

@@ -5,9 +5,10 @@ return [
 	# Errors
 
 	'PAGE_ERROR_MODIFY'                             => 'Error saving page data',
+	'PAGE_ERROR_MOVE'                               => 'Error moving page',
 	'PAGE_ERROR_REMOVE'                             => 'Error removing page',
 
-	'PAGE_ERROR_NAME_DUPLICATE'                     => 'Page URL is already in use',
+	'PAGE_WARNING_NAME_DUPLICATE'                   => 'Specified URL is not unique. The page will not appear on site',
 
 	# Success messages
 

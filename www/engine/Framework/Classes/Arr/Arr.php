@@ -55,11 +55,11 @@ namespace {
 				return ((is_array($element) && isset($element[$sub_key])) ? $element[$sub_key] : false);
 			};
 
-			$column = array_map($select_key, $array);
+			$result = []; $column = array_map($select_key, $array);
 
 			if (!$descending) asort($column); else arsort($column);
 
-			$result = []; foreach (array_keys($column) as $key) $result[$key] = $array[$key];
+			foreach (array_keys($column) as $key) $result[$key] = $array[$key];
 
 			# ------------------------
 

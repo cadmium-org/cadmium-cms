@@ -2,7 +2,7 @@
 
 namespace Modules\Settings\Form {
 
-	use Modules\Settings, Utils\Form, Utils\Lister, Geo\Timezone;
+	use Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
 
 	class General extends Form {
 
@@ -18,7 +18,7 @@ namespace Modules\Settings\Form {
 
 			$this->addText('site_slogan', Settings::get('site_slogan'), FORM_FIELD_TEXT, CONFIG_SITE_SLOGAN_MAX_LENGTH);
 
-			$this->addSelect('site_status', Settings::get('site_status'), Lister\Status::list());
+			$this->addSelect('site_status', Settings::get('site_status'), Range\Status::array());
 
 			$this->addText('site_description', Settings::get('site_description'), FORM_FIELD_TEXTAREA, CONFIG_SITE_DESCRIPTION_MAX_LENGTH);
 
@@ -30,7 +30,7 @@ namespace Modules\Settings\Form {
 
 			$this->addText('system_email', Settings::get('system_email'), FORM_FIELD_TEXT, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, ['required' => true]);
 
-			$this->addSelect('system_timezone', Settings::get('system_timezone'), Timezone::list(), null, ['search' => true]);
+			$this->addSelect('system_timezone', Settings::get('system_timezone'), Timezone::array(), null, ['search' => true]);
 
 			# Add other fields
 

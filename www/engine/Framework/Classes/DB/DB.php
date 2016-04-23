@@ -52,16 +52,16 @@ namespace {
 
 		public static function select(string $table, $selection, $condition = null, $order = null, int $limit = 0) {
 
-			$query = new DB\Query\Select($table, $selection, $condition, $order, $limit);
+			$query = new DB\Query\Select(...func_get_args());
 
 			return self::send($query->query());
 		}
 
 		# Send insert query
 
-		public static function insert(string $table, array $dataset, bool $multiple = false) {
+		public static function insert(string $table, array $dataset, bool $multiple = false, bool $ignore = false) {
 
-			$query = new DB\Query\Insert($table, $dataset, $multiple);
+			$query = new DB\Query\Insert(...func_get_args());
 
 			return self::send($query->query());
 		}
@@ -70,7 +70,7 @@ namespace {
 
 		public static function update(string $table, array $dataset, $condition = null) {
 
-			$query = new DB\Query\Update($table, $dataset, $condition);
+			$query = new DB\Query\Update(...func_get_args());
 
 			return self::send($query->query());
 		}
@@ -79,7 +79,7 @@ namespace {
 
 		public static function delete(string $table, $condition = null) {
 
-			$query = new DB\Query\Delete($table, $condition);
+			$query = new DB\Query\Delete(...func_get_args());
 
 			return self::send($query->query());
 		}

@@ -6,60 +6,31 @@ namespace Utils {
 
 	abstract class Messages {
 
-		private static $messages = [];
+		protected static $types = ['info', 'warning', 'error', 'success'];
 
-		# Set message
-
-		private static function setMessage(string $type, string $text, string $header = null) {
-
-			if (('' === $text) || isset(self::$messages[$type])) return;
-
-			self::$messages[$type] = ['text' => $text, 'header' => null];
-
-			if ((null !== $header) && ('' !== $header)) self::$messages[$type]['header'] = $header;
-		}
+		protected static $items = [];
 
 		# Init messages
 
 		public static function init() {
 
-			self::$messages = [];
+			static::$items = [];
 		}
 
-		# Set info message
+		# Set message
 
-		public static function info(string $text = null, string $header = null) {
+		public static function set(string $type, string $text, string $title = null) {
 
-			if (null === $text) return (self::$messages['info'] ?? false);
+			if (!in_array($type, static::$types, true) || isset(static::$items[$type]) || ('' === $text)) return;
 
-			self::setMessage('info', $text, $header);
+			static::$items[$type] = ['text' => $text, 'title' => (('' !== $title) ? $title : null)];
 		}
 
-		# Set warning message
+		# Get message
 
-		public static function warning(string $text = null, string $header = null) {
+		public static function get(string $type) {
 
-			if (null === $text) return (self::$messages['warning'] ?? false);
-
-			self::setMessage('warning', $text, $header);
-		}
-
-		# Set error message
-
-		public static function error(string $text = null, string $header = null) {
-
-			if (null === $text) return (self::$messages['error'] ?? false);
-
-			self::setMessage('error', $text, $header);
-		}
-
-		# Set success message
-
-		public static function success(string $text = null, string $header = null) {
-
-			if (null === $text) return (self::$messages['success'] ?? false);
-
-			self::setMessage('success', $text, $header);
+			return (static::$items[$type] ?? false);
 		}
 
 		# Get block
@@ -68,13 +39,13 @@ namespace Utils {
 
 			$messages = Template::group();
 
-			foreach (self::$messages as $type => $message) {
+			foreach (static::$items as $type => $item) {
 
 				$messages->add($block = View::get('Blocks\Utils\Message'));
 
-				$block->type = $type; $block->text = Template::block($message['text']); $header = $block->block('header');
+				$block->type = $type; $block->text = Template::block($item['text']);
 
-				if (isset($message['header'])) $header->text = $message['header']; else $header->disable();
+				if (isset($item['title'])) $block->block('title')->set('text', $item['title'])->enable();
 			}
 
 			# ------------------------

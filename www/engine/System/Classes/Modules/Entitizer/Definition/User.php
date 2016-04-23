@@ -14,24 +14,27 @@ namespace Modules\Entitizer\Definition {
 
 			# Add params
 
-			$this->addInteger       ('rank',            true, 1, RANK_USER, true, false);
-			$this->addTextual       ('name',            true, 16, false, true, true);
-			$this->addTextual       ('email',           true, 128, false, true, true);
-			$this->addTextual       ('auth_key',        true, 40, true, false, false);
-			$this->addTextual       ('password',        true, 40, true, false, false);
-			$this->addTextual       ('first_name',      true, 255, false, false, false);
-			$this->addTextual       ('last_name',       true, 255, false, false, false);
-			$this->addInteger       ('sex',             true, 1, SEX_NOT_SELECTED, false, false);
-			$this->addTextual       ('city',            true, 255, false, false, false);
-			$this->addTextual       ('country',         true, 2, false, false, false);
-			$this->addTextual       ('timezone',        true, 40, false, false, false);
-			$this->addInteger       ('time_registered', false, 10, 0, true, false);
-			$this->addInteger       ('time_logged',     false, 10, 0, true, false);
+			$this->params->integer      ('rank',                true, 1, true, RANK_GUEST);
+			$this->params->textual      ('name',                true, 16, false, '');
+			$this->params->textual      ('email',               true, 128, false, '');
+			$this->params->textual      ('auth_key',            true, 40, true, '');
+			$this->params->textual      ('password',            true, 40, true, '');
+			$this->params->textual      ('first_name',          true, 255, false, '');
+			$this->params->textual      ('last_name',           true, 255, false, '');
+			$this->params->integer      ('sex',                 true, 1, true, SEX_NOT_SELECTED);
+			$this->params->textual      ('city',                true, 255, false, '');
+			$this->params->textual      ('country',             true, 2, false, '');
+			$this->params->textual      ('timezone',            true, 40, false, '');
+			$this->params->integer      ('time_registered',     false, 10, true, 0);
+			$this->params->integer      ('time_logged',         false, 10, true, 0);
 
-			# Add orderers
+			# Add indexes
 
-			$this->addOrderer       ('rank', true);
-			$this->addOrderer       ('name');
+			$this->indexes->add         ('rank');
+			$this->indexes->add         ('name',                'UNIQUE');
+			$this->indexes->add         ('email',               'UNIQUE');
+			$this->indexes->add         ('time_registered');
+			$this->indexes->add         ('time_logged');
 		}
 	}
 }

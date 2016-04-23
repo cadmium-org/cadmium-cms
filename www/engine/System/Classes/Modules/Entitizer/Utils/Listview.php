@@ -2,58 +2,102 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
+	use Modules\Entitizer, DB;
 
-	abstract class Listview {
+	abstract class Listview extends Collection {
 
-		protected $index = 0, $parent = null, $items = [];
+		# Get default select query
 
-		# Process parent block
+		private function getDefaultSelectQuery(array $config, array $order_by, int $index, int $display) {
 
-		private function processParent(Template\Asset\Block $parent) {
+			return ("SELECT SQL_CALC_FOUND_ROWS " . $this->getSelection() . " ") .
 
-			# Set parent id
+			       ("FROM " . static::$table . " ent ") .
 
-			$parent->id = $this->parent->id;
+				   (('' !== ($condition = $this->getCondition($config))) ? ("WHERE " . $condition . " ") : "") .
 
-			# Set create button
+				   ("ORDER BY " . $this->getOrderBy($order_by) . " ") .
 
-			$parent->block('create')->id = $this->parent->id;
-
-			# Set edit button
-
-			if (0 === $this->parent->id) $parent->block('edit')->disable();
-
-			else $parent->block('edit')->id = $this->parent->id;
+			       (($index > 0) ? ("LIMIT " . ((($index - 1) * $display) . ", " . $display)) : "");
 		}
 
-		# Get items block
+		# Get nesting select query
 
-		private function getItemsBlock(bool $ajax = false) {
+		private function getNestingSelectQuery(int $parent_id, array $config, array $order_by, int $index, int $display) {
 
-			$items = Template::group();
+			return ("SELECT SQL_CALC_FOUND_ROWS " . $this->getSelection() . ", COUNT(chd.descendant) as children ") .
 
-			foreach ($this->items['list'] as $item) {
+			       ("FROM " . static::$table . " ent ") .
 
-				$items->add($view = View::get($ajax ? static::$view_ajax_item : static::$view_item));
+			       ("LEFT JOIN " . static::$table_relations . " chd ON chd.ancestor = ent.id AND chd.depth = 1 ") .
 
-				# Set data
+				   ("LEFT JOIN " . static::$table_relations . " rel ON rel.descendant = ent.id AND rel.depth = 1 ") .
 
-				$view->id = $item['entity']->id;
+				   ("WHERE COALESCE(rel.ancestor, 0) = " . $parent_id . " ") .
 
-				$view->set(static::$naming, $item['entity']->__get(static::$naming));
+				   (('' !== ($condition = $this->getCondition($config))) ? ("AND " . $condition . " ") : "") .
 
-				# Set remove button
+				   ("GROUP BY ent.id ORDER BY " . $this->getOrderBy($order_by) . " ") .
 
-				$super = (static::$super && ($item['entity']->id === 1));
+			       (($index > 0) ? ("LIMIT " . ((($index - 1) * $display) . ", " . $display)) : "");
+		}
 
-				$has_children = (static::$nesting && ($item['children'] > 0));
+		# Get default count query
 
-				$view->block('remove')->class = ((!$super && !$has_children) ? 'negative' : 'disabled');
+		private function getDefaultCountQuery(array $config) {
 
-				# Add item additional data
+			return ("SELECT COUNT(ent.id) as count FROM " . static::$table . " ent ") .
 
-				$this->processItem($view, $item['entity'], (static::$nesting ? $item['children'] : 0));
+			       (('' !== ($condition = $this->getCondition($config))) ? ("WHERE " . $condition) : "");
+		}
+
+		# Get nesting count query
+
+		private function getNestingCountQuery(int $parent_id, array $config) {
+
+			return ("SELECT COUNT(ent.id) as count FROM " . static::$table . " ent ") .
+
+			       ("LEFT JOIN " . static::$table_relations . " rel ON rel.descendant = ent.id AND rel.depth = 1 ") .
+
+			       ("WHERE COALESCE(rel.ancestor, 0) = " . $parent_id . " ") .
+
+			       (('' !== ($condition = $this->getCondition($config))) ? ("AND " . $condition) : "");
+		}
+
+		# Select entries from DB
+
+		private function select(int $parent_id = null, array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
+
+			if (!((null === $parent_id) || ($parent_id >= 0))) return false;
+
+			if (!(($index >= 0) && ($display >= 0))) return false;
+
+			# Select entities
+
+			$query = ((null === $parent_id) ? $this->getDefaultSelectQuery($config, $order_by, $index, $display) :
+
+				$this->getNestingSelectQuery($parent_id, $config, $order_by, $index, $display));
+
+			if (!(DB::send($query) && DB::last()->status)) return false;
+
+			# Process results
+
+			$items = ['list' => [], 'total' => 0];
+
+			while (null !== ($data = DB::last()->row())) {
+
+				$dataset = Entitizer::dataset(static::$table, $data);
+
+				$items['list'][$dataset->id]['dataset'] = $dataset;
+
+				if (null !== $parent_id) $items['list'][$dataset->id]['children'] = intval($data['children']);
+			}
+
+			# Count total
+
+			if (DB::send("SELECT FOUND_ROWS() as total") && (DB::last()->rows === 1)) {
+
+				$items['total'] = intval(DB::last()->row()['total']);
 			}
 
 			# ------------------------
@@ -61,94 +105,55 @@ namespace Modules\Entitizer\Utils {
 			return $items;
 		}
 
-		# Get pagination block
+		# Count entries in DB
 
-		private function getPaginationBlock() {
+		private function count(int $parent_id = null, array $config = []) {
 
-			$query = (static::$nesting ? ('?parent_id=' . $this->parent->id) : '');
+			if (!((null === $parent_id) || ($parent_id >= 0))) return false;
 
-			$url = new Url(INSTALL_PATH . static::$link . $query);
+			# Count entities
+
+			$query = ((null === $parent_id) ? $this->getDefaultCountQuery($config) :
+
+				$this->getNestingCountQuery($parent_id, $config));
+
+			if (!(DB::send($query) && DB::last()->status)) return false;
 
 			# ------------------------
 
-			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
+			return intval(DB::last()->row()['count']);
 		}
 
-		# Get contents
+		# Get items
 
-		private function getContents(bool $ajax = false) {
+		public function items(array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
 
-			$contents = View::get($ajax ? static::$view_ajax_main : static::$view_main);
-
-			# Set path
-
-			if (static::$nesting) $contents->path = $this->parent->path;
-
-			# Process parent block
-
-			if (static::$nesting && !$ajax) $this->processParent($contents->block('parent'));
-
-			# Set items
-
-			$items = $this->getItemsBlock($ajax);
-
-			if ($items->count() > 0) $contents->items = $items;
-
-			# Set pagination
-
-			if (!$ajax) $contents->pagination = $this->getPaginationBlock();
-
-			# Add additional data for specific entity
-
-			$this->processEntity($contents);
-
-			# ------------------------
-
-			return $contents;
+			return $this->select(null, $config, $order_by, $index, $display);
 		}
 
-		# Handle ajax request
+		# Get items count
 
-		private function handleAjax() {
+		public function itemsCount(array $config = []) {
 
-			$ajax = Ajax::response();
-
-			# Create parent entity
-
-			if (static::$nesting) $this->parent = Entitizer::get(static::$type, Number::format(Request::get('parent_id')));
-
-			# Get children items
-
-			$lister = new static::$lister(); $parent_id = (static::$nesting ? $this->parent->id : 0);
-
-			$this->items = $lister->select(0, 0, $parent_id, Number::format(Request::post('id')));
-
-			# ------------------------
-
-			return $ajax->set('contents', $this->getContents(true)->contents(true));
+			return $this->count(null, $config);
 		}
 
-		# Handle common request
+		# Get children
 
-		public function handle() {
+		public function children(int $parent_id = 0, array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
 
-			if (Request::isAjax()) return $this->handleAjax();
+			if (!static::$nesting) return false;
 
-			$this->index = Number::format(Request::get('index'), 1, 999999);
+			return $this->select($parent_id, $config, $order_by, $index, $display);
+		}
 
-			# Create parent entity
+		# Get children count
 
-			if (static::$nesting) $this->parent = Entitizer::get(static::$type, Number::format(Request::get('parent_id')));
+		public function childrenCount(int $parent_id = 0, array $config = []) {
 
-			# Get children items
+			if (!static::$nesting) return false;
 
-			$lister = new static::$lister(); $parent_id = (static::$nesting ? $this->parent->id : 0);
-
-			$this->items = $lister->select($this->index, static::$display, $parent_id);
-
-			# ------------------------
-
-			return $this->getContents();
+			return $this->count($parent_id, $config);
 		}
 	}
 }

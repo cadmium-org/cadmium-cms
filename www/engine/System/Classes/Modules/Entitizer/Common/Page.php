@@ -6,10 +6,8 @@ namespace Modules\Entitizer\Common {
 
 		# Common configuration
 
-		protected static $type = ENTITY_TYPE_PAGE, $table = TABLE_PAGES;
+		protected static $table = TABLE_PAGES, $table_relations = TABLE_PAGES_RELATIONS;
 
 		protected static $auto_increment = true, $nesting = true, $super = true;
-
-		protected static $extensions = [];
 	}
 }

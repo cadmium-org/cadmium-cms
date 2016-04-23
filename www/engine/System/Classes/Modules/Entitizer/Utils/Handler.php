@@ -2,11 +2,11 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Modules\Entitizer, Utils\Messages, Utils\View, Ajax, Language, Number, Request, Template;
+	use Modules\Entitizer, Utils\Popup, Utils\View, Ajax, Language, Number, Request, Template;
 
 	abstract class Handler {
 
-		protected $create = false, $parent = null, $entity = null, $form = null;
+		protected $create = false, $entity = null, $parent = null, $path = [], $form = null;
 
 		# Process parent block
 
@@ -18,18 +18,27 @@ namespace Modules\Entitizer\Utils {
 
 			# Set create button
 
-			$parent->block('create')->class = ($this->create ? 'active item' : 'item');
+			if (count($this->path) < CONFIG_ENTITIZER_MAX_DEPTH) {
 
-			$parent->block('create')->id = $this->parent->id;
+				$parent->block('create')->class = ($this->create ? 'active item' : 'item');
+
+				$parent->block('create')->id = $this->parent->id;
+
+			} else { $parent->block('create')->disable(); $parent->block('create_disabled')->enable(); }
 
 			# Set edit button
 
-			if (0 === $this->parent->id) $parent->block('edit')->disable(); else {
+			if (0 !== $this->parent->id) {
 
 				$parent->block('edit')->class = (!$this->create ? 'active item' : 'item');
 
 				$parent->block('edit')->id = $this->parent->id;
-			}
+
+			} else { $parent->block('edit')->disable(); $parent->block('edit_disabled')->enable(); }
+
+			# Add parent additional data
+
+			$this->processEntityParent($parent);
 		}
 
 		# Process selector block
@@ -38,9 +47,13 @@ namespace Modules\Entitizer\Utils {
 
 			if ($this->create) return $selector->disable();
 
-			$parent = Entitizer::get(static::$type, $this->entity->parent_id);
+			$selector->parent_id = $this->entity->parent_id;
 
-			$selector->set(static::$naming, $parent->__get(static::$naming));
+			$parent = Entitizer::get(static::$table, $this->entity->parent_id);
+
+			$selector->super_parent_id = $parent->parent_id;
+
+			$selector->set(static::$naming, $parent->get(static::$naming));
 		}
 
 		# Get contents
@@ -55,9 +68,13 @@ namespace Modules\Entitizer\Utils {
 
 			# Set path / title
 
-			if (static::$nesting) $contents->path = $this->parent->path;
+			if (static::$nesting) $contents->path = $this->path;
 
-			else $contents->title = ($this->create ? Language::get(static::$naming_new) : $this->entity->__get(static::$naming));
+			else $contents->title = ($this->create ? Language::get(static::$naming_new) : $this->entity->get(static::$naming));
+
+			# Process parent block
+
+			if (static::$nesting) $this->processParent($contents->block('parent'));
 
 			# Set link
 
@@ -66,10 +83,6 @@ namespace Modules\Entitizer\Utils {
 			if (static::$nesting) $contents->link = ($link . ($this->create ? 'create' : 'edit') . '?id=' . $this->parent->id);
 
 			else $contents->link = ($link . ($this->create ? 'create' : ('edit?id=' . $this->entity->id)));
-
-			# Process parent block
-
-			if (static::$nesting) $this->processParent($contents->block('parent'));
 
 			# Process selector block
 
@@ -96,11 +109,19 @@ namespace Modules\Entitizer\Utils {
 
 			# Create entity
 
-			$this->entity = Entitizer::get(static::$type, Number::format(Request::get('id')));
+			$id = Number::format(Request::get('id'));
 
-			# Process remove action
+			$this->entity = Entitizer::get(static::$table, (!$this->create ? $id : 0));
 
-			if (Request::post('action') === 'remove') {
+			# Process actions
+
+			if (Request::post('action') === 'move') {
+
+				$parent_id = Number::format(Request::post('parent_id'));
+
+				if (!$this->entity->move($parent_id)) return $ajax->error(Language::get(static::$message_error_move));
+
+			} else if (Request::post('action') === 'remove') {
 
 				if (!$this->entity->remove()) return $ajax->error(Language::get(static::$message_error_remove));
 			}
@@ -118,23 +139,29 @@ namespace Modules\Entitizer\Utils {
 
 			# Create entity
 
-			if (static::$nesting) $this->parent = Entitizer::get(static::$type, Number::format(Request::get('id')));
+			$id = Number::format(Request::get('id'));
 
-			$this->entity = Entitizer::get(static::$type, (!$this->create ? Number::format(Request::get('id')) : 0));
-
-			# Redirect if entity not found
+			$this->entity = Entitizer::get(static::$table, (!$this->create ? $id : 0));
 
 			if (!$this->create && (0 === $this->entity->id)) return Request::redirect(INSTALL_PATH . static::$link);
+
+			# Create parent entity
+
+			$this->parent = Entitizer::get(static::$table, (static::$nesting ? $id : 0));
+
+			# Get path
+
+			if (false !== ($path = $this->parent->path())) $this->path = $path;
 
 			# Create form
 
 			$this->form = new static::$form_class($this->entity);
 
-			if (static::$nesting && $this->create) $this->form->get('parent_id')->set($this->parent->id);
-
 			# Handle form
 
-			if ($this->form->handle(new static::$controller($this->entity))) {
+			if ($this->form->handle(new static::$controller($this->entity), true)) {
+
+				if ($this->create && (0 !== $this->parent->id)) $this->entity->move($this->parent->id);
 
 				Request::redirect(INSTALL_PATH . static::$link . '/edit?id=' . $this->entity->id . '&submitted');
 			}
@@ -143,7 +170,7 @@ namespace Modules\Entitizer\Utils {
 
 			if (!$this->create && (false !== Request::get('submitted'))) {
 
-				Messages::success(Language::get(static::$message_success_save));
+				Popup::set('positive', Language::get(static::$message_success_save));
 			}
 
 			# ------------------------

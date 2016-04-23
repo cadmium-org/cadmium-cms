@@ -6,10 +6,8 @@ namespace Modules\Entitizer\Common {
 
 		# Common configuration
 
-		protected static $type = ENTITY_TYPE_MENUITEM, $table = TABLE_MENU;
+		protected static $table = TABLE_MENU, $table_relations = TABLE_MENU_RELATIONS;
 
 		protected static $auto_increment = true, $nesting = true, $super = false;
-
-		protected static $extensions = [];
 	}
 }

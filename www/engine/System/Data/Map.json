@@ -17,7 +17,7 @@
 	},
 	{
 		"path": "admin/content/pages",
-		"handler": "Admin/Content/Pages/Listview"
+		"handler": "Admin/Content/Pages/Lister"
 	},
 	{
 		"path": "admin/content/pages/create",
@@ -29,7 +29,7 @@
 	},
 	{
 		"path": "admin/content/menuitems",
-		"handler": "Admin/Content/Menuitems/Listview"
+		"handler": "Admin/Content/Menuitems/Lister"
 	},
 	{
 		"path": "admin/content/menuitems/create",
@@ -41,7 +41,7 @@
 	},
 	{
 		"path": "admin/content/variables",
-		"handler": "Admin/Content/Variables/Listview"
+		"handler": "Admin/Content/Variables/Lister"
 	},
 	{
 		"path": "admin/content/variables/create",
@@ -53,7 +53,7 @@
 	},
 	{
 		"path": "admin/content/widgets",
-		"handler": "Admin/Content/Widgets/Listview"
+		"handler": "Admin/Content/Widgets/Lister"
 	},
 	{
 		"path": "admin/content/widgets/create",
@@ -65,7 +65,7 @@
 	},
 	{
 		"path": "admin/content/filemanager",
-		"handler": "Admin/Content/Filemanager/Listview"
+		"handler": "Admin/Content/Filemanager/Lister"
 	},
 	{
 		"path": "admin/content/filemanager/dir",
@@ -89,7 +89,7 @@
 	},
 	{
 		"path": "admin/system/users",
-		"handler": "Admin/System/Users/Listview"
+		"handler": "Admin/System/Users/Lister"
 	},
 	{
 		"path": "admin/system/users/create",

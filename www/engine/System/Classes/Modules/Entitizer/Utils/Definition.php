@@ -6,27 +6,17 @@ namespace Modules\Entitizer\Utils {
 
 	abstract class Definition {
 
-		private $id = null, $params = [], $orderers = [];
+		protected $params = null, $indexes = null, $foreigns = null;
 
-		# Add param to set
+		# Get list of statements
 
-		private function addParam(Param $param) {
+		private function getStatements() {
 
-			if (('' === $param->name()) || isset($this->params[$param->name()])) return;
+			$statements = [];
 
-			$this->params[$param->name()] = $param;
-		}
+			foreach ([$this->params, $this->indexes, $this->foreigns] as $group) {
 
-
-		# Get list of params statements
-
-		private function getStatements($method) {
-
-			$statements = [$this->id->$method()];
-
-			foreach ($this->params as $param) {
-
-				if (false !== ($statement = $param->$method())) $statements[] = $statement;
+				foreach ($group->list() as $item) $statements[] = $item->statement();
 			}
 
 			# ------------------------
@@ -34,108 +24,113 @@ namespace Modules\Entitizer\Utils {
 			return $statements;
 		}
 
-		# Add boolean param
+		# Create main table
 
-		protected function addBoolean(string $name, bool $default = false, bool $index = false) {
+		private function createMainTable() {
 
-			$this->addParam(new Param\Type\Boolean($name, $default, $index));
-		}
+			$query = ("CREATE TABLE IF NOT EXISTS `" . static::$table . "` (") .
 
-		# Add integer param
+			         implode(", ", $this->getStatements()) .
 
-		protected function addInteger(string $name, bool $short = false, int $maxlength = 0,
-
-			int $default = 0, bool $index = false, bool $unique = false) {
-
-			$this->addParam(new Param\Type\Integer($name, $short, $maxlength, $default, $index, $unique));
-		}
-
-		# Add textual param
-
-		protected function addTextual(string $name, bool $text = false, int $maxlength = 0,
-
-			bool $binary = false, bool $index = false, bool $unique = false) {
-
-			$this->addParam(new Param\Type\Textual($name, $text, $maxlength, $binary, $index, $unique));
-		}
-
-		# Add orderer to set
-
-		protected function addOrderer(string $name, bool $descending = false) {
-
-			if (!isset($this->params[$name]) || isset($this->orderers[$name])) return;
-
-			$this->orderers[$name] = $descending;
-		}
-
-		# Constructor
-
-		public function __construct() {
-
-			$this->id = new Param\Id('id', static::$auto_increment);
-
-			# Define specific entity params
-
-			$this->define();
-		}
-
-		# Create table
-
-		public function createTable() {
-
-			$set = array_merge($this->getStatements('fieldStatement'), $this->getStatements('keyStatement'));
-
-			$query = ("CREATE TABLE IF NOT EXISTS `" . static::$table . "`") .
-
-					 ("(" . implode(", ", $set) . ") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+			         (") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
 			# ------------------------
 
 			return (DB::send($query) && DB::last()->status);
 		}
 
-		# Return id param
+		# Create relations table
 
-		public function id() {
+		private function createRelationsTable() {
 
-			return $this->id;
+			$query = ("CREATE TABLE IF NOT EXISTS `" . static::$table_relations . "` (") .
+
+					 ("`ancestor` int(10) UNSIGNED NOT NULL, `descendant` int(10) UNSIGNED NOT NULL, ") .
+
+					 ("`depth` int(10) UNSIGNED NOT NULL, ") .
+
+					 ("PRIMARY KEY (`ancestor`, `descendant`), KEY (`ancestor`), KEY (`descendant`), KEY (`depth`), ") .
+
+					 ("FOREIGN KEY (`ancestor`) REFERENCES `" . static::$table . "` (`id`) ON DELETE CASCADE, ") .
+
+					 ("FOREIGN KEY (`descendant`) REFERENCES `" . static::$table . "` (`id`) ON DELETE CASCADE ") .
+
+					 (") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+
+			# ------------------------
+
+		 	return (DB::send($query) && DB::last()->status);
+		}
+
+		# Constructor
+
+		public function __construct() {
+
+			$this->params = new Definition\Group\Params($this, static::$auto_increment);
+
+			$this->indexes = new Definition\Group\Indexes($this);
+
+			$this->foreigns = new Definition\Group\Foreigns($this);
+
+			# Define specific params
+
+			$this->define();
 		}
 
 		# Return params
 
 		public function params() {
 
-			return $this->params;
+			return $this->params->list();
 		}
 
-		# Return orderers
+		# Return secure params
 
-		public function orderers() {
+		public function paramsSecure() {
 
-			return $this->orderers;
+			return $this->params->secure();
 		}
 
 		# Return param by name
 
-		public function get(string $name) {
+		public function param(string $name) {
 
-			return (isset($this->params[$name]) ? $this->params[$name] : false);
+			return $this->params->get($name);
 		}
 
-		# Cast data to be suitable with current definition
+		# Return indexes
 
-		public function cast(array $data) {
+		public function indexes() {
 
-			$params = [];
+			return $this->indexes->list();
+		}
 
-			foreach ($data as $name => $value) if (isset($this->params[$name])) {
+		# Return index by name
 
-				$params[$name] = $this->params[$name]->cast($value);
-			}
+		public function index(string $name) {
 
-			# ------------------------
+			return $this->indexes->get($name);
+		}
 
-			return $params;
+		# Return foreigns
+
+		public function foreigns() {
+
+			return $this->foreigns->list();
+		}
+
+		# Return foreign by name
+
+		public function foreign(string $name) {
+
+			return $this->foreigns->get($name);
+		}
+
+		# Create table(s)
+
+		public function createTable() {
+
+			return ($this->createMainTable() && (!static::$nesting || $this->createRelationsTable()));
 		}
 	}
 }

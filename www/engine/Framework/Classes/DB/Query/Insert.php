@@ -8,7 +8,7 @@ namespace DB\Query {
 
 		# Constructor
 
-		public function __construct(string $table, array $dataset, bool $multiple = false) {
+		public function __construct(string $table, array $dataset, bool $multiple = false, bool $ignore = false) {
 
 			# Process arguments
 
@@ -29,7 +29,9 @@ namespace DB\Query {
 
 			# Build query
 
-			$this->query = ('INSERT INTO ' . $table . ' (' . $names . ') VALUES ' . implode(', ', $values));
+			$this->query = ('INSERT ' . ($ignore ? 'IGNORE ' : '') .
+
+				'INTO ' . $table . ' (' . $names . ') VALUES ' . implode(', ', $values));
 		}
 	}
 }

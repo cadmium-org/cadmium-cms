@@ -2,48 +2,11 @@
 
 namespace Handlers\Site {
 
-	use Frames, Modules\Auth, Modules\Entitizer, Utils\View, DB, Template;
+	use Frames, Modules\Entitizer, Utils\View, Template;
 
 	class Page extends Frames\Site\Section {
 
-		private $path = [], $page = false;
-
-		# Get path
-
-		private function getPath() {
-
-			$path = []; $parent_id = 0; $link = INSTALL_PATH;
-
-			# Page validator
-
-			$page = function(int $id, string $name, string $title) use(&$parent_id, &$link) {
-
-				$parent_id = $id; $link .= ('/' . $name);
-
-				return ['id' => $id, 'link' => $link, 'title' => $title];
-			};
-
-			# Process url path items
-
-			foreach ($this->url->path() as $name) {
-
-				$selection = ['id', 'name', 'title'];
-
-				$access = (Auth::check() ? Auth::user()->rank : RANK_GUEST);
-
-				$condition = ("parent_id = " . $parent_id . " AND visibility = " . VISIBILITY_PUBLISHED . " ") .
-
-				             ("AND access <= " . $access . " AND name = '" . addslashes($name) . "'");
-
-				if (!(DB::select(TABLE_PAGES, $selection, $condition, null, 1) && (DB::last()->rows === 1))) return false;
-
-				$path[] = $page(...array_values(DB::last()->row()));
-			}
-
-			# ------------------------
-
-			return $path;
-		}
+		private $page = null, $path = [];
 
 		# Get contents
 
@@ -70,15 +33,23 @@ namespace Handlers\Site {
 
 		protected function handle() {
 
-			if (false === ($path = $this->getPath())) return false;
+			# Get page entity
 
-			$this->path = $path;
+			$this->page = Entitizer::get(TABLE_PAGES);
 
-			# Create page
+			# Init page by requested url
 
-			$this->page = Entitizer::get(ENTITY_TYPE_PAGE, ($this->path ? end($this->path)['id'] : 1));
+			$slug = implode('/', $this->url->path());
+
+			if ('' !== $slug) $this->page->initBySlug($slug); else $this->page->init(1);
+
+			# Display error if not found
 
 			if (0 === $this->page->id) return false;
+
+			# Get path
+
+			if (false !== ($path = $this->page->path())) $this->path = $path;
 
 			# Set data
 

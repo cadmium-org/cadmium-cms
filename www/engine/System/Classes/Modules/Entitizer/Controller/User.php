@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Auth, Modules\Entitizer, Utils\Validate, Str;
+	use Modules\Entitizer, Utils\Validate, Str;
 
 	class User {
 
@@ -31,30 +31,30 @@ namespace Modules\Entitizer\Controller {
 
 			# Validate name & email
 
-			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return ['name', 'USER_ERROR_NAME_INVALID'];
 
-			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return ['email', 'USER_ERROR_EMAIL_INVALID'];
 
 			# Validate password
 
 			if ((0 === $this->user->id) || ('' !== $password)) {
 
-				if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+				if (false === ($password = Validate::userPassword($password))) return ['password', 'USER_ERROR_PASSWORD_INVALID'];
 
-				if (0 !== strcmp($password, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
+				if (0 !== strcmp($password, $password_retype)) return ['password_retype', 'USER_ERROR_PASSWORD_MISMATCH'];
 			}
 
 			# Check name exists
 
-			if (false === ($check_name = $this->user->check('name', $name))) return 'USER_ERROR_MODIFY';
+			if (false === ($check_name = $this->user->check($name, 'name'))) return 'USER_ERROR_MODIFY';
 
-			if ($check_name === 1) return 'USER_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return ['name', 'USER_ERROR_NAME_DUPLICATE'];
 
 			# Check email exists
 
-			if (false === ($check_email = $this->user->check('email', $email))) return 'USER_ERROR_MODIFY';
+			if (false === ($check_email = $this->user->check($email, 'email'))) return 'USER_ERROR_MODIFY';
 
-			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
+			if ($check_email === 1) return ['email', 'USER_ERROR_EMAIL_DUPLICATE'];
 
 			# Modify user
 

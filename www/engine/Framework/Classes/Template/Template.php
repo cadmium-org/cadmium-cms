@@ -24,6 +24,20 @@ namespace {
 			if (!isset(self::$widgets[$name])) self::$widgets[$name] = $block;
 		}
 
+		# Get a list of global variables
+
+		public static function globals() {
+
+			return self::$globals;
+		}
+
+		# Get a list of widgets
+
+		public static function widgets() {
+
+			return self::$widgets;
+		}
+
 		# Create block
 
 		public static function block(string $contents = '', bool $parse = true) {

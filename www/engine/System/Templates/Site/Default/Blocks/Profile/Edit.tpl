@@ -1,10 +1,12 @@
-<div class="ui menu">
+<div class="ui secondary pointing menu">
 
 	<a class="item" href="$install_path$/profile">%PROFILE_TAB_OVERVIEW%</a>
 
 	<a class="active item" href="$install_path$/profile/edit">%PROFILE_TAB_EDIT%</a>
 
 </div>
+
+{ block:messages / }
 
 <div class="ui stacked segment">
 

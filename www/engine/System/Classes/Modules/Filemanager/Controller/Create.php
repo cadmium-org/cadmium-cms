@@ -33,11 +33,11 @@ namespace Modules\Filemanager\Controller {
 
 			# Validate name
 
-			if (false === ($name = Validate::fileName($name))) return 'FILEMANAGER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::fileName($name))) return ['name', 'FILEMANAGER_ERROR_NAME_INVALID'];
 
 			# Check if item exists
 
-			if (@file_exists($this->parent->pathFull() . $name)) return 'FILEMANAGER_ERROR_EXISTS';
+			if (@file_exists($this->parent->pathFull() . $name)) return ['name', 'FILEMANAGER_ERROR_EXISTS'];
 
 			# Create item
 

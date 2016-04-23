@@ -33,13 +33,13 @@ namespace Modules\Filemanager\Controller {
 
 			# Validate name
 
-			if (false === ($name = Validate::fileName($name))) return 'FILEMANAGER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::fileName($name))) return ['name', 'FILEMANAGER_ERROR_NAME_INVALID'];
 
 			# Check if item exists
 
 			if ((0 !== strcasecmp($this->entity->name(), $name)) &&
 
-				@file_exists($this->entity->parent()->pathFull() . $name)) return 'FILEMANAGER_ERROR_EXISTS';
+				@file_exists($this->entity->parent()->pathFull() . $name)) return ['name', 'FILEMANAGER_ERROR_EXISTS'];
 
 			# Rename item
 

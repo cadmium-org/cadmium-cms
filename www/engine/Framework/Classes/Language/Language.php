@@ -30,7 +30,7 @@ namespace {
 
 		public static function get(string $name) {
 
-			return ((isset(self::$phrases[$name])) ? self::$phrases[$name] : false);
+			return (self::$phrases[$name] ?? false);
 		}
 	}
 }

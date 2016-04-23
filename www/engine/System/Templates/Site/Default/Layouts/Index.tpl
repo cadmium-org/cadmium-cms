@@ -86,8 +86,6 @@
 
 		<div class="column">
 
-			{ block:messages / }
-
 			{ block:contents / }
 
 		</div>

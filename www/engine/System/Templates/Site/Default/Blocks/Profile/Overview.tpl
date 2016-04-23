@@ -1,4 +1,4 @@
-<div class="ui menu">
+<div class="ui secondary pointing menu">
 
 	<a class="active item" href="$install_path$/profile">%PROFILE_TAB_OVERVIEW%</a>
 

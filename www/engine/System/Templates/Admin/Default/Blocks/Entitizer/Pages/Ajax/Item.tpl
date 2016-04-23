@@ -1,4 +1,4 @@
-<tr data-id="$id$" data-title="$title$" data-slug="$slug$">
+<tr class="$class$" data-id="$id$" data-title="$title$" data-slug="$slug$">
 
 	<td><i class="$icon$ icon"></i> <a href="#" onclick="Main.PagesLoader.load($id$);">$title$</a></td>
 
@@ -12,7 +12,11 @@
 
 		{ / block:browse }
 
-		<a class="ui mini grey icon select button" title="%PAGES_ITEM_SELECT%"><i class="checkmark icon"></i></a>
+		{ block:select }
+
+		<a class="ui mini $class$ icon select button" title="%PAGES_ITEM_SELECT%"><i class="checkmark icon"></i></a>
+
+		{ / block:select }
 
 	</td>
 

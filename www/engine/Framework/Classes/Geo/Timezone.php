@@ -2,11 +2,11 @@
 
 namespace Geo {
 
-	use Lister;
+	use Range;
 
-	abstract class Timezone extends Lister {
+	abstract class Timezone extends Range {
 
-		protected static $list = [];
+		protected static $range = [];
 
 		# Autoloader
 

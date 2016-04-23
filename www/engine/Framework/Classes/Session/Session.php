@@ -28,6 +28,13 @@ namespace {
 			if (session_id()) { session_unset(); session_destroy(); $_SESSION = []; }
 		}
 
+		# Set variable
+
+		public static function set(string $name, $value) {
+
+			if (session_id()) $_SESSION[$name] = $value;
+		}
+
 		# Check if variable exists
 
 		public static function exists(string $name) {
@@ -40,13 +47,6 @@ namespace {
 		public static function get(string $name) {
 
 			return ((session_id() && isset($_SESSION[$name])) ? $_SESSION[$name] : false);
-		}
-
-		# Set variable
-
-		public static function set(string $name, $value) {
-
-			if (session_id()) $_SESSION[$name] = $value;
 		}
 
 		# Delete variable

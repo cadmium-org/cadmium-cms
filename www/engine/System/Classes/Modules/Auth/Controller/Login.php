@@ -22,25 +22,25 @@ namespace Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return ['name', 'USER_ERROR_NAME_INVALID'];
 
-			if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Validate::userPassword($password))) return ['password', 'USER_ERROR_PASSWORD_INVALID'];
 
 			# Create user object
 
-			$user = Entitizer::get(ENTITY_TYPE_USER);
+			$user = Entitizer::get(TABLE_USERS);
 
 			# Init user
 
-			if (!$user->init($name, 'name')) return 'USER_ERROR_NAME_INCORRECT';
+			if (!$user->init($name, 'name')) return ['name', 'USER_ERROR_NAME_INCORRECT'];
 
-			if (Auth::admin() && ($user->rank < RANK_ADMINISTRATOR)) return 'USER_ERROR_NAME_INCORRECT';
+			if (Auth::admin() && ($user->rank < RANK_ADMINISTRATOR)) return ['name', 'USER_ERROR_NAME_INCORRECT'];
 
 			# Check password
 
 			$password = Str::encode($user->auth_key, $password);
 
-			if (0 !== strcmp($user->password, $password)) return 'USER_ERROR_PASSWORD_INCORRECT';
+			if (0 !== strcmp($user->password, $password)) return ['password', 'USER_ERROR_PASSWORD_INCORRECT'];
 
 			# Check access
 
@@ -48,7 +48,7 @@ namespace Modules\Auth\Controller {
 
 			# Create session
 
-			$session = Entitizer::get(ENTITY_TYPE_USER_SESSION, $user->id); $session->remove();
+			$session = Entitizer::get(TABLE_USERS_SESSIONS, $user->id); $session->remove();
 
 			$code = Str::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
 

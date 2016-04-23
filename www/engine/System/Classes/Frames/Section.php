@@ -2,7 +2,7 @@
 
 namespace Frames {
 
-	use Modules\Auth, Modules\Extend, Modules\Settings, Utils\Messages, Utils\View, Language, Template;
+	use Modules\Auth, Modules\Extend, Modules\Settings, Utils\Messages, Utils\Popup, Utils\View, Language, Template;
 
 	abstract class Section extends Main {
 
@@ -53,7 +53,7 @@ namespace Frames {
 
 			# Init utils
 
-			View::init(static::SECTION); Messages::init();
+			View::init(static::SECTION); Messages::init(); Popup::init();
 
 			# Set timezone
 

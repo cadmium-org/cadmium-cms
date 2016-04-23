@@ -22,19 +22,19 @@ namespace Modules\Auth\Controller {
 
 			# Validate values
 
-			if (false === ($name = Validate::userName($name))) return 'USER_ERROR_NAME_INVALID';
+			if (false === ($name = Validate::userName($name))) return ['name', 'USER_ERROR_NAME_INVALID'];
 
-			if (false === Security::checkCaptcha($captcha)) return 'USER_ERROR_CAPTCHA_INCORRECT';
+			if (false === Security::checkCaptcha($captcha)) return ['captcha', 'USER_ERROR_CAPTCHA_INCORRECT'];
 
 			# Create user object
 
-			$user = Entitizer::get(ENTITY_TYPE_USER);
+			$user = Entitizer::get(TABLE_USERS);
 
 			# Init user
 
-			if (!$user->init($name, 'name')) return 'USER_ERROR_NAME_INCORRECT';
+			if (!$user->init($name, 'name')) return ['name', 'USER_ERROR_NAME_INCORRECT'];
 
-			if (Auth::admin() && ($user->rank < RANK_ADMINISTRATOR)) return 'USER_ERROR_NAME_INCORRECT';
+			if (Auth::admin() && ($user->rank < RANK_ADMINISTRATOR)) return ['name', 'USER_ERROR_NAME_INCORRECT'];
 
 			# Check access
 
@@ -42,7 +42,7 @@ namespace Modules\Auth\Controller {
 
 			# Create session
 
-			$secret = Entitizer::get(ENTITY_TYPE_USER_SECRET, $user->id); $secret->remove();
+			$secret = Entitizer::get(TABLE_USERS_SECRETS, $user->id); $secret->remove();
 
 			$code = Str::random(40); $ip = REQUEST_CLIENT_IP; $time = REQUEST_TIME;
 

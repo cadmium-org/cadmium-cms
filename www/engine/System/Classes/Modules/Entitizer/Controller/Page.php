@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Entitizer, Arr;
+	use Modules\Entitizer;
 
 	class Page {
 
@@ -21,7 +21,7 @@ namespace Modules\Entitizer\Controller {
 
 			# Declare variables
 
-			$parent_id = ''; $title = ''; $name = ''; $visibility = ''; $access = '';
+			$title = ''; $name = ''; $visibility = ''; $access = '';
 
 			$description = ''; $keywords = ''; $robots_index = ''; $robots_follow = ''; $contents = '';
 
@@ -29,21 +29,10 @@ namespace Modules\Entitizer\Controller {
 
 			extract($post);
 
-			# Get hash
-
-			$hash = Arr::encode([$name, Entitizer::get(ENTITY_TYPE_PAGE, $parent_id)->id]);
-
-			# Check name exists
-
-			if (false === ($check_name = $this->page->check('hash', $hash))) return 'PAGE_ERROR_MODIFY';
-
-			if ($check_name === 1) return 'PAGE_ERROR_NAME_DUPLICATE';
-
 			# Modify page
 
 			$data = [];
 
-			$data['parent_id']          = $parent_id;
 			$data['title']              = $title;
 			$data['name']               = $name;
 			$data['visibility']         = $visibility;
@@ -53,7 +42,9 @@ namespace Modules\Entitizer\Controller {
 			$data['robots_index']       = $robots_index;
 			$data['robots_follow']      = $robots_follow;
 			$data['contents']           = $contents;
-			$data['hash']               = $hash;
+			$data['time_modified']      = REQUEST_TIME;
+
+			if (0 === $this->page->id) $data['time_created'] = REQUEST_TIME;
 
 			$modifier = ((0 === $this->page->id) ? 'create' : 'edit');
 

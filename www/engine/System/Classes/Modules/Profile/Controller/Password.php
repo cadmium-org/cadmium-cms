@@ -20,17 +20,23 @@ namespace Modules\Profile\Controller {
 
 			# Validate values
 
-			if (false === ($password = Validate::userPassword($password))) return 'USER_ERROR_PASSWORD_INVALID';
+			if (false === ($password = Validate::userPassword($password)))
 
-			if (false === ($password_new = Validate::userPassword($password_new))) return 'USER_ERROR_PASSWORD_NEW_INVALID';
+				return ['password', 'USER_ERROR_PASSWORD_INVALID'];
 
-			if (0 !== strcmp($password_new, $password_retype)) return 'USER_ERROR_PASSWORD_MISMATCH';
+			if (false === ($password_new = Validate::userPassword($password_new)))
+
+				return ['password_new', 'USER_ERROR_PASSWORD_NEW_INVALID'];
+
+			if (0 !== strcmp($password_new, $password_retype))
+
+				return ['password_retype', 'USER_ERROR_PASSWORD_MISMATCH'];
 
 			# Check password
 
 			$password = Str::encode(Auth::user()->auth_key, $password);
 
-			if (0 !== strcmp(Auth::user()->password, $password)) return 'USER_ERROR_PASSWORD_INCORRECT';
+			if (0 !== strcmp(Auth::user()->password, $password)) return ['password', 'USER_ERROR_PASSWORD_INCORRECT'];
 
 			# Encode password
 

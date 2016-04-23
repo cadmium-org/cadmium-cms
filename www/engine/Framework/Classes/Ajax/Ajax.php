@@ -24,7 +24,7 @@ namespace {
 
 			Headers::nocache(); Headers::status(STATUS_CODE_200); Headers::content(MIME_TYPE_JSON);
 
-			echo json_encode(array_merge(['status' => intval($response->status())], $response->data()));
+			echo json_encode(array_merge(['status' => $response->status()], $response->data()));
 		}
 	}
 }

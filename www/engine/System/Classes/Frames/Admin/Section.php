@@ -2,7 +2,7 @@
 
 namespace Frames\Admin {
 
-	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Utils\Messages, Utils\View;
+	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Utils\Messages, Utils\Popup, Utils\View;
 	use Ajax, DB, Debug, Request, Template;
 
 	abstract class Section extends Frames\Section {
@@ -13,7 +13,7 @@ namespace Frames\Admin {
 
 		# Define phrases list
 
-		const PHRASES = ['Admin', 'Ajax', 'Common', 'Install', 'Lister', 'Mail', 'Menuitem', 'Page', 'User', 'Variable', 'Widget'];
+		const PHRASES = ['Admin', 'Ajax', 'Common', 'Install', 'Mail', 'Menuitem', 'Page', 'Range', 'User', 'Variable', 'Widget'];
 
 		# Section settings
 
@@ -90,6 +90,10 @@ namespace Frames\Admin {
 
 			$layout->block('user')->id = Auth::user()->id;
 
+			# Set popup
+
+			$layout->popup = Popup::block();
+
 			# Set title
 
 			$layout->title = $this->title;
@@ -140,7 +144,7 @@ namespace Frames\Admin {
 
 			# Check for restricted access
 
-			if (('' === CONFIG_ADMIN_IP) || in_array(REQUEST_CLIENT_IP, preg_split('/ +/', CONFIG_ADMIN_IP))) {
+			if (('' === CONFIG_ADMIN_IP) || in_array(REQUEST_CLIENT_IP, preg_split('/ +/', CONFIG_ADMIN_IP), true)) {
 
 				# Handle install component request
 

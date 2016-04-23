@@ -33,7 +33,7 @@ spl_autoload_register(function($class_name) {
 
 	$system_classes = ['Frames', 'Handlers', 'Modules', 'Utils', 'Views', 'Dispatcher', 'Installer'];
 
-	$path = ((in_array($path[0], $system_classes) ? DIR_SYSTEM_CLASSES : DIR_CLASSES) . implode('/', $path));
+	$path = ((in_array($path[0], $system_classes, true) ? DIR_SYSTEM_CLASSES : DIR_CLASSES) . implode('/', $path));
 
 	# Require class file
 

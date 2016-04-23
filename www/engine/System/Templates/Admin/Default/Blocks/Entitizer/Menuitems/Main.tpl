@@ -32,17 +32,35 @@
 
 	{ / block:create }
 
+	{ ! block:create_disabled }
+
+	<a class="disabled item"><i class="add icon"></i> %MENUITEMS_ITEM_CREATE%</a>
+
+	{ / block:create_disabled }
+
 	{ block:edit }
 
 	<a class="$class$" href="$install_path$/admin/content/menuitems/edit?id=$id$"><i class="edit icon"></i> %MENUITEMS_ITEM_EDIT%</a>
 
 	{ / block:edit }
 
+	{ ! block:edit_disabled }
+
+	<a class="disabled item"><i class="edit icon"></i> %MENUITEMS_ITEM_EDIT%</a>
+
+	{ / block:edit_disabled }
+
 	{ block:browse }
 
 	<a class="item" href="$link$" target="_blank"><i class="external icon"></i> %MENUITEMS_ITEM_BROWSE%</a>
 
 	{ / block:browse }
+
+	{ ! block:browse_disabled }
+
+	<a class="disabled item"><i class="external icon"></i> %MENUITEMS_ITEM_BROWSE%</a>
+
+	{ / block:browse_disabled }
 
 </div>
 
@@ -62,19 +80,21 @@
 
 				<div class="ui action input">
 
-					<input type="text" id="menuitem-parent-text" value="$text$" placeholder="%NONE%" readonly="readonly" />
+					<input type="hidden" id="menuitem-parent-id" value="$parent_id$" />
 
-					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.load();"><i class="search icon"></i></a>
+					<input type="hidden" id="menuitem-super-parent-id" value="$super_parent_id$" />
 
-					<a class="ui teal icon button" onclick="Main.MenuitemsLoader.select(0);"><i class="close icon"></i></a>
+					<input type="text" value="$text$" placeholder="%NONE%" readonly="readonly" />
+
+					<a class="ui teal icon button" id="menuitems-selector-load" onclick="Main.MenuitemsLoader.load();"><i class="search icon"></i></a>
+
+					<a class="ui teal icon button" id="menuitems-selector-reset" onclick="Main.MenuitemsSelector.submit(0);"><i class="close icon"></i></a>
 
 				</div>
 
 			</div>
 
 			{ / block:selector }
-
-			{ block:field_menuitem_parent_id / }
 
 			<div class="field">
 
@@ -103,6 +123,18 @@
 				<label for="menuitem-target">%MENUITEM_FIELD_TARGET%</label>
 
 				{ block:field_menuitem_target / }
+
+			</div>
+
+			<div class="field">
+
+				<div class="ui slider checkbox">
+
+					{ block:field_menuitem_active / }
+
+					<label for="menuitem-active">%MENUITEM_FIELD_ACTIVE%</label>
+
+				</div>
 
 			</div>
 

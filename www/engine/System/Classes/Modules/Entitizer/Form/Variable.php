@@ -10,7 +10,7 @@ namespace Modules\Entitizer\Form {
 
 		public function __construct(Entitizer\Entity\Variable $variable) {
 
-			parent::__construct(ENTITY_TYPE_VARIABLE);
+			parent::__construct('variable');
 
 			# Add fields
 

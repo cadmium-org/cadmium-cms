@@ -20,13 +20,13 @@ namespace Modules\Profile\Controller {
 
 			# Validate values
 
-			if (false === ($email = Validate::userEmail($email))) return 'USER_ERROR_EMAIL_INVALID';
+			if (false === ($email = Validate::userEmail($email))) return ['email', 'USER_ERROR_EMAIL_INVALID'];
 
 			# Check email exists
 
-			if (false === ($check_email = Auth::user()->check('email', $email))) return 'USER_ERROR_EDIT_PERSONAL';
+			if (false === ($check_email = Auth::user()->check($email, 'email'))) return 'USER_ERROR_EDIT_PERSONAL';
 
-			if ($check_email === 1) return 'USER_ERROR_EMAIL_DUPLICATE';
+			if ($check_email === 1) return ['email', 'USER_ERROR_EMAIL_DUPLICATE'];
 
 			# Update user
 

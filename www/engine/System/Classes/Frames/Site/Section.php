@@ -2,8 +2,8 @@
 
 namespace Frames\Site {
 
-	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Modules\Settings, Utils\Menu, Utils\Messages, Utils\View;
-	use Utils\Template\Variables, Utils\Template\Widgets, Date, Request, Template;
+	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Modules\Settings, Utils\Menu, Utils\Messages;
+	use Utils\Template\Variables, Utils\Template\Widgets, Utils\View, Date, Request, Template;
 
 	abstract class Section extends Frames\Section {
 
@@ -13,7 +13,7 @@ namespace Frames\Site {
 
 		# Define phrases list
 
-		const PHRASES = ['Common', 'Lister', 'Mail', 'Site', 'User'];
+		const PHRASES = ['Common', 'Mail', 'Range', 'Site', 'User'];
 
 		# Section settings
 
@@ -58,10 +58,6 @@ namespace Frames\Site {
 			# Set slogan
 
 			$layout->slogan = Settings::get('site_slogan');
-
-			# Set messages
-
-			$layout->messages = Messages::block();
 
 			# Set contents
 
@@ -116,6 +112,10 @@ namespace Frames\Site {
 
 			$page->layout = $this->getLayout($contents);
 
+			# Set messages
+
+			$contents->messages = Messages::block();
+
 			# ------------------------
 
 			Template::output($page, STATUS_CODE_200);
@@ -153,11 +153,9 @@ namespace Frames\Site {
 
 				# Set global components
 
-				$variables = new Variables(); $widgets = new Widgets();
+				foreach (Variables::generate() as $name => $value) Template::global($name, $value);
 
-				foreach ($variables->items() as $name => $value) Template::global($name, $value);
-
-				foreach ($widgets->items() as $name => $block) Template::widget($name, $block);
+				foreach (Widgets::generate() as $name => $block) Template::widget($name, $block);
 
 				# Display page
 

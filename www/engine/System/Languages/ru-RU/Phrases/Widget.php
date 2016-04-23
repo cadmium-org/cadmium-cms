@@ -17,7 +17,7 @@ return [
 
 	'WIDGET_FIELD_TITLE'                            => 'Название виджета',
 	'WIDGET_FIELD_NAME'                             => 'Уникальный ключ',
-	'WIDGET_FIELD_DISPLAY'                          => 'Отображать на сайте',
+	'WIDGET_FIELD_ACTIVE'                           => 'Отображать на сайте',
 	'WIDGET_FIELD_CONTENTS'                         => 'Содержимое',
 
 	# Other

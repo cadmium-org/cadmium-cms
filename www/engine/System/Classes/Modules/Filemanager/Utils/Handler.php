@@ -2,7 +2,7 @@
 
 namespace Modules\Filemanager\Utils {
 
-	use Modules\Filemanager, Modules\Informer, Utils\Messages, Utils\View, Ajax, Language, Request;
+	use Modules\Filemanager, Modules\Informer, Utils\Popup, Utils\View, Ajax, Language, Request;
 
 	abstract class Handler {
 
@@ -99,7 +99,7 @@ namespace Modules\Filemanager\Utils {
 
 			# Handle form
 
-			if ($this->form->handle(new Filemanager\Controller\Rename($this->entity))) {
+			if ($this->form->handle(new Filemanager\Controller\Rename($this->entity), true)) {
 
 				$query = ('?parent=' . $this->parent->path() . '&name=' . $this->entity->name() . '&submitted');
 
@@ -108,7 +108,7 @@ namespace Modules\Filemanager\Utils {
 
 			# Display success message
 
-			if (false !== Request::get('submitted')) Messages::success(Language::get(static::$message_success_rename));
+			if (false !== Request::get('submitted')) Popup::set('positive', Language::get(static::$message_success_rename));
 
 			# ------------------------
 

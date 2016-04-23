@@ -121,7 +121,6 @@ return [
 	'WIDGETS_NOT_FOUND'                         => 'Виджеты не найдены',
 
 	'WIDGETS_COLUMN_TITLE'                      => 'Название',
-	'WIDGETS_COLUMN_DISPLAY'                    => 'Статус',
 
 	'WIDGETS_ITEM_CREATE'                       => 'Создать виджет',
 	'WIDGETS_ITEM_NEW'                          => 'Новый виджет',

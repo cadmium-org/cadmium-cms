@@ -29,9 +29,9 @@ namespace Modules\Entitizer\Controller {
 
 			# Check name exists
 
-			if (false === ($check_name = $this->variable->check('name', $name))) return 'VARIABLE_ERROR_MODIFY';
+			if (false === ($check_name = $this->variable->check($name, 'name'))) return 'VARIABLE_ERROR_MODIFY';
 
-			if ($check_name === 1) return 'VARIABLE_ERROR_NAME_DUPLICATE';
+			if ($check_name === 1) return ['name', 'VARIABLE_ERROR_NAME_DUPLICATE'];
 
 			# Modify variable
 

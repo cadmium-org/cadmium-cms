@@ -2,7 +2,7 @@
 
 namespace Modules\Profile\Form {
 
-	use Modules\Auth, Utils\Form, Utils\Lister, Geo\Country, Geo\Timezone, Language;
+	use Modules\Auth, Utils\Form, Utils\Range, Geo\Country, Geo\Timezone, Language;
 
 	class Personal extends Form {
 
@@ -20,13 +20,13 @@ namespace Modules\Profile\Form {
 
 			$this->addText('last_name', Auth::user()->last_name, FORM_FIELD_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$this->addSelect('sex', Auth::user()->sex, Lister\Sex::list());
+			$this->addSelect('sex', Auth::user()->sex, Range\Sex::array());
 
 			$this->addText('city', Auth::user()->city, FORM_FIELD_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
 
-			$this->addSelect('country', Auth::user()->country, Country::list(), Language::get('COUNTRY_NOT_SELECTED'), ['search' => true]);
+			$this->addSelect('country', Auth::user()->country, Country::array(), Language::get('COUNTRY_NOT_SELECTED'), ['search' => true]);
 
-			$this->addSelect('timezone', Auth::user()->timezone, Timezone::list(), null, ['search' => true]);
+			$this->addSelect('timezone', Auth::user()->timezone, Timezone::array(), null, ['search' => true]);
 		}
 	}
 }

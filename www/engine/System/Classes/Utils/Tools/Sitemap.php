@@ -2,7 +2,7 @@
 
 namespace Utils\Tools {
 
-	use Utils\Lister, Utils\Validate, Date, Explorer, Number, XML;
+	use Utils\Range, Utils\Validate, Date, Explorer, Number, XML;
 
 	class Sitemap {
 
@@ -72,7 +72,7 @@ namespace Utils\Tools {
 
 			# Set change frequency
 
-			if ((null !== $changefreq) && (false !== ($changefreq = Lister\Frequency::validate($changefreq)))) {
+			if ((null !== $changefreq) && (false !== ($changefreq = Range\Frequency::validate($changefreq)))) {
 
 				$url->addChild('changefreq', $changefreq);
 			}

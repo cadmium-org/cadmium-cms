@@ -20,7 +20,7 @@ namespace Modules\Auth\Utils {
 
 			$from = ((false !== ($host = parse_url(Settings::get('system_url'), PHP_URL_HOST))) ? ('noreply@' . $host) : '');
 
-			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(true), true);
+			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(), true);
 		}
 
 		# Send reset mail

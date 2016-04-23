@@ -4,20 +4,11 @@ namespace Utils\Template {
 
 	use DB;
 
-	class Variables {
+	abstract class Variables {
 
-		private $items = [];
+		# Generate variables list
 
-		# Add item
-
-		private function addItem(string $name, string $value) {
-
-			$this->items[$name] = $value;
-		}
-
-		# Constructor
-
-		public function __construct() {
+		public static function generate() {
 
 			# Process selection
 
@@ -27,14 +18,7 @@ namespace Utils\Template {
 
 			# Process results
 
-			while (null !== ($variable = DB::last()->row())) $this->addItem($variable['name'], $variable['value']);
-		}
-
-		# Return items
-
-		public function items() {
-
-			return $this->items;
+			while (null !== ($variable = DB::last()->row())) yield $variable['name'] => $variable['value'];
 		}
 	}
 }

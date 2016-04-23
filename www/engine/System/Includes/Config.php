@@ -17,10 +17,14 @@ define('CONFIG_LANGUAGE_COOKIE_EXPIRES',            30758400);      # 356 days
 
 define('CONFIG_TEMPLATE_COOKIE_EXPIRES',            30758400);      # 356 days
 
+# Entitizer
+
+define('CONFIG_ENTITIZER_MAX_DEPTH',                6);
+
 # Page
 
 define('CONFIG_PAGE_TITLE_MAX_LENGTH',              255);
-define('CONFIG_PAGE_NAME_MAX_LENGTH',               60);
+define('CONFIG_PAGE_NAME_MAX_LENGTH',               40);
 define('CONFIG_PAGE_DESCRIPTION_MAX_LENGTH',        512);
 define('CONFIG_PAGE_KEYWORDS_MAX_LENGTH',           512);
 

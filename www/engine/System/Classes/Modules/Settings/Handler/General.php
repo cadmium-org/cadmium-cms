@@ -2,7 +2,7 @@
 
 namespace Modules\Settings\Handler {
 
-	use Modules\Settings, Utils\Messages, Utils\View, Language, Request;
+	use Modules\Settings, Utils\Popup, Utils\View, Language, Request;
 
 	class General {
 
@@ -33,14 +33,14 @@ namespace Modules\Settings\Handler {
 
 			# Handle form
 
-			if ($this->form->handle(new Settings\Controller\General())) {
+			if ($this->form->handle(new Settings\Controller\General(), true)) {
 
 				Request::redirect(INSTALL_PATH . '/admin/system/settings?submitted');
 			}
 
 			# Display success message
 
-			if (false !== Request::get('submitted')) Messages::success(Language::get('SETTINGS_SUCCESS'));
+			if (false !== Request::get('submitted')) Popup::set('positive', Language::get('SETTINGS_SUCCESS'));
 
 			# ------------------------
 

@@ -20,7 +20,7 @@ namespace {
 
 			# Get handler by requested url
 
-			$handler = (new Map())->handler($url = new Url(Request::get('url')));
+			$handler = (new Map)->handler($url = new Url(Request::get('url')));
 
 			# Determine handler class
 

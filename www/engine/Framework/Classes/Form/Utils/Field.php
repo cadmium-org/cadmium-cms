@@ -56,9 +56,9 @@ namespace Form\Utils {
 
 			foreach ($params as $name => $default) if (isset($config[$name])) {
 
-				$checker = (is_numeric($default) ? 'is_numeric' : 'is_scalar');
+				try { $this->$name($config[$name]); }
 
-				if ($checker($config[$name])) $this->$name($config[$name]);
+				catch (\TypeError $e) { /* Ignore setting value of illegal type */ }
 			}
 		}
 
@@ -114,11 +114,13 @@ namespace Form\Utils {
 			$this->required = $value;
 		}
 
-		# Check for error
+		# Set/check for error
 
-		public function error() {
+		public function error(bool $value = null) {
 
-			return $this->error;
+			if (null === $value) return $this->error;
+
+			$this->error = $value;
 		}
 
 		# Set value interface

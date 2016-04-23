@@ -1,3 +1,5 @@
+{ block:messages / }
+
 <div class="ui segment">
 
 	<form class="ui auth form" method="post" action="$install_path$/profile/reset" autocomplete="off">
