@@ -1,5 +1,5 @@
 <?php
 
-require_once 'engine/Main.php';
+require_once './engine/Main.php';
 
-(new Dispatcher())->handle();
+(new Dispatcher)->handle();

@@ -18,7 +18,7 @@ namespace {
 
 			# ------------------------
 
-			new $class();
+			new $class;
 		}
 	}
 }
