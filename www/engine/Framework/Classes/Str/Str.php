@@ -1,12 +1,24 @@
 <?php
 
+/**
+ * @package Framework\Str
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Str {
 
-		# Format input string
+		/**
+		 * Format a string recieved from a client. The method can optionally cut the string
+		 *
+		 * @param $multiline    tells to preserve line breaks
+		 * @param $codestyle    tells to preserve indentation
+		 */
 
-		public static function input(string $string, int $maxlength = 0, bool $multiline = false, bool $codestyle = false) {
+		public static function formatInput(string $string, int $maxlength = 0, bool $multiline = false, bool $codestyle = false) {
 
 			foreach (($string = explode("\n", $string)) as $key => $line) {
 
@@ -24,30 +36,38 @@ namespace {
 			return self::cut($string, $maxlength);
 		}
 
-		# Format output string
+		/**
+		 * Format a string before outputting. The method can optionally cut the string
+		 */
 
-		public static function output(string $string, int $maxlength = 0) {
+		public static function formatOutput(string $string, int $maxlength = 0) {
 
 			$search = ['$', '%', '{', '}']; $replace = ['&#36;', '&#37;', '&#123;', '&#125;'];
 
 			return str_replace($search, $replace, htmlspecialchars(self::cut($string, $maxlength)));
 		}
 
-		# Convert string to no spaces
+		/**
+		 * Strip spaces out of a string
+		 */
 
 		public static function stripSpaces(string $string) {
 
 			return preg_replace('/ +/', '', $string);
 		}
 
-		# Convert string to single spaces
+		/**
+		 * Replace multiple spaces in a string with a single space
+		 */
 
 		public static function singleSpaces(string $string) {
 
 			return preg_replace('/ +/', ' ', $string);
 		}
 
-		# Translit string
+		/**
+		 * Translit a string (for ukrainian and russian language only)
+		 */
 
 		public static function translit(string $string) {
 
@@ -79,7 +99,10 @@ namespace {
 			return strtr($string, $pattern);
 		}
 
-		# Convert string to url
+		/**
+		 * Format a string for safe use in a url (replaces all characters except a-Z and 0-9 with -).
+		 * The method can optionally cut the string
+		 */
 
 		public static function toUrl(string $string, int $maxlength) {
 
@@ -88,7 +111,10 @@ namespace {
 			return self::cut(trim(preg_replace('/[^a-zA-Z0-9]+/', '-', $string), '-'), $maxlength);
 		}
 
-		# Convert string to variable name
+		/**
+		 * Format a string as a variable name (replaces all characters except a-Z and 0-9 with _).
+		 * The method can optionally cut the string
+		 */
 
 		public static function toVar(string $string, int $maxlength) {
 
@@ -97,42 +123,54 @@ namespace {
 			return self::cut(trim(preg_replace('/[^a-zA-Z0-9]+/', '_', $string), '_'), $maxlength);
 		}
 
-		# Transform string to lower case
+		/**
+		 * Transform a string to lower case
+		 */
 
 		public static function toLower(string $string) {
 
 			return (function_exists('mb_strtolower') ? 'mb_strtolower' : 'strtolower')($string);
 		}
 
-		# Transform string to upper case
+		/**
+		 * Transform a string to upper case
+		 */
 
 		public static function toUpper(string $string) {
 
 			return (function_exists('mb_strtoupper') ? 'mb_strtoupper' : 'strtoupper')($string);
 		}
 
-		# Get string length
+		/**
+		 * Get a string length
+		 */
 
 		public static function length(string $string) {
 
 			return (function_exists('mb_strlen') ? 'mb_strlen' : 'strlen')($string);
 		}
 
-		# Get substring
+		/**
+		 * Get a part of a string
+		 */
 
 		public static function substr(string $string, int $start, int $length) {
 
 			return (function_exists('mb_substr') ? 'mb_substr' : 'substr')($string, $start, $length);
 		}
 
-		# Check if string length is between given values
+		/**
+		 * Check if a string length is between given values
+		 */
 
 		public static function between(string $string, int $min, int $max) {
 
 			return ((($length = self::length($string)) >= $min) && ($length <= $max));
 		}
 
-		# Cut string
+		/**
+		 * Cut a string with adding an optional ellipsis
+		 */
 
 		public static function cut(string $string, int $maxlength, bool $ellipsis = false) {
 
@@ -145,7 +183,9 @@ namespace {
 			return $string;
 		}
 
-		# Get random string
+		/**
+		 * Get a random string with a given length from characters specified in a pool string
+		 */
 
 		public static function random(int $length, string $pool = STR_POOL_DEFAULT) {
 
@@ -158,11 +198,13 @@ namespace {
 			return $string;
 		}
 
-		# Encode string
+		/**
+		 * Encode a string into a 40-character hash string
+		 */
 
-		public static function encode(string $key, string $string) {
+		public static function encode(string $salt, string $string) {
 
-			return sha1($key . substr(sha1($string), 8, 32));
+			return sha1($salt . substr(sha1($string), 8, 32));
 		}
 	}
 }

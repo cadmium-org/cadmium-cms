@@ -78,13 +78,13 @@ namespace Modules\Entitizer\Utils {
 
 				$this->getNestingSelectQuery($parent_id, $config, $order_by, $index, $display));
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# Process results
 
 			$items = ['list' => [], 'total' => 0];
 
-			while (null !== ($data = DB::last()->row())) {
+			while (null !== ($data = DB::getLast()->getRow())) {
 
 				$dataset = Entitizer::dataset(static::$table, $data);
 
@@ -95,9 +95,9 @@ namespace Modules\Entitizer\Utils {
 
 			# Count total
 
-			if (DB::send("SELECT FOUND_ROWS() as total") && (DB::last()->rows === 1)) {
+			if (DB::send("SELECT FOUND_ROWS() as total") && (DB::getLast()->rows === 1)) {
 
-				$items['total'] = intval(DB::last()->row()['total']);
+				$items['total'] = intval(DB::getLast()->getRow()['total']);
 			}
 
 			# ------------------------
@@ -117,11 +117,11 @@ namespace Modules\Entitizer\Utils {
 
 				$this->getNestingCountQuery($parent_id, $config));
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# ------------------------
 
-			return intval(DB::last()->row()['count']);
+			return intval(DB::getLast()->getRow()['count']);
 		}
 
 		# Get items

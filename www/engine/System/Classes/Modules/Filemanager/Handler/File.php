@@ -6,6 +6,8 @@ namespace Modules\Filemanager\Handler {
 
 	class File extends Filemanager\Utils\Handler {
 
+		protected $title = 'TITLE_CONTENT_FILEMANAGER_FILE';
+
 		# Handler configuration
 
 		protected static $type = FILEMANAGER_TYPE_FILE;
@@ -14,11 +16,11 @@ namespace Modules\Filemanager\Handler {
 
 		protected static $message_error_remove = 'FILEMANAGER_ERROR_FILE_REMOVE';
 
-		protected static $view = 'Blocks\Filemanager\File';
+		protected static $view = 'Blocks/Filemanager/File';
 
 		# Set item info
 
-		protected function processInfo(Template\Asset\Block $info) {
+		protected function processInfo(Template\Block $info) {
 
 			# Set times
 
@@ -36,9 +38,9 @@ namespace Modules\Filemanager\Handler {
 
 			# Set MIME type
 
-			$mime = Mime::get(strtolower(Explorer::extension($this->entity->name(), false)));
+			$mime = Mime::get(strtolower(Explorer::getExtension($this->entity->name(), false)));
 
-			$info->mime = ((false !== $mime) ? $mime : '-');
+			$info->mime = ((null !== $mime) ? $mime : '-');
 		}
 	}
 }

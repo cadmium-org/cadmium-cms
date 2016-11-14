@@ -4,9 +4,30 @@ namespace {
 
 	abstract class Engine {
 
-		# Get client IP
+		/**
+		 * Parse template contents
+		 */
 
-		public static function ip() {
+		private static function parseContents(string $contents, Throwable $exc) {
+
+		   $contents = str_replace('$message$',            $exc->getMessage(),                  $contents);
+
+		   $contents = str_replace('$file$',               $exc->getFile(),                     $contents);
+
+		   $contents = str_replace('$line$',               $exc->getLine(),                     $contents);
+
+		   $contents = str_replace('$trace$',              nl2br($exc->getTraceAsString()),     $contents);
+
+		   # ------------------------
+
+		   return $contents;
+		}
+
+		/**
+		 * Get a client IP address
+		 */
+
+		public static function getIP() {
 
 			if (!empty(getenv('HTTP_CLIENT_IP')))           return getenv('HTTP_CLIENT_IP');
 
@@ -25,26 +46,11 @@ namespace {
 			return 'unknown';
 		}
 
-		# Display exception screen
+		/**
+		 * Display an exception screen
+		 */
 
-		public static function exception(Throwable $exc) {
-
-			# Contents parser
-
-			$parse_contents = function(string $contents) use($exc) {
-
-				$contents = str_replace('$message$', $exc->getMessage(), $contents);
-
-				$contents = str_replace('$file$', $exc->getFile(), $contents);
-
-				$contents = str_replace('$line$', $exc->getLine(), $contents);
-
-				$contents = str_replace('$trace$', nl2br($exc->getTraceAsString()), $contents);
-
-				# ------------------------
-
-				return $contents;
-			};
+		public static function handleException(Throwable $exc) {
 
 			# Load template
 
@@ -52,7 +58,7 @@ namespace {
 
 			if (false === ($contents = @file_get_contents($file_name))) $output = nl2br($exc);
 
-			else $output = $parse_contents($contents);
+			else $output = self::parseContents($contents, $exc);
 
 			# Set headers
 

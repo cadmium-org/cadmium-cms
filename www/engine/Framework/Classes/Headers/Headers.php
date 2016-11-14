@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @package Framework\Headers
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Headers {
 
-		private static $cache_send = false;
+		private static $cache_sent = false;
 
 		# Status codes
 
@@ -85,67 +92,81 @@ namespace {
 			MIME_TYPE_GIF       => 'image/gif'
 		];
 
-		# Check if string is status code
+		/**
+		 * Check if a given value is a valid status code
+		 */
 
-		public static function isStatusCode(string $string) {
+		public static function isStatusCode(int $value) {
 
-			return isset(self::$status_codes[$string]);
+			return isset(self::$status_codes[$value]);
 		}
 
-		# Check if string is content type
+		/**
+		 * Check if a given value is a valid content type
+		 */
 
-		public static function isContentType(string $string) {
+		public static function isContentType(string $value) {
 
-			return (self::isContentTypeText($string) || self::isContentTypeMedia($string));
+			return (self::isTextContentType($value) || self::isMediaContentType($value));
 		}
 
-		# Check if string is text content type
+		/**
+		 * Check if a given value is a text content type
+		 */
 
-		public static function isContentTypeText(string $string) {
+		public static function isTextContentType(string $value) {
 
-			return isset(self::$content_types_text[$string]);
+			return isset(self::$content_types_text[$value]);
 		}
 
-		# Check if string is media content type
+		/**
+		 * Check if a given value is a media content type
+		 */
 
-		public static function isContentTypeMedia(string $string) {
+		public static function isMediaContentType(string $value) {
 
-			return isset(self::$content_types_media[$string]);
+			return isset(self::$content_types_media[$value]);
 		}
 
-		# Send status header
+		/**
+		 * Send a status code header
+		 */
 
-		public static function status(string $code) {
+		public static function sendStatus(int $code) {
 
 			if (self::isStatusCode($code)) header(getenv('SERVER_PROTOCOL') . ' ' . self::$status_codes[$code]);
 		}
 
-		# Send content header
+		/**
+		 * Send a content type header
+		 */
 
-		public static function content(string $type) {
+		public static function sendContent(string $type) {
 
-			if (self::isContentTypeText($type)) {
+			if (self::isTextContentType($type)) {
 
 				return header('Content-type: ' . self::$content_types_text[$type] . '; charset=UTF-8');
 			}
 
-			if (self::isContentTypeMedia($type)) {
+			if (self::isMediaContentType($type)) {
 
 				return header('Content-type: ' . self::$content_types_media[$type]);
 			}
 		}
 
-		# Send cache headers
+		/**
+		 * Send cache headers with a given expiration time and cache-control (can be private or public)
+		 */
 
-		public static function cache(string $limiter, int $expires) {
+		public static function sendCache(int $expires, bool $public = false) {
 
-			if (self::$cache_send) return;
-
-			if (!in_array($limiter, [CACHE_LIMITER_PRIVATE, CACHE_LIMITER_PUBLIC], true)) return;
+			if (self::$cache_sent) return;
 
 			header('Expires: ' . gmdate('D, d M Y H:i:s', (REQUEST_TIME + $expires)) . ' GMT');
 
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', REQUEST_TIME) . ' GMT');
+
+			$limiter = ($public ? 'public' : 'private');
 
 			header('Cache-Control: ' . $limiter . ', max-age=' . $expires . ', pre-check=' . $expires);
 
@@ -153,14 +174,16 @@ namespace {
 
 			# ------------------------
 
-			self::$cache_send = true;
+			self::$cache_sent = true;
 		}
 
-		# Send no cache headers
+		/**
+		 * Tell a client not to cache a response
+		 */
 
-		public static function nocache() {
+		public static function sendNoCache() {
 
-			if (self::$cache_send) return;
+			if (self::$cache_sent) return;
 
 			header('Expires: ' . gmdate('D, d M Y H:i:s', strtotime('-1 day')) . ' GMT');
 
@@ -174,7 +197,7 @@ namespace {
 
 			# ------------------------
 
-			self::$cache_send = true;
+			self::$cache_sent = true;
 		}
 	}
 }

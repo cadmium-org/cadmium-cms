@@ -18,7 +18,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			# ------------------------
 
-			return (DB::last() && DB::last()->status);
+			return (DB::getLast() && DB::getLast()->status);
 		}
 
 		# Disconnect subtree from current position
@@ -35,7 +35,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			         ("WHERE rlb.ancestor = " . $this->id . " AND rlx.ancestor IS NULL");
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# Set path
 
@@ -60,7 +60,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			         ("WHERE sub.ancestor = " . $this->id . " AND sup.descendant = " . $parent_id);
 
-			if (!(DB::send($query) && (DB::last()->rows > 0))) return false;
+			if (!(DB::send($query) && (DB::getLast()->rows > 0))) return false;
 
 			# Set path
 
@@ -85,11 +85,11 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			DB::insert(static::$table, $data);
 
-			if (!(DB::last() && DB::last()->status)) return false;
+			if (!(DB::getLast() && DB::getLast()->status)) return false;
 
 			# Update data
 
-			if (static::$auto_increment) $data['id'] = DB::last()->id;
+			if (static::$auto_increment) $data['id'] = DB::getLast()->id;
 
 			$this->dataset->update($data);
 
@@ -120,7 +120,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			DB::update(static::$table, $data, ['id' => $this->id]);
 
-			if (!(DB::last() && DB::last()->status)) return false;
+			if (!(DB::getLast() && DB::getLast()->status)) return false;
 
 			# Update data
 
@@ -185,7 +185,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			DB::delete(static::$table, ['id' => $this->id]);
 
-			if (!(DB::last() && DB::last()->status)) return false;
+			if (!(DB::getLast() && DB::getLast()->status)) return false;
 
 			# Uncache entity
 

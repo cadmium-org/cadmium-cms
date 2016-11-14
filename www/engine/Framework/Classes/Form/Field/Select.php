@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @package Framework\Form
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Form\Field {
 
-	use Form, Form\Utils, Form\View;
+	use Form, Tag;
 
-	class Select extends Utils\Field {
+	class Select extends Form\Field {
 
 		# Field default value
 
@@ -22,25 +29,9 @@ namespace Form\Field {
 			'auto'              => false
 		];
 
-		# Get options
-
-		private function getOptions() {
-
-			$block = new View\Options(); $options = $block->loop('options');
-
-			foreach ($this->options as $value => $text) {
-
-				$selected = (($this->value === $value) ? ' selected' : '');
-
-				$options->add(['value' => $value, 'selected' => $selected, 'text' => $text]);
-			}
-
-			# ------------------------
-
-			return $block;
-		}
-
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(Form $form, string $key, string $value = '',
 
@@ -56,12 +47,16 @@ namespace Form\Field {
 
 			# Set value
 
-			$this->set($value);
+			$this->setValue($value);
 		}
 
-		# Set value
+		/**
+		 * Set a value
+		 *
+		 * @return true if the result value is not empty, otherwise false
+		 */
 
-		public function set(string $value) {
+		public function setValue(string $value) {
 
 			$key = array_search($value, ($range = array_keys($this->options)));
 
@@ -72,35 +67,36 @@ namespace Form\Field {
 			return !empty($this->value);
 		}
 
-		# Set search
+		/**
+		 * Get a block
+		 */
 
-		public function search(bool $value) {
-
-			$this->config['search'] = $value;
-		}
-
-		# Set auto
-
-		public function auto(bool $value) {
-
-			$this->config['auto'] = $value;
-		}
-
-		# Get block
-
-		public function block() {
+		public function getBlock() {
 
 			$tag = $this->getTag('select');
 
-			if ($this->config['search']) $tag->set('data-search', 'search');
+			# Set appearance
 
-			if ($this->config['auto']) $tag->set('data-auto', 'auto');
+			if ($this->search) $tag->setAttribute('data-search', 'search');
 
-			$tag->contents($this->getOptions());
+			if ($this->auto) $tag->setAttribute('data-auto', 'auto');
+
+			# Set options
+
+			foreach ($this->options as $value => $text) {
+
+				if (!is_scalar($text)) continue;
+
+				$tag->appendChild($option = Tag::create('option', $text));
+
+				$option->setAttribute('value', $value);
+
+				if ($this->value === $value) $option->setAttribute('selected', null);
+			}
 
 			# ------------------------
 
-			return $tag->block();
+			return $this->toBlock($tag);
 		}
 	}
 }

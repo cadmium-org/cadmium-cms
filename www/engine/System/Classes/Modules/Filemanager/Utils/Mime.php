@@ -10,7 +10,7 @@ namespace Modules\Filemanager\Utils {
 
 		public static function type(string $file_name) {
 
-			$extension = strtolower(Explorer::extension($file_name, false));
+			$extension = strtolower(Explorer::getExtension($file_name, false));
 
 			if (self::isImage($extension)) return 'image';
 

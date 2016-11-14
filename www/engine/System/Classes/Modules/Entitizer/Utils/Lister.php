@@ -2,9 +2,9 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
+	use Frames, Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
 
-	abstract class Lister {
+	abstract class Lister extends Frames\Admin\Area\Authorized {
 
 		protected $index = 0, $parent = null, $entity = null, $path = [], $depth = 0;
 
@@ -12,7 +12,7 @@ namespace Modules\Entitizer\Utils {
 
 		# Process parent block
 
-		private function processParent(Template\Asset\Block $parent) {
+		private function processParent(Template\Block $parent) {
 
 			# Set parent id
 
@@ -20,32 +20,30 @@ namespace Modules\Entitizer\Utils {
 
 			# Set create button
 
-			if (count($this->path) < CONFIG_ENTITIZER_MAX_DEPTH) $parent->block('create')->id = $this->parent->id;
+			if (count($this->path) < CONFIG_ENTITIZER_MAX_DEPTH) $parent->getBlock('create')->id = $this->parent->id;
 
-			else { $parent->block('create')->disable(); $parent->block('create_disabled')->enable(); }
+			else { $parent->getBlock('create')->disable(); $parent->getBlock('create_disabled')->enable(); }
 
 			# Set edit button
 
-			if (0 !== $this->parent->id) $parent->block('edit')->id = $this->parent->id;
+			if (0 !== $this->parent->id) $parent->getBlock('edit')->id = $this->parent->id;
 
-			else { $parent->block('edit')->disable(); $parent->block('edit_disabled')->enable(); }
+			else { $parent->getBlock('edit')->disable(); $parent->getBlock('edit_disabled')->enable(); }
 
 			# Add parent additional data
 
 			$this->processEntityParent($parent);
 		}
 
-		# Get items block
+		# Process items block
 
-		private function getItemsBlock(bool $ajax = false) {
-
-			$items = Template::group();
+		private function processItems(Template\Block $items, bool $ajax = false) {
 
 			foreach ($this->items['list'] as $item) {
 
 				if ((null !== $this->entity) && ($item['dataset']->id === $this->entity->id)) continue;
 
-				$items->add($view = View::get(!$ajax ? static::$view_item : static::$view_ajax_item));
+				$items->addItem($view = View::get(!$ajax ? static::$view_item : static::$view_ajax_item));
 
 				# Set data
 
@@ -57,27 +55,32 @@ namespace Modules\Entitizer\Utils {
 
 				if (!$ajax) {
 
+					if (static::$nesting) {
+
+						$fertile = ((count($this->path) + 1) < CONFIG_ENTITIZER_MAX_DEPTH);
+
+						$view->getBlock('create')->class = ($fertile ? 'olive' : 'disabled');
+
+						$view->getBlock('create')->id = $item['dataset']->id;
+					}
+
 					$super = (static::$super && ($item['dataset']->id === 1));
 
 					$has_children = (static::$nesting && ($item['children'] > 0));
 
-					$view->block('remove')->class = ((!$super && !$has_children) ? 'negative' : 'disabled');
+					$view->getBlock('remove')->class = ((!$super && !$has_children) ? 'negative' : 'disabled');
 
 				} else {
 
 					$selectable = ((count($this->path) + $this->depth + 1) < CONFIG_ENTITIZER_MAX_DEPTH);
 
-					$view->block('select')->class = ($selectable ? 'grey' : 'disabled');
+					$view->getBlock('select')->class = ($selectable ? 'grey' : 'disabled');
 				}
 
 				# Add item additional data
 
 				$this->processItem($view, $item['dataset'], (static::$nesting ? $item['children'] : 0));
 			}
-
-			# ------------------------
-
-			return $items;
 		}
 
 		# Get pagination block
@@ -105,13 +108,11 @@ namespace Modules\Entitizer\Utils {
 
 			# Process parent block
 
-			if (static::$nesting && !$ajax) $this->processParent($contents->block('parent'));
+			if (static::$nesting && !$ajax) $this->processParent($contents->getBlock('parent'));
 
-			# Set items
+			# Process items block
 
-			$items = $this->getItemsBlock($ajax);
-
-			if ($items->count() > 0) $contents->items = $items;
+			$this->processItems($contents->getBlock('items'), $ajax);
 
 			# Set pagination
 
@@ -126,17 +127,17 @@ namespace Modules\Entitizer\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::response();
+			$ajax = Ajax::createResponse();
 
 			# Create parent entity
 
-			$parent_id = (static::$nesting ? Number::format(Request::get('parent_id')) : 0);
+			$parent_id = (static::$nesting ? Number::forceInt(Request::get('parent_id')) : 0);
 
 			$this->parent = Entitizer::get(static::$table, $parent_id);
 
 			# Create active entity
 
-			$this->entity = Entitizer::get(static::$table, Number::format(Request::post('id')));
+			$this->entity = Entitizer::get(static::$table, Number::forceInt(Request::post('id')));
 
 			# Get path and depth
 
@@ -152,20 +153,20 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return $ajax->set('contents', $this->getContents(true)->contents());
+			return $ajax->set('contents', $this->getContents(true)->getContents());
 		}
 
 		# Handle common request
 
-		public function handle() {
+		protected function handle() {
 
 			if (Request::isAjax()) return $this->handleAjax();
 
-			$this->index = Number::format(Request::get('index'), 1, 999999);
+			$this->index = Number::forceInt(Request::get('index'), 1, 999999);
 
 			# Create parent entity
 
-			$parent_id = (static::$nesting ? Number::format(Request::get('parent_id')) : 0);
+			$parent_id = (static::$nesting ? Number::forceInt(Request::get('parent_id')) : 0);
 
 			$this->parent = Entitizer::get(static::$table, $parent_id);
 

@@ -14,9 +14,9 @@
 
 		{ block:menu / }
 
-		{ ! block:user }
-
 		<div class="right menu">
+
+			{ ! block:user }
 
 			<div class="ui user dropdown item">
 
@@ -34,19 +34,9 @@
 
 			</div>
 
-			{ ! block:admin }
+			{ / block:user }
 
-			<a class="icon item" href="$install_path$/admin" target="_blank" id="section-button" title="%SECTION_ADMIN%"><i class="setting icon"></i></a>
-
-			{ / block:admin }
-
-		</div>
-
-		{ / block:user }
-
-		{ ! block:auth }
-
-		<div class="right menu">
+			{ block:auth }
 
 			<a class="expanded item" href="$install_path$/profile/login">%LOGIN%</a>
 
@@ -66,9 +56,15 @@
 
 			</div>
 
-		</div>
+			{ / block:auth }
 
-		{ / block:auth }
+			{ ! block:admin }
+
+			<a class="icon item" href="$install_path$/admin" target="_blank" id="section-button" title="%SECTION_ADMIN%"><i class="setting icon"></i></a>
+
+			{ / block:admin }
+
+		</div>
 
 	</nav>
 

@@ -2,39 +2,75 @@
 
 namespace Modules\Settings\Form {
 
-	use Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
+	use Modules\Extend, Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
 
 	class General extends Form {
+
+		protected $name = 'settings';
 
 		# Constructor
 
 		public function __construct() {
 
-			parent::__construct('settings');
+			# Site title
 
-			# Add fields
+			$this->addText('site_title', Settings::get('site_title'),
 
-			$this->addText('site_title', Settings::get('site_title'), FORM_FIELD_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, ['required' => true]);
+				FORM_FIELD_TEXT, CONFIG_SITE_TITLE_MAX_LENGTH, ['required' => true]);
 
-			$this->addText('site_slogan', Settings::get('site_slogan'), FORM_FIELD_TEXT, CONFIG_SITE_SLOGAN_MAX_LENGTH);
+			# Site slogan
 
-			$this->addSelect('site_status', Settings::get('site_status'), Range\Status::array());
+			$this->addText('site_slogan', Settings::get('site_slogan'),
 
-			$this->addText('site_description', Settings::get('site_description'), FORM_FIELD_TEXTAREA, CONFIG_SITE_DESCRIPTION_MAX_LENGTH);
+				FORM_FIELD_TEXT, CONFIG_SITE_SLOGAN_MAX_LENGTH);
 
-			$this->addText('site_keywords', Settings::get('site_keywords'), FORM_FIELD_TEXTAREA, CONFIG_SITE_KEYWORDS_MAX_LENGTH);
+			# Site status
 
-			# Add system fields
+			$this->addSelect('site_status', Settings::get('site_status'),
 
-			$this->addText('system_url', Settings::get('system_url'), FORM_FIELD_TEXT, CONFIG_SYSTEM_URL_MAX_LENGTH, ['required' => true]);
+				Range\Status::getRange());
 
-			$this->addText('system_email', Settings::get('system_email'), FORM_FIELD_TEXT, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, ['required' => true]);
+			# Site description
 
-			$this->addSelect('system_timezone', Settings::get('system_timezone'), Timezone::array(), null, ['search' => true]);
+			$this->addText('site_description', Settings::get('site_description'),
 
-			# Add other fields
+				FORM_FIELD_TEXTAREA, CONFIG_SITE_DESCRIPTION_MAX_LENGTH);
 
-			$this->addCheckbox('users_registration', Settings::get('users_registration'));
+			# Site keywords
+
+			$this->addText('site_keywords', Settings::get('site_keywords'),
+
+				FORM_FIELD_TEXTAREA, CONFIG_SITE_KEYWORDS_MAX_LENGTH);
+
+			# System url
+
+			$this->addText('system_url', Settings::get('system_url'),
+
+				FORM_FIELD_TEXT, CONFIG_SYSTEM_URL_MAX_LENGTH, ['required' => true]);
+
+			# System email
+
+			$this->addText('system_email', Settings::get('system_email'),
+
+				FORM_FIELD_TEXT, CONFIG_SYSTEM_EMAIL_MAX_LENGTH, ['required' => true]);
+
+			# System timezone
+
+			$this->addSelect('system_timezone', Settings::get('system_timezone'),
+
+				Timezone::getRange(), null, ['search' => true]);
+
+			# Admin language
+
+			$languages = Extend\Languages::loader(SECTION_ADMIN);
+
+			$this->addSelect('admin_language', $languages->active(), $languages->items(true));
+
+			# Admin template
+
+			$templates = Extend\Templates::loader(SECTION_ADMIN);
+
+			$this->addSelect('admin_template', $templates->active(), $templates->items(true));
 		}
 	}
 }

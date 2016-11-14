@@ -36,7 +36,7 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return (DB::send($query) && DB::last()->status);
+			return (DB::send($query) && DB::getLast()->status);
 		}
 
 		# Create relations table
@@ -59,7 +59,7 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-		 	return (DB::send($query) && DB::last()->status);
+		 	return (DB::send($query) && DB::getLast()->status);
 		}
 
 		# Constructor

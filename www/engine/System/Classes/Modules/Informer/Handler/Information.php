@@ -2,25 +2,27 @@
 
 namespace Modules\Informer\Handler {
 
-	use Modules\Informer, Utils\View;
+	use Frames, Modules\Informer, Utils\View;
 
-	class Information {
+	class Information extends Frames\Admin\Area\Authorized {
+
+		protected $title = 'TITLE_SYSTEM_INFORMATION';
 
 		# Get contents
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Informer\Information');
+			$contents = View::get('Blocks/Informer/Information');
 
-			# Set core entries
-
-			$contents->system_version       = CADMIUM_VERSION;
+			# Set server entries
 
 			$contents->php_version          = phpversion();
 
 			$contents->mysql_version        = Informer::mysqlVersion();
 
-			# Set external entries
+			# Set system entries
+
+			$contents->system_version       = CADMIUM_VERSION;
 
 			$contents->jquery_version       = JQUERY_VERSION;
 
@@ -35,7 +37,7 @@ namespace Modules\Informer\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
 			return $this->getContents();
 		}

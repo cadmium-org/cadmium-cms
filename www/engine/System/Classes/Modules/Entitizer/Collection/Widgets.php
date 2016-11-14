@@ -12,7 +12,7 @@ namespace Modules\Entitizer\Collection {
 
 		protected function init() {
 
-			$this->config->add('active', false, function (bool $active) {
+			$this->config->addParam('active', '', function (bool $active) {
 
 				return ($active ? "ent.active = 1" : '');
 			});

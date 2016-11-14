@@ -8,6 +8,8 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Variable;
 
+		protected $title = 'TITLE_CONTENT_VARIABLES';
+
 		# Lister configuration
 
 		protected static $link = '/admin/content/variables';
@@ -16,9 +18,9 @@ namespace Modules\Entitizer\Lister {
 
 		protected static $display = CONFIG_ADMIN_VARIABLES_DISPLAY;
 
-		protected static $view_main = 'Blocks\Entitizer\Variables\Lister\Main';
+		protected static $view_main = 'Blocks/Entitizer/Variables/Lister/Main';
 
-		protected static $view_item = 'Blocks\Entitizer\Variables\Lister\Item';
+		protected static $view_item = 'Blocks/Entitizer/Variables/Lister/Item';
 
 		protected static $view_ajax_main = '';
 
@@ -30,7 +32,7 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\Variable $variable) {
+		protected function processItem(Template\Block $view, Entitizer\Dataset\Variable $variable) {
 
 			$view->class = '';
 

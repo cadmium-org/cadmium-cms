@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @package Framework\Form
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Form\Field {
 
-	use Form, Form\Utils, Str;
+	use Form, Str;
 
-	class Text extends Utils\Field {
+	class Text extends Form\Field {
 
 		# Field default value
 
@@ -31,77 +38,95 @@ namespace Form\Field {
 			'cols'              => 0
 		];
 
-		# Get hidden input tag
+		/**
+		 * Get a hidden input tag
+		 */
 
 		private function getHidden() {
 
-			return $this->getTag('input', ['type' => 'hidden', 'value' => $this->value]);
+			return $this->getTag('input', '', ['type' => 'hidden', 'value' => $this->value]);
 		}
 
-		# Get password input tag
+		/**
+		 * Get a password input tag
+		 */
 
 		private function getPassword() {
 
-			return $this->getTag('input', ['type' => 'password', 'value' => '']);
+			return $this->getTag('input', '', ['type' => 'password', 'value' => '']);
 		}
 
-		# Get captcha input tag
+		/**
+		 * Get a captcha input tag
+		 */
 
 		private function getCaptcha() {
 
-			return $this->getTag('input', ['type' => 'text', 'value' => '']);
+			return $this->getTag('input', '', ['type' => 'text', 'value' => '']);
 		}
 
-		# Get text input tag
+		/**
+		 * Get a text input tag
+		 */
 
 		private function getText() {
 
-			return $this->getTag('input', ['type' => 'text', 'value' => $this->value]);
+			return $this->getTag('input', '', ['type' => 'text', 'value' => $this->value]);
 		}
 
-		# Get textarea tag
+		/**
+		 * Get a textarea input tag
+		 */
 
 		private function getTextarea() {
 
-			$tag = $this->getTag('textarea', [], $this->value);
+			$tag = $this->getTag('textarea', $this->value);
 
-			if ($this->config['rows'] > 0) $tag->set('rows', $this->config['rows']);
+			if ($this->rows > 0) $tag->setAttribute('rows', $this->rows);
 
-			if ($this->config['cols'] > 0) $tag->set('cols', $this->config['cols']);
+			if ($this->cols > 0) $tag->setAttribute('cols', $this->cols);
 
 			# ------------------------
 
 			return $tag;
 		}
 
-		# Process spaces
+		/**
+		 * Process spaces
+		 */
 
 		private function processSpaces() {
 
-			if ($this->config['spaces'] === 'strip') $this->value = Str::stripSpaces($this->value);
+			if ($this->spaces === 'strip') $this->value = Str::stripSpaces($this->value);
 
-			else if ($this->config['spaces'] === 'single') $this->value = Str::singleSpaces($this->value);
+			else if ($this->spaces === 'single') $this->value = Str::singleSpaces($this->value);
 		}
 
-		# Process convert
+		/**
+		 * Process convert
+		 */
 
 		private function processConvert() {
 
-			if ($this->config['convert'] === 'url') $this->value = Str::toUrl($this->value, $this->maxlength);
+			if ($this->convert === 'url') $this->value = Str::toUrl($this->value, $this->maxlength);
 
-			else if ($this->config['convert'] === 'var') $this->value = Str::toVar($this->value, $this->maxlength);
+			else if ($this->convert === 'var') $this->value = Str::toVar($this->value, $this->maxlength);
 		}
 
-		# Process transform
+		/**
+		 * Process case transform
+		 */
 
 		private function processTransform() {
 
-			if ($this->config['transform'] === 'lower') $this->value = Str::toLower($this->value);
+			if ($this->transform === 'lower') $this->value = Str::toLower($this->value);
 
-			else if ($this->config['transform'] === 'upper') $this->value = Str::toUpper($this->value);
+			else if ($this->transform === 'upper') $this->value = Str::toUpper($this->value);
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(Form $form, string $key, string $value = '',
 
@@ -117,12 +142,16 @@ namespace Form\Field {
 
 			# Set value
 
-			$this->set($value);
+			$this->setValue($value);
 		}
 
-		# Set value
+		/**
+		 * Set a value
+		 *
+		 * @return true if the result value is not empty, otherwise false
+		 */
 
-		public function set(string $value) {
+		public function setValue(string $value) {
 
 			if (($this->type === FORM_FIELD_PASSWORD) || ($this->type === FORM_FIELD_CAPTCHA)) {
 
@@ -130,11 +159,11 @@ namespace Form\Field {
 
 			} else {
 
-				$multiline = (($this->type === FORM_FIELD_TEXTAREA) && $this->config['multiline']);
+				$multiline = (($this->type === FORM_FIELD_TEXTAREA) && $this->multiline);
 
-				$codestyle = (($this->type === FORM_FIELD_TEXTAREA) && $this->config['codestyle']);
+				$codestyle = (($this->type === FORM_FIELD_TEXTAREA) && $this->codestyle);
 
-				$this->value = Str::input($value, $this->maxlength, $multiline, $codestyle);
+				$this->value = Str::formatInput($value, $this->maxlength, $multiline, $codestyle);
 
 				# Process operations
 
@@ -146,87 +175,17 @@ namespace Form\Field {
 			return ('' !== $this->value);
 		}
 
-		# Set multiline
+		/**
+		 * Get a block
+		 */
 
-		public function multiline(bool $value) {
+		public function getBlock() {
 
-			$this->config['multiline'] = $value;
-		}
+			# Process hidden field
 
-		# Set codestyle
+			if ($this->type === FORM_FIELD_HIDDEN) return $this->toBlock($this->getHidden());
 
-		public function codestyle(bool $value) {
-
-			$this->config['codestyle'] = $value;
-		}
-
-		# Set spaces
-
-		public function spaces(string $value) {
-
-			if (!in_array($value, ['strip', 'single'], true)) $value = '';
-
-			$this->config['spaces'] = $value;
-		}
-
-		# Set convert
-
-		public function convert(string $value) {
-
-			if (!in_array($value, ['url', 'var'], true)) $value = '';
-
-			$this->config['convert'] = $value;
-		}
-
-		# Set transform
-
-		public function transform(string $value) {
-
-			if (!in_array($value, ['upper', 'lower'], true)) $value = '';
-
-			$this->config['transform'] = $value;
-		}
-
-		# Set placeholder
-
-		public function placeholder(string $value) {
-
-			$this->config['placeholder'] = $value;
-		}
-
-		# Set readonly
-
-		public function readonly(bool $value) {
-
-			$this->config['readonly'] = $value;
-		}
-
-		# Set autofocus
-
-		public function autofocus(bool $value) {
-
-			$this->config['autofocus'] = $value;
-		}
-
-		# Set rows
-
-		public function rows(int $value) {
-
-			$this->config['rows'] = $value;
-		}
-
-		# Set cols
-
-		public function cols(int $value) {
-
-			$this->config['cols'] = $value;
-		}
-
-		# Get block
-
-		public function block() {
-
-			if ($this->type === FORM_FIELD_HIDDEN) return $this->getHidden()->block();
+			# Process visible field
 
 			else if ($this->type === FORM_FIELD_PASSWORD) $tag = $this->getPassword();
 
@@ -238,17 +197,17 @@ namespace Form\Field {
 
 			# Set appearance
 
-			if ($this->maxlength > 0) $tag->set('maxlength', $this->maxlength);
+			if ($this->maxlength > 0) $tag->setAttribute('maxlength', $this->maxlength);
 
-			if ('' !== $this->config['placeholder']) $tag->set('placeholder', $this->config['placeholder']);
+			if ('' !== $this->placeholder) $tag->setAttribute('placeholder', $this->placeholder);
 
-			if ($this->config['readonly']) $tag->set('readonly', 'readonly');
+			if ($this->readonly) $tag->setAttribute('readonly', 'readonly');
 
-			if ($this->config['autofocus']) $tag->set('autofocus', 'autofocus');
+			if ($this->autofocus) $tag->setAttribute('autofocus', 'autofocus');
 
 			# ------------------------
 
-			return $tag->block();
+			return $this->toBlock($tag);
 		}
 	}
 }

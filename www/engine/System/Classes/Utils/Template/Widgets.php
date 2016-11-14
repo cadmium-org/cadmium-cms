@@ -14,11 +14,14 @@ namespace Utils\Template {
 
 			$selection = ['name', 'contents']; $condition = ['active' => 1]; $order = ['name' => 'ASC'];
 
-			if (!(DB::select(TABLE_WIDGETS, $selection, $condition, $order) && DB::last()->status)) return;
+			if (!(DB::select(TABLE_WIDGETS, $selection, $condition, $order) && DB::getLast()->status)) return;
 
 			# Process results
 
-			while (null !== ($widget = DB::last()->row())) yield $widget['name'] => Template::block($widget['contents']);
+			while (null !== ($widget = DB::getLast()->getRow())) {
+
+				yield $widget['name'] => Template::createBlock($widget['contents']);
+			}
 		}
 	}
 }

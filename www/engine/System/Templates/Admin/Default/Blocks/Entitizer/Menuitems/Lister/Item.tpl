@@ -6,6 +6,12 @@
 
 	<td class="right aligned">
 
+		{ block:create }
+
+		<a class="ui mini $class$ icon button" href="$install_path$/admin/content/menuitems/create?id=$id$" title="%MENUITEMS_ITEM_CREATE_SUB%"><i class="plus icon"></i></a>
+
+		{ / block:create }
+
 		<a class="ui mini positive icon button" href="$install_path$/admin/content/menuitems/edit?id=$id$" title="%MENUITEMS_ITEM_EDIT%"><i class="edit icon"></i></a>
 
 		{ block:browse }

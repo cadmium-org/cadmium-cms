@@ -25,13 +25,13 @@
 
 		<script src="$install_path$/include/semantic/semantic.min.js"></script>
 
-		<script src="$install_path$/include/site/templates/$template_name$/scripts/main.js"></script>
+		<script src="$install_path$/include/site/templates/$template_name$/scripts/view.js"></script>
 
 		<script>
 
 			var install_path = '$install_path$';
 
-			$(document).ready(function() { Main.init(); });
+			$(function() { View.init(); });
 
 		</script>
 

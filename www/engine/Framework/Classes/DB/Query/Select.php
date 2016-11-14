@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @package Framework\DB\Query
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace DB\Query {
 
-	use DB\Utils;
+	use DB;
 
-	class Select extends Utils\Query {
+	class Select extends DB\Query {
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(string $table, $selection, $condition = null, $order = null, int $limit = 0) {
 
@@ -18,7 +27,7 @@ namespace DB\Query {
 
 			$condition = $this->getString($condition, '^name = $value', ' AND ');
 
-			$order = $this->getString($order, '^name $sort', ', ');
+			$order = $this->getString($order, '^name $direction', ', ');
 
 			# Build query
 

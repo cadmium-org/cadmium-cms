@@ -1,0 +1,16 @@
+{
+	"name": "Contact",
+	"title": "Contact",
+	"description": "A simple contact form for your website.",
+	"version": "0.1.0",
+	"author": "Anton Romanov",
+	"website": "http://cadmium-cms.com",
+	"browse_url" : "/contact",
+	"routes":
+	[
+		{
+			"path": "contact",
+			"handler": "Handler"
+		}
+	]
+}

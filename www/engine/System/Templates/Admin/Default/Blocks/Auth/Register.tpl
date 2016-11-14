@@ -2,61 +2,41 @@
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="register-name">%USER_FIELD_NAME%</label>
 
-			{ block:field_register_name / }
-
-			<i class="user icon"></i>
-
-		</div>
+		{ block:field_register_name / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="register-password">%USER_FIELD_PASSWORD%</label>
 
-			{ block:field_register_password / }
-
-			<i class="lock icon"></i>
-
-		</div>
+		{ block:field_register_password / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="register-password-retype">%USER_FIELD_PASSWORD_RETYPE%</label>
 
-			{ block:field_register_password_retype / }
-
-			<i class="lock icon"></i>
-
-		</div>
+		{ block:field_register_password_retype / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="register-email">%USER_FIELD_EMAIL%</label>
 
-			{ block:field_register_email / }
-
-			<i class="at icon"></i>
-
-		</div>
+		{ block:field_register_email / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="register-captcha">%USER_FIELD_CAPTCHA%</label>
 
-			{ block:field_register_captcha / }
-
-			<i class="protect icon"></i>
-
-		</div>
+		{ block:field_register_captcha / }
 
 	</div>
 
@@ -72,9 +52,11 @@
 
 	</div>
 
+	<div class="ui hidden divider"></div>
+
 	<div class="field">
 
-		<input class="ui fluid teal button" type="submit" value="%REGISTER%" />
+		<input class="ui teal button" type="submit" value="%REGISTER%" />
 
 	</div>
 

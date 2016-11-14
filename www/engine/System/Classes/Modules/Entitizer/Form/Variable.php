@@ -6,13 +6,11 @@ namespace Modules\Entitizer\Form {
 
 	class Variable extends Form {
 
+		protected $name = 'variable';
+
 		# Constructor
 
 		public function __construct(Entitizer\Entity\Variable $variable) {
-
-			parent::__construct('variable');
-
-			# Add fields
 
 			$this->addText('title', $variable->title, FORM_FIELD_TEXT, CONFIG_VARIABLE_TITLE_MAX_LENGTH, ['required' => true]);
 

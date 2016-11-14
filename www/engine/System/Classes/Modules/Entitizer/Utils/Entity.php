@@ -105,7 +105,7 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return ((DB::last() && (DB::last()->rows === 1)) ? $this->setData(DB::last()->row()) : false);
+			return ((DB::getLast() && (DB::getLast()->rows === 1)) ? $this->setData(DB::getLast()->getRow()) : false);
 		}
 
 		# Check if unique param value exists
@@ -130,7 +130,7 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return ((DB::last() && DB::last()->status) ? DB::last()->rows : false);
+			return ((DB::getLast() && DB::getLast()->status) ? DB::getLast()->rows : false);
 		}
 
 		# Return definition

@@ -6,13 +6,11 @@ namespace Modules\Profile\Form {
 
 	class Personal extends Form {
 
+		protected $name = 'edit';
+
 		# Constructor
 
 		public function __construct() {
-
-			parent::__construct('edit');
-
-			# Add fields
 
 			$this->addText('email', Auth::user()->email, FORM_FIELD_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, ['required' => true]);
 
@@ -20,13 +18,13 @@ namespace Modules\Profile\Form {
 
 			$this->addText('last_name', Auth::user()->last_name, FORM_FIELD_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$this->addSelect('sex', Auth::user()->sex, Range\Sex::array());
+			$this->addSelect('sex', Auth::user()->sex, Range\Sex::getRange());
 
 			$this->addText('city', Auth::user()->city, FORM_FIELD_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
 
-			$this->addSelect('country', Auth::user()->country, Country::array(), Language::get('COUNTRY_NOT_SELECTED'), ['search' => true]);
+			$this->addSelect('country', Auth::user()->country, Country::getRange(), Language::get('COUNTRY_NOT_SELECTED'), ['search' => true]);
 
-			$this->addSelect('timezone', Auth::user()->timezone, Timezone::array(), null, ['search' => true]);
+			$this->addSelect('timezone', Auth::user()->timezone, Timezone::getRange(), null, ['search' => true]);
 		}
 	}
 }

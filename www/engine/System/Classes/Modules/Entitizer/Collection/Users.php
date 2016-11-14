@@ -12,27 +12,27 @@ namespace Modules\Entitizer\Collection {
 
 		protected function init() {
 
-			$this->config->add('rank', null, function (int $rank = null) {
+			$this->config->addParam('rank', '', function (int $rank = null) {
 
 				return ((null !== $rank) ? ("ent.rank >= " . $rank) : '');
 			});
 
-			$this->config->add('time_registered >=', 0, function (int $time) {
+			$this->config->addParam('time_registered >=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_registered >= " . $time) : '');
 			});
 
-			$this->config->add('time_registered <=', 0, function (int $time) {
+			$this->config->addParam('time_registered <=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_registered <= " . $time) : '');
 			});
 
-			$this->config->add('time_logged >=', 0, function (int $time) {
+			$this->config->addParam('time_logged >=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_logged >= " . $time) : '');
 			});
 
-			$this->config->add('time_logged <=', 0, function (int $time) {
+			$this->config->addParam('time_logged <=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_logged <= " . $time) : '');
 			});

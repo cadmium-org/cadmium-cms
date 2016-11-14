@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Framework\Geo
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Geo {
 
 	use Range;
@@ -8,7 +15,9 @@ namespace Geo {
 
 		protected static $range = [];
 
-		# Autoloader
+		/**
+		 * Autoloader
+		 */
 
 		public static function __autoload() {
 

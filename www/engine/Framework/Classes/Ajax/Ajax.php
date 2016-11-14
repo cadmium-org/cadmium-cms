@@ -1,30 +1,41 @@
 <?php
 
+/**
+ * @package Framework\Ajax
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Ajax {
 
-		# Create new response
+		/**
+		 * Create a new response object
+		 */
 
-		public static function response() {
+		public static function createResponse() {
 
-			return new Ajax\Utils\Response();
+			return new Ajax\Response;
 		}
 
-		# Check if object is response
+		/**
+		 * Check if a given variable is a response object
+		 */
 
 		public static function isResponse($object) {
 
-			return ($object instanceof Ajax\Utils\Response);
+			return ($object instanceof Ajax\Response);
 		}
 
-		# Output JSON data
+		/**
+		 * Output JSON data contained in a given response object
+		 */
 
-		public static function output(Ajax\Utils\Response $response) {
+		public static function output(Ajax\Response $response) {
 
-			Headers::nocache(); Headers::status(STATUS_CODE_200); Headers::content(MIME_TYPE_JSON);
-
-			echo json_encode(array_merge(['status' => $response->status()], $response->data()));
+			JSON::output($response->getData());
 		}
 	}
 }

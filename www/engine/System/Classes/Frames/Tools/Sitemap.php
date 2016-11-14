@@ -2,11 +2,11 @@
 
 namespace Frames\Tools {
 
-	use Frames, Utils\Tools, Exception, XML;
+	use Frames, Modules\Tools, Exception, XML;
 
 	abstract class Sitemap extends Frames\Main {
 
-		# Captcha main method
+		# Sitemap main method
 
 		protected function main() {
 

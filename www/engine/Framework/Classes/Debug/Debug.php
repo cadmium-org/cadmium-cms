@@ -1,19 +1,30 @@
 <?php
 
+/**
+ * @package Framework\Debug
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Debug {
 
-		# Get script peak memory usage
+		/**
+		 * Get the peak memory in bytes, that's been allocated to the script
+		 */
 
-		public static function memory() {
+		public static function getMemory() {
 
-			return number_format(memory_get_peak_usage());
+			return memory_get_peak_usage();
 		}
 
-		# Get script elapsed time
+		/**
+		 * Get the time in seconds, that's passed since the script started
+		 */
 
-		public static function time() {
+		public static function getTime() {
 
 			return number_format((microtime(true) - REQUEST_TIME_FLOAT), 10);
 		}

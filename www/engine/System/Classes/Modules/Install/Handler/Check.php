@@ -2,11 +2,13 @@
 
 namespace Modules\Install\Handler {
 
-	use Modules\Install, Utils\View, Language;
+	use Frames, Modules\Extend, Modules\Install, Utils\View, Language;
 
-	class Check {
+	class Check extends Frames\Admin\Area\Install {
 
-		private $form = null;
+		protected $title = 'TITLE_INSTALL_CHECK';
+
+		private $languages = [];
 
 		# Get requirements
 
@@ -32,23 +34,27 @@ namespace Modules\Install\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Install\Check');
+			$contents = View::get('Blocks/Install/Check');
 
-			# Implement form
+			# Set languages
 
-			$this->form->implement($contents);
+			$contents->getBlock('language')->country = Extend\Languages::data('country');
+
+			$contents->getBlock('language')->title = Extend\Languages::data('title');
+
+			$contents->getBlock('language')->items = $this->languages->items();
 
 			# Set requirements
 
-			$contents->php_version = phpversion();
+			$contents->getBlock('requirements')->php_version = phpversion();
 
-			$contents->requirements = $this->getRequirements();
+			$contents->getBlock('requirements')->items = $this->getRequirements();
 
 			# Set button
 
-			$contents->block('button')->checked = intval(Install::status());
+			$contents->getBlock('button')->checked = intval(Install::status());
 
-			$contents->block('button')->text = Language::get(Install::status() ? 'CONTINUE' : 'RECHECK');
+			$contents->getBlock('button')->text = Language::get(Install::status() ? 'CONTINUE' : 'RECHECK');
 
 			# ------------------------
 
@@ -57,11 +63,11 @@ namespace Modules\Install\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
-			# Create form
+			# Load languages
 
-			$this->form = new Install\Form\Check();
+			$this->languages = Extend\Languages::loader(SECTION_ADMIN);
 
 			# ------------------------
 

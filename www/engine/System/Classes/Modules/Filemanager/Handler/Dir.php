@@ -6,6 +6,8 @@ namespace Modules\Filemanager\Handler {
 
 	class Dir extends Filemanager\Utils\Handler {
 
+		protected $title = 'TITLE_CONTENT_FILEMANAGER_DIR';
+
 		# Handler configuration
 
 		protected static $type = FILEMANAGER_TYPE_DIR;
@@ -14,11 +16,11 @@ namespace Modules\Filemanager\Handler {
 
 		protected static $message_error_remove = 'FILEMANAGER_ERROR_DIR_REMOVE';
 
-		protected static $view = 'Blocks\Filemanager\Dir';
+		protected static $view = 'Blocks/Filemanager/Dir';
 
 		# Set item info
 
-		protected function processInfo(Template\Asset\Block $info) {
+		protected function processInfo(Template\Block $info) {
 
 			# Set times
 

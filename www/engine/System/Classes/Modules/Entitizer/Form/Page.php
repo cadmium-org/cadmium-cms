@@ -6,21 +6,19 @@ namespace Modules\Entitizer\Form {
 
 	class Page extends Form {
 
+		protected $name = 'page';
+
 		# Constructor
 
 		public function __construct(Entitizer\Entity\Page $page) {
-
-			parent::__construct('page');
-
-			# Add fields
 
 			$this->addText('title', $page->title, FORM_FIELD_TEXT, CONFIG_PAGE_TITLE_MAX_LENGTH, ['required' => true]);
 
 			$this->addText('name', $page->name, FORM_FIELD_TEXT, CONFIG_PAGE_NAME_MAX_LENGTH, ['required' => true, 'convert' => 'url']);
 
-			$this->addSelect('visibility', $page->visibility, Range\Visibility::array());
+			$this->addSelect('visibility', $page->visibility, Range\Visibility::getRange());
 
-			$this->addSelect('access', $page->access, Range\Access::array());
+			$this->addSelect('access', $page->access, Range\Access::getRange());
 
 			$this->addText('description', $page->description, FORM_FIELD_TEXTAREA, CONFIG_PAGE_DESCRIPTION_MAX_LENGTH);
 

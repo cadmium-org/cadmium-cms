@@ -18,6 +18,8 @@
 
 			<form class="ui form" method="post" action="$install_path$/profile/edit" autocomplete="off">
 
+				<input type="password" id="fake-password" name="fake_password" style="display:none;" />
+
 				<div class="field">
 
 					<label for="edit-email">%USER_FIELD_EMAIL%</label>

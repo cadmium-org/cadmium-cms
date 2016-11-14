@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @package Framework\DB\Query
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace DB\Query {
 
-	use DB\Utils;
+	use DB;
 
-	class Delete extends Utils\Query {
+	class Delete extends DB\Query {
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(string $table, $condition = null) {
 

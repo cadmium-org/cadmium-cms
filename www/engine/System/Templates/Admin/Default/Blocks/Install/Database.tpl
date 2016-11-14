@@ -32,9 +32,11 @@
 
 	</div>
 
+	<div class="ui hidden divider"></div>
+
 	<div class="field">
 
-		<input class="ui fluid teal button" type="submit" value="%SUBMIT%" />
+		<input class="ui teal button" type="submit" value="%SUBMIT%" />
 
 	</div>
 

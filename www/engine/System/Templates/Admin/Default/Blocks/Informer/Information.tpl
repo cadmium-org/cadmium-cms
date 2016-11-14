@@ -4,21 +4,13 @@
 
 		<tr>
 
-			<th colspan="2">%INFORMATION_GROUP_CORE%</th>
+			<th colspan="2">%INFORMATION_GROUP_SERVER%</th>
 
 		</tr>
 
 	</thead>
 
 	<tbody>
-
-		<tr>
-
-			<td class="four wide">%INFORMATION_ROW_SYSTEM_VERSION%</td>
-
-			<td>$system_version$</td>
-
-		</tr>
 
 		<tr>
 
@@ -46,13 +38,21 @@
 
 		<tr>
 
-			<th colspan="2">%INFORMATION_GROUP_EXTERNAL%</th>
+			<th colspan="2">%INFORMATION_GROUP_SYSTEM%</th>
 
 		</tr>
 
 	</thead>
 
 	<tbody>
+
+		<tr>
+
+			<td class="four wide">%INFORMATION_ROW_SYSTEM_VERSION%</td>
+
+			<td>$system_version$</td>
+
+		</tr>
 
 		<tr>
 

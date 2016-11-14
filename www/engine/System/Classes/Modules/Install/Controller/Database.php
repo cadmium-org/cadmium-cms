@@ -2,7 +2,7 @@
 
 namespace Modules\Install\Controller {
 
-	use Modules\Install, DB, Exception, Explorer;
+	use Modules\Install, Exception, DB, JSON;
 
 	class Database {
 
@@ -47,9 +47,9 @@ namespace Modules\Install\Controller {
 
 			$system['time'] = REQUEST_TIME;
 
-			$system_file = (DIR_SYSTEM_DATA . 'System.json'); $system = json_encode($system, JSON_PRETTY_PRINT);
+			$system_file = (DIR_SYSTEM_DATA . 'System.json');
 
-			if (false === Explorer::save($system_file, $system, true)) return 'INSTALL_ERROR_SYSTEM';
+			if (false === JSON::save($system_file, $system)) return 'INSTALL_ERROR_SYSTEM';
 
 			# ------------------------
 

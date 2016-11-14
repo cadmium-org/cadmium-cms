@@ -8,7 +8,9 @@ namespace Exception {
 
 		protected $message = 'Default exception thrown';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(string $value = '') {
 
@@ -22,7 +24,9 @@ namespace Exception {
 
 	class General extends Exception {
 
-		# Constructor override
+		/**
+		 * Constructor override
+		 */
 
 		public function __construct(string $message = '') {
 

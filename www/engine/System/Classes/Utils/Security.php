@@ -23,7 +23,7 @@ namespace Utils {
 
 		public static function checkCaptcha(string $captcha) {
 
-			return (0 === strcasecmp(Session::get('captcha'), $captcha));
+			return (0 === strcasecmp((Session::get('captcha') ?? ''), $captcha));
 		}
 	}
 }

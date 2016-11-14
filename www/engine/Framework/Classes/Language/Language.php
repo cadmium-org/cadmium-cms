@@ -1,36 +1,62 @@
 <?php
 
+/**
+ * @package Framework\Language
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Language {
 
 		protected static $phrases = [];
 
-		# Add phrase to list
+		/**
+		 * Add a phrase to the list
+		 */
 
 		private static function addPhrase(string $name, string $value) {
 
 			if (preg_match(REGEX_LANGUAGE_PHRASE_NAME, $name)) self::$phrases[$name] = $value;
 		}
 
-		# Load phrases file
+		/**
+		 * Load a phrases list from a file
+		 *
+		 * @return true on success or false on failure
+		 */
 
 		public static function load(string $file_name) {
 
-			if (!is_array($phrases = Explorer::php($file_name))) return false;
+			if (!is_array($phrases = Explorer::include($file_name))) return false;
 
-			foreach ($phrases as $name => $value) self::addPhrase($name, $value);
+			foreach ($phrases as $name => $value) if (is_scalar($value)) self::addPhrase($name, $value);
 
 			# ------------------------
 
 			return true;
 		}
 
-		# Get phrase by name
+		/**
+		 * Get a phrase
+		 *
+		 * @return the phrase if exists, otherwise false
+		 */
 
 		public static function get(string $name) {
 
 			return (self::$phrases[$name] ?? false);
+		}
+
+		/**
+		 * Get the phrases array
+		 */
+
+		public static function getPhrases() {
+
+			return static::$phrases;
 		}
 	}
 }

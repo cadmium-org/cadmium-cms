@@ -4,12 +4,10 @@ namespace Modules\Extend\Handler {
 
 	use Modules\Extend;
 
-	class Templates extends Extend\Templates {
+	class Templates extends Extend\Utils\Handler\Basic {
 
-		use Extend\Utils\Handler;
+		use Extend\Common\Templates;
 
-		protected static $error_name = 'TEMPLATES_ERROR_NAME', $errors_save = 'TEMPLATES_ERROR_SAVE';
-
-		protected static $view_main = 'Blocks\Extend\Templates\Main', $view_item = 'Blocks\Extend\Templates\Item';
+		protected $title = 'TITLE_EXTEND_TEMPLATES';
 	}
 }

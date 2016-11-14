@@ -3,7 +3,7 @@
 namespace Frames\Site {
 
 	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Modules\Settings, Utils\Menu, Utils\Messages;
-	use Utils\Template\Variables, Utils\Template\Widgets, Utils\View, Date, Request, Template;
+	use Utils\SEO, Utils\Template\Variables, Utils\Template\Widgets, Utils\View, Date, Language, Template;
 
 	abstract class Section extends Frames\Section {
 
@@ -15,21 +15,19 @@ namespace Frames\Site {
 
 		const PHRASES = ['Common', 'Mail', 'Range', 'Site', 'User'];
 
-		# Section settings
+		# Page settings
 
 		protected $title = '', $layout = 'Common';
 
-		protected $description = '', $keywords = '', $robots_index = false, $robots_follow = false, $canonical = '';
-
 		# Get layout
 
-		private function getLayout(Template\Asset\Block $contents) {
+		private function getLayout(Template\Block $contents) {
 
-			$layout = View::get('Layouts\\' . $this->layout);
+			$layout = View::get('Layouts/' . $this->layout);
 
 			# Create layout components
 
-			$menu = new Menu();
+			$menu = new Menu;
 
 			# Set menu
 
@@ -37,23 +35,24 @@ namespace Frames\Site {
 
 			# Set auth
 
-			if (Settings::get('users_registration')) {
+			if (Auth::check()) {
 
-				if (!Auth::check()) $layout->block('auth')->enable(); else {
+				$layout->getBlock('user')->enable();
 
-					$layout->block('user')->enable();
+				$layout->getBlock('user')->gravatar = Auth::user()->gravatar;;
 
-					$layout->block('user')->gravatar = md5(strtolower(Auth::user()->email));
+				$layout->getBlock('user')->name = Auth::user()->name;
 
-					$layout->block('user')->name = Auth::user()->name;
+				$layout->getBlock('auth')->disable();
 
-					if (Auth::user()->rank === RANK_ADMINISTRATOR) $layout->block('user')->block('admin')->enable();
-				}
+				if (Auth::user()->rank === RANK_ADMINISTRATOR) $layout->getBlock('admin')->enable();
 			}
 
 			# Set title
 
-			$layout->title = (('' !== $this->title) ? $this->title : Settings::get('site_title'));
+			$layout->title = (('' !== SEO::title()) ? SEO::title() :
+
+				(('' !== $this->title) ? Language::get($this->title) : Settings::get('site_title')));
 
 			# Set slogan
 
@@ -65,7 +64,7 @@ namespace Frames\Site {
 
 			# Set copyright
 
-			$layout->copyright = Date::year();
+			$layout->copyright = Date::getYear();
 
 			# Set powered by
 
@@ -80,11 +79,11 @@ namespace Frames\Site {
 
 		# Display page
 
-		private function displayPage(Template\Asset\Block $contents) {
+		protected function displayPage(Template\Block $contents, int $status = STATUS_CODE_200) {
 
 			# Process template
 
-			$page = View::get('Main\Page');
+			$page = View::get('Main/Page');
 
 			# Set language
 
@@ -92,21 +91,23 @@ namespace Frames\Site {
 
 			# Set SEO data
 
-			$page->description = ('' !== $this->description) ? $this->description : Settings::get('site_description');
+			$page->description = ('' !== SEO::description()) ? SEO::description() : Settings::get('site_description');
 
-			$page->keywords = ('' !== $this->keywords) ? $this->keywords : Settings::get('site_keywords');
+			$page->keywords = ('' !== SEO::keywords()) ? SEO::keywords() : Settings::get('site_keywords');
 
-			$page->robots = (($this->robots_index ? 'INDEX' : 'NOINDEX') . ',' . ($this->robots_follow ? 'FOLLOW' : 'NOFOLLOW'));
+			$page->robots = ((SEO::robotsIndex() ? 'INDEX' : 'NOINDEX') . ',' . (SEO::robotsFollow() ? 'FOLLOW' : 'NOFOLLOW'));
 
 			# Set title
 
-			$page->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . Settings::get('site_title'));
+			$page->title = (('' !== SEO::title()) ? SEO::title() :
+
+				((('' !== $this->title) ? (Language::get($this->title) . ' | ') : '') . Settings::get('site_title')));
 
 			# Set canonical
 
-			if ('' === $this->canonical) $page->block('canonical')->disable();
+			if ('' === SEO::canonical()) $page->getBlock('canonical')->disable();
 
-			else $page->block('canonical')->link = $this->canonical;
+			else $page->getBlock('canonical')->link = SEO::canonical();
 
 			# Set layout
 
@@ -116,9 +117,15 @@ namespace Frames\Site {
 
 			$contents->messages = Messages::block();
 
+			# Set global components
+
+			foreach (Variables::generate() as $name => $value) Template::setGlobal($name, $value);
+
+			foreach (Widgets::generate() as $name => $block) Template::setWidget($name, $block);
+
 			# ------------------------
 
-			Template::output($page, STATUS_CODE_200);
+			Template::output($page, $status);
 		}
 
 		# Site main method
@@ -131,40 +138,9 @@ namespace Frames\Site {
 
 			if (Settings::get('site_status') === STATUS_UPDATE) return Status::update();
 
-			# Check access rights
-
-			if ($this instanceof Component\Profile) {
-
-				if (!Settings::get('users_registration')) return Status::error404();
-
-				if (($this instanceof Component\Profile\Auth)) {
-
-					if (Auth::check()) Request::redirect(INSTALL_PATH . '/profile');
-
-				} else if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
-
-					Request::redirect(INSTALL_PATH . '/profile/login');
-				}
-			}
-
-			# Handle request
-
-			if (Template::isBlock($result = $this->handle())) {
-
-				# Set global components
-
-				foreach (Variables::generate() as $name => $value) Template::global($name, $value);
-
-				foreach (Widgets::generate() as $name => $block) Template::widget($name, $block);
-
-				# Display page
-
-				return $this->displayPage($result);
-			}
-
 			# ------------------------
 
-			return Status::error404();
+			$this->area();
 		}
 	}
 }

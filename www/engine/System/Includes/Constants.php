@@ -5,19 +5,19 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.3.0');
+define('CADMIUM_VERSION',                           '0.4.0');
 define('CADMIUM_COPY',                              '2016');
 
 # External
 
-define('JQUERY_VERSION',                            '2.2.3');
-define('SEMANTIC_UI_VERSION',                       '2.1.8');
-define('CKEDITOR_VERSION',                          '4.5.8');
+define('JQUERY_VERSION',                            '3.1.1');
+define('SEMANTIC_UI_VERSION',                       '2.2.6');
+define('CKEDITOR_VERSION',                          '4.5.11');
 
 # Sections
 
-define('SECTION_ADMIN',                             'Admin');
-define('SECTION_SITE',                              'Site');
+define('SECTION_ADMIN',                             'admin');
+define('SECTION_SITE',                              'site');
 
 # Filemanager types
 

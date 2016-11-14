@@ -6,22 +6,24 @@ namespace Modules\Entitizer\Utils {
 
 	abstract class Dataset {
 
-		protected $definition = null, $handlers = [], $data = [];
+		protected $params = null, $workers = [], $data = [];
 
-		# Add handler
+		# Add worker
 
-		protected function addHandler(string $name, callable $handler) {
+		protected function addWorker(string $name, callable $worker) {
 
-			if ((false !== $this->definition->param($name)) || isset($this->handlers[$name])) return;
+			if (isset($this->params[$name]) || isset($this->workers[$name])) return;
 
-			$this->handlers[$name] = $handler;
+			$this->workers[$name] = $worker;
 		}
 
 		# Constructor
 
 		public function __construct() {
 
-			$this->definition = Entitizer::definition(static::$table);
+			$this->params = Entitizer::definition(static::$table)->params();
+
+			if (static::$nesting) $this->params['parent_id'] = $this->params['id'];
 
 			$this->init(); $this->reset();
 		}
@@ -32,15 +34,11 @@ namespace Modules\Entitizer\Utils {
 
 			# Reset params
 
-			foreach ($this->definition->params() as $name => $param) $this->data[$name] = $param->cast(null);
+			foreach ($this->params as $name => $param) $this->data[$name] = $param->cast(null);
 
 			# Reset extras
 
-			foreach ($this->handlers as $name => $handler) $this->data[$name] = $handler($this->data);
-
-			# Reset parent id
-
-			if (static::$nesting) $this->data['parent_id'] = 0;
+			foreach ($this->workers as $name => $worker) $this->data[$name] = $worker($this->data);
 
 			# ------------------------
 
@@ -55,21 +53,12 @@ namespace Modules\Entitizer\Utils {
 
 			foreach ($data as $name => $value) {
 
-				if (false === ($param = $this->definition->param($name))) continue;
-
-				$this->data[$name] = $param->cast($value);
+				if (isset($this->params[$name])) $this->data[$name] = $this->params[$name]->cast($value);
 			}
 
 			# Update extras
 
-			foreach ($this->handlers as $name => $handler) $this->data[$name] = $handler($this->data);
-
-			# Update parent id
-
-			if (static::$nesting && isset($data['parent_id'])) {
-
-				$this->data['parent_id'] = $this->definition->param('id')->cast($data['parent_id']);
-			}
+			foreach ($this->workers as $name => $worker) $this->data[$name] = $worker($this->data);
 
 			# ------------------------
 
@@ -84,9 +73,7 @@ namespace Modules\Entitizer\Utils {
 
 			foreach ($data as $name => $value) {
 
-				if (false === ($param = $this->definition->param($name))) continue;
-
-				$cast[$name] = $param->cast($value);
+				if (isset($this->params[$name])) $cast[$name] = $this->params[$name]->cast($value);
 			}
 
 			# ------------------------

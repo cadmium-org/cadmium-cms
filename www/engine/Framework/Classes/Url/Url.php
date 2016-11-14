@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @package Framework\Url
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	class Url {
 
 		private $path = [], $query = [];
 
-		# Consructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(string $url = '') {
 
@@ -24,42 +33,82 @@ namespace {
 			if (isset($url['query'])) parse_str($url['query'], $this->query);
 		}
 
-		# Return path
+		/**
+		 * Set a query attribute. If the value is null, an attribute will be removed
+		 *
+		 * @return the current url object
+		 */
 
-		public function path() {
-
-			return $this->path;
-		}
-
-		# Return query
-
-		public function query() {
-
-			return $this->query;
-		}
-
-		# Set query variable
-
-		public function set(string $name, string $value = '') {
+		public function setAttribute(string $name, string $value = null) {
 
 			$this->query[$name] = $value;
 
 			return $this;
 		}
 
-		# Get url as string
+		/**
+		* Get a query attribute
+		*
+		* @return the value, otherwise false
+		*/
 
-		public function string() {
+		public function getAttribute(string $name) {
 
-			$path = [];
+			return ($this->query[$name] ?? false);
+		}
 
-			foreach ($this->path as $value) $path[] = urlencode($value);
+		/**
+		 * Get the slug (a path without leading slash)
+		 */
 
-			$path = implode('/', $path); $query = http_build_query($this->query);
+		public function getSlug() {
 
-			# ------------------------
+			return implode('/', array_map('urlencode', $this->path));
+		}
 
-			return ('/' . $path . ($query ? ('?' . $query) : ''));
+		/**
+		 * Get the url path
+		 */
+
+		public function getPath() {
+
+			return ('/' . implode('/', array_map('urlencode', $this->path)));
+		}
+
+		/**
+		 * Get the url query
+		 */
+
+		public function getQuery() {
+
+			return (($query = http_build_query($this->query)) ? ('?' . $query) : '');
+		}
+
+		/**
+		 * Get the url path as an array
+		 */
+
+		public function getPathParts() {
+
+			return $this->path;
+		}
+
+		/**
+		 * Get the url query as an array
+		 */
+
+		public function getQueryParts() {
+
+			return $this->query;
+		}
+
+		/**
+		 * Get the url as a string
+		 */
+
+		public function getString(bool $include_query = true) {
+
+			return ($this->getPath() . $this->getQuery());
 		}
 	}
 }

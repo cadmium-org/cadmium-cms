@@ -23,9 +23,10 @@ namespace Modules\Settings\Controller {
 
 			# Process post data
 
-			foreach ($post as $name => $value) if (!Settings::set($name, $value))
+			foreach (Settings::setArray($post) as $name => $result) {
 
-				return (isset($errors[$name]) ? [$name, $errors[$name]] : false);
+				if (!$result) return (isset($errors[$name]) ? [$name, $errors[$name]] : false);
+			}
 
 			# Save settings
 

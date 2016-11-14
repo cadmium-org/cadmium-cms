@@ -6,13 +6,11 @@ namespace Modules\Install\Form {
 
 	class Database extends Form {
 
+		protected $name = 'database';
+
 		# Constructor
 
 		public function __construct() {
-
-			parent::__construct('database');
-
-			# Add fields
 
 			$this->addText('server', 'localhost', FORM_FIELD_TEXT, CONFIG_DATABASE_SERVER_MAX_LENGTH, ['required' => true]);
 

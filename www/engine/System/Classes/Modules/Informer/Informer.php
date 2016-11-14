@@ -10,14 +10,14 @@ namespace Modules {
 
 		public static function countEntries(string $table, bool $false_on_error = false) {
 
-			if (!(DB::select($table, 'COUNT(id) as count') && (DB::last()->rows === 1))) {
+			if (!(DB::select($table, 'COUNT(id) as count') && (DB::getLast()->rows === 1))) {
 
 				return (!$false_on_error ? 0 : false);
 			}
 
 			# ------------------------
 
-			return intval(DB::last()->row()['count']);
+			return intval(DB::getLast()->getRow()['count']);
 		}
 
 		# Check if install file exists
@@ -45,9 +45,9 @@ namespace Modules {
 
 		public static function mysqlVersion() {
 
-			if (!(DB::send("SELECT VERSION() as version") && DB::last()->status)) return false;
+			if (!(DB::send("SELECT VERSION() as version") && DB::getLast()->status)) return false;
 
-			return strval(DB::last()->row()['version']);
+			return strval(DB::getLast()->getRow()['version']);
 		}
 	}
 }

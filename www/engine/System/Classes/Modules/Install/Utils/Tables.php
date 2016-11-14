@@ -19,7 +19,7 @@ namespace Modules\Install\Utils {
 
 			# ------------------------
 
-			return (DB::insert($table, $relations, true, true) && DB::last()->status);
+			return (DB::insert($table, $relations, true, true) && DB::getLast()->status);
 		}
 
 		# Fill pages table
@@ -40,7 +40,7 @@ namespace Modules\Install\Utils {
 
 				'title' => Language::get('INSTALL_PAGE_INDEX_TITLE'),
 
-				'contents' => Template::block(Language::get('INSTALL_PAGE_INDEX_CONTENTS'))->contents(),
+				'contents' => Template::createBlock(Language::get('INSTALL_PAGE_INDEX_CONTENTS'))->getContents(),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME]];
 
@@ -50,13 +50,13 @@ namespace Modules\Install\Utils {
 
 				'title' => (Language::get('INSTALL_PAGE_DEMO_TITLE') . ' ' . ($id - 1)),
 
-				'contents' => Template::block(Language::get('INSTALL_PAGE_DEMO_CONTENTS'))->contents(),
+				'contents' => Template::createBlock(Language::get('INSTALL_PAGE_DEMO_CONTENTS'))->getContents(),
 
 				'time_created' => REQUEST_TIME, 'time_modified' => REQUEST_TIME];
 
 			# Process insertion
 
-			if (!(DB::insert(TABLE_PAGES, $pages, true) && DB::last()->status)) return false;
+			if (!(DB::insert(TABLE_PAGES, $pages, true) && DB::getLast()->status)) return false;
 
 			self::fillRelationsTable(TABLE_PAGES_RELATIONS, 4);
 
@@ -87,7 +87,7 @@ namespace Modules\Install\Utils {
 
 			# Process insertion
 
-			if (!(DB::insert(TABLE_MENU, $menu, true) && DB::last()->status)) return false;
+			if (!(DB::insert(TABLE_MENU, $menu, true) && DB::getLast()->status)) return false;
 
 			self::fillRelationsTable(TABLE_MENU_RELATIONS, 3);
 

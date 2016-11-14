@@ -2,15 +2,17 @@
 
 namespace Modules\Profile\Handler {
 
-	use Modules\Auth, Utils\Range, Utils\View, Date, Geo\Country;
+	use Frames, Modules\Auth, Utils\Range, Utils\View, Date, Geo\Country;
 
-	class Overview {
+	class Overview extends Frames\Site\Area\Authorized {
+
+		protected $title = 'TITLE_PROFILE';
 
 		# Get contents
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Profile\Overview');
+			$contents = View::get('Blocks/Profile/Overview');
 
 			# Set general
 
@@ -18,30 +20,30 @@ namespace Modules\Profile\Handler {
 
 			$contents->email = Auth::user()->email;
 
-			$contents->rank = Range\Rank::get(Auth::user()->rank);
+			$contents->rank = (Range\Rank::get(Auth::user()->rank) ?? '');
 
 			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->time_registered);
 
 			# Set sex
 
-			$contents->sex = Range\Sex::get(Auth::user()->sex);
+			$contents->sex = (Range\Sex::get(Auth::user()->sex) ?? '');
 
 			# Set full name & city
 
 			foreach (['full_name', 'city'] as $name) {
 
-				if ('' === ($text = Auth::user()->$name)) $contents->block($name)->disable();
+				if ('' === ($text = Auth::user()->$name)) $contents->getBlock($name)->disable();
 
-				else $contents->block($name)->text = $text;
+				else $contents->getBlock($name)->text = $text;
 			}
 
 			# Set country
 
-			if ('' === ($country = Auth::user()->country)) $contents->block('country')->disable(); else {
+			if ('' === ($country = Auth::user()->country)) $contents->getBlock('country')->disable(); else {
 
-				$contents->block('country')->code = $country;
+				$contents->getBlock('country')->code = $country;
 
-				$contents->block('country')->name = Country::get($country);
+				$contents->getBlock('country')->name = (Country::get($country) ?? '');
 			}
 
 			# ------------------------
@@ -51,7 +53,7 @@ namespace Modules\Profile\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
 			return $this->getContents();
 		}

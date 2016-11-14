@@ -51,7 +51,7 @@ namespace Utils {
 
 			$extensions = ['php', 'phtml', 'php3', 'php4', 'php5', 'phps'];
 
-			$extension = strtolower(Explorer::extension($file['name'], false));
+			$extension = strtolower(Explorer::getExtension($file['name'], false));
 
 			if (in_array($extension, $extensions, true)) return 'UPLOADER_ERROR_TYPE';
 

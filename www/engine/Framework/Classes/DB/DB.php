@@ -1,37 +1,50 @@
 <?php
 
+/**
+ * @package Framework\DB
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class DB {
 
 		private static $link = null, $last = null, $log = [], $time = 0;
 
-		# Connect to database
+		/**
+		 * Connect to a database
+		 */
 
 		public static function connect(string $server, string $user, string $password, string $name) {
 
 			# Establish connection
 
-			if (false === ($link = @mysqli_connect($server, $user, $password))) throw new Exception\DBConnect();
+			if (false === ($link = mysqli_connect($server, $user, $password))) throw new Exception\DBConnect();
 
 			# Select database
 
-			if (!@mysqli_select_db($link, $name)) throw new Exception\DBSelect();
+			if (!mysqli_select_db($link, $name)) throw new Exception\DBSelect();
 
 			# Set encoding
 
-			if (!@mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Exception\DBCharset();
+			if (!mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Exception\DBCharset();
 
-			if (!@mysqli_query($link, "SET character_set_results = 'utf8'")) throw new Exception\DBCharset();
+			if (!mysqli_query($link, "SET character_set_results = 'utf8'")) throw new Exception\DBCharset();
 
-			if (!@mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) throw new Exception\DBCharset();
+			if (!mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) throw new Exception\DBCharset();
 
 			# ------------------------
 
 			self::$link = $link;
 		}
 
-		# Send query
+		/**
+		 * Send a query
+		 *
+		 * @return the result object or false on failure
+		 */
 
 		public static function send(string $query) {
 
@@ -39,7 +52,7 @@ namespace {
 
 			$time = microtime(true); $result = mysqli_query(self::$link, $query); $time = (microtime(true) - $time);
 
-			self::$last = new DB\Utils\Result(self::$link, $result, $query, $time);
+			self::$last = new DB\Result(self::$link, $result, $query, $time);
 
 			self::$log[] = self::$last; self::$time += $time;
 
@@ -48,59 +61,93 @@ namespace {
 			return self::$last;
 		}
 
-		# Send select query
+		/**
+		 * Send a select query
+		 *
+		 * @param $table        a table name
+		 * @param $selection    a string or an array where each value is a field name
+		 * @param $condition    a string or an array where each key is a field name and each value is a field value
+		 * @param $order        a string or an array where each key is a field name and each value is a sorting direction (ASC or DESC)
+		 * @param $limit        a maximum number of rows to be selected
+		 *
+		 * @return the result object or false on failure
+		 */
 
 		public static function select(string $table, $selection, $condition = null, $order = null, int $limit = 0) {
 
-			$query = new DB\Query\Select(...func_get_args());
-
-			return self::send($query->query());
+			return self::send(new DB\Query\Select(...func_get_args()));
 		}
 
-		# Send insert query
+		/**
+		 * Send an insert query
+		 *
+		 * @param $table        a table name
+		 * @param $set          an array where each key is a field name and each value is a field value, or an array of such arrays
+		 * @param $multiple     tells that the set must be interpreted as a multi-dimensional array (for multi-row inserts)
+		 * @param $ignore       tells to ignore insert errors, such as a duplicate-key error
+		 *
+		 * @return the result object or false on failure
+		 */
 
-		public static function insert(string $table, array $dataset, bool $multiple = false, bool $ignore = false) {
+		public static function insert(string $table, array $set, bool $multiple = false, bool $ignore = false) {
 
-			$query = new DB\Query\Insert(...func_get_args());
-
-			return self::send($query->query());
+			return self::send(new DB\Query\Insert(...func_get_args()));
 		}
 
-		# Send update query
+		/**
+		 * Send an update query
+		 *
+		 * @param $table        a table name
+		 * @param $set          an array where each key is a field name and each value is a field value
+		 * @param $condition    a string or an array where each key is a field name and each value is a field value
+		 *
+		 * @return the result object or false on failure
+		 */
 
-		public static function update(string $table, array $dataset, $condition = null) {
+		public static function update(string $table, array $set, $condition = null) {
 
-			$query = new DB\Query\Update(...func_get_args());
-
-			return self::send($query->query());
+			return self::send(new DB\Query\Update(...func_get_args()));
 		}
 
-		# Send delete query
+		/**
+		 * Send a delete query
+		 *
+		 * @param $table        a table name
+		 * @param $condition    a string or an array where each key is a field name and each value is a field value
+		 *
+		 * @return the result object or false on failure
+		 */
 
 		public static function delete(string $table, $condition = null) {
 
-			$query = new DB\Query\Delete(...func_get_args());
-
-			return self::send($query->query());
+			return self::send(new DB\Query\Delete(...func_get_args()));
 		}
 
-		# Return last query holder
+		/**
+		 * Get the last result object
+		 *
+		 * @return the result object or false if the last query failed or null if there have been no queries sent
+		 */
 
-		public static function last() {
+		public static function getLast() {
 
 			return self::$last;
 		}
 
-		# Return process log
+		/**
+		 * Get the array of all the result objects
+		 */
 
-		public static function log() {
+		public static function getLog() {
 
 			return self::$log;
 		}
 
-		# Return process time
+		/**
+		 * Get the total time of all the queries sent
+		 */
 
-		public static function time() {
+		public static function getTime() {
 
 			return number_format(self::$time, 10);
 		}

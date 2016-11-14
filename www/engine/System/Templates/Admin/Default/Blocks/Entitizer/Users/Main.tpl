@@ -18,6 +18,8 @@
 
 	<form class="ui form" method="post" action="$link$" autocomplete="off">
 
+		<input type="password" id="fake-password" name="fake_password" style="display:none;" />
+
 		<div class="ui stackable grid">
 
 			<div class="two column row">

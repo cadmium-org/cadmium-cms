@@ -1,24 +1,38 @@
-<form class="ui form" method="get" action="$install_path$/install.php" autocomplete="off">
+{ block:language }
+
+<div class="ui form">
 
 	<div class="field">
 
-		<label for="language">%INSTALL_FIELD_LANGUAGE%</label>
+		<label>%INSTALL_FIELD_LANGUAGE%</label>
 
-		{ block:field_language / }
+		<div class="ui fluid selection dropdown">
+
+			<i class="dropdown icon"></i>
+
+			<div class="text"><i class="$country$ flag"></i>$title$</div>
+
+			<div class="menu">
+
+				{ for:items }
+
+				<a class="item" href="?language=$name$"><i class="$country$ flag"></i>$title$</a>
+
+				{ / for:items }
+
+			</div>
+
+		</div>
 
 	</div>
 
-	<div class="field">
+</div>
 
-		<label for="template">%INSTALL_FIELD_TEMPLATE%</label>
+{ / block:language }
 
-		{ block:field_template / }
+{ block:requirements }
 
-	</div>
-
-</form>
-
-<table class="ui table">
+<table class="ui unstackable basic table">
 
 	<tbody>
 
@@ -32,7 +46,7 @@
 
 		</tr>
 
-		{ for:requirements }
+		{ for:items }
 
 		<tr>
 
@@ -40,17 +54,21 @@
 
 		</tr>
 
-		{ / for:requirements }
+		{ / for:items }
 
 	</tbody>
 
 </table>
 
+{ / block:requirements }
+
 { block:button }
+
+<div class="ui hidden divider"></div>
 
 <div class="field">
 
-	<a class="ui fluid teal button" href="$install_path$/install.php?checked=$checked$">$text$</a>
+	<a class="ui teal button" href="$install_path$/install.php?checked=$checked$">$text$</a>
 
 </div>
 

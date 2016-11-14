@@ -22,9 +22,9 @@ namespace Utils {
 
 		# Get range array
 
-		public static function array() {
+		public static function getRange() {
 
-			return array_map('self::translate', parent::array());
+			return array_map('self::translate', parent::getRange());
 		}
 	}
 }

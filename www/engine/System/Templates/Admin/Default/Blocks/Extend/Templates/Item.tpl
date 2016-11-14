@@ -1,10 +1,10 @@
 <tr data-name="$name$">
 
-	<td><i class="theme icon"></i> $title$</td>
+	<td class="twelve wide"><i class="theme icon"></i> $title$</td>
 
 	<td class="right aligned">
 
-		<a class="ui mini $class$ icon checker button" title="%DEFAULT%"><i class="icon checkmark"></i></a>
+		<a class="ui mini $class$ icon checker button" title="%DEFAULT%"><i class="checkmark icon"></i></a>
 
 	</td>
 

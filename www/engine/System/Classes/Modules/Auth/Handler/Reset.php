@@ -2,30 +2,19 @@
 
 namespace Modules\Auth\Handler {
 
-	use Modules\Auth, Request;
+	use Frames, Modules\Auth, Request;
 
-	class Reset extends Auth\Utils\Handler {
+	class Reset extends Frames\Admin\Area\Auth {
 
-		protected $view = 'Blocks\Auth\Reset';
+		protected $title = 'TITLE_AUTH_RESET';
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
-			# Create form
+			if (Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/register');
 
-			$this->form = new Auth\Form\Reset();
-
-			# Handle form
-
-			if ($this->form->handle(new Auth\Controller\Reset())) {
-
-				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=reset');
-			}
-
-			# ------------------------
-
-			return $this->getContents();
+			return (new Auth\Action\Reset)->handle();
 		}
 	}
 }
