@@ -93,5 +93,14 @@ namespace Template {
 
 			return $this->items->getContents();
 		}
+
+		/**
+		 * Cloner
+		 */
+
+		public function __clone() {
+
+			$this->items = clone $this->items;
+		}
 	}
 }
