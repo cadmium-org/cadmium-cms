@@ -49,7 +49,7 @@ namespace {
 		/**
 		 * Save a JSON value into a file
 		 *
-		 * @return the number of bytes that were written to the file, or false on failure
+		 * @return the number of bytes that were written to the file or false on failure
 		 */
 
 		public static function save(string $file_name, $value) {

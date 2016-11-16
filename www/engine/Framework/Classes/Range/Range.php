@@ -26,7 +26,7 @@ namespace {
 		 * Check if a key exists in the range
 		 */
 
-		public static function exists($key) {
+		public static function exists($key) : bool {
 
 			return isset(static::$range[$key]);
 		}
@@ -59,7 +59,7 @@ namespace {
 		 * Get the range array
 		 */
 
-		public static function getRange() {
+		public static function getRange() : array {
 
 			return static::$range;
 		}

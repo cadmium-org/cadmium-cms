@@ -72,7 +72,7 @@ namespace Template {
 		 * Get block contents
 		 */
 
-		protected function getBlockContents() {
+		protected function getBlockContents() : string {
 
 			$insertions = [];
 
@@ -132,7 +132,7 @@ namespace Template {
 		 * Get group contents
 		 */
 
-		protected function getGroupContents() {
+		protected function getGroupContents() : string {
 
 			$contents = '';
 
@@ -162,7 +162,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function addItem(Block $item) {
+		public function addItem(Block $item) : Block {
 
 			$this->items[] = $item; $this->count++;
 
@@ -175,7 +175,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function addItems(array $items) {
+		public function addItems(array $items) : Block {
 
 			foreach ($items as $item) if ($item instanceof Block) $this->addItem($item);
 
@@ -188,7 +188,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function removeItems() {
+		public function removeItems() : Block {
 
 			$this->items = []; $this->count = 0;
 
@@ -201,7 +201,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function set(string $name, $value) {
+		public function set(string $name, $value) : Block {
 
 			if ($value instanceof Block) $this->setBlock($name, $value);
 
@@ -220,7 +220,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function setArray(array $components) {
+		public function setArray(array $components) : Block {
 
 			foreach ($components as $name => $component) $this->set($name, $component);
 
@@ -233,7 +233,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function setBlock(string $name, Block $block) {
+		public function setBlock(string $name, Block $block) : Block {
 
 			if (isset($this->blocks[$name])) $this->blocks[$name] = $block;
 
@@ -246,7 +246,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function setLoop(string $name, array $items) {
+		public function setLoop(string $name, array $items) : Block {
 
 			if (isset($this->loops[$name])) $this->loops[$name]->setItems($items);
 
@@ -259,7 +259,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function setVar(string $name, string $value) {
+		public function setVar(string $name, string $value) : Block {
 
 			if (isset($this->variables[$name])) $this->variables[$name] = $value;
 
@@ -272,7 +272,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function setItems(array $items) {
+		public function setItems(array $items) : Block {
 
 			$this->removeItems(); $this->addItems($items);
 
@@ -296,7 +296,7 @@ namespace Template {
 		 * @return the block or an empty block if the block with the given name does not exist
 		 */
 
-		public function getBlock(string $name) {
+		public function getBlock(string $name) : Block {
 
 			return ($this->blocks[$name] ?? new Block);
 		}
@@ -305,7 +305,7 @@ namespace Template {
 		 * Get the blocks list
 		 */
 
-		public function getBlocks() {
+		public function getBlocks() : array {
 
 			return $this->blocks;
 		}
@@ -316,7 +316,7 @@ namespace Template {
 		 * @return the loop or an empty loop if the loop with the given name does not exist
 		 */
 
-		public function getLoop(string $name) {
+		public function getLoop(string $name) : Loop {
 
 			return ($this->loops[$name] ?? new Loop);
 		}
@@ -325,7 +325,7 @@ namespace Template {
 		 * Get the loops list
 		 */
 
-		public function getLoops() {
+		public function getLoops() : array {
 
 			return $this->loops;
 		}
@@ -333,7 +333,7 @@ namespace Template {
 		/**
 		 * Get a variable
 		 *
-		 * @return the variable or false if the variable with the given name does not exist
+		 * @return the value or false if the variable with the given name does not exist
 		 */
 
 		public function getVar(string $name) {
@@ -345,7 +345,7 @@ namespace Template {
 		 * Get the variable list
 		 */
 
-		public function getVars() {
+		public function getVars() : array {
 
 			return $this->variables;
 		}
@@ -354,7 +354,7 @@ namespace Template {
 		 * Get the items list
 		 */
 
-		public function getItems() {
+		public function getItems() : array {
 
 			return $this->items;
 		}
@@ -363,7 +363,7 @@ namespace Template {
 		 * Get the items count
 		 */
 
-		public function getCount() {
+		public function getCount() : int {
 
 			return $this->count;
 		}
@@ -372,7 +372,7 @@ namespace Template {
 		 * Get the block contents
 		 */
 
-		public function getContents() {
+		public function getContents() : string {
 
 			if (!$this->enabled) return '';
 
@@ -399,7 +399,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function disable() {
+		public function disable() : Block {
 
 			$this->enabled = false;
 
@@ -412,7 +412,7 @@ namespace Template {
 		 * @return the current block object
 		 */
 
-		public function enable() {
+		public function enable() : Block {
 
 			$this->enabled = true;
 
@@ -423,7 +423,7 @@ namespace Template {
 		 * Check if the block is enabled
 		 */
 
-		public function isEnabled() {
+		public function isEnabled() : bool {
 
 			return $this->enabled;
 		}
@@ -443,7 +443,7 @@ namespace Template {
 		 * An alias for the set method
 		 */
 
-		public function __set(string $name, $value) {
+		public function __set(string $name, $value) : Block {
 
 			return $this->set($name, $value);
 		}
@@ -461,7 +461,7 @@ namespace Template {
 		 * Check if a component exists
 		 */
 
-		public function __isset(string $name) {
+		public function __isset(string $name) : bool {
 
 			return (isset($this->blocks[$name]) || isset($this->loops[$name]) || isset($this->variables[$name]));
 		}

@@ -17,7 +17,7 @@ namespace {
 		 * Check if an extension is of a given type
 		 */
 
-		private static function checkType(string $extension, string $type) {
+		private static function checkType(string $extension, string $type) : bool {
 
 			if (false === ($mime = self::get($extension))) return false;
 
@@ -37,7 +37,7 @@ namespace {
 		 * Check if a given extension is of an image type
 		 */
 
-		public static function isImage(string $extension) {
+		public static function isImage(string $extension) : bool {
 
 			return self::checkType($extension, 'image');
 		}
@@ -46,7 +46,7 @@ namespace {
 		 * Check if a given extension is of an audio type
 		 */
 
-		public static function isAudio(string $extension) {
+		public static function isAudio(string $extension) : bool {
 
 			return self::checkType($extension, 'audio');
 		}
@@ -55,7 +55,7 @@ namespace {
 		 * Check if a given extension is of a video type
 		 */
 
-		public static function isVideo(string $extension) {
+		public static function isVideo(string $extension) : bool {
 
 			return self::checkType($extension, 'video');
 		}

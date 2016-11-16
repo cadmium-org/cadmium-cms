@@ -21,7 +21,7 @@ namespace Template {
 		 * @return the current loop object
 		 */
 
-		public function addItem(array $data) {
+		public function addItem(array $data) : Loop {
 
 			$this->items->addItem((clone $this->block)->setArray($data));
 
@@ -34,7 +34,7 @@ namespace Template {
 		 * @return the current loop object
 		 */
 
-		public function addItems(array $items) {
+		public function addItems(array $items) : Loop {
 
 			foreach ($items as $item) if (is_array($item)) $this->addItem($item);
 
@@ -47,7 +47,7 @@ namespace Template {
 		 * @return the current loop object
 		 */
 
-		public function removeItems() {
+		public function removeItems() : Loop {
 
 			$this->items->removeItems();
 
@@ -60,7 +60,7 @@ namespace Template {
 		 * @return the current loop object
 		 */
 
-		public function setItems(array $items) {
+		public function setItems(array $items) : Loop {
 
 			$this->removeItems(); $this->addItems($items);
 
@@ -71,7 +71,7 @@ namespace Template {
 		 * Get the items list
 		 */
 
-		public function getItems() {
+		public function getItems() : array {
 
 			return $this->items->getItems();
 		}
@@ -80,7 +80,7 @@ namespace Template {
 		 * Get the items count
 		 */
 
-		public function getCount() {
+		public function getCount() : int {
 
 			return $this->items->getCount();
 		}
@@ -89,7 +89,7 @@ namespace Template {
 		 * Get the loop contents
 		 */
 
-		public function getContents() {
+		public function getContents() : string {
 
 			return $this->items->getContents();
 		}

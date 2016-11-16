@@ -18,7 +18,7 @@ namespace {
 		 * @param $codestyle    tells to preserve indentation
 		 */
 
-		public static function formatInput(string $string, int $maxlength = 0, bool $multiline = false, bool $codestyle = false) {
+		public static function formatInput(string $string, int $maxlength = 0, bool $multiline = false, bool $codestyle = false) : string {
 
 			foreach (($string = explode("\n", $string)) as $key => $line) {
 
@@ -40,7 +40,7 @@ namespace {
 		 * Format a string before outputting. The method can optionally cut the string
 		 */
 
-		public static function formatOutput(string $string, int $maxlength = 0) {
+		public static function formatOutput(string $string, int $maxlength = 0) : string {
 
 			$search = ['$', '%', '{', '}']; $replace = ['&#36;', '&#37;', '&#123;', '&#125;'];
 
@@ -51,7 +51,7 @@ namespace {
 		 * Strip spaces out of a string
 		 */
 
-		public static function stripSpaces(string $string) {
+		public static function stripSpaces(string $string) : string {
 
 			return preg_replace('/ +/', '', $string);
 		}
@@ -60,7 +60,7 @@ namespace {
 		 * Replace multiple spaces in a string with a single space
 		 */
 
-		public static function singleSpaces(string $string) {
+		public static function singleSpaces(string $string) : string {
 
 			return preg_replace('/ +/', ' ', $string);
 		}
@@ -69,7 +69,7 @@ namespace {
 		 * Translit a string (for ukrainian and russian language only)
 		 */
 
-		public static function translit(string $string) {
+		public static function translit(string $string) : string {
 
 			$pattern = [
 
@@ -104,7 +104,7 @@ namespace {
 		 * The method can optionally cut the string
 		 */
 
-		public static function toUrl(string $string, int $maxlength) {
+		public static function toUrl(string $string, int $maxlength) : string {
 
 			$string = self::toLower(self::translit($string));
 
@@ -116,7 +116,7 @@ namespace {
 		 * The method can optionally cut the string
 		 */
 
-		public static function toVar(string $string, int $maxlength) {
+		public static function toVar(string $string, int $maxlength) : string {
 
 			$string = self::toLower(self::translit($string));
 
@@ -127,7 +127,7 @@ namespace {
 		 * Transform a string to lower case
 		 */
 
-		public static function toLower(string $string) {
+		public static function toLower(string $string) : string {
 
 			return (function_exists('mb_strtolower') ? 'mb_strtolower' : 'strtolower')($string);
 		}
@@ -136,7 +136,7 @@ namespace {
 		 * Transform a string to upper case
 		 */
 
-		public static function toUpper(string $string) {
+		public static function toUpper(string $string) : string {
 
 			return (function_exists('mb_strtoupper') ? 'mb_strtoupper' : 'strtoupper')($string);
 		}
@@ -145,7 +145,7 @@ namespace {
 		 * Get a string length
 		 */
 
-		public static function length(string $string) {
+		public static function length(string $string) : string {
 
 			return (function_exists('mb_strlen') ? 'mb_strlen' : 'strlen')($string);
 		}
@@ -154,7 +154,7 @@ namespace {
 		 * Get a part of a string
 		 */
 
-		public static function substr(string $string, int $start, int $length) {
+		public static function substr(string $string, int $start, int $length) : string {
 
 			return (function_exists('mb_substr') ? 'mb_substr' : 'substr')($string, $start, $length);
 		}
@@ -163,7 +163,7 @@ namespace {
 		 * Check if a string length is between given values
 		 */
 
-		public static function between(string $string, int $min, int $max) {
+		public static function between(string $string, int $min, int $max) : string {
 
 			return ((($length = self::length($string)) >= $min) && ($length <= $max));
 		}
@@ -172,7 +172,7 @@ namespace {
 		 * Cut a string with adding an optional ellipsis
 		 */
 
-		public static function cut(string $string, int $maxlength, bool $ellipsis = false) {
+		public static function cut(string $string, int $maxlength, bool $ellipsis = false) : string {
 
 			if (($maxlength < 1) || (self::length($string = trim($string)) <= $maxlength)) return $string;
 
@@ -187,7 +187,7 @@ namespace {
 		 * Get a random string with a given length from characters specified in a pool string
 		 */
 
-		public static function random(int $length, string $pool = STR_POOL_DEFAULT) {
+		public static function random(int $length, string $pool = STR_POOL_DEFAULT) : string {
 
 			if (($length < 1) || (0 === ($pool_length = self::length($pool)))) return '';
 
@@ -202,7 +202,7 @@ namespace {
 		 * Encode a string into a 40-character hash string
 		 */
 
-		public static function encode(string $salt, string $string) {
+		public static function encode(string $salt, string $string) : string {
 
 			return sha1($salt . substr(sha1($string), 8, 32));
 		}

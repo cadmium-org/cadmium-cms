@@ -19,7 +19,7 @@ namespace {
 
 		public static function set(string $name, string $value, int $lifetime = 0,
 
-			string $path = '/', string $domain = '', bool $secure = false, bool $http_only = false) {
+			string $path = '/', string $domain = '', bool $secure = false, bool $http_only = false) : bool {
 
 			return setcookie($name, $value, (REQUEST_TIME + $lifetime), $path, $domain, $secure, $http_only);
 		}
@@ -28,7 +28,7 @@ namespace {
 		 * Check if a cookie exists
 		 */
 
-		public static function exists(string $name) {
+		public static function exists(string $name) : bool {
 
 			return isset($_COOKIE[$name]);
 		}

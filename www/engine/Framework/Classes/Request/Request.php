@@ -15,7 +15,7 @@ namespace {
 		 * Check whether this is an ajax request
 		 */
 
-		public static function isAjax() {
+		public static function isAjax() : bool {
 
 			return (getenv('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
 		}
@@ -24,7 +24,7 @@ namespace {
 		 * Check whether this is a HTTPS request
 		 */
 
-		public static function isSecure() {
+		public static function isSecure() : bool {
 
 			$https = (!empty(getenv('HTTPS')) && (getenv('HTTPS') !== 'off'));
 

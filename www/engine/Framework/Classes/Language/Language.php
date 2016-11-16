@@ -28,7 +28,7 @@ namespace {
 		 * @return true on success or false on failure
 		 */
 
-		public static function load(string $file_name) {
+		public static function load(string $file_name) : bool {
 
 			if (!is_array($phrases = Explorer::include($file_name))) return false;
 
@@ -54,7 +54,7 @@ namespace {
 		 * Get the phrases array
 		 */
 
-		public static function getPhrases() {
+		public static function getPhrases() : array {
 
 			return static::$phrases;
 		}

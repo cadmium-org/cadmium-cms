@@ -26,7 +26,7 @@ namespace {
 		 * Create a new DOM element
 		 */
 
-		public static function create(string $name, string $value = '') {
+		public static function create(string $name, string $value = '') : DOMElement {
 
 			$element = self::$dom->createElement($name);
 

@@ -19,7 +19,7 @@ namespace {
 		 * @return true if the agent is present in the list, otherwise false
 		 */
 
-		private static function search(array &$list) {
+		private static function search(array &$list) : bool {
 
 			if (empty($agent = getenv('HTTP_USER_AGENT'))) return false;
 
@@ -51,7 +51,7 @@ namespace {
 		 * @return true if the agent is present in the mobile devices list, otherwise false
 		 */
 
-		public static function isMobile() {
+		public static function isMobile() : bool {
 
 			return self::search(self::$mobiles);
 		}
@@ -62,7 +62,7 @@ namespace {
 		 * @return true if the agent is present in the robots list, otherwise false
 		 */
 
-		public static function isRobot() {
+		public static function isRobot() : bool {
 
 			return self::search(self::$robots);
 		}

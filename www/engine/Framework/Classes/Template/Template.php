@@ -57,7 +57,7 @@ namespace {
 		 * Get the list of global variables
 		 */
 
-		public static function getGlobals() {
+		public static function getGlobals() : array {
 
 			return self::$globals;
 		}
@@ -66,7 +66,7 @@ namespace {
 		 * Get the list of widgets
 		 */
 
-		public static function getWidgets() {
+		public static function getWidgets() : array {
 
 			return self::$widgets;
 		}
@@ -75,7 +75,7 @@ namespace {
 		 * Create a new block object
 		 */
 
-		public static function createBlock(string $contents = '') {
+		public static function createBlock(string $contents = '') : Template\Block {
 
 			return new Template\Block($contents);
 		}
@@ -84,7 +84,7 @@ namespace {
 		 * Check if a given variable is a block object
 		 */
 
-		public static function isBlock($object) {
+		public static function isBlock($object) : bool {
 
 			return ($object instanceof Template\Block);
 		}

@@ -8,7 +8,7 @@ namespace {
 		 * Parse template contents
 		 */
 
-		private static function parseContents(string $contents, Throwable $exc) {
+		private static function parseContents(string $contents, Throwable $exc) : string {
 
 		   $contents = str_replace('$message$',            $exc->getMessage(),                  $contents);
 
@@ -27,7 +27,7 @@ namespace {
 		 * Get a client IP address
 		 */
 
-		public static function getIP() {
+		public static function getIP() : string {
 
 			if (!empty(getenv('HTTP_CLIENT_IP')))           return getenv('HTTP_CLIENT_IP');
 

@@ -9,7 +9,7 @@
 
 namespace Form\Field {
 
-	use Form, Validate;
+	use Form, Template, Validate;
 
 	class Checkbox extends Form\Field {
 
@@ -38,7 +38,7 @@ namespace Form\Field {
 		 * @return the result value
 		 */
 
-		public function setValue(string $value) {
+		public function setValue(string $value) : bool {
 
 			return ($this->value = Validate::boolean($value));
 		}
@@ -47,7 +47,7 @@ namespace Form\Field {
 		 * Get a block
 		 */
 
-		public function getBlock() {
+		public function getBlock() : Template\Block {
 
 			$tag = $this->getTag('input');
 

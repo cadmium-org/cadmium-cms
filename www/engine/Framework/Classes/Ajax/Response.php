@@ -19,7 +19,7 @@ namespace Ajax {
 		 * @return the current response object
 		 */
 
-		public function set(string $name, $value) {
+		public function set(string $name, $value) : Response {
 
 			if (!in_array($name, ['error', 'status'], true)) $this->data[$name] = $value;
 
@@ -32,7 +32,7 @@ namespace Ajax {
 		 * @return the current response object
 		 */
 
-		public function setError(string $value) {
+		public function setError(string $value) : Response {
 
 			$this->error = $value; $this->status = false;
 
@@ -64,10 +64,10 @@ namespace Ajax {
 		/**
 		 * Get the response status
 		 *
-		 * @return false if an error has been set, otherwise true
+		 * @return true if no error has been set, otherwise false
 		 */
 
-		public function getStatus() {
+		public function getStatus() : bool {
 
 			return $this->status;
 		}
@@ -75,10 +75,10 @@ namespace Ajax {
 		/**
 		 * Get the response data
 		 *
-		 * @return the array containing the response status, the error (if set), and the params list
+		 * @return the array containing the response status, the error (if set), and the params set
 		 */
 
-		public function getData() {
+		public function getData() : array {
 
 			$data = ['status' => $this->status];
 
@@ -93,7 +93,7 @@ namespace Ajax {
 		 * An alias for the set method
 		 */
 
-		public function __set(string $name, $value) {
+		public function __set(string $name, $value) : Response {
 
 			return $this->set($name, $value);
 		}
@@ -111,7 +111,7 @@ namespace Ajax {
 		 * Check if param is set
 		 */
 
-		 public function __isset(string $name) {
+		 public function __isset(string $name) : bool {
 
  			return isset($this->data[$name]);
  		}

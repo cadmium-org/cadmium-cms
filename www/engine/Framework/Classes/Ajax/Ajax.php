@@ -15,7 +15,7 @@ namespace {
 		 * Create a new response object
 		 */
 
-		public static function createResponse() {
+		public static function createResponse() : Ajax\Response {
 
 			return new Ajax\Response;
 		}
@@ -24,7 +24,7 @@ namespace {
 		 * Check if a given variable is a response object
 		 */
 
-		public static function isResponse($object) {
+		public static function isResponse($object) : bool {
 
 			return ($object instanceof Ajax\Response);
 		}

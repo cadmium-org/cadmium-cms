@@ -21,7 +21,7 @@ namespace {
 		 * @return true if the field was successfully added, otherwise false
 		 */
 
-		private function addField(Form\Field $field) {
+		private function addField(Form\Field $field) : bool {
 
 			if ($this->posted || ('' === ($key = $field->getKey()))) return false;
 
@@ -49,7 +49,7 @@ namespace {
 
 		public function addText(string $key, string $value = '',
 
-			string $type = FORM_FIELD_TEXT, int $maxlength = 0, array $config = []) {
+			string $type = FORM_FIELD_TEXT, int $maxlength = 0, array $config = []) : bool {
 
 			return $this->addField(new Form\Field\Text($this, ...func_get_args()));
 		}
@@ -62,7 +62,7 @@ namespace {
 
 		public function addSelect(string $key, string $value = '',
 
-			array $options = [], string $default = null, array $config = []) {
+			array $options = [], string $default = null, array $config = []) : bool {
 
 			return $this->addField(new Form\Field\Select($this, ...func_get_args()));
 		}
@@ -73,7 +73,7 @@ namespace {
 		 * @return true if the field was successfully added, otherwise false
 		 */
 
-		public function addCheckbox(string $key, string $value = '') {
+		public function addCheckbox(string $key, string $value = '') : bool {
 
 			return $this->addField(new Form\Field\Checkbox($this, ...func_get_args()));
 		}
@@ -81,10 +81,10 @@ namespace {
 		/**
 		 * Check if valid POST data has been recieved
 		 *
-		 * @return the check status
+		 * @return true if the data has been recieved, otherwise false
 		 */
 
-		public function check() {
+		public function check() : bool {
 
 			$check = false;
 
@@ -130,7 +130,7 @@ namespace {
 		 * Get the form name
 		 */
 
-		public function getName() {
+		public function getName() : string {
 
 			return $this->name;
 		}
@@ -139,7 +139,7 @@ namespace {
 		 * Check if POST data has been catched
 		 */
 
-		public function isPosted() {
+		public function isPosted() : bool {
 
 			return $this->posted;
 		}
@@ -148,7 +148,7 @@ namespace {
 		 * Check for errors within the form
 		 */
 
-		public function hasErrors() {
+		public function hasErrors() : bool {
 
 			return $this->errors;
 		}
@@ -156,7 +156,7 @@ namespace {
 		/**
 		 * Get a field object
 		 *
-		 * @return the object or false if an object with a given key does not exist
+		 * @return the object or false if the object with the given key does not exist
 		 */
 
 		public function getField(string $key) {
@@ -168,7 +168,7 @@ namespace {
 		 * Get the fields array
 		 */
 
-		public function getFields() {
+		public function getFields() : array {
 
 			return $this->fields;
 		}

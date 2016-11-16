@@ -138,7 +138,7 @@ namespace {
 		 * Get the array of all the result objects
 		 */
 
-		public static function getLog() {
+		public static function getLog() : array {
 
 			return self::$log;
 		}
@@ -147,7 +147,7 @@ namespace {
 		 * Get the total time of all the queries sent
 		 */
 
-		public static function getTime() {
+		public static function getTime() : string {
 
 			return number_format(self::$time, 10);
 		}

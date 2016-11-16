@@ -9,7 +9,7 @@
 
 namespace Form\Field {
 
-	use Form, Tag;
+	use Form, Tag, Template;
 
 	class Select extends Form\Field {
 
@@ -56,7 +56,7 @@ namespace Form\Field {
 		 * @return true if the result value is not empty, otherwise false
 		 */
 
-		public function setValue(string $value) {
+		public function setValue(string $value) : bool {
 
 			$key = array_search($value, ($range = array_keys($this->options)));
 
@@ -71,7 +71,7 @@ namespace Form\Field {
 		 * Get a block
 		 */
 
-		public function getBlock() {
+		public function getBlock() : Template\Block {
 
 			$tag = $this->getTag('select');
 

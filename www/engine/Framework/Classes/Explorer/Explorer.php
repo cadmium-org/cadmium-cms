@@ -15,7 +15,7 @@ namespace {
 		 * Get list of directory items
 		 */
 
-		private static function getList(string $dir_name, callable $checker) {
+		private static function getList(string $dir_name, callable $checker) : Generator {
 
 			if (false !== ($handler = @opendir($dir_name))) {
 
@@ -32,6 +32,8 @@ namespace {
 
 		/**
 		 * Get information about a file
+		 *
+		 * @return the string or false if check_exists is true and the file does not actually exists
 		 */
 
 		private static function getInfo(string $file_name, int $param, bool $check_exists = true) {
@@ -45,7 +47,7 @@ namespace {
 		 * Check if a directory exists
 		 */
 
-		public static function isDir(string $dir_name) {
+		public static function isDir(string $dir_name) : bool {
 
 			return (@file_exists($dir_name) && @is_dir($dir_name));
 		}
@@ -54,7 +56,7 @@ namespace {
 		 * Check if a file exists
 		 */
 
-		public static function isFile(string $file_name) {
+		public static function isFile(string $file_name) : bool {
 
 			return (@file_exists($file_name) && @is_file($file_name));
 		}
@@ -65,7 +67,7 @@ namespace {
 		 * @return true on success or false on failure
 		 */
 
-		public static function createDir(string $dir_name, int $mode = 0755) {
+		public static function createDir(string $dir_name, int $mode = 0755) : bool {
 
 			return @mkdir($dir_name, $mode, true);
 		}
@@ -76,7 +78,7 @@ namespace {
 		 * @return true on success or false on failure
 		 */
 
-		public static function createFile(string $file_name) {
+		public static function createFile(string $file_name) : bool {
 
 			return @touch($file_name);
 		}
@@ -87,7 +89,7 @@ namespace {
 		 * @return true on success or false on failure
 		 */
 
-		public static function removeDir(string $dir_name, bool $recursive = false) {
+		public static function removeDir(string $dir_name, bool $recursive = false) : bool {
 
 			if ($recursive && (false !== ($list = @scandir($dir_name)))) {
 
@@ -112,7 +114,7 @@ namespace {
 		 * @return true on success or false on failure
 		 */
 
-		public static function removeFile(string $file_name) {
+		public static function removeFile(string $file_name) : bool {
 
 			return @unlink($file_name);
 		}
@@ -121,7 +123,7 @@ namespace {
 		 * Iterate over directories within a given directory
 		 */
 
-		public static function iterateDirs(string $dir_name) {
+		public static function iterateDirs(string $dir_name) : Generator {
 
 			foreach (self::getList($dir_name, 'is_dir') as $name) yield $name;
 		}
@@ -130,7 +132,7 @@ namespace {
 		 * Iterate over files within a given directory
 		 */
 
-		public static function iterateFiles(string $dir_name) {
+		public static function iterateFiles(string $dir_name) : Generator {
 
 			foreach (self::getList($dir_name, 'is_file') as $name) yield $name;
 		}
@@ -139,7 +141,7 @@ namespace {
 		 * Get a list of directories within a given directory
 		 */
 
-		public static function listDirs(string $dir_name) {
+		public static function listDirs(string $dir_name) : array {
 
 			return iterator_to_array(self::getList($dir_name, 'is_dir'));
 		}
@@ -148,7 +150,7 @@ namespace {
 		 * Get a list of files within a given directory
 		 */
 
-		public static function listFiles(string $dir_name) {
+		public static function listFiles(string $dir_name) : array {
 
 			return iterator_to_array(self::getList($dir_name, 'is_file'));
 		}
@@ -156,7 +158,7 @@ namespace {
 		/**
 		 * Get a parent directory name
 		 *
-		 * @return a string or false if check_exists is true and the file does not actually exists
+		 * @return the string or false if check_exists is true and the file does not actually exists
 		 */
 
 		public static function getDirname(string $file_name, bool $check_exists = true) {
@@ -167,7 +169,7 @@ namespace {
 		/**
 		 * Get a basename of a file
 		 *
-		 * @return a string or false if check_exists is true and the file does not actually exists
+		 * @return the string or false if check_exists is true and the file does not actually exists
 		 */
 
 		public static function getBasename(string $file_name, bool $check_exists = true) {
@@ -178,7 +180,7 @@ namespace {
 		/**
 		 * Get a filename of a file
 		 *
-		 * @return a string or false if check_exists is true and the file does not actually exists
+		 * @return the string or false if check_exists is true and the file does not actually exists
 		 */
 
 		public static function getFilename(string $file_name, bool $check_exists = true) {
@@ -189,7 +191,7 @@ namespace {
 		/**
 		 * Get an extnesion of a file
 		 *
-		 * @return a string or false if check_exists is true and the file does not actually exists
+		 * @return the string or false if check_exists is true and the file does not actually exists
 		 */
 
 		public static function getExtension(string $file_name, bool $check_exists = true) {
@@ -222,7 +224,7 @@ namespace {
 		/**
 		 * Save data into a file
 		 *
-		 * @return the number of bytes that were written to the file, or false on failure
+		 * @return the number of bytes that were written to the file or false on failure
 		 */
 
 		public static function putContents(string $file_name, string $contents) {

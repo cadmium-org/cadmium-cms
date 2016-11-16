@@ -32,9 +32,9 @@ namespace {
 		 * @return the current dataset object
 		 */
 
-		public function addParam(string $name, $default, callable $validator = null) {
+		public function addParam(string $name, $default, callable $validator = null) : Dataset {
 
-			if ('' === $name) return;
+			if ('' === $name) return $this;
 
 			$this->data[$name] = $default; $this->defaults[$name] = $default;
 
@@ -51,7 +51,7 @@ namespace {
 		 * @return the current dataset object
 		 */
 
-		public function addParams(array $data) {
+		public function addParams(array $data) : Dataset {
 
 			foreach ($data as $name => $value) if (is_scalar($name)) $this->addParam($name, $value);
 
@@ -84,7 +84,7 @@ namespace {
 		 * @return the array of update results for every param (true on success or false on error)
 		 */
 
-		public function setArray(array $data) {
+		public function setArray(array $data) : array {
 
 			$setted = [];
 
@@ -124,7 +124,7 @@ namespace {
 		 * @return the array of validated values or the array of all values if return_all is true
 		 */
 
-		public function castArray(array $data, bool $return_all = false) {
+		public function castArray(array $data, bool $return_all = false) : array {
 
 			$casted = [];
 
@@ -162,7 +162,7 @@ namespace {
 		 * Get the array of params and their values
 		 */
 
-		public function getData() {
+		public function getData() : array {
 
 			return $this->data;
 		}
@@ -171,7 +171,7 @@ namespace {
 		 * Get the array of params and their default values
 		 */
 
-		public function getDefaults() {
+		public function getDefaults() : array {
 
 			return $this->defaults;
 		}
@@ -198,7 +198,7 @@ namespace {
 		 * Check if a param exists
 		 */
 
-		 public function __isset(string $name) {
+		 public function __isset(string $name) : bool {
 
  			return isset($this->data[$name]);
  		}

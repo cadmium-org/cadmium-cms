@@ -17,7 +17,7 @@ namespace {
 		 * @return true on success or false on failure
 		 */
 
-		public static function start(string $name, int $lifetime) {
+		public static function start(string $name, int $lifetime) : bool {
 
 			if (session_id()) return true;
 
@@ -54,7 +54,7 @@ namespace {
 		 * Check if a variable exists
 		 */
 
-		public static function exists(string $name) {
+		public static function exists(string $name) : bool {
 
 			return isset($_SESSION[$name]);
 		}

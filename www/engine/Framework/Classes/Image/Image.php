@@ -17,7 +17,7 @@ namespace {
 		 * @return true on success or false if the given image is not a valid resource
 		 */
 
-		private static function output($image, string $mime, callable $outputter, array $params = []) {
+		private static function output($image, string $mime, callable $outputter, array $params = []) : bool {
 
 			if (!is_resource($image)) return false;
 
@@ -38,7 +38,7 @@ namespace {
 		 * @return true on success or false if the given image is not a valid resource
 		 */
 
-		public static function outputJPEG($image, int $quality = 75) {
+		public static function outputJPEG($image, int $quality = 75) : bool {
 
 			$params = [null, Number::forceInt($quality, 0, 100)];
 
@@ -53,7 +53,7 @@ namespace {
 		 * @return true on success or false if the given image is not a valid resource
 		 */
 
-		public static function outputPNG($image, int $quality = 4) {
+		public static function outputPNG($image, int $quality = 4) : bool {
 
 			$params = [null, Number::forceInt($quality, 0, 9)];
 
@@ -66,7 +66,7 @@ namespace {
 		 * @return true on success or false if the given image is not a valid resource
 		 */
 
-		public static function outputGIF($image) {
+		public static function outputGIF($image) : bool {
 
 			return self::output($image, MIME_TYPE_GIF, 'imagegif');
 		}

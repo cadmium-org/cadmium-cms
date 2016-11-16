@@ -9,7 +9,7 @@
 
 namespace Form\Field {
 
-	use Form, Str;
+	use Form, Str, Template;
 
 	class Text extends Form\Field {
 
@@ -42,7 +42,7 @@ namespace Form\Field {
 		 * Get a hidden input tag
 		 */
 
-		private function getHidden() {
+		private function getHidden() : \DOMElement {
 
 			return $this->getTag('input', '', ['type' => 'hidden', 'value' => $this->value]);
 		}
@@ -51,7 +51,7 @@ namespace Form\Field {
 		 * Get a password input tag
 		 */
 
-		private function getPassword() {
+		private function getPassword() : \DOMElement {
 
 			return $this->getTag('input', '', ['type' => 'password', 'value' => '']);
 		}
@@ -60,7 +60,7 @@ namespace Form\Field {
 		 * Get a captcha input tag
 		 */
 
-		private function getCaptcha() {
+		private function getCaptcha() : \DOMElement {
 
 			return $this->getTag('input', '', ['type' => 'text', 'value' => '']);
 		}
@@ -69,7 +69,7 @@ namespace Form\Field {
 		 * Get a text input tag
 		 */
 
-		private function getText() {
+		private function getText() : \DOMElement {
 
 			return $this->getTag('input', '', ['type' => 'text', 'value' => $this->value]);
 		}
@@ -78,7 +78,7 @@ namespace Form\Field {
 		 * Get a textarea input tag
 		 */
 
-		private function getTextarea() {
+		private function getTextarea() : \DOMElement {
 
 			$tag = $this->getTag('textarea', $this->value);
 
@@ -151,7 +151,7 @@ namespace Form\Field {
 		 * @return true if the result value is not empty, otherwise false
 		 */
 
-		public function setValue(string $value) {
+		public function setValue(string $value) : bool {
 
 			if (($this->type === FORM_FIELD_PASSWORD) || ($this->type === FORM_FIELD_CAPTCHA)) {
 
@@ -179,7 +179,7 @@ namespace Form\Field {
 		 * Get a block
 		 */
 
-		public function getBlock() {
+		public function getBlock() : Template\Block {
 
 			# Process hidden field
 

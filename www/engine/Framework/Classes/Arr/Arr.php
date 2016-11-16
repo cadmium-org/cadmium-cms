@@ -34,7 +34,7 @@ namespace {
 		 * A result array can be optionally filtered by a given callback
 		 */
 
-		public static function select(array $array, array $keys, callable $filter = null) {
+		public static function select(array $array, array $keys, callable $filter = null) : array {
 
 			$selected = array_intersect_key($array, array_flip($keys));
 
@@ -50,7 +50,7 @@ namespace {
 		 * [$key_name => old_key, $value_name => old_value]
 		 */
 
-		public static function index(array $array, string $key_name, string $value_name) {
+		public static function index(array $array, string $key_name, string $value_name) : array {
 
 			$indexed = [];
 
@@ -65,7 +65,7 @@ namespace {
 		 * Sort an array by a subvalue
 		 */
 
-		public static function sortby(array $array, $sub_key, bool $descending = false) {
+		public static function sortby(array $array, $sub_key, bool $descending = false) : array {
 
 			$select_key = function($element) use($sub_key) { return ($element[$sub_key] ?? false); };
 
@@ -82,18 +82,20 @@ namespace {
 
 		/**
 		 * Get a random value from an array
+		 *
+		 * @return the value or null if the array is empty
 		 */
 
 		public static function random(array $array) {
 
-			return $array[array_rand($array)];
+			return ($array[array_rand($array)] ?? null);
 		}
 
 		/**
 		 * Encode an array into a 40-character hash string
 		 */
 
-		public static function encode(array $array) {
+		public static function encode(array $array) : string {
 
 			return sha1(serialize($array));
 		}

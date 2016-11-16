@@ -39,7 +39,7 @@ namespace {
 		 * @return the current url object
 		 */
 
-		public function setAttribute(string $name, string $value = null) {
+		public function setAttribute(string $name, string $value = null) : Url {
 
 			$this->query[$name] = $value;
 
@@ -49,7 +49,7 @@ namespace {
 		/**
 		* Get a query attribute
 		*
-		* @return the value, otherwise false
+		* @return the value or false if the attribute does not exist
 		*/
 
 		public function getAttribute(string $name) {
@@ -61,7 +61,7 @@ namespace {
 		 * Get the slug (a path without leading slash)
 		 */
 
-		public function getSlug() {
+		public function getSlug() : string {
 
 			return implode('/', array_map('urlencode', $this->path));
 		}
@@ -70,7 +70,7 @@ namespace {
 		 * Get the url path
 		 */
 
-		public function getPath() {
+		public function getPath() : string {
 
 			return ('/' . implode('/', array_map('urlencode', $this->path)));
 		}
@@ -79,7 +79,7 @@ namespace {
 		 * Get the url query
 		 */
 
-		public function getQuery() {
+		public function getQuery() : string {
 
 			return (($query = http_build_query($this->query)) ? ('?' . $query) : '');
 		}
@@ -88,7 +88,7 @@ namespace {
 		 * Get the url path as an array
 		 */
 
-		public function getPathParts() {
+		public function getPathParts() : array {
 
 			return $this->path;
 		}
@@ -97,7 +97,7 @@ namespace {
 		 * Get the url query as an array
 		 */
 
-		public function getQueryParts() {
+		public function getQueryParts() : array {
 
 			return $this->query;
 		}
@@ -106,7 +106,7 @@ namespace {
 		 * Get the url as a string
 		 */
 
-		public function getString(bool $include_query = true) {
+		public function getString(bool $include_query = true) : string {
 
 			return ($this->getPath() . $this->getQuery());
 		}

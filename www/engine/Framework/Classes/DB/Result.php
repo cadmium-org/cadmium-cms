@@ -12,15 +12,15 @@ namespace DB {
 	class Result {
 
 		/**
-		 * @var bool                $status     the result status
-		 * @var mysqli_result|bool  $result     the mysqli_result object for successful select queries, true for other queries, or false on failure
-		 * @var string              $query      the query string
-		 * @var float               $time       the query execution time in seconds
+		 * @property  bool                $status     the result status
+		 * @property  mysqli_result|bool  $result     the mysqli_result object for successful select queries, true for other queries, or false on failure
+		 * @property  string              $query      the query string
+		 * @property  float               $time       the query execution time in seconds
 		 *
-		 * @var int                 $rows       a number of selected/affected rows
-		 * @var int                 $id         an updated id (auto-increment field) or zero if the id were not affected
-		 * @var string              $error      an error description or an empty string if no error occurred
-		 * @var int                 $errno      an error code or zero if no error occurred
+		 * @property  int                 $rows       a number of selected/affected rows
+		 * @property  int                 $id         an updated id (auto-increment field) or zero if the id were not affected
+		 * @property  string              $error      an error description or an empty string if no error occurred
+		 * @property  int                 $errno      an error code or zero if no error occurred
 		 */
 
 		private $status = false, $result = null, $query = '', $time = 0.0;
@@ -52,6 +52,8 @@ namespace DB {
 
 		/**
 		 * Get the next row
+		 *
+		 * @return the row data array or null if there are no more rows in the resultset
 		 */
 
 		public function getRow() {
@@ -65,7 +67,7 @@ namespace DB {
 		 * Get the rows array
 		 */
 
-		public function getRows() {
+		public function getRows() : array {
 
 			if (!is_object($this->result)) return [];
 
@@ -77,21 +79,21 @@ namespace DB {
 		}
 
 		/**
-		 * Getter
+		 * Get a property
 		 */
 
-		public function __get(string $var) {
+		public function __get(string $property) {
 
-			return ($this->$var ?? null);
+			return ($this->$property ?? null);
 		}
 
 		/**
-		 * Isset
+		 * Check if a property exists
 		 */
 
-		public function __isset(string $var) {
+		public function __isset(string $property) : bool {
 
-			return isset($this->$var);
+			return isset($this->$property);
 		}
 	}
 }

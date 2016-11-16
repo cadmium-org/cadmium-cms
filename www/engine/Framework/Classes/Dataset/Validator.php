@@ -15,7 +15,7 @@ namespace Dataset {
 		 * Get a validator for a given value type
 		 */
 
-		public static function get($default) {
+		public static function get($default) : callable {
 
 			# Check basic types
 

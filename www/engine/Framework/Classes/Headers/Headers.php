@@ -96,7 +96,7 @@ namespace {
 		 * Check if a given value is a valid status code
 		 */
 
-		public static function isStatusCode(int $value) {
+		public static function isStatusCode(int $value) : bool {
 
 			return isset(self::$status_codes[$value]);
 		}
@@ -105,7 +105,7 @@ namespace {
 		 * Check if a given value is a valid content type
 		 */
 
-		public static function isContentType(string $value) {
+		public static function isContentType(string $value) : bool {
 
 			return (self::isTextContentType($value) || self::isMediaContentType($value));
 		}
@@ -114,7 +114,7 @@ namespace {
 		 * Check if a given value is a text content type
 		 */
 
-		public static function isTextContentType(string $value) {
+		public static function isTextContentType(string $value) : bool {
 
 			return isset(self::$content_types_text[$value]);
 		}
@@ -123,7 +123,7 @@ namespace {
 		 * Check if a given value is a media content type
 		 */
 
-		public static function isMediaContentType(string $value) {
+		public static function isMediaContentType(string $value) : bool {
 
 			return isset(self::$content_types_media[$value]);
 		}

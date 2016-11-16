@@ -17,7 +17,7 @@ namespace DB {
 		 * Get a field/table name
 		 */
 
-		protected function getName(string $name) {
+		protected function getName(string $name) : string {
 
 			return preg_replace('/[^a-zA-Z0-9_]/', '_', trim($name));
 		}
@@ -26,7 +26,7 @@ namespace DB {
 		 * Get a field value
 		 */
 
-		protected function getValue(string $value) {
+		protected function getValue(string $value) : string {
 
 			return ('\'' . addslashes($value) . '\'');
 		}
@@ -35,7 +35,7 @@ namespace DB {
 		 * Get a field sorting direction
 		 */
 
-		protected function getDirection(string $direction) {
+		protected function getDirection(string $direction) : string {
 
 			return ((strtoupper($direction) !== 'DESC') ? 'ASC' : 'DESC');
 		}
@@ -44,7 +44,7 @@ namespace DB {
 		 * Convert a data array to a string
 		 */
 
-		protected function getString($source = null, string $pattern = '', string $separator = '') {
+		protected function getString($source = null, string $pattern = '', string $separator = '') : string {
 
 			if (!is_array($source)) return (is_scalar($source) ? strval($source) : '');
 
@@ -77,7 +77,7 @@ namespace DB {
 		 * Convert the object to a string
 		 */
 
-		public function __toString() {
+		public function __toString() : string {
 
 			return $this->query;
 		}

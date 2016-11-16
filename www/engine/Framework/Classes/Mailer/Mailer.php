@@ -19,7 +19,7 @@ namespace {
 
 		public static function send(string $to, string $sender, string $from, string $reply_to,
 
-			string $subject, string $message, bool $is_html = false) {
+			string $subject, string $message, bool $is_html = false) : bool {
 
 			# Set headers
 

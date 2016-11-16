@@ -15,7 +15,7 @@ namespace {
 		 * Force a given variable to an integer
 		 */
 
-		public static function forceInt($number, int $min = 0, int $max = 0) {
+		public static function forceInt($number, int $min = 0, int $max = 0) : int {
 
 			if (!is_numeric($number) || (($number = intval($number)) < 0)) $number = 0;
 
@@ -32,7 +32,7 @@ namespace {
 		 * Force a given variable to a float
 		 */
 
-		public static function forceFloat($number, float $min = 0, float $max = 0, int $decimals = 0) {
+		public static function forceFloat($number, float $min = 0, float $max = 0, int $decimals = 0) : float {
 
 			if (!is_numeric($number) || (($number = floatval($number)) < 0)) $number = 0;
 
@@ -51,7 +51,7 @@ namespace {
 		 * Format a given number as a file size
 		 */
 
-		public static function size(int $number) {
+		public static function size(int $number) : string {
 
 			$number = (($number >= 0) ? $number : 0); $exponents = [0 => 'Bytes', 'KB', 'MB', 'GB', 'TB'];
 
@@ -73,7 +73,7 @@ namespace {
 		 * @return one of the given forms depending on the number
 		 */
 
-		public static function text(int $number, string $form_1, string $form_3, string $form_5) {
+		public static function text(int $number, string $form_1, string $form_3, string $form_5) : string {
 
 			$number = (($number >= 0) ? $number : 0); $length = strlen($number);
 

@@ -49,7 +49,7 @@ namespace Form {
 		 * Get a DOM element with a given name, a value, and a set of attributes
 		 */
 
-		protected function getTag(string $name, string $value = '', array $attributes = []) {
+		protected function getTag(string $name, string $value = '', array $attributes = []) : \DOMElement {
 
 			$tag = Tag::create($name, $value);
 
@@ -81,7 +81,7 @@ namespace Form {
 		 * Convert a DOMElement object to a Template\Block object
 		 */
 
-		protected function toBlock(\DOMElement $tag) {
+		protected function toBlock(\DOMElement $tag) : Template\Block {
 
 			return Template::createBlock($tag->ownerDocument->saveHTML($tag));
 		}
@@ -92,7 +92,7 @@ namespace Form {
 		 * @return true on success or false on failure
 		 */
 
-		public function post() {
+		public function post() : bool {
 
 			if ($this->posted || $this->disabled || ('' === $this->key)) return false;
 
@@ -107,7 +107,7 @@ namespace Form {
 		 * Check if a POST value has been catched
 		 */
 
-		public function isPosted() {
+		public function isPosted() : bool {
 
 			return $this->posted;
 		}
@@ -116,7 +116,7 @@ namespace Form {
 		 * Get the field key
 		 */
 
-		public function getKey() {
+		public function getKey() : string {
 
 			return $this->key;
 		}
@@ -125,7 +125,7 @@ namespace Form {
 		 * Get the field name
 		 */
 
-		public function getName() {
+		public function getName() : string {
 
 			return $this->name;
 		}
@@ -134,7 +134,7 @@ namespace Form {
 		 * Get the field id
 		 */
 
-		public function getId() {
+		public function getId() : string {
 
 			return $this->id;
 		}
@@ -170,7 +170,7 @@ namespace Form {
 		 * Check if a configuration value is set
 		 */
 
-		public function __isset(string $name) {
+		public function __isset(string $name) : bool {
 
 			return isset($this->dataset->$name);
 		}

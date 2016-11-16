@@ -15,7 +15,7 @@ namespace {
 		 * Get the peak memory in bytes, that's been allocated to the script
 		 */
 
-		public static function getMemory() {
+		public static function getMemory() : int {
 
 			return memory_get_peak_usage();
 		}
@@ -24,7 +24,7 @@ namespace {
 		 * Get the time in seconds, that's passed since the script started
 		 */
 
-		public static function getTime() {
+		public static function getTime() : string {
 
 			return number_format((microtime(true) - REQUEST_TIME_FLOAT), 10);
 		}
