@@ -80,7 +80,7 @@ namespace {
 		 * Get the tag name
 		 */
 
-		 public function getName(string $name) : string {
+		 public function getName() : string {
 
  			return $this->name;
  		}
