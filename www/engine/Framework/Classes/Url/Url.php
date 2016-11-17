@@ -49,7 +49,7 @@ namespace {
 		/**
 		* Get a query attribute
 		*
-		* @return string|false: the value or false if the attribute does not exist
+		* @return string|false : the value or false if the attribute does not exist
 		*/
 
 		public function getAttribute(string $name) {
