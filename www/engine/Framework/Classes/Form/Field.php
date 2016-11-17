@@ -9,7 +9,7 @@
 
 namespace Form {
 
-	use Dataset, Form, Request, Tag, Template;
+	use Dataset, Form, Request, Tag;
 
 	abstract class Field {
 
@@ -49,41 +49,23 @@ namespace Form {
 		 * Get a DOM element with a given name, a value, and a set of attributes
 		 */
 
-		protected function getTag(string $name, string $value = '', array $attributes = []) : \DOMElement {
-
-			$tag = Tag::create($name, $value);
+		protected function getTag(string $name, array $attributes = [], $contents = null) : Tag {
 
 			# Set name and id
 
-			$tag->setAttribute('name', $this->name); $tag->setAttribute('id', $this->id);
+			$data = ['name' => $this->name, 'id' => $this->id];
 
 			# Set appearance
 
-			if ($this->disabled) $tag->setAttribute('disabled', 'disabled');
+			if ($this->disabled)    $data['disabled']           = 'disabled';
 
-			if ($this->required) $tag->setAttribute('data-required', 'required');
+			if ($this->required)    $data['data-required']      = 'required';
 
-			if ($this->error) $tag->setAttribute('data-error', 'error');
-
-			# Set attributes
-
-			foreach ($attributes as $name => $value) {
-
-				if (is_scalar($name) && is_scalar($value)) $tag->setAttribute($name, $value);
-			}
+			if ($this->error)       $data['data-error']         = 'error';
 
 			# ------------------------
 
-			return $tag;
-		}
-
-		/**
-		 * Convert a DOMElement object to a Template\Block object
-		 */
-
-		protected function toBlock(\DOMElement $tag) : Template\Block {
-
-			return Template::createBlock($tag->ownerDocument->saveHTML($tag));
+			return new Tag($name, array_merge($data, $attributes), $contents);
 		}
 
 		/**

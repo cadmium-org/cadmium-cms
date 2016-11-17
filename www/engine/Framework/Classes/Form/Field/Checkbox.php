@@ -57,7 +57,7 @@ namespace Form\Field {
 
 			# ------------------------
 
-			return $this->toBlock($tag);
+			return $tag->getBlock();
 		}
 	}
 }

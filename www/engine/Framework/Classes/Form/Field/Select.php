@@ -73,7 +73,7 @@ namespace Form\Field {
 
 		public function getBlock() : Template\Block {
 
-			$tag = $this->getTag('select');
+			$tag = $this->getTag('select', [], ($options = Template::createBlock()));
 
 			# Set appearance
 
@@ -85,18 +85,16 @@ namespace Form\Field {
 
 			foreach ($this->options as $value => $text) {
 
-				if (!is_scalar($text)) continue;
+				$option = (new Tag('option', [], $text))->setAttribute('value', $value);
 
-				$tag->appendChild($option = Tag::create('option', $text));
+				if ($this->value === $value) $option->setAttribute('selected', '');
 
-				$option->setAttribute('value', $value);
-
-				if ($this->value === $value) $option->setAttribute('selected', null);
+				$options->addItem($option->getBlock());
 			}
 
 			# ------------------------
 
-			return $this->toBlock($tag);
+			return $tag->getBlock();
 		}
 	}
 }

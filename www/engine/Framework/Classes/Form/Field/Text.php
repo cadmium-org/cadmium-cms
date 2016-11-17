@@ -9,7 +9,7 @@
 
 namespace Form\Field {
 
-	use Form, Str, Template;
+	use Form, Str, Tag, Template;
 
 	class Text extends Form\Field {
 
@@ -42,45 +42,45 @@ namespace Form\Field {
 		 * Get a hidden input tag
 		 */
 
-		private function getHidden() : \DOMElement {
+		private function getHidden() : Tag {
 
-			return $this->getTag('input', '', ['type' => 'hidden', 'value' => $this->value]);
+			return $this->getTag('input', ['type' => 'hidden', 'value' => $this->value]);
 		}
 
 		/**
 		 * Get a password input tag
 		 */
 
-		private function getPassword() : \DOMElement {
+		private function getPassword() : Tag {
 
-			return $this->getTag('input', '', ['type' => 'password', 'value' => '']);
+			return $this->getTag('input', ['type' => 'password', 'value' => '']);
 		}
 
 		/**
 		 * Get a captcha input tag
 		 */
 
-		private function getCaptcha() : \DOMElement {
+		private function getCaptcha() : Tag {
 
-			return $this->getTag('input', '', ['type' => 'text', 'value' => '']);
+			return $this->getTag('input', ['type' => 'text', 'value' => '']);
 		}
 
 		/**
 		 * Get a text input tag
 		 */
 
-		private function getText() : \DOMElement {
+		private function getText() : Tag {
 
-			return $this->getTag('input', '', ['type' => 'text', 'value' => $this->value]);
+			return $this->getTag('input', ['type' => 'text', 'value' => $this->value]);
 		}
 
 		/**
 		 * Get a textarea input tag
 		 */
 
-		private function getTextarea() : \DOMElement {
+		private function getTextarea() : Tag {
 
-			$tag = $this->getTag('textarea', $this->value);
+			$tag = $this->getTag('textarea', [], $this->value);
 
 			if ($this->rows > 0) $tag->setAttribute('rows', $this->rows);
 
@@ -183,7 +183,7 @@ namespace Form\Field {
 
 			# Process hidden field
 
-			if ($this->type === FORM_FIELD_HIDDEN) return $this->toBlock($this->getHidden());
+			if ($this->type === FORM_FIELD_HIDDEN) return $this->getHidden()->getBlock();
 
 			# Process visible field
 
@@ -207,7 +207,7 @@ namespace Form\Field {
 
 			# ------------------------
 
-			return $this->toBlock($tag);
+			return $tag->getBlock();
 		}
 	}
 }
