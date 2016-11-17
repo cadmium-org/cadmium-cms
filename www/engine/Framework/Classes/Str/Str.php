@@ -145,7 +145,7 @@ namespace {
 		 * Get a string length
 		 */
 
-		public static function length(string $string) : string {
+		public static function length(string $string) : int {
 
 			return (function_exists('mb_strlen') ? 'mb_strlen' : 'strlen')($string);
 		}
@@ -163,7 +163,7 @@ namespace {
 		 * Check if a string length is between given values
 		 */
 
-		public static function between(string $string, int $min, int $max) : string {
+		public static function between(string $string, int $min, int $max) : bool {
 
 			return ((($length = self::length($string)) >= $min) && ($length <= $max));
 		}
