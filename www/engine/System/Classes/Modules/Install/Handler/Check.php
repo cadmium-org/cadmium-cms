@@ -8,7 +8,7 @@ namespace Modules\Install\Handler {
 
 		protected $title = 'TITLE_INSTALL_CHECK';
 
-		private $languages = [];
+		private $languages = null;
 
 		# Get requirements
 
