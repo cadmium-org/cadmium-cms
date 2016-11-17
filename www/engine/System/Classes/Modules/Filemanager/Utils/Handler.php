@@ -2,7 +2,7 @@
 
 namespace Modules\Filemanager\Utils {
 
-	use Frames, Modules\Filemanager, Modules\Informer, Utils\Popup, Utils\View, Ajax, Language, Request;
+	use Frames, Modules\Filemanager, Utils\Popup, Utils\View, Ajax, Language, Request;
 
 	abstract class Handler extends Frames\Admin\Area\Authorized {
 
@@ -47,7 +47,7 @@ namespace Modules\Filemanager\Utils {
 
 			# Check for demo mode
 
-			if (Informer::isDemoMode()) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
+			if (MODE_DEMO) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
 
 			# Init entity
 

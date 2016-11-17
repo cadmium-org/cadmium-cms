@@ -2,7 +2,7 @@
 
 namespace Modules\Filemanager\Controller {
 
-	use Modules\Filemanager, Modules\Informer, Utils\Validate;
+	use Modules\Filemanager, Utils\Validate;
 
 	class Rename {
 
@@ -29,7 +29,7 @@ namespace Modules\Filemanager\Controller {
 
 			# Check for demo mode
 
-			if (Informer::isDemoMode()) return 'DEMO_MODE_RESTRICTION';
+			if (MODE_DEMO) return 'DEMO_MODE_RESTRICTION';
 
 			# Validate name
 

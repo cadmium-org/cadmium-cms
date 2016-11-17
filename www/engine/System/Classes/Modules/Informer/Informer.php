@@ -27,20 +27,6 @@ namespace Modules {
 			return Explorer::isFile(DIR_WWW . 'install.php');
 		}
 
-		# Check if debug mode forced
-
-		public static function isDebugMode() {
-
-			return Explorer::isFile(DIR_SYSTEM_DATA . '.debug');
-		}
-
-		# Check if demo mode forced
-
-		public static function isDemoMode() {
-
-			return Explorer::isFile(DIR_SYSTEM_DATA . '.demo');
-		}
-
 		# Get MySQL version
 
 		public static function mysqlVersion() {

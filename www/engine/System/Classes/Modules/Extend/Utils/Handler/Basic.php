@@ -2,7 +2,7 @@
 
 namespace Modules\Extend\Utils\Handler {
 
-	use Modules\Extend, Modules\Informer, Modules\Settings, Ajax, Arr, Language, Request, Template, JSON;
+	use Modules\Extend, Modules\Settings, Ajax, Arr, Language, Request, Template, JSON;
 
 	abstract class Basic extends Extend\Utils\Handler {
 
@@ -30,7 +30,7 @@ namespace Modules\Extend\Utils\Handler {
 
 			if (Request::post('action') === 'activate') {
 
-				if (Informer::isDemoMode()) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
+				if (MODE_DEMO) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
 
 				$param = static::$param[$this->loader->section()]; $name = Request::post('name');
 

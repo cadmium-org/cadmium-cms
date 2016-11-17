@@ -2,7 +2,7 @@
 
 namespace Utils {
 
-	use Modules\Informer, Utils\Messages, Explorer, Language, Request;
+	use Utils\Messages, Explorer, Language, Request;
 
 	abstract class Uploader {
 
@@ -37,7 +37,7 @@ namespace Utils {
 
 			# Check for demo mode
 
-			if (Informer::isDemoMode()) return 'DEMO_MODE_RESTRICTION';
+			if (MODE_DEMO) return 'DEMO_MODE_RESTRICTION';
 
 			# Check for upload errors
 

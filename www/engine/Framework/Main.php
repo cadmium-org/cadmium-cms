@@ -29,11 +29,10 @@ date_default_timezone_set('UTC');
 
 # Set request constants
 
-define('REQUEST_CLIENT_IP', Engine::getIP());
+define('REQUEST_CLIENT_IP',     Engine::getIP());
 
-define('REQUEST_TIME', $_SERVER['REQUEST_TIME']);
-
-define('REQUEST_TIME_FLOAT', $_SERVER['REQUEST_TIME_FLOAT']);
+define('REQUEST_TIME',          $_SERVER['REQUEST_TIME']);
+define('REQUEST_TIME_FLOAT',    $_SERVER['REQUEST_TIME_FLOAT']);
 
 # Set exception handler
 

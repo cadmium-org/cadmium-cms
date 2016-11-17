@@ -2,7 +2,7 @@
 
 namespace Modules\Settings\Controller {
 
-	use Modules\Informer, Modules\Settings;
+	use Modules\Settings;
 
 	class General {
 
@@ -12,7 +12,7 @@ namespace Modules\Settings\Controller {
 
 			# Check for demo mode
 
-			if (Informer::isDemoMode()) return 'DEMO_MODE_RESTRICTION';
+			if (MODE_DEMO) return 'DEMO_MODE_RESTRICTION';
 
 			# Define errors list
 
