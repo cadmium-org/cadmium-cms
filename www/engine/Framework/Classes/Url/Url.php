@@ -108,7 +108,7 @@ namespace {
 
 		public function getString(bool $include_query = true) : string {
 
-			return ($this->getPath() . $this->getQuery());
+			return ($this->getPath() . ($include_query ? $this->getQuery() : ''));
 		}
 	}
 }
