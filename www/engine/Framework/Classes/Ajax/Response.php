@@ -75,7 +75,7 @@ namespace Ajax {
 		/**
 		 * Get the response data
 		 *
-		 * @return array : the array containing the response status, the error (if set), and the params set
+		 * @return array : the array containing the response status, the error (if set), and the set of params
 		 */
 
 		public function getData() : array {
