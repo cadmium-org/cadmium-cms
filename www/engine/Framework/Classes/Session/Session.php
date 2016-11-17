@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Start a session
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public static function start(string $name, int $lifetime) : bool {
@@ -62,7 +62,7 @@ namespace {
 		/**
 		 * Get a variable
 		 *
-		 * @return the value or null if the variable is not set
+		 * @return mixed|null : the value or null if the variable is not set
 		 */
 
 		public static function get(string $name) {

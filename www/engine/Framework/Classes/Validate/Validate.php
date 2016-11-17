@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Validate a boolean value
 		 *
-		 * @return true for "1", "true", "on" and "yes", otherwise false
+		 * @return bool : true for "1", "true", "on" and "yes", otherwise false
 		 */
 
 		public static function boolean($value) : bool {
@@ -25,7 +25,7 @@ namespace {
 		/**
 		 * Validate an ip address
 		 *
-		 * @return the filtered string or false if the filter fails
+		 * @return string|false : the filtered data or false if the filter fails
 		 */
 
 		public static function ip(string $value) {
@@ -36,7 +36,7 @@ namespace {
 		/**
 		 * Validate an email
 		 *
-		 * @return the filtered string or false if the filter fails
+		 * @return string|false : the filtered data or false if the filter fails
 		 */
 
 		public static function email(string $value) {
@@ -47,7 +47,7 @@ namespace {
 		/**
 		 * Validate a regular expression
 		 *
-		 * @return the filtered string or false if the filter fails
+		 * @return string|false : the filtered data or false if the filter fails
 		 */
 
 		public static function regex(string $value) {
@@ -58,7 +58,7 @@ namespace {
 		/**
 		 * Validate a mac address
 		 *
-		 * @return the filtered string or false if the filter fails
+		 * @return string|false : the filtered data or false if the filter fails
 		 */
 
 		public static function mac(string $value) {
@@ -69,7 +69,7 @@ namespace {
 		/**
 		 * Validate an url
 		 *
-		 * @return the filtered string or false if the filter fails
+		 * @return string|false : the filtered data or false if the filter fails
 		 */
 
 		public static function url(string $value) {

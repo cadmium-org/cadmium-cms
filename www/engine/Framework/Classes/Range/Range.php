@@ -34,7 +34,7 @@ namespace {
 		/**
 		 * Validate a key
 		 *
-		 * @return the key if exists, otherwise false
+		 * @return mixed|null : the key if exists, otherwise false
 		 */
 
 		public static function validate($key) {
@@ -47,7 +47,7 @@ namespace {
 		/**
 		 * Get an item value by a key
 		 *
-		 * @return the value if the key exists, otherwise null
+		 * @return mixed|null : the value if the key exists, otherwise null
 		 */
 
 		public static function get($key) {

@@ -12,9 +12,11 @@ namespace {
 	abstract class Cookie {
 
 		/**
-		 * Set a cookie. For more information see http://php.net/manual/function.setcookie.php
+		 * Set a cookie
 		 *
-		 * @return true on success or false if output exists prior to calling this method
+		 * @see http://php.net/manual/function.setcookie.php
+		 *
+		 * @return bool : true on success or false if output exists prior to calling this method
 		 */
 
 		public static function set(string $name, string $value, int $lifetime = 0,
@@ -36,7 +38,7 @@ namespace {
 		/**
 		 * Get a cookie
 		 *
-		 * @return the value or false if the cookie is not set
+		 * @return string|false : the value or false if the cookie is not set
 		 */
 
 		public static function get(string $name) {

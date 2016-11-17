@@ -43,7 +43,7 @@ namespace {
 		/**
 		 * Send a query
 		 *
-		 * @return the result object or false on failure
+		 * @return DB\Result|false : the result object or false on failure
 		 */
 
 		public static function send(string $query) {
@@ -70,7 +70,7 @@ namespace {
 		 * @param $order        a string or an array where each key is a field name and each value is a sorting direction (ASC or DESC)
 		 * @param $limit        a maximum number of rows to be selected
 		 *
-		 * @return the result object or false on failure
+		 * @return DB\Result|false : the result object or false on failure
 		 */
 
 		public static function select(string $table, $selection, $condition = null, $order = null, int $limit = 0) {
@@ -86,7 +86,7 @@ namespace {
 		 * @param $multiple     tells that the set must be interpreted as a multi-dimensional array (for multi-row inserts)
 		 * @param $ignore       tells to ignore insert errors, such as a duplicate-key error
 		 *
-		 * @return the result object or false on failure
+		 * @return DB\Result|false : the result object or false on failure
 		 */
 
 		public static function insert(string $table, array $set, bool $multiple = false, bool $ignore = false) {
@@ -101,7 +101,7 @@ namespace {
 		 * @param $set          an array where each key is a field name and each value is a field value
 		 * @param $condition    a string or an array where each key is a field name and each value is a field value
 		 *
-		 * @return the result object or false on failure
+		 * @return DB\Result|false : the result object or false on failure
 		 */
 
 		public static function update(string $table, array $set, $condition = null) {
@@ -115,7 +115,7 @@ namespace {
 		 * @param $table        a table name
 		 * @param $condition    a string or an array where each key is a field name and each value is a field value
 		 *
-		 * @return the result object or false on failure
+		 * @return DB\Result|false : the result object or false on failure
 		 */
 
 		public static function delete(string $table, $condition = null) {
@@ -126,7 +126,7 @@ namespace {
 		/**
 		 * Get the last result object
 		 *
-		 * @return the result object or false if the last query failed or null if there have been no queries sent
+		 * @return DB\Result|false|null : the result object or false if the last query failed or null if there have been no queries sent
 		 */
 
 		public static function getLast() {

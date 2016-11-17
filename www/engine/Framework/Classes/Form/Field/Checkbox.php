@@ -35,7 +35,7 @@ namespace Form\Field {
 		/**
 		 * Set a value
 		 *
-		 * @return the result value
+		 * @return bool : the result value
 		 */
 
 		public function setValue(string $value) : bool {

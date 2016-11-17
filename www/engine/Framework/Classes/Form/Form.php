@@ -18,7 +18,7 @@ namespace {
 		/**
 		 * Add a field to the form
 		 *
-		 * @return true if the field was successfully added, otherwise false
+		 * @return bool : true if the field was successfully added, otherwise false
 		 */
 
 		private function addField(Form\Field $field) : bool {
@@ -44,7 +44,7 @@ namespace {
 		/**
 		 * Add a text field
 		 *
-		 * @return true if the field was successfully added, otherwise false
+		 * @return bool : true if the field was successfully added, otherwise false
 		 */
 
 		public function addText(string $key, string $value = '',
@@ -57,7 +57,7 @@ namespace {
 		/**
 		 * Add a select field
 		 *
-		 * @return true if the field was successfully added, otherwise false
+		 * @return bool : true if the field was successfully added, otherwise false
 		 */
 
 		public function addSelect(string $key, string $value = '',
@@ -70,7 +70,7 @@ namespace {
 		/**
 		 * Add a checkbox field
 		 *
-		 * @return true if the field was successfully added, otherwise false
+		 * @return bool : true if the field was successfully added, otherwise false
 		 */
 
 		public function addCheckbox(string $key, string $value = '') : bool {
@@ -81,7 +81,7 @@ namespace {
 		/**
 		 * Check if valid POST data has been recieved
 		 *
-		 * @return true if the data has been recieved, otherwise false
+		 * @return bool : true if the data has been recieved, otherwise false
 		 */
 
 		public function check() : bool {
@@ -103,7 +103,7 @@ namespace {
 		/**
 		 * Catch POST data into an array
 		 *
-		 * @return the result array or false if valid POST data has not been received
+		 * @return array|false : the result array or false if valid POST data has not been received
 		 */
 
 		public function post() {
@@ -156,7 +156,7 @@ namespace {
 		/**
 		 * Get a field object
 		 *
-		 * @return the object or false if the object with the given key does not exist
+		 * @return Form\Field|false : the object or false if the object does not exist
 		 */
 
 		public function getField(string $key) {

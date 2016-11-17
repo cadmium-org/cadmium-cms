@@ -53,7 +53,7 @@ namespace Form\Field {
 		/**
 		 * Set a value
 		 *
-		 * @return true if the result value is not empty, otherwise false
+		 * @return bool : true if the result value is not empty, otherwise false
 		 */
 
 		public function setValue(string $value) : bool {

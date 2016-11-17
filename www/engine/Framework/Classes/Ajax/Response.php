@@ -16,7 +16,7 @@ namespace Ajax {
 		/**
 		 * Set a param
 		 *
-		 * @return the current response object
+		 * @return Ajax\Response : the current response object
 		 */
 
 		public function set(string $name, $value) : Response {
@@ -29,7 +29,7 @@ namespace Ajax {
 		/**
 		 * Set an error and switch the response status to false (default is true)
 		 *
-		 * @return the current response object
+		 * @return Ajax\Response : the current response object
 		 */
 
 		public function setError(string $value) : Response {
@@ -42,7 +42,7 @@ namespace Ajax {
 		/**
 		 * Get a param
 		 *
-		 * @return the value or null if the param is not set
+		 * @return mixed|null : the value or null if the param is not set
 		 */
 
 		public function get(string $name) {
@@ -53,7 +53,7 @@ namespace Ajax {
 		/**
 		 * Get en error
 		 *
-		 * @return the value or false if the error is not set
+		 * @return string|false : the value or false if the error is not set
 		 */
 
 		public function getError() {
@@ -64,7 +64,7 @@ namespace Ajax {
 		/**
 		 * Get the response status
 		 *
-		 * @return true if no error has been set, otherwise false
+		 * @return bool : true if no error has been set, otherwise false
 		 */
 
 		public function getStatus() : bool {
@@ -75,7 +75,7 @@ namespace Ajax {
 		/**
 		 * Get the response data
 		 *
-		 * @return the array containing the response status, the error (if set), and the params set
+		 * @return array : the array containing the response status, the error (if set), and the params set
 		 */
 
 		public function getData() : array {

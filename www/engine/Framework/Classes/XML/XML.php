@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Parse a string as XML
 		 *
-		 * @return the XML object or false on failure
+		 * @return SimpleXMLElement|false : the XML object or false on failure
 		 */
 
 		public static function parse(string $string) {
@@ -25,7 +25,7 @@ namespace {
 		/**
 		 * Convert an XML object to a string
 		 *
-		 * @return the string or false on failure
+		 * @return string|false : the string or false on failure
 		 */
 
 		public static function stringify(SimpleXMLElement $xml) {
@@ -42,7 +42,7 @@ namespace {
 		/**
 		 * Load an XML object from a file
 		 *
-		 * @return the XML object or false on failure
+		 * @return SimpleXMLElement|false : the XML object or false on failure
 		 */
 
 		public static function load(string $file_name) {
@@ -55,7 +55,7 @@ namespace {
 		/**
 		 * Save an XML object into a file
 		 *
-		 * @return the number of bytes that were written to the file or false on failure
+		 * @return int|false : the number of bytes that were written to the file or false on failure
 		 */
 
 		public static function save(string $file_name, SimpleXMLElement $xml) {

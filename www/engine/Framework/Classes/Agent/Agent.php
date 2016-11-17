@@ -16,7 +16,7 @@ namespace {
 		/**
 		 * Search an agent in the list
 		 *
-		 * @return true if the agent is present in the list, otherwise false
+		 * @return bool : true if the agent is present in the list, otherwise false
 		 */
 
 		private static function search(array &$list) : bool {
@@ -48,7 +48,7 @@ namespace {
 		/**
 		 * Check if a current user agent is a mobile device
 		 *
-		 * @return true if the agent is present in the mobile devices list, otherwise false
+		 * @return bool : true if the agent is present in the mobile devices list, otherwise false
 		 */
 
 		public static function isMobile() : bool {
@@ -59,7 +59,7 @@ namespace {
 		/**
 		 * Check if a current user agent is a robot
 		 *
-		 * @return true if the agent is present in the robots list, otherwise false
+		 * @return bool : true if the agent is present in the robots list, otherwise false
 		 */
 
 		public static function isRobot() : bool {

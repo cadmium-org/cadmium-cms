@@ -25,7 +25,7 @@ namespace {
 		/**
 		 * Load a phrases list from a file
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public static function load(string $file_name) : bool {
@@ -42,7 +42,7 @@ namespace {
 		/**
 		 * Get a phrase
 		 *
-		 * @return the phrase if exists, otherwise false
+		 * @return string|false : the phrase if exists, otherwise false
 		 */
 
 		public static function get(string $name) {

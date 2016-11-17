@@ -34,7 +34,7 @@ namespace {
 		/**
 		 * Get a GET-param value
 		 *
-		 * @return the value or false if the param does not exist
+		 * @return string|false : the value or false if the param does not exist
 		 */
 
 		public static function get(string $name) {
@@ -45,7 +45,7 @@ namespace {
 		/**
 		 * Get a POST-param value
 		 *
-		 * @return the value or false if the param does not exist
+		 * @return string|false : the value or false if the param does not exist
 		 */
 
 		public static function post(string $name) {
@@ -56,7 +56,7 @@ namespace {
 		/**
 		 * Get a FILE-param value
 		 *
-		 * @return the array with file info or false if the param does not exist
+		 * @return array|false : the array with file info or false if the param does not exist
 		 */
 
 		public static function file(string $name) {

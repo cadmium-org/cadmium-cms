@@ -34,7 +34,7 @@ namespace Template {
 		/**
 		 * Add an item
 		 *
-		 * @return the current group object
+		 * @return Template\Group : the current group object
 		 */
 
 		public function addItem(Block $item) : Group {
@@ -47,7 +47,7 @@ namespace Template {
 		/**
 		 * Add multiple items
 		 *
-		 * @return the current group object
+		 * @return Template\Group : the current group object
 		 */
 
 		public function addItems(array $items) : Group {
@@ -60,7 +60,7 @@ namespace Template {
 		/**
 		 * Clear the items list
 		 *
-		 * @return the current group object
+		 * @return Template\Group : the current group object
 		 */
 
 		 public function removeItems() : Group {
@@ -73,7 +73,7 @@ namespace Template {
 		/**
 		 * Set items list
 		 *
-		 * @return the current group object
+		 * @return Template\Group : the current group object
 		 */
 
 		public function setItems(array $items) : Group {

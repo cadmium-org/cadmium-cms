@@ -15,7 +15,7 @@ namespace {
 		 * Get an array value by a given path, where path is an array of keys.
 		 * This method is useful for accessing multidimensional arrays
 		 *
-		 * @return the value or null if the path does not exist
+		 * @return mixed|null : the value or null if the path does not exist
 		 */
 
 		public static function get(array $array, array $path) {
@@ -83,7 +83,7 @@ namespace {
 		/**
 		 * Get a random value from an array
 		 *
-		 * @return the value or null if the array is empty
+		 * @return mixed|null : the value or null if the array is empty
 		 */
 
 		public static function random(array $array) {
