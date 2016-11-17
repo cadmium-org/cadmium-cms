@@ -11,13 +11,11 @@ namespace Template {
 
 	use Language, Str, Template;
 
-	class Block {
+	class Block extends Group {
 
 		private $contents = '', $enabled = true;
 
 		private $blocks = [], $loops = [], $widgets = [], $variables = [], $phrases = [];
-
-		private $items = [], $count = 0;
 
 		/**
 		 * Parse structures
@@ -69,10 +67,10 @@ namespace Template {
 		}
 
 		/**
-		 * Get block contents
+		 * Build the block contents
 		 */
 
-		protected function getBlockContents() : string {
+		protected function buildContents() : string {
 
 			$insertions = [];
 
@@ -129,23 +127,6 @@ namespace Template {
 		}
 
 		/**
-		 * Get group contents
-		 */
-
-		protected function getGroupContents() : string {
-
-			$contents = '';
-
-			# Process items
-
-			foreach ($this->items as $block) $contents .= $block->getContents();
-
-			# ------------------------
-
-			return $contents;
-		}
-
-		/**
 		 * Constructor
 		 */
 
@@ -157,42 +138,16 @@ namespace Template {
 		}
 
 		/**
-		 * Add an item
-		 *
-		 * @return the current block object
+		 * Cloner
 		 */
 
-		public function addItem(Block $item) : Block {
+		public function __clone() {
 
-			$this->items[] = $item; $this->count++;
+			foreach ($this->blocks as $name => $block) $this->blocks[$name] = clone $block;
 
-			return $this;
-		}
+			foreach ($this->loops as $name => $loop) $this->loops[$name] = clone $loop;
 
-		/**
-		 * Add multiple items
-		 *
-		 * @return the current block object
-		 */
-
-		public function addItems(array $items) : Block {
-
-			foreach ($items as $item) if ($item instanceof Block) $this->addItem($item);
-
-			return $this;
-		}
-
-		/**
-		 * Clear the items list
-		 *
-		 * @return the current block object
-		 */
-
-		public function removeItems() : Block {
-
-			$this->items = []; $this->count = 0;
-
-			return $this;
+			foreach ($this->items as $name => $item) $this->items[$name] = clone $item;
 		}
 
 		/**
@@ -262,19 +217,6 @@ namespace Template {
 		public function setVar(string $name, string $value) : Block {
 
 			if (isset($this->variables[$name])) $this->variables[$name] = $value;
-
-			return $this;
-		}
-
-		/**
-		 * Set items list
-		 *
-		 * @return the current block object
-		 */
-
-		public function setItems(array $items) : Block {
-
-			$this->removeItems(); $this->addItems($items);
 
 			return $this;
 		}
@@ -351,24 +293,6 @@ namespace Template {
 		}
 
 		/**
-		 * Get the items list
-		 */
-
-		public function getItems() : array {
-
-			return $this->items;
-		}
-
-		/**
-		 * Get the items count
-		 */
-
-		public function getCount() : int {
-
-			return $this->count;
-		}
-
-		/**
 		 * Get the block contents
 		 */
 
@@ -382,7 +306,7 @@ namespace Template {
 
 			# Generate contents
 
-			$contents = (0 === $this->count) ? $this->getBlockContents() : $this->getGroupContents();
+			$contents = ((0 === $this->count) ? $this->buildContents() : parent::getContents());
 
 			# Unlock the block
 
@@ -426,19 +350,6 @@ namespace Template {
 		public function isEnabled() : bool {
 
 			return $this->enabled;
-		}
-
-		/**
-		 * Cloner
-		 */
-
-		public function __clone() {
-
-			foreach ($this->blocks as $name => $block) $this->blocks[$name] = clone $block;
-
-			foreach ($this->loops as $name => $loop) $this->loops[$name] = clone $loop;
-
-			foreach ($this->items as $name => $item) $this->items[$name] = clone $item;
 		}
 
 		/**

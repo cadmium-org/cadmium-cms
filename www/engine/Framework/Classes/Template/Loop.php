@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Framework\Template
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Template {
 
 	class Loop {
@@ -12,7 +19,16 @@ namespace Template {
 
 		public function __construct(string $contents = '') {
 
-			$this->block = new Block($contents); $this->items = new Block;
+			$this->block = new Block($contents); $this->items = new Group;
+		}
+
+		/**
+		 * Cloner
+		 */
+
+		public function __clone() {
+
+			$this->items = clone $this->items;
 		}
 
 		/**
@@ -92,15 +108,6 @@ namespace Template {
 		public function getContents() : string {
 
 			return $this->items->getContents();
-		}
-
-		/**
-		 * Cloner
-		 */
-
-		public function __clone() {
-
-			$this->items = clone $this->items;
 		}
 	}
 }
