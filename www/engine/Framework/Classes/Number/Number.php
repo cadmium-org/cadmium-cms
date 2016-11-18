@@ -70,7 +70,7 @@ namespace {
 		/**
 		 * Format a text related to a number (for specific languages such as ukrainian or russian)
 		 *
-		 * @return one of the given forms depending on the number
+		 * @return string : one of the given forms depending on the number
 		 */
 
 		public static function text(int $number, string $form_1, string $form_3, string $form_5) : string {

@@ -71,7 +71,7 @@ namespace Form {
 		/**
 		 * Catch a POST value by the field key
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public function post() : bool {

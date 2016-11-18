@@ -33,7 +33,7 @@ namespace {
 		/**
 		 * Get information about a file
 		 *
-		 * @return the string or false if check_exists is true and the file does not actually exists
+		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
 		 */
 
 		private static function getInfo(string $file_name, int $param, bool $check_exists = true) {
@@ -64,7 +64,7 @@ namespace {
 		/**
 		 * Create a directory
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public static function createDir(string $dir_name, int $mode = 0755) : bool {
@@ -75,7 +75,7 @@ namespace {
 		/**
 		 * Create a file
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public static function createFile(string $file_name) : bool {
@@ -86,7 +86,7 @@ namespace {
 		/**
 		 * Remove a directory
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public static function removeDir(string $dir_name, bool $recursive = false) : bool {
@@ -111,7 +111,7 @@ namespace {
 		/**
 		 * Remove a file
 		 *
-		 * @return true on success or false on failure
+		 * @return bool : true on success or false on failure
 		 */
 
 		public static function removeFile(string $file_name) : bool {
@@ -158,7 +158,7 @@ namespace {
 		/**
 		 * Get a parent directory name
 		 *
-		 * @return the string or false if check_exists is true and the file does not actually exists
+		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getDirname(string $file_name, bool $check_exists = true) {
@@ -169,7 +169,7 @@ namespace {
 		/**
 		 * Get a basename of a file
 		 *
-		 * @return the string or false if check_exists is true and the file does not actually exists
+		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getBasename(string $file_name, bool $check_exists = true) {
@@ -180,7 +180,7 @@ namespace {
 		/**
 		 * Get a filename of a file
 		 *
-		 * @return the string or false if check_exists is true and the file does not actually exists
+		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getFilename(string $file_name, bool $check_exists = true) {
@@ -191,7 +191,7 @@ namespace {
 		/**
 		 * Get an extnesion of a file
 		 *
-		 * @return the string or false if check_exists is true and the file does not actually exists
+		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getExtension(string $file_name, bool $check_exists = true) {
@@ -202,7 +202,7 @@ namespace {
 		/**
 		 * Get file (or directory) modification time
 		 *
-		 * @return the time or false on failure
+		 * @return int|false : the time or false on failure
 		 */
 
 		public static function getModified(string $file_name) {
@@ -213,7 +213,7 @@ namespace {
 		/**
 		 * Get file contents
 		 *
-		 * @return the read data or false on failure
+		 * @return string|false : the read data or false on failure
 		 */
 
 		public static function getContents(string $file_name) {
@@ -224,7 +224,7 @@ namespace {
 		/**
 		 * Save data into a file
 		 *
-		 * @return the number of bytes that were written to the file or false on failure
+		 * @return int|false : the number of bytes that were written to the file or false on failure
 		 */
 
 		public static function putContents(string $file_name, string $contents) {
@@ -235,7 +235,7 @@ namespace {
 		/**
 		 * Include a PHP file
 		 *
-		 * @return the file return data or false on failure
+		 * @return mixed|false : the file return data or false on failure
 		 */
 
 		public static function include(string $file_name) {

@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Send an email
 		 *
-		 * @return true if the mail was successfully accepted for delivery, otherwise false
+		 * @return bool : true if the mail was successfully accepted for delivery, otherwise false
 		 */
 
 		public static function send(string $to, string $sender, string $from, string $reply_to,

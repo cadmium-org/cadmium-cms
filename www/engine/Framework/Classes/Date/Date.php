@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Validate a date using a given format
 		 *
-		 * @return the formatted date or false on failure
+		 * @return string|false : the formatted date or false on failure
 		 */
 
 		public static function validate(string $date, string $format) {
@@ -31,7 +31,7 @@ namespace {
 		/**
 		 * Check if a given number is a valid day
 		 *
-		 * @return the formatted day or false on failure
+		 * @return string|false : the formatted day or false on failure
 		 */
 
 		public static function validateDay(int $day) {
@@ -42,7 +42,7 @@ namespace {
 		/**
 		 * Check if a given number is a valid month
 		 *
-		 * @return the formatted month or false on failure
+		 * @return string|false : the formatted month or false on failure
 		 */
 
 		public static function validateMonth(int $month) {
@@ -53,7 +53,7 @@ namespace {
 		/**
 		 * Check if a given number is a valid year
 		 *
-		 * @return the formatted year or false on failure
+		 * @return string|false : the formatted year or false on failure
 		 */
 
 		public static function validateYear(int $year) {
@@ -67,7 +67,7 @@ namespace {
 		 * Get a date from a given timestamp and format it according to a given pattern.
 		 * If the timestamp is null, a current time will be used
 		 *
-		 * @return the formatted date or false if a non-numeric value is used for timestamp
+		 * @return string|false : the formatted date or false if a non-numeric value is used for timestamp
 		 */
 
 		public static function get(string $format = DATE_FORMAT_STANDART, int $time = null) {
@@ -78,7 +78,7 @@ namespace {
 		/**
 		 * Get a day from a given timestamp. If the timestamp is null, a current time will be used
 		 *
-		 * @return the formatted day or false if a non-numeric value is used for timestamp
+		 * @return string|false : the formatted day or false if a non-numeric value is used for timestamp
 		 */
 
 		public static function getDay(int $time = null) {
@@ -89,7 +89,7 @@ namespace {
 		/**
 		 * Get a month from a given timestamp. If the timestamp is null, a current time will be used
 		 *
-		 * @return the formatted month or false if a non-numeric value is used for timestamp
+		 * @return string|false : the formatted month or false if a non-numeric value is used for timestamp
 		 */
 
 		public static function getMonth(int $time = null) {
@@ -100,7 +100,7 @@ namespace {
 		/**
 		 * Get a year from a given timestamp. If the timestamp is null, a current time will be used
 		 *
-		 * @return the formatted year or false if a non-numeric value is used for timestamp
+		 * @return string|false : the formatted year or false if a non-numeric value is used for timestamp
 		 */
 
 		public static function getYear(int $time = null) {

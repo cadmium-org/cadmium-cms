@@ -153,7 +153,7 @@ namespace Template {
 		/**
 		 * Set a block, a loop, or a variable
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function set(string $name, $value) : Block {
@@ -172,7 +172,7 @@ namespace Template {
 		/**
 		 * Set multiple components (blocks, loops, or variables)
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function setArray(array $components) : Block {
@@ -185,7 +185,7 @@ namespace Template {
 		/**
 		 * Set a block
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function setBlock(string $name, Block $block) : Block {
@@ -198,7 +198,7 @@ namespace Template {
 		/**
 		 * Set a loop
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function setLoop(string $name, array $items) : Block {
@@ -211,7 +211,7 @@ namespace Template {
 		/**
 		 * Set a variable
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function setVar(string $name, string $value) : Block {
@@ -224,7 +224,7 @@ namespace Template {
 		/**
 		 * Get a block, a loop, or a variable
 		 *
-		 * @return the component or false if the component with the given name does not exist
+		 * @return Template\Block|Template\Loop|string|false : the component or false if the component does not exist
 		 */
 
 		public function get(string $name) {
@@ -235,7 +235,7 @@ namespace Template {
 		/**
 		 * Get a block. It's recommended to use this method instead of magic getter to avoid an error on getting nonexistent block
 		 *
-		 * @return the block or an empty block if the block with the given name does not exist
+		 * @return Template\Block : the block or an empty block if the block does not exist
 		 */
 
 		public function getBlock(string $name) : Block {
@@ -255,7 +255,7 @@ namespace Template {
 		/**
 		 * Get a loop. It's recommended to use this method instead of magic getter to avoid an error on getting nonexistent loop
 		 *
-		 * @return the loop or an empty loop if the loop with the given name does not exist
+		 * @return Template\Loop : the loop or an empty loop if the loop does not exist
 		 */
 
 		public function getLoop(string $name) : Loop {
@@ -275,7 +275,7 @@ namespace Template {
 		/**
 		 * Get a variable
 		 *
-		 * @return the value or false if the variable with the given name does not exist
+		 * @return string|false : the value or false if the variable does not exist
 		 */
 
 		public function getVar(string $name) {
@@ -320,7 +320,7 @@ namespace Template {
 		/**
 		 * Disable the block
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function disable() : Block {
@@ -333,7 +333,7 @@ namespace Template {
 		/**
 		 * Enable the block
 		 *
-		 * @return the current block object
+		 * @return Template\Block : the current block object
 		 */
 
 		public function enable() : Block {

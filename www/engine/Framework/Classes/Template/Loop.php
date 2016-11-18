@@ -34,7 +34,7 @@ namespace Template {
 		/**
 		 * Add an item
 		 *
-		 * @return the current loop object
+		 * @return Template\Loop : the current loop object
 		 */
 
 		public function addItem(array $data) : Loop {
@@ -47,7 +47,7 @@ namespace Template {
 		/**
 		 * Add multiple items
 		 *
-		 * @return the current loop object
+		 * @return Template\Loop : the current loop object
 		 */
 
 		public function addItems(array $items) : Loop {
@@ -60,7 +60,7 @@ namespace Template {
 		/**
 		 * Clear the items list
 		 *
-		 * @return the current loop object
+		 * @return Template\Loop : the current loop object
 		 */
 
 		public function removeItems() : Loop {
@@ -73,7 +73,7 @@ namespace Template {
 		/**
 		 * Set items list
 		 *
-		 * @return the current loop object
+		 * @return Template\Loop : the current loop object
 		 */
 
 		public function setItems(array $items) : Loop {

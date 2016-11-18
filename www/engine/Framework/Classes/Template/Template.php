@@ -34,7 +34,7 @@ namespace {
 		/**
 		 * Get a global variable
 		 *
-		 * @return the variable or false if the variable is not set
+		 * @return string|false : the variable or false if the variable is not set
 		 */
 
 		public static function getGlobal(string $name) {
@@ -45,7 +45,7 @@ namespace {
 		/**
 		 * Get a widget
 		 *
-		 * @return the widget or false if the widget is not set
+		 * @return Template\Block|false : the widget or false if the widget is not set
 		 */
 
 		public static function getWidget(string $name) {

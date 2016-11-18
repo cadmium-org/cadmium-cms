@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Parse a string as JSON
 		 *
-		 * @return the JSON value or null on failure
+		 * @return mixed|null : the JSON value or null on failure
 		 */
 
 		public static function parse(string $string) {
@@ -25,7 +25,7 @@ namespace {
 		/**
 		 * Convert a JSON value to a string
 		 *
-		 * @return the string or false on failure
+		 * @return string|false : the string or false on failure
 		 */
 
 		public static function stringify($value) {
@@ -36,7 +36,7 @@ namespace {
 		/**
 		 * Load a JSON value from a file
 		 *
-		 * @return the JSON value or null on failure
+		 * @return mixed|null : the JSON value or null on failure
 		 */
 
 		public static function load(string $file_name) {
@@ -49,7 +49,7 @@ namespace {
 		/**
 		 * Save a JSON value into a file
 		 *
-		 * @return the number of bytes that were written to the file or false on failure
+		 * @return int|false : the number of bytes that were written to the file or false on failure
 		 */
 
 		public static function save(string $file_name, $value) {

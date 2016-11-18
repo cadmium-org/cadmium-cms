@@ -27,7 +27,7 @@ namespace {
 		/**
 		 * Set a name
 		 *
-		 * @return the current tag object
+		 * @return Tag : the current tag object
 		 */
 
 		 public function setName(string $name) : Tag {
@@ -40,7 +40,7 @@ namespace {
 		/**
 		 * Set an attribute
 		 *
-		 * @return the current tag object
+		 * @return Tag : the current tag object
 		 */
 
 		public function setAttribute(string $name, string $value) : Tag {
@@ -53,7 +53,7 @@ namespace {
 		/**
 		 * Set multiple attributes
 		 *
-		 * @return the current tag object
+		 * @return Tag : the current tag object
 		 */
 
 		public function setAttributes(array $attributes) : Tag {
@@ -66,7 +66,7 @@ namespace {
 		/**
 		 * Set contents. The method expects a block, a string, or null
 		 *
-		 * @return the current tag object
+		 * @return Tag : the current tag object
 		 */
 
 		public function setContents($contents) : Tag {
@@ -88,7 +88,7 @@ namespace {
 		/**
 		 * Get the tag attribute
 		 *
-		 * @return the value or false if the attribute does not exist
+		 * @return string|false : the value or false if the attribute does not exist
 		 */
 
 		public function getAttribute(string $name) {
@@ -107,8 +107,6 @@ namespace {
 
 		/**
 		 * Get the tag as a block
-		 *
-		 * @return the self-closing tag if no valid contents have been set, otherwise the regular tag
 		 */
 
 		public function getBlock() : Template\Block {

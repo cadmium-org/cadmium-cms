@@ -14,7 +14,7 @@ namespace {
 		/**
 		 * Output an image
 		 *
-		 * @return true on success or false if the given image is not a valid resource
+		 * @return bool : true on success or false if the given image is not a valid resource
 		 */
 
 		private static function output($image, string $mime, callable $outputter, array $params = []) : bool {
@@ -35,7 +35,7 @@ namespace {
 		 *
 		 * @param $quality ranges from 0 (worst) to 100 (best)
 		 *
-		 * @return true on success or false if the given image is not a valid resource
+		 * @return bool : true on success or false if the given image is not a valid resource
 		 */
 
 		public static function outputJPEG($image, int $quality = 75) : bool {
@@ -50,7 +50,7 @@ namespace {
 		 *
 		 * @param $quality ranges from 0 (no compression) to 9
 		 *
-		 * @return true on success or false if the given image is not a valid resource
+		 * @return bool : true on success or false if the given image is not a valid resource
 		 */
 
 		public static function outputPNG($image, int $quality = 4) : bool {
@@ -63,7 +63,7 @@ namespace {
 		/**
 		 * Output a GIF image
 		 *
-		 * @return true on success or false if the given image is not a valid resource
+		 * @return bool : true on success or false if the given image is not a valid resource
 		 */
 
 		public static function outputGIF($image) : bool {

@@ -36,7 +36,7 @@ namespace {
 		/**
 		 * Set a query attribute. If the value is null, an attribute will be removed
 		 *
-		 * @return the current url object
+		 * @return Url : the current url object
 		 */
 
 		public function setAttribute(string $name, string $value = null) : Url {
@@ -49,7 +49,7 @@ namespace {
 		/**
 		* Get a query attribute
 		*
-		* @return the value or false if the attribute does not exist
+		* @return string|false : the value or false if the attribute does not exist
 		*/
 
 		public function getAttribute(string $name) {

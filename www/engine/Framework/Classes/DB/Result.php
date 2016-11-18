@@ -53,7 +53,7 @@ namespace DB {
 		/**
 		 * Get the next row
 		 *
-		 * @return the row data array or null if there are no more rows in the resultset
+		 * @return array|null : the row data array or null if there are no more rows in the resultset
 		 */
 
 		public function getRow() {

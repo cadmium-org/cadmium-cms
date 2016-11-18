@@ -29,7 +29,7 @@ namespace {
 		 * If a validator was not given, a default validator will be used to convert a given variable type to a default's type.
 		 * In a case the conversion fails an existing value will not be changed
 		 *
-		 * @return the current dataset object
+		 * @return Dataset : the current dataset object
 		 */
 
 		public function addParam(string $name, $default, callable $validator = null) : Dataset {
@@ -48,7 +48,7 @@ namespace {
 		/**
 		 * Add multiple params
 		 *
-		 * @return the current dataset object
+		 * @return Dataset : the current dataset object
 		 */
 
 		public function addParams(array $data) : Dataset {
@@ -61,7 +61,7 @@ namespace {
 		/**
 		 * Update a value
 		 *
-		 * @return true on success, false on error, or null if the param does not exist
+		 * @return bool|null : true on success, false on error, or null if the param does not exist
 		 */
 
 		public function set(string $name, $value) {
@@ -81,7 +81,7 @@ namespace {
 		/**
 		 * Update multiple values
 		 *
-		 * @return the array of update results for every param (true on success or false on error)
+		 * @return array : the array of update results for every param (true on success or false on error)
 		 */
 
 		public function setArray(array $data) : array {
@@ -101,7 +101,7 @@ namespace {
 		/**
 		 * Validate and return a value without affecting the dataset
 		 *
-		 * @return the validated value or null if the param does not exist
+		 * @return mixed|null : the validated value or null if the param does not exist
 		 */
 
 		public function cast(string $name, $value) {
@@ -121,7 +121,7 @@ namespace {
 		/**
 		 * Validate and return multiple values without affecting the dataset
 		 *
-		 * @return the array of validated values or the array of all values if return_all is true
+		 * @return array : the array of validated values or the array of all values if $return_all is true
 		 */
 
 		public function castArray(array $data, bool $return_all = false) : array {
@@ -150,7 +150,7 @@ namespace {
 		/**
 		 * Get a param value
 		 *
-		 * @return the value or null if the param does not exist
+		 * @return mixed|null : the value or null if the param does not exist
 		 */
 
 		public function get(string $name) {
