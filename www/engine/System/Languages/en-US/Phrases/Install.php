@@ -49,7 +49,6 @@ return [
 	# Fields
 
 	'INSTALL_FIELD_LANGUAGE'                    => 'Language',
-	'INSTALL_FIELD_TEMPLATE'                    => 'Template',
 
 	'INSTALL_FIELD_DATABASE_SERVER'             => 'Server',
 	'INSTALL_FIELD_DATABASE_USER'               => 'User name',

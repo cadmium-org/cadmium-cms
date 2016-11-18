@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Modules\Entitizer, Config;
+	use Modules\Entitizer, Dataset as Config;
 
 	abstract class Collection {
 
@@ -56,7 +56,7 @@ namespace Modules\Entitizer\Utils {
 
 		protected function getCondition(array $data) {
 
-			return implode(' AND ', array_filter($this->config->cast($data, true)));
+			return implode(' AND ', array_filter($this->config->castArray($data, true)));
 		}
 
 		# Constructor

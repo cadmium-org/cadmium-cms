@@ -76,17 +76,21 @@
 
 			</div>
 
-			<h4 class="ui dividing header">%SETTINGS_GROUP_EXTRA%</h4>
+			<h4 class="ui dividing header">%SETTINGS_GROUP_ADMIN%</h4>
 
 			<div class="field">
 
-				<div class="ui slider checkbox">
+				<label for="settings-admin-language">%SETTINGS_FIELD_ADMIN_LANGUAGE%</label>
 
-					{ block:field_settings_users_registration / }
+				{ block:field_settings_admin_language / }
 
-					<label for="settings-users-registration">%SETTINGS_FIELD_USERS_REGISTRATION%</label>
+			</div>
 
-				</div>
+			<div class="field">
+
+				<label for="settings-admin-template">%SETTINGS_FIELD_ADMIN_TEMPLATE%</label>
+
+				{ block:field_settings_admin_template / }
 
 			</div>
 

@@ -3,7 +3,7 @@
 namespace Frames\Admin {
 
 	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Utils\Messages, Utils\Popup, Utils\View;
-	use Ajax, DB, Debug, Request, Template;
+	use DB, Debug, Language, Template;
 
 	abstract class Section extends Frames\Section {
 
@@ -15,31 +15,32 @@ namespace Frames\Admin {
 
 		const PHRASES = ['Admin', 'Ajax', 'Common', 'Install', 'Mail', 'Menuitem', 'Page', 'Range', 'User', 'Variable', 'Widget'];
 
-		# Section settings
+		# Page settings
 
-		protected $title = '';
+		protected $title = '', $layout = 'Page';
 
-		# Display form
+		# Get layout
 
-		private function displayForm(Template\Asset\Block $contents, string $status) {
+		private function getLayout(Template\Block $contents) {
 
-			$form = View::get('Main\Form');
+			$layout = View::get('Layouts/' . $this->layout);
 
-			# Set language
+			# Set menu and user
 
-			$form->language = Extend\Languages::data('iso');
+			if (Auth::check()) {
+
+				$layout->menu = View::get('Blocks/Utils/Menu');
+
+				$layout->getBlock('user')->gravatar = Auth::user()->gravatar;
+
+				$layout->getBlock('user')->name = Auth::user()->name;
+
+				$layout->getBlock('user')->id = Auth::user()->id;
+			}
 
 			# Set title
 
-			$form->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . CADMIUM_NAME);
-
-			# Create layout
-
-			$form->layout = ($layout = View::get('Layouts\Form'));
-
-			# Set title
-
-			$layout->title = $this->title;
+			$layout->title = Language::get($this->title);
 
 			# Set messages
 
@@ -49,62 +50,11 @@ namespace Frames\Admin {
 
 			$layout->contents = $contents;
 
-			# Set report
+			# Set personalizer
 
-			$layout->block('report')->script_time = Debug::time();
+			$layout->getBlock('language')->country = Extend\Languages::data('country');
 
-			$layout->block('report')->db_time = DB::time();
-
-			# ------------------------
-
-			Template::output($form, $status);
-		}
-
-		# Display page
-
-		private function displayPage(Template\Asset\Block $contents) {
-
-			$page = View::get('Main\Page');
-
-			# Set language
-
-			$page->language = Extend\Languages::data('iso');
-
-			# Set title
-
-			$page->title = ((('' !== $this->title) ? ($this->title . ' | ') : '') . CADMIUM_NAME);
-
-			# Create layout
-
-			$page->layout = ($layout = View::get('Layouts\Page'));
-
-			# Set menu
-
-			$layout->menu = View::get('Blocks\Utils\Menu');
-
-			# Set user
-
-			$layout->block('user')->gravatar = md5(strtolower(Auth::user()->email));
-
-			$layout->block('user')->name = Auth::user()->name;
-
-			$layout->block('user')->id = Auth::user()->id;
-
-			# Set popup
-
-			$layout->popup = Popup::block();
-
-			# Set title
-
-			$layout->title = $this->title;
-
-			# Set messages
-
-			$layout->messages = Messages::block();
-
-			# Set contents
-
-			$layout->contents = $contents;
+			$layout->getBlock('language')->title = Extend\Languages::data('title');
 
 			# Set copyright
 
@@ -113,29 +63,42 @@ namespace Frames\Admin {
 			$layout->cadmium_name       = CADMIUM_NAME;
 			$layout->cadmium_version    = CADMIUM_VERSION;
 
-			# Set language selector
+			# Set popup
 
-			$layout->block('language')->country = Extend\Languages::data('country');
-
-			$layout->block('language')->title = Extend\Languages::data('title');
-
-			$layout->block('language')->items = Extend\Languages::items();
-
-			# Set template selector
-
-			$layout->block('template')->title = Extend\Templates::data('title');
-
-			$layout->block('template')->items = Extend\Templates::items();
+			$layout->popup = Popup::block();
 
 			# Set report
 
-			$layout->block('report')->script_time = Debug::time();
+			$layout->getBlock('report')->script_time = Debug::getTime();
 
-			$layout->block('report')->db_time = DB::time();
+			$layout->getBlock('report')->db_time = DB::getTime();
 
 			# ------------------------
 
-			Template::output($page, STATUS_CODE_200);
+			return $layout;
+		}
+
+		# Display page
+
+		protected function displayPage(Template\Block $contents, int $status = STATUS_CODE_200) {
+
+			$page = View::get('Main/' . $this->layout);
+
+			# Set language
+
+			$page->language = Extend\Languages::data('iso');
+
+			# Set title
+
+			$page->title = ((('' !== $this->title) ? (Language::get($this->title) . ' | ') : '') . CADMIUM_NAME);
+
+			# Set layout
+
+			$page->layout = $this->getLayout($contents);
+
+			# ------------------------
+
+			Template::output($page, $status);
 		}
 
 		# Admin main method
@@ -144,46 +107,16 @@ namespace Frames\Admin {
 
 			# Check for restricted access
 
-			if (('' === CONFIG_ADMIN_IP) || in_array(REQUEST_CLIENT_IP, preg_split('/ +/', CONFIG_ADMIN_IP), true)) {
+			if ('' !== CONFIG_ADMIN_IP) {
 
-				# Handle install component request
+				$ips = preg_split('/ +/', CONFIG_ADMIN_IP, -1, PREG_SPLIT_NO_EMPTY);
 
-				if ($this instanceof Component\Install) {
-
-					if (Template::isBlock($result = $this->handle())) return $this->displayForm($result, STATUS_CODE_200);
-				}
-
-				# Handle auth component request
-
-				else if ($this instanceof Component\Auth) {
-
-					if (Auth::check()) Request::redirect(INSTALL_PATH . '/admin');
-
-					if ($this instanceof Component\Auth\Initial) { if (!Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/login'); }
-
-					else if (Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/register');
-
-					if (Template::isBlock($result = $this->handle())) return $this->displayForm($result, STATUS_CODE_401);
-				}
-
-				# Handle panel component request
-
-				else if ($this instanceof Component\Panel) {
-
-					if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
-
-						Request::redirect(INSTALL_PATH . '/admin/login');
-					}
-
-					if (Template::isBlock($result = $this->handle())) return $this->displayPage($result);
-
-					if (Ajax::isResponse($result)) return Ajax::output($result);
-				}
+				if (!in_array(REQUEST_CLIENT_IP, $ips, true)) return Status::error404();
 			}
 
 			# ------------------------
 
-			return Status::error404();
+			$this->area();
 		}
 	}
 }

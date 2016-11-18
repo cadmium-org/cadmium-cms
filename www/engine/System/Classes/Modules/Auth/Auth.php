@@ -42,7 +42,7 @@ namespace Modules {
 
 			# Check session code
 
-			if (false === ($code = Validate::authCode(Session::get('code')))) return false;
+			if (false === ($code = Validate::authCode(Session::get('code') ?? ''))) return false;
 
 			# Get auth
 

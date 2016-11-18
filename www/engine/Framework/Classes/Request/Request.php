@@ -1,47 +1,72 @@
 <?php
 
+/**
+ * @package Framework\Request
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Request {
 
-		# Check if request is ajax
+		/**
+		 * Check whether this is an ajax request
+		 */
 
-		public static function isAjax() {
+		public static function isAjax() : bool {
 
 			return (getenv('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
 		}
 
-		# Check if request is secure
+		/**
+		 * Check whether this is a HTTPS request
+		 */
 
-		public static function isSecure() {
+		public static function isSecure() : bool {
 
 			$https = (!empty(getenv('HTTPS')) && (getenv('HTTPS') !== 'off'));
 
 			return ($https || (getenv('SERVER_PORT') === '443'));
 		}
 
-		# Return GET param by name
+		/**
+		 * Get a GET-param value
+		 *
+		 * @return the value or false if the param does not exist
+		 */
 
 		public static function get(string $name) {
 
 			return ($_GET[$name] ?? false);
 		}
 
-		# Return POST param by name
+		/**
+		 * Get a POST-param value
+		 *
+		 * @return the value or false if the param does not exist
+		 */
 
 		public static function post(string $name) {
 
 			return ($_POST[$name] ?? false);
 		}
 
-		# Return file by name
+		/**
+		 * Get a FILE-param value
+		 *
+		 * @return the array with file info or false if the param does not exist
+		 */
 
 		public static function file(string $name) {
 
 			return ($_FILES[$name] ?? false);
 		}
 
-		# Redirect to specified url
+		/**
+		 * Redirect to a specified url and terminate the script
+		 */
 
 		public static function redirect(string $url) {
 

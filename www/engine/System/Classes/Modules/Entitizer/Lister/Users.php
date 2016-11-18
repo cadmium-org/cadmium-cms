@@ -8,6 +8,8 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\User;
 
+		protected $title = 'TITLE_SYSTEM_USERS';
+
 		# Lister configuration
 
 		protected static $link = '/admin/system/users';
@@ -16,9 +18,9 @@ namespace Modules\Entitizer\Lister {
 
 		protected static $display = CONFIG_ADMIN_USERS_DISPLAY;
 
-		protected static $view_main = 'Blocks\Entitizer\Users\Lister\Main';
+		protected static $view_main = 'Blocks/Entitizer/Users/Lister/Main';
 
-		protected static $view_item = 'Blocks\Entitizer\Users\Lister\Item';
+		protected static $view_item = 'Blocks/Entitizer/Users/Lister/Item';
 
 		protected static $view_ajax_main = '';
 
@@ -30,15 +32,15 @@ namespace Modules\Entitizer\Lister {
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\User $user) {
+		protected function processItem(Template\Block $view, Entitizer\Dataset\User $user) {
 
 			$view->class = (($user->rank === RANK_GUEST) ? 'inactive' : '');
 
-			$view->rank = Range\Rank::get($user->rank);
+			$view->rank = (Range\Rank::get($user->rank) ?? '');
 
 			# Set remove button
 
-			if ($user->id === Auth::user()->id) $view->block('remove')->class = 'disabled';
+			if ($user->id === Auth::user()->id) $view->getBlock('remove')->class = 'disabled';
 		}
 	}
 }

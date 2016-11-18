@@ -37,15 +37,15 @@ namespace Utils {
 
 		public static function block() {
 
-			$messages = Template::group();
+			$messages = Template::createBlock();
 
 			foreach (static::$items as $type => $item) {
 
-				$messages->add($block = View::get('Blocks\Utils\Message'));
+				$messages->addItem($block = View::get('Blocks/Utils/Message'));
 
-				$block->type = $type; $block->text = Template::block($item['text']);
+				$block->type = $type; $block->text = Template::createBlock($item['text']);
 
-				if (isset($item['title'])) $block->block('title')->set('text', $item['title'])->enable();
+				if (isset($item['title'])) $block->getBlock('title')->set('text', $item['title'])->enable();
 			}
 
 			# ------------------------

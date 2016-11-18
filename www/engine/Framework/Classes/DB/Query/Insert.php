@@ -1,26 +1,35 @@
 <?php
 
+/**
+ * @package Framework\DB
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace DB\Query {
 
-	use DB\Utils;
+	use DB;
 
-	class Insert extends Utils\Query {
+	class Insert extends DB\Query {
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
-		public function __construct(string $table, array $dataset, bool $multiple = false, bool $ignore = false) {
+		public function __construct(string $table, array $set, bool $multiple = false, bool $ignore = false) {
 
 			# Process arguments
 
 			$table = $this->getName($table);
 
-			$dataset = ($multiple ? array_values($dataset) : [$dataset]);
+			$set = ($multiple ? array_values($set) : [$set]);
 
-			# Process dataset
+			# Process set
 
 			$names = ''; $values = [];
 
-			foreach ($dataset as $key => $row) if (is_array($row)) {
+			foreach ($set as $key => $row) if (is_array($row)) {
 
 				if (0 === $key) $names = $this->getString(array_keys($row), '$name', ', ');
 

@@ -64,13 +64,13 @@ namespace Modules\Entitizer\Utils {
 
 			$query = $this->getSelectQuery($parent_id, $config, $order_by);
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# Process results
 
 			$items = [$parent_id => ['children' => []]];
 
-			while (null !== ($data = DB::last()->row())) {
+			while (null !== ($data = DB::getLast()->getRow())) {
 
 				$dataset = Entitizer::dataset(static::$table, $data);
 
@@ -94,11 +94,11 @@ namespace Modules\Entitizer\Utils {
 
 			$query = $this->getCountQuery($parent_id);
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# ------------------------
 
-			return intval(DB::last()->row()['count']);
+			return intval(DB::getLast()->getRow()['count']);
 		}
 
 		# Get subtree depth
@@ -111,11 +111,11 @@ namespace Modules\Entitizer\Utils {
 
 			$query = $this->getDepthQuery($parent_id);
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# ------------------------
 
-			return intval(DB::last()->row()['depth']);
+			return intval(DB::getLast()->getRow()['depth']);
 		}
 
 		# Get path
@@ -134,13 +134,13 @@ namespace Modules\Entitizer\Utils {
 
 			# Select path
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# Process results
 
 			$path = [];
 
-			while (null !== ($data = DB::last()->row())) $path[] = Entitizer::dataset(static::$table, $data)->data();
+			while (null !== ($data = DB::getLast()->getRow())) $path[] = Entitizer::dataset(static::$table, $data)->data();
 
 			# ------------------------
 

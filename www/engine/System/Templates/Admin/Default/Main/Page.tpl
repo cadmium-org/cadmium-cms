@@ -25,7 +25,8 @@
 
 		<script src="$install_path$/include/admin/ckeditor/ckeditor.js"></script>
 
-		<script src="$install_path$/include/admin/scripts/main.js"></script>
+		<script src="$install_path$/include/admin/templates/$template_name$/scripts/view.js"></script>
+		<script src="$install_path$/include/admin/templates/$template_name$/scripts/main.js"></script>
 
 		<script>
 
@@ -46,18 +47,20 @@
 				'MENUITEMS_CONFIRM_REMOVE':         '%MENUITEMS_ITEM_CONFIRM_REMOVE%',
 
 				'VARIABLES_CONFIRM_REMOVE':         '%VARIABLES_ITEM_CONFIRM_REMOVE%',
-				'VARIABLES_INFO_TEXT':              "%VARIABLES_ITEM_INFO_TEXT%",
+				'VARIABLES_INFO_TEXT':              '%VARIABLES_ITEM_INFO_TEXT%',
 
 				'WIDGETS_CONFIRM_REMOVE':           '%WIDGETS_ITEM_CONFIRM_REMOVE%',
-				'WIDGETS_INFO_TEXT':                "%WIDGETS_ITEM_INFO_TEXT%",
+				'WIDGETS_INFO_TEXT':                '%WIDGETS_ITEM_INFO_TEXT%',
 
 				'FILEMANAGER_CONFIRM_DIR_REMOVE':   '%FILEMANAGER_CONFIRM_DIR_REMOVE%',
 				'FILEMANAGER_CONFIRM_FILE_REMOVE':  '%FILEMANAGER_CONFIRM_FILE_REMOVE%',
 
+				'ADDONS_CONFIRM_UNINSTALL':         '%ADDONS_ITEM_CONFIRM_UNINSTALL%',
+
 				'USERS_CONFIRM_REMOVE':             '%USERS_ITEM_CONFIRM_REMOVE%'
 			};
 
-			$(document).ready(function() { Main.init(); });
+			$(function() { View.init(); Main.init(); });
 
 		</script>
 

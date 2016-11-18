@@ -1,14 +1,25 @@
 <?php
 
+/**
+ * @package Framework\Agent
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Agent {
 
 		private static $mobiles = [], $robots = [];
 
-		# Search agent in list
+		/**
+		 * Search an agent in the list
+		 *
+		 * @return true if the agent is present in the list, otherwise false
+		 */
 
-		private static function search(array &$list) {
+		private static function search(array &$list) : bool {
 
 			if (empty($agent = getenv('HTTP_USER_AGENT'))) return false;
 
@@ -19,7 +30,9 @@ namespace {
 			return false;
 		}
 
-		# Autoloader
+		/**
+		 * Autoloader
+		 */
 
 		public static function __autoload() {
 
@@ -27,21 +40,29 @@ namespace {
 
 			$file_robots = (DIR_DATA . 'Agent/Robots.php');
 
-			if (is_array($mobiles = Explorer::php($file_mobiles))) self::$mobiles = $mobiles;
+			if (is_array($mobiles = Explorer::include($file_mobiles))) self::$mobiles = $mobiles;
 
-			if (is_array($robots = Explorer::php($file_robots))) self::$robots = $robots;
+			if (is_array($robots = Explorer::include($file_robots))) self::$robots = $robots;
 		}
 
-		# Check if user agent is mobile
+		/**
+		 * Check if a current user agent is a mobile device
+		 *
+		 * @return true if the agent is present in the mobile devices list, otherwise false
+		 */
 
-		public static function isMobile() {
+		public static function isMobile() : bool {
 
 			return self::search(self::$mobiles);
 		}
 
-		# Check if user agent is robot
+		/**
+		 * Check if a current user agent is a robot
+		 *
+		 * @return true if the agent is present in the robots list, otherwise false
+		 */
 
-		public static function isRobot() {
+		public static function isRobot() : bool {
 
 			return self::search(self::$robots);
 		}

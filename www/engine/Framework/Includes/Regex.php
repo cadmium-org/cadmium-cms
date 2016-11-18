@@ -11,10 +11,10 @@ define('REGEX_LANGUAGE_PHRASE_NAME',                '/^(?![0-9_])(?!.*_$)(?!.*_{
 
 # Template expressions
 
-define('REGEX_TEMPLATE_ITEM_NAME',                  '/^(?![0-9_])(?!.*_$)(?!.*_{2,})[a-zA-Z0-9_]+$/');
+define('REGEX_TEMPLATE_COMPONENT_NAME',             '/^(?![0-9_])(?!.*_$)(?!.*_{2,})[a-zA-Z0-9_]+$/');
 
-define('REGEX_TEMPLATE_STRUCTURE',                   '/(?s){[ ]*(!)?[ ]*(block|for|widget)[ ]*:[ ]*([a-zA-Z0-9_]+)[ ]*' .
-                                                     '(?:\/[ ]*}|}(.*?){[ ]*\/[ ]*\2[ ]*:[ ]*\3[ ]*})/');
+define('REGEX_TEMPLATE_STRUCTURE',                  '/(?s){[ ]*(!)?[ ]*(block|for|widget)[ ]*:[ ]*([a-zA-Z0-9_]+)[ ]*' .
+                                                    '(?:\/[ ]*}|}(.*?){[ ]*\/[ ]*\2[ ]*:[ ]*\3[ ]*})/');
 
 define('REGEX_TEMPLATE_VARIABLE',                   '/\$([a-zA-Z0-9_]+)\$/');
 define('REGEX_TEMPLATE_PHRASE',                     '/\%([a-zA-Z0-9_]+)\%/');

@@ -7,7 +7,8 @@ return [
 	'VARIABLE_ERROR_MODIFY'                         => 'Error saving variable data',
 	'VARIABLE_ERROR_REMOVE'                         => 'Error removing variable',
 
-	'VARIABLE_ERROR_NAME_DUPLICATE'                 => 'Variable name is already in use',
+	'VARIABLE_ERROR_NAME_INVALID'                   => 'Invalid key',
+	'VARIABLE_ERROR_NAME_DUPLICATE'                 => 'Variable key is already in use',
 
 	# Success messages
 

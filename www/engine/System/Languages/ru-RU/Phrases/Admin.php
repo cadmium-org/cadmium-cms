@@ -29,6 +29,7 @@ return [
 	'TITLE_CONTENT_FILEMANAGER_DIR'             => 'Редактирование директории',
 	'TITLE_CONTENT_FILEMANAGER_FILE'            => 'Редактирование файла',
 
+	'TITLE_EXTEND_ADDONS'                       => 'Аддоны',
 	'TITLE_EXTEND_LANGUAGES'                    => 'Языки',
 	'TITLE_EXTEND_TEMPLATES'                    => 'Шаблоны',
 
@@ -65,8 +66,8 @@ return [
 
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
 	                                               'по-прежнему находится в корневой директории сайта. Необходимо удалить его.',
-	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'Похоже, Вы пока не редактировали конфигурацию сайта. '.
-	                                               'Перейдите на <a href="$install_path$/admin/system/settings">страницу настроек</a> для ввода актуальных значений.',
+	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'Похоже, Вы пока не редактировали настройки сайта. '.
+	                                               'Перейдите на <a href="$install_path$/admin/system/settings">страницу настроек</a> для ввода актуальных данных.',
 
 	# Pages
 
@@ -77,6 +78,7 @@ return [
 
 	'PAGES_ITEM_LIST'                           => 'Список страниц',
 	'PAGES_ITEM_CREATE'                         => 'Создать страницу',
+	'PAGES_ITEM_CREATE_SUB'                     => 'Создать подстраницу',
 	'PAGES_ITEM_EDIT'                           => 'Редактировать',
 	'PAGES_ITEM_BROWSE'                         => 'Просмотреть',
 	'PAGES_ITEM_REMOVE'                         => 'Удалить',
@@ -93,6 +95,7 @@ return [
 
 	'MENUITEMS_ITEM_LIST'                       => 'Список элементов',
 	'MENUITEMS_ITEM_CREATE'                     => 'Создать элемент',
+	'MENUITEMS_ITEM_CREATE_SUB'                 => 'Создать подэлемент',
 	'MENUITEMS_ITEM_EDIT'                       => 'Редактировать',
 	'MENUITEMS_ITEM_BROWSE'                     => 'Перейти',
 	'MENUITEMS_ITEM_REMOVE'                     => 'Удалить',
@@ -205,20 +208,31 @@ return [
 	'UPLOADER_ERROR_SAVE'                       => 'Ошибка сохранения файла',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Ошибка загрузки файла',
 
+	# Add-ons
+
+	'ADDONS_NOT_FOUND'                          => 'Аддоны не найдены',
+
+	'ADDONS_ERROR_INSTALL'                      => 'Ошибка инсталляции аддона',
+	'ADDONS_ERROR_UNINSTALL'                    => 'Ошибка деинсталляции аддона',
+
+	'ADDONS_ITEM_CONFIRM_UNINSTALL'             => 'Вы действительно хотите деинсталлировать выбранный аддон?',
+
 	# Languages
 
 	'LANGUAGES_NOT_FOUND'                       => 'Языки не найдены',
-	'LANGUAGES_INSTALLED'                       => 'Установленные языки',
 
-	'LANGUAGES_ERROR_NAME'                      => 'Ошибка активации языка',
+	'LANGUAGES_ERROR_ACTIVATE'                  => 'Ошибка установки языка по умолчанию',
+	'LANGUAGES_ERROR_INSTALL'                   => 'Ошибка инсталляции языка',
+	'LANGUAGES_ERROR_REMOVE'                    => 'Ошибка удаления языка',
 	'LANGUAGES_ERROR_SAVE'                      => 'Ошибка сохранения настроек',
 
 	# Templates
 
 	'TEMPLATES_NOT_FOUND'                       => 'Шаблоны не найдены',
-	'TEMPLATES_INSTALLED'                       => 'Установленные шаблоны',
 
-	'TEMPLATES_ERROR_NAME'                      => 'Ошибка активации шаблона',
+	'TEMPLATES_ERROR_ACTIVATE'                  => 'Ошибка установки шаблона по умолчанию',
+	'TEMPLATES_ERROR_INSTALL'                   => 'Ошибка инсталляции шаблона',
+	'TEMPLATES_ERROR_REMOVE'                    => 'Ошибка удаления шаблона',
 	'TEMPLATES_ERROR_SAVE'                      => 'Ошибка сохранения настроек',
 
 	# Users
@@ -242,7 +256,7 @@ return [
 
 	'SETTINGS_GROUP_SITE'                       => 'Настройки сайта',
 	'SETTINGS_GROUP_SYSTEM'                     => 'Настройки системы',
-	'SETTINGS_GROUP_EXTRA'                      => 'Прочие настройки',
+	'SETTINGS_GROUP_ADMIN'                      => 'Настройки панели управления',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название сайта',
 	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган сайта',
@@ -254,10 +268,11 @@ return [
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Часовая зона',
 	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'Системный e-mail',
 
-	'SETTINGS_FIELD_USERS_REGISTRATION'         => 'Разрешить регистрацию пользователей',
-
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',
+
+	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Язык по умолчанию',
+	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон по умолчанию',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Ошибка сохранения настроек',
 
@@ -265,16 +280,16 @@ return [
 
 	# Information
 
-	'INFORMATION_ROW_SYSTEM_VERSION'            => 'Версия CMS',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версия PHP',
 	'INFORMATION_ROW_MYSQL_VERSION'             => 'Версия MySQL',
 
+	'INFORMATION_ROW_SYSTEM_VERSION'            => 'Версия CMS',
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'Версия jQuery',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версия Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версия CKEditor',
 
-	'INFORMATION_GROUP_CORE'                    => 'Ядро',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
+	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
 
 	# Other
 

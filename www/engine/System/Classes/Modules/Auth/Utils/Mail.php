@@ -10,9 +10,9 @@ namespace Modules\Auth\Utils {
 
 		private static function send(Entitizer\Entity\User $user, string $view, string $subject, string $link) {
 
-			$message = View::get($view);
+			$message = View::get((Auth::admin() ? 'Blocks/Auth/Mail/' : 'Blocks/Profile/Auth/Mail/') . $view);
 
-			$message->name = $user->name; $message->link = $link; $message->copyright = Date::year();
+			$message->name = $user->name; $message->link = $link; $message->copyright = Date::getYear();
 
 			# ------------------------
 
@@ -20,7 +20,7 @@ namespace Modules\Auth\Utils {
 
 			$from = ((false !== ($host = parse_url(Settings::get('system_url'), PHP_URL_HOST))) ? ('noreply@' . $host) : '');
 
-			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->contents(), true);
+			return Mailer::send($to, $sender, $from, $reply_to, $subject, $message->getContents(), true);
 		}
 
 		# Send reset mail
@@ -29,7 +29,7 @@ namespace Modules\Auth\Utils {
 
 			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile') . '/recover?code=' . $code);
 
-			return self::send($user, 'Blocks\Auth\Mail\Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
+			return self::send($user, 'Reset', Language::get('MAIL_SUBJECT_RESET'), $link);
 		}
 
 		# Send register mail
@@ -38,7 +38,7 @@ namespace Modules\Auth\Utils {
 
 			$link = (Settings::get('system_url') . (Auth::admin() ? '/admin' : '/profile'));
 
-			return self::send($user, 'Blocks\Auth\Mail\Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
+			return self::send($user, 'Register', Language::get('MAIL_SUBJECT_REGISTER'), $link);
 		}
 	}
 }

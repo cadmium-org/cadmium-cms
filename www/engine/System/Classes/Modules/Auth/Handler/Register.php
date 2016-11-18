@@ -2,30 +2,19 @@
 
 namespace Modules\Auth\Handler {
 
-	use Modules\Auth, Request;
+	use Frames, Modules\Auth, Request;
 
-	class Register extends Auth\Utils\Handler {
+	class Register extends Frames\Admin\Area\Auth {
 
-		protected $view = 'Blocks\Auth\Register';
+		protected $title = 'TITLE_AUTH_REGISTER';
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
-			# Create form
+			if (!Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/login');
 
-			$this->form = new Auth\Form\Register();
-
-			# Handle form
-
-			if ($this->form->handle(new Auth\Controller\Register())) {
-
-				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=register');
-			}
-
-			# ------------------------
-
-			return $this->getContents();
+			return (new Auth\Action\Register)->handle();
 		}
 	}
 }

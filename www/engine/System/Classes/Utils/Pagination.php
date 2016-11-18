@@ -8,9 +8,9 @@ namespace Utils {
 
 		# Set items
 
-		private static function setItems(Template\Asset\Block $pagination, int $active, int $count, Url $url) {
+		private static function setItems(Template\Block $pagination, int $active, int $count, Url $url) {
 
-			$items = $pagination->loop('items');
+			$items = $pagination->getLoop('items');
 
 			for ($index = ($active - 2); $index <= ($active + 2); $index++) {
 
@@ -18,15 +18,15 @@ namespace Utils {
 
 				$class = (($index === $active) ? 'active item' : 'item');
 
-				$url->set('index', $index); $link = $url->string();
+				$url->setAttribute('index', $index); $link = $url->getString();
 
-				$items->add(['class' => $class, 'link' => $link, 'index' => $index]);
+				$items->addItem(['class' => $class, 'link' => $link, 'index' => $index]);
 			}
 		}
 
 		# Set first & last button
 
-		private static function setExtremeButtons(Template\Asset\Block $pagination, int $active, int $count, Url $url) {
+		private static function setExtremeButtons(Template\Block $pagination, int $active, int $count, Url $url) {
 
 			$extremums = [1, $count]; $buttons = [];
 
@@ -35,19 +35,19 @@ namespace Utils {
 
 			foreach ($buttons as $class => $data) {
 
-				list ($index, $closest, $disabled) = $data; $block = $pagination->block($class);
+				list ($index, $closest, $disabled) = $data; $block = $pagination->getBlock($class);
 
 				if ($disabled) { $block->disable(); continue; }
 
-				$block->link = $url->set('index', $index)->string(); $block->index = $index;
+				$block->link = $url->setAttribute('index', $index)->getString(); $block->index = $index;
 
-				if ($closest) $block->block('ellipsis')->disable();
+				if ($closest) $block->getBlock('ellipsis')->disable();
 			}
 		}
 
 		# Set previous & next buttons
 
-		private static function setStepButtons(Template\Asset\Block $pagination, int $active, int $count, Url $url) {
+		private static function setStepButtons(Template\Block $pagination, int $active, int $count, Url $url) {
 
 			$extremums = [1, $count]; $buttons = [];
 
@@ -56,11 +56,11 @@ namespace Utils {
 
 			foreach ($buttons as $class => $data) {
 
-				list ($extremum, $index) = $data; $block = $pagination->block($class);
+				list ($extremum, $index) = $data; $block = $pagination->getBlock($class);
 
-				if ($active === $extremum) { $block->disable(); $pagination->block($class . '_disabled')->enable(); }
+				if ($active === $extremum) { $block->disable(); $pagination->getBlock($class . '_disabled')->enable(); }
 
-				else $block->link = $url->set('index', $index)->string();
+				else $block->link = $url->setAttribute('index', $index)->getString();
 			}
 		}
 
@@ -74,7 +74,7 @@ namespace Utils {
 
 			# Create block
 
-			$pagination = View::get('Blocks\Utils\Pagination');
+			$pagination = View::get('Blocks/Utils/Pagination');
 
 			# Set items
 

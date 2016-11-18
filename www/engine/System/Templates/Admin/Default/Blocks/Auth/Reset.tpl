@@ -2,25 +2,17 @@
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="reset-name">%USER_FIELD_NAME%</label>
 
-			{ block:field_reset_name / }
-
-			<i class="user icon"></i>
-
-		</div>
+		{ block:field_reset_name / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="reset-captcha">%USER_FIELD_CAPTCHA%</label>
 
-			{ block:field_reset_captcha / }
-
-			<i class="protect icon"></i>
-
-		</div>
+		{ block:field_reset_captcha / }
 
 	</div>
 
@@ -36,15 +28,11 @@
 
 	</div>
 
-	<div class="field">
-
-		<input class="ui fluid teal button" type="submit" value="%RESET%" />
-
-	</div>
+	<div class="ui hidden divider"></div>
 
 	<div class="field">
 
-		<a class="ui fluid basic button" href="$install_path$/admin/login">%LOGIN%</a>
+		<input class="ui teal button" type="submit" value="%RESET%" />
 
 	</div>
 

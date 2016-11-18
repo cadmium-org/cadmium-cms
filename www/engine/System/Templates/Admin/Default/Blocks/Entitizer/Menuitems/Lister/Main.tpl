@@ -70,9 +70,9 @@
 
 		<tr>
 
-			<th class="ten wide">%MENUITEMS_COLUMN_TEXT%</th>
+			<th class="eight wide">%MENUITEMS_COLUMN_TEXT%</th>
 
-			<th class="six wide" colspan="2">%MENUITEMS_COLUMN_POSITION%</th>
+			<th class="eight wide" colspan="2">%MENUITEMS_COLUMN_POSITION%</th>
 
 		</tr>
 

@@ -38,11 +38,11 @@ namespace Modules\Entitizer\Entity {
 
 			# Select entity from DB
 
-			if (!(DB::send($query) && (DB::last()->rows === 1))) return false;
+			if (!(DB::send($query) && (DB::getLast()->rows === 1))) return false;
 
 			# ------------------------
 
-			return $this->setData(DB::last()->row());
+			return $this->setData(DB::getLast()->getRow());
 		}
 
 		# Update slugs
@@ -67,7 +67,7 @@ namespace Modules\Entitizer\Entity {
 
 			         (") slg ON slg.id = ent.id SET ent.locked = 1, ent.slug = slg.slug");
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# Send unlock request
 
@@ -83,7 +83,7 @@ namespace Modules\Entitizer\Entity {
 
 			         (") chk ON chk.id = ent.id SET ent.locked = 0");
 
-			if (!(DB::send($query) && DB::last()->status)) return false;
+			if (!(DB::send($query) && DB::getLast()->status)) return false;
 
 			# ------------------------
 

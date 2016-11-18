@@ -2,15 +2,15 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Modules\Entitizer, Utils\Popup, Utils\View, Ajax, Language, Number, Request, Template;
+	use Frames, Modules\Entitizer, Utils\Popup, Utils\View, Ajax, Language, Number, Request, Template;
 
-	abstract class Handler {
+	abstract class Handler extends Frames\Admin\Area\Authorized {
 
 		protected $create = false, $entity = null, $parent = null, $path = [], $form = null;
 
 		# Process parent block
 
-		private function processParent(Template\Asset\Block $parent) {
+		private function processParent(Template\Block $parent) {
 
 			# Set parent id
 
@@ -20,21 +20,21 @@ namespace Modules\Entitizer\Utils {
 
 			if (count($this->path) < CONFIG_ENTITIZER_MAX_DEPTH) {
 
-				$parent->block('create')->class = ($this->create ? 'active item' : 'item');
+				$parent->getBlock('create')->class = ($this->create ? 'active item' : 'item');
 
-				$parent->block('create')->id = $this->parent->id;
+				$parent->getBlock('create')->id = $this->parent->id;
 
-			} else { $parent->block('create')->disable(); $parent->block('create_disabled')->enable(); }
+			} else { $parent->getBlock('create')->disable(); $parent->getBlock('create_disabled')->enable(); }
 
 			# Set edit button
 
 			if (0 !== $this->parent->id) {
 
-				$parent->block('edit')->class = (!$this->create ? 'active item' : 'item');
+				$parent->getBlock('edit')->class = (!$this->create ? 'active item' : 'item');
 
-				$parent->block('edit')->id = $this->parent->id;
+				$parent->getBlock('edit')->id = $this->parent->id;
 
-			} else { $parent->block('edit')->disable(); $parent->block('edit_disabled')->enable(); }
+			} else { $parent->getBlock('edit')->disable(); $parent->getBlock('edit_disabled')->enable(); }
 
 			# Add parent additional data
 
@@ -43,7 +43,7 @@ namespace Modules\Entitizer\Utils {
 
 		# Process selector block
 
-		private function processSelector(Template\Asset\Block $selector) {
+		private function processSelector(Template\Block $selector) {
 
 			if ($this->create) return $selector->disable();
 
@@ -74,7 +74,7 @@ namespace Modules\Entitizer\Utils {
 
 			# Process parent block
 
-			if (static::$nesting) $this->processParent($contents->block('parent'));
+			if (static::$nesting) $this->processParent($contents->getBlock('parent'));
 
 			# Set link
 
@@ -86,7 +86,7 @@ namespace Modules\Entitizer\Utils {
 
 			# Process selector block
 
-			if (static::$nesting) $this->processSelector($contents->block('selector'));
+			if (static::$nesting) $this->processSelector($contents->getBlock('selector'));
 
 			# Implement form
 
@@ -105,11 +105,11 @@ namespace Modules\Entitizer\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::response();
+			$ajax = Ajax::createResponse();
 
 			# Create entity
 
-			$id = Number::format(Request::get('id'));
+			$id = Number::forceInt(Request::get('id'));
 
 			$this->entity = Entitizer::get(static::$table, (!$this->create ? $id : 0));
 
@@ -117,13 +117,13 @@ namespace Modules\Entitizer\Utils {
 
 			if (Request::post('action') === 'move') {
 
-				$parent_id = Number::format(Request::post('parent_id'));
+				$parent_id = Number::forceInt(Request::post('parent_id'));
 
-				if (!$this->entity->move($parent_id)) return $ajax->error(Language::get(static::$message_error_move));
+				if (!$this->entity->move($parent_id)) return $ajax->setError(Language::get(static::$message_error_move));
 
 			} else if (Request::post('action') === 'remove') {
 
-				if (!$this->entity->remove()) return $ajax->error(Language::get(static::$message_error_remove));
+				if (!$this->entity->remove()) return $ajax->setError(Language::get(static::$message_error_remove));
 			}
 
 			# ------------------------
@@ -133,13 +133,13 @@ namespace Modules\Entitizer\Utils {
 
 		# Handle request
 
-		public function handle(bool $create = false) {
+		protected function handle() {
 
-			if (!($this->create = $create) && Request::isAjax()) return $this->handleAjax();
+			if (!$this->create && Request::isAjax()) return $this->handleAjax();
 
 			# Create entity
 
-			$id = Number::format(Request::get('id'));
+			$id = Number::forceInt(Request::get('id'));
 
 			$this->entity = Entitizer::get(static::$table, (!$this->create ? $id : 0));
 

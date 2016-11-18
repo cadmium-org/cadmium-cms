@@ -8,6 +8,8 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Page;
 
+		protected $title = 'TITLE_CONTENT_PAGES';
+
 		# Lister configuration
 
 		protected static $link = '/admin/content/pages';
@@ -16,28 +18,26 @@ namespace Modules\Entitizer\Lister {
 
 		protected static $display = CONFIG_ADMIN_PAGES_DISPLAY;
 
-		protected static $view_main = 'Blocks\Entitizer\Pages\Lister\Main';
+		protected static $view_main = 'Blocks/Entitizer/Pages/Lister/Main';
 
-		protected static $view_item = 'Blocks\Entitizer\Pages\Lister\Item';
+		protected static $view_item = 'Blocks/Entitizer/Pages/Lister/Item';
 
-		protected static $view_ajax_main = 'Blocks\Entitizer\Pages\Ajax\Main';
+		protected static $view_ajax_main = 'Blocks/Entitizer/Pages/Ajax/Main';
 
-		protected static $view_ajax_item = 'Blocks\Entitizer\Pages\Ajax\Item';
+		protected static $view_ajax_item = 'Blocks/Entitizer/Pages/Ajax/Item';
 
 		# Add parent additional data
 
-		protected function processEntityParent(Template\Asset\Block $parent) {
+		protected function processEntityParent(Template\Block $parent) {
 
-			if ((0 === $this->parent->id) || !$this->parent->active) {
+			if ((0 !== $this->parent->id) && $this->parent->active) $parent->getBlock('browse')->link = $this->parent->link;
 
-				$parent->block('browse')->disable(); $parent->block('browse_disabled')->enable();
-
-			} else $parent->block('browse')->link = $this->parent->link;
+			else { $parent->getBlock('browse')->disable(); $parent->getBlock('browse_disabled')->enable(); }
 		}
 
 		# Add item additional data
 
-		protected function processItem(Template\Asset\Block $view, Entitizer\Dataset\Page $page, int $children = 0) {
+		protected function processItem(Template\Block $view, Entitizer\Dataset\Page $page, int $children = 0) {
 
 			$view->class = ($page->locked ? 'inactive warning' : (!$page->active ? 'inactive' : ''));
 
@@ -45,13 +45,13 @@ namespace Modules\Entitizer\Lister {
 
 			$view->icon = ((0 === $children) ? 'file text outline' : 'folder');
 
-			$view->access = Range\Access::get($page->access);
+			$view->access = (Range\Access::get($page->access) ?? '');
 
 			# Set browse button
 
-			$view->block('browse')->class = ($page->active ? 'primary' : 'disabled');
+			$view->getBlock('browse')->class = ($page->active ? 'primary' : 'disabled');
 
-			$view->block('browse')->link = $page->link;
+			$view->getBlock('browse')->link = $page->link;
 		}
 	}
 }

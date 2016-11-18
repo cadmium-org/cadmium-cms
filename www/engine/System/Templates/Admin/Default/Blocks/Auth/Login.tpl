@@ -2,37 +2,27 @@
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="login-name">%USER_FIELD_NAME%</label>
 
-			{ block:field_login_name / }
-
-			<i class="user icon"></i>
-
-		</div>
+		{ block:field_login_name / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="login-password">%USER_FIELD_PASSWORD%</label>
 
-			{ block:field_login_password / }
-
-			<i class="lock icon"></i>
-
-		</div>
+		{ block:field_login_password / }
 
 	</div>
 
-	<div class="field">
-
-		<input class="ui fluid teal button" type="submit" value="%LOGIN%" />
-
-	</div>
+	<div class="ui hidden divider"></div>
 
 	<div class="field">
 
-		<a class="ui fluid basic button" href="$install_path$/admin/reset">%RESET%</a>
+		<input class="ui teal button" type="submit" value="%LOGIN%" />
+
+		<a class="ui basic button" href="$install_path$/admin/reset">%RESET_TEXT%</a>
 
 	</div>
 

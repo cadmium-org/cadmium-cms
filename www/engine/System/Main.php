@@ -8,12 +8,10 @@ define('DIR_SYSTEM_CLASSES',        (DIR_SYSTEM . 'Classes/'));
 define('DIR_SYSTEM_DATA',           (DIR_SYSTEM . 'Data/'));
 define('DIR_SYSTEM_INCLUDES',       (DIR_SYSTEM . 'Includes/'));
 define('DIR_SYSTEM_LANGUAGES',      (DIR_SYSTEM . 'Languages/'));
-define('DIR_SYSTEM_PLUGINS',        (DIR_SYSTEM . 'Plugins/'));
 define('DIR_SYSTEM_TEMPLATES',      (DIR_SYSTEM . 'Templates/'));
 
 # Require classes
 
-require_once (DIR_SYSTEM . 'System.php');
 require_once (DIR_SYSTEM . 'Exception.php');
 
 # Require configuration
@@ -25,6 +23,12 @@ require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
 
 # Process environment variables
 
-define('HTTP_MOD_REWRITE', (getenv('HTTP_MOD_REWRITE') === 'on'));
+define('HTTP_MOD_REWRITE',      (getenv('HTTP_MOD_REWRITE') === 'on'));
 
-define('INSTALL_PATH', rtrim(getenv('INSTALL_PATH'), '/'));
+define('INSTALL_PATH',          rtrim(getenv('INSTALL_PATH'), '/'));
+
+define('MODE_DEBUG',            @file_exists(DIR_SYSTEM_DATA . '.debug'));
+define('MODE_DEMO',             @file_exists(DIR_SYSTEM_DATA . '.demo'));
+
+// Add here a check for a debug mode and if enabled then set an error reporting to E_ALL (previously should be set to 0).
+// Till the CMS is in a beta stage an error reporting should be set to E_ALL by default.

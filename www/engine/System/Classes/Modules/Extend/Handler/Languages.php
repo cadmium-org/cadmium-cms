@@ -4,12 +4,10 @@ namespace Modules\Extend\Handler {
 
 	use Modules\Extend;
 
-	class Languages extends Extend\Languages {
+	class Languages extends Extend\Utils\Handler\Basic {
 
-		use Extend\Utils\Handler;
+		use Extend\Common\Languages;
 
-		protected static $error_name = 'LANGUAGES_ERROR_NAME', $errors_save = 'LANGUAGES_ERROR_SAVE';
-
-		protected static $view_main = 'Blocks\Extend\Languages\Main', $view_item = 'Blocks\Extend\Languages\Item';
+		protected $title = 'TITLE_EXTEND_LANGUAGES';
 	}
 }

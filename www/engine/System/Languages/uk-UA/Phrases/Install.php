@@ -49,7 +49,6 @@ return [
 	# Fields
 
 	'INSTALL_FIELD_LANGUAGE'                    => 'Мова',
-	'INSTALL_FIELD_TEMPLATE'                    => 'Шаблон',
 
 	'INSTALL_FIELD_DATABASE_SERVER'             => 'Сервер',
 	'INSTALL_FIELD_DATABASE_USER'               => 'Ім\'я користувача',

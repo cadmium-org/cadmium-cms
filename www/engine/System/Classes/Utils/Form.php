@@ -27,13 +27,13 @@ namespace Utils {
 
 			# Check form for errors
 
-			if ($this->errors()) return $this->displayError('FORM_ERROR_REQUIRED', $popup);
+			if ($this->hasErrors()) return $this->displayError('FORM_ERROR_REQUIRED', $popup);
 
 			# Call controller method
 
 			if (is_string($result = $callback($post))) return $this->displayError($result, $popup);
 
-			if (is_array($result)) { $this->get($result[0])->error(true); return $this->displayError($result[1], $popup); }
+			if (is_array($result)) { $this->getField($result[0])->error = true; return $this->displayError($result[1], $popup); }
 
 			# ------------------------
 

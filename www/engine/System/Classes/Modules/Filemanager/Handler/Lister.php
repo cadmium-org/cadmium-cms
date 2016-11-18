@@ -2,10 +2,12 @@
 
 namespace Modules\Filemanager\Handler {
 
-	use Modules\Filemanager, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
+	use Frames, Modules\Filemanager, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
 	use Ajax, Arr, Explorer, Language, Number, Request, Template, Url;
 
-	class Lister {
+	class Lister extends Frames\Admin\Area\Authorized {
+
+		protected $title = 'TITLE_CONTENT_FILEMANAGER';
 
 		private $parent = null, $form = null, $index = 0, $items = [];
 
@@ -56,7 +58,7 @@ namespace Modules\Filemanager\Handler {
 
 		private function getDirItemBlock(array $data) {
 
-			$view = View::get('Blocks\Filemanager\Lister\Item\Dir');
+			$view = View::get('Blocks/Filemanager/Lister/Item/Dir');
 
 			# Set data
 
@@ -73,7 +75,7 @@ namespace Modules\Filemanager\Handler {
 
 		private function getFileItemBlock(array $data) {
 
-			$view = View::get('Blocks\Filemanager\Lister\Item\File');
+			$view = View::get('Blocks/Filemanager/Lister/Item/File');
 
 			# Set data
 
@@ -88,24 +90,6 @@ namespace Modules\Filemanager\Handler {
 			# ------------------------
 
 			return $view;
-		}
-
-		# Get items block
-
-		private function getItemsBlock() {
-
-			$items = Template::group();
-
-			foreach ($this->items['list'] as $item) {
-
-				if ($item['type'] === FILEMANAGER_TYPE_DIR) $items->add($this->getDirItemBlock($item));
-
-				else if ($item['type'] === FILEMANAGER_TYPE_FILE) $items->add($this->getFileItemBlock($item));
-			}
-
-			# ------------------------
-
-			return $items;
 		}
 
 		# Get pagination block
@@ -125,7 +109,7 @@ namespace Modules\Filemanager\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Filemanager\Lister\Main');
+			$contents = View::get('Blocks/Filemanager/Lister/Main');
 
 			# Set parent
 
@@ -147,9 +131,14 @@ namespace Modules\Filemanager\Handler {
 
 			# Set items
 
-			$items = $this->getItemsBlock();
+			$items = $contents->getBlock('items');
 
-			if ($items->count() > 0) $contents->items = $items;
+			foreach ($this->items['list'] as $item) {
+
+				if ($item['type'] === FILEMANAGER_TYPE_DIR) $items->addItem($this->getDirItemBlock($item));
+
+				else if ($item['type'] === FILEMANAGER_TYPE_FILE) $items->addItem($this->getFileItemBlock($item));
+			}
 
 			# Set pagination
 
@@ -162,7 +151,7 @@ namespace Modules\Filemanager\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
 			# Create parent
 
@@ -187,7 +176,7 @@ namespace Modules\Filemanager\Handler {
 
 			# Get index
 
-			$this->index = Number::format(Request::get('index'), 1, 999999);
+			$this->index = Number::forceInt(Request::get('index'), 1, 999999);
 
 			# Get items
 

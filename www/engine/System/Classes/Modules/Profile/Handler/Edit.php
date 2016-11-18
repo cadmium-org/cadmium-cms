@@ -2,9 +2,11 @@
 
 namespace Modules\Profile\Handler {
 
-	use Modules\Profile, Utils\Messages, Utils\View, Language, Request;
+	use Frames, Modules\Profile, Utils\Messages, Utils\View, Language, Request;
 
-	class Edit {
+	class Edit extends Frames\Site\Area\Authorized {
+
+		protected $title = 'TITLE_PROFILE';
 
 		private $form_personal = null, $form_password = null;
 
@@ -12,7 +14,7 @@ namespace Modules\Profile\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Profile\Edit');
+			$contents = View::get('Blocks/Profile/Edit');
 
 			# Implement forms
 
@@ -27,7 +29,7 @@ namespace Modules\Profile\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
 			# Create forms
 

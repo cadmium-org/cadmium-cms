@@ -6,13 +6,11 @@ namespace Modules\Entitizer\Form {
 
 	class Widget extends Form {
 
+		protected $name = 'widget';
+
 		# Constructor
 
 		public function __construct(Entitizer\Entity\Widget $widget) {
-
-			parent::__construct('widget');
-
-			# Add fields
 
 			$this->addText('title', $widget->title, FORM_FIELD_TEXT, CONFIG_WIDGET_TITLE_MAX_LENGTH, ['required' => true]);
 

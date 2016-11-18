@@ -12,19 +12,19 @@ namespace Modules\Entitizer\Dataset {
 
 		protected function init() {
 
-			$this->addHandler('active', function (array $data) {
+			$this->addWorker('active', function (array $data) {
 
 				return (($data['visibility'] === VISIBILITY_PUBLISHED) && !$data['locked']);
 			});
 
-			$this->addHandler('link', function (array $data) {
+			$this->addWorker('link', function (array $data) {
 
 				if ('' === $data['slug']) return '';
 
 				return (INSTALL_PATH . '/' . $data['slug']);
 			});
 
-			$this->addHandler('canonical', function (array $data) {
+			$this->addWorker('canonical', function (array $data) {
 
 				if ('' === $data['slug']) return '';
 

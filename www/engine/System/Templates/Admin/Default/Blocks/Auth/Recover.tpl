@@ -2,31 +2,25 @@
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="recover-password-new">%USER_FIELD_PASSWORD_NEW%</label>
 
-			{ block:field_recover_password_new / }
-
-			<i class="privacy icon"></i>
-
-		</div>
+		{ block:field_recover_password_new / }
 
 	</div>
 
 	<div class="field">
 
-		<div class="ui left icon input">
+		<label for="recover-password-retype">%USER_FIELD_PASSWORD_RETYPE%</label>
 
-			{ block:field_recover_password_retype / }
-
-			<i class="privacy icon"></i>
-
-		</div>
+		{ block:field_recover_password_retype / }
 
 	</div>
 
+	<div class="ui hidden divider"></div>
+
 	<div class="field">
 
-		<input class="ui fluid teal button" type="submit" value="%SUBMIT%" />
+		<input class="ui teal button" type="submit" value="%SUBMIT%" />
 
 	</div>
 

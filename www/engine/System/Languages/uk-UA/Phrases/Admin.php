@@ -29,6 +29,7 @@ return [
 	'TITLE_CONTENT_FILEMANAGER_DIR'             => 'Редагування директорії',
 	'TITLE_CONTENT_FILEMANAGER_FILE'            => 'Редагування файла',
 
+	'TITLE_EXTEND_ADDONS'                       => 'Аддони',
 	'TITLE_EXTEND_LANGUAGES'                    => 'Мови',
 	'TITLE_EXTEND_TEMPLATES'                    => 'Шаблони',
 
@@ -65,8 +66,8 @@ return [
 
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Інсталяційний файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
 	                                               'досі знаходиться в кореневій директорії сайта. Необхідно видалити його.',
-	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'Схоже, Ви поки не редагували конфігурацію сайта. '.
-	                                               'Перейдіть на <a href="$install_path$/admin/system/settings">сторінку налаштувань</a> для введення актуальних значень.',
+	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'Схоже, Ви поки не редагували налаштування сайта. '.
+	                                               'Перейдіть на <a href="$install_path$/admin/system/settings">сторінку налаштувань</a> для введення актуальних даних.',
 
 	# Pages
 
@@ -77,6 +78,7 @@ return [
 
 	'PAGES_ITEM_LIST'                           => 'Список сторінок',
 	'PAGES_ITEM_CREATE'                         => 'Створити сторінку',
+	'PAGES_ITEM_CREATE_SUB'                     => 'Створити підсторінку',
 	'PAGES_ITEM_EDIT'                           => 'Редагувати',
 	'PAGES_ITEM_BROWSE'                         => 'Переглянути',
 	'PAGES_ITEM_REMOVE'                         => 'Видалити',
@@ -93,6 +95,7 @@ return [
 
 	'MENUITEMS_ITEM_LIST'                       => 'Список елементів',
 	'MENUITEMS_ITEM_CREATE'                     => 'Створити елемент',
+	'MENUITEMS_ITEM_CREATE_SUB'                 => 'Створити піделемент',
 	'MENUITEMS_ITEM_EDIT'                       => 'Редагувати',
 	'MENUITEMS_ITEM_BROWSE'                     => 'Перейти',
 	'MENUITEMS_ITEM_REMOVE'                     => 'Видалити',
@@ -185,7 +188,7 @@ return [
 	'FILEMANAGER_ERROR_DIR_REMOVE'              => 'Помилка видалення директорії',
 	'FILEMANAGER_ERROR_FILE_REMOVE'             => 'Помилка видалення файла',
 
-	'FILEMANAGER_CONFIRM_DIR_REMOVE'            => 'Ви дійсно бажаєте видалити обрану директорію і весь її зміст?',
+	'FILEMANAGER_CONFIRM_DIR_REMOVE'            => 'Ви дійсно бажаєте видалити обрану директорію і весь її вміст?',
 	'FILEMANAGER_CONFIRM_FILE_REMOVE'           => 'Ви дійсно бажаєте видалити обраний файл?',
 
 	# Uploader
@@ -205,20 +208,31 @@ return [
 	'UPLOADER_ERROR_SAVE'                       => 'Помилка збереження файла',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Помилка завантаження файла',
 
+	# Add-ons
+
+	'ADDONS_NOT_FOUND'                          => 'Аддони не знайдені',
+
+	'ADDONS_ERROR_INSTALL'                      => 'Помилка інсталяції аддона',
+	'ADDONS_ERROR_UNINSTALL'                    => 'Помилка деінсталяції аддона',
+
+	'ADDONS_ITEM_CONFIRM_UNINSTALL'             => 'Ви дійсно бажаєте деінсталювати обраний аддон?',
+
 	# Languages
 
 	'LANGUAGES_NOT_FOUND'                       => 'Мови не знайдені',
-	'LANGUAGES_INSTALLED'                       => 'Встановлені мови',
 
-	'LANGUAGES_ERROR_NAME'                      => 'Помилка активації мови',
+	'LANGUAGES_ERROR_ACTIVATE'                  => 'Помилка встановлення мови за промовчанням',
+	'LANGUAGES_ERROR_INSTALL'                   => 'Помилка інсталяції мови',
+	'LANGUAGES_ERROR_REMOVE'                    => 'Помилка видалення мови',
 	'LANGUAGES_ERROR_SAVE'                      => 'Помилка збереження налаштувань',
 
 	# Templates
 
 	'TEMPLATES_NOT_FOUND'                       => 'Шаблони не знайдені',
-	'TEMPLATES_INSTALLED'                       => 'Встановлені шаблони',
 
-	'TEMPLATES_ERROR_NAME'                      => 'Помилка активації шаблона',
+	'TEMPLATES_ERROR_ACTIVATE'                  => 'Помилка встановлення шаблона за промовчанням',
+	'TEMPLATES_ERROR_INSTALL'                   => 'Помилка інсталяції шаблона',
+	'TEMPLATES_ERROR_REMOVE'                    => 'Помилка видалення шаблона',
 	'TEMPLATES_ERROR_SAVE'                      => 'Помилка збереження налаштувань',
 
 	# Users
@@ -242,7 +256,7 @@ return [
 
 	'SETTINGS_GROUP_SITE'                       => 'Налаштування сайта',
 	'SETTINGS_GROUP_SYSTEM'                     => 'Налаштування системи',
-	'SETTINGS_GROUP_EXTRA'                      => 'Інші налаштування',
+	'SETTINGS_GROUP_ADMIN'                      => 'Налаштування панелі керування',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Назва сайта',
 	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган сайта',
@@ -254,10 +268,11 @@ return [
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Часова зона',
 	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'Системний e-mail',
 
-	'SETTINGS_FIELD_USERS_REGISTRATION'         => 'Дозволити реєстрацію користувачів',
-
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Невірний формат URL',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Невірний формат e-mail',
+
+	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Мова за замовчуванням',
+	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон за замовчуванням',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Помилка збереження налаштувань',
 
@@ -265,16 +280,16 @@ return [
 
 	# Information
 
-	'INFORMATION_ROW_SYSTEM_VERSION'            => 'Версія CMS',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версія PHP',
 	'INFORMATION_ROW_MYSQL_VERSION'             => 'Версія MySQL',
 
+	'INFORMATION_ROW_SYSTEM_VERSION'            => 'Версія CMS',
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'Версія jQuery',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версія Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версія CKEditor',
 
-	'INFORMATION_GROUP_CORE'                    => 'Ядро',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннє ПЗ',
+	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
+	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
 
 	# Other
 

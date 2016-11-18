@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Entitizer;
+	use Modules\Entitizer, Utils\Validate;
 
 	class Variable {
 
@@ -26,6 +26,10 @@ namespace Modules\Entitizer\Controller {
 			# Extract post array
 
 			extract($post);
+
+			# Validate name
+
+			if (false === ($name = Validate::templateComponentName($name))) return ['name', 'VARIABLE_ERROR_NAME_INVALID'];
 
 			# Check name exists
 

@@ -6,6 +6,8 @@ namespace Modules\Filemanager\Form {
 
 	class Create extends Form {
 
+		protected $name = 'create';
+
 		# Get options
 
 		private function getOptions() {
@@ -23,10 +25,6 @@ namespace Modules\Filemanager\Form {
 		# Constructor
 
 		public function __construct() {
-
-			parent::__construct('create');
-
-			# Add fields
 
 			$this->addSelect('type', FILEMANAGER_TYPE_DIR, $this->getOptions(), null, ['disabled' => true]);
 

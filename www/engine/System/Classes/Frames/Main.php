@@ -12,15 +12,15 @@ namespace Frames {
 
 		public function __construct(Url $url = null) {
 
-			$this->url = ((null !== $url) ? $url : new Url());
+			$this->url = ($url ?? new Url);
 
 			# Start session
 
 			Session::start(CONFIG_SESSION_NAME, CONFIG_SESSION_LIFETIME);
 
-			# Init configuration
+			# Load settings
 
-			Settings::init();
+			Settings::load();
 
 			# Set timezone
 

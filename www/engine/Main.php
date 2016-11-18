@@ -31,7 +31,7 @@ spl_autoload_register(function($class_name) {
 
 	# Determine class path
 
-	$system_classes = ['Frames', 'Handlers', 'Modules', 'Utils', 'Views', 'Dispatcher', 'Installer'];
+	$system_classes = ['Addons', 'Frames', 'Modules', 'Schemas', 'Utils', 'Dispatcher', 'Installer'];
 
 	$path = ((in_array($path[0], $system_classes, true) ? DIR_SYSTEM_CLASSES : DIR_CLASSES) . implode('/', $path));
 

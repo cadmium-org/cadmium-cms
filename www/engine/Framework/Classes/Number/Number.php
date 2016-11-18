@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @package Framework\Number
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Number {
 
-		# Format number
+		/**
+		 * Force a given variable to an integer
+		 */
 
-		public static function format($number, int $min = 0, int $max = 0) {
+		public static function forceInt($number, int $min = 0, int $max = 0) : int {
 
 			if (!is_numeric($number) || (($number = intval($number)) < 0)) $number = 0;
 
@@ -19,9 +28,11 @@ namespace {
 			return $number;
 		}
 
-		# Format float number
+		/**
+		 * Force a given variable to a float
+		 */
 
-		public static function formatFloat($number, float $min = 0, float $max = 0, int $decimals = 0) {
+		public static function forceFloat($number, float $min = 0, float $max = 0, int $decimals = 0) : float {
 
 			if (!is_numeric($number) || (($number = floatval($number)) < 0)) $number = 0;
 
@@ -36,9 +47,11 @@ namespace {
 			return $number;
 		}
 
-		# Format number as file size
+		/**
+		 * Format a given number as a file size
+		 */
 
-		public static function size(int $number) {
+		public static function size(int $number) : string {
 
 			$number = (($number >= 0) ? $number : 0); $exponents = [0 => 'Bytes', 'KB', 'MB', 'GB', 'TB'];
 
@@ -54,21 +67,25 @@ namespace {
 			return '> 1 PB';
 		}
 
-		# Format text containing number (ukrainian/russian language only)
+		/**
+		 * Format a text related to a number (for specific languages such as ukrainian or russian)
+		 *
+		 * @return one of the given forms depending on the number
+		 */
 
-		public static function text(int $number, string $variant_1, string $variant_3, string $variant_5) {
+		public static function text(int $number, string $form_1, string $form_3, string $form_5) : string {
 
 			$number = (($number >= 0) ? $number : 0); $length = strlen($number);
 
 			$last_1 = substr($number, ($length - 1), 1); $last_2 = substr($number, ($length - 2), 2);
 
-			if (($last_2 >= 11) && ($last_2 <= 20)) return $variant_5;
+			if (($last_2 >= 11) && ($last_2 <= 20)) return $form_5;
 
-			if ($last_1 == 1) return $variant_1;
+			if ($last_1 == 1) return $form_1;
 
-			if (($last_1 >= 2) && ($last_1 <= 4)) return $variant_3;
+			if (($last_1 >= 2) && ($last_1 <= 4)) return $form_3;
 
-			if (($last_1 >= 5) || ($last_1 == 0)) return $variant_5;
+			if (($last_1 >= 5) || ($last_1 == 0)) return $form_5;
 		}
 	}
 }

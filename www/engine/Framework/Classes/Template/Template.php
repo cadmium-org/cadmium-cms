@@ -1,82 +1,107 @@
 <?php
 
+/**
+ * @package Framework\Template
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Template {
 
 		private static $globals = [], $widgets = [];
 
-		# Set/get global variable
+		/**
+		 * Set a global variable
+		 */
 
-		public static function global(string $name, string $value = null) {
+		public static function setGlobal(string $name, string $value) {
 
-			if (null === $value) return (self::$globals[$name] ?? false);
-
-			if (!isset(self::$globals[$name])) self::$globals[$name] = $value;
+			self::$globals[$name] = $value;
 		}
 
-		# Set/get widget
+		/**
+		 * Set a widget
+		 */
 
-		public static function widget(string $name, Template\Asset\Block $block = null) {
+		public static function setWidget(string $name, Template\Block $block) {
 
-			if (null === $block) return (self::$widgets[$name] ?? false);
-
-			if (!isset(self::$widgets[$name])) self::$widgets[$name] = $block;
+			self::$widgets[$name] = $block;
 		}
 
-		# Get a list of global variables
+		/**
+		 * Get a global variable
+		 *
+		 * @return the variable or false if the variable is not set
+		 */
 
-		public static function globals() {
+		public static function getGlobal(string $name) {
+
+			return (self::$globals[$name] ?? false);
+		}
+
+		/**
+		 * Get a widget
+		 *
+		 * @return the widget or false if the widget is not set
+		 */
+
+		public static function getWidget(string $name) {
+
+			return (self::$widgets[$name] ?? false);
+		}
+
+		/**
+		 * Get the list of global variables
+		 */
+
+		public static function getGlobals() : array {
 
 			return self::$globals;
 		}
 
-		# Get a list of widgets
+		/**
+		 * Get the list of widgets
+		 */
 
-		public static function widgets() {
+		public static function getWidgets() : array {
 
 			return self::$widgets;
 		}
 
-		# Create block
+		/**
+		 * Create a new block object
+		 */
 
-		public static function block(string $contents = '', bool $parse = true) {
+		public static function createBlock(string $contents = '') : Template\Block {
 
-			return new Template\Asset\Block($contents, $parse);
+			return new Template\Block($contents);
 		}
 
-		# Create group
+		/*
+		 * Check if a given variable is a block object
+		 */
 
-		public static function group() {
+		public static function isBlock($object) : bool {
 
-			return new Template\Asset\Group();
+			return ($object instanceof Template\Block);
 		}
 
-		# Check if object is block
+		/**
+		 * Output data contained in a given block object. The method also sends a custom HTTP status code
+		 */
 
-		public static function isBlock($object) {
+		public static function output(Template\Block $block, int $status = STATUS_CODE_200) {
 
-			return ($object instanceof Template\Asset\Block);
-		}
+			if (!Headers::isStatusCode($status)) $status = STATUS_CODE_200;
 
-		# Check if object is group
-
-		public static function isGroup($object) {
-
-			return ($object instanceof Template\Asset\Group);
-		}
-
-		# Output contents
-
-		public static function output(Template\Asset\Block $block, $status = null) {
-
-			if ((null === $status) || !Headers::isStatusCode($status)) $status = STATUS_CODE_200;
-
-			Headers::nocache(); Headers::status($status); Headers::content(MIME_TYPE_HTML);
+			Headers::sendNoCache(); Headers::sendStatus($status); Headers::sendContent(MIME_TYPE_HTML);
 
 			# ------------------------
 
-			echo $block->contents();
+			echo $block->getContents();
 		}
 	}
 }

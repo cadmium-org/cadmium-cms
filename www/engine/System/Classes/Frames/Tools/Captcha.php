@@ -2,7 +2,7 @@
 
 namespace Frames\Tools {
 
-	use Frames, Utils\Tools, Exception, Image;
+	use Frames, Modules\Tools, Exception, Image;
 
 	abstract class Captcha extends Frames\Main {
 

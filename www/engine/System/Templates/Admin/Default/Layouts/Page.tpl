@@ -14,9 +14,9 @@
 
 		{ block:menu / }
 
-		{ block:user }
-
 		<div class="right menu">
+
+			{ block:user }
 
 			<div class="ui user dropdown item">
 
@@ -34,19 +34,13 @@
 
 			</div>
 
-			{ block:site }
+			{ / block:user }
 
 			<a class="icon item" href="$index_page$" target="_blank" id="section-button" title="%SECTION_SITE%"><i class="globe icon"></i></a>
 
-			{ / block:site }
-
 		</div>
 
-		{ / block:user }
-
 	</nav>
-
-	{ block:popup / }
 
 	<div class="ui one column page grid wrapper">
 
@@ -60,69 +54,37 @@
 
 			<div class="ui hidden divider"></div>
 
-			<div class="ui two column stackable grid">
+			<div class="footer">
 
-				<div class="nine wide column">
+				{ block:language }
 
-					<a class="ui small basic button" href="$cadmium_home$" target="_blank">
+				<div class="ui left bottom small pointing dropdown language button">
 
-						&copy; $cadmium_copy$ <b>$cadmium_name$</b>
+					<div class="text"><i class="$country$ flag"></i>$title$</div>
 
-					</a>
-
-					<a class="ui small disabled button">v. $cadmium_version$</a>
+					<div class="menu"></div>
 
 				</div>
 
-				<div class="seven wide right aligned column">
+				{ / block:language }
 
-					{ block:language }
+				<div class="ui small loading disabled basic button" style="display:none;">&nbsp;</div>
 
-					<div class="ui left bottom pointing dropdown small button">
+				<a class="ui small right floated basic copyright button" href="$cadmium_home$" target="_blank">
 
-						<div class="text"><i class="$country$ flag"></i>$title$</div>
+					&copy; <span class="year">$cadmium_copy$ <b>$cadmium_name$</b></span>
 
-						<div class="menu">
+				</a>
 
-							{ for:items }
-
-							<a class="item" href="?language=$name$"><i class="$country$ flag"></i>$title$</a>
-
-							{ / for:items }
-
-						</div>
-
-					</div>
-
-					{ / block:language }
-
-					{ block:template }
-
-					<div class="ui left bottom pointing dropdown small button">
-
-						<div class="text"><i class="theme icon"></i>$title$</div>
-
-						<div class="menu">
-
-							{ for:items }
-
-							<a class="item" href="?template=$name$"><i class="theme icon"></i>$title$</a>
-
-							{ / for:items }
-
-						</div>
-
-					</div>
-
-					{ / block:template }
-
-				</div>
+				<a class="ui small right floated disabled version button">v. $cadmium_version$</a>
 
 			</div>
 
 		</div>
 
 	</div>
+
+	{ block:popup / }
 
 	<div class="ui large modal" id="modal-lister">
 

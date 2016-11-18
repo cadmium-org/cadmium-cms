@@ -2,34 +2,35 @@
 
 namespace Utils {
 
-	use Exception;
+	use Exception, Modules\Extend, Explorer, Template;
 
 	abstract class View {
 
-		private static $section = '', $cache = [];
+		private static $cache = [];
 
 		# Init view
 
-		public static function init(string $section) {
+		public static function init() {
 
-			self::$section = (($section === SECTION_ADMIN) ? SECTION_ADMIN : SECTION_SITE);
+			self::$cache = [];
 		}
 
 		# Get view
 
 		public static function get(string $name) {
 
-			if ('' === self::$section) throw new Exception\View();
+			if (false === ($path = Extend\Templates::path())) throw new Exception\View;
 
-			$class_name = ('Views\\' . self::$section . '\\' . $name);
+			if (!isset(self::$cache[$file_name = ($path . $name . '.tpl')])) {
 
-			if (isset(self::$cache[$class_name])) $view = clone self::$cache[$class_name];
+				if (false === ($contents = Explorer::getContents($file_name))) throw new Exception\ViewFile($file_name);
 
-			else $view = (self::$cache[$class_name] = new $class_name());
+				self::$cache[$file_name] = Template::createBlock($contents);
+			}
 
 			# ------------------------
 
-			return $view;
+			return clone self::$cache[$file_name];
 		}
 	}
 }

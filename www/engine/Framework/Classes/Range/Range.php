@@ -1,26 +1,41 @@
 <?php
 
+/**
+ * @package Framework\Range
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	abstract class Range {
 
 		protected static $range = [];
 
-		# Load range
+		/**
+		 * Load data from a file
+		 */
 
 		protected static function init(string $file_name) {
 
-			if (is_array($range = Explorer::php($file_name))) static::$range = $range;
+			if (is_array($range = Explorer::include($file_name))) static::$range = $range;
 		}
 
-		# Check if item exists
+		/**
+		 * Check if a key exists in the range
+		 */
 
-		public static function exists($key) {
+		public static function exists($key) : bool {
 
 			return isset(static::$range[$key]);
 		}
 
-		# Validate key
+		/**
+		 * Validate a key
+		 *
+		 * @return the key if exists, otherwise false
+		 */
 
 		public static function validate($key) {
 
@@ -29,16 +44,22 @@ namespace {
 			return ((false !== ($key = array_search($key, $keys))) ? $keys[$key] : false);
 		}
 
-		# Get item by key
+		/**
+		 * Get an item value by a key
+		 *
+		 * @return the value if the key exists, otherwise null
+		 */
 
 		public static function get($key) {
 
-			return (static::$range[$key] ?? false);
+			return (static::$range[$key] ?? null);
 		}
 
-		# Get range array
+		/**
+		 * Get the range array
+		 */
 
-		public static function array() {
+		public static function getRange() : array {
 
 			return static::$range;
 		}

@@ -9,6 +9,7 @@ return [
 	'CONTINUE'                                  => 'Continue',
 	'DEFAULT'                                   => 'Default',
 	'EDIT'                                      => 'Edit',
+	'INSTALL'                                   => 'Install',
 	'LOGIN'                                     => 'Log in',
 	'LOGOUT'                                    => 'Log out',
 	'NO'                                        => 'No',
@@ -22,6 +23,7 @@ return [
 	'RESET_TEXT'                                => 'Forgot password?',
 	'SAVE'                                      => 'Save',
 	'SUBMIT'                                    => 'Submit',
+	'UNINSTALL'                                 => 'Uninstall',
 	'YES'                                       => 'Yes',
 
 	'PAGES_1'                                   => 'page',

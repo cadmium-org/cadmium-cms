@@ -12,42 +12,42 @@ namespace Modules\Entitizer\Collection {
 
 		protected function init() {
 
-			$this->config->add('active', false, function (bool $active) {
+			$this->config->addParam('active', '', function (bool $active) {
 
 				return ($active ? ("ent.visibility = " . VISIBILITY_PUBLISHED . " AND ent.locked = 0") : '');
 			});
 
-			$this->config->add('rank', null, function (int $rank = null) {
+			$this->config->addParam('rank', '', function (int $rank = null) {
 
 				return ((null !== $rank) ? ("ent.access <= " . $rank) : '');
 			});
 
-			$this->config->add('slug', '', function (string $slug) {
+			$this->config->addParam('slug', '', function (string $slug) {
 
 				return (('' !== $slug) ? ("ent.slug = '" . addslashes($slug) . "'") : '');
 			});
 
-			$this->config->add('name', '', function (string $name) {
+			$this->config->addParam('name', '', function (string $name) {
 
 				return (('' !== $name) ? ("ent.name = '" . addslashes($name) . "'") : '');
 			});
 
-			$this->config->add('time_created >=', 0, function (int $time) {
+			$this->config->addParam('time_created >=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_created >= " . $time) : '');
 			});
 
-			$this->config->add('time_created <=', 0, function (int $time) {
+			$this->config->addParam('time_created <=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_created <= " . $time) : '');
 			});
 
-			$this->config->add('time_modified >=', 0, function (int $time) {
+			$this->config->addParam('time_modified >=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_modified >= " . $time) : '');
 			});
 
-			$this->config->add('time_modified <=', 0, function (int $time) {
+			$this->config->addParam('time_modified <=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_modified <= " . $time) : '');
 			});

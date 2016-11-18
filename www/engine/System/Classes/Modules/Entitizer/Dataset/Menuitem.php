@@ -12,7 +12,7 @@ namespace Modules\Entitizer\Dataset {
 
 		protected function init() {
 
-			$this->addHandler('link', function (array $data) {
+			$this->addWorker('link', function (array $data) {
 
 				if ('' === $data['slug']) return '';
 

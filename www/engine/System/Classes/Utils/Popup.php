@@ -14,13 +14,15 @@ namespace Utils {
 
 		public static function block() {
 
-			$popup = Template::group(); $icons = ['positive' => 'checkmark', 'negative' => 'warning'];
+			$popup = Template::createBlock();
+
+			$icons = ['positive' => 'checkmark', 'negative' => 'warning'];
 
 			foreach (static::$items as $type => $item) {
 
-				$popup->add($block = View::get('Blocks\Utils\Popup'));
+				$popup->addItem($block = View::get('Blocks/Utils/Popup'));
 
-				$block->type = $type; $block->text = Template::block($item['text']);
+				$block->type = $type; $block->text = Template::createBlock($item['text']);
 
 				$block->title = ($item['title'] ?? null); $block->icon = $icons[$type];
 			}

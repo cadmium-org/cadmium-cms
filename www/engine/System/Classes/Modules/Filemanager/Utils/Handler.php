@@ -2,9 +2,9 @@
 
 namespace Modules\Filemanager\Utils {
 
-	use Modules\Filemanager, Modules\Informer, Utils\Popup, Utils\View, Ajax, Language, Request;
+	use Frames, Modules\Filemanager, Utils\Popup, Utils\View, Ajax, Language, Request;
 
-	abstract class Handler {
+	abstract class Handler extends Frames\Admin\Area\Authorized {
 
 		protected $parent = null, $entity = null, $form = null;
 
@@ -32,7 +32,7 @@ namespace Modules\Filemanager\Utils {
 
 			# Set info
 
-			$this->processInfo($contents->block('info'));
+			$this->processInfo($contents->getBlock('info'));
 
 			# ------------------------
 
@@ -43,24 +43,24 @@ namespace Modules\Filemanager\Utils {
 
 		private function handleAjax() {
 
-			$ajax = Ajax::response();
+			$ajax = Ajax::createResponse();
 
 			# Check for demo mode
 
-			if (Informer::isDemoMode()) return $ajax->error(Language::get('DEMO_MODE_RESTRICTION'));
+			if (MODE_DEMO) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
 
 			# Init entity
 
 			if (!$this->entity->init(Request::get('name'))) {
 
-				return $ajax->error(Language::get(static::$message_error_remove));
+				return $ajax->setError(Language::get(static::$message_error_remove));
 			}
 
 			# Process remove action
 
 			if (Request::post('action') === 'remove') {
 
-				if (!$this->entity->remove()) return $ajax->error(Language::get(static::$message_error_remove));
+				if (!$this->entity->remove()) return $ajax->setError(Language::get(static::$message_error_remove));
 			}
 
 			# ------------------------

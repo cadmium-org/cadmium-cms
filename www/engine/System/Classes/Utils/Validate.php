@@ -38,6 +38,13 @@ namespace Utils {
 			return self::email($value);
 		}
 
+		# Validate template component name
+
+		public static function templateComponentName(string $value) {
+
+			return (preg_match(REGEX_TEMPLATE_COMPONENT_NAME, $value) ? $value : false);
+		}
+
 		# Validate file or directory name
 
 		public static function fileName(string $value) {

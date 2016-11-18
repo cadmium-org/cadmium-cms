@@ -1,26 +1,35 @@
 <?php
 
+/**
+ * @package Framework\DB
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace DB\Query {
 
-	use DB\Utils;
+	use DB;
 
-	class Update extends Utils\Query {
+	class Update extends DB\Query {
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
-		public function __construct(string $table, array $dataset, $condition = null) {
+		public function __construct(string $table, array $set, $condition = null) {
 
 			# Process arguments
 
 			$table = $this->getName($table);
 
-			$dataset = $this->getString($dataset, '^name = $value', ', ');
+			$set = $this->getString($set, '^name = $value', ', ');
 
 			$condition = $this->getString($condition, '^name = $value', ' AND ');
 
 			# Build query
 
-			$this->query = ('UPDATE ' . $table . ' SET ' . $dataset . ($condition ? (' WHERE (' .  $condition . ')') : ''));
+			$this->query = ('UPDATE ' . $table . ' SET ' . $set . ($condition ? (' WHERE (' .  $condition . ')') : ''));
 		}
 	}
 }

@@ -12,7 +12,12 @@ namespace Modules\Entitizer\Dataset {
 
 		protected function init() {
 
-			$this->addHandler('full_name', function (array $data) {
+			$this->addWorker('gravatar', function (array $data) {
+
+				return md5(strtolower($data['email']));
+			});
+
+			$this->addWorker('full_name', function (array $data) {
 
 				return trim($data['first_name'] . ' ' . $data['last_name']);
 			});

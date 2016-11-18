@@ -24,6 +24,8 @@
 
 	<div class="menu">
 
+		<a class="item" href="$install_path$/admin/extend/addons"><i class="plug icon"></i>%TITLE_EXTEND_ADDONS%</a>
+
 		<a class="item" href="$install_path$/admin/extend/languages"><i class="flag icon"></i>%TITLE_EXTEND_LANGUAGES%</a>
 
 		<a class="item" href="$install_path$/admin/extend/templates"><i class="theme icon"></i>%TITLE_EXTEND_TEMPLATES%</a>

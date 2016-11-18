@@ -29,6 +29,7 @@ return [
 	'TITLE_CONTENT_FILEMANAGER_DIR'             => 'Edit directory',
 	'TITLE_CONTENT_FILEMANAGER_FILE'            => 'Edit file',
 
+	'TITLE_EXTEND_ADDONS'                       => 'Add-ons',
 	'TITLE_EXTEND_LANGUAGES'                    => 'Languages',
 	'TITLE_EXTEND_TEMPLATES'                    => 'Templates',
 
@@ -65,8 +66,8 @@ return [
 
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
 	                                               'still exists in the root of your site. It\'s necessary to remove it.',
-	'DASHBOARD_MESSAGE_CONFIG_FILE'             => 'It seems you have not yet edited site configuration. ' .
-	                                               'Go to <a href="$install_path$/admin/system/settings">settings page</a> to provide actual values.',
+	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'It seems you have not yet edited site settings. ' .
+	                                               'Go to <a href="$install_path$/admin/system/settings">settings page</a> to provide actual data.',
 
 	# Pages
 
@@ -77,6 +78,7 @@ return [
 
 	'PAGES_ITEM_LIST'                           => 'List pages',
 	'PAGES_ITEM_CREATE'                         => 'Create page',
+	'PAGES_ITEM_CREATE_SUB'                     => 'Create subpage',
 	'PAGES_ITEM_EDIT'                           => 'Edit',
 	'PAGES_ITEM_BROWSE'                         => 'Browse',
 	'PAGES_ITEM_REMOVE'                         => 'Remove',
@@ -93,6 +95,7 @@ return [
 
 	'MENUITEMS_ITEM_LIST'                       => 'List items',
 	'MENUITEMS_ITEM_CREATE'                     => 'Create item',
+	'MENUITEMS_ITEM_CREATE_SUB'                 => 'Create subitem',
 	'MENUITEMS_ITEM_EDIT'                       => 'Edit',
 	'MENUITEMS_ITEM_BROWSE'                     => 'Browse',
 	'MENUITEMS_ITEM_REMOVE'                     => 'Remove',
@@ -205,20 +208,31 @@ return [
 	'UPLOADER_ERROR_SAVE'                       => 'Error saving file',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Error uploading file',
 
+	# Add-ons
+
+	'ADDONS_NOT_FOUND'                          => 'Add-ons not found',
+
+	'ADDONS_ERROR_INSTALL'                      => 'Error installing add-on',
+	'ADDONS_ERROR_UNINSTALL'                    => 'Error uninstalling add-on',
+
+	'ADDONS_ITEM_CONFIRM_UNINSTALL'             => 'Are you sure you want to uninstall selected add-on?',
+
 	# Languages
 
 	'LANGUAGES_NOT_FOUND'                       => 'Languages not found',
-	'LANGUAGES_INSTALLED'                       => 'Installed languages',
 
-	'LANGUAGES_ERROR_NAME'                      => 'Error activating language',
+	'LANGUAGES_ERROR_ACTIVATE'                  => 'Error setting default language',
+	'LANGUAGES_ERROR_INSTALL'                   => 'Error installing language',
+	'LANGUAGES_ERROR_REMOVE'                    => 'Error removing language',
 	'LANGUAGES_ERROR_SAVE'                      => 'Error saving settings',
 
 	# Templates
 
 	'TEMPLATES_NOT_FOUND'                       => 'Templates not found',
-	'TEMPLATES_INSTALLED'                       => 'Installed templates',
 
-	'TEMPLATES_ERROR_NAME'                      => 'Error activating template',
+	'TEMPLATES_ERROR_ACTIVATE'                  => 'Error setting default template',
+	'TEMPLATES_ERROR_INSTALL'                   => 'Error installing template',
+	'TEMPLATES_ERROR_REMOVE'                    => 'Error removing template',
 	'TEMPLATES_ERROR_SAVE'                      => 'Error saving settings',
 
 	# Users
@@ -242,7 +256,7 @@ return [
 
 	'SETTINGS_GROUP_SITE'                       => 'Site settings',
 	'SETTINGS_GROUP_SYSTEM'                     => 'System settings',
-	'SETTINGS_GROUP_EXTRA'                      => 'Extra settings',
+	'SETTINGS_GROUP_ADMIN'                      => 'Admin panel settings',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Site title',
 	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Site slogan',
@@ -254,10 +268,11 @@ return [
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Timezone',
 	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'System e-mail',
 
-	'SETTINGS_FIELD_USERS_REGISTRATION'         => 'Allow users registration',
-
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Invalid URL format',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Invalid email format',
+
+	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Default language',
+	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Default template',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Error saving settings',
 
@@ -265,16 +280,16 @@ return [
 
 	# Information
 
-	'INFORMATION_ROW_SYSTEM_VERSION'            => 'CMS version',
 	'INFORMATION_ROW_PHP_VERSION'               => 'PHP version',
 	'INFORMATION_ROW_MYSQL_VERSION'             => 'MySQL version',
 
+	'INFORMATION_ROW_SYSTEM_VERSION'            => 'CMS version',
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'jQuery version',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Semantic UI version',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'CKEditor version',
 
-	'INFORMATION_GROUP_CORE'                    => 'Core',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
+	'INFORMATION_GROUP_SERVER'                  => 'Server',
+	'INFORMATION_GROUP_SYSTEM'                  => 'System',
 
 	# Other
 

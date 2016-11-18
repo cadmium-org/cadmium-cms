@@ -1,10 +1,5 @@
 <?php
 
-# Cache limiters
-
-define('CACHE_LIMITER_PRIVATE',                     'private');
-define('CACHE_LIMITER_PUBLIC',                      'public');
-
 # Date formats
 
 define('DATE_FORMAT_STANDART',                      'd.m.Y');

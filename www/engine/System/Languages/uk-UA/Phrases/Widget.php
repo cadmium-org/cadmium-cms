@@ -7,7 +7,8 @@ return [
 	'WIDGET_ERROR_MODIFY'                           => 'Помилка збереження даних віджета',
 	'WIDGET_ERROR_REMOVE'                           => 'Помилка видалення віджета',
 
-	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Віджет з таким унікальним ключем вже існує',
+	'WIDGET_ERROR_NAME_INVALID'                     => 'Невірний формат ключа',
+	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Віджет з таким ключем вже існує',
 
 	# Success messages
 

@@ -2,9 +2,11 @@
 
 namespace Modules\Install\Handler {
 
-	use Modules\Install, Utils\View, Request;
+	use Frames, Modules\Install, Utils\View, Request;
 
-	class Database {
+	class Database extends Frames\Admin\Area\Install {
+
+		protected $title = 'TITLE_INSTALL_DATABASE';
 
 		private $form = null;
 
@@ -12,7 +14,7 @@ namespace Modules\Install\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Install\Database');
+			$contents = View::get('Blocks/Install/Database');
 
 			# Implement form
 
@@ -25,15 +27,15 @@ namespace Modules\Install\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
 			# Create form
 
-			$this->form = new Install\Form\Database();
+			$this->form = new Install\Form\Database;
 
 			# Handle form
 
-			if ($this->form->handle(new Install\Controller\Database())) {
+			if ($this->form->handle(new Install\Controller\Database)) {
 
 				Request::redirect(INSTALL_PATH . '/admin/register');
 			}

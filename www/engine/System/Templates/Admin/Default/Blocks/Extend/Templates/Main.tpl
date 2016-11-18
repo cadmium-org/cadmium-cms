@@ -1,26 +1,6 @@
-<div class="ui menu">
-
-	{ for:sections }
-
-	<a href="$install_path$/admin/extend/templates?list=$name$" class="$class$">$title$</a>
-
-	{ / for:sections }
-
-</div>
-
 <input type="hidden" id="templates-section" name="section" value="$section$" />
 
 <table class="ui unstackable table" id="templates-list">
-
-	<thead>
-
-		<tr>
-
-			<th colspan="2">%TEMPLATES_INSTALLED%</th>
-
-		</tr>
-
-	</thead>
 
 	<tbody>
 

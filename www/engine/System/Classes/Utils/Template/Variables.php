@@ -14,11 +14,14 @@ namespace Utils\Template {
 
 			$selection = ['name', 'value']; $order = ['name' => 'ASC'];
 
-			if (!(DB::select(TABLE_VARIABLES, $selection, null, $order) && DB::last()->status)) return;
+			if (!(DB::select(TABLE_VARIABLES, $selection, null, $order) && DB::getLast()->status)) return;
 
 			# Process results
 
-			while (null !== ($variable = DB::last()->row())) yield $variable['name'] => $variable['value'];
+			while (null !== ($variable = DB::getLast()->getRow())) {
+
+				yield $variable['name'] => $variable['value'];
+			}
 		}
 	}
 }

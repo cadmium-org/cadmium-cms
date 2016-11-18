@@ -2,9 +2,11 @@
 
 namespace Modules\Settings\Handler {
 
-	use Modules\Settings, Utils\Popup, Utils\View, Language, Request;
+	use Frames, Modules\Settings, Utils\Popup, Utils\View, Language, Request;
 
-	class General {
+	class General extends Frames\Admin\Area\Authorized {
+
+		protected $title = 'TITLE_SYSTEM_SETTINGS';
 
 		private $form = null;
 
@@ -12,7 +14,7 @@ namespace Modules\Settings\Handler {
 
 		private function getContents() {
 
-			$contents = View::get('Blocks\Settings\General');
+			$contents = View::get('Blocks/Settings/General');
 
 			# Implement form
 
@@ -25,15 +27,15 @@ namespace Modules\Settings\Handler {
 
 		# Handle request
 
-		public function handle() {
+		protected function handle() {
 
 			# Create form
 
-			$this->form = new Settings\Form\General();
+			$this->form = new Settings\Form\General;
 
 			# Handle form
 
-			if ($this->form->handle(new Settings\Controller\General(), true)) {
+			if ($this->form->handle(new Settings\Controller\General, true)) {
 
 				Request::redirect(INSTALL_PATH . '/admin/system/settings?submitted');
 			}

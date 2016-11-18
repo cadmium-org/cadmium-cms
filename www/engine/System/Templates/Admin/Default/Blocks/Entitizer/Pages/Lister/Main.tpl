@@ -70,9 +70,9 @@
 
 		<tr>
 
-			<th class="ten wide">%PAGES_COLUMN_TITLE%</th>
+			<th class="eight wide">%PAGES_COLUMN_TITLE%</th>
 
-			<th class="six wide" colspan="2">%PAGES_COLUMN_ACCESS%</th>
+			<th class="eight wide" colspan="2">%PAGES_COLUMN_ACCESS%</th>
 
 		</tr>
 

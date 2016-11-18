@@ -1,48 +1,63 @@
 <?php
 
+/**
+ * @package Framework\Form
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Form\Field {
 
-	use Form, Form\Utils, Validate;
+	use Form, Template, Validate;
 
-	class Checkbox extends Utils\Field {
+	class Checkbox extends Form\Field {
 
 		# Field default value
 
 		protected $value = false;
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
-		public function __construct(Form $form, string $key, string $value = '', array $config = []) {
+		public function __construct(Form $form, string $key, string $value = '') {
 
 			# Init field
 
-			self::init($form, $key, $config);
+			self::init($form, $key);
 
 			# Set value
 
-			$this->set($value);
+			$this->setValue($value);
 		}
 
-		# Set value
+		/**
+		 * Set a value
+		 *
+		 * @return the result value
+		 */
 
-		public function set(string $value) {
+		public function setValue(string $value) : bool {
 
 			return ($this->value = Validate::boolean($value));
 		}
 
-		# Get block
+		/**
+		 * Get a block
+		 */
 
-		public function block() {
+		public function getBlock() : Template\Block {
 
 			$tag = $this->getTag('input');
 
-			$tag->set('type', 'checkbox');
+			$tag->setAttribute('type', 'checkbox');
 
-			if (false !== $this->value) $tag->set('checked', 'checked');
+			if ($this->value) $tag->setAttribute('checked', 'checked');
 
 			# ------------------------
 
-			return $tag->block();
+			return $tag->getBlock();
 		}
 	}
 }

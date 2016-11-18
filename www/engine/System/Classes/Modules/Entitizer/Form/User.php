@@ -6,19 +6,17 @@ namespace Modules\Entitizer\Form {
 
 	class User extends Form {
 
+		protected $name = 'user';
+
 		# Constructor
 
 		public function __construct(Entitizer\Entity\User $user) {
-
-			parent::__construct('user');
-
-			# Add fields
 
 			$this->addText('name', $user->name, FORM_FIELD_TEXT, CONFIG_USER_NAME_MAX_LENGTH, ['required' => true]);
 
 			$this->addText('email', $user->email, FORM_FIELD_TEXT, CONFIG_USER_EMAIL_MAX_LENGTH, ['required' => true]);
 
-			$this->addSelect('rank', ((0 !== $user->id) ? $user->rank : RANK_USER), Range\Rank::array(), null,
+			$this->addSelect('rank', ((0 !== $user->id) ? $user->rank : RANK_USER), Range\Rank::getRange(), null,
 
 				['disabled' => (($user->id === 1) || ($user->id === Auth::user()->id))]);
 
@@ -26,13 +24,13 @@ namespace Modules\Entitizer\Form {
 
 			$this->addText('last_name', $user->last_name, FORM_FIELD_TEXT, CONFIG_USER_LAST_NAME_MAX_LENGTH);
 
-			$this->addSelect('sex', $user->sex, Range\Sex::array());
+			$this->addSelect('sex', $user->sex, Range\Sex::getRange());
 
 			$this->addText('city', $user->city, FORM_FIELD_TEXT, CONFIG_USER_CITY_MAX_LENGTH);
 
-			$this->addSelect('country', $user->country, Country::array(), Language::get('COUNTRY_NOT_SELECTED'), ['search' => true]);
+			$this->addSelect('country', $user->country, Country::getRange(), Language::get('COUNTRY_NOT_SELECTED'), ['search' => true]);
 
-			$this->addSelect('timezone', $user->timezone, Timezone::array(), null, ['search' => true]);
+			$this->addSelect('timezone', $user->timezone, Timezone::getRange(), null, ['search' => true]);
 
 			$this->addText('password', '', FORM_FIELD_PASSWORD, CONFIG_USER_PASSWORD_MAX_LENGTH, ['required' => (0 === $user->id)]);
 

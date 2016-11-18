@@ -7,7 +7,8 @@ return [
 	'WIDGET_ERROR_MODIFY'                           => 'Error saving widget data',
 	'WIDGET_ERROR_REMOVE'                           => 'Error removing widget',
 
-	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Widget name is already in use',
+	'WIDGET_ERROR_NAME_INVALID'                     => 'Invalid key',
+	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Widget key is already in use',
 
 	# Success messages
 
