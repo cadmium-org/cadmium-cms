@@ -63,32 +63,32 @@ namespace Utils {
 
 		private static function parseRoute(string $name, array $route) {
 
-			if (false === ($path = static::parseString($route['path'], REGEX_MAP_ITEM_PATH))) return;
+			if (false === ($path = self::parseString($route['path'], REGEX_MAP_ITEM_PATH))) return;
 
-			if (false === ($handler = static::parseString($route['handler'], REGEX_MAP_ITEM_HANDLER))) return;
+			if (false === ($handler = self::parseString($route['handler'], REGEX_MAP_ITEM_HANDLER))) return;
 
-			static::$routes['/' . implode('/', $path)] = ('Addons\\' . $name . '\\' . implode('\\', $handler));
+			self::$routes['/' . implode('/', $path)] = ('Addons\\' . $name . '\\' . implode('\\', $handler));
 		}
 
 		# Parse item
 
 		private static function parseItem(array $item) {
 
-			foreach ($item['routes'] as $route) static::parseRoute($item['name'], $route);
+			foreach ($item['routes'] as $route) self::parseRoute($item['name'], $route);
 		}
 
 		# Autoloader
 
 		public static function __autoload() {
 
-			foreach (Extend\Addons::items() as $item) static::parseItem($item);
+			foreach (Extend\Addons::items() as $item) self::parseItem($item);
 		}
 
 		# Get handler by url
 
 		public static function handler(Url $url) {
 
-			return (static::$routes[$url->getPath()] ?? false);
+			return (self::$routes[$url->getPath()] ?? false);
 		}
 	}
 }
