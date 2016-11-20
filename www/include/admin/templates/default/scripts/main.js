@@ -407,7 +407,18 @@ var Main = {
 
 		'init' : function() {
 
-			var handler = this;
+			var handler = this, modal = $('#variables-modal');
+
+			var modal_input = modal.find('input'), modal_button = modal.find('button');
+
+			modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
+
+			$(document).keydown(function(e) { if (e.keyCode == 27) modal_button.popup('hide'); });
+
+			(new Clipboard('#variable-shortcode-button')).on('success', function(e) {
+
+				modal_button.popup('show').mouseout(function() { modal_button.popup('hide'); }); e.clearSelection();
+			});
 
 			$('table#variables-list tbody tr').each(function() {
 
@@ -417,9 +428,7 @@ var Main = {
 
 				row.find('.info.button').click(function() {
 
-					if (!handler.locked) Main.info($('<p>' + lang['VARIABLES_INFO_TEXT'] + '</p><form class="ui form">' +
-
-						'<input type="text" readonly="readonly" value="$' + name + '$" /></form>'));
+					if (!handler.locked) { modal.find('input').val('$' + name + '$').select(); modal.modal('show'); }
 				});
 
 				var remove = row.find('.remove.button').click(function() {
@@ -465,7 +474,18 @@ var Main = {
 
 		'init' : function() {
 
-			var handler = this;
+			var handler = this, modal = $('#widgets-modal');
+
+			var modal_input = modal.find('input'), modal_button = modal.find('button');
+
+			modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
+
+			$(document).keydown(function(e) { if (e.keyCode == 27) modal_button.popup('hide'); });
+
+			(new Clipboard('#widget-shortcode-button')).on('success', function(e) {
+
+				modal_button.popup('show').mouseout(function() { modal_button.popup('hide'); }); e.clearSelection();
+			});
 
 			$('table#widgets-list tbody tr').each(function() {
 
@@ -475,9 +495,7 @@ var Main = {
 
 				row.find('.info.button').click(function() {
 
-					if (!handler.locked) Main.info($('<p>' + lang['WIDGETS_INFO_TEXT'] + '</p><form class="ui form">' +
-
-						'<input type="text" readonly="readonly" value="{ widget:' + name + ' / }" /></form>'));
+					if (!handler.locked) { modal.find('input').val('{ widget:' + name + ' / }').select(); modal.modal('show'); }
 				});
 
 				var remove = row.find('.remove.button').click(function() {

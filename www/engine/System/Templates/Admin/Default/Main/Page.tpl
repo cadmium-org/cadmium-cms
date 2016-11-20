@@ -18,6 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="$install_path$/include/admin/templates/$template_name$/styles/main.css" />
 
 		<script src="$install_path$/include/common/jquery.core.js"></script>
+		<script src="$install_path$/include/common/clipboard.js"></script>
 
 		<script src="$install_path$/include/semantic/semantic.min.js"></script>
 
@@ -45,12 +46,8 @@
 
 				'PAGES_CONFIRM_REMOVE':             '%PAGES_ITEM_CONFIRM_REMOVE%',
 				'MENUITEMS_CONFIRM_REMOVE':         '%MENUITEMS_ITEM_CONFIRM_REMOVE%',
-
 				'VARIABLES_CONFIRM_REMOVE':         '%VARIABLES_ITEM_CONFIRM_REMOVE%',
-				'VARIABLES_INFO_TEXT':              '%VARIABLES_ITEM_INFO_TEXT%',
-
 				'WIDGETS_CONFIRM_REMOVE':           '%WIDGETS_ITEM_CONFIRM_REMOVE%',
-				'WIDGETS_INFO_TEXT':                '%WIDGETS_ITEM_INFO_TEXT%',
 
 				'FILEMANAGER_CONFIRM_DIR_REMOVE':   '%FILEMANAGER_CONFIRM_DIR_REMOVE%',
 				'FILEMANAGER_CONFIRM_FILE_REMOVE':  '%FILEMANAGER_CONFIRM_FILE_REMOVE%',

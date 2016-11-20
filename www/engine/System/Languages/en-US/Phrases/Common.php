@@ -7,6 +7,7 @@ return [
 	'CLOSE'                                     => 'Close',
 	'CREATE'                                    => 'Create',
 	'CONTINUE'                                  => 'Continue',
+	'COPIED'                                    => 'Copied',
 	'DEFAULT'                                   => 'Default',
 	'EDIT'                                      => 'Edit',
 	'INSTALL'                                   => 'Install',
