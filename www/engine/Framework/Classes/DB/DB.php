@@ -21,19 +21,21 @@ namespace {
 
 			# Establish connection
 
-			if (false === ($link = mysqli_connect($server, $user, $password))) throw new Exception\DBConnect();
+			// Ignore error to avoid warning when trying to connect to unavailable host
+
+			if (false === ($link = @mysqli_connect($server, $user, $password))) throw new Exception\DBConnect;
 
 			# Select database
 
-			if (!mysqli_select_db($link, $name)) throw new Exception\DBSelect();
+			if (!mysqli_select_db($link, $name)) throw new Exception\DBSelect;
 
 			# Set encoding
 
-			if (!mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Exception\DBCharset();
+			if (!mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Exception\DBCharset;
 
-			if (!mysqli_query($link, "SET character_set_results = 'utf8'")) throw new Exception\DBCharset();
+			if (!mysqli_query($link, "SET character_set_results = 'utf8'")) throw new Exception\DBCharset;
 
-			if (!mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) throw new Exception\DBCharset();
+			if (!mysqli_query($link, "SET collation_connection = 'utf8_general_ci'")) throw new Exception\DBCharset;
 
 			# ------------------------
 
