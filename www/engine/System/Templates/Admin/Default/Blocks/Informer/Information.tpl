@@ -14,6 +14,14 @@
 
 		<tr>
 
+			<td class="four wide">%INFORMATION_ROW_OS_VERSION%</td>
+
+			<td>$os_version$</td>
+
+		</tr>
+
+		<tr>
+
 			<td class="four wide">%INFORMATION_ROW_PHP_VERSION%</td>
 
 			<td>$php_version$</td>
@@ -53,6 +61,36 @@
 			<td>$system_version$</td>
 
 		</tr>
+
+		{ block:debug_mode }
+
+		<tr>
+
+			<td class="four wide">%INFORMATION_ROW_DEBUG_MODE%</td>
+
+			<td><div class="ui small $class$ label">$text$</div></td>
+
+		</tr>
+
+		{ / block:debug_mode }
+
+	</tbody>
+
+</table>
+
+<table class="ui table">
+
+	<thead>
+
+		<tr>
+
+			<th colspan="2">%INFORMATION_GROUP_EXTERNAL%</th>
+
+		</tr>
+
+	</thead>
+
+	<tbody>
 
 		<tr>
 

@@ -280,16 +280,23 @@ return [
 
 	# Information
 
+	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
+	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
+	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+
+	'INFORMATION_ROW_OS_VERSION'                => 'Версия ОС',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версия PHP',
 	'INFORMATION_ROW_MYSQL_VERSION'             => 'Версия MySQL',
 
 	'INFORMATION_ROW_SYSTEM_VERSION'            => 'Версия CMS',
+	'INFORMATION_ROW_DEBUG_MODE'                => 'Режим отладки',
+
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'Версия jQuery',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версия Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версия CKEditor',
 
-	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
-	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
+	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'Включен',
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Выключен',
 
 	# Other
 

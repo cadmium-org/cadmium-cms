@@ -280,16 +280,23 @@ return [
 
 	# Information
 
+	'INFORMATION_GROUP_SERVER'                  => 'Server',
+	'INFORMATION_GROUP_SYSTEM'                  => 'System',
+	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
+
+	'INFORMATION_ROW_OS_VERSION'                => 'OS version',
 	'INFORMATION_ROW_PHP_VERSION'               => 'PHP version',
 	'INFORMATION_ROW_MYSQL_VERSION'             => 'MySQL version',
 
 	'INFORMATION_ROW_SYSTEM_VERSION'            => 'CMS version',
+	'INFORMATION_ROW_DEBUG_MODE'                => 'Debug mode',
+
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'jQuery version',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Semantic UI version',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'CKEditor version',
 
-	'INFORMATION_GROUP_SERVER'                  => 'Server',
-	'INFORMATION_GROUP_SYSTEM'                  => 'System',
+	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'On',
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Off',
 
 	# Other
 
