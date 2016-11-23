@@ -23,6 +23,7 @@ Cadmium CMS is PHP-based content management system for creating shiny and respon
 ## Coming soon
 
  - Publications.
+ - Backups.
  - Editor for languages and templates.
  - Full-featured multi-language system.
  - Full documentation.
