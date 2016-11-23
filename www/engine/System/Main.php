@@ -27,8 +27,8 @@ define('HTTP_MOD_REWRITE',      (getenv('HTTP_MOD_REWRITE') === 'on'));
 
 define('INSTALL_PATH',          rtrim(getenv('INSTALL_PATH'), '/'));
 
-define('MODE_DEBUG',            @file_exists(DIR_SYSTEM_DATA . '.debug'));
-define('MODE_DEMO',             @file_exists(DIR_SYSTEM_DATA . '.demo'));
+define('DEBUG_MODE',            @file_exists(DIR_SYSTEM_DATA . '.debug'));
 
-// Add here a check for a debug mode and if enabled then set an error reporting to E_ALL (previously should be set to 0).
-// Till the CMS is in a beta stage an error reporting should be set to E_ALL by default.
+# Set error reporting
+
+if (DEBUG_MODE) error_reporting(E_ALL);

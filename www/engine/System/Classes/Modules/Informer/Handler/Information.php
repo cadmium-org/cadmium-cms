@@ -12,7 +12,7 @@ namespace Modules\Informer\Handler {
 
 		private function processDebugMode(Template\Block $debug_mode) {
 
-			if (MODE_DEBUG) {
+			if (DEBUG_MODE) {
 
 				$debug_mode->class = 'red';
 
