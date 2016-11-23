@@ -30,8 +30,6 @@ namespace Modules\Extend\Utils\Handler {
 
 			if (Request::post('action') === 'activate') {
 
-				if (MODE_DEMO) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
-
 				$param = static::$param[$this->loader->section()]; $name = Request::post('name');
 
 				if (false === Settings::set($param, $name)) return $ajax->setError(Language::get(static::$error_activate));

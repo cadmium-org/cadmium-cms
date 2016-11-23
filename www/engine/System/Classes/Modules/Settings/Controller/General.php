@@ -10,10 +10,6 @@ namespace Modules\Settings\Controller {
 
 		public function __invoke(array $post) {
 
-			# Check for demo mode
-
-			if (MODE_DEMO) return 'DEMO_MODE_RESTRICTION';
-
 			# Define errors list
 
 			$errors = [];

@@ -296,10 +296,5 @@ return [
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'CKEditor version',
 
 	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'On',
-	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Off',
-
-	# Other
-
-	'DEMO_MODE_RESTRICTION'                     => 'You are not allowed to make changes on this page in demo mode',
-	'FEATURE_NOT_AVAILABLE'                     => 'Feature is currently in development'
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Off'
 ];

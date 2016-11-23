@@ -296,10 +296,5 @@ return [
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версия CKEditor',
 
 	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'Включен',
-	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Выключен',
-
-	# Other
-
-	'DEMO_MODE_RESTRICTION'                     => 'Вы не можете вносить изменения на этой странице в демо-режиме',
-	'FEATURE_NOT_AVAILABLE'                     => 'Функция находится в разработке'
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Выключен'
 ];

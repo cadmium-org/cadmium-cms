@@ -27,10 +27,6 @@ namespace Modules\Filemanager\Controller {
 
 			extract($post);
 
-			# Check for demo mode
-
-			if (MODE_DEMO) return 'DEMO_MODE_RESTRICTION';
-
 			# Validate name
 
 			if (false === ($name = Validate::fileName($name))) return ['name', 'FILEMANAGER_ERROR_NAME_INVALID'];
