@@ -6,6 +6,31 @@ namespace Modules\Install\Utils {
 
 	abstract class Tables {
 
+		# Get definitions list
+
+		private static function getDefinitions(bool $reverse) {
+
+			$definitions = [];
+
+			$definitions[] = Entitizer::definition(TABLE_PAGES);
+
+			$definitions[] = Entitizer::definition(TABLE_MENU);
+
+			$definitions[] = Entitizer::definition(TABLE_VARIABLES);
+
+			$definitions[] = Entitizer::definition(TABLE_WIDGETS);
+
+			$definitions[] = Entitizer::definition(TABLE_USERS);
+
+			$definitions[] = Entitizer::definition(TABLE_USERS_SECRETS);
+
+			$definitions[] = Entitizer::definition(TABLE_USERS_SESSIONS);
+
+			# ------------------------
+
+			return ($reverse ? array_reverse($definitions) : $definitions);
+		}
+
 		# Fill specific relations table
 
 		private static function fillRelationsTable(string $table, int $max_id) {
@@ -100,23 +125,22 @@ namespace Modules\Install\Utils {
 
 		public static function create() {
 
-			$definitions = [];
+			$definitions = self::getDefinitions(false);
 
-			$definitions[] = Entitizer::definition(TABLE_PAGES);
+			foreach ($definitions as $definition) if (!$definition->createTables()) return false;
 
-			$definitions[] = Entitizer::definition(TABLE_MENU);
+			# ------------------------
 
-			$definitions[] = Entitizer::definition(TABLE_VARIABLES);
+			return true;
+		}
 
-			$definitions[] = Entitizer::definition(TABLE_WIDGETS);
+		# Remove tables
 
-			$definitions[] = Entitizer::definition(TABLE_USERS);
+		public static function remove() {
 
-			$definitions[] = Entitizer::definition(TABLE_USERS_SECRETS);
+			$definitions = self::getDefinitions(true);
 
-			$definitions[] = Entitizer::definition(TABLE_USERS_SESSIONS);
-
-			foreach ($definitions as $definition) if (!$definition->createTable()) return false;
+			foreach ($definitions as $definition) if (!$definition->removeTables()) return false;
 
 			# ------------------------
 
