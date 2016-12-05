@@ -25,10 +25,6 @@ namespace {
 
 			if (false === ($link = @mysqli_connect($server, $user, $password))) throw new Exception\DBConnect;
 
-			# Select database
-
-			if (!mysqli_select_db($link, $name)) throw new Exception\DBSelect;
-
 			# Set encoding
 
 			if (!mysqli_query($link, "SET character_set_client = 'utf8'")) throw new Exception\DBCharset;
@@ -39,7 +35,16 @@ namespace {
 
 			# ------------------------
 
-			self::$link = $link;
+			self::$link = $link; self::name($name);
+		}
+
+		/**
+		 * Select a database
+		 */
+
+		public static function name(string $name) {
+
+			if (!mysqli_select_db(self::$link, $name)) throw new Exception\DBSelect;
 		}
 
 		/**
