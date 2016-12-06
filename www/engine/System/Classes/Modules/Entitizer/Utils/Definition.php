@@ -62,6 +62,24 @@ namespace Modules\Entitizer\Utils {
 		 	return (DB::send($query) && DB::getLast()->status);
 		}
 
+		# Drop main table
+
+		private function removeMainTable() {
+
+			$query = ("DROP TABLE IF EXISTS `" . static::$table  . "`");
+
+			return (DB::send($query) && DB::getLast()->status);
+		}
+
+		# Drop relations table
+
+		private function removeRelationsTable() {
+
+			$query = ("DROP TABLE IF EXISTS `" . static::$table_relations  . "`");
+
+			return (DB::send($query) && DB::getLast()->status);
+		}
+
 		# Constructor
 
 		public function __construct() {
@@ -126,11 +144,18 @@ namespace Modules\Entitizer\Utils {
 			return $this->foreigns->get($name);
 		}
 
-		# Create table(s)
+		# Create tables
 
-		public function createTable() {
+		public function createTables() {
 
 			return ($this->createMainTable() && (!static::$nesting || $this->createRelationsTable()));
+		}
+
+		# Remove tables
+
+		public function removeTables() {
+
+			return ((!static::$nesting || $this->removeRelationsTable()) && $this->removeMainTable());
 		}
 	}
 }

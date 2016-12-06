@@ -48,17 +48,17 @@ namespace Exception {
 		protected $message = 'Unable to connect to database';
 	}
 
-	# Database select exception
-
-	class DBSelect extends Exception  {
-
-		protected $message = 'Unable to select database';
-	}
-
 	# Database charset exception
 
 	class DBCharset extends Exception  {
 
 		protected $message = 'Unable to set database charset';
+	}
+
+	# Database select exception
+
+	class DBSelect extends Exception  {
+
+		protected $message = 'Unable to select database';
 	}
 }

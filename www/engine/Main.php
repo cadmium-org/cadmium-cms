@@ -6,7 +6,7 @@ if (version_compare(PHP_VERSION, '7.0.0') < 0) exit('PHP version 7 or higher is 
 
 # Set error reporting
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 # Define constants
 

@@ -280,19 +280,21 @@ return [
 
 	# Information
 
+	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
+	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
+	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннє ПЗ',
+
+	'INFORMATION_ROW_OS_VERSION'                => 'Версія ОС',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версія PHP',
 	'INFORMATION_ROW_MYSQL_VERSION'             => 'Версія MySQL',
 
 	'INFORMATION_ROW_SYSTEM_VERSION'            => 'Версія CMS',
+	'INFORMATION_ROW_DEBUG_MODE'                => 'Режим налагодження',
+
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'Версія jQuery',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версія Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версія CKEditor',
 
-	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
-	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
-
-	# Other
-
-	'DEMO_MODE_RESTRICTION'                     => 'Ви не можете вносити зміни на цій сторінці в демо-режимі',
-	'FEATURE_NOT_AVAILABLE'                     => 'Функція знаходиться в розробці'
+	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'Ввімкнений',
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Вимкнений'
 ];

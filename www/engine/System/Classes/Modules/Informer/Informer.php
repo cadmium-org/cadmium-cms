@@ -27,6 +27,13 @@ namespace Modules {
 			return Explorer::isFile(DIR_WWW . 'install.php');
 		}
 
+		# Get OS version
+
+		public static function osVersion() {
+
+			return (php_uname('s') . ', ' . php_uname('v'));
+		}
+
 		# Get MySQL version
 
 		public static function mysqlVersion() {

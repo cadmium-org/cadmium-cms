@@ -21,9 +21,9 @@ namespace {
 
 		private static function search(array &$list) : bool {
 
-			if (empty($agent = getenv('HTTP_USER_AGENT'))) return false;
+			if (empty($_SERVER['HTTP_USER_AGENT'])) return false;
 
-			foreach ($list as $item) if (false !== stripos($agent, $item)) return true;
+			foreach ($list as $item) if (false !== stripos($_SERVER['HTTP_USER_AGENT'], $item)) return true;
 
 			# ------------------------
 

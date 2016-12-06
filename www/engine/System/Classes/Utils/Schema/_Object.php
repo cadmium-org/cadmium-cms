@@ -2,7 +2,7 @@
 
 namespace Utils\Schema {
 
-	use JSON;
+	use Explorer, JSON;
 
 	class _Object {
 
@@ -101,6 +101,17 @@ namespace Utils\Schema {
 			# ------------------------
 
 			return true;
+		}
+
+		# Remove JSON file
+
+		public function remove() {
+
+			if ('' === static::$file_name) return false;
+
+			$file_name = (DIR_SYSTEM_DATA . static::$file_name);
+
+			return (!Explorer::isFile($file_name) || Explorer::removeFile($file_name));
 		}
 	}
 }

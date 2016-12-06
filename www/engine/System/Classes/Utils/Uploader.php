@@ -35,10 +35,6 @@ namespace Utils {
 
 			if ((false === ($file = Request::file($name))) || !is_uploaded_file($file['tmp_name'])) return false;
 
-			# Check for demo mode
-
-			if (MODE_DEMO) return 'DEMO_MODE_RESTRICTION';
-
 			# Check for upload errors
 
 			if ($file['error'] !== UPLOAD_ERR_OK) return self::translateError($file['error']);

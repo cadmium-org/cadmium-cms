@@ -45,10 +45,6 @@ namespace Modules\Filemanager\Utils {
 
 			$ajax = Ajax::createResponse();
 
-			# Check for demo mode
-
-			if (MODE_DEMO) return $ajax->setError(Language::get('DEMO_MODE_RESTRICTION'));
-
 			# Init entity
 
 			if (!$this->entity->init(Request::get('name'))) {
