@@ -10,18 +10,14 @@ namespace Modules\Settings\Utils {
 
 		private function getSystemUrl() {
 
-			if (empty($host = getenv('HTTP_HOST'))) return;
-
-			return ((Request::isSecure() ? 'https://' : 'http://') . $host);
+			if (!empty($_SERVER['HTTP_HOST'])) return ((Request::isSecure() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']);
 		}
 
 		# Get system email
 
 		private function getSystemEmail() {
 
-			if (empty($host = getenv('HTTP_HOST'))) return;
-
-			return ('admin@' . $host);
+			if (!empty($_SERVER['HTTP_HOST'])) return ('admin@' . $_SERVER['HTTP_HOST']);
 		}
 
 		# Constructor

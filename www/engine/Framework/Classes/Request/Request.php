@@ -17,7 +17,7 @@ namespace {
 
 		public static function isAjax() : bool {
 
-			return (getenv('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest');
+			return (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest');
 		}
 
 		/**
@@ -26,9 +26,9 @@ namespace {
 
 		public static function isSecure() : bool {
 
-			$https = (!empty(getenv('HTTPS')) && (getenv('HTTPS') !== 'off'));
+			$https = (!empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] !== 'off'));
 
-			return ($https || (getenv('SERVER_PORT') === '443'));
+			return ($https || ($_SERVER['SERVER_PORT'] === '443'));
 		}
 
 		/**
