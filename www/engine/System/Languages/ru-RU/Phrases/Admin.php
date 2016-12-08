@@ -281,9 +281,15 @@ return [
 
 	# Information
 
+	'INFORMATION_TAB_COMMON'                    => 'Общее',
+	'INFORMATION_TAB_PHP'                       => 'Конфигурация PHP',
+
 	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
 	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
 	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+
+	'INFORMATION_GROUP_PHP_ERRORS'              => 'Ошибки',
+	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'Загрузка файлов',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'Версия ОС',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версия PHP',

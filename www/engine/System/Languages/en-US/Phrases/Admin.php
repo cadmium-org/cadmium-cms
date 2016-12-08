@@ -281,9 +281,15 @@ return [
 
 	# Information
 
+	'INFORMATION_TAB_COMMON'                    => 'Common',
+	'INFORMATION_TAB_PHP'                       => 'PHP configuration',
+
 	'INFORMATION_GROUP_SERVER'                  => 'Server',
 	'INFORMATION_GROUP_SYSTEM'                  => 'System',
 	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
+
+	'INFORMATION_GROUP_PHP_ERRORS'              => 'Errors',
+	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'File uploads',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'OS version',
 	'INFORMATION_ROW_PHP_VERSION'               => 'PHP version',

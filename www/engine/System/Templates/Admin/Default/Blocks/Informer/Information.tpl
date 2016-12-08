@@ -1,121 +1,215 @@
-<table class="ui table">
+<div class="ui menu" id="information-menu">
 
-	<thead>
+	<a class="active item" data-segment="common">%INFORMATION_TAB_COMMON%</a>
 
-		<tr>
+	<a class="item" data-segment="php">%INFORMATION_TAB_PHP%</a>
 
-			<th colspan="2">%INFORMATION_GROUP_SERVER%</th>
+</div>
 
-		</tr>
+<div id="information-segments">
 
-	</thead>
+	<div data-name="common">
 
-	<tbody>
+		<table class="ui fixed table">
 
-		<tr>
+			<thead>
 
-			<td class="four wide">%INFORMATION_ROW_OS_VERSION%</td>
+				<tr>
 
-			<td>$os_version$</td>
+					<th colspan="2">%INFORMATION_GROUP_SERVER%</th>
 
-		</tr>
+				</tr>
 
-		<tr>
+			</thead>
 
-			<td class="four wide">%INFORMATION_ROW_PHP_VERSION%</td>
+			<tbody>
 
-			<td>$php_version$</td>
+				<tr>
 
-		</tr>
+					<td><i class="server icon"></i> %INFORMATION_ROW_OS_VERSION%</td>
 
-		<tr>
+					<td>$os_version$</td>
 
-			<td class="four wide">%INFORMATION_ROW_MYSQL_VERSION%</td>
+				</tr>
 
-			<td>$mysql_version$</td>
+				<tr>
 
-		</tr>
+					<td><i class="settings icon"></i> %INFORMATION_ROW_PHP_VERSION%</td>
 
-	</tbody>
+					<td>$php_version$</td>
 
-</table>
+				</tr>
 
-<table class="ui table">
+				<tr>
 
-	<thead>
+					<td><i class="database icon"></i> %INFORMATION_ROW_MYSQL_VERSION%</td>
 
-		<tr>
+					<td>$mysql_version$</td>
 
-			<th colspan="2">%INFORMATION_GROUP_SYSTEM%</th>
+				</tr>
 
-		</tr>
+			</tbody>
 
-	</thead>
+		</table>
 
-	<tbody>
+		<table class="ui fixed table">
 
-		<tr>
+			<thead>
 
-			<td class="four wide">%INFORMATION_ROW_SYSTEM_VERSION%</td>
+				<tr>
 
-			<td>$system_version$</td>
+					<th colspan="2">%INFORMATION_GROUP_SYSTEM%</th>
 
-		</tr>
+				</tr>
 
-		{ block:debug_mode }
+			</thead>
 
-		<tr>
+			<tbody>
 
-			<td class="four wide">%INFORMATION_ROW_DEBUG_MODE%</td>
+				<tr>
 
-			<td><div class="ui small $class$ label">$text$</div></td>
+					<td><i class="setting icon"></i> %INFORMATION_ROW_SYSTEM_VERSION%</td>
 
-		</tr>
+					<td>$system_version$</td>
 
-		{ / block:debug_mode }
+				</tr>
 
-	</tbody>
+				{ block:debug_mode }
 
-</table>
+				<tr>
 
-<table class="ui table">
+					<td><i class="bug icon"></i> %INFORMATION_ROW_DEBUG_MODE%</td>
 
-	<thead>
+					<td><div class="ui small $class$ label">$text$</div></td>
 
-		<tr>
+				</tr>
 
-			<th colspan="2">%INFORMATION_GROUP_EXTERNAL%</th>
+				{ / block:debug_mode }
 
-		</tr>
+			</tbody>
 
-	</thead>
+		</table>
 
-	<tbody>
+		<table class="ui fixed table">
 
-		<tr>
+			<thead>
 
-			<td class="four wide">%INFORMATION_ROW_JQUERY_VERSION%</td>
+				<tr>
 
-			<td>$jquery_version$</td>
+					<th colspan="2">%INFORMATION_GROUP_EXTERNAL%</th>
 
-		</tr>
+				</tr>
 
-		<tr>
+			</thead>
 
-			<td class="four wide">%INFORMATION_ROW_SEMANTIC_UI_VERSION%</td>
+			<tbody>
 
-			<td>$semantic_ui_version$</td>
+				<tr>
 
-		</tr>
+					<td><i class="puzzle icon"></i> %INFORMATION_ROW_JQUERY_VERSION%</td>
 
-		<tr>
+					<td>$jquery_version$</td>
 
-			<td class="four wide">%INFORMATION_ROW_CKEDITOR_VERSION%</td>
+				</tr>
 
-			<td>$ckeditor_version$</td>
+				<tr>
 
-		</tr>
+					<td><i class="puzzle icon"></i> %INFORMATION_ROW_SEMANTIC_UI_VERSION%</td>
 
-	</tbody>
+					<td>$semantic_ui_version$</td>
 
-</table>
+				</tr>
+
+				<tr>
+
+					<td><i class="puzzle icon"></i> %INFORMATION_ROW_CKEDITOR_VERSION%</td>
+
+					<td>$ckeditor_version$</td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+	<div data-name="php" style="display:none;">
+
+		<table class="ui fixed table">
+
+			<thead>
+
+				<tr>
+
+					<th colspan="2">%INFORMATION_GROUP_PHP_ERRORS%</th>
+
+				</tr>
+
+			</thead>
+
+			<tbody>
+
+				<tr>
+
+					<td><i class="angle right icon"></i> display_errors</td>
+
+					<td>$php_display_errors$</td>
+
+				</tr>
+
+				<tr>
+
+					<td><i class="angle right icon"></i> display_startup_errors</td>
+
+					<td>$php_display_startup_errors$</td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+		<table class="ui fixed table">
+
+			<thead>
+
+				<tr>
+
+					<th colspan="2">%INFORMATION_GROUP_PHP_FILE_UPLOADS%</th>
+
+				</tr>
+
+			</thead>
+
+				<tr>
+
+					<td><i class="angle right icon"></i> file_uploads</td>
+
+					<td>$php_file_uploads$</td>
+
+				</tr>
+
+				<tr>
+
+					<td><i class="angle right icon"></i> upload_max_filesize</td>
+
+					<td>$php_upload_max_filesize$</td>
+
+				</tr>
+
+				<tr>
+
+					<td><i class="angle right icon"></i> post_max_size</td>
+
+					<td>$php_post_max_size$</td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+</div>

@@ -900,6 +900,21 @@ var Main = {
 		}
 	},
 
+	'Information' : {
+
+		'init' : function() {
+
+			var menu = $('#information-menu'), segments = $('#information-segments');
+
+			menu.children('.item').click(function() {
+
+				$(this).addClass('active').siblings().removeClass('active');
+
+				segments.children('div').hide().filter('[data-name=' + $(this).data('segment') + ']').show();
+			});
+		}
+	},
+
 	'Editor' : {
 
 		'init' : function() {

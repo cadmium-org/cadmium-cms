@@ -2,11 +2,18 @@
 
 namespace Modules\Informer\Handler {
 
-	use Frames, Modules\Informer, Utils\View, Language, Template;
+	use Frames, Modules\Informer, Utils\Validate, Utils\View, Language, Template;
 
 	class Information extends Frames\Admin\Area\Authorized {
 
 		protected $title = 'TITLE_SYSTEM_INFORMATION';
+
+		# Get boolean value for php configuration
+
+		private function getBooleanValue(string $value) {
+
+			return (Validate::boolean($value) ? 'On' : 'Off');
+		}
 
 		# Process debug mode block
 
@@ -51,6 +58,18 @@ namespace Modules\Informer\Handler {
 			$contents->semantic_ui_version  = SEMANTIC_UI_VERSION;
 
 			$contents->ckeditor_version     = CKEDITOR_VERSION;
+
+			# Set php entries
+
+			$contents->php_display_errors           = $this->getBooleanValue(ini_get('display_errors'));
+
+			$contents->php_display_startup_errors   = $this->getBooleanValue(ini_get('display_startup_errors'));
+
+			$contents->php_file_uploads             = $this->getBooleanValue(ini_get('file_uploads'));
+
+			$contents->php_upload_max_filesize      = ini_get('upload_max_filesize');
+
+			$contents->php_post_max_size            = ini_get('post_max_size');
 
 			# Set debug mode
 
