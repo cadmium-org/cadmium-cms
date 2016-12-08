@@ -42,7 +42,7 @@
 
 		<a class="item" href="$install_path$/admin/system/users"><i class="users icon"></i>%TITLE_SYSTEM_USERS%</a>
 
-		<a class="item" href="$install_path$/admin/system/settings"><i class="settings icon"></i>%TITLE_SYSTEM_SETTINGS%</a>
+		<a class="item" href="$install_path$/admin/system/settings"><i class="configure icon"></i>%TITLE_SYSTEM_SETTINGS%</a>
 
 		<a class="item" href="$install_path$/admin/system/information"><i class="info circle icon"></i>%TITLE_SYSTEM_INFORMATION%</a>
 
