@@ -201,9 +201,10 @@ return [
 	'UPLOADER_ERROR_CANT_WRITE'                 => 'Failed to write file to disk',
 	'UPLOADER_ERROR_EXTENSION'                  => 'PHP extension stopped the file upload',
 
+	'UPLOADER_ERROR_SECURITY'                   => 'Possible file upload attack',
 	'UPLOADER_ERROR_SIZE'                       => 'Uploaded file size cannot exceed 100 MB',
 	'UPLOADER_ERROR_TYPE'                       => 'PHP-files are not allowed for upload',
-	'UPLOADER_ERROR_DIR'                        => 'Missing target directory',
+	'UPLOADER_ERROR_DIR'                        => 'Error creating target directory',
 	'UPLOADER_ERROR_EXISTS'                     => 'A file or directory with such name already exists',
 	'UPLOADER_ERROR_SAVE'                       => 'Error saving file',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Error uploading file',

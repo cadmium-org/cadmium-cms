@@ -6,6 +6,8 @@ namespace Utils {
 
 	abstract class Uploader {
 
+		private static $base_name = null, $file_name = null;
+
 		# Translate error code
 
 		private static function translateError(int $error) {
@@ -33,11 +35,15 @@ namespace Utils {
 
 		public static function save(string $name, string $dir_name) {
 
-			if ((false === ($file = Request::file($name))) || !is_uploaded_file($file['tmp_name'])) return false;
+			if (false === ($file = Request::file($name))) return false;
 
 			# Check for upload errors
 
 			if ($file['error'] !== UPLOAD_ERR_OK) return self::translateError($file['error']);
+
+			# Check for secure upload
+
+			if (!is_uploaded_file($file['tmp_name'])) return 'UPLOADER_ERROR_SECURITY';
 
 			# Check size
 
@@ -53,17 +59,21 @@ namespace Utils {
 
 			# Check target directory
 
-			if (!Explorer::isDir($dir_name)) return 'UPLOADER_ERROR_DIR';
+			if (!Explorer::isDir($dir_name) && !Explorer::createDir($dir_name)) return 'UPLOADER_ERROR_DIR';
 
 			# Check target file
 
-			$file_name = ($dir_name . '/' . basename($file['name']));
+			$base_name = basename($file['name']); $file_name = ($dir_name . '/' . $base_name);
 
 			if (Explorer::isDir($file_name) || Explorer::isFile($file_name)) return 'UPLOADER_ERROR_EXISTS';
 
 			# Save uploaded file
 
 			if (!@move_uploaded_file($file['tmp_name'], $file_name)) return 'UPLOADER_ERROR_SAVE';
+
+			# Set upload data
+
+			self::$base_name = $base_name; self::$file_name = $file_name;
 
 			# ------------------------
 
@@ -80,7 +90,21 @@ namespace Utils {
 
 			# ------------------------
 
-			return (true === $result);
+			return $result;
+		}
+
+		# Get last upload base name
+
+		public static function baseName() {
+
+			return self::$base_name;
+		}
+
+		# Get last upload file name
+
+		public static function fileName() {
+
+			return self::$file_name;
 		}
 	}
 }

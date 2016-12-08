@@ -201,9 +201,10 @@ return [
 	'UPLOADER_ERROR_CANT_WRITE'                 => 'Не удалось записать файл на диск',
 	'UPLOADER_ERROR_EXTENSION'                  => 'PHP-расширение остановило загрузку файла',
 
+	'UPLOADER_ERROR_SECURITY'                   => 'Возможная атака с участием загрузки файла',
 	'UPLOADER_ERROR_SIZE'                       => 'Размер загруженного файла не должен превышать 100 MB',
 	'UPLOADER_ERROR_TYPE'                       => 'PHP-файлы не разрешены для загрузки',
-	'UPLOADER_ERROR_DIR'                        => 'Отсутствует целевая директория',
+	'UPLOADER_ERROR_DIR'                        => 'Ошибка создания целевой директории',
 	'UPLOADER_ERROR_EXISTS'                     => 'Файл или директория с таким именем уже существует',
 	'UPLOADER_ERROR_SAVE'                       => 'Ошибка сохранения файла',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Ошибка загрузки файла',

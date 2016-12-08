@@ -938,7 +938,12 @@ var Main = {
 
 			var language = $('html').attr('lang'), instanceReady = function (event) { container.show(); };
 
-			CKEDITOR.replace('page-contents', { 'language' : language , 'on' : { 'instanceReady' : instanceReady } });
+			var editor = CKEDITOR.replace('page-contents', { 'language' : language , 'on' : { 'instanceReady' : instanceReady }});
+
+			editor.on('fileUploadRequest', function(event) {
+
+				event.data.fileLoader.xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			});
 		}
 	}
 };
