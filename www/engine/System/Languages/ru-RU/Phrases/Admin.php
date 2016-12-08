@@ -201,9 +201,10 @@ return [
 	'UPLOADER_ERROR_CANT_WRITE'                 => 'Не удалось записать файл на диск',
 	'UPLOADER_ERROR_EXTENSION'                  => 'PHP-расширение остановило загрузку файла',
 
+	'UPLOADER_ERROR_SECURITY'                   => 'Возможная атака с участием загрузки файла',
 	'UPLOADER_ERROR_SIZE'                       => 'Размер загруженного файла не должен превышать 100 MB',
 	'UPLOADER_ERROR_TYPE'                       => 'PHP-файлы не разрешены для загрузки',
-	'UPLOADER_ERROR_DIR'                        => 'Отсутствует целевая директория',
+	'UPLOADER_ERROR_DIR'                        => 'Ошибка создания целевой директории',
 	'UPLOADER_ERROR_EXISTS'                     => 'Файл или директория с таким именем уже существует',
 	'UPLOADER_ERROR_SAVE'                       => 'Ошибка сохранения файла',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Ошибка загрузки файла',
@@ -280,9 +281,15 @@ return [
 
 	# Information
 
+	'INFORMATION_TAB_COMMON'                    => 'Общее',
+	'INFORMATION_TAB_PHP'                       => 'Конфигурация PHP',
+
 	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
 	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
 	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+
+	'INFORMATION_GROUP_PHP_ERRORS'              => 'Ошибки',
+	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'Загрузка файлов',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'Версия ОС',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версия PHP',

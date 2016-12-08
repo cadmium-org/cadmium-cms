@@ -27,6 +27,7 @@ namespace Utils {
 			'/admin/content/filemanager'            => 'Modules\Filemanager\Handler\Lister',
 			'/admin/content/filemanager/dir'        => 'Modules\Filemanager\Handler\Dir',
 			'/admin/content/filemanager/file'       => 'Modules\Filemanager\Handler\File',
+			'/admin/content/filemanager/upload'     => 'Modules\Filemanager\Handler\Upload',
 			'/admin/extend/addons'                  => 'Modules\Extend\Handler\Addons',
 			'/admin/extend/languages'               => 'Modules\Extend\Handler\Languages',
 			'/admin/extend/templates'               => 'Modules\Extend\Handler\Templates',

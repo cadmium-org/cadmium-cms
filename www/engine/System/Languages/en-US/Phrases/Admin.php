@@ -201,9 +201,10 @@ return [
 	'UPLOADER_ERROR_CANT_WRITE'                 => 'Failed to write file to disk',
 	'UPLOADER_ERROR_EXTENSION'                  => 'PHP extension stopped the file upload',
 
+	'UPLOADER_ERROR_SECURITY'                   => 'Possible file upload attack',
 	'UPLOADER_ERROR_SIZE'                       => 'Uploaded file size cannot exceed 100 MB',
 	'UPLOADER_ERROR_TYPE'                       => 'PHP-files are not allowed for upload',
-	'UPLOADER_ERROR_DIR'                        => 'Missing target directory',
+	'UPLOADER_ERROR_DIR'                        => 'Error creating target directory',
 	'UPLOADER_ERROR_EXISTS'                     => 'A file or directory with such name already exists',
 	'UPLOADER_ERROR_SAVE'                       => 'Error saving file',
 	'UPLOADER_ERROR_UNKNOWN'                    => 'Error uploading file',
@@ -280,9 +281,15 @@ return [
 
 	# Information
 
+	'INFORMATION_TAB_COMMON'                    => 'Common',
+	'INFORMATION_TAB_PHP'                       => 'PHP configuration',
+
 	'INFORMATION_GROUP_SERVER'                  => 'Server',
 	'INFORMATION_GROUP_SYSTEM'                  => 'System',
 	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
+
+	'INFORMATION_GROUP_PHP_ERRORS'              => 'Errors',
+	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'File uploads',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'OS version',
 	'INFORMATION_ROW_PHP_VERSION'               => 'PHP version',

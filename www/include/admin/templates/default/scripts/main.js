@@ -900,6 +900,21 @@ var Main = {
 		}
 	},
 
+	'Information' : {
+
+		'init' : function() {
+
+			var menu = $('#information-menu'), segments = $('#information-segments');
+
+			menu.children('.item').click(function() {
+
+				$(this).addClass('active').siblings().removeClass('active');
+
+				segments.children('div').hide().filter('[data-name=' + $(this).data('segment') + ']').show();
+			});
+		}
+	},
+
 	'Editor' : {
 
 		'init' : function() {
@@ -938,7 +953,12 @@ var Main = {
 
 			var language = $('html').attr('lang'), instanceReady = function (event) { container.show(); };
 
-			CKEDITOR.replace('page-contents', { 'language' : language , 'on' : { 'instanceReady' : instanceReady } });
+			var editor = CKEDITOR.replace('page-contents', { 'language' : language , 'on' : { 'instanceReady' : instanceReady }});
+
+			editor.on('fileUploadRequest', function(event) {
+
+				event.data.fileLoader.xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			});
 		}
 	}
 };

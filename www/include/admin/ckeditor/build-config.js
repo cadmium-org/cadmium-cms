@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/a155d79f61dbe12807ef6ac3d21a6f72
+ * (2) http://ckeditor.com/builder/58fb652ec31145efd15470fad061b815
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/a155d79f61dbe12807ef6ac3d21a6f72
+ * (3) http://ckeditor.com/builder/download/58fb652ec31145efd15470fad061b815
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'bootstrapck',
+	skin: 'moono-lisa',
 	preset: 'standard',
 	ignore: [
 		'.bender',
@@ -54,10 +54,12 @@ var CKBUILDER_CONFIG = {
 		'blockquote' : 1,
 		'clipboard' : 1,
 		'contextmenu' : 1,
+		'copyformatting' : 1,
 		'elementspath' : 1,
 		'enterkey' : 1,
 		'entities' : 1,
 		'filebrowser' : 1,
+		'filetools' : 1,
 		'floatingspace' : 1,
 		'format' : 1,
 		'horizontalrule' : 1,
@@ -68,6 +70,7 @@ var CKBUILDER_CONFIG = {
 		'list' : 1,
 		'magicline' : 1,
 		'maximize' : 1,
+		'notification' : 1,
 		'pastefromword' : 1,
 		'pastetext' : 1,
 		'removeformat' : 1,
@@ -81,6 +84,8 @@ var CKBUILDER_CONFIG = {
 		'tabletools' : 1,
 		'toolbar' : 1,
 		'undo' : 1,
+		'uploadfile' : 1,
+		'uploadimage' : 1,
 		'wsc' : 1,
 		'wysiwygarea' : 1
 	},
