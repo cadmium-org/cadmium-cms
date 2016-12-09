@@ -24,15 +24,13 @@ namespace Modules\Filemanager\Handler {
 
 			if (true === ($upload = (Uploader::save('upload', (DIR_UPLOADS . $target_dir))))) {
 
-				$base_name = Uploader::baseName(); $url = (INSTALL_PATH . '/uploads/' . $target_dir . $base_name);
+				$name = Uploader::baseName(); $url = (INSTALL_PATH . '/uploads/' . $target_dir . $name);
 
-				$ajax->set('uploaded', 1)->set('fileName', $base_name)->set('url', $url);
+				$ajax->set('name', $name)->set('url', $url);
 
 			} else {
 
-				$message = Language::get((false !== $upload) ? $upload : 'UPLOADER_ERROR_UNKNOWN');
-
-				$ajax->set('uploaded', 0)->setError(['message' => $message]);
+				$ajax->setError(Language::get((false !== $upload) ? $upload : 'UPLOADER_ERROR_UNKNOWN'));
 			}
 
 			# ------------------------

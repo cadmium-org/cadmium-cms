@@ -32,7 +32,7 @@ namespace Ajax {
 		 * @return Ajax\Response : the current response object
 		 */
 
-		public function setError($value) : Response {
+		public function setError(string $value) : Response {
 
 			$this->error = $value; $this->status = false;
 
@@ -53,12 +53,12 @@ namespace Ajax {
 		/**
 		 * Get en error
 		 *
-		 * @return mixed|null : the value or null if the error is not set
+		 * @return string|false : the value or false if the error is not set
 		 */
 
 		public function getError() {
 
-			return $this->error;
+			return ($this->error ?? false);
 		}
 
 		/**

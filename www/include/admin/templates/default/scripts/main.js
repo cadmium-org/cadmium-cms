@@ -959,6 +959,33 @@ var Main = {
 
 				event.data.fileLoader.xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			});
+
+			editor.on('fileUploadResponse', function(event) {
+
+			    event.stop();
+
+				var data = event.data, xhr = data.fileLoader.xhr;
+
+				try {
+
+					var response = JSON.parse(xhr.responseText);
+
+					if (response.error) data.message = response.error;
+
+					if (response.status) { data.fileName = response.name; data.url = response.url; }
+
+					else event.cancel();
+
+				} catch (error) {
+
+					data.message = data.fileLoader.lang.filetools.responseError;
+
+					CKEDITOR.warn('filetools-response-error', { responseText: xhr.responseText });
+
+					event.cancel();
+				}
+
+			});
 		}
 	}
 };
