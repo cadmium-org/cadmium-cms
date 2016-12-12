@@ -28,6 +28,10 @@
 
 .wrapper { margin:0 !important; padding-top:55px !important; }
 
+/* Segments */
+
+.segment { box-shadow:0 1px 2px 0 rgba(34, 36, 38, 0.08) !important; overflow:hidden; }
+
 /* Breadcrumbs */
 
 .breadcrumb .section:last-of-type { font-weight:bold; }
@@ -45,7 +49,7 @@
 
 /* Tables */
 
-.table { table-layout: fixed; }
+.table { table-layout:fixed; box-shadow:0 1px 2px 0 rgba(34, 36, 8, 0.08) !important; }
 
 .table tr.inactive td { color:rgba(40, 40, 40, 0.3); }
 
@@ -94,7 +98,3 @@
 .ui.modal .actions > .button { margin-left:0; }
 
 #modal-lister { top:0px; margin-top:3.5rem !important; }
-
-/* Others */
-
-.ui.segment { overflow:hidden; }
