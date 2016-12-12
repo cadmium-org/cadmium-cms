@@ -15,8 +15,6 @@ var View = {
 
 		var items = $('.ui.form').find('input, textarea, select');
 
-		items.filter('textarea').css({ 'height' : '6em', 'min-height' : '6em' });
-
 		items.filter('select').addClass('ui dropdown').filter('[data-search=search]').addClass('search');
 
 		items.filter('[data-error=error]').closest('.field').addClass('error');

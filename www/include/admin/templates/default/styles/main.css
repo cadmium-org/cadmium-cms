@@ -67,6 +67,12 @@
 	.pagination .item:not(.active):not(.step) { display:none !important; }
 }
 
+/* Forms */
+
+.form select { height:38px !important; color:#FFF !important; }
+
+.form textarea { height:6em !important; min-height:6em !important; }
+
 /* Captcha */
 
 #captcha { background-color:#FFF !important; }

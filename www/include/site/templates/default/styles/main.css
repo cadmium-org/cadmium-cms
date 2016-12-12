@@ -50,6 +50,10 @@
 
 /* Forms */
 
+.form select { height:38px !important; color:#FFF !important; }
+
+.form textarea { height:6em !important; min-height:6em !important; }
+
 @media only screen and (min-width:768px) {
 
 	.sided.form { max-width:460px !important; }
