@@ -131,9 +131,40 @@ namespace {
 		}
 
 		/**
+		 * Count the number of rows in a table
+		 *
+		 * @param $table        a table name
+		 * @param $column       a column name to count the number of values or '*' to count the number of rows in the table
+		 * @param $distinct     tells to count the number of distinct values of the specified column
+		 * @param $condition    a string or an array where each key is a field name and each value is a field value
+		 *
+		 * @return int|false : the number of rows or false on failure
+		 */
+
+		public static function count(string $table, string $column = '*', bool $distinct = false, $condition = null) {
+
+			$result = self::send(new DB\Query\Count(...func_get_args()));
+
+			return (($result && ($result->rows === 1)) ? intval($result->getRow()['count']) : false);
+		}
+
+		/**
+		 * Get the MySQL version
+		 *
+		 * @return string|false : the version or false on failure
+		 */
+
+		public static function getVersion() {
+
+			$result = self::send("SELECT VERSION() as version");
+
+			return (($result && ($result->rows === 1)) ? strval($result->getRow()['version']) : false);
+		}
+
+		/**
 		 * Get the last result object
 		 *
-		 * @return DB\Result|false|null : the result object or false if the last query failed or null if there have been no queries sent
+		 * @return DB\Result|false|null : the result object, false if the last query failed, or null if there have been no queries sent
 		 */
 
 		public static function getLast() {
