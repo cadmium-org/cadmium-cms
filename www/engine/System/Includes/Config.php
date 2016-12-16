@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 # Admin ip
 
 define('CONFIG_ADMIN_IP',                           '');

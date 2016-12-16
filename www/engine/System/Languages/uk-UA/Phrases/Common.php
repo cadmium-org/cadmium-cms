@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Languages\uk-UA
+ * @author Dariia Romanova
+ * @copyright Copyright (c) 2015-2017, Dariia Romanova
+ * @link http://cadmium-cms.com
+ */
+
 return [
 
 	'BROWSE'                                    => 'Переглянути',

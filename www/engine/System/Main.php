@@ -1,6 +1,13 @@
 <?php
 
-# Define constants
+/**
+ * @package Cadmium\System
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
+# Define directories
 
 define('DIR_SYSTEM',                (dirname(__FILE__) . '/'));
 
@@ -21,7 +28,7 @@ require_once (DIR_SYSTEM_INCLUDES . 'Constants.php');
 require_once (DIR_SYSTEM_INCLUDES . 'Regex.php');
 require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
 
-# Process environment variables
+# Set environment constants
 
 define('HTTP_MOD_REWRITE',      (getenv('HTTP_MOD_REWRITE') === 'on'));
 

@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	use Modules\Extend, Utils\Map, Utils\Schema;
 
 	class Dispatcher {
 
-		# Dispatcher handle method
+		/**
+		 * Route a request to a handler
+		 */
 
-		public function handle() {
+		public function route() {
 
 			# Check installation
 
@@ -25,11 +34,9 @@ namespace {
 
 			Extend\Addons::init();
 
-			# Get handler by requested url
+			# Get handler class by requested url
 
 			$handler = Map::handler($url = new Url(Request::get('url')));
-
-			# Determine handler class
 
 			$class = ((false !== $handler) ? $handler : 'Modules\Page');
 
