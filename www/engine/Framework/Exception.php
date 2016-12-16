@@ -1,8 +1,13 @@
 <?php
 
-namespace Exception {
+/**
+ * @package Cadmium\Framework
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
 
-	# Exception parent class
+namespace Exception {
 
 	abstract class Exception extends \Exception {
 
@@ -20,8 +25,6 @@ namespace Exception {
 		}
 	}
 
-	# General exception
-
 	class General extends Exception {
 
 		/**
@@ -34,28 +37,20 @@ namespace Exception {
 		}
 	}
 
-	# Class load exception
-
 	class ClassLoad extends Exception  {
 
 		protected $message = 'Class \'$value$\' not found';
 	}
-
-	# Database connect exception
 
 	class DBConnect extends Exception  {
 
 		protected $message = 'Unable to connect to database';
 	}
 
-	# Database charset exception
-
 	class DBCharset extends Exception  {
 
 		protected $message = 'Unable to set database charset';
 	}
-
-	# Database select exception
 
 	class DBSelect extends Exception  {
 

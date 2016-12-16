@@ -1,6 +1,13 @@
 <?php
 
-# Mobiles list
+/**
+ * @package Cadmium\Framework\Agent
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
+# Mobile devices list
 
 return [
 

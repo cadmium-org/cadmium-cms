@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\Framework\Agent
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 # Robots list
 
 return [

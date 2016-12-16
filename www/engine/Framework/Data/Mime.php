@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\Framework\Mime
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 # Mime types list
 
 return [
@@ -177,7 +184,7 @@ return [
 	'movie'         => 'video/x-sgi-movie',
 	'smv'           => 'video/x-smv',
 
-	# Documents types
+	# Document types
 
 	'doc'           => 'application/msword',
 	'docx'          => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
