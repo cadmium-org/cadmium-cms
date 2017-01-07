@@ -18,6 +18,9 @@ return [
 
 	'INSTALL_PHP_VERSION'                       => 'PHP version',
 
+	'INSTALL_REQUIREMENT_REWRITE_SUCCESS'       => 'Module Rewrite is enabled.',
+	'INSTALL_REQUIREMENT_REWRITE_FAIL'          => 'Module Rewrite is not enabled.',
+
 	'INSTALL_REQUIREMENT_MYSQLI_SUCCESS'        => 'Extension MySQLi is installed.',
 	'INSTALL_REQUIREMENT_MYSQLI_FAIL'           => 'Extension MySQLi is not installed.',
 
@@ -33,9 +36,6 @@ return [
 	'INSTALL_REQUIREMENT_DOM_SUCCESS'           => 'Extension DOM is installed.',
 	'INSTALL_REQUIREMENT_DOM_FAIL'              => 'Extension DOM is not installed.',
 
-	'INSTALL_REQUIREMENT_REWRITE_SUCCESS'       => 'Module Rewrite is enabled.',
-	'INSTALL_REQUIREMENT_REWRITE_FAIL'          => 'Module Rewrite is not enabled.',
-
 	'INSTALL_REQUIREMENT_DATA_SUCCESS'          => 'Engine/System/Data is writable.',
 	'INSTALL_REQUIREMENT_DATA_FAIL'             => 'Engine/System/Data is not writable.',
 
@@ -45,8 +45,8 @@ return [
 	# Errors
 
 	'INSTALL_ERROR_DATABASE_CONNECT'            => 'Unable to connect to database',
-	'INSTALL_ERROR_DATABASE_SELECT'             => 'Unable to select database',
 	'INSTALL_ERROR_DATABASE_CHARSET'            => 'Unable to set database charset',
+	'INSTALL_ERROR_DATABASE_SELECT'             => 'Unable to select database',
 
 	'INSTALL_ERROR_DATABASE_TABLES_CREATE'      => 'Error creating database tables',
 	'INSTALL_ERROR_DATABASE_TABLES_FILL'        => 'Error saving initial data',
@@ -67,8 +67,8 @@ return [
 	'INSTALL_PAGE_INDEX_TITLE'                  => 'Home',
 
 	'INSTALL_PAGE_INDEX_CONTENTS'               => '<h2>Welcome!</h2>' .
-	                                               '<p>This is demo site, powered by <strong>Cadmium CMS</strong>.</p>' .
-	                                               '<p>You can log into admin panel by following <a href="$install_path$/admin">this link</a>.</p>' .
+	                                               '<p>This is the demo site, powered by <strong>Cadmium CMS</strong>.</p>' .
+	                                               '<p>You can log into the admin panel by following <a href="$install_path$/admin">this link</a>.</p>' .
 	                                               '<h2>See also</h2>' .
 	                                               '<ul><li><a href="http://cadmium-cms.com" target="_blank">Official website</a></li>' .
 	                                               '<li><a href="https://github.com/cadmium-org/cadmium-cms" target="_blank">GitHub project page</a></ul>',
