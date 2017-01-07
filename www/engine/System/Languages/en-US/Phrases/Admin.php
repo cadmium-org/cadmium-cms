@@ -75,7 +75,7 @@ return [
 	'DASHBOARD_LINK_INFORMATION'                => 'More information',
 
 	'DASHBOARD_MESSAGE_INSTALL_REQUIREMENTS'    => 'Some features may be unavailable due to a server misconfiguration. Please proceed to the ' .
-												   '<a href="$install_path$/admin/system/information#diagnostics">diagnostics page</a> to learn more.',
+	                                               '<a href="$install_path$/admin/system/information#diagnostics">diagnostics page</a> to learn more.',
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'The installation file <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
 	                                               'still exists in the root of your site. It\'s recommended to remove it.',
 	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'It seems you have not yet edited the site settings. ' .

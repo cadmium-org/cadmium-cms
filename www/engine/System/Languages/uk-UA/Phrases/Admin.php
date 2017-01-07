@@ -75,7 +75,7 @@ return [
 	'DASHBOARD_LINK_INFORMATION'                => 'Більше інформації',
 
 	'DASHBOARD_MESSAGE_INSTALL_REQUIREMENTS'    => 'Деякі можливості можуть бути недоступні через невірну конфігурацію сервера. Детальніше на ' .
-												   '<a href="$install_path$/admin/system/information#diagnostics">сторінці діагностики</a>.',
+	                                               '<a href="$install_path$/admin/system/information#diagnostics">сторінці діагностики</a>.',
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Інсталяційний файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
 	                                               'досі знаходиться в кореневій директорії сайта. Рекомендовано видалити його.',
 	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'Схоже, Ви поки не редагували налаштування сайта. '.
