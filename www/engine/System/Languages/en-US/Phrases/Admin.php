@@ -58,23 +58,28 @@ return [
 
 	# Dashboard
 
-	'DASHBOARD_ROW_SITE_TITLE'                  => 'Site title',
-	'DASHBOARD_ROW_SITE_STATUS'                 => 'Site status',
+	'DASHBOARD_GROUP_SITE'                      => 'Site info',
+	'DASHBOARD_GROUP_SERVER'                    => 'Server',
 
-	'DASHBOARD_ROW_SYSTEM_URL'                  => 'Root URL',
-	'DASHBOARD_ROW_SYSTEM_EMAIL'                => 'System e-mail',
+	'DASHBOARD_ROW_SITE_TITLE'                  => 'Title',
+	'DASHBOARD_ROW_SITE_STATUS'                 => 'Status',
+
+	'DASHBOARD_ROW_SYSTEM_EMAIL'                => 'E-mail',
 	'DASHBOARD_ROW_SYSTEM_TIMEZONE'             => 'Timezone',
 
-	'DASHBOARD_ROW_PAGES'                       => 'Total pages',
-	'DASHBOARD_ROW_USERS'                       => 'Total users',
+	'DASHBOARD_ROW_OS_VERSION'                  => 'OS version',
+	'DASHBOARD_ROW_PHP_VERSION'                 => 'PHP version',
+	'DASHBOARD_ROW_MYSQL_VERSION'               => 'MySQL version',
 
-	'DASHBOARD_GROUP_GENERAL'                   => 'General',
-	'DASHBOARD_GROUP_DATABASE'                  => 'Database',
+	'DASHBOARD_LINK_SETTINGS'                   => 'Edit settings',
+	'DASHBOARD_LINK_INFORMATION'                => 'More information',
 
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Installation file <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
-	                                               'still exists in the root of your site. It\'s necessary to remove it.',
-	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'It seems you have not yet edited site settings. ' .
-	                                               'Go to <a href="$install_path$/admin/system/settings">settings page</a> to provide actual data.',
+	'DASHBOARD_MESSAGE_INSTALL_REQUIREMENTS'    => 'Some features may be unavailable due to a server misconfiguration. Please proceed to the ' .
+												   '<a href="$install_path$/admin/system/information#diagnostics">diagnostics page</a> to learn more.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'The installation file <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
+	                                               'still exists in the root of your site. It\'s recommended to remove it.',
+	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'It seems you have not yet edited the site settings. ' .
+	                                               'Go to the <a href="$install_path$/admin/system/settings">settings page</a> to provide actual data.',
 
 	# Pages
 
@@ -290,13 +295,17 @@ return [
 
 	'INFORMATION_TAB_COMMON'                    => 'Common',
 	'INFORMATION_TAB_PHP'                       => 'PHP configuration',
+	'INFORMATION_TAB_DIAGNOSTICS'               => 'Diagnostics',
 
 	'INFORMATION_GROUP_SERVER'                  => 'Server',
 	'INFORMATION_GROUP_SYSTEM'                  => 'System',
 	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
 
-	'INFORMATION_GROUP_PHP_ERRORS'              => 'Errors',
-	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'File uploads',
+	'INFORMATION_GROUP_ERRORS'                  => 'Errors',
+	'INFORMATION_GROUP_FILE_UPLOADS'            => 'File uploads',
+
+	'INFORMATION_GROUP_EXTENSIONS'              => 'PHP extensions',
+	'INFORMATION_GROUP_DIRS'                    => 'Directories',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'OS version',
 	'INFORMATION_ROW_PHP_VERSION'               => 'PHP version',
@@ -309,6 +318,21 @@ return [
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Semantic UI version',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'CKEditor version',
 
+	'INFORMATION_ROW_EXTENSION_MYSQLI'          => 'MySQLi',
+	'INFORMATION_ROW_EXTENSION_MBSTRING'        => 'Multibyte String',
+	'INFORMATION_ROW_EXTENSION_GD'              => 'GD',
+	'INFORMATION_ROW_EXTENSION_SIMPLEXML'       => 'SimpleXML',
+	'INFORMATION_ROW_EXTENSION_DOM'             => 'DOM',
+
+	'INFORMATION_ROW_DIR_UPLOADS'               => '/uploads',
+	'INFORMATION_ROW_DIR_DATA'                  => '/engine/System/Data',
+
 	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'On',
-	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Off'
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Off',
+
+	'INFORMATION_VALUE_EXTENSION_LOADED'        => 'Loaded',
+	'INFORMATION_VALUE_EXTENSION_NOT_LOADED'    => 'Not loaded',
+
+	'INFORMATION_VALUE_DIR_WRITABLE'            => 'Writable',
+	'INFORMATION_VALUE_DIR_NOT_WRITABLE'        => 'Not writable'
 ];

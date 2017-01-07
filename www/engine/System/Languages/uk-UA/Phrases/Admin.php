@@ -58,21 +58,26 @@ return [
 
 	# Dashboard
 
-	'DASHBOARD_ROW_SITE_TITLE'                  => 'Назва сайта',
-	'DASHBOARD_ROW_SITE_STATUS'                 => 'Статус сайта',
+	'DASHBOARD_GROUP_SITE'                      => 'Інформація про сайт',
+	'DASHBOARD_GROUP_SERVER'                    => 'Сервер',
 
-	'DASHBOARD_ROW_SYSTEM_URL'                  => 'Кореневий URL',
-	'DASHBOARD_ROW_SYSTEM_EMAIL'                => 'Системний e-mail',
+	'DASHBOARD_ROW_SITE_TITLE'                  => 'Назва',
+	'DASHBOARD_ROW_SITE_STATUS'                 => 'Статус',
+
+	'DASHBOARD_ROW_SYSTEM_EMAIL'                => 'E-mail',
 	'DASHBOARD_ROW_SYSTEM_TIMEZONE'             => 'Часова зона',
 
-	'DASHBOARD_ROW_PAGES'                       => 'Всього сторінок',
-	'DASHBOARD_ROW_USERS'                       => 'Всього користувачів',
+	'DASHBOARD_ROW_OS_VERSION'                  => 'Версія ОС',
+	'DASHBOARD_ROW_PHP_VERSION'                 => 'Версія PHP',
+	'DASHBOARD_ROW_MYSQL_VERSION'               => 'Версія MySQL',
 
-	'DASHBOARD_GROUP_GENERAL'                   => 'Основне',
-	'DASHBOARD_GROUP_DATABASE'                  => 'База даних',
+	'DASHBOARD_LINK_SETTINGS'                   => 'Редагувати налаштування',
+	'DASHBOARD_LINK_INFORMATION'                => 'Більше інформації',
 
+	'DASHBOARD_MESSAGE_INSTALL_REQUIREMENTS'    => 'Деякі можливості можуть бути недоступні через невірну конфігурацію сервера. Детальніше на ' .
+												   '<a href="$install_path$/admin/system/information#diagnostics">сторінці діагностики</a>.',
 	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Інсталяційний файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
-	                                               'досі знаходиться в кореневій директорії сайта. Необхідно видалити його.',
+	                                               'досі знаходиться в кореневій директорії сайта. Рекомендовано видалити його.',
 	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'Схоже, Ви поки не редагували налаштування сайта. '.
 	                                               'Перейдіть на <a href="$install_path$/admin/system/settings">сторінку налаштувань</a> для введення актуальних даних.',
 
@@ -290,13 +295,17 @@ return [
 
 	'INFORMATION_TAB_COMMON'                    => 'Загальне',
 	'INFORMATION_TAB_PHP'                       => 'Конфігурація PHP',
+	'INFORMATION_TAB_DIAGNOSTICS'               => 'Діагностика',
 
 	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
 	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
 	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннє ПЗ',
 
-	'INFORMATION_GROUP_PHP_ERRORS'              => 'Помилки',
-	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'Завантеження файлів',
+	'INFORMATION_GROUP_ERRORS'                  => 'Помилки',
+	'INFORMATION_GROUP_FILE_UPLOADS'            => 'Завантеження файлів',
+
+	'INFORMATION_GROUP_EXTENSIONS'              => 'Розширення PHP',
+	'INFORMATION_GROUP_DIRS'                    => 'Директорії',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'Версія ОС',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версія PHP',
@@ -309,6 +318,21 @@ return [
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версія Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версія CKEditor',
 
+	'INFORMATION_ROW_EXTENSION_MYSQLI'          => 'MySQLi',
+	'INFORMATION_ROW_EXTENSION_MBSTRING'        => 'Multibyte String',
+	'INFORMATION_ROW_EXTENSION_GD'              => 'GD',
+	'INFORMATION_ROW_EXTENSION_SIMPLEXML'       => 'SimpleXML',
+	'INFORMATION_ROW_EXTENSION_DOM'             => 'DOM',
+
+	'INFORMATION_ROW_DIR_UPLOADS'               => '/uploads',
+	'INFORMATION_ROW_DIR_DATA'                  => '/engine/System/Data',
+
 	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'Ввімкнений',
-	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Вимкнений'
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Вимкнений',
+
+	'INFORMATION_VALUE_EXTENSION_LOADED'        => 'Підключене',
+	'INFORMATION_VALUE_EXTENSION_NOT_LOADED'    => 'Відключене',
+
+	'INFORMATION_VALUE_DIR_WRITABLE'            => 'Доступна для запису',
+	'INFORMATION_VALUE_DIR_NOT_WRITABLE'        => 'Недоступна для запису'
 ];

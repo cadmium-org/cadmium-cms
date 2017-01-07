@@ -911,7 +911,8 @@ var Main = {
 				$(this).addClass('active').siblings().removeClass('active');
 
 				segments.children('div').hide().filter('[data-name=' + $(this).data('segment') + ']').show();
-			});
+
+			}).filter('[data-segment=' + window.location.hash.substring(1) + ']').click();
 		}
 	},
 
