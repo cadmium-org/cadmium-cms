@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Install
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Install\Form {
 
 	use Utils\Form;
@@ -8,7 +15,9 @@ namespace Modules\Install\Form {
 
 		protected $name = 'database';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 

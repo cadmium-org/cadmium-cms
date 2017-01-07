@@ -1,14 +1,25 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Install
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Install\Utils {
 
-	use Modules\Entitizer, Modules\Informer, DB, Language, Template;
+	use Modules\Entitizer, DB, Language, Template;
 
 	abstract class Tables {
 
-		# Get definitions list
+		/**
+		 * Get the list of entities definitions
+		 *
+		 * @param $reverse tells to return the definitions in a reverse order (necessary for removing database tables)
+		 */
 
-		private static function getDefinitions(bool $reverse) {
+		private static function getDefinitions(bool $reverse) : array {
 
 			$definitions = [];
 
@@ -31,9 +42,16 @@ namespace Modules\Install\Utils {
 			return ($reverse ? array_reverse($definitions) : $definitions);
 		}
 
-		# Fill specific relations table
+		/**
+		 * Fill in a relations table
+		 *
+		 * @param $table        a basic table
+		 * @param $max_id       a number of entries to insert
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private static function fillRelationsTable(string $table, int $max_id) {
+		private static function fillRelationsTable(string $table, int $max_id) : bool {
 
 			$relations = [];
 
@@ -47,13 +65,17 @@ namespace Modules\Install\Utils {
 			return (DB::insert($table, $relations, true, true) && DB::getLast()->status);
 		}
 
-		# Fill pages table
+		/**
+		 * Fill in the pages table with the default values
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private static function fillPagesTable() {
+		private static function fillPagesTable() : bool {
 
 			# Count pages
 
-			$count = Informer::countEntries(TABLE_PAGES, true);
+			$count = DB::count(TABLE_PAGES);
 
 			if (false === $count) return false; else if ($count > 0) return true;
 
@@ -83,20 +105,24 @@ namespace Modules\Install\Utils {
 
 			if (!(DB::insert(TABLE_PAGES, $pages, true) && DB::getLast()->status)) return false;
 
-			self::fillRelationsTable(TABLE_PAGES_RELATIONS, 4);
+			self::fillRelationsTable(TABLE_PAGES_RELATIONS, count($pages));
 
 			# ------------------------
 
 			return true;
 		}
 
-		# Fill menu table
+		/**
+		 * Fill in the menu table with the default values
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private static function fillMenuTable() {
+		private static function fillMenuTable() : bool {
 
 			# Count menuitems
 
-			$count = Informer::countEntries(TABLE_MENU, true);
+			$count = DB::count(TABLE_MENU);
 
 			if (false === $count) return false; else if ($count > 0) return true;
 
@@ -114,16 +140,20 @@ namespace Modules\Install\Utils {
 
 			if (!(DB::insert(TABLE_MENU, $menu, true) && DB::getLast()->status)) return false;
 
-			self::fillRelationsTable(TABLE_MENU_RELATIONS, 3);
+			self::fillRelationsTable(TABLE_MENU_RELATIONS, count($menu));
 
 			# ------------------------
 
 			return true;
 		}
 
-		# Create tables
+		/**
+		 * Create the tables
+		 *
+		 * @return bool : true if all of the tables were successfully created, otherwise false
+		 */
 
-		public static function create() {
+		public static function create() : bool {
 
 			$definitions = self::getDefinitions(false);
 
@@ -134,9 +164,13 @@ namespace Modules\Install\Utils {
 			return true;
 		}
 
-		# Remove tables
+		/**
+		 * Remove the tables
+		 *
+		 * @return bool : true if all of the tables were successfully removed, otherwise false
+		 */
 
-		public static function remove() {
+		public static function remove() : bool {
 
 			$definitions = self::getDefinitions(true);
 
@@ -147,9 +181,13 @@ namespace Modules\Install\Utils {
 			return true;
 		}
 
-		# Fill tables
+		/**
+		 * Fill in the tables with the default values
+		 *
+		 * @return bool : true if all of the tables were successfully filled in, otherwise false
+		 */
 
-		public static function fill() {
+		public static function fill() : bool {
 
 			return (self::fillPagesTable() && self::fillMenuTable());
 		}
