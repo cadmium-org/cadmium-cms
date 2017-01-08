@@ -32,7 +32,7 @@ require_once(DIR_ENGINE . 'System/Main.php');
 
 # Register classes autoloader
 
-spl_autoload_register(function($class_name) {
+spl_autoload_register(function ($class_name) {
 
 	$path = explode('\\', $class_name); $last = $path[count($path) - 1];
 

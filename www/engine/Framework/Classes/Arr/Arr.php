@@ -67,7 +67,7 @@ namespace {
 
 		public static function sortby(array $array, $sub_key, bool $descending = false) : array {
 
-			$select_key = function($element) use($sub_key) { return ($element[$sub_key] ?? false); };
+			$select_key = function ($element) use ($sub_key) { return ($element[$sub_key] ?? false); };
 
 			$sorted = []; $column = array_map($select_key, $array);
 
