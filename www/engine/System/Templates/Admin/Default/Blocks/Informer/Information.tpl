@@ -94,7 +94,7 @@
 
 				<tr>
 
-					<th colspan="2">%INFORMATION_GROUP_EXTERNAL%</th>
+					<th colspan="2">%INFORMATION_GROUP_THIRD_PARTY%</th>
 
 				</tr>
 

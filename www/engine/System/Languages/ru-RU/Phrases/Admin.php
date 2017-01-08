@@ -299,7 +299,7 @@ return [
 
 	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
 	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+	'INFORMATION_GROUP_THIRD_PARTY'             => 'Стороннее ПО',
 
 	'INFORMATION_GROUP_ERRORS'                  => 'Ошибки',
 	'INFORMATION_GROUP_FILE_UPLOADS'            => 'Загрузка файлов',

@@ -37,7 +37,7 @@ namespace Modules\Informer\Handler {
 
 			$contents->debug_mode_value     = Language::get('INFORMATION_VALUE_DEBUG_MODE_' . (DEBUG_MODE ? 'ON' : 'OFF'));
 
-			# Set external entries
+			# Set third-party entries
 
 			$contents->jquery_version       = JQUERY_VERSION;
 

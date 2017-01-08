@@ -299,7 +299,7 @@ return [
 
 	'INFORMATION_GROUP_SERVER'                  => 'Server',
 	'INFORMATION_GROUP_SYSTEM'                  => 'System',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Third-party software',
+	'INFORMATION_GROUP_THIRD_PARTY'             => 'Third-party software',
 
 	'INFORMATION_GROUP_ERRORS'                  => 'Errors',
 	'INFORMATION_GROUP_FILE_UPLOADS'            => 'File uploads',

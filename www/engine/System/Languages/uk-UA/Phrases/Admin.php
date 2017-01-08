@@ -299,7 +299,7 @@ return [
 
 	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
 	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннє ПЗ',
+	'INFORMATION_GROUP_THIRD_PARTY'             => 'Стороннє ПЗ',
 
 	'INFORMATION_GROUP_ERRORS'                  => 'Помилки',
 	'INFORMATION_GROUP_FILE_UPLOADS'            => 'Завантеження файлів',
