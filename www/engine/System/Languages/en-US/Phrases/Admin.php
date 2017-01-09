@@ -267,25 +267,28 @@ return [
 
 	# Settings
 
+	'SETTINGS_TAB_COMMON'                       => 'Common',
+
 	'SETTINGS_GROUP_SITE'                       => 'Site settings',
 	'SETTINGS_GROUP_SYSTEM'                     => 'System settings',
 	'SETTINGS_GROUP_ADMIN'                      => 'Admin panel settings',
 
-	'SETTINGS_FIELD_SITE_TITLE'                 => 'Site title',
-	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Site slogan',
-	'SETTINGS_FIELD_SITE_STATUS'                => 'Site status',
+	'SETTINGS_FIELD_SITE_TITLE'                 => 'Title',
+	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Slogan',
+	'SETTINGS_FIELD_SITE_STATUS'                => 'Status',
 	'SETTINGS_FIELD_SITE_DESCRIPTION'           => 'Description',
 	'SETTINGS_FIELD_SITE_KEYWORDS'              => 'Keywords',
 
 	'SETTINGS_FIELD_SYSTEM_URL'                 => 'Root URL',
+	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'E-mail',
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Timezone',
-	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'System e-mail',
-
-	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Invalid URL format',
-	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Invalid email format',
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Default language',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Default template',
+	'SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION'      => 'Ajax navigation',
+
+	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Invalid URL format',
+	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Invalid e-mail format',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Error saving settings',
 

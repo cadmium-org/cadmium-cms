@@ -1,42 +1,45 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Settings
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Settings\Utils {
 
 	use Modules\Extend, Utils\Range, Utils\Validate, Geo\Timezone, Request;
 
 	class Dataset extends \Dataset {
 
-		# Get system url
+		/**
+		 * Get default system url
+		 */
 
-		private function getSystemUrl() {
+		private function getSystemUrl() : string {
 
-			if (!empty($_SERVER['HTTP_HOST'])) return ((Request::isSecure() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']);
+			if (empty($_SERVER['HTTP_HOST'])) return CONFIG_SYSTEM_URL_DEFAULT;
+
+			return ((Request::isSecure() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']);
 		}
 
-		# Get system email
+		/**
+		 * Get default system email
+		 */
 
-		private function getSystemEmail() {
+		private function getSystemEmail() : string {
 
-			if (!empty($_SERVER['HTTP_HOST'])) return ('admin@' . $_SERVER['HTTP_HOST']);
+			if (empty($_SERVER['HTTP_HOST'])) return CONFIG_SYSTEM_EMAIL_DEFAULT;
+
+			return ('admin@' . $_SERVER['HTTP_HOST']);
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
-
-			# Admin language
-
-			$this->addParam('admin_language', CONFIG_ADMIN_LANGUAGE_DEFAULT, function (string $name) {
-
-				return ((false !== ($name = Extend\Languages::validate($name))) ? $name : null);
-			});
-
-			# Admin template
-
-			$this->addParam('admin_template', CONFIG_ADMIN_TEMPLATE_DEFAULT, function (string $name) {
-
-				return ((false !== ($name = Extend\Templates::validate($name))) ? $name : null);
-			});
 
 			# Site language
 
@@ -68,21 +71,21 @@ namespace Modules\Settings\Utils {
 
 			# Site status
 
-			$this->addParam('site_status', STATUS_ONLINE, function (string $status) {
+			$this->addParam('site_status', STATUS_ONLINE, function (int $status) {
 
 				return ((false !== ($status = Range\Status::validate($status))) ? $status : null);
 			});
 
 			# Site description
 
-			$this->addParam('site_description', '', function (string $description) {
+			$this->addParam('site_description', CONFIG_SITE_DESCRIPTION_DEFAULT, function (string $description) {
 
 				return $description;
 			});
 
 			# Site keywords
 
-			$this->addParam('site_keywords', '', function (string $keywords) {
+			$this->addParam('site_keywords', CONFIG_SITE_KEYWORDS_DEFAULT, function (string $keywords) {
 
 				return $keywords;
 			});
@@ -106,6 +109,27 @@ namespace Modules\Settings\Utils {
 			$this->addParam('system_timezone', CONFIG_SYSTEM_TIMEZONE_DEFAULT, function (string $timezone) {
 
 				return ((false !== ($timezone = Timezone::validate($timezone))) ? $timezone : null);
+			});
+
+			# Admin language
+
+			$this->addParam('admin_language', CONFIG_ADMIN_LANGUAGE_DEFAULT, function (string $name) {
+
+				return ((false !== ($name = Extend\Languages::validate($name))) ? $name : null);
+			});
+
+			# Admin template
+
+			$this->addParam('admin_template', CONFIG_ADMIN_TEMPLATE_DEFAULT, function (string $name) {
+
+				return ((false !== ($name = Extend\Templates::validate($name))) ? $name : null);
+			});
+
+			# Admin ajax navigation
+
+			$this->addParam('admin_ajax_navigation', true, function (bool $active) {
+
+				return $active;
 			});
 		}
 	}

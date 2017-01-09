@@ -267,25 +267,28 @@ return [
 
 	# Settings
 
+	'SETTINGS_TAB_COMMON'                       => 'Загальні',
+
 	'SETTINGS_GROUP_SITE'                       => 'Налаштування сайта',
 	'SETTINGS_GROUP_SYSTEM'                     => 'Налаштування системи',
 	'SETTINGS_GROUP_ADMIN'                      => 'Налаштування панелі керування',
 
-	'SETTINGS_FIELD_SITE_TITLE'                 => 'Назва сайта',
-	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган сайта',
-	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус сайта',
+	'SETTINGS_FIELD_SITE_TITLE'                 => 'Назва',
+	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган',
+	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус',
 	'SETTINGS_FIELD_SITE_DESCRIPTION'           => 'Опис',
 	'SETTINGS_FIELD_SITE_KEYWORDS'              => 'Ключові слова',
 
 	'SETTINGS_FIELD_SYSTEM_URL'                 => 'Кореневий URL',
+	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'E-mail',
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Часова зона',
-	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'Системний e-mail',
-
-	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Невірний формат URL',
-	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Невірний формат e-mail',
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Мова за замовчуванням',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон за замовчуванням',
+	'SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION'      => 'Ajax-навігація',
+
+	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Невірний формат URL',
+	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Невірний формат e-mail',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Помилка збереження налаштувань',
 

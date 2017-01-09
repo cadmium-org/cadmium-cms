@@ -1,18 +1,27 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Settings
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Settings\Handler {
 
-	use Frames, Modules\Settings, Utils\Popup, Utils\View, Language, Request;
+	use Frames, Modules\Settings, Utils\Popup, Utils\View, Language, Request, Template;
 
-	class General extends Frames\Admin\Area\Authorized {
+	class General extends Frames\Admin\Area\Panel {
 
 		protected $title = 'TITLE_SYSTEM_SETTINGS';
 
 		private $form = null;
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get('Blocks/Settings/General');
 
@@ -25,9 +34,11 @@ namespace Modules\Settings\Handler {
 			return $contents;
 		}
 
-		# Handle request
+		/**
+		 * Handle a request
+		 */
 
-		protected function handle() {
+		protected function handle() : Template\Block {
 
 			# Create form
 

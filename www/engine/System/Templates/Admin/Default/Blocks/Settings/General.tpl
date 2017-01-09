@@ -1,3 +1,9 @@
+<div class="ui menu">
+
+	<a class="active item">%SETTINGS_TAB_COMMON%</a>
+
+</div>
+
 <form class="ui form segment" method="post" action="$install_path$/admin/system/settings" autocomplete="off">
 
 	<div class="ui two column stackable grid">
@@ -91,6 +97,18 @@
 				<label for="settings-admin-template">%SETTINGS_FIELD_ADMIN_TEMPLATE%</label>
 
 				{ block:field_settings_admin_template / }
+
+			</div>
+
+			<div class="field">
+
+				<div class="ui slider checkbox">
+
+					{ block:field_settings_admin_ajax_navigation / }
+
+					<label for="settings-admin-ajax-navigation">%SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION%</label>
+
+				</div>
 
 			</div>
 

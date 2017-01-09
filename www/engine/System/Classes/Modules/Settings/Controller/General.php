@@ -1,12 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Settings
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Settings\Controller {
 
 	use Modules\Settings;
 
 	class General {
 
-		# Invoker
+		/**
+		 * Invoker
+		 *
+		 * @return string|array|true : an error code, or an array of type ['param name', 'error code'], or true on success
+		 */
 
 		public function __invoke(array $post) {
 

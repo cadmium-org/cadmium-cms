@@ -267,25 +267,28 @@ return [
 
 	# Settings
 
+	'SETTINGS_TAB_COMMON'                       => 'Общие',
+
 	'SETTINGS_GROUP_SITE'                       => 'Настройки сайта',
 	'SETTINGS_GROUP_SYSTEM'                     => 'Настройки системы',
 	'SETTINGS_GROUP_ADMIN'                      => 'Настройки панели управления',
 
-	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название сайта',
-	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган сайта',
-	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус сайта',
+	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название',
+	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган',
+	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус',
 	'SETTINGS_FIELD_SITE_DESCRIPTION'           => 'Описание',
 	'SETTINGS_FIELD_SITE_KEYWORDS'              => 'Ключевые слова',
 
 	'SETTINGS_FIELD_SYSTEM_URL'                 => 'Корневой URL',
+	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'E-mail',
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Часовая зона',
-	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'Системный e-mail',
-
-	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
-	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Язык по умолчанию',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон по умолчанию',
+	'SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION'      => 'Ajax-навигация',
+
+	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
+	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Ошибка сохранения настроек',
 

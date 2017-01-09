@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Settings
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Settings\Form {
 
 	use Modules\Extend, Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
@@ -8,7 +15,9 @@ namespace Modules\Settings\Form {
 
 		protected $name = 'settings';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
@@ -71,6 +80,10 @@ namespace Modules\Settings\Form {
 			$templates = Extend\Templates::loader(SECTION_ADMIN);
 
 			$this->addSelect('admin_template', $templates->active(), $templates->items(true));
+
+			# Admin ajax navigation
+
+			$this->addCheckbox('admin_ajax_navigation', Settings::get('admin_ajax_navigation'));
 		}
 	}
 }
