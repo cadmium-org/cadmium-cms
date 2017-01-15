@@ -15,6 +15,7 @@ return [
 	'WIDGET_ERROR_REMOVE'                           => 'Ошибка удаления виджета',
 
 	'WIDGET_ERROR_NAME_INVALID'                     => 'Неверный формат ключа',
+	'WIDGET_ERROR_NAME_RESERVED'                    => 'Ключ виджета зерезервирован и не может быть использован',
 	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Виджет с таким ключом уже существует',
 
 	# Success messages

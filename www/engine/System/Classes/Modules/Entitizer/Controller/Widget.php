@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Entitizer, Utils\Validate;
+	use Modules\Entitizer, Utils\Validate, Template;
 
 	class Widget {
 
@@ -30,6 +30,10 @@ namespace Modules\Entitizer\Controller {
 			# Validate name
 
 			if (false === ($name = Validate::templateComponentName($name))) return ['name', 'WIDGET_ERROR_NAME_INVALID'];
+
+			# Check name reserved
+
+			if (false !== Template::getWidget($name)) return ['name', 'WIDGET_ERROR_NAME_RESERVED'];
 
 			# Check name exists
 

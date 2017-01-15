@@ -15,6 +15,7 @@ return [
 	'WIDGET_ERROR_REMOVE'                           => 'Error removing widget',
 
 	'WIDGET_ERROR_NAME_INVALID'                     => 'Invalid key',
+	'WIDGET_ERROR_NAME_RESERVED'                    => 'Widget key is reserved and can not be used',
 	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Widget key is already in use',
 
 	# Success messages

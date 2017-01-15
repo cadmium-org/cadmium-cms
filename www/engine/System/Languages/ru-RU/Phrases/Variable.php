@@ -15,6 +15,7 @@ return [
 	'VARIABLE_ERROR_REMOVE'                         => 'Ошибка удаления переменной',
 
 	'VARIABLE_ERROR_NAME_INVALID'                   => 'Неверный формат ключа',
+	'VARIABLE_ERROR_NAME_RESERVED'                  => 'Ключ переменной зерезервирован и не может быть использован',
 	'VARIABLE_ERROR_NAME_DUPLICATE'                 => 'Переменная с таким ключом уже существует',
 
 	# Success messages
