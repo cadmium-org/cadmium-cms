@@ -21,6 +21,15 @@ namespace {
 		}
 
 		/**
+		 * Check whether this is a special ajax request
+		 */
+
+		public static function isSpecial(string $type) : bool {
+
+			return (self::isAjax() && ($_SERVER['HTTP_X_SPECIAL_REQUEST'] ?? null) === $type);
+		}
+
+		/**
 		 * Check whether this is a HTTPS request
 		 */
 
