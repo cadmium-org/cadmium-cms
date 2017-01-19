@@ -14,6 +14,15 @@ namespace Ajax {
 		private $data = [], $error = null, $status = true;
 
 		/**
+		 * Constructor
+		 */
+
+		public function __construct(array $data = []) {
+
+			$this->setArray($data);
+		}
+
+		/**
 		 * Set a param
 		 *
 		 * @return Ajax\Response : the current response object
@@ -22,6 +31,19 @@ namespace Ajax {
 		public function set(string $name, $value) : Response {
 
 			if (!in_array($name, ['error', 'status'], true)) $this->data[$name] = $value;
+
+			return $this;
+		}
+
+		/**
+		 * Set multiple params
+		 *
+		 * @return Ajax\Response : the current response object
+		 */
+
+		public function setArray(array $data) : Response {
+
+			foreach ($data as $name => $value) $this->set($name, $value);
 
 			return $this;
 		}

@@ -15,9 +15,9 @@ namespace {
 		 * Create a new response object
 		 */
 
-		public static function createResponse() : Ajax\Response {
+		public static function createResponse(array $data = []) : Ajax\Response {
 
-			return new Ajax\Response;
+			return new Ajax\Response($data);
 		}
 
 		/**
