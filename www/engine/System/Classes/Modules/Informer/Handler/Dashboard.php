@@ -60,7 +60,7 @@ namespace Modules\Informer\Handler {
 
 			# Check if settings file is loaded
 
-			if (!Settings::loaded()) Messages::set('info', Language::get('DASHBOARD_MESSAGE_SETTINGS_FILE'));
+			if (!Settings::areLoaded()) Messages::set('info', Language::get('DASHBOARD_MESSAGE_SETTINGS_FILE'));
 
 			# ------------------------
 

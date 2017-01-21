@@ -28,7 +28,7 @@ namespace {
 
 			# Get handler class
 
-			$checked = (Install::status() && Validate::boolean(Request::get('checked')));
+			$checked = (Install::checkRequirements() && Validate::boolean(Request::get('checked')));
 
 			$class = ('Modules\Install\Handler\\' . (!$checked ? 'Check' : 'Database'));
 

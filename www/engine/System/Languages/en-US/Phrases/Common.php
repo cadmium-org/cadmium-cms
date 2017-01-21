@@ -46,8 +46,8 @@ return [
 
 	# Sections
 
-	'SECTION_ADMIN'                             => 'Admin panel',
 	'SECTION_SITE'                              => 'Site',
+	'SECTION_ADMIN'                             => 'Admin panel',
 
 	# Forms
 

@@ -46,8 +46,8 @@ return [
 
 	# Sections
 
-	'SECTION_ADMIN'                             => 'Панель керування',
 	'SECTION_SITE'                              => 'Сайт',
+	'SECTION_ADMIN'                             => 'Панель керування',
 
 	# Forms
 

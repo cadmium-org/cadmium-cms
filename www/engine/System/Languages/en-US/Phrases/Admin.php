@@ -11,6 +11,9 @@ return [
 
 	# Titles
 
+	'TITLE_INSTALL_CHECK'                       => 'Step 1. Checking requirements',
+	'TITLE_INSTALL_DATABASE'                    => 'Step 2. MySQL settings',
+
 	'TITLE_AUTH_LOGIN'                          => 'Logging in',
 	'TITLE_AUTH_RESET'                          => 'Password reset',
 	'TITLE_AUTH_RECOVER'                        => 'Password recovery',

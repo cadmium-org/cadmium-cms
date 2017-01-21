@@ -11,6 +11,9 @@ return [
 
 	# Titles
 
+	'TITLE_INSTALL_CHECK'                       => 'Шаг 1. Проверка требований',
+	'TITLE_INSTALL_DATABASE'                    => 'Шаг 2. Настройки MySQL',
+
 	'TITLE_AUTH_LOGIN'                          => 'Вход',
 	'TITLE_AUTH_RESET'                          => 'Восстановление пароля',
 	'TITLE_AUTH_RECOVER'                        => 'Изменение пароля',

@@ -10,15 +10,15 @@ namespace Modules\Extend\Common {
 
 		protected static $loader_class = 'Modules\Extend\Loader\Templates', $exception_class = 'Exception\Template';
 
-		protected static $root_dir = [SECTION_ADMIN => DIR_SYSTEM_TEMPLATES . 'Admin/', SECTION_SITE => DIR_SYSTEM_TEMPLATES . 'Site/'];
+		protected static $root_dir = [SECTION_SITE => DIR_SYSTEM_TEMPLATES . 'Site/', SECTION_ADMIN => DIR_SYSTEM_TEMPLATES . 'Admin/'];
 
 		protected static $schema_prototype = 'Prototype\Template', $regex_name = REGEX_TEMPLATE_NAME;
 
-		protected static $selectable = [SECTION_ADMIN => false, SECTION_SITE => false], $name = 'template';
+		protected static $selectable = [SECTION_SITE => false, SECTION_ADMIN => false], $name = 'template';
 
-		protected static $default = [SECTION_ADMIN => CONFIG_ADMIN_TEMPLATE_DEFAULT, SECTION_SITE => CONFIG_SITE_TEMPLATE_DEFAULT];
+		protected static $default = [SECTION_SITE => CONFIG_SITE_TEMPLATE_DEFAULT, SECTION_ADMIN => CONFIG_ADMIN_TEMPLATE_DEFAULT];
 
-		protected static $param = [SECTION_ADMIN => 'admin_template', SECTION_SITE => 'site_template'];
+		protected static $param = [SECTION_SITE => 'site_template', SECTION_ADMIN => 'admin_template'];
 
 		protected static $cookie_expires = CONFIG_TEMPLATE_COOKIE_EXPIRES;
 

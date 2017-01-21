@@ -9,11 +9,6 @@
 
 return [
 
-	# Titles
-
-	'TITLE_INSTALL_CHECK'                       => 'Крок 1. Перевірка вимог',
-	'TITLE_INSTALL_DATABASE'                    => 'Крок 2. Налаштування MySQL',
-
 	# Requirements
 
 	'INSTALL_PHP_VERSION'                       => 'Версія PHP',
