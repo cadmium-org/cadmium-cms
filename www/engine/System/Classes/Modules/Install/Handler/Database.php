@@ -13,7 +13,7 @@ namespace Modules\Install\Handler {
 
 	class Database extends Frames\Admin\Area\Install {
 
-		protected $title = 'TITLE_INSTALL_DATABASE';
+		protected $_title = 'TITLE_INSTALL_DATABASE';
 
 		private $form = null;
 
@@ -35,7 +35,7 @@ namespace Modules\Install\Handler {
 		}
 
 		/**
-		 * Handle a request
+		 * Handle the request
 		 */
 
 		protected function handle() : Template\Block {

@@ -13,7 +13,7 @@ namespace Modules\Settings\Handler {
 
 	class General extends Frames\Admin\Area\Panel {
 
-		protected $title = 'TITLE_SYSTEM_SETTINGS';
+		protected $_title = 'TITLE_SYSTEM_SETTINGS';
 
 		private $form = null;
 
@@ -35,7 +35,7 @@ namespace Modules\Settings\Handler {
 		}
 
 		/**
-		 * Handle a request
+		 * Handle the request
 		 */
 
 		protected function handle() : Template\Block {

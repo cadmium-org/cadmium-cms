@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\User;
 
-		protected $title = 'TITLE_SYSTEM_USERS';
+		protected $_title = 'TITLE_SYSTEM_USERS';
 
 		# Lister configuration
 

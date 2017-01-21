@@ -48,11 +48,11 @@ namespace Modules\Extend\Utils\Handler {
 
 		# Handle common request
 
-		public function handle() {
+		public function handle(bool $ajax = false) {
 
 			$this->loader = new static::$loader_class(Request::get('list'));
 
-			if (Request::isAjax()) return $this->handleAjax();
+			if ($ajax) return $this->handleAjax();
 
 			# ------------------------
 

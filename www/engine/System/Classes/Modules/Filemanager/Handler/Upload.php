@@ -4,7 +4,7 @@ namespace Modules\Filemanager\Handler {
 
 	use Frames, Utils\Uploader, Ajax, Language, Request;
 
-	class Upload extends Frames\Admin\Area\Authorized {
+	class Upload extends Frames\Admin\Area\Panel {
 
 		# Handle request
 

@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * @package Cadmium\System\Frames\Admin
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Frames\Admin {
 
-	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Utils\Messages, Utils\Popup, Utils\View;
-	use DB, Debug, Language, Template;
+	use Frames, Frames\Status, Modules\Auth, Ajax, Request, Template;
 
 	abstract class Section extends Frames\Section {
 
@@ -17,93 +23,60 @@ namespace Frames\Admin {
 
 		# Page settings
 
-		protected $title = '', $layout = 'Page';
+		protected $_title = '';
 
-		# Get layout
+		/**
+		 * Handle a form area request
+		 */
 
-		private function getLayout(Template\Block $contents) {
+		private function handleFormArea() {
 
-			$layout = View::get('Layouts/' . $this->layout);
+			# Check auth
 
-			# Set menu and user
+			if (($this instanceof Area\Auth) && Auth::check()) Request::redirect(INSTALL_PATH . '/admin');
 
-			if (Auth::check()) {
+			# Handle request
 
-				$layout->menu = View::get('Blocks/Utils/Menu');
+			if (Template::isBlock($result = $this->handle())) return (new View\Form($this->_title))->display($result);
 
-				$layout->getBlock('user')->gravatar = Auth::user()->gravatar;
+			# ------------------------
 
-				$layout->getBlock('user')->name = Auth::user()->name;
+			return Status::displayError404();
+		}
 
-				$layout->getBlock('user')->id = Auth::user()->id;
+		/**
+		 * Handle a panel area request
+		 */
+
+		private function handlePanelArea() {
+
+			# Check auth
+
+			if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
+
+				Request::redirect(INSTALL_PATH . '/admin/login');
 			}
 
-			# Set title
+			# Handle request
 
-			$layout->title = Language::get($this->title);
+			$request = (!Request::isSpecial('navigate') ? 'display' : 'navigate');
 
-			# Set messages
+			$result = $this->handle(Request::isAjax() && ($request === 'display'));
 
-			$layout->messages = Messages::block();
+			if (Template::isBlock($result)) return (new View\Panel($this->_title))->$request($result);
 
-			# Set contents
-
-			$layout->contents = $contents;
-
-			# Set personalizer
-
-			$layout->getBlock('language')->country = Extend\Languages::data('country');
-
-			$layout->getBlock('language')->title = Extend\Languages::data('title');
-
-			# Set copyright
-
-			$layout->cadmium_home       = CADMIUM_HOME;
-			$layout->cadmium_copy       = CADMIUM_COPY;
-			$layout->cadmium_name       = CADMIUM_NAME;
-			$layout->cadmium_version    = CADMIUM_VERSION;
-
-			# Set popup
-
-			$layout->popup = Popup::block();
-
-			# Set report
-
-			$layout->getBlock('report')->script_time = Debug::getTime();
-
-			$layout->getBlock('report')->db_time = DB::getTime();
+			if (Ajax::isResponse($result)) return Ajax::output($result);
 
 			# ------------------------
 
-			return $layout;
+			return Status::displayError404();
 		}
 
-		# Display page
+		/**
+		 * The branch method for the admin section
+		 */
 
-		protected function displayPage(Template\Block $contents, int $status = STATUS_CODE_200) {
-
-			$page = View::get('Main/' . $this->layout);
-
-			# Set language
-
-			$page->language = Extend\Languages::data('iso');
-
-			# Set title
-
-			$page->title = ((('' !== $this->title) ? (Language::get($this->title) . ' | ') : '') . CADMIUM_NAME);
-
-			# Set layout
-
-			$page->layout = $this->getLayout($contents);
-
-			# ------------------------
-
-			Template::output($page, $status);
-		}
-
-		# Admin main method
-
-		protected function section() {
+		protected function _section() {
 
 			# Check for restricted access
 
@@ -111,12 +84,18 @@ namespace Frames\Admin {
 
 				$ips = preg_split('/ +/', CONFIG_ADMIN_IP, -1, PREG_SPLIT_NO_EMPTY);
 
-				if (!in_array(REQUEST_CLIENT_IP, $ips, true)) return Status::error404();
+				if (!in_array(REQUEST_CLIENT_IP, $ips, true)) return Status::displayError404();
 			}
+
+			# Handle request
+
+			if (($this instanceof Area\Auth) || ($this instanceof Area\Install)) return $this->handleFormArea();
+
+			if ($this instanceof Area\Panel) return $this->handlePanelArea();
 
 			# ------------------------
 
-			$this->area();
+			return Status::displayError404();
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace Modules\Profile\Handler\Auth {
 
 	class Login extends Frames\Site\Area\Auth {
 
-		protected $title = 'TITLE_PROFILE_AUTH_LOGIN';
+		protected $_title = 'TITLE_PROFILE_AUTH_LOGIN';
 
 		# Handle request
 

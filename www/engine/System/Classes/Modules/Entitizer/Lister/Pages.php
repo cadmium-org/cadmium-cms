@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Page;
 
-		protected $title = 'TITLE_CONTENT_PAGES';
+		protected $_title = 'TITLE_CONTENT_PAGES';
 
 		# Lister configuration
 

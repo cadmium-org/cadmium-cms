@@ -13,7 +13,7 @@ namespace Modules\Install\Handler {
 
 	class Check extends Frames\Admin\Area\Install {
 
-		protected $title = 'TITLE_INSTALL_CHECK';
+		protected $_title = 'TITLE_INSTALL_CHECK';
 
 		private $languages = null;
 
@@ -73,7 +73,7 @@ namespace Modules\Install\Handler {
 		}
 
 		/**
-		 * Handle a request
+		 * Handle the request
 		 */
 
 		protected function handle() : Template\Block {

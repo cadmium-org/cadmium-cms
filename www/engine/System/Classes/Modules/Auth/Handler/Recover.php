@@ -6,7 +6,7 @@ namespace Modules\Auth\Handler {
 
 	class Recover extends Frames\Admin\Area\Auth {
 
-		protected $title = 'TITLE_AUTH_RECOVER';
+		protected $_title = 'TITLE_AUTH_RECOVER';
 
 		# Handle request
 

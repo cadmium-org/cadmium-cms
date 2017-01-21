@@ -6,7 +6,7 @@ namespace Modules\Entitizer\Handler\Create {
 
 	class User extends Entitizer\Handler\Edit\User {
 
-		protected $title = 'TITLE_SYSTEM_USERS_CREATE';
+		protected $_title = 'TITLE_SYSTEM_USERS_CREATE';
 
 		protected $create = true;
 	}

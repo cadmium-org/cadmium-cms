@@ -4,7 +4,7 @@ namespace Modules\Extend\Utils {
 
 	use Frames, Utils\View;
 
-	abstract class Handler extends Frames\Admin\Area\Authorized {
+	abstract class Handler extends Frames\Admin\Area\Panel {
 
 		protected $loader = null;
 

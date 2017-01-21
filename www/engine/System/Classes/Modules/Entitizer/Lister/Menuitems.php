@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Menuitem;
 
-		protected $title = 'TITLE_CONTENT_MENUITEMS';
+		protected $_title = 'TITLE_CONTENT_MENUITEMS';
 
 		# Lister configuration
 

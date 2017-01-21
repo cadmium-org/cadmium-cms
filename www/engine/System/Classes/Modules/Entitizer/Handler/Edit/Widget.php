@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		use Entitizer\Common\Widget;
 
-		protected $title = 'TITLE_CONTENT_WIDGETS_EDIT';
+		protected $_title = 'TITLE_CONTENT_WIDGETS_EDIT';
 
 		# Handler configuration
 

@@ -88,7 +88,7 @@
 
 		<div class="left aligned column">
 
-			$copyright$ &copy; <a href="$index_page$">$site_title$</a>
+			$current_year$ &copy; <a href="$index_page$">$site_title$</a>
 
 		</div>
 

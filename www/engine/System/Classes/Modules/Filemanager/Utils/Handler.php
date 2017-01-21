@@ -4,7 +4,7 @@ namespace Modules\Filemanager\Utils {
 
 	use Frames, Modules\Filemanager, Utils\Popup, Utils\View, Ajax, Language, Request;
 
-	abstract class Handler extends Frames\Admin\Area\Authorized {
+	abstract class Handler extends Frames\Admin\Area\Panel {
 
 		protected $parent = null, $entity = null, $form = null;
 
@@ -66,7 +66,7 @@ namespace Modules\Filemanager\Utils {
 
 		# Handle request
 
-		public function handle() {
+		public function handle(bool $ajax = false) {
 
 			# Create parent
 
@@ -78,7 +78,7 @@ namespace Modules\Filemanager\Utils {
 
 			# Handle ajax request
 
-			if (Request::isAjax()) return $this->handleAjax();
+			if ($ajax) return $this->handleAjax();
 
 			# Init entity
 

@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Variable;
 
-		protected $title = 'TITLE_CONTENT_VARIABLES';
+		protected $_title = 'TITLE_CONTENT_VARIABLES';
 
 		# Lister configuration
 

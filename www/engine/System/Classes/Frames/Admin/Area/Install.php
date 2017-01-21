@@ -1,24 +1,15 @@
 <?php
 
+/**
+ * @package Cadmium\System\Frames\Admin
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Frames\Admin\Area {
 
-	use Frames, Frames\Status, Template;
+	use Frames;
 
-	abstract class Install extends Frames\Admin\Section {
-
-		protected $layout = 'Form';
-
-		# Install area main method
-
-		protected function area() {
-
-			# Handle request
-
-			if (Template::isBlock($result = $this->handle())) return $this->displayPage($result, STATUS_CODE_200);
-
-			# ------------------------
-
-			return Status::error404();
-		}
-	}
+	abstract class Install extends Frames\Admin\Section {}
 }

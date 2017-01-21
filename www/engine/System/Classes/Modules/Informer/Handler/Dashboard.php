@@ -13,7 +13,7 @@ namespace Modules\Informer\Handler {
 
 	class Dashboard extends Frames\Admin\Area\Panel {
 
-		protected $title = 'TITLE_DASHBOARD';
+		protected $_title = 'TITLE_DASHBOARD';
 
 		/**
 		 * Get the contents block
@@ -45,7 +45,7 @@ namespace Modules\Informer\Handler {
 		}
 
 		/**
-		 * Handle a request
+		 * Handle the request
 		 */
 
 		protected function handle() : Template\Block {

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Page
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules {
 
 	use Frames, Utils\SEO, Utils\View, Template;
@@ -8,9 +15,11 @@ namespace Modules {
 
 		private $page = null, $path = [];
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get('Blocks/Page');
 
@@ -29,7 +38,11 @@ namespace Modules {
 			return $contents;
 		}
 
-		# Handle request
+		/**
+		 * Handle the request
+		 *
+		 * @return Template\Block|false : a block object on success or false if page was not found
+		 */
 
 		protected function handle() {
 
@@ -39,7 +52,7 @@ namespace Modules {
 
 			# Init page by requested url
 
-			$slug = $this->url->getSlug();
+			$slug = $this->_url->getSlug();
 
 			if ('' !== $slug) $this->page->initBySlug($slug); else $this->page->init(1);
 
@@ -53,7 +66,7 @@ namespace Modules {
 
 			# Set data
 
-			if ($this->page->id !== 1) SEO::title($this->page->title); else $this->layout = 'Index';
+			if ($this->page->id !== 1) SEO::title($this->page->title); else $this->_layout = 'Index';
 
 			SEO::description        ($this->page->description);
 			SEO::keywords           ($this->page->keywords);

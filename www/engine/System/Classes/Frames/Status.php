@@ -1,47 +1,62 @@
 <?php
 
+/**
+ * @package Cadmium\System\Frames
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Frames {
 
-	use Modules\Extend, Modules\Settings, Utils\View, Date, Language, Template;
+	use Modules\Extend, Date, Language, Template;
 
-	abstract class Status {
+	abstract class Status extends \Utils\View {
 
-		# Display status screen
+		/**
+		 * Display a status screen
+		 */
 
-		private static function display(string $view, string $title, string $code) {
+		private static function display(string $view, string $title, int $status) {
 
-			$status = View::get($view);
+			$screen = self::get($view);
 
 			# Set data
 
-			$status->language = Extend\Languages::data('iso');
+			$screen->language = Extend\Languages::data('iso');
 
-			$status->title = Language::get($title);
+			$screen->title = Language::get($title);
 
-			$status->copyright = Date::getYear();
+			$screen->copyright = Date::getYear();
 
 			# ------------------------
 
-			Template::output($status, $code);
+			Template::output($screen, $status);
 		}
 
-		# Display 404 error
+		/**
+		 * Display the 404 error screen
+		 */
 
-		public static function error404() {
+		public static function displayError404() {
 
 			self::display('Main/Status/Error404', 'STATUS_TITLE_404', STATUS_CODE_404);
 		}
 
-		# Display maintenance screen
+		/**
+		 * Display the maintenance screen
+		 */
 
-		public static function maintenance() {
+		public static function displayMaintenance() {
 
 			self::display('Main/Status/Maintenance', 'STATUS_TITLE_MAINTENANCE', STATUS_CODE_503);
 		}
 
-		# Display update screen
+		/**
+		 * Display the update screen
+		 */
 
-		public static function update() {
+		public static function displayUpdate() {
 
 			self::display('Main/Status/Update', 'STATUS_TITLE_UPDATE', STATUS_CODE_503);
 		}

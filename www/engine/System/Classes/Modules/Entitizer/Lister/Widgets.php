@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Widget;
 
-		protected $title = 'TITLE_CONTENT_WIDGETS';
+		protected $_title = 'TITLE_CONTENT_WIDGETS';
 
 		# Lister configuration
 

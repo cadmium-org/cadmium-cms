@@ -5,9 +5,9 @@ namespace Modules\Filemanager\Handler {
 	use Frames, Modules\Filemanager, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
 	use Ajax, Arr, Explorer, Language, Number, Request, Template, Url;
 
-	class Lister extends Frames\Admin\Area\Authorized {
+	class Lister extends Frames\Admin\Area\Panel {
 
-		protected $title = 'TITLE_CONTENT_FILEMANAGER';
+		protected $_title = 'TITLE_CONTENT_FILEMANAGER';
 
 		private $parent = null, $form = null, $index = 0, $items = [];
 

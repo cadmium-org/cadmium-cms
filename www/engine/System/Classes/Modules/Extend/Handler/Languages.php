@@ -8,6 +8,6 @@ namespace Modules\Extend\Handler {
 
 		use Extend\Common\Languages;
 
-		protected $title = 'TITLE_EXTEND_LANGUAGES';
+		protected $_title = 'TITLE_EXTEND_LANGUAGES';
 	}
 }

@@ -4,7 +4,7 @@ namespace Modules\Entitizer\Utils {
 
 	use Frames, Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
 
-	abstract class Lister extends Frames\Admin\Area\Authorized {
+	abstract class Lister extends Frames\Admin\Area\Panel {
 
 		protected $index = 0, $parent = null, $entity = null, $path = [], $depth = 0;
 
@@ -158,9 +158,9 @@ namespace Modules\Entitizer\Utils {
 
 		# Handle common request
 
-		protected function handle() {
+		protected function handle(bool $ajax = false) {
 
-			if (Request::isAjax()) return $this->handleAjax();
+			if ($ajax) return $this->handleAjax();
 
 			$this->index = Number::forceInt(Request::get('index'), 1, 999999);
 

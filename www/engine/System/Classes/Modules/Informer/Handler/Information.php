@@ -13,7 +13,7 @@ namespace Modules\Informer\Handler {
 
 	class Information extends Frames\Admin\Area\Panel {
 
-		protected $title = 'TITLE_SYSTEM_INFORMATION';
+		protected $_title = 'TITLE_SYSTEM_INFORMATION';
 
 		/**
 		 * Set common entries
@@ -140,7 +140,7 @@ namespace Modules\Informer\Handler {
 		}
 
 		/**
-		 * Handle a request
+		 * Handle the request
 		 */
 
 		protected function handle() : Template\Block {

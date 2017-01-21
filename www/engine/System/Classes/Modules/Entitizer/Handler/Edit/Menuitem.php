@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		use Entitizer\Common\Menuitem;
 
-		protected $title = 'TITLE_CONTENT_MENUITEMS_EDIT';
+		protected $_title = 'TITLE_CONTENT_MENUITEMS_EDIT';
 
 		# Handler configuration
 
