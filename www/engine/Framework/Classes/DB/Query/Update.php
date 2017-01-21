@@ -25,7 +25,7 @@ namespace DB\Query {
 
 			$set = $this->getString($set, '^name = $value', ', ');
 
-			$condition = $this->getString($condition, '^name = $value', ' AND ');
+			$condition = $this->getString($condition, '^name IN $list', ' AND ');
 
 			# Build query
 

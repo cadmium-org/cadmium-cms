@@ -25,7 +25,7 @@ namespace DB\Query {
 
 			if ($column !== '*') $column = (($distinct ? 'DISTINCT ' : '') . $this->getName($column));
 
-			$condition = $this->getString($condition, '^name = $value', ' AND ');
+			$condition = $this->getString($condition, '^name IN $list', ' AND ');
 
 			# Build query
 

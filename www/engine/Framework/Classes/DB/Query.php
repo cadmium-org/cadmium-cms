@@ -32,6 +32,19 @@ namespace DB {
 		}
 
 		/**
+		 * Get a list of values
+		 */
+
+		protected function getList($value) : string {
+
+			if (!is_array($value)) $value = [$value];
+
+			$parser = function($value) { if (is_scalar($value)) return $this->getValue($value); };
+
+			return ('(' . implode(', ', array_filter(array_map($parser, $value))) . ')');
+		}
+
+		/**
 		 * Get a field sorting direction
 		 */
 
@@ -50,7 +63,9 @@ namespace DB {
 
 			$regexs = ['key' => '/\^([a-z]+)/', 'value' => '/\$([a-z]+)/']; $matches = ['key' => [], 'value' => []];
 
-			$parsers = ['name' => 'getName', 'value' => 'getValue', 'direction' => 'getDirection']; $output = []; $count = 0;
+			$parsers = ['name' => 'getName', 'value' => 'getValue', 'list' => 'getList', 'direction' => 'getDirection'];
+
+			$output = []; $count = 0;
 
 			# Parse pattern
 
@@ -58,15 +73,17 @@ namespace DB {
 
 			# Process replacements
 
-			foreach ($source as $key => $value) if (is_scalar($value)) {
+			foreach ($source as $key => $value) {
 
 				$output[$count] = $pattern; $item = &$output[$count++];
 
 				foreach ($matches as $name => $match) if (isset($match[1]) && isset($parsers[$match[1]])) {
 
-					$item = str_replace($match[0], [$this, $parsers[$match[1]]]($$name), $item);
+					try { $replace = [$this, $parsers[$match[1]]]($$name); } catch (\TypeError $e) { $replace = ''; }
+
+					$item = str_replace($match[0], $replace, $item);
 				}
-			};
+			}
 
 			# ------------------------
 
