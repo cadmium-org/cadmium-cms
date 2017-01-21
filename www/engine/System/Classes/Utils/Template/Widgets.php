@@ -12,9 +12,11 @@ namespace Utils\Template {
 
 			# Process selection
 
-			$selection = ['name', 'contents']; $condition = ['active' => 1]; $order = ['name' => 'ASC'];
+			if (0 === count($name = array_keys(Template::getWidgets()))) return;
 
-			if (!(DB::select(TABLE_WIDGETS, $selection, $condition, $order) && DB::getLast()->status)) return;
+			DB::select(TABLE_WIDGETS, ['name', 'contents'], ['active' => 1, 'name' => $name], ['name' => 'ASC']);
+
+			if (!(DB::getLast() && DB::getLast()->status)) return;
 
 			# Process results
 

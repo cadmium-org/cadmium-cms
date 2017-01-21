@@ -12,9 +12,9 @@ namespace Utils\Template {
 
 			# Process selection
 
-			$selection = ['name', 'value']; $order = ['name' => 'ASC'];
+			DB::select(TABLE_VARIABLES, ['name', 'value'], null, ['name' => 'ASC']);
 
-			if (!(DB::select(TABLE_VARIABLES, $selection, null, $order) && DB::getLast()->status)) return;
+			if (!(DB::getLast() && DB::getLast()->status)) return;
 
 			# Process results
 

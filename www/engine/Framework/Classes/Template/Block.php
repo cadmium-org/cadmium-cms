@@ -18,6 +18,15 @@ namespace Template {
 		private $blocks = [], $loops = [], $widgets = [], $variables = [], $phrases = [];
 
 		/**
+		 * Set an empty template widget if was not set before
+		 */
+
+		private function registerWidget(string $name) {
+
+			if (false === Template::getWidget($name)) Template::setWidget($name, new Block);
+		}
+
+		/**
 		 * Parse structures
 		 */
 
@@ -39,7 +48,7 @@ namespace Template {
 
 				else if ($type === 'for') $this->loops[$name] = new Loop($contents);
 
-				else if ($type === 'widget') $this->widgets[] = $name;
+				else if ($type === 'widget') $this->registerWidget($this->widgets[] = $name);
 			}
 		}
 
