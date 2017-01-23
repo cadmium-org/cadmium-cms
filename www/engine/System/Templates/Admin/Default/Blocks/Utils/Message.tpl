@@ -1,4 +1,4 @@
-<div class="ui $type$ message">
+<div class="ui $type$ message segment">
 
 	{ ! block:title }<div class="header">$text$</div>{ / block:title }
 

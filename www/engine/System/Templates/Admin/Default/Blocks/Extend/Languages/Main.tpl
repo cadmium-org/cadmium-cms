@@ -1,6 +1,6 @@
 <input type="hidden" id="languages-section" name="section" value="$section$" />
 
-<table class="ui unstackable table" id="languages-list">
+<table class="ui unstackable table segment" id="languages-list">
 
 	<tbody>
 

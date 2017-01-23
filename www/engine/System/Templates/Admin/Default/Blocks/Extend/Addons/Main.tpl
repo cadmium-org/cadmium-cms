@@ -1,4 +1,4 @@
-<table class="ui table" id="addons-list">
+<table class="ui table segment" id="addons-list">
 
 	<tbody>
 

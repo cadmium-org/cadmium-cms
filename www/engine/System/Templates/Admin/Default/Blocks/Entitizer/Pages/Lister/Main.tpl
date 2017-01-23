@@ -64,7 +64,7 @@
 
 { / block:parent }
 
-<table class="ui table" id="pages-list">
+<table class="ui table segment" id="pages-list">
 
 	<thead>
 

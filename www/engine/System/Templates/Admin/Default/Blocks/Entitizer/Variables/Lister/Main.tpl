@@ -4,7 +4,7 @@
 
 </div>
 
-<table class="ui table" id="variables-list">
+<table class="ui table segment" id="variables-list">
 
 	<thead>
 

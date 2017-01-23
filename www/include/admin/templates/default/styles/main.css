@@ -3,11 +3,19 @@
 
 @charset "UTF-8";
 
+body { position:absolute !important; width:100%; height:100%; top:0; left:0; }
+
 /* Condensed grid */
 
 .condensed.grid { padding:3rem 0 !important; }
 
 .condensed.grid .column { max-width:458px; }
+
+/* Progress */
+
+.progress { position:fixed !important; top:0; width:100%; z-index:201; margin:0 !important; border-radius:0 !important; }
+
+.progress .bar { height:0.15em !important; }
 
 /* Main menu */
 
@@ -24,13 +32,23 @@
     .main.menu .right.menu .user.item .name { display:none; }
 }
 
-/* Wrapper */
-
-.wrapper { margin:0 !important; padding-top:55px !important; }
-
 /* Segments */
 
 .segment { box-shadow:0 1px 2px 0 rgba(34, 36, 38, 0.08) !important; overflow:hidden; }
+
+/* Menus */
+
+.menu:not(.main) { box-shadow:0 1px 2px 0 rgba(34, 36, 38, 0.08) !important; }
+
+/* Messages */
+
+.info.message.segment { border:1px solid #A9D5DE !important; box-shadow:0 1px 2px 0 rgba(169, 213, 222, 0.24) !important; }
+
+.warning.message.segment { border:1px solid #C9BA9B !important; box-shadow:0 1px 2px 0 rgba(201, 186, 155, 0.24) !important; }
+
+.error.message.segment { border:1px solid #E0B4B4 !important; box-shadow:0 1px 2px 0 rgba(224, 180, 180, 0.24) !important; }
+
+.success.message.segment { border:1px solid #A3C293 !important; box-shadow:0 1px 2px 0 rgba(163, 194, 147, 0.24) !important; }
 
 /* Breadcrumbs */
 
@@ -44,12 +62,10 @@
 
 @media only screen and (max-width:767px) {
 
-	.uploader .column > * { width:100% }
+	.uploader .column > * { width:100%; }
 }
 
 /* Tables */
-
-.table { table-layout:fixed; box-shadow:0 1px 2px 0 rgba(34, 36, 8, 0.08) !important; }
 
 .table tr.inactive td { color:rgba(40, 40, 40, 0.3); }
 
@@ -73,6 +89,10 @@
 
 .form textarea { height:6em !important; min-height:6em !important; }
 
+/* Fixed button */
+
+.fixed.button { position:fixed !important; top:5.5rem; right:-0.5rem; padding-right:1.25em !important; z-index:1; }
+
 /* Captcha */
 
 #captcha { background-color:#FFF !important; }
@@ -90,12 +110,8 @@
 
 @media only screen and (max-width:479px) {
 
-	.copyright span { display:none; }
+	.copyright.button span { display:none; }
 }
-
-/* Fixed button */
-
-.fixed.button { position:fixed !important; top:5.5rem; right:-0.5rem; padding-right:1.25em !important; z-index:1; }
 
 /* Modals */
 
@@ -103,4 +119,4 @@
 
 .ui.modal .actions > .button { margin-left:0; }
 
-#modal-lister { top:0px; margin-top:3.5rem !important; }
+#modal-lister { top:0; margin-top:3.5rem !important; }

@@ -1,6 +1,6 @@
 <input type="hidden" id="templates-section" name="section" value="$section$" />
 
-<table class="ui unstackable table" id="templates-list">
+<table class="ui unstackable table segment" id="templates-list">
 
 	<tbody>
 
