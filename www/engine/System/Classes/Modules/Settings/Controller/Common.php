@@ -11,7 +11,7 @@ namespace Modules\Settings\Controller {
 
 	use Modules\Settings;
 
-	class General {
+	class Common {
 
 		/**
 		 * Invoker

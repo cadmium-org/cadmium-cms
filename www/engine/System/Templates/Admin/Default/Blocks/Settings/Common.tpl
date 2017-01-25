@@ -1,6 +1,6 @@
 <div class="ui menu">
 
-	<a class="active item">%SETTINGS_TAB_COMMON%</a>
+	<a class="active item" href="/admin/system/settings">%SETTINGS_TAB_COMMON%</a>
 
 </div>
 

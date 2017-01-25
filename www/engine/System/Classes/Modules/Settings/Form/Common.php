@@ -11,7 +11,7 @@ namespace Modules\Settings\Form {
 
 	use Modules\Extend, Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
 
-	class General extends Form {
+	class Common extends Form {
 
 		protected $name = 'settings';
 

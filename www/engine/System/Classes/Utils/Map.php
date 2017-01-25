@@ -31,7 +31,7 @@ namespace Utils {
 			'/admin/extend/addons'                  => 'Modules\Extend\Handler\Addons',
 			'/admin/extend/languages'               => 'Modules\Extend\Handler\Languages',
 			'/admin/extend/templates'               => 'Modules\Extend\Handler\Templates',
-			'/admin/system/settings'                => 'Modules\Settings\Handler\General',
+			'/admin/system/settings'                => 'Modules\Settings\Handler\Common',
 			'/admin/system/users'                   => 'Modules\Entitizer\Lister\Users',
 			'/admin/system/users/create'            => 'Modules\Entitizer\Handler\Create\User',
 			'/admin/system/users/edit'              => 'Modules\Entitizer\Handler\Edit\User',
