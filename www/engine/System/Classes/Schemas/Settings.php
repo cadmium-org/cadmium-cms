@@ -35,7 +35,6 @@ namespace Schemas {
 
 			$this->addString('admin_language');
 			$this->addString('admin_template');
-			$this->addString('admin_ajax_navigation');
 		}
 	}
 }

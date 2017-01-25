@@ -288,7 +288,6 @@ return [
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Язык по умолчанию',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон по умолчанию',
-	'SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION'      => 'Ajax-навигация',
 
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',

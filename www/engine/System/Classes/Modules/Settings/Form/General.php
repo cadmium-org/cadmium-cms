@@ -80,10 +80,6 @@ namespace Modules\Settings\Form {
 			$templates = Extend\Templates::loader(SECTION_ADMIN);
 
 			$this->addSelect('admin_template', $templates->active(), $templates->items(true));
-
-			# Admin ajax navigation
-
-			$this->addCheckbox('admin_ajax_navigation', Settings::get('admin_ajax_navigation'));
 		}
 	}
 }

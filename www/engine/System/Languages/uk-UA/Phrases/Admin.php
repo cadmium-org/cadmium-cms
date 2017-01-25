@@ -288,7 +288,6 @@ return [
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Мова за замовчуванням',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон за замовчуванням',
-	'SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION'      => 'Ajax-навігація',
 
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Невірний формат URL',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Невірний формат e-mail',

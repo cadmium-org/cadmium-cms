@@ -100,18 +100,6 @@
 
 			</div>
 
-			<div class="field">
-
-				<div class="ui slider checkbox">
-
-					{ block:field_settings_admin_ajax_navigation / }
-
-					<label for="settings-admin-ajax-navigation">%SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION%</label>
-
-				</div>
-
-			</div>
-
 		</div>
 
 	</div>

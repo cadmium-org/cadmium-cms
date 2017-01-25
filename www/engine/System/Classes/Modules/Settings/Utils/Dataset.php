@@ -124,13 +124,6 @@ namespace Modules\Settings\Utils {
 
 				return ((false !== ($name = Extend\Templates::validate($name))) ? $name : null);
 			});
-
-			# Admin ajax navigation
-
-			$this->addParam('admin_ajax_navigation', true, function (bool $active) {
-
-				return $active;
-			});
 		}
 	}
 }

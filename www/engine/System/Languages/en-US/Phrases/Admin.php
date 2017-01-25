@@ -288,7 +288,6 @@ return [
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Default language',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Default template',
-	'SETTINGS_FIELD_ADMIN_AJAX_NAVIGATION'      => 'Ajax navigation',
 
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Invalid URL format',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Invalid e-mail format',
