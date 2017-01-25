@@ -202,8 +202,6 @@ var Main = {
 
 				$(this).attr('href', (window.location.pathname + '?' + $.param(params)));
 			});
-
-			Main.initNavigation(this.menu);
 		},
 
 		'submit' : function() {
