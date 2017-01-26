@@ -65,7 +65,7 @@ namespace Modules\Auth\Controller {
 			$data['auth_key']           = $auth_key;
 			$data['password']           = $password;
 			$data['rank']               = $rank;
-			$data['timezone']           = CONFIG_SYSTEM_TIMEZONE_DEFAULT;
+			$data['timezone']           = CONFIG_SYSTEM_TIMEZONE;
 			$data['time_registered']    = REQUEST_TIME;
 			$data['time_logged']        = REQUEST_TIME;
 

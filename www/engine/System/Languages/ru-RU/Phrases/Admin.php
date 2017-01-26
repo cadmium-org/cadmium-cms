@@ -271,10 +271,13 @@ return [
 	# Settings
 
 	'SETTINGS_TAB_COMMON'                       => 'Общие',
+	'SETTINGS_TAB_ADMIN'                        => 'Панель управления',
 
 	'SETTINGS_GROUP_SITE'                       => 'Настройки сайта',
 	'SETTINGS_GROUP_SYSTEM'                     => 'Настройки системы',
-	'SETTINGS_GROUP_ADMIN'                      => 'Настройки панели управления',
+
+	'SETTINGS_GROUP_MAIN'                       => 'Основные настройки',
+	'SETTINGS_GROUP_APPEARANCE'                 => 'Настройки отображения',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название',
 	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган',
@@ -288,6 +291,9 @@ return [
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Язык по умолчанию',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон по умолчанию',
+
+	'SETTINGS_FIELD_ADMIN_DISPLAY_ENTITIES'     => 'Элементов на странице',
+	'SETTINGS_FIELD_ADMIN_DISPLAY_FILES'        => 'Файлов на странице',
 
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',

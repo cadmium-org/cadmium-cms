@@ -18,20 +18,24 @@ define('CONFIG_SESSION_LIFETIME',                   2592000);       # 30 days
 
 # Default settings
 
-define('CONFIG_SITE_LANGUAGE_DEFAULT',              'en-US');
-define('CONFIG_SITE_TEMPLATE_DEFAULT',              'Default');
+define('CONFIG_SITE_LANGUAGE',                      'en-US');
+define('CONFIG_SITE_TEMPLATE',                      'Default');
 
-define('CONFIG_SITE_TITLE_DEFAULT',                 'Demo Site');
-define('CONFIG_SITE_SLOGAN_DEFAULT',                'A place for site slogan');
-define('CONFIG_SITE_DESCRIPTION_DEFAULT',           '');
-define('CONFIG_SITE_KEYWORDS_DEFAULT',              '');
+define('CONFIG_SITE_TITLE',                         'Demo Site');
+define('CONFIG_SITE_SLOGAN',                        'A place for site slogan');
+define('CONFIG_SITE_STATUS',                        STATUS_ONLINE);
+define('CONFIG_SITE_DESCRIPTION',                   '');
+define('CONFIG_SITE_KEYWORDS',                      '');
 
-define('CONFIG_SYSTEM_URL_DEFAULT',                 'http://example.com');
-define('CONFIG_SYSTEM_EMAIL_DEFAULT',               'admin@example.com');
-define('CONFIG_SYSTEM_TIMEZONE_DEFAULT',            'UTC');
+define('CONFIG_SYSTEM_URL',                         'http://example.com');
+define('CONFIG_SYSTEM_EMAIL',                       'admin@example.com');
+define('CONFIG_SYSTEM_TIMEZONE',                    'UTC');
 
-define('CONFIG_ADMIN_LANGUAGE_DEFAULT',             'en-US');
-define('CONFIG_ADMIN_TEMPLATE_DEFAULT',             'Default');
+define('CONFIG_ADMIN_LANGUAGE',                     'en-US');
+define('CONFIG_ADMIN_TEMPLATE',                     'Default');
+
+define('CONFIG_ADMIN_DISPLAY_ENTITIES',             50);
+define('CONFIG_ADMIN_DISPLAY_FILES',                40);
 
 # Language
 
@@ -111,16 +115,6 @@ define('CONFIG_SITE_KEYWORDS_MAX_LENGTH',           512);
 
 define('CONFIG_SYSTEM_URL_MAX_LENGTH',              128);
 define('CONFIG_SYSTEM_EMAIL_MAX_LENGTH',            128);
-
-# Admin
-
-define('CONFIG_ADMIN_PAGES_DISPLAY',                50);
-define('CONFIG_ADMIN_MENUITEMS_DISPLAY',            50);
-define('CONFIG_ADMIN_VARIABLES_DISPLAY',            50);
-define('CONFIG_ADMIN_WIDGETS_DISPLAY',              50);
-define('CONFIG_ADMIN_USERS_DISPLAY',                50);
-
-define('CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY',    50);
 
 # Captcha
 

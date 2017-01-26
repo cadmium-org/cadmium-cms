@@ -16,8 +16,6 @@ namespace Modules\Entitizer\Lister {
 
 		protected static $naming = 'title';
 
-		protected static $display = CONFIG_ADMIN_WIDGETS_DISPLAY;
-
 		protected static $view_main = 'Blocks/Entitizer/Widgets/Lister/Main';
 
 		protected static $view_item = 'Blocks/Entitizer/Widgets/Lister/Item';

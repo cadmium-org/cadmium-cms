@@ -2,6 +2,8 @@
 
 	<a class="active item" href="/admin/system/settings">%SETTINGS_TAB_COMMON%</a>
 
+	<a class="item" href="/admin/system/settings/admin">%SETTINGS_TAB_ADMIN%</a>
+
 </div>
 
 <form class="ui form segment" method="post" action="$install_path$/admin/system/settings" autocomplete="off">
@@ -79,24 +81,6 @@
 				<label for="settings-system-timezone">%SETTINGS_FIELD_SYSTEM_TIMEZONE%</label>
 
 				{ block:field_settings_system_timezone / }
-
-			</div>
-
-			<h4 class="ui dividing header">%SETTINGS_GROUP_ADMIN%</h4>
-
-			<div class="field">
-
-				<label for="settings-admin-language">%SETTINGS_FIELD_ADMIN_LANGUAGE%</label>
-
-				{ block:field_settings_admin_language / }
-
-			</div>
-
-			<div class="field">
-
-				<label for="settings-admin-template">%SETTINGS_FIELD_ADMIN_TEMPLATE%</label>
-
-				{ block:field_settings_admin_template / }
 
 			</div>
 

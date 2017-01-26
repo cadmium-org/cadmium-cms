@@ -16,7 +16,7 @@ namespace Modules\Extend\Common {
 
 		protected static $selectable = [SECTION_SITE => false, SECTION_ADMIN => false], $name = 'template';
 
-		protected static $default = [SECTION_SITE => CONFIG_SITE_TEMPLATE_DEFAULT, SECTION_ADMIN => CONFIG_ADMIN_TEMPLATE_DEFAULT];
+		protected static $default = [SECTION_SITE => CONFIG_SITE_TEMPLATE, SECTION_ADMIN => CONFIG_ADMIN_TEMPLATE];
 
 		protected static $param = [SECTION_SITE => 'site_template', SECTION_ADMIN => 'admin_template'];
 

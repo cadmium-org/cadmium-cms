@@ -35,6 +35,9 @@ namespace Schemas {
 
 			$this->addString('admin_language');
 			$this->addString('admin_template');
+
+			$this->addString('admin_display_entities');
+			$this->addString('admin_display_files');
 		}
 	}
 }

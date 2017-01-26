@@ -11,5 +11,5 @@ namespace Modules\Settings\Controller {
 
 	use Modules\Settings;
 
-	class Common extends Settings\Utils\Controller {}
+	class Admin extends Settings\Utils\Controller {}
 }

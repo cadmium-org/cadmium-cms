@@ -271,10 +271,13 @@ return [
 	# Settings
 
 	'SETTINGS_TAB_COMMON'                       => 'Common',
+	'SETTINGS_TAB_ADMIN'                        => 'Admin panel',
 
 	'SETTINGS_GROUP_SITE'                       => 'Site settings',
 	'SETTINGS_GROUP_SYSTEM'                     => 'System settings',
-	'SETTINGS_GROUP_ADMIN'                      => 'Admin panel settings',
+
+	'SETTINGS_GROUP_MAIN'                       => 'Main settings',
+	'SETTINGS_GROUP_APPEARANCE'                 => 'Appearance settings',
 
 	'SETTINGS_FIELD_SITE_TITLE'                 => 'Title',
 	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Slogan',
@@ -288,6 +291,9 @@ return [
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Default language',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Default template',
+
+	'SETTINGS_FIELD_ADMIN_DISPLAY_ENTITIES'     => 'Items per page',
+	'SETTINGS_FIELD_ADMIN_DISPLAY_FILES'        => 'Files per page',
 
 	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Invalid URL format',
 	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Invalid e-mail format',

@@ -16,7 +16,7 @@ namespace Modules\Extend\Common {
 
 		protected static $selectable = [SECTION_SITE => false, SECTION_ADMIN => true], $name = 'language';
 
-		protected static $default = [SECTION_SITE => CONFIG_SITE_LANGUAGE_DEFAULT, SECTION_ADMIN => CONFIG_ADMIN_LANGUAGE_DEFAULT];
+		protected static $default = [SECTION_SITE => CONFIG_SITE_LANGUAGE, SECTION_ADMIN => CONFIG_ADMIN_LANGUAGE];
 
 		protected static $param = [SECTION_SITE => 'site_language', SECTION_ADMIN => 'admin_language'];
 

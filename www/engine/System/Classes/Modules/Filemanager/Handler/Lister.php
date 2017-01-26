@@ -2,7 +2,7 @@
 
 namespace Modules\Filemanager\Handler {
 
-	use Frames, Modules\Filemanager, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
+	use Frames, Modules\Filemanager, Modules\Settings, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
 	use Ajax, Arr, Explorer, Language, Number, Request, Template, Url;
 
 	class Lister extends Frames\Admin\Area\Panel {
@@ -45,7 +45,7 @@ namespace Modules\Filemanager\Handler {
 
 			# Extract a set of items to display
 
-			$list = ($dirs + $files); $total = count($list); $display = CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY;
+			$list = ($dirs + $files); $total = count($list); $display = Settings::get('admin_display_files');
 
 			$list = array_splice($list, (($this->index - 1) * $display), $display);
 
@@ -102,7 +102,7 @@ namespace Modules\Filemanager\Handler {
 
 			# ------------------------
 
-			return Pagination::block($this->index, CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY, $this->items['total'], $url);
+			return Pagination::block($this->index, Settings::get('admin_display_files'), $this->items['total'], $url);
 		}
 
 		# Get contents

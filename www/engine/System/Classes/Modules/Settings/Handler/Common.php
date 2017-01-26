@@ -9,55 +9,18 @@
 
 namespace Modules\Settings\Handler {
 
-	use Frames, Modules\Settings, Utils\Popup, Utils\View, Language, Request, Template;
+	use Modules\Settings;
 
-	class Common extends Frames\Admin\Area\Panel {
+	class Common extends Settings\Utils\Handler {
 
-		protected $_title = 'TITLE_SYSTEM_SETTINGS';
+		# Handler configuration
 
-		private $form = null;
+		protected static $form_class = 'Modules\Settings\Form\Common';
 
-		/**
-		 * Get the contents block
-		 */
+		protected static $controller_class = 'Modules\Settings\Controller\Common';
 
-		private function getContents() : Template\Block {
+		protected static $url = '/admin/system/settings';
 
-			$contents = View::get('Blocks/Settings/Common');
-
-			# Implement form
-
-			$this->form->implement($contents);
-
-			# ------------------------
-
-			return $contents;
-		}
-
-		/**
-		 * Handle the request
-		 */
-
-		protected function handle() : Template\Block {
-
-			# Create form
-
-			$this->form = new Settings\Form\Common;
-
-			# Handle form
-
-			if ($this->form->handle(new Settings\Controller\Common, true)) {
-
-				Request::redirect(INSTALL_PATH . '/admin/system/settings?submitted');
-			}
-
-			# Display success message
-
-			if (false !== Request::get('submitted')) Popup::set('positive', Language::get('SETTINGS_SUCCESS'));
-
-			# ------------------------
-
-			return $this->getContents();
-		}
+		protected static $view = 'Blocks/Settings/Common';
 	}
 }
