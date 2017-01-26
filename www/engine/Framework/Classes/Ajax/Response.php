@@ -108,7 +108,7 @@ namespace Ajax {
 
 			# ------------------------
 
-			return array_merge($data, $this->data);
+			return ($data + $this->data);
 		}
 
 		/**

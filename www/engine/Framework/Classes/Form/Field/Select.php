@@ -43,7 +43,7 @@ namespace Form\Field {
 
 			# Set data
 
-			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
+			$this->options = (((null !== $default) ? ['' => $default] : []) + $options);
 
 			# Set value
 

@@ -31,9 +31,9 @@ namespace Modules\Filemanager\Handler {
 
 					$data = ['name' => $name, 'path' => $path, 'path_full' => $path_full];
 
-					if (@is_dir($path_full)) $dirs[] = array_merge($data, ['type' => FILEMANAGER_TYPE_DIR]);
+					if (@is_dir($path_full)) $dirs[] = ($data + ['type' => FILEMANAGER_TYPE_DIR]);
 
-					else if (@is_file($path_full)) $files[] = array_merge($data, ['type' => FILEMANAGER_TYPE_FILE]);
+					else if (@is_file($path_full)) $files[] = ($data + ['type' => FILEMANAGER_TYPE_FILE]);
 				}
 
 				closedir($handler);
@@ -45,7 +45,7 @@ namespace Modules\Filemanager\Handler {
 
 			# Extract a set of items to display
 
-			$list = array_merge($dirs, $files); $total = count($list); $display = CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY;
+			$list = ($dirs + $files); $total = count($list); $display = CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY;
 
 			$list = array_splice($list, (($this->index - 1) * $display), $display);
 
