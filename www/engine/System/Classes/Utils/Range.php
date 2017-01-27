@@ -17,7 +17,7 @@ namespace Utils {
 
 		public static function get($key) {
 
-			return ((false !== ($value = parent::get($key))) ? self::translate($value) : false);
+			return ((null !== ($value = parent::get($key))) ? self::translate($value) : null);
 		}
 
 		# Get range array
