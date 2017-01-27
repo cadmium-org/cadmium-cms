@@ -79,8 +79,8 @@ return [
 
 	'DASHBOARD_MESSAGE_INSTALL_REQUIREMENTS'    => 'Некоторые возможности могут быть недоступны из-за неверной конфигурации сервера. Подробнее на ' .
 	                                               '<a href="$install_path$/admin/system/information#diagnostics">странице диагностики</a>.',
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
-	                                               'по-прежнему находится в корневой директории сайта. Рекомендуется удалить его.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <b>install.php</b> по-прежнему находится в корневой директории сайта. ' .
+	                                               'Рекомендуется удалить его.',
 	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'Похоже, Вы пока не редактировали настройки сайта. '.
 	                                               'Перейдите на <a href="$install_path$/admin/system/settings">страницу настроек</a> для ввода актуальных данных.',
 
