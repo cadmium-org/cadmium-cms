@@ -15,7 +15,6 @@ return [
 	'WIDGET_ERROR_REMOVE'                           => 'Помилка видалення віджета',
 
 	'WIDGET_ERROR_NAME_INVALID'                     => 'Невірний формат ключа',
-	'WIDGET_ERROR_NAME_RESERVED'                    => 'Ключ віджета зарезервований і не може бути використаний',
 	'WIDGET_ERROR_NAME_DUPLICATE'                   => 'Віджет з таким ключем вже існує',
 
 	# Success messages

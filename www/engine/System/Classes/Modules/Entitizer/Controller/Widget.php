@@ -31,10 +31,6 @@ namespace Modules\Entitizer\Controller {
 
 			if (false === ($name = Validate::templateComponentName($name))) return ['name', 'WIDGET_ERROR_NAME_INVALID'];
 
-			# Check name reserved
-
-			if (false !== Template::getWidget($name)) return ['name', 'WIDGET_ERROR_NAME_RESERVED'];
-
 			# Check name exists
 
 			if (false === ($check_name = $this->widget->check($name, 'name'))) return 'WIDGET_ERROR_MODIFY';
