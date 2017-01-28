@@ -8,15 +8,13 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Widget;
 
-		protected $title = 'TITLE_CONTENT_WIDGETS';
+		protected $_title = 'TITLE_CONTENT_WIDGETS';
 
 		# Lister configuration
 
 		protected static $link = '/admin/content/widgets';
 
 		protected static $naming = 'title';
-
-		protected static $display = CONFIG_ADMIN_WIDGETS_DISPLAY;
 
 		protected static $view_main = 'Blocks/Entitizer/Widgets/Lister/Main';
 

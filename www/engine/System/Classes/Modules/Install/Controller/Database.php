@@ -1,12 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Install
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Install\Controller {
 
-	use Modules\Install, Utils\Schema, Exception, DB, JSON;
+	use Modules\Install, Utils\Schema, Exception, DB;
 
 	class Database {
 
-		# Invoker
+		/**
+		 * Invoker
+		 *
+		 * @return string|true : an error code on failure or true on success
+		 */
 
 		public function __invoke(array $post) {
 
@@ -24,9 +35,9 @@ namespace Modules\Install\Controller {
 
 			catch (Exception\DBConnect $error) { return 'INSTALL_ERROR_DATABASE_CONNECT'; }
 
-			catch (Exception\DBSelect $error) { return 'INSTALL_ERROR_DATABASE_SELECT'; }
-
 			catch (Exception\DBCharset $error) { return 'INSTALL_ERROR_DATABASE_CHARSET'; }
+
+			catch (Exception\DBSelect $error) { return 'INSTALL_ERROR_DATABASE_SELECT'; }
 
 			# Create tables
 

@@ -6,7 +6,7 @@ namespace Modules\Profile\Handler\Auth {
 
 	class Register extends Frames\Site\Area\Auth {
 
-		protected $title = 'TITLE_PROFILE_AUTH_REGISTER';
+		protected $_title = 'TITLE_PROFILE_AUTH_REGISTER';
 
 		# Handle request
 

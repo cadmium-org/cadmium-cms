@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Validate
+ * @package Cadmium\Framework\Validate
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 

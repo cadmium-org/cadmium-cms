@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Schemas
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Schemas {
 
 	use Utils\Schema;
@@ -8,7 +15,9 @@ namespace Schemas {
 
 		protected static $file_name = 'Addons.json';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 

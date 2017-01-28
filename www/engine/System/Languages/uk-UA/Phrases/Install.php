@@ -1,15 +1,20 @@
 <?php
 
+/**
+ * @package Cadmium\System\Languages\uk-UA
+ * @author Dariia Romanova
+ * @copyright Copyright (c) 2015-2017, Dariia Romanova
+ * @link http://cadmium-cms.com
+ */
+
 return [
-
-	# Titles
-
-	'TITLE_INSTALL_CHECK'                       => 'Крок 1. Перевірка вимог',
-	'TITLE_INSTALL_DATABASE'                    => 'Крок 2. Налаштування MySQL',
 
 	# Requirements
 
 	'INSTALL_PHP_VERSION'                       => 'Версія PHP',
+
+	'INSTALL_REQUIREMENT_REWRITE_SUCCESS'       => 'Модуль Rewrite включений.',
+	'INSTALL_REQUIREMENT_REWRITE_FAIL'          => 'Модуль Rewrite не включений.',
 
 	'INSTALL_REQUIREMENT_MYSQLI_SUCCESS'        => 'Розширення MySQLi встановлене.',
 	'INSTALL_REQUIREMENT_MYSQLI_FAIL'           => 'Розширення MySQLi не встановлене.',
@@ -26,20 +31,17 @@ return [
 	'INSTALL_REQUIREMENT_DOM_SUCCESS'           => 'Розширення DOM встановлене.',
 	'INSTALL_REQUIREMENT_DOM_FAIL'              => 'Розширення DOM не встановлене.',
 
-	'INSTALL_REQUIREMENT_REWRITE_SUCCESS'       => 'Модуль Rewrite включений.',
-	'INSTALL_REQUIREMENT_REWRITE_FAIL'          => 'Модуль Rewrite не включений.',
-
 	'INSTALL_REQUIREMENT_DATA_SUCCESS'          => 'Engine/System/Data доступна для запису.',
-	'INSTALL_REQUIREMENT_DATA_FAIL'             => 'Engine/System/Data не доступна для запису.',
+	'INSTALL_REQUIREMENT_DATA_FAIL'             => 'Engine/System/Data недоступна для запису.',
 
 	'INSTALL_REQUIREMENT_UPLOADS_SUCCESS'       => 'Директорія Uploads доступна для запису.',
-	'INSTALL_REQUIREMENT_UPLOADS_FAIL'          => 'Директорія Uploads не доступна для запису.',
+	'INSTALL_REQUIREMENT_UPLOADS_FAIL'          => 'Директорія Uploads недоступна для запису.',
 
 	# Errors
 
 	'INSTALL_ERROR_DATABASE_CONNECT'            => 'Неможливо підключитися до бази даних',
-	'INSTALL_ERROR_DATABASE_SELECT'             => 'Неможливо вибрати базу даних',
 	'INSTALL_ERROR_DATABASE_CHARSET'            => 'Неможливо встановити кодування бази даних',
+	'INSTALL_ERROR_DATABASE_SELECT'             => 'Неможливо вибрати базу даних',
 
 	'INSTALL_ERROR_DATABASE_TABLES_CREATE'      => 'Помилка створення таблиць бази даних',
 	'INSTALL_ERROR_DATABASE_TABLES_FILL'        => 'Помилка збереження початкових даних',

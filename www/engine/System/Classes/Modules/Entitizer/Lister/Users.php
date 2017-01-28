@@ -8,15 +8,13 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\User;
 
-		protected $title = 'TITLE_SYSTEM_USERS';
+		protected $_title = 'TITLE_SYSTEM_USERS';
 
 		# Lister configuration
 
 		protected static $link = '/admin/system/users';
 
 		protected static $naming = 'name';
-
-		protected static $display = CONFIG_ADMIN_USERS_DISPLAY;
 
 		protected static $view_main = 'Blocks/Entitizer/Users/Lister/Main';
 

@@ -2,12 +2,12 @@
 
 namespace Modules\Filemanager\Handler {
 
-	use Frames, Modules\Filemanager, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
+	use Frames, Modules\Filemanager, Modules\Settings, Utils\Messages, Utils\Pagination, Utils\Uploader, Utils\View;
 	use Ajax, Arr, Explorer, Language, Number, Request, Template, Url;
 
-	class Lister extends Frames\Admin\Area\Authorized {
+	class Lister extends Frames\Admin\Area\Panel {
 
-		protected $title = 'TITLE_CONTENT_FILEMANAGER';
+		protected $_title = 'TITLE_CONTENT_FILEMANAGER';
 
 		private $parent = null, $form = null, $index = 0, $items = [];
 
@@ -31,9 +31,9 @@ namespace Modules\Filemanager\Handler {
 
 					$data = ['name' => $name, 'path' => $path, 'path_full' => $path_full];
 
-					if (@is_dir($path_full)) $dirs[] = array_merge($data, ['type' => FILEMANAGER_TYPE_DIR]);
+					if (@is_dir($path_full)) $dirs[] = ($data + ['type' => FILEMANAGER_TYPE_DIR]);
 
-					else if (@is_file($path_full)) $files[] = array_merge($data, ['type' => FILEMANAGER_TYPE_FILE]);
+					else if (@is_file($path_full)) $files[] = ($data + ['type' => FILEMANAGER_TYPE_FILE]);
 				}
 
 				closedir($handler);
@@ -45,7 +45,7 @@ namespace Modules\Filemanager\Handler {
 
 			# Extract a set of items to display
 
-			$list = array_merge($dirs, $files); $total = count($list); $display = CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY;
+			$list = ($dirs + $files); $total = count($list); $display = Settings::get('admin_display_files');
 
 			$list = array_splice($list, (($this->index - 1) * $display), $display);
 
@@ -102,7 +102,7 @@ namespace Modules\Filemanager\Handler {
 
 			# ------------------------
 
-			return Pagination::block($this->index, CONFIG_ADMIN_FILEMANAGER_ITEMS_DISPLAY, $this->items['total'], $url);
+			return Pagination::block($this->index, Settings::get('admin_display_files'), $this->items['total'], $url);
 		}
 
 		# Get contents

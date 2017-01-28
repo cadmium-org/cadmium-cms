@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Request
+ * @package Cadmium\Framework\Request
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -18,6 +18,15 @@ namespace {
 		public static function isAjax() : bool {
 
 			return (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest');
+		}
+
+		/**
+		 * Check whether this is a special ajax request
+		 */
+
+		public static function isSpecial(string $type) : bool {
+
+			return (self::isAjax() && ($_SERVER['HTTP_X_SPECIAL_REQUEST'] ?? null) === $type);
 		}
 
 		/**

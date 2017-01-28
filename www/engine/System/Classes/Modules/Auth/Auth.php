@@ -2,7 +2,7 @@
 
 namespace Modules {
 
-	use Utils\Validate, Request, Session;
+	use Utils\Validate, DB, Request, Session;
 
 	abstract class Auth {
 
@@ -115,7 +115,7 @@ namespace Modules {
 
 		public static function initial() {
 
-			return (0 === Informer::countEntries(TABLE_USERS, true));
+			return (0 === DB::count(TABLE_USERS));
 		}
 
 		# Check if authorized

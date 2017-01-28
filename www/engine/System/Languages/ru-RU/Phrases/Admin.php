@@ -1,8 +1,18 @@
 <?php
 
+/**
+ * @package Cadmium\System\Languages\ru-RU
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 return [
 
 	# Titles
+
+	'TITLE_INSTALL_CHECK'                       => 'Шаг 1. Проверка требований',
+	'TITLE_INSTALL_DATABASE'                    => 'Шаг 2. Настройки MySQL',
 
 	'TITLE_AUTH_LOGIN'                          => 'Вход',
 	'TITLE_AUTH_RESET'                          => 'Восстановление пароля',
@@ -51,21 +61,26 @@ return [
 
 	# Dashboard
 
-	'DASHBOARD_ROW_SITE_TITLE'                  => 'Название сайта',
-	'DASHBOARD_ROW_SITE_STATUS'                 => 'Статус сайта',
+	'DASHBOARD_GROUP_SITE'                      => 'Информация о сайте',
+	'DASHBOARD_GROUP_SERVER'                    => 'Сервер',
 
-	'DASHBOARD_ROW_SYSTEM_URL'                  => 'Корневой URL',
-	'DASHBOARD_ROW_SYSTEM_EMAIL'                => 'Системный e-mail',
+	'DASHBOARD_ROW_SITE_TITLE'                  => 'Название',
+	'DASHBOARD_ROW_SITE_STATUS'                 => 'Статус',
+
+	'DASHBOARD_ROW_SYSTEM_EMAIL'                => 'E-mail',
 	'DASHBOARD_ROW_SYSTEM_TIMEZONE'             => 'Часовая зона',
 
-	'DASHBOARD_ROW_PAGES'                       => 'Всего страниц',
-	'DASHBOARD_ROW_USERS'                       => 'Всего пользователей',
+	'DASHBOARD_ROW_OS_VERSION'                  => 'Версия ОС',
+	'DASHBOARD_ROW_PHP_VERSION'                 => 'Версия PHP',
+	'DASHBOARD_ROW_MYSQL_VERSION'               => 'Версия MySQL',
 
-	'DASHBOARD_GROUP_GENERAL'                   => 'Основное',
-	'DASHBOARD_GROUP_DATABASE'                  => 'База данных',
+	'DASHBOARD_LINK_SETTINGS'                   => 'Редактировать настройки',
+	'DASHBOARD_LINK_INFORMATION'                => 'Больше информации',
 
-	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <a href="$install_path$/install.php" target="_blank">install.php</a> ' .
-	                                               'по-прежнему находится в корневой директории сайта. Необходимо удалить его.',
+	'DASHBOARD_MESSAGE_INSTALL_REQUIREMENTS'    => 'Некоторые возможности могут быть недоступны из-за неверной конфигурации сервера. Подробнее на ' .
+	                                               '<a href="$install_path$/admin/system/information#diagnostics">странице диагностики</a>.',
+	'DASHBOARD_MESSAGE_INSTALL_FILE'            => 'Установочный файл <b>install.php</b> по-прежнему находится в корневой директории сайта. ' .
+	                                               'Рекомендуется удалить его.',
 	'DASHBOARD_MESSAGE_SETTINGS_FILE'           => 'Похоже, Вы пока не редактировали настройки сайта. '.
 	                                               'Перейдите на <a href="$install_path$/admin/system/settings">страницу настроек</a> для ввода актуальных данных.',
 
@@ -255,25 +270,33 @@ return [
 
 	# Settings
 
+	'SETTINGS_TAB_COMMON'                       => 'Общие',
+	'SETTINGS_TAB_ADMIN'                        => 'Панель управления',
+
 	'SETTINGS_GROUP_SITE'                       => 'Настройки сайта',
 	'SETTINGS_GROUP_SYSTEM'                     => 'Настройки системы',
-	'SETTINGS_GROUP_ADMIN'                      => 'Настройки панели управления',
 
-	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название сайта',
-	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган сайта',
-	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус сайта',
+	'SETTINGS_GROUP_MAIN'                       => 'Основные настройки',
+	'SETTINGS_GROUP_APPEARANCE'                 => 'Настройки отображения',
+
+	'SETTINGS_FIELD_SITE_TITLE'                 => 'Название',
+	'SETTINGS_FIELD_SITE_SLOGAN'                => 'Слоган',
+	'SETTINGS_FIELD_SITE_STATUS'                => 'Статус',
 	'SETTINGS_FIELD_SITE_DESCRIPTION'           => 'Описание',
 	'SETTINGS_FIELD_SITE_KEYWORDS'              => 'Ключевые слова',
 
 	'SETTINGS_FIELD_SYSTEM_URL'                 => 'Корневой URL',
+	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'E-mail',
 	'SETTINGS_FIELD_SYSTEM_TIMEZONE'            => 'Часовая зона',
-	'SETTINGS_FIELD_SYSTEM_EMAIL'               => 'Системный e-mail',
-
-	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
-	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',
 
 	'SETTINGS_FIELD_ADMIN_LANGUAGE'             => 'Язык по умолчанию',
 	'SETTINGS_FIELD_ADMIN_TEMPLATE'             => 'Шаблон по умолчанию',
+
+	'SETTINGS_FIELD_ADMIN_DISPLAY_ENTITIES'     => 'Элементов на странице',
+	'SETTINGS_FIELD_ADMIN_DISPLAY_FILES'        => 'Файлов на странице',
+
+	'SETTINGS_ERROR_SYSTEM_URL'                 => 'Неверный формат URL',
+	'SETTINGS_ERROR_SYSTEM_EMAIL'               => 'Неверный формат e-mail',
 
 	'SETTINGS_ERROR_SAVE'                       => 'Ошибка сохранения настроек',
 
@@ -283,13 +306,17 @@ return [
 
 	'INFORMATION_TAB_COMMON'                    => 'Общее',
 	'INFORMATION_TAB_PHP'                       => 'Конфигурация PHP',
+	'INFORMATION_TAB_DIAGNOSTICS'               => 'Диагностика',
 
 	'INFORMATION_GROUP_SERVER'                  => 'Сервер',
 	'INFORMATION_GROUP_SYSTEM'                  => 'Система',
-	'INFORMATION_GROUP_EXTERNAL'                => 'Стороннее ПО',
+	'INFORMATION_GROUP_THIRD_PARTY'             => 'Стороннее ПО',
 
-	'INFORMATION_GROUP_PHP_ERRORS'              => 'Ошибки',
-	'INFORMATION_GROUP_PHP_FILE_UPLOADS'        => 'Загрузка файлов',
+	'INFORMATION_GROUP_ERRORS'                  => 'Ошибки',
+	'INFORMATION_GROUP_FILE_UPLOADS'            => 'Загрузка файлов',
+
+	'INFORMATION_GROUP_EXTENSIONS'              => 'Расширения PHP',
+	'INFORMATION_GROUP_DIRS'                    => 'Директории',
 
 	'INFORMATION_ROW_OS_VERSION'                => 'Версия ОС',
 	'INFORMATION_ROW_PHP_VERSION'               => 'Версия PHP',
@@ -302,6 +329,21 @@ return [
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версия Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версия CKEditor',
 
+	'INFORMATION_ROW_EXTENSION_MYSQLI'          => 'MySQLi',
+	'INFORMATION_ROW_EXTENSION_MBSTRING'        => 'Multibyte String',
+	'INFORMATION_ROW_EXTENSION_GD'              => 'GD',
+	'INFORMATION_ROW_EXTENSION_SIMPLEXML'       => 'SimpleXML',
+	'INFORMATION_ROW_EXTENSION_DOM'             => 'DOM',
+
+	'INFORMATION_ROW_DIR_UPLOADS'               => '/uploads',
+	'INFORMATION_ROW_DIR_DATA'                  => '/engine/System/Data',
+
 	'INFORMATION_VALUE_DEBUG_MODE_ON'           => 'Включен',
-	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Выключен'
+	'INFORMATION_VALUE_DEBUG_MODE_OFF'          => 'Выключен',
+
+	'INFORMATION_VALUE_EXTENSION_LOADED'        => 'Подключено',
+	'INFORMATION_VALUE_EXTENSION_NOT_LOADED'    => 'Отключено',
+
+	'INFORMATION_VALUE_DIR_WRITABLE'            => 'Доступна для записи',
+	'INFORMATION_VALUE_DIR_NOT_WRITABLE'        => 'Недоступна для записи'
 ];

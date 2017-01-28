@@ -6,7 +6,7 @@ namespace Modules\Entitizer\Handler\Create {
 
 	class Widget extends Entitizer\Handler\Edit\Widget {
 
-		protected $title = 'TITLE_CONTENT_WIDGETS_CREATE';
+		protected $_title = 'TITLE_CONTENT_WIDGETS_CREATE';
 
 		protected $create = true;
 	}

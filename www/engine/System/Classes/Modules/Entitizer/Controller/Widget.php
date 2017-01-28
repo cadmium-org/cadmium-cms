@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Entitizer, Utils\Validate;
+	use Modules\Entitizer, Utils\Validate, Template;
 
 	class Widget {
 

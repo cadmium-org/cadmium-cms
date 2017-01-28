@@ -6,7 +6,7 @@ namespace Modules\Entitizer\Handler\Create {
 
 	class Page extends Entitizer\Handler\Edit\Page {
 
-		protected $title = 'TITLE_CONTENT_PAGES_CREATE';
+		protected $_title = 'TITLE_CONTENT_PAGES_CREATE';
 
 		protected $create = true;
 	}

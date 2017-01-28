@@ -2,7 +2,7 @@
 
 namespace Modules\Entitizer\Controller {
 
-	use Modules\Entitizer, Utils\Validate;
+	use Modules\Entitizer, Utils\Validate, Template;
 
 	class Variable {
 
@@ -30,6 +30,10 @@ namespace Modules\Entitizer\Controller {
 			# Validate name
 
 			if (false === ($name = Validate::templateComponentName($name))) return ['name', 'VARIABLE_ERROR_NAME_INVALID'];
+
+			# Check name reserved
+
+			if (false !== Template::getGlobal($name)) return ['name', 'VARIABLE_ERROR_NAME_RESERVED'];
 
 			# Check name exists
 

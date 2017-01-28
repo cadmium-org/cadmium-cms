@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Languages\ru-RU
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 return [
 
 	'BROWSE'                                    => 'Просмотреть',
@@ -39,8 +46,8 @@ return [
 
 	# Sections
 
-	'SECTION_ADMIN'                             => 'Панель управления',
 	'SECTION_SITE'                              => 'Сайт',
+	'SECTION_ADMIN'                             => 'Панель управления',
 
 	# Forms
 

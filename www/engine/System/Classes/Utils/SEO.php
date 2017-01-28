@@ -17,7 +17,7 @@ namespace Utils {
 
 		public static function title(string $value = null) {
 
-			if (null === $value) return (self::$data['title'] ?? '');
+			if (null === $value) return (self::$data['title'] ?? false);
 
 			self::$data['title'] = $value;
 		}
@@ -26,7 +26,7 @@ namespace Utils {
 
 		public static function description(string $value = null) {
 
-			if (null === $value) return (self::$data['description'] ?? '');
+			if (null === $value) return (self::$data['description'] ?? false);
 
 			self::$data['description'] = $value;
 		}
@@ -35,7 +35,7 @@ namespace Utils {
 
 		public static function keywords(string $value = null) {
 
-			if (null === $value) return (self::$data['keywords'] ?? '');
+			if (null === $value) return (self::$data['keywords'] ?? false);
 
 			self::$data['keywords'] = $value;
 		}
@@ -62,9 +62,16 @@ namespace Utils {
 
 		public static function canonical(string $value = null) {
 
-			if (null === $value) return (self::$data['canonical'] ?? '');
+			if (null === $value) return (self::$data['canonical'] ?? false);
 
 			self::$data['canonical'] = $value;
+		}
+
+		# Get robots string
+
+		public static function robots() {
+
+			return ((self::robotsIndex() ? 'INDEX' : 'NOINDEX') . ',' . (self::robotsFollow() ? 'FOLLOW' : 'NOFOLLOW'));
 		}
 	}
 }

@@ -2,9 +2,9 @@
 
 namespace Modules\Entitizer\Utils {
 
-	use Frames, Modules\Entitizer, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
+	use Frames, Modules\Entitizer, Modules\Settings, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
 
-	abstract class Lister extends Frames\Admin\Area\Authorized {
+	abstract class Lister extends Frames\Admin\Area\Panel {
 
 		protected $index = 0, $parent = null, $entity = null, $path = [], $depth = 0;
 
@@ -93,7 +93,7 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return Pagination::block($this->index, static::$display, $this->items['total'], $url);
+			return Pagination::block($this->index, Settings::get('admin_display_entities'), $this->items['total'], $url);
 		}
 
 		# Get contents
@@ -158,9 +158,9 @@ namespace Modules\Entitizer\Utils {
 
 		# Handle common request
 
-		protected function handle() {
+		protected function handle(bool $ajax = false) {
 
-			if (Request::isAjax()) return $this->handleAjax();
+			if ($ajax) return $this->handleAjax();
 
 			$this->index = Number::forceInt(Request::get('index'), 1, 999999);
 
@@ -176,9 +176,9 @@ namespace Modules\Entitizer\Utils {
 
 			# Get items list
 
-			$lister = (static::$nesting ? 'children' : 'items'); $index = $this->index; $display = static::$display;
+			$lister = (static::$nesting ? 'children' : 'items'); $display = Settings::get('admin_display_entities');
 
-			if (false !== ($items = $this->parent->$lister([], [], $index, $display))) $this->items = $items;
+			if (false !== ($items = $this->parent->$lister([], [], $this->index, $display))) $this->items = $items;
 
 			# ------------------------
 

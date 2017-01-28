@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		use Entitizer\Common\User;
 
-		protected $title = 'TITLE_SYSTEM_USERS_EDIT';
+		protected $_title = 'TITLE_SYSTEM_USERS_EDIT';
 
 		# Handler configuration
 

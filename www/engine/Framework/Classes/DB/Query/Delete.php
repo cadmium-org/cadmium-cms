@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\DB
+ * @package Cadmium\Framework\DB
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -23,7 +23,7 @@ namespace DB\Query {
 
 			$table = $this->getName($table);
 
-			$condition = $this->getString($condition, '^name = $value', ' AND ');
+			$condition = $this->getString($condition, '^name IN $list', ' AND ');
 
 			# Build query
 

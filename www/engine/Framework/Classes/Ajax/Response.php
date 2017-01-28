@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Ajax
+ * @package Cadmium\Framework\Ajax
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -12,6 +12,15 @@ namespace Ajax {
 	class Response {
 
 		private $data = [], $error = null, $status = true;
+
+		/**
+		 * Constructor
+		 */
+
+		public function __construct(array $data = []) {
+
+			$this->setArray($data);
+		}
 
 		/**
 		 * Set a param
@@ -27,12 +36,25 @@ namespace Ajax {
 		}
 
 		/**
+		 * Set multiple params
+		 *
+		 * @return Ajax\Response : the current response object
+		 */
+
+		public function setArray(array $data) : Response {
+
+			foreach ($data as $name => $value) $this->set($name, $value);
+
+			return $this;
+		}
+
+		/**
 		 * Set an error and switch the response status to false (default is true)
 		 *
 		 * @return Ajax\Response : the current response object
 		 */
 
-		public function setError($value) : Response {
+		public function setError(string $value) : Response {
 
 			$this->error = $value; $this->status = false;
 
@@ -53,12 +75,12 @@ namespace Ajax {
 		/**
 		 * Get en error
 		 *
-		 * @return mixed|null : the value or null if the error is not set
+		 * @return string|false : the value or false if the error is not set
 		 */
 
 		public function getError() {
 
-			return $this->error;
+			return ($this->error ?? false);
 		}
 
 		/**
@@ -86,7 +108,7 @@ namespace Ajax {
 
 			# ------------------------
 
-			return array_merge($data, $this->data);
+			return ($data + $this->data);
 		}
 
 		/**

@@ -6,7 +6,7 @@ namespace Modules\Filemanager\Handler {
 
 	class Dir extends Filemanager\Utils\Handler {
 
-		protected $title = 'TITLE_CONTENT_FILEMANAGER_DIR';
+		protected $_title = 'TITLE_CONTENT_FILEMANAGER_DIR';
 
 		# Handler configuration
 

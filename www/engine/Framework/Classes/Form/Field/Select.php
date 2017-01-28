@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Form
+ * @package Cadmium\Framework\Form
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -43,7 +43,7 @@ namespace Form\Field {
 
 			# Set data
 
-			$this->options = array_merge(((null !== $default) ? ['' => $default] : []), $options);
+			$this->options = (((null !== $default) ? ['' => $default] : []) + $options);
 
 			# Set value
 

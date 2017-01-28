@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Ajax
+ * @package Cadmium\Framework\Ajax
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -15,9 +15,9 @@ namespace {
 		 * Create a new response object
 		 */
 
-		public static function createResponse() : Ajax\Response {
+		public static function createResponse(array $data = []) : Ajax\Response {
 
-			return new Ajax\Response;
+			return new Ajax\Response($data);
 		}
 
 		/**

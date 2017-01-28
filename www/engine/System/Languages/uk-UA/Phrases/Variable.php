@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Languages\uk-UA
+ * @author Dariia Romanova
+ * @copyright Copyright (c) 2015-2017, Dariia Romanova
+ * @link http://cadmium-cms.com
+ */
+
 return [
 
 	# Errors
@@ -8,6 +15,7 @@ return [
 	'VARIABLE_ERROR_REMOVE'                         => 'Помилка видалення змінної',
 
 	'VARIABLE_ERROR_NAME_INVALID'                   => 'Невірний формат ключа',
+	'VARIABLE_ERROR_NAME_RESERVED'                  => 'Ключ змінної зарезервований і не може бути використаний',
 	'VARIABLE_ERROR_NAME_DUPLICATE'                 => 'Змінна з таким ключем вже існує',
 
 	# Success messages

@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		use Entitizer\Common\Variable;
 
-		protected $title = 'TITLE_CONTENT_VARIABLES_EDIT';
+		protected $_title = 'TITLE_CONTENT_VARIABLES_EDIT';
 
 		# Handler configuration
 

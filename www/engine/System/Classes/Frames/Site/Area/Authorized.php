@@ -1,31 +1,15 @@
 <?php
 
+/**
+ * @package Cadmium\System\Frames\Site
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Frames\Site\Area {
 
-	use Frames, Frames\Status, Modules, Ajax, Request, Template;
+	use Frames;
 
-	abstract class Authorized extends Frames\Site\Section {
-
-		# Authorized area main method
-
-		protected function area() {
-
-			# Check auth
-
-			if (!Modules\Auth::check() || ((false !== Request::get('logout')) && Modules\Auth::logout())) {
-
-				Request::redirect(INSTALL_PATH . '/profile/login');
-			}
-
-			# Handle request
-
-			if (Template::isBlock($result = $this->handle())) return $this->displayPage($result, STATUS_CODE_200);
-
-			if (Ajax::isResponse($result)) return Ajax::output($result);
-
-			# ------------------------
-
-			return Status::error404();
-		}
-	}
+	abstract class Authorized extends Frames\Site\Section {}
 }

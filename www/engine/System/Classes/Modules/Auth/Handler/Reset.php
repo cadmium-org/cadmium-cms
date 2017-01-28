@@ -6,7 +6,7 @@ namespace Modules\Auth\Handler {
 
 	class Reset extends Frames\Admin\Area\Auth {
 
-		protected $title = 'TITLE_AUTH_RESET';
+		protected $_title = 'TITLE_AUTH_RESET';
 
 		# Handle request
 

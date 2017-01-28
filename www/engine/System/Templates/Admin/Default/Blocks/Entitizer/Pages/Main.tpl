@@ -118,19 +118,23 @@
 
 			</div>
 
-			<div class="field">
+			<div class="two fields">
 
-				<label for="page-visibility">%PAGE_FIELD_VISIBILITY%</label>
+				<div class="field">
 
-				{ block:field_page_visibility / }
+					<label for="page-visibility">%PAGE_FIELD_VISIBILITY%</label>
 
-			</div>
+					{ block:field_page_visibility / }
 
-			<div class="field">
+				</div>
 
-				<label for="page-access">%PAGE_FIELD_ACCESS%</label>
+				<div class="field">
 
-				{ block:field_page_access / }
+					<label for="page-access">%PAGE_FIELD_ACCESS%</label>
+
+					{ block:field_page_access / }
+
+				</div>
 
 			</div>
 

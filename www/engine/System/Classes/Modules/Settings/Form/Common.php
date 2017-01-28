@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Settings
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Settings\Form {
 
-	use Modules\Extend, Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
+	use Modules\Settings, Utils\Form, Utils\Range, Geo\Timezone;
 
-	class General extends Form {
+	class Common extends Form {
 
 		protected $name = 'settings';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
@@ -59,18 +68,6 @@ namespace Modules\Settings\Form {
 			$this->addSelect('system_timezone', Settings::get('system_timezone'),
 
 				Timezone::getRange(), null, ['search' => true]);
-
-			# Admin language
-
-			$languages = Extend\Languages::loader(SECTION_ADMIN);
-
-			$this->addSelect('admin_language', $languages->active(), $languages->items(true));
-
-			# Admin template
-
-			$templates = Extend\Templates::loader(SECTION_ADMIN);
-
-			$this->addSelect('admin_template', $templates->active(), $templates->items(true));
 		}
 	}
 }

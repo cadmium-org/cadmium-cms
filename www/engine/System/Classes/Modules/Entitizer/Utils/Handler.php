@@ -4,7 +4,7 @@ namespace Modules\Entitizer\Utils {
 
 	use Frames, Modules\Entitizer, Utils\Popup, Utils\View, Ajax, Language, Number, Request, Template;
 
-	abstract class Handler extends Frames\Admin\Area\Authorized {
+	abstract class Handler extends Frames\Admin\Area\Panel {
 
 		protected $create = false, $entity = null, $parent = null, $path = [], $form = null;
 
@@ -133,9 +133,9 @@ namespace Modules\Entitizer\Utils {
 
 		# Handle request
 
-		protected function handle() {
+		protected function handle(bool $ajax = false) {
 
-			if (!$this->create && Request::isAjax()) return $this->handleAjax();
+			if (!$this->create && $ajax) return $this->handleAjax();
 
 			# Create entity
 

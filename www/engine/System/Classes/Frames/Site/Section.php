@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * @package Cadmium\System\Frames\Site
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Frames\Site {
 
-	use Frames, Frames\Status, Modules\Auth, Modules\Extend, Modules\Settings, Utils\Menu, Utils\Messages;
-	use Utils\SEO, Utils\Template\Variables, Utils\Template\Widgets, Utils\View, Date, Language, Template;
+	use Frames, Frames\Status, Modules\Auth, Modules\Settings, Ajax, Request, Template;
 
 	abstract class Section extends Frames\Section {
 
@@ -17,130 +23,83 @@ namespace Frames\Site {
 
 		# Page settings
 
-		protected $title = '', $layout = 'Common';
+		protected $_title = '', $_layout = 'Common';
 
-		# Get layout
+		/**
+		 * Handle an auth area request
+		 */
 
-		private function getLayout(Template\Block $contents) {
+		private function handleAuthArea() {
 
-			$layout = View::get('Layouts/' . $this->layout);
+			# Check auth
 
-			# Create layout components
+			if (Auth::check()) Request::redirect(INSTALL_PATH . '/profile');
 
-			$menu = new Menu;
+			# ------------------------
 
-			# Set menu
+			return $this->handleCommonArea();
+		}
 
-			$layout->menu = $menu->block();
+		/**
+		 * Handle an authorized area request
+		 */
 
-			# Set auth
+		private function handleAuthorizedArea() {
 
-			if (Auth::check()) {
+			# Check auth
 
-				$layout->getBlock('user')->enable();
+			if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
 
-				$layout->getBlock('user')->gravatar = Auth::user()->gravatar;;
-
-				$layout->getBlock('user')->name = Auth::user()->name;
-
-				$layout->getBlock('auth')->disable();
-
-				if (Auth::user()->rank === RANK_ADMINISTRATOR) $layout->getBlock('admin')->enable();
+				Request::redirect(INSTALL_PATH . '/profile/login');
 			}
 
-			# Set title
+			# ------------------------
 
-			$layout->title = (('' !== SEO::title()) ? SEO::title() :
+			return $this->handleCommonArea();
+		}
 
-				(('' !== $this->title) ? Language::get($this->title) : Settings::get('site_title')));
+		/**
+		 * Handle a common area request
+		 */
 
-			# Set slogan
+		private function handleCommonArea() {
 
-			$layout->slogan = Settings::get('site_slogan');
+			# Handle request
 
-			# Set contents
+			$result = $this->handle(Request::isAjax());
 
-			$layout->contents = $contents;
+			if (Template::isBlock($result)) return (new View($this->_title, $this->_layout))->display($result);
 
-			# Set copyright
-
-			$layout->copyright = Date::getYear();
-
-			# Set powered by
-
-			$layout->cadmium_home       = CADMIUM_HOME;
-			$layout->cadmium_name       = CADMIUM_NAME;
-			$layout->cadmium_version    = CADMIUM_VERSION;
+			if (Ajax::isResponse($result)) return Ajax::output($result);
 
 			# ------------------------
 
-			return $layout;
+			return Status::displayError404();
 		}
 
-		# Display page
+		/**
+		 * The branch method for the site section
+		 */
 
-		protected function displayPage(Template\Block $contents, int $status = STATUS_CODE_200) {
-
-			# Process template
-
-			$page = View::get('Main/Page');
-
-			# Set language
-
-			$page->language = Extend\Languages::data('iso');
-
-			# Set SEO data
-
-			$page->description = ('' !== SEO::description()) ? SEO::description() : Settings::get('site_description');
-
-			$page->keywords = ('' !== SEO::keywords()) ? SEO::keywords() : Settings::get('site_keywords');
-
-			$page->robots = ((SEO::robotsIndex() ? 'INDEX' : 'NOINDEX') . ',' . (SEO::robotsFollow() ? 'FOLLOW' : 'NOFOLLOW'));
-
-			# Set title
-
-			$page->title = (('' !== SEO::title()) ? SEO::title() :
-
-				((('' !== $this->title) ? (Language::get($this->title) . ' | ') : '') . Settings::get('site_title')));
-
-			# Set canonical
-
-			if ('' === SEO::canonical()) $page->getBlock('canonical')->disable();
-
-			else $page->getBlock('canonical')->link = SEO::canonical();
-
-			# Set layout
-
-			$page->layout = $this->getLayout($contents);
-
-			# Set messages
-
-			$contents->messages = Messages::block();
-
-			# Set global components
-
-			foreach (Variables::generate() as $name => $value) Template::setGlobal($name, $value);
-
-			foreach (Widgets::generate() as $name => $block) Template::setWidget($name, $block);
-
-			# ------------------------
-
-			Template::output($page, $status);
-		}
-
-		# Site main method
-
-		protected function section() {
+		protected function _section() {
 
 			# Check site status
 
-			if (Settings::get('site_status') === STATUS_MAINTENANCE) return Status::maintenance();
+			if (Settings::get('site_status') === STATUS_MAINTENANCE) return Status::displayMaintenance();
 
-			if (Settings::get('site_status') === STATUS_UPDATE) return Status::update();
+			if (Settings::get('site_status') === STATUS_UPDATE) return Status::displayUpdate();
+
+			# Handle request
+
+			if ($this instanceof Area\Auth) return $this->handleAuthArea();
+
+			if ($this instanceof Area\Authorized) return $this->handleAuthorizedArea();
+
+			if ($this instanceof Area\Common) return $this->handleCommonArea();
 
 			# ------------------------
 
-			$this->area();
+			return Status::displayError404();
 		}
 	}
 }

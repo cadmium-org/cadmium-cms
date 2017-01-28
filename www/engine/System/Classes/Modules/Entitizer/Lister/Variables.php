@@ -8,15 +8,13 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Variable;
 
-		protected $title = 'TITLE_CONTENT_VARIABLES';
+		protected $_title = 'TITLE_CONTENT_VARIABLES';
 
 		# Lister configuration
 
 		protected static $link = '/admin/content/variables';
 
 		protected static $naming = 'title';
-
-		protected static $display = CONFIG_ADMIN_VARIABLES_DISPLAY;
 
 		protected static $view_main = 'Blocks/Entitizer/Variables/Lister/Main';
 

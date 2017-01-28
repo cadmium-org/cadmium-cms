@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Dataset
+ * @package Cadmium\Framework\Dataset
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -59,7 +59,7 @@ namespace {
 		}
 
 		/**
-		 * Update a value
+		 * Set a param value
 		 *
 		 * @return bool|null : true on success, false on error, or null if the param does not exist
 		 */
@@ -79,9 +79,9 @@ namespace {
 		}
 
 		/**
-		 * Update multiple values
+		 * Set multiple values
 		 *
-		 * @return array : the array of update results for every param (true on success or false on error)
+		 * @return array : the array of set results for every param (true on success or false on error)
 		 */
 
 		public function setArray(array $data) : array {

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Languages\uk-UA
+ * @author Dariia Romanova
+ * @copyright Copyright (c) 2015-2017, Dariia Romanova
+ * @link http://cadmium-cms.com
+ */
+
 return [
 
 	'BROWSE'                                    => 'Переглянути',
@@ -39,8 +46,8 @@ return [
 
 	# Sections
 
-	'SECTION_ADMIN'                             => 'Панель керування',
 	'SECTION_SITE'                              => 'Сайт',
+	'SECTION_ADMIN'                             => 'Панель керування',
 
 	# Forms
 

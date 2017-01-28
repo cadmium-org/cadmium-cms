@@ -1,10 +1,10 @@
-<table class="ui table">
+<table class="ui fixed table segment">
 
 	<thead>
 
 		<tr>
 
-			<th colspan="2">%DASHBOARD_GROUP_GENERAL%</th>
+			<th colspan="2">%DASHBOARD_GROUP_SITE%</th>
 
 		</tr>
 
@@ -14,7 +14,7 @@
 
 		<tr>
 
-			<td class="four wide">%DASHBOARD_ROW_SITE_TITLE%</td>
+			<td><i class="globe icon"></i> %DASHBOARD_ROW_SITE_TITLE%</td>
 
 			<td>$site_title$</td>
 
@@ -22,23 +22,15 @@
 
 		<tr>
 
-			<td class="four wide">%DASHBOARD_ROW_SITE_STATUS%</td>
+			<td><i class="configure icon"></i> %DASHBOARD_ROW_SITE_STATUS%</td>
 
-			<td>$site_status$</td>
-
-		</tr>
-
-		<tr>
-
-			<td class="four wide">%DASHBOARD_ROW_SYSTEM_URL%</td>
-
-			<td>$system_url$</td>
+			<td><div class="ui small $site_status_class$ label">$site_status_value$</div></td>
 
 		</tr>
 
 		<tr>
 
-			<td class="four wide">%DASHBOARD_ROW_SYSTEM_EMAIL%</td>
+			<td><i class="at icon"></i> %DASHBOARD_ROW_SYSTEM_EMAIL%</td>
 
 			<td>$system_email$</td>
 
@@ -46,9 +38,17 @@
 
 		<tr>
 
-			<td class="four wide">%DASHBOARD_ROW_SYSTEM_TIMEZONE%</td>
+			<td><i class="wait icon"></i> %DASHBOARD_ROW_SYSTEM_TIMEZONE%</td>
 
 			<td>$system_timezone$</td>
+
+		</tr>
+
+		<tr>
+
+			<td colspan="2"><a href="$install_path$/admin/system/settings">
+
+				<i class="angle right icon"></i> %DASHBOARD_LINK_SETTINGS%</a></td>
 
 		</tr>
 
@@ -56,13 +56,13 @@
 
 </table>
 
-<table class="ui table">
+<table class="ui fixed table segment">
 
 	<thead>
 
 		<tr>
 
-			<th colspan="2">%DASHBOARD_GROUP_DATABASE%</th>
+			<th colspan="2">%DASHBOARD_GROUP_SERVER%</th>
 
 		</tr>
 
@@ -72,17 +72,33 @@
 
 		<tr>
 
-			<td class="four wide">%DASHBOARD_ROW_PAGES%</td>
+			<td><i class="desktop icon"></i> %DASHBOARD_ROW_OS_VERSION%</td>
 
-			<td>$pages_count$</td>
+			<td>$os_version$</td>
 
 		</tr>
 
 		<tr>
 
-			<td class="four wide">%DASHBOARD_ROW_USERS%</td>
+			<td><i class="server icon"></i> %DASHBOARD_ROW_PHP_VERSION%</td>
 
-			<td>$users_count$</td>
+			<td>$php_version$</td>
+
+		</tr>
+
+		<tr>
+
+			<td><i class="database icon"></i> %DASHBOARD_ROW_MYSQL_VERSION%</td>
+
+			<td>$mysql_version$</td>
+
+		</tr>
+
+		<tr>
+
+			<td colspan="2"><a href="$install_path$/admin/system/information">
+
+				<i class="angle right icon"></i> %DASHBOARD_LINK_INFORMATION%</a></td>
 
 		</tr>
 

@@ -1,26 +1,35 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Install
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Install\Handler {
 
-	use Frames, Modules\Extend, Modules\Install, Utils\View, Language;
+	use Frames, Modules\Extend, Modules\Install, Utils\View, Language, Template;
 
 	class Check extends Frames\Admin\Area\Install {
 
-		protected $title = 'TITLE_INSTALL_CHECK';
+		protected $_title = 'TITLE_INSTALL_CHECK';
 
 		private $languages = null;
 
-		# Get requirements
+		/**
+		 * Get the requirements loop
+		 */
 
-		private function getRequirements() {
+		private function getRequirements() : array {
 
 			$requirements = [];
 
-			foreach (Install::requirements() as $name => $value) {
+			foreach (Install::getRequirements() as $name => $status) {
 
-				$class = ($value ? 'positive' : 'negative'); $icon = ($value ? 'check circle' : 'warning circle');
+				$class = ($status ? 'positive' : 'negative'); $icon = ($status ? 'check circle' : 'warning circle');
 
-				$text = Language::get('INSTALL_REQUIREMENT_' . strtoupper($name) . '_' . ($value ? 'SUCCESS' : 'FAIL'));
+				$text = Language::get('INSTALL_REQUIREMENT_' . strtoupper($name) . '_' . ($status ? 'SUCCESS' : 'FAIL'));
 
 				$requirements[] = ['class' => $class, 'icon' => $icon, 'text' => $text];
 			}
@@ -30,13 +39,15 @@ namespace Modules\Install\Handler {
 			return $requirements;
 		}
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get('Blocks/Install/Check');
 
-			# Set languages
+			# Set language
 
 			$contents->getBlock('language')->country = Extend\Languages::data('country');
 
@@ -52,18 +63,20 @@ namespace Modules\Install\Handler {
 
 			# Set button
 
-			$contents->getBlock('button')->checked = intval(Install::status());
+			$contents->getBlock('button')->checked = intval($checked = Install::checkRequirements());
 
-			$contents->getBlock('button')->text = Language::get(Install::status() ? 'CONTINUE' : 'RECHECK');
+			$contents->getBlock('button')->text = Language::get($checked ? 'CONTINUE' : 'RECHECK');
 
 			# ------------------------
 
 			return $contents;
 		}
 
-		# Handle request
+		/**
+		 * Handle the request
+		 */
 
-		protected function handle() {
+		protected function handle() : Template\Block {
 
 			# Load languages
 

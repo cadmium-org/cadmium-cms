@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Form
+ * @package Cadmium\Framework\Form
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -40,7 +40,7 @@ namespace Form {
 
 			$general = ['disabled' => false, 'required' => false, 'error' => false];
 
-			$this->dataset = new Dataset(array_merge($general, $this->config));
+			$this->dataset = new Dataset($general + $this->config);
 
 			$this->dataset->setArray($config);
 		}
@@ -65,7 +65,7 @@ namespace Form {
 
 			# ------------------------
 
-			return new Tag($name, array_merge($data, $attributes), $contents);
+			return new Tag($name, ($data + $attributes), $contents);
 		}
 
 		/**

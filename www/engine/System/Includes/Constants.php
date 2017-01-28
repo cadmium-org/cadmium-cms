@@ -1,23 +1,30 @@
 <?php
 
+/**
+ * @package Cadmium\System
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 # Cadmium
 
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.4.2');
-define('CADMIUM_COPY',                              '2016');
+define('CADMIUM_VERSION',                           '0.4.3');
+define('CADMIUM_COPY',                              '2017');
 
-# External
+# Third-party
 
 define('JQUERY_VERSION',                            '3.1.1');
-define('SEMANTIC_UI_VERSION',                       '2.2.6');
-define('CKEDITOR_VERSION',                          '4.6.0');
+define('SEMANTIC_UI_VERSION',                       '2.2.7');
+define('CKEDITOR_VERSION',                          '4.6.2');
 
 # Sections
 
-define('SECTION_ADMIN',                             'admin');
 define('SECTION_SITE',                              'site');
+define('SECTION_ADMIN',                             'admin');
 
 # Filemanager types
 

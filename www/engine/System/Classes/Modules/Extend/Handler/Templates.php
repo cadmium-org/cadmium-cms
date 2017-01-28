@@ -8,6 +8,6 @@ namespace Modules\Extend\Handler {
 
 		use Extend\Common\Templates;
 
-		protected $title = 'TITLE_EXTEND_TEMPLATES';
+		protected $_title = 'TITLE_EXTEND_TEMPLATES';
 	}
 }

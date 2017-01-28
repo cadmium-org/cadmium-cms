@@ -16,7 +16,7 @@
 
 				{ for:items }
 
-				<a class="item" href="?language=$name$"><i class="$country$ flag"></i>$title$</a>
+				<a class="item" href="$install_path$/install.php?language=$name$"><i class="$country$ flag"></i>$title$</a>
 
 				{ / for:items }
 
@@ -32,17 +32,13 @@
 
 { block:requirements }
 
-<table class="ui unstackable basic table">
+<table class="ui unstackable table">
 
 	<tbody>
 
 		<tr>
 
-			<td class="positive">
-
-				<i class="check circle icon"></i>%INSTALL_PHP_VERSION% $php_version$.
-
-			</td>
+			<td class="positive"><i class="check circle icon"></i>%INSTALL_PHP_VERSION% $php_version$.</td>
 
 		</tr>
 

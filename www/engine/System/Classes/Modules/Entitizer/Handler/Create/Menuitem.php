@@ -6,7 +6,7 @@ namespace Modules\Entitizer\Handler\Create {
 
 	class Menuitem extends Entitizer\Handler\Edit\Menuitem {
 
-		protected $title = 'TITLE_CONTENT_MENUITEMS_CREATE';
+		protected $_title = 'TITLE_CONTENT_MENUITEMS_CREATE';
 
 		protected $create = true;
 	}

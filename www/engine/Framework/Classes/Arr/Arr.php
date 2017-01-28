@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package Framework\Arr
+ * @package Cadmium\Framework\Arr
  * @author Anton Romanov
- * @copyright Copyright (c) 2015-2016, Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
  * @link http://cadmium-cms.com
  */
 
@@ -67,7 +67,7 @@ namespace {
 
 		public static function sortby(array $array, $sub_key, bool $descending = false) : array {
 
-			$select_key = function($element) use($sub_key) { return ($element[$sub_key] ?? false); };
+			$select_key = function ($element) use ($sub_key) { return ($element[$sub_key] ?? false); };
 
 			$sorted = []; $column = array_map($select_key, $array);
 

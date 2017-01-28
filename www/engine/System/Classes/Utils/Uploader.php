@@ -2,7 +2,7 @@
 
 namespace Utils {
 
-	use Utils\Messages, Explorer, Language, Request;
+	use Utils\Popup, Explorer, Language, Request;
 
 	abstract class Uploader {
 
@@ -86,7 +86,7 @@ namespace Utils {
 
 			$result = self::save($name, $dir_name);
 
-			if (is_string($result)) { Messages::set('error', Language::get($result)); return false; }
+			if (is_string($result)) { Popup::set('negative', Language::get($result)); return false; }
 
 			# ------------------------
 

@@ -8,15 +8,13 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Menuitem;
 
-		protected $title = 'TITLE_CONTENT_MENUITEMS';
+		protected $_title = 'TITLE_CONTENT_MENUITEMS';
 
 		# Lister configuration
 
 		protected static $link = '/admin/content/menuitems';
 
 		protected static $naming = 'text';
-
-		protected static $display = CONFIG_ADMIN_MENUITEMS_DISPLAY;
 
 		protected static $view_main = 'Blocks/Entitizer/Menuitems/Lister/Main';
 

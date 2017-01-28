@@ -6,7 +6,7 @@ namespace Modules\Profile\Handler {
 
 	class Overview extends Frames\Site\Area\Authorized {
 
-		protected $title = 'TITLE_PROFILE';
+		protected $_title = 'TITLE_PROFILE';
 
 		# Get contents
 

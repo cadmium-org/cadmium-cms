@@ -10,15 +10,15 @@ namespace Modules\Extend\Common {
 
 		protected static $loader_class = 'Modules\Extend\Loader\Languages', $exception_class = 'Exception\Language';
 
-		protected static $root_dir = [SECTION_ADMIN => DIR_SYSTEM_LANGUAGES, SECTION_SITE => DIR_SYSTEM_LANGUAGES];
+		protected static $root_dir = [SECTION_SITE => DIR_SYSTEM_LANGUAGES, SECTION_ADMIN => DIR_SYSTEM_LANGUAGES];
 
 		protected static $schema_prototype = 'Prototype\Language', $regex_name = REGEX_LANGUAGE_NAME;
 
-		protected static $selectable = [SECTION_ADMIN => true, SECTION_SITE => false], $name = 'language';
+		protected static $selectable = [SECTION_SITE => false, SECTION_ADMIN => true], $name = 'language';
 
-		protected static $default = [SECTION_ADMIN => CONFIG_ADMIN_LANGUAGE_DEFAULT, SECTION_SITE => CONFIG_SITE_LANGUAGE_DEFAULT];
+		protected static $default = [SECTION_SITE => CONFIG_SITE_LANGUAGE, SECTION_ADMIN => CONFIG_ADMIN_LANGUAGE];
 
-		protected static $param = [SECTION_ADMIN => 'admin_language', SECTION_SITE => 'site_language'];
+		protected static $param = [SECTION_SITE => 'site_language', SECTION_ADMIN => 'admin_language'];
 
 		protected static $cookie_expires = CONFIG_LANGUAGE_COOKIE_EXPIRES;
 

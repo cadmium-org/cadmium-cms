@@ -28,7 +28,7 @@
 
 					<a class="item" href="$install_path$/profile"><i class="user icon"></i>%TITLE_PROFILE%</a>
 
-					<a class="item" href="$install_path$/profile?logout"><i class="sign out icon"></i>%LOGOUT%</a>
+					<a class="item logout" href="$install_path$/profile?logout"><i class="sign out icon"></i>%LOGOUT%</a>
 
 				</div>
 
@@ -60,7 +60,9 @@
 
 			{ ! block:admin }
 
-			<a class="icon item" href="$install_path$/admin" target="_blank" id="section-button" title="%SECTION_ADMIN%"><i class="setting icon"></i></a>
+			<a class="section icon item" href="$install_path$/admin" target="_blank"
+
+				title="%SECTION_ADMIN%"><i class="setting icon"></i></a>
 
 			{ / block:admin }
 
@@ -72,13 +74,13 @@
 
 		<h1>$title$</h1>
 
-		<p class="slogan">$slogan$</p>
+		<p class="slogan">$site_slogan$</p>
 
 		<a class="big ui labeled icon button"><i class="rocket icon"></i>Get started</a>
 
 	</header>
 
-	<section class="ui one column page grid">
+	<section class="ui one column page grid" id="container">
 
 		<div class="column">
 
@@ -92,7 +94,7 @@
 
 		<div class="left aligned column">
 
-			$copyright$ &copy; <a href="$index_page$">$site_title$</a>
+			$current_year$ &copy; <a href="$index_page$">$site_title$</a>
 
 		</div>
 

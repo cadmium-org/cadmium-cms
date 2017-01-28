@@ -8,6 +8,6 @@ namespace Modules\Extend\Handler {
 
 		use Extend\Common\Addons;
 
-		protected $title = 'TITLE_EXTEND_ADDONS';
+		protected $_title = 'TITLE_EXTEND_ADDONS';
 	}
 }

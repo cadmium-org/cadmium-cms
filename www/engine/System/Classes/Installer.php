@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace {
 
 	use Modules\Install, Utils\Schema;
 
 	class Installer {
 
-		# Installer handle method
+		/**
+		 * Route a request to a handler
+		 */
 
-		public function handle() {
+		public function route() {
 
 			# Check installation
 
@@ -17,9 +26,9 @@ namespace {
 				Request::redirect(INSTALL_PATH . '/index.php');
 			}
 
-			# Determine handler class
+			# Get handler class
 
-			$checked = (Install::status() && Validate::boolean(Request::get('checked')));
+			$checked = (Install::checkRequirements() && Validate::boolean(Request::get('checked')));
 
 			$class = ('Modules\Install\Handler\\' . (!$checked ? 'Check' : 'Database'));
 

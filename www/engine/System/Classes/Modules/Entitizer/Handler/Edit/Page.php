@@ -8,7 +8,7 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		use Entitizer\Common\Page;
 
-		protected $title = 'TITLE_CONTENT_PAGES_EDIT';
+		protected $_title = 'TITLE_CONTENT_PAGES_EDIT';
 
 		# Handler configuration
 

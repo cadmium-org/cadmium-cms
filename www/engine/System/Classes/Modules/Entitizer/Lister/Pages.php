@@ -8,15 +8,13 @@ namespace Modules\Entitizer\Lister {
 
 		use Entitizer\Common\Page;
 
-		protected $title = 'TITLE_CONTENT_PAGES';
+		protected $_title = 'TITLE_CONTENT_PAGES';
 
 		# Lister configuration
 
 		protected static $link = '/admin/content/pages';
 
 		protected static $naming = 'title';
-
-		protected static $display = CONFIG_ADMIN_PAGES_DISPLAY;
 
 		protected static $view_main = 'Blocks/Entitizer/Pages/Lister/Main';
 

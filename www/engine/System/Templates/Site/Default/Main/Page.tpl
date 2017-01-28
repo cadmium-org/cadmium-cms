@@ -14,7 +14,7 @@
 
 		<title>$title$</title>
 
-		{ block:canonical }<link rel="canonical" href="$link$" />{ / block:canonical }
+		{ ! block:canonical }<link rel="canonical" href="$link$" />{ / block:canonical }
 
 		<link rel="icon" type="image/png" href="$install_path$/include/favicon.png" />
 

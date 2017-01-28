@@ -6,7 +6,7 @@ namespace Modules\Entitizer\Handler\Create {
 
 	class Variable extends Entitizer\Handler\Edit\Variable {
 
-		protected $title = 'TITLE_CONTENT_VARIABLES_CREATE';
+		protected $_title = 'TITLE_CONTENT_VARIABLES_CREATE';
 
 		protected $create = true;
 	}

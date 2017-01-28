@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 # Regular expressions
 
 define('REGEX_MAP_ITEM_PATH',                       '/^[a-zA-Z0-9_\-\+\.\,\'\*\(\)\[\]:;!$%~]+$/');

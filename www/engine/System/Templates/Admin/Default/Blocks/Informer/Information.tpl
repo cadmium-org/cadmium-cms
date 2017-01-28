@@ -1,8 +1,10 @@
 <div class="ui menu" id="information-menu">
 
-	<a class="active item" data-segment="common">%INFORMATION_TAB_COMMON%</a>
+	<a class="active item" href="#common" data-segment="common">%INFORMATION_TAB_COMMON%</a>
 
-	<a class="item" data-segment="php">%INFORMATION_TAB_PHP%</a>
+	<a class="item" href="#php" data-segment="php">%INFORMATION_TAB_PHP%</a>
+
+	<a class="item" href="#diagnostics" data-segment="diagnostics">%INFORMATION_TAB_DIAGNOSTICS%</a>
 
 </div>
 
@@ -10,7 +12,7 @@
 
 	<div data-name="common">
 
-		<table class="ui fixed table">
+		<table class="ui fixed table segment">
 
 			<thead>
 
@@ -26,7 +28,7 @@
 
 				<tr>
 
-					<td><i class="server icon"></i> %INFORMATION_ROW_OS_VERSION%</td>
+					<td><i class="desktop icon"></i> %INFORMATION_ROW_OS_VERSION%</td>
 
 					<td>$os_version$</td>
 
@@ -34,7 +36,7 @@
 
 				<tr>
 
-					<td><i class="settings icon"></i> %INFORMATION_ROW_PHP_VERSION%</td>
+					<td><i class="server icon"></i> %INFORMATION_ROW_PHP_VERSION%</td>
 
 					<td>$php_version$</td>
 
@@ -52,7 +54,7 @@
 
 		</table>
 
-		<table class="ui fixed table">
+		<table class="ui fixed table segment">
 
 			<thead>
 
@@ -74,29 +76,25 @@
 
 				</tr>
 
-				{ block:debug_mode }
-
 				<tr>
 
 					<td><i class="bug icon"></i> %INFORMATION_ROW_DEBUG_MODE%</td>
 
-					<td><div class="ui small $class$ label">$text$</div></td>
+					<td><div class="ui small $debug_mode_class$ label">$debug_mode_value$</div></td>
 
 				</tr>
-
-				{ / block:debug_mode }
 
 			</tbody>
 
 		</table>
 
-		<table class="ui fixed table">
+		<table class="ui fixed table segment">
 
 			<thead>
 
 				<tr>
 
-					<th colspan="2">%INFORMATION_GROUP_EXTERNAL%</th>
+					<th colspan="2">%INFORMATION_GROUP_THIRD_PARTY%</th>
 
 				</tr>
 
@@ -136,13 +134,13 @@
 
 	<div data-name="php" style="display:none;">
 
-		<table class="ui fixed table">
+		<table class="ui fixed table segment">
 
 			<thead>
 
 				<tr>
 
-					<th colspan="2">%INFORMATION_GROUP_PHP_ERRORS%</th>
+					<th colspan="2">%INFORMATION_GROUP_ERRORS%</th>
 
 				</tr>
 
@@ -154,7 +152,7 @@
 
 					<td><i class="angle right icon"></i> display_errors</td>
 
-					<td>$php_display_errors$</td>
+					<td><div class="ui small $display_errors_class$ label">$display_errors_value$</div></td>
 
 				</tr>
 
@@ -162,7 +160,7 @@
 
 					<td><i class="angle right icon"></i> display_startup_errors</td>
 
-					<td>$php_display_startup_errors$</td>
+					<td><div class="ui small $display_startup_errors_class$ label">$display_startup_errors_value$</div></td>
 
 				</tr>
 
@@ -170,23 +168,25 @@
 
 		</table>
 
-		<table class="ui fixed table">
+		<table class="ui fixed table segment">
 
 			<thead>
 
 				<tr>
 
-					<th colspan="2">%INFORMATION_GROUP_PHP_FILE_UPLOADS%</th>
+					<th colspan="2">%INFORMATION_GROUP_FILE_UPLOADS%</th>
 
 				</tr>
 
 			</thead>
 
+			<tbody>
+
 				<tr>
 
 					<td><i class="angle right icon"></i> file_uploads</td>
 
-					<td>$php_file_uploads$</td>
+					<td><div class="ui small $file_uploads_class$ label">$file_uploads_value$</div></td>
 
 				</tr>
 
@@ -194,7 +194,7 @@
 
 					<td><i class="angle right icon"></i> upload_max_filesize</td>
 
-					<td>$php_upload_max_filesize$</td>
+					<td>$upload_max_filesize$</td>
 
 				</tr>
 
@@ -202,9 +202,73 @@
 
 					<td><i class="angle right icon"></i> post_max_size</td>
 
-					<td>$php_post_max_size$</td>
+					<td>$post_max_size$</td>
 
 				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+	<div data-name="diagnostics" style="display:none;">
+
+		<table class="ui fixed table segment">
+
+			<thead>
+
+				<tr>
+
+					<th colspan="2">%INFORMATION_GROUP_EXTENSIONS%</th>
+
+				</tr>
+
+			</thead>
+
+			<tbody>
+
+				{ for:extensions }
+
+				<tr>
+
+					<td><i class="cube icon"></i> $name$</td>
+
+					<td><div class="ui small $class$ label">$value$</div></td>
+
+				</tr>
+
+				{ / for:extensions }
+
+			</tbody>
+
+		</table>
+
+		<table class="ui fixed table segment">
+
+			<thead>
+
+				<tr>
+
+					<th colspan="2">%INFORMATION_GROUP_DIRS%</th>
+
+				</tr>
+
+			</thead>
+
+			<tbody>
+
+				{ for:dirs }
+
+				<tr>
+
+					<td><i class="folder icon"></i> $name$</td>
+
+					<td><div class="ui small $class$ label">$value$</div></td>
+
+				</tr>
+
+				{ / for:dirs }
 
 			</tbody>
 

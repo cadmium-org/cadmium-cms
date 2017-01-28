@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 # Check PHP version
 
 if (version_compare(PHP_VERSION, '7.0.0') < 0) exit('PHP version 7 or higher is required.');
@@ -25,11 +32,11 @@ require_once(DIR_ENGINE . 'System/Main.php');
 
 # Register classes autoloader
 
-spl_autoload_register(function($class_name) {
+spl_autoload_register(function ($class_name) {
 
 	$path = explode('\\', $class_name); $last = $path[count($path) - 1];
 
-	# Determine class path
+	# Get class path
 
 	$system_classes = ['Addons', 'Frames', 'Modules', 'Schemas', 'Utils', 'Dispatcher', 'Installer'];
 

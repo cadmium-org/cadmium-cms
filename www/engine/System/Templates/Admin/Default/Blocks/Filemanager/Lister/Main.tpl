@@ -86,7 +86,7 @@
 
 </div>
 
-<table class="ui table" id="filemanager-list">
+<table class="ui table segment" id="filemanager-list">
 
 	<thead>
 
