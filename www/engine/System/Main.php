@@ -30,9 +30,9 @@ require_once (DIR_SYSTEM_INCLUDES . 'Tables.php');
 
 # Set environment constants
 
-define('HTTP_MOD_REWRITE',      (getenv('HTTP_MOD_REWRITE') === 'on'));
+define('HTTP_MOD_REWRITE',      ($_SERVER['HTTP_MOD_REWRITE'] === 'on'));
 
-define('INSTALL_PATH',          rtrim(getenv('INSTALL_PATH'), '/'));
+define('INSTALL_PATH',          rtrim($_SERVER['INSTALL_PATH'], '/'));
 
 define('DEBUG_MODE',            @file_exists(DIR_SYSTEM_DATA . '.debug'));
 
