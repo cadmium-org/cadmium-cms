@@ -32,7 +32,7 @@ namespace Modules\Entitizer\Entity {
 
 			         ("LEFT JOIN " . static::$table_relations . " rel ON rel.descendant = ent.id AND rel.depth = 1 ") .
 
-			         ("WHERE ent.visibility = " . VISIBILITY_PUBLISHED . " AND ent.access <= " . Auth::user()->rank . " AND ") .
+			         ("WHERE ent.visibility = " . VISIBILITY_PUBLISHED . " AND ent.access <= " . Auth::get('rank') . " AND ") .
 
 			         ("ent.locked = 0 AND ent.slug = '" . addslashes($slug) . "' LIMIT 1");
 

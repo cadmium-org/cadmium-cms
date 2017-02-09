@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Form {
 
-	use Modules\Auth, Utils\Form, Language;
+	use Modules\Auth, Utils\Form;
 
 	class Register extends Form {
 
 		protected $name = 'register';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 

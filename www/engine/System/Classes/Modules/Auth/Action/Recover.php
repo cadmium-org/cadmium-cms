@@ -1,39 +1,52 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Action {
 
-	use Modules\Auth, Request;
+	use Modules\Auth, Request, Template;
 
 	class Recover extends Auth\Utils\Action {
 
-		# Handle request
+		# Action configuration
 
-		public function handle() {
+		protected static $view = 'Recover';
 
-			# Init user by secret code
+		protected static $form_class = 'Modules\Auth\Form\Recover';
 
-			if (false !== ($code = Auth::secret())) $this->code = $code;
+		protected static $controller_class = 'Modules\Auth\Controller\Recover';
 
-			else Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/reset');
+		protected static $redirect = '/login?submitted=recover';
 
-			# Set view
+		protected static $messages = [];
 
-			$this->view = (Auth::admin() ? 'Blocks/Auth/Recover' : 'Blocks/Profile/Auth/Recover');
+		/**
+		 * Handle the request
+		 */
 
-			# Create form
+		public function handle() : Template\Block {
 
-			$this->form = new Auth\Form\Recover;
+			$code = Request::get('code'); $admin = Auth::isAdmin();
 
-			# Handle form
+			# Redirect if code is invalid
 
-			if ($this->form->handle(new Auth\Controller\Recover)) {
+			if (false === ($result = Auth\Utils\Connector\Secret::authorize($code, $admin))) {
 
-				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=recover');
+				Request::redirect(INSTALL_PATH . ($admin ? '/admin' : '/profile') . '/reset');
 			}
+
+			# Set recovery data
+
+			$this->code = $result['auth']->code; $this->user = $result['user'];
 
 			# ------------------------
 
-			return $this->getContents();
+			return parent::handle();
 		}
 	}
 }

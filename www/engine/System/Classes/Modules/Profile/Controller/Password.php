@@ -34,9 +34,9 @@ namespace Modules\Profile\Controller {
 
 			# Check password
 
-			$password = Str::encode(Auth::user()->auth_key, $password);
+			$password = Str::encode(Auth::get('auth_key'), $password);
 
-			if (0 !== strcmp(Auth::user()->password, $password)) return ['password', 'USER_ERROR_PASSWORD_INCORRECT'];
+			if (0 !== strcmp(Auth::get('password'), $password)) return ['password', 'USER_ERROR_PASSWORD_INCORRECT'];
 
 			# Encode password
 
@@ -49,7 +49,7 @@ namespace Modules\Profile\Controller {
 			$data['auth_key']           = $auth_key;
 			$data['password']           = $password;
 
-			if (!Auth::user()->edit($data)) return 'USER_ERROR_EDIT_PASSWORD';
+			if (!Auth::getUser()->edit($data)) return 'USER_ERROR_EDIT_PASSWORD';
 
 			# ------------------------
 

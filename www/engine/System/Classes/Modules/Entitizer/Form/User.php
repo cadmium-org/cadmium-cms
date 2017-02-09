@@ -18,7 +18,7 @@ namespace Modules\Entitizer\Form {
 
 			$this->addSelect('rank', ((0 !== $user->id) ? $user->rank : RANK_USER), Range\Rank::getRange(), null,
 
-				['disabled' => (($user->id === 1) || ($user->id === Auth::user()->id))]);
+				['disabled' => (($user->id === 1) || ($user->id === Auth::get('id')))]);
 
 			$this->addText('first_name', $user->first_name, FORM_FIELD_TEXT, CONFIG_USER_FIRST_NAME_MAX_LENGTH);
 

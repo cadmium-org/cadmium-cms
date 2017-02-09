@@ -1,33 +1,28 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Action {
 
-	use Modules\Auth, Request;
+	use Modules\Auth;
 
 	class Reset extends Auth\Utils\Action {
 
-		# Handle request
+		# Action configuration
 
-		public function handle() {
+		protected static $view = 'Reset';
 
-			# Set view
+		protected static $form_class = 'Modules\Auth\Form\Reset';
 
-			$this->view = (Auth::admin() ? 'Blocks/Auth/Reset' : 'Blocks/Profile/Auth/Reset');
+		protected static $controller_class = 'Modules\Auth\Controller\Reset';
 
-			# Create form
+		protected static $redirect = '/login?submitted=reset';
 
-			$this->form = new Auth\Form\Reset;
-
-			# Handle form
-
-			if ($this->form->handle(new Auth\Controller\Reset)) {
-
-				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile') . '/login?submitted=reset');
-			}
-
-			# ------------------------
-
-			return $this->getContents();
-		}
+		protected static $messages = [];
 	}
 }

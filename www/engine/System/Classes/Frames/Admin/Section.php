@@ -33,7 +33,7 @@ namespace Frames\Admin {
 
 			# Check auth
 
-			if (($this instanceof Area\Auth) && Auth::check()) Request::redirect(INSTALL_PATH . '/admin');
+			if (($this instanceof Area\Auth) && Auth::isLogged()) Request::redirect(INSTALL_PATH . '/admin');
 
 			# Handle request
 
@@ -52,7 +52,7 @@ namespace Frames\Admin {
 
 			# Check auth
 
-			if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
+			if (!Auth::isLogged() || ((false !== Request::get('logout')) && Auth::logout())) {
 
 				Request::redirect(INSTALL_PATH . '/admin/login');
 			}

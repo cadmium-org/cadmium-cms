@@ -24,7 +24,7 @@ namespace Modules\Profile\Controller {
 
 			# Check email exists
 
-			if (false === ($check_email = Auth::user()->check($email, 'email'))) return 'USER_ERROR_EDIT_PERSONAL';
+			if (false === ($check_email = Auth::getUser()->check($email, 'email'))) return 'USER_ERROR_EDIT_PERSONAL';
 
 			if ($check_email === 1) return ['email', 'USER_ERROR_EMAIL_DUPLICATE'];
 
@@ -40,7 +40,7 @@ namespace Modules\Profile\Controller {
 			$data['country']            = $country;
 			$data['timezone']           = $timezone;
 
-			if (!Auth::user()->edit($data)) return 'USER_ERROR_EDIT_PERSONAL';
+			if (!Auth::getUser()->edit($data)) return 'USER_ERROR_EDIT_PERSONAL';
 
 			# ------------------------
 

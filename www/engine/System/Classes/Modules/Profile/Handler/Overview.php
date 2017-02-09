@@ -16,30 +16,30 @@ namespace Modules\Profile\Handler {
 
 			# Set general
 
-			$contents->name = Auth::user()->name;
+			$contents->name = Auth::get('name');
 
-			$contents->email = Auth::user()->email;
+			$contents->email = Auth::get('email');
 
-			$contents->rank = (Range\Rank::get(Auth::user()->rank) ?? '');
+			$contents->rank = (Range\Rank::get(Auth::get('rank')) ?? '');
 
-			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::user()->time_registered);
+			$contents->time = Date::get(DATE_FORMAT_DATETIME, Auth::get('time_registered'));
 
 			# Set sex
 
-			$contents->sex = (Range\Sex::get(Auth::user()->sex) ?? '');
+			$contents->sex = (Range\Sex::get(Auth::get('sex')) ?? '');
 
 			# Set full name & city
 
 			foreach (['full_name', 'city'] as $name) {
 
-				if ('' === ($text = Auth::user()->$name)) $contents->getBlock($name)->disable();
+				if ('' === ($text = Auth::get($name))) $contents->getBlock($name)->disable();
 
 				else $contents->getBlock($name)->text = $text;
 			}
 
 			# Set country
 
-			if ('' === ($country = Auth::user()->country)) $contents->getBlock('country')->disable(); else {
+			if ('' === ($country = Auth::get('country'))) $contents->getBlock('country')->disable(); else {
 
 				$contents->getBlock('country')->code = $country;
 

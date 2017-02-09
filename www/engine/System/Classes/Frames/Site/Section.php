@@ -33,7 +33,7 @@ namespace Frames\Site {
 
 			# Check auth
 
-			if (Auth::check()) Request::redirect(INSTALL_PATH . '/profile');
+			if (Auth::isLogged()) Request::redirect(INSTALL_PATH . '/profile');
 
 			# ------------------------
 
@@ -48,7 +48,7 @@ namespace Frames\Site {
 
 			# Check auth
 
-			if (!Auth::check() || ((false !== Request::get('logout')) && Auth::logout())) {
+			if (!Auth::isLogged() || ((false !== Request::get('logout')) && Auth::logout())) {
 
 				Request::redirect(INSTALL_PATH . '/profile/login');
 			}

@@ -30,15 +30,15 @@ namespace Frames\Site {
 
 			# Set auth
 
-			if (Auth::check()) {
+			if (Auth::isLogged()) {
 
 				$layout->getBlock('user')->enable(); $layout->getBlock('auth')->disable();
 
-				$layout->getBlock('user')->gravatar = Auth::user()->gravatar;
+				$layout->getBlock('user')->gravatar = Auth::get('gravatar');
 
-				$layout->getBlock('user')->name = Auth::user()->name;
+				$layout->getBlock('user')->name = Auth::get('name');
 
-				if (Auth::user()->rank === RANK_ADMINISTRATOR) $layout->getBlock('admin')->enable();
+				if (Auth::get('rank') === RANK_ADMINISTRATOR) $layout->getBlock('admin')->enable();
 			}
 
 			# Set title

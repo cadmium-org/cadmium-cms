@@ -1,16 +1,38 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Controller {
 
 	use Modules\Auth, Modules\Entitizer, Utils\Security, Utils\Validate, Str;
 
 	class Register {
 
-		# Invoker
+		private $user = null;
+
+		/**
+		 * Constructor
+		 */
+
+		public function __construct() {
+
+			$this->user = Entitizer::get(TABLE_USERS);
+		}
+
+		/**
+		 * Invoker
+		 *
+		 * @return true|string|array : true on success, otherwise an error code, or an array of type [$param_name, $error_code],
+		 *         where $param_name is a name of param that has triggered the error,
+		 *         and $error_code is a language phrase related to the error
+		 */
 
 		public function __invoke(array $post) {
-
-			if (Auth::check()) return true;
 
 			# Declare variables
 
@@ -32,19 +54,15 @@ namespace Modules\Auth\Controller {
 
 			if (false === Security::checkCaptcha($captcha)) return ['captcha', 'USER_ERROR_CAPTCHA_INCORRECT'];
 
-			# Create user object
-
-			$user = Entitizer::get(TABLE_USERS);
-
 			# Check name exists
 
-			if (false === ($check_name = $user->check($name, 'name'))) return 'USER_ERROR_AUTH_REGISTER';
+			if (false === ($check_name = $this->user->check($name, 'name'))) return 'USER_ERROR_AUTH_REGISTER';
 
 			if ($check_name === 1) return ['name', 'USER_ERROR_NAME_DUPLICATE'];
 
 			# Check email exists
 
-			if (false === ($check_email = $user->check($email, 'email'))) return 'USER_ERROR_AUTH_REGISTER';
+			if (false === ($check_email = $this->user->check($email, 'email'))) return 'USER_ERROR_AUTH_REGISTER';
 
 			if ($check_email === 1) return ['email', 'USER_ERROR_EMAIL_DUPLICATE'];
 
@@ -54,7 +72,7 @@ namespace Modules\Auth\Controller {
 
 			# Determine rank
 
-			$rank = (Auth::admin() ? RANK_ADMINISTRATOR : RANK_USER);
+			$rank = (Auth::isAdmin() ? RANK_ADMINISTRATOR : RANK_USER);
 
 			# Create user
 
@@ -69,11 +87,11 @@ namespace Modules\Auth\Controller {
 			$data['time_registered']    = REQUEST_TIME;
 			$data['time_logged']        = REQUEST_TIME;
 
-			if (!$user->create($data)) return 'USER_ERROR_AUTH_REGISTER';
+			if (!$this->user->create($data)) return 'USER_ERROR_AUTH_REGISTER';
 
 			# Send mail
 
-			Auth\Utils\Mail::register($user);
+			Auth\Utils\Mail::sendRegistrationMessage($this->user);
 
 			# ------------------------
 

@@ -86,7 +86,7 @@ namespace Frames {
 
 			# Set timezone
 
-			if (Auth::check() && ('' !== ($timezone = Auth::user()->timezone))) date_default_timezone_set($timezone);
+			if (Auth::isLogged() && ('' !== ($timezone = Auth::get('timezone')))) date_default_timezone_set($timezone);
 
 			# Init utils
 

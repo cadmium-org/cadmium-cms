@@ -2,9 +2,9 @@
 
 	<div class="field">
 
-		<label for="reset-name">%USER_FIELD_NAME%</label>
+		<label for="reset-name-email">%USER_FIELD_NAME_EMAIL%</label>
 
-		{ block:field_reset_name / }
+		{ block:field_reset_name_email / }
 
 	</div>
 

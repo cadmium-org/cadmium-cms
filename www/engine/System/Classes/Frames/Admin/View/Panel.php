@@ -25,15 +25,15 @@ namespace Frames\Admin\View {
 
 			 # Set menu and user
 
-			 if (Auth::check()) {
+			 if (Auth::isLogged()) {
 
 				 $layout->menu = self::get('Blocks/Utils/Menu');
 
-				 $layout->getBlock('user')->gravatar = Auth::user()->gravatar;
+				 $layout->getBlock('user')->gravatar = Auth::get('gravatar');
 
-				 $layout->getBlock('user')->name = Auth::user()->name;
+				 $layout->getBlock('user')->name = Auth::get('name');
 
-				 $layout->getBlock('user')->id = Auth::user()->id;
+				 $layout->getBlock('user')->id = Auth::get('id');
 			 }
 
 			 # Set title
