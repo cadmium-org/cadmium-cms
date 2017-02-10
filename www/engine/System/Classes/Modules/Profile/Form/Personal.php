@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Profile
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Profile\Form {
 
 	use Modules\Auth, Utils\Form, Utils\Range, Geo\Country, Geo\Timezone, Language;
@@ -8,7 +15,9 @@ namespace Modules\Profile\Form {
 
 		protected $name = 'edit';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 

@@ -1,16 +1,25 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Profile
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Profile\Handler {
 
-	use Frames, Modules\Auth, Utils\Range, Utils\View, Date, Geo\Country;
+	use Frames, Modules\Auth, Utils\Range, Utils\View, Date, Geo\Country, Template;
 
 	class Overview extends Frames\Site\Area\Authorized {
 
 		protected $_title = 'TITLE_PROFILE';
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get('Blocks/Profile/Overview');
 
@@ -51,9 +60,11 @@ namespace Modules\Profile\Handler {
 			return $contents;
 		}
 
-		# Handle request
+		/**
+		 * Handle the request
+		 */
 
-		protected function handle() {
+		protected function handle() : Template\Block {
 
 			return $this->getContents();
 		}
