@@ -21,6 +21,8 @@ body { position:absolute !important; width:100%; height:100%; top:0; left:0; }
 
 .main.menu { min-width:320px; }
 
+.main.menu .brand.item img { width:25px; }
+
 .main.menu .launcher.item { display:none; }
 
 @media only screen and (max-width:767px) {
