@@ -76,8 +76,6 @@
 
 		<p class="slogan">$site_slogan$</p>
 
-		<a class="big ui labeled icon button"><i class="rocket icon"></i>Get started</a>
-
 	</header>
 
 	<section class="ui one column page grid" id="container">
