@@ -20,10 +20,12 @@ define('DIR_TEMPLATES',     (DIR_FRAMEWORK . 'Templates/'));
 
 require_once (DIR_FRAMEWORK . 'Engine.php');
 require_once (DIR_FRAMEWORK . 'Exception.php');
+require_once (DIR_FRAMEWORK . 'Type.php');
 
 # Require configuration
 
 require_once (DIR_INCLUDES . 'Constants.php');
+require_once (DIR_INCLUDES . 'Functions.php');
 require_once (DIR_INCLUDES . 'Regex.php');
 require_once (DIR_INCLUDES . 'Headers/Mime.php');
 require_once (DIR_INCLUDES . 'Headers/Status.php');
