@@ -533,24 +533,35 @@ var Main = {
 
 	'Variables' : {
 
-		'locked' : false, 'sender' : null, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [], 'clipboard' : null,
 
 		'init' : function() {
 
 			this.locked = false; this.sender = null; this.list = [];
 
+			if (this.clipboard) { this.clipboard.destroy(); this.clipboard = null; }
+
 			var handler = this, modal = $('#variables-modal');
 
-			var modal_input = modal.find('input'), modal_button = modal.find('button');
+			if (modal.length) {
 
-			modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
+				var modal_input = modal.find('input'), modal_button = modal.find('button');
 
-			$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+				modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
 
-			(new Clipboard('#variable-shortcode-button')).on('success', function(event) {
+				modal_button.mouseout(function() { $(this).popup('hide'); });
 
-				modal_button.popup('show').mouseout(function() { modal_button.popup('hide'); }); event.clearSelection();
-			});
+				$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+
+				this.clipboard = new Clipboard('#variable-shortcode-button');
+
+				this.clipboard.on('success', function(event) {
+
+					modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' }).popup('show');
+
+					event.clearSelection();
+				});
+			}
 
 			$('table#variables-list tbody tr').each(function() {
 
@@ -606,24 +617,35 @@ var Main = {
 
 	'Widgets' : {
 
-		'locked' : false, 'sender' : null, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [], 'clipboard' : null,
 
 		'init' : function() {
 
 			this.locked = false; this.sender = null; this.list = [];
 
+			if (this.clipboard) { this.clipboard.destroy(); this.clipboard = null; }
+
 			var handler = this, modal = $('#widgets-modal');
 
-			var modal_input = modal.find('input'), modal_button = modal.find('button');
+			if (modal.length) {
 
-			modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
+				var modal_input = modal.find('input'), modal_button = modal.find('button');
 
-			$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+				modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
 
-			(new Clipboard('#widget-shortcode-button')).on('success', function(event) {
+				modal_button.mouseout(function() { $(this).popup('hide'); });
 
-				modal_button.popup('show').mouseout(function() { modal_button.popup('hide'); }); event.clearSelection();
-			});
+				$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+
+				this.clipboard = new Clipboard('#widget-shortcode-button');
+
+				this.clipboard.on('success', function(event) {
+
+					modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' }).popup('show');
+
+					event.clearSelection();
+				});
+			}
 
 			$('table#widgets-list tbody tr').each(function() {
 
