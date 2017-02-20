@@ -1,4 +1,4 @@
-<div class="ui menu">
+<div class="ui stackable menu">
 
 	<a class="item" href="/admin/system/settings">%SETTINGS_TAB_COMMON%</a>
 
