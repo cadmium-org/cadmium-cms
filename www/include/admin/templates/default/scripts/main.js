@@ -132,7 +132,7 @@ var Main = {
 
 			$('html').attr('lang', data.language); $('title').html(data.title);
 
-			$('body').scrollTop(0); this.title.html(data.layout.title);
+			$('body').scrollTop(0); $('.sidebar.menu').sidebar('hide'); this.title.html(data.layout.title);
 
 			this.container.html(data.layout.messages + data.layout.popup + data.layout.contents);
 
