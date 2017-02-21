@@ -183,9 +183,11 @@ var Main = {
 
 			var handler = this;
 
-			this.button = $('#language-button').click(function() { handler.submit(); });
+			if (!this.button) this.button = $('#language-button').click(function() { handler.submit(); });
 
-			this.loader = $('#language-loader'); this.menu = this.button.find('.menu');
+			if (!this.loader) this.loader = $('#language-loader');
+
+			if (!this.menu) this.menu = this.button.find('.menu');
 
 			if (this.menu.children('.item').length) this.initMenu();
 		},
@@ -206,7 +208,7 @@ var Main = {
 
 		'submit' : function() {
 
-			if (Main.locked || this.locked || (this.button.find('.menu .item').length > 0)) return;
+			if (Main.locked || this.locked || (this.menu.find('.item').length > 0)) return;
 
 			this.locked = true; this.loader.show();
 
@@ -225,15 +227,13 @@ var Main = {
 
 					item.html('<i class="' + data.items[i].country + ' flag"></i>' + data.items[i].title);
 
-					this.button.find('.menu').append(item);
+					this.menu.append(item);
 				}
 
-				this.initMenu();
+				this.initMenu(); this.button.dropdown({ 'duration' : 0 }).dropdown('show');
 			}
 
-			this.loader.hide(); this.button.dropdown('refresh').dropdown('show');
-
-			this.locked = false; return null;
+			this.loader.hide(); this.locked = false; return null;
 		}
 	},
 
