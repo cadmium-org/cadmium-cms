@@ -7,6 +7,8 @@
 
 .main.menu { min-width:320px; }
 
+.main.menu .brand.item img { width:25px; }
+
 .main.menu .launcher.item { display:none; }
 
 .main.menu .right.menu .collapsed.item { display:none; }

@@ -21,10 +21,7 @@ namespace {
 
 			# Check installation
 
-			if (null !== ($data = Schema::get('System')->load())) {
-
-				Request::redirect(INSTALL_PATH . '/index.php');
-			}
+			if (null !== ($data = Schema::get('System')->load())) Request::redirect(INSTALL_PATH . '/index.php');
 
 			# Get handler class
 

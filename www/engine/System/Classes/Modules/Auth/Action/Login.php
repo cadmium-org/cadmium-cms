@@ -1,48 +1,35 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Action {
 
-	use Modules\Auth, Utils\Messages, Language, Request;
+	use Modules\Auth;
 
 	class Login extends Auth\Utils\Action {
 
-		# Handle request
+		# Action configuration
 
-		public function handle() {
+		protected static $view = 'Login';
 
-			# Set view
+		protected static $form_class = 'Modules\Auth\Form\Login';
 
-			$this->view = (Auth::admin() ? 'Blocks/Auth/Login' : 'Blocks/Profile/Auth/Login');
+		protected static $controller_class = 'Modules\Auth\Controller\Login';
 
-			# Create form
+		protected static $redirect = '';
 
-			$this->form = new Auth\Form\Login;
+		protected static $messages = [
 
-			# Handle form
+			'reset' => ['text' => 'USER_SUCCESS_RESET_TEXT', 'title' => 'USER_SUCCESS_RESET'],
 
-			if ($this->form->handle(new Auth\Controller\Login)) {
+			'recover' => ['text' => 'USER_SUCCESS_RECOVER_TEXT', 'title' => 'USER_SUCCESS_RECOVER'],
 
-				Request::redirect(INSTALL_PATH . (Auth::admin() ? '/admin' : '/profile'));
-			}
-
-			# Display success message
-
-			if (Request::get('submitted') === 'reset') {
-
-				Messages::set('success', Language::get('USER_SUCCESS_RESET_TEXT'), Language::get('USER_SUCCESS_RESET'));
-
-			} else if (Request::get('submitted') === 'recover') {
-
-				Messages::set('success', Language::get('USER_SUCCESS_RECOVER_TEXT'), Language::get('USER_SUCCESS_RECOVER'));
-
-			} else if (Request::get('submitted') === 'register') {
-
-				Messages::set('success', Language::get('USER_SUCCESS_REGISTER_TEXT'), Language::get('USER_SUCCESS_REGISTER'));
-			}
-
-			# ------------------------
-
-			return $this->getContents();
-		}
+			'register' => ['text' => 'USER_SUCCESS_REGISTER_TEXT', 'title' => 'USER_SUCCESS_REGISTER']
+		];
 	}
 }

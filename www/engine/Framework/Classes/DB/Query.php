@@ -9,6 +9,8 @@
 
 namespace DB {
 
+	use Type;
+
 	abstract class Query {
 
 		protected $query = '';
@@ -32,16 +34,41 @@ namespace DB {
 		}
 
 		/**
-		 * Get a list of values
+		 * Get a range of values
 		 */
 
-		protected function getList($value) : string {
-
-			if (!is_array($value)) $value = [$value];
+		protected function getRange(array $value) : string {
 
 			$parser = function($value) { if (is_scalar($value)) return $this->getValue($value); };
 
 			return ('(' . implode(', ', array_filter(array_map($parser, $value))) . ')');
+		}
+
+		/**
+		 * Get an operatable value (value with an operator)
+		 */
+
+		protected function getOperatable($value) {
+
+			if (is_scalar($value)) return ('= ' . $this->getValue($value));
+
+			if (is_array($value)) return ('IN ' . $this->getRange($value));
+
+			if ($value instanceof Type\Not) return ('NOT ' . $this->getValue($value->get()));
+
+			if ($value instanceof Type\Like) return ('LIKE ' . $this->getValue($value->get()));
+
+			if ($value instanceof Type\LessThan) return ('< ' . $value->get());
+
+			if ($value instanceof Type\GreaterThan) return ('> ' . $value->get());
+
+			if ($value instanceof Type\LessThanOrEqual) return ('<= ' . $value->get());
+
+			if ($value instanceof Type\GreaterThanOrEqual) return ('>= ' . $value->get());
+
+			# ------------------------
+
+			return '';
 		}
 
 		/**
@@ -63,7 +90,9 @@ namespace DB {
 
 			$regexs = ['key' => '/\^([a-z]+)/', 'value' => '/\$([a-z]+)/']; $matches = ['key' => [], 'value' => []];
 
-			$parsers = ['name' => 'getName', 'value' => 'getValue', 'list' => 'getList', 'direction' => 'getDirection'];
+			$parsers = ['name' => 'getName', 'value' => 'getValue', 'range' => 'getRange',
+
+						'operatable' => 'getOperatable', 'direction' => 'getDirection'];
 
 			$output = []; $count = 0;
 

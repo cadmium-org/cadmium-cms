@@ -38,7 +38,7 @@ namespace Modules\Entitizer\Lister {
 
 			# Set remove button
 
-			if ($user->id === Auth::user()->id) $view->getBlock('remove')->class = 'disabled';
+			if ($user->id === Auth::get('id')) $view->getBlock('remove')->class = 'disabled';
 		}
 	}
 }

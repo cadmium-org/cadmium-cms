@@ -14,12 +14,12 @@ return [
 
 	'MAIL_TEXT_GREETING'                        => 'Hello',
 
-	'MAIL_TEXT_REGISTER_SUCCESS'                => 'You have successfully registred on',
+	'MAIL_TEXT_REGISTER_SUCCESS'                => 'You have successfully registred at',
 	'MAIL_TEXT_REGISTER_LINK'                   => 'You can authorize by following this link',
 
-	'MAIL_TEXT_RESET_SUCCESS'                   => 'You have requested password reset on',
+	'MAIL_TEXT_RESET_SUCCESS'                   => 'You have requested the password reset at',
 	'MAIL_TEXT_RESET_LINK'                      => 'Please follow the link below to enter your new password',
-	'MAIL_TEXT_RESET_TIME'                      => 'Please note that link is actual for 24 hours',
+	'MAIL_TEXT_RESET_TIME'                      => 'Please note that the link is actual for 24 hours',
 
 	'MAIL_TEXT_FOOTER_NOREPLY'                  => 'This message was generated automatically. Please do not reply',
 	'MAIL_TEXT_FOOTER_REPLY_TO'                 => 'If you have any questions, please email to'

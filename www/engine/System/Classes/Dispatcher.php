@@ -21,10 +21,7 @@ namespace {
 
 			# Check installation
 
-			if (null === ($data = Schema::get('System')->load())) {
-
-				Request::redirect(INSTALL_PATH . '/install.php');
-			}
+			if (null === ($data = Schema::get('System')->load())) Request::redirect(INSTALL_PATH . '/install.php');
 
 			# Connect to database
 

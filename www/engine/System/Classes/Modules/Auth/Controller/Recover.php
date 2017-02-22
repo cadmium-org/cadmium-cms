@@ -1,16 +1,38 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Controller {
 
 	use Modules\Auth, Modules\Entitizer, Utils\Validate, Str;
 
 	class Recover {
 
-		# Invoker
+		private $user = null;
+
+		/**
+		 * Constructor
+		 */
+
+		public function __construct(Entitizer\Entity\User $user) {
+
+			$this->user = $user;
+		}
+
+		/**
+		 * Invoker
+		 *
+		 * @return true|string|array : true on success, otherwise an error code, or an array of type [$param_name, $error_code],
+		 *         where $param_name is a name of param that has triggered the error,
+		 *         and $error_code is a language phrase related to the error
+		 */
 
 		public function __invoke(array $post) {
-
-			if (!Auth::check()) return false;
 
 			# Declare variables
 
@@ -38,11 +60,11 @@ namespace Modules\Auth\Controller {
 
 			$data = ['auth_key' => $auth_key, 'password' => $password];
 
-			if (!Auth::user()->edit($data)) return 'USER_ERROR_AUTH_RECOVER';
+			if (!$this->user->edit($data)) return 'USER_ERROR_AUTH_RECOVER';
 
 			# Remove secret
 
-			Entitizer::get(TABLE_USERS_SECRETS, Auth::user()->id)->remove();
+			Entitizer::get(TABLE_USERS_SECRETS, $this->user->id)->remove();
 
 			# ------------------------
 

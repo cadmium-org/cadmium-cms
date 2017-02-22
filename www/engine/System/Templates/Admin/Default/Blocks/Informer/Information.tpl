@@ -1,4 +1,4 @@
-<div class="ui menu" id="information-menu">
+<div class="ui stackable menu" id="information-menu">
 
 	<a class="active item" href="#common" data-segment="common">%INFORMATION_TAB_COMMON%</a>
 

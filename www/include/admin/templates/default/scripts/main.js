@@ -132,7 +132,7 @@ var Main = {
 
 			$('html').attr('lang', data.language); $('title').html(data.title);
 
-			$('body').scrollTop(0); this.title.html(data.layout.title);
+			$('body').scrollTop(0); $('.sidebar.menu').sidebar('hide'); this.title.html(data.layout.title);
 
 			this.container.html(data.layout.messages + data.layout.popup + data.layout.contents);
 
@@ -183,9 +183,11 @@ var Main = {
 
 			var handler = this;
 
-			this.button = $('#language-button').click(function() { handler.submit(); });
+			if (!this.button) this.button = $('#language-button').click(function() { handler.submit(); });
 
-			this.loader = $('#language-loader'); this.menu = this.button.find('.menu');
+			if (!this.loader) this.loader = $('#language-loader');
+
+			if (!this.menu) this.menu = this.button.find('.menu');
 
 			if (this.menu.children('.item').length) this.initMenu();
 		},
@@ -206,7 +208,7 @@ var Main = {
 
 		'submit' : function() {
 
-			if (Main.locked || this.locked || (this.button.find('.menu .item').length > 0)) return;
+			if (Main.locked || this.locked || (this.menu.find('.item').length > 0)) return;
 
 			this.locked = true; this.loader.show();
 
@@ -225,15 +227,13 @@ var Main = {
 
 					item.html('<i class="' + data.items[i].country + ' flag"></i>' + data.items[i].title);
 
-					this.button.find('.menu').append(item);
+					this.menu.append(item);
 				}
 
-				this.initMenu();
+				this.initMenu(); this.button.dropdown({ 'duration' : 0 }).dropdown('show');
 			}
 
-			this.loader.hide(); this.button.dropdown('refresh').dropdown('show');
-
-			this.locked = false; return null;
+			this.loader.hide(); this.locked = false; return null;
 		}
 	},
 
@@ -533,24 +533,35 @@ var Main = {
 
 	'Variables' : {
 
-		'locked' : false, 'sender' : null, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [], 'clipboard' : null,
 
 		'init' : function() {
 
 			this.locked = false; this.sender = null; this.list = [];
 
+			if (this.clipboard) { this.clipboard.destroy(); this.clipboard = null; }
+
 			var handler = this, modal = $('#variables-modal');
 
-			var modal_input = modal.find('input'), modal_button = modal.find('button');
+			if (modal.length) {
 
-			modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
+				var modal_input = modal.find('input'), modal_button = modal.find('button');
 
-			$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+				modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
 
-			(new Clipboard('#variable-shortcode-button')).on('success', function(event) {
+				modal_button.mouseout(function() { $(this).popup('hide'); });
 
-				modal_button.popup('show').mouseout(function() { modal_button.popup('hide'); }); event.clearSelection();
-			});
+				$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+
+				this.clipboard = new Clipboard('#variable-shortcode-button');
+
+				this.clipboard.on('success', function(event) {
+
+					modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' }).popup('show');
+
+					event.clearSelection();
+				});
+			}
 
 			$('table#variables-list tbody tr').each(function() {
 
@@ -606,24 +617,35 @@ var Main = {
 
 	'Widgets' : {
 
-		'locked' : false, 'sender' : null, 'list' : [],
+		'locked' : false, 'sender' : null, 'list' : [], 'clipboard' : null,
 
 		'init' : function() {
 
 			this.locked = false; this.sender = null; this.list = [];
 
+			if (this.clipboard) { this.clipboard.destroy(); this.clipboard = null; }
+
 			var handler = this, modal = $('#widgets-modal');
 
-			var modal_input = modal.find('input'), modal_button = modal.find('button');
+			if (modal.length) {
 
-			modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
+				var modal_input = modal.find('input'), modal_button = modal.find('button');
 
-			$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+				modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' });
 
-			(new Clipboard('#widget-shortcode-button')).on('success', function(event) {
+				modal_button.mouseout(function() { $(this).popup('hide'); });
 
-				modal_button.popup('show').mouseout(function() { modal_button.popup('hide'); }); event.clearSelection();
-			});
+				$(document).keydown(function(event) { if (event.keyCode == 27) modal_button.popup('hide'); });
+
+				this.clipboard = new Clipboard('#widget-shortcode-button');
+
+				this.clipboard.on('success', function(event) {
+
+					modal_button.popup({ 'position': 'top center', 'variation': 'tiny inverted', 'on' : 'manual' }).popup('show');
+
+					event.clearSelection();
+				});
+			}
 
 			$('table#widgets-list tbody tr').each(function() {
 

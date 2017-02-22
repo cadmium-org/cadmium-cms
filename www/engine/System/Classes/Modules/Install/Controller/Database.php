@@ -16,7 +16,7 @@ namespace Modules\Install\Controller {
 		/**
 		 * Invoker
 		 *
-		 * @return string|true : an error code on failure or true on success
+		 * @return true|string : true on success or an error code on failure
 		 */
 
 		public function __invoke(array $post) {

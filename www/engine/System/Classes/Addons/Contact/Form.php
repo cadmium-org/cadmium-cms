@@ -12,9 +12,9 @@ namespace Addons\Contact {
 
 		public function __construct() {
 
-			$this->addText('name', Auth::user()->full_name, FORM_FIELD_TEXT, Addons\Contact::NAME_MAX_LENGTH, ['required' => true]);
+			$this->addText('name', Auth::get('full_name'), FORM_FIELD_TEXT, Addons\Contact::NAME_MAX_LENGTH, ['required' => true]);
 
-			$this->addText('email', Auth::user()->email, FORM_FIELD_TEXT, Addons\Contact::EMAIL_MAX_LENGTH, ['required' => true]);
+			$this->addText('email', Auth::get('email'), FORM_FIELD_TEXT, Addons\Contact::EMAIL_MAX_LENGTH, ['required' => true]);
 
 			$this->addText('message', '', FORM_FIELD_TEXTAREA, Addons\Contact::MESSAGE_MAX_LENGTH, ['required' => true]);
 

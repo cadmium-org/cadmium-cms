@@ -25,7 +25,7 @@ namespace DB\Query {
 
 			$selection = $this->getString($selection, '$name', ', ');
 
-			$condition = $this->getString($condition, '^name IN $list', ' AND ');
+			$condition = $this->getString($condition, '^name $operatable', ' AND ');
 
 			$order = $this->getString($order, '^name $direction', ', ');
 

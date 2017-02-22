@@ -10,9 +10,9 @@
 
 				<div class="field">
 
-					<label for="login-name">%USER_FIELD_NAME%</label>
+					<label for="login-name-email">%USER_FIELD_NAME_EMAIL%</label>
 
-					{ block:field_login_name / }
+					{ block:field_login_name_email / }
 
 				</div>
 

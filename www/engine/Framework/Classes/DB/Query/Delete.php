@@ -23,7 +23,7 @@ namespace DB\Query {
 
 			$table = $this->getName($table);
 
-			$condition = $this->getString($condition, '^name IN $list', ' AND ');
+			$condition = $this->getString($condition, '^name $operatable', ' AND ');
 
 			# Build query
 

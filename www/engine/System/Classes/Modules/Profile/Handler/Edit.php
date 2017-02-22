@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Profile
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Profile\Handler {
 
-	use Frames, Modules\Profile, Utils\Messages, Utils\View, Language, Request;
+	use Frames, Modules\Profile, Utils\Messages, Utils\View, Language, Request, Template;
 
 	class Edit extends Frames\Site\Area\Authorized {
 
@@ -10,9 +17,11 @@ namespace Modules\Profile\Handler {
 
 		private $form_personal = null, $form_password = null;
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get('Blocks/Profile/Edit');
 
@@ -27,21 +36,23 @@ namespace Modules\Profile\Handler {
 			return $contents;
 		}
 
-		# Handle request
+		/**
+		 * Handle the request
+		 */
 
-		protected function handle() {
+		protected function handle() : Template\Block {
 
 			# Create forms
 
-			$this->form_personal = new Profile\Form\Personal();
+			$this->form_personal = new Profile\Form\Personal;
 
-			$this->form_password = new Profile\Form\Password();
+			$this->form_password = new Profile\Form\Password;
 
 			# Create controllers
 
-			$controller_personal = new Profile\Controller\Personal();
+			$controller_personal = new Profile\Controller\Personal;
 
-			$controller_password = new Profile\Controller\Password();
+			$controller_password = new Profile\Controller\Password;
 
 			# Handle forms
 

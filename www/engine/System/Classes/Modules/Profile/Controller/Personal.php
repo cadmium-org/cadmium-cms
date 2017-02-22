@@ -1,12 +1,25 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Profile
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Profile\Controller {
 
 	use Modules\Auth, Utils\Validate;
 
 	class Personal {
 
-		# Invoker
+		/**
+		 * Invoker
+		 *
+		 * @return true|string|array : true on success, otherwise an error code, or an array of type [$param_name, $error_code],
+		 *         where $param_name is a name of param that has triggered the error,
+		 *         and $error_code is a language phrase related to the error
+		 */
 
 		public function __invoke(array $post) {
 
@@ -24,7 +37,7 @@ namespace Modules\Profile\Controller {
 
 			# Check email exists
 
-			if (false === ($check_email = Auth::user()->check($email, 'email'))) return 'USER_ERROR_EDIT_PERSONAL';
+			if (false === ($check_email = Auth::getUser()->check($email, 'email'))) return 'USER_ERROR_EDIT_PERSONAL';
 
 			if ($check_email === 1) return ['email', 'USER_ERROR_EMAIL_DUPLICATE'];
 
@@ -40,7 +53,7 @@ namespace Modules\Profile\Controller {
 			$data['country']            = $country;
 			$data['timezone']           = $timezone;
 
-			if (!Auth::user()->edit($data)) return 'USER_ERROR_EDIT_PERSONAL';
+			if (!Auth::getUser()->edit($data)) return 'USER_ERROR_EDIT_PERSONAL';
 
 			# ------------------------
 

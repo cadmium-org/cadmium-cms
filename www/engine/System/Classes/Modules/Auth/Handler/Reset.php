@@ -1,18 +1,27 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Auth
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Auth\Handler {
 
-	use Frames, Modules\Auth, Request;
+	use Frames, Modules\Auth, Request, Template;
 
 	class Reset extends Frames\Admin\Area\Auth {
 
 		protected $_title = 'TITLE_AUTH_RESET';
 
-		# Handle request
+		/**
+		 * Handle the request
+		 */
 
-		protected function handle() {
+		public function handle() : Template\Block {
 
-			if (Auth::initial()) Request::redirect(INSTALL_PATH . '/admin/register');
+			if (Auth::isInitial()) Request::redirect(INSTALL_PATH . '/admin/register');
 
 			return (new Auth\Action\Reset)->handle();
 		}

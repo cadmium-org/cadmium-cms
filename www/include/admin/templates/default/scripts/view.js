@@ -28,10 +28,6 @@ var View = {
 			event.preventDefault(); if (window.matchMedia('(min-width: 768px)').matches) $('.sidebar.menu').sidebar('hide');
 		});
 
-		/* Language button */
-
-		$('#language-button').dropdown({ 'duration' : 0 });
-
 		/* Modals */
 
 		$('.ui.modal').modal('setting', 'transition', 'fade down');

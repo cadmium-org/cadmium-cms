@@ -39,7 +39,7 @@
 
 	</head>
 
-	<body>
+	<body class="form">
 
 		{ block:layout / }
 
