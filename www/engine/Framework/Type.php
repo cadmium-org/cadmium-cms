@@ -21,12 +21,12 @@ namespace Type {
 
 		 public function get() {
 
- 			return $value;
+ 			return $this->value;
  		}
 	}
 
-	abstract class _String {
-		
+	abstract class _String extends Type {
+
 		/**
 		 * Constructor
 		 */
@@ -37,7 +37,7 @@ namespace Type {
 		}
 	}
 
-	abstract class _Integer {
+	abstract class _Integer extends Type {
 
 		/**
 		 * Constructor
