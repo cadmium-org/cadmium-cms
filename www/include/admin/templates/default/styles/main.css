@@ -36,9 +36,13 @@ body.form { background:url('../images/form.jpg') top center fixed; background-si
     .main.menu .right.menu .user.item .name { display:none; }
 }
 
+/* Wrapper */
+
+.wrapper { margin-bottom:0 !important; }
+
 /* Segments */
 
-.segment { box-shadow:0 1px 2px 0 rgba(34, 36, 38, 0.08) !important; }
+.segment:not(.basic) { box-shadow:0 1px 2px 0 rgba(34, 36, 38, 0.08) !important; }
 
 body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
