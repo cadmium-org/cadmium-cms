@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, DB;
 
 	abstract class Listview extends Collection {
 
-		# Get default select query
+		/**
+		 * Get the basic select query
+		 */
 
-		private function getDefaultSelectQuery(array $config, array $order_by, int $index, int $display) {
+		private function getBasicSelectQuery(array $config, array $order_by, int $index, int $display) : string {
 
 			return ("SELECT SQL_CALC_FOUND_ROWS " . $this->getSelection() . " ") .
 
@@ -21,9 +30,11 @@ namespace Modules\Entitizer\Utils {
 			       (($index > 0) ? ("LIMIT " . ((($index - 1) * $display) . ", " . $display)) : "");
 		}
 
-		# Get nesting select query
+		/**
+		 * Get the nesting select query
+		 */
 
-		private function getNestingSelectQuery(int $parent_id, array $config, array $order_by, int $index, int $display) {
+		private function getNestingSelectQuery(int $parent_id, array $config, array $order_by, int $index, int $display) : string {
 
 			return ("SELECT SQL_CALC_FOUND_ROWS " . $this->getSelection() . ", COUNT(chd.descendant) as children ") .
 
@@ -42,18 +53,22 @@ namespace Modules\Entitizer\Utils {
 			       (($index > 0) ? ("LIMIT " . ((($index - 1) * $display) . ", " . $display)) : "");
 		}
 
-		# Get default count query
+		/**
+		 * Get the basic count query
+		 */
 
-		private function getDefaultCountQuery(array $config) {
+		private function getBasicCountQuery(array $config) : string {
 
 			return ("SELECT COUNT(ent.id) as count FROM " . static::$table . " ent ") .
 
 			       (('' !== ($condition = $this->getCondition($config))) ? ("WHERE " . $condition) : "");
 		}
 
-		# Get nesting count query
+		/**
+		 * Get the nesting count query
+		 */
 
-		private function getNestingCountQuery(int $parent_id, array $config) {
+		private function getNestingCountQuery(int $parent_id, array $config) : string {
 
 			return ("SELECT COUNT(ent.id) as count FROM " . static::$table . " ent ") .
 
@@ -64,7 +79,11 @@ namespace Modules\Entitizer\Utils {
 			       (('' !== ($condition = $this->getCondition($config))) ? ("AND " . $condition) : "");
 		}
 
-		# Select entries from DB
+		/**
+		 * Select entries from DB
+		 *
+		 * @return array|false : the array of entities or false on failure
+		 */
 
 		private function select(int $parent_id = null, array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
 
@@ -74,7 +93,7 @@ namespace Modules\Entitizer\Utils {
 
 			# Select entities
 
-			$query = ((null === $parent_id) ? $this->getDefaultSelectQuery($config, $order_by, $index, $display) :
+			$query = ((null === $parent_id) ? $this->getBasicSelectQuery($config, $order_by, $index, $display) :
 
 				$this->getNestingSelectQuery($parent_id, $config, $order_by, $index, $display));
 
@@ -86,7 +105,7 @@ namespace Modules\Entitizer\Utils {
 
 			while (null !== ($data = DB::getLast()->getRow())) {
 
-				$dataset = Entitizer::dataset(static::$table, $data);
+				$dataset = Entitizer::getDataset(static::$table, $data);
 
 				$items['list'][$dataset->id]['dataset'] = $dataset;
 
@@ -105,7 +124,11 @@ namespace Modules\Entitizer\Utils {
 			return $items;
 		}
 
-		# Count entries in DB
+		/**
+		 * Count entries in DB
+		 *
+		 * @return int|false : the number of entities or false on failure
+		 */
 
 		private function count(int $parent_id = null, array $config = []) {
 
@@ -113,7 +136,7 @@ namespace Modules\Entitizer\Utils {
 
 			# Count entities
 
-			$query = ((null === $parent_id) ? $this->getDefaultCountQuery($config) :
+			$query = ((null === $parent_id) ? $this->getBasicCountQuery($config) :
 
 				$this->getNestingCountQuery($parent_id, $config));
 
@@ -124,32 +147,64 @@ namespace Modules\Entitizer\Utils {
 			return intval(DB::getLast()->getRow()['count']);
 		}
 
-		# Get items
+		/**
+		 * Get the list of items
+		 *
+		 * @param $config       an array of filtering options
+		 * @param $order_by     an array where each key is a field name and each value is a sorting direction (ASC or DESC)
+		 * @param $index        a page index
+		 * @param $display      a number of results per page
+		 *
+		 * @return array|false : the array of entities or false on failure
+		 */
 
-		public function items(array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
+		public function getItems(array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
 
 			return $this->select(null, $config, $order_by, $index, $display);
 		}
 
-		# Get items count
+		/**
+		 * Get the items count
+		 *
+		 * @param $config : an array of filtering options
+		 *
+		 * @return int|false : the number of entities or false on failure
+		 */
 
-		public function itemsCount(array $config = []) {
+		public function getItemsCount(array $config = []) {
 
 			return $this->count(null, $config);
 		}
 
-		# Get children
+		/**
+		 * Get the list of children items
+		 *
+		 * @param $parent_id    an id of a parent entity
+		 * @param $config       an array of filtering options
+		 * @param $order_by     an array where each key is a field name and each value is a sorting direction (ASC or DESC)
+		 * @param $index        a page index
+		 * @param $display      a number of results per page
+		 *
+		 * @return array|false : the array of entities or false on failure
+		 */
 
-		public function children(int $parent_id = 0, array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
+		public function getChildren(int $parent_id = 0, array $config = [], array $order_by = [], int $index = 0, int $display = 0) {
 
 			if (!static::$nesting) return false;
 
 			return $this->select($parent_id, $config, $order_by, $index, $display);
 		}
 
-		# Get children count
+		/**
+		 * Get the children items count
+		 *
+		 * @param $parent_id    an id of a parent entity
+		 * @param $config       an array of filtering options
+		 *
+		 * @return int|false : the number of entities or false on failure
+		 */
 
-		public function childrenCount(int $parent_id = 0, array $config = []) {
+		public function getChildrenCount(int $parent_id = 0, array $config = []) {
 
 			if (!static::$nesting) return false;
 

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Form {
 
 	use Modules\Entitizer, Utils\Form;
@@ -8,7 +15,9 @@ namespace Modules\Entitizer\Form {
 
 		protected $name = 'variable';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(Entitizer\Entity\Variable $variable) {
 

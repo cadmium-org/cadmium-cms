@@ -31,7 +31,7 @@ namespace Modules\Tools\Handler {
 
 			# ------------------------
 
-			while (null !== ($data = DB::getLast()->getRow())) yield Entitizer::dataset(TABLE_PAGES, $data);
+			while (null !== ($data = DB::getLast()->getRow())) yield Entitizer::getDataset(TABLE_PAGES, $data);
 		}
 
 		# Handle request

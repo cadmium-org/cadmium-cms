@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils\Entity {
 
 	use Modules\Entitizer, DB;
@@ -8,9 +15,13 @@ namespace Modules\Entitizer\Utils\Entity {
 
 		protected $definition = null, $dataset = null;
 
-		# Init entity subtree connection
+		/**
+		 * Initialize the subtree connection
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function initSubtree() {
+		private function initSubtree() : bool {
 
 			$data = ['ancestor' => $this->id, 'descendant' => $this->id, 'depth' => 0];
 
@@ -21,9 +32,13 @@ namespace Modules\Entitizer\Utils\Entity {
 			return (DB::getLast() && DB::getLast()->status);
 		}
 
-		# Disconnect subtree from current position
+		/**
+		 * Disconnect the subtree from the current position
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function disconnectSubtree() {
+		private function disconnectSubtree() : bool {
 
 			$query = ("DELETE rla FROM " . static::$table_relations . " rla ") .
 
@@ -46,9 +61,13 @@ namespace Modules\Entitizer\Utils\Entity {
 			return true;
 		}
 
-		# Connect subtree under new position
+		/**
+		 * Connect the subtree under the new position
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function connectSubtree(int $parent_id) {
+		private function connectSubtree(int $parent_id) : bool {
 
 			$query = ("INSERT INTO " . static::$table_relations . " (ancestor, descendant, depth) ") .
 
@@ -71,9 +90,13 @@ namespace Modules\Entitizer\Utils\Entity {
 			return true;
 		}
 
-		# Create entity entry in DB
+		/**
+		 * Create the entity entry in DB
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function create(array $data) {
+		public function create(array $data) : bool {
 
 			if (0 !== $this->id) return false;
 
@@ -106,9 +129,13 @@ namespace Modules\Entitizer\Utils\Entity {
 			return true;
 		}
 
-		# Edit entity entry in DB
+		/**
+		 * Edit the entity entry in DB
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function edit(array $data) {
+		public function edit(array $data) : bool {
 
 			if (0 === $this->id) return false;
 
@@ -135,9 +162,13 @@ namespace Modules\Entitizer\Utils\Entity {
 			return true;
 		}
 
-		# Move entity to new parent
+		/**
+		 * Move the entity to a new parent
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function move(int $parent_id) {
+		public function move(int $parent_id) : bool {
 
 			if (0 === $this->id) return false;
 
@@ -145,13 +176,13 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			if (!$this->initSubtree()) return false;
 
-			# Create parent entity
+			# Get parent entity
 
 			if (0 !== ($parent = Entitizer::get(static::$table, $parent_id))->id) {
 
-				if (false === ($path = $parent->path())) return false;
+				if (false === ($path = $parent->getPath())) return false;
 
-				if (false === ($depth = $this->subtreeDepth())) return false;
+				if (false === ($depth = $this->getSubtreeDepth())) return false;
 
 				if ((count($path) + $depth + 1) > CONFIG_ENTITIZER_MAX_DEPTH) return false;
 			}
@@ -169,9 +200,13 @@ namespace Modules\Entitizer\Utils\Entity {
 			return true;
 		}
 
-		# Remove entity entry from DB
+		/**
+		 * Remove the entity entry from DB
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function remove() {
+		public function remove() : bool {
 
 			if (0 === $this->id) return false;
 
@@ -179,7 +214,7 @@ namespace Modules\Entitizer\Utils\Entity {
 
 			if (static::$super && ($this->id === 1)) return false;
 
-			if (static::$nesting && (0 !== $this->subtreeCount())) return false;
+			if (static::$nesting && (0 !== $this->getSubtreeCount())) return false;
 
 			# Remove entity
 

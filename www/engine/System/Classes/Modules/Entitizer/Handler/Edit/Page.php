@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Handler\Edit {
 
 	use Modules\Entitizer, Template;
@@ -12,13 +19,13 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		# Handler configuration
 
-		protected static $controller = 'Modules\Entitizer\Controller\Page';
-
-		protected static $link = '/admin/content/pages';
-
 		protected static $naming = 'title', $naming_new = '';
 
+		protected static $view = 'Blocks/Entitizer/Pages/Main';
+
 		protected static $form_class = 'Modules\Entitizer\Form\Page';
+
+		protected static $controller_class = 'Modules\Entitizer\Controller\Page';
 
 		protected static $message_success_save = 'PAGE_SUCCESS_SAVE';
 
@@ -26,9 +33,11 @@ namespace Modules\Entitizer\Handler\Edit {
 
 		protected static $message_error_remove = 'PAGE_ERROR_REMOVE';
 
-		protected static $view = 'Blocks/Entitizer/Pages/Main';
+		protected static $link = '/admin/content/pages';
 
-		# Add parent additional data
+		/**
+		 * Add parent's additional data
+		 */
 
 		protected function processEntityParent(Template\Block $parent) {
 
@@ -37,7 +46,9 @@ namespace Modules\Entitizer\Handler\Edit {
 			else { $parent->getBlock('browse')->disable(); $parent->getBlock('browse_disabled')->enable(); }
 		}
 
-		# Add additional parent data for specific entity
+		/**
+		 * Add additional data for a specific entity
+		 */
 
 		protected function processEntity(Template\Block $contents) {
 

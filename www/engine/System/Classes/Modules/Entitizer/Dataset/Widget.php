@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Dataset {
 
 	use Modules\Entitizer;
@@ -8,7 +15,9 @@ namespace Modules\Entitizer\Dataset {
 
 		use Entitizer\Common\Widget;
 
-		# Init dataset
+		/**
+		 * Initialize the dataset
+		 */
 
 		protected function init() {}
 	}

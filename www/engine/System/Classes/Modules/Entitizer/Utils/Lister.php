@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Frames, Modules\Entitizer, Modules\Settings, Utils\Pagination, Utils\View, Ajax, Number, Request, Template, Url;
@@ -10,7 +17,9 @@ namespace Modules\Entitizer\Utils {
 
 		protected $items = ['list' => [], 'total' => 0];
 
-		# Process parent block
+		/**
+		 * Process the parent block
+		 */
 
 		private function processParent(Template\Block $parent) {
 
@@ -35,7 +44,9 @@ namespace Modules\Entitizer\Utils {
 			$this->processEntityParent($parent);
 		}
 
-		# Process items block
+		/**
+		 * Process the items block
+		 */
 
 		private function processItems(Template\Block $items, bool $ajax = false) {
 
@@ -83,7 +94,11 @@ namespace Modules\Entitizer\Utils {
 			}
 		}
 
-		# Get pagination block
+		/**
+		 * Get the pagination block
+		 *
+		 * @return Template\Block|false : a block or false if there is only a single page
+		 */
 
 		private function getPaginationBlock() {
 
@@ -96,9 +111,11 @@ namespace Modules\Entitizer\Utils {
 			return Pagination::block($this->index, Settings::get('admin_display_entities'), $this->items['total'], $url);
 		}
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents(bool $ajax = false) {
+		private function getContents(bool $ajax = false) : Template\Block {
 
 			$contents = View::get(!$ajax ? static::$view_main : static::$view_ajax_main);
 
@@ -123,9 +140,11 @@ namespace Modules\Entitizer\Utils {
 			return $contents;
 		}
 
-		# Handle ajax request
+		/**
+		 * Handle the ajax request
+		 */
 
-		private function handleAjax() {
+		private function handleAjax() : Ajax\Response {
 
 			$ajax = Ajax::createResponse();
 
@@ -141,13 +160,13 @@ namespace Modules\Entitizer\Utils {
 
 			# Get path and depth
 
-			if (false !== ($path = $this->parent->path())) $this->path = $path;
+			if (false !== ($path = $this->parent->getPath())) $this->path = $path;
 
-			if ((0 !== $this->entity->id) && (false !== ($depth = $this->entity->subtreeDepth()))) $this->depth = $depth;
+			if ((0 !== $this->entity->id) && (false !== ($depth = $this->entity->getSubtreeDepth()))) $this->depth = $depth;
 
 			# Get items list
 
-			$lister = (static::$nesting ? 'children' : 'items');
+			$lister = (static::$nesting ? 'getChildren' : 'getItems');
 
 			if (false !== ($items = $this->parent->$lister())) $this->items = $items;
 
@@ -156,7 +175,11 @@ namespace Modules\Entitizer\Utils {
 			return $ajax->set('contents', $this->getContents(true)->getContents());
 		}
 
-		# Handle common request
+		/**
+		 * Handle the request
+		 *
+		 * @return Template\Block|Ajax\Response | a block object if the ajax param was set to false, otherwise an ajax response
+		 */
 
 		protected function handle(bool $ajax = false) {
 
@@ -172,11 +195,11 @@ namespace Modules\Entitizer\Utils {
 
 			# Get path
 
-			if (false !== ($path = $this->parent->path())) $this->path = $path;
+			if (false !== ($path = $this->parent->getPath())) $this->path = $path;
 
 			# Get items list
 
-			$lister = (static::$nesting ? 'children' : 'items'); $display = Settings::get('admin_display_entities');
+			$lister = (static::$nesting ? 'getChildren' : 'getItems'); $display = Settings::get('admin_display_entities');
 
 			if (false !== ($items = $this->parent->$lister([], [], $this->index, $display))) $this->items = $items;
 

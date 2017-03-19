@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use DB;
@@ -8,15 +15,17 @@ namespace Modules\Entitizer\Utils {
 
 		protected $params = null, $indexes = null, $foreigns = null;
 
-		# Get list of statements
+		/**
+		 * Get the list of statements
+		 */
 
-		private function getStatements() {
+		private function getStatements() : array {
 
 			$statements = [];
 
 			foreach ([$this->params, $this->indexes, $this->foreigns] as $group) {
 
-				foreach ($group->list() as $item) $statements[] = $item->statement();
+				foreach ($group->getList() as $item) $statements[] = $item->getStatement();
 			}
 
 			# ------------------------
@@ -24,9 +33,13 @@ namespace Modules\Entitizer\Utils {
 			return $statements;
 		}
 
-		# Create main table
+		/**
+		 * Create the main table
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function createMainTable() {
+		private function createMainTable() : bool {
 
 			$query = ("CREATE TABLE IF NOT EXISTS `" . static::$table . "` (") .
 
@@ -39,9 +52,13 @@ namespace Modules\Entitizer\Utils {
 			return (DB::send($query) && DB::getLast()->status);
 		}
 
-		# Create relations table
+		/**
+		 * Create the relations table
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function createRelationsTable() {
+		private function createRelationsTable() : bool {
 
 			$query = ("CREATE TABLE IF NOT EXISTS `" . static::$table_relations . "` (") .
 
@@ -62,25 +79,35 @@ namespace Modules\Entitizer\Utils {
 		 	return (DB::send($query) && DB::getLast()->status);
 		}
 
-		# Drop main table
+		/**
+		 * Drop the main table
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function removeMainTable() {
+		private function removeMainTable() : bool {
 
 			$query = ("DROP TABLE IF EXISTS `" . static::$table  . "`");
 
 			return (DB::send($query) && DB::getLast()->status);
 		}
 
-		# Drop relations table
+		/**
+		 * Drop the relations table
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		private function removeRelationsTable() {
+		private function removeRelationsTable() : bool {
 
 			$query = ("DROP TABLE IF EXISTS `" . static::$table_relations  . "`");
 
 			return (DB::send($query) && DB::getLast()->status);
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
@@ -95,65 +122,93 @@ namespace Modules\Entitizer\Utils {
 			$this->define();
 		}
 
-		# Return params
+		/**
+		 * Get a param
+		 *
+		 * @return Entitizer\Utils\Definition\Item\Param|false : the param object or false if the param does not exist
+		 */
 
-		public function params() {
-
-			return $this->params->list();
-		}
-
-		# Return secure params
-
-		public function paramsSecure() {
-
-			return $this->params->secure();
-		}
-
-		# Return param by name
-
-		public function param(string $name) {
+		public function getParam(string $name) {
 
 			return $this->params->get($name);
 		}
 
-		# Return indexes
+		/**
+		 * Get the params list
+		 */
 
-		public function indexes() {
+		public function getParams() : array {
 
-			return $this->indexes->list();
+			return $this->params->getList();
 		}
 
-		# Return index by name
+		/**
+		 * Get the secure params list (includes every param except of long textuals)
+		 */
 
-		public function index(string $name) {
+		public function getParamsSecure() : array {
+
+			return $this->params->getSecure();
+		}
+
+		/**
+		 * Get an index
+		 *
+		 * @return Entitizer\Utils\Definition\Item\Index|false : the index object or false if the index does not exist
+		 */
+
+		public function getIndex(string $name) {
 
 			return $this->indexes->get($name);
 		}
 
-		# Return foreigns
+		/**
+		 * Get the indexes list
+		 */
 
-		public function foreigns() {
+		public function getIndexes() : array {
 
-			return $this->foreigns->list();
+			return $this->indexes->getList();
 		}
 
-		# Return foreign by name
+		/**
+		 * Get a foreign
+		 *
+		 * @return Entitizer\Utils\Definition\Item\Foreign|false : the foreign object or false if the foreign does not exist
+		 */
 
-		public function foreign(string $name) {
+		public function getForeign(string $name) {
 
 			return $this->foreigns->get($name);
 		}
 
-		# Create tables
+		/**
+		 * Get the foreigns list
+		 */
 
-		public function createTables() {
+		public function getForeigns() : array {
+
+			return $this->foreigns->getList();
+		}
+
+		/**
+		 * Create entity table(s)
+		 *
+		 * @return bool : true on success or false on failure
+		 */
+
+		public function createTables() : bool {
 
 			return ($this->createMainTable() && (!static::$nesting || $this->createRelationsTable()));
 		}
 
-		# Remove tables
+		/**
+		 * Remove entity table(s)
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function removeTables() {
+		public function removeTables() : bool {
 
 			return ((!static::$nesting || $this->removeRelationsTable()) && $this->removeMainTable());
 		}

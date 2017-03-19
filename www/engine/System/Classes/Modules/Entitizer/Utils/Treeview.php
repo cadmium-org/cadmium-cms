@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, DB;
 
 	abstract class Treeview extends Collection {
 
-		# Get join statement
+		/**
+		 * Get the join statement
+		 */
 
-		protected function getQueryJoin(int $parent_id) {
+		protected function getQueryJoin(int $parent_id) : string {
 
 			return (0 !== $parent_id) ? (("JOIN " . static::$table_relations . " rel ") .
 
@@ -17,9 +26,11 @@ namespace Modules\Entitizer\Utils {
 				   ("JOIN " . static::$table_relations . " rel ON rel.descendant = ent.id");
 		}
 
-		# Get select query
+		/**
+		 * Get the select query
+		 */
 
-		private function getSelectQuery(int $parent_id, array $config, array $order_by) {
+		private function getSelectQuery(int $parent_id, array $config, array $order_by) : string {
 
 			return ("SELECT " . $this->getSelection() . ", COALESCE(par.ancestor, 0) as parent_id ") .
 
@@ -32,18 +43,22 @@ namespace Modules\Entitizer\Utils {
 			       ("GROUP BY ent.id ORDER BY MAX(rel.depth) ASC, " . $this->getOrderBy($order_by));
 		}
 
-		# Get count query
+		/**
+		 * Get the count query
+		 */
 
-		private function getCountQuery(int $parent_id) {
+		private function getCountQuery(int $parent_id) : string {
 
 			return ("SELECT COUNT(DISTINCT ent.id) as count FROM " . static::$table . " ent ") .
 
 			       $this->getQueryJoin($parent_id);
 		}
 
-		# Get depth query
+		/**
+		 * Get the depth query
+		 */
 
-		private function getDepthQuery(int $parent_id) {
+		private function getDepthQuery(int $parent_id) : string {
 
 			$query = ("SELECT COUNT(DISTINCT rel.depth) as depth FROM " . static::$table . " ent ") .
 
@@ -54,9 +69,17 @@ namespace Modules\Entitizer\Utils {
 			return $query;
 		}
 
-		# Get subtree
+		/**
+		 * Get the entity subtree
+		 *
+		 * @param $parent_id    an id of a parent entity
+		 * @param $config       an array of filtering options
+		 * @param $order_by     an array where each key is a field name and each value is a sorting direction (ASC or DESC)
+		 *
+		 * @return array|false : the multidimensional array containing the tree or false on failure
+		 */
 
-		public function subtree(int $parent_id = 0, array $config = [], array $order_by = []) {
+		public function getSubtree(int $parent_id = 0, array $config = [], array $order_by = []) {
 
 			if (!(static::$nesting && ($parent_id >= 0))) return false;
 
@@ -72,7 +95,7 @@ namespace Modules\Entitizer\Utils {
 
 			while (null !== ($data = DB::getLast()->getRow())) {
 
-				$dataset = Entitizer::dataset(static::$table, $data);
+				$dataset = Entitizer::getDataset(static::$table, $data);
 
 				$items[$dataset->id] = ['dataset' => $dataset, 'children' => []];
 
@@ -84,9 +107,15 @@ namespace Modules\Entitizer\Utils {
 			return $items;
 		}
 
-		# Get subtree count
+		/**
+		 * Get the count of items within the entity subtree
+		 *
+		 * @param $parent_id : an id of a parent entity
+		 *
+		 * @return int|false : the number of entities or false on failure
+		 */
 
-		public function subtreeCount(int $parent_id = 0) {
+		public function getSubtreeCount(int $parent_id = 0) {
 
 			if (!(static::$nesting && ($parent_id >= 0))) return false;
 
@@ -101,9 +130,15 @@ namespace Modules\Entitizer\Utils {
 			return intval(DB::getLast()->getRow()['count']);
 		}
 
-		# Get subtree depth
+		/**
+		 * Get the subtree depth
+		 *
+		 * @param $parent_id : an id of a parent entity
+		 *
+		 * @return int|false : the depth or false on failure
+		 */
 
-		public function subtreeDepth(int $parent_id = 0) {
+		public function getSubtreeDepth(int $parent_id = 0) {
 
 			if (!(static::$nesting && ($parent_id >= 0))) return false;
 
@@ -118,9 +153,15 @@ namespace Modules\Entitizer\Utils {
 			return intval(DB::getLast()->getRow()['depth']);
 		}
 
-		# Get path
+		/**
+		 * Get the entity path
+		 *
+		 * @param $parent_id : an id of a parent entity
+		 *
+		 * @return array|false : the array of path items or false on failure
+		 */
 
-		public function path(int $parent_id = 0) {
+		public function getPath(int $parent_id = 0) {
 
 			if (!(static::$nesting && ($parent_id >= 0))) return false;
 
@@ -140,7 +181,7 @@ namespace Modules\Entitizer\Utils {
 
 			$path = [];
 
-			while (null !== ($data = DB::getLast()->getRow())) $path[] = Entitizer::dataset(static::$table, $data)->data();
+			while (null !== ($data = DB::getLast()->getRow())) $path[] = Entitizer::getDataset(static::$table, $data)->getData();
 
 			# ------------------------
 

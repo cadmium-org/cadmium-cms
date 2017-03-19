@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, Dataset as Config;
@@ -8,15 +15,19 @@ namespace Modules\Entitizer\Utils {
 
 		protected $definition = null, $config = null;
 
-		# Cast order set to be suitable with entity definition
+		/**
+		 * Validate an order-by fieldset to be suitable with the entity definition
+		 *
+		 * @return array : the array of validated values or the array of defaults if the validation result is empty
+		 */
 
-		private function castOrderBy(array $data) {
+		private function castOrderBy(array $data) : array {
 
 			$order_by = [];
 
 			foreach ($data as $field => $direction) {
 
-				if (false === ($param = $this->definition->param($field))) continue;
+				if (false === ($param = $this->definition->getParam($field))) continue;
 
 				$order_by[$param->name] = ((strtoupper($direction) !== 'DESC') ? 'ASC' : 'DESC');
 			}
@@ -26,22 +37,26 @@ namespace Modules\Entitizer\Utils {
 			return (([] !== $order_by) ? $order_by : static::$order_by);
 		}
 
-		# Get selection
+		/**
+		 * Get the selection statement
+		 */
 
-		protected function getSelection() {
+		protected function getSelection() : string {
 
 			$selection = [];
 
-			foreach ($this->definition->paramsSecure() as $field) $selection[] = ('ent.' . $field);
+			foreach ($this->definition->getParamsSecure() as $field) $selection[] = ('ent.' . $field);
 
 			# ------------------------
 
 			return implode(', ', $selection);
 		}
 
-		# Get order by
+		/**
+		 * Get the order-by statement
+		 */
 
-		protected function getOrderBy(array $data) {
+		protected function getOrderBy(array $data) : string {
 
 			$order_by = [];
 
@@ -52,20 +67,24 @@ namespace Modules\Entitizer\Utils {
 			return implode(', ', $order_by);
 		}
 
-		# Get condition
+		/**
+		 * Get the condition statement
+		 */
 
-		protected function getCondition(array $data) {
+		protected function getCondition(array $data) : string {
 
 			return implode(' AND ', array_filter($this->config->castArray($data, true)));
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
-			$this->definition = Entitizer::definition(static::$table);
+			$this->definition = Entitizer::getDefinition(static::$table);
 
-			$this->config = new Config();
+			$this->config = new Config;
 
 			$this->init();
 		}

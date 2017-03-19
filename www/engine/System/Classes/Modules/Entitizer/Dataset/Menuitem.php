@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Dataset {
 
 	use Modules\Entitizer, Utils\Validate;
@@ -8,11 +15,13 @@ namespace Modules\Entitizer\Dataset {
 
 		use Entitizer\Common\Menuitem;
 
-		# Init dataset
+		/**
+		 * Initialize the dataset
+		 */
 
 		protected function init() {
 
-			$this->addWorker('link', function (array $data) {
+			$this->addVirtual('link', function (array $data) {
 
 				if ('' === $data['slug']) return '';
 

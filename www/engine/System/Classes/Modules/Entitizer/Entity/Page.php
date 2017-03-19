@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Entity {
 
 	use Modules\Auth, Modules\Entitizer, DB;
@@ -8,19 +15,23 @@ namespace Modules\Entitizer\Entity {
 
 		use Entitizer\Common\Page;
 
-		# Init by slug
+		/**
+ 		 * Initialize the page by a slug
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function initBySlug(string $slug) {
+		public function initBySlug(string $slug) : bool {
 
 			if (0 !== $this->id) return false;
 
 			# Process value
 
-			$slug = $this->definition->param('slug')->cast($slug);
+			$slug = $this->definition->getParam('slug')->cast($slug);
 
 			# Process selection
 
-			$selection = array_keys($this->definition->params());
+			$selection = array_keys($this->definition->getParams());
 
 			foreach ($selection as $key => $field) $selection[$key] = ('ent.' . $field);
 
@@ -45,9 +56,13 @@ namespace Modules\Entitizer\Entity {
 			return $this->setData(DB::getLast()->getRow());
 		}
 
-		# Update slugs
+		/**
+ 		 * Update slugs of the page descendants
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function updateSlugs() {
+		public function updateSlugs() : bool {
 
 			if (0 === $this->id) return false;
 
@@ -90,9 +105,13 @@ namespace Modules\Entitizer\Entity {
 			return true;
 		}
 
-		# Create page entry in DB
+		/**
+		 * Create the page entry in DB
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function create(array $data) {
+		public function create(array $data) : bool {
 
 			if (!parent::create($data)) return false;
 
@@ -103,9 +122,13 @@ namespace Modules\Entitizer\Entity {
 			return true;
 		}
 
-		# Edit page entry in DB
+		/**
+		 * Edit the page entry in DB
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function edit(array $data) {
+		public function edit(array $data) : bool {
 
 			if (!parent::edit($data)) return false;
 
@@ -116,9 +139,13 @@ namespace Modules\Entitizer\Entity {
 			return true;
 		}
 
-		# Move page to new parent
+		/**
+		 * Move the page to a new parent
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function move(int $parent_id) {
+		public function move(int $parent_id) : bool {
 
 			if (!parent::move($parent_id)) return false;
 

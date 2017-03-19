@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer, DB;
@@ -10,28 +17,36 @@ namespace Modules\Entitizer\Utils {
 
 		protected $definition = null, $dataset = null;
 
-		# Select default entity from DB
+		/**
+		 * Select a basic entity from DB
+		 *
+		 * @return DB\Result|false : the selection result object or false on failure
+		 */
 
-		private function selectDefault(string $name, string $value) {
+		private function selectBasic(string $name, string $value) {
 
-			$selection = array_keys($this->definition->params());
+			$selection = array_keys($this->definition->getParams());
 
 			return DB::select(static::$table, $selection, [$name => $value], null, 1);
 		}
 
-		# Select nesting entity from DB
+		/**
+		 * Select a nesting entity from DB
+		 *
+		 * @return DB\Result|false : the selection result object or false on failure
+		 */
 
 		private function selectNesting(string $name, string $value) {
 
 			# Process selection
 
-			$selection = array_keys($this->definition->params());
+			$selection = array_keys($this->definition->getParams());
 
 			foreach ($selection as $key => $field) $selection[$key] = ('ent.' . $field);
 
 			# Process query
 
-			$query = ("SELECT " . implode(', ', $selection) .", rel.ancestor as parent_id ") .
+			$query = ("SELECT " . implode(', ', $selection) . ", rel.ancestor as parent_id ") .
 
 			         ("FROM " . static::$table . " ent ") .
 
@@ -44,11 +59,15 @@ namespace Modules\Entitizer\Utils {
 			return DB::send($query);
 		}
 
-		# Set selected data
+		/**
+		 * Update the entity dataset with a selected data. Also updates every entity object having an identical id
+		 *
+		 * @return true : always true ;)
+		 */
 
-		protected function setData(array $data) {
+		protected function setData(array $data) : bool {
 
-			$id = $this->definition->param('id')->cast($data['id']);
+			$id = $this->definition->getParam('id')->cast($data['id']);
 
 			# Import data
 
@@ -70,57 +89,68 @@ namespace Modules\Entitizer\Utils {
 			return true;
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
 			# Get definition
 
-			$this->definition = Entitizer::definition(static::$table);
+			$this->definition = Entitizer::getDefinition(static::$table);
 
 			# Preset data
 
-			$this->dataset = Entitizer::dataset(static::$table);
+			$this->dataset = Entitizer::getDataset(static::$table);
 		}
 
-		# Init entity
+		/**
+		 * Initialize the entity by a unique param (default: id)
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function init($value, string $name = 'id') {
+		public function init($value, string $name = 'id') : bool {
 
 			if (0 !== $this->id) return false;
 
 			# Get initiation index
 
-			if (false === ($index = $this->definition->index($name))) return false;
+			if (false === ($index = $this->definition->getIndex($name))) return false;
 
 			if (($index->type !== 'PRIMARY') && ($index->type !== 'UNIQUE')) return false;
 
 			# Process name & value
 
-			$name = $index->name; $value = $this->definition->param($name)->cast($value);
+			$name = $index->name; $value = $this->definition->getParam($name)->cast($value);
 
 			# Select entity from DB
 
-			if (!static::$nesting) $this->selectDefault($name, $value); else $this->selectNesting($name, $value);
+			if (!static::$nesting) $this->selectBasic($name, $value); else $this->selectNesting($name, $value);
 
 			# ------------------------
 
 			return ((DB::getLast() && (DB::getLast()->rows === 1)) ? $this->setData(DB::getLast()->getRow()) : false);
 		}
 
-		# Check if unique param value exists
+		/**
+		 * Check whether another entity with a given unique param value exists.
+		 * The method helps you to find out the possibility of changing the entity's unique param value to the given one
+		 *
+		 * @return int|false : the number of entities found (0 or 1) or false on error
+		 */
 
 		public function check($value, string $name) {
 
 			# Get initiation index
 
-			if (false === ($index = $this->definition->index($name))) return false;
+			if (false === ($index = $this->definition->getIndex($name))) return false;
 
 			if ($index->type !== 'UNIQUE') return false;
 
 			# Process name & value
 
-			$name = $index->name; $value = $this->definition->param($name)->cast($value);
+			$name = $index->name; $value = $this->definition->getParam($name)->cast($value);
 
 			# Select entity from DB
 
@@ -133,32 +163,51 @@ namespace Modules\Entitizer\Utils {
 			return ((DB::getLast() && DB::getLast()->status) ? DB::getLast()->rows : false);
 		}
 
-		# Return definition
+		/**
+		 * Get the entity definition
+		 */
 
-		public function definition() {
+		public function getDefinition() : Entitizer\Utils\Definition {
 
 			return $this->definition;
 		}
 
-		# Return data
-
-		public function data() {
-
-			return $this->dataset->data();
-		}
-
-		# Return param value
+		/**
+		 * Get a param value
+		 *
+		 * @return mixed|null : the value or null if the param does not exist
+		 */
 
 		public function get(string $name) {
 
 			return $this->dataset->get($name);
 		}
 
-		# Getter
+		/**
+		 * Get the array of params and their values
+		 */
+
+		public function getData() : array {
+
+			return $this->dataset->getData();
+		}
+
+		/**
+		 * An alias for the get method
+		 */
 
 		public function __get(string $name) {
 
-			return $this->dataset->get($name);
+			return $this->dataset->__get($name);
 		}
+
+		/**
+		 * Check if a param exists
+		 */
+
+		 public function __isset(string $name) : bool {
+
+ 			return $this->dataset->__isset($name);
+ 		}
 	}
 }

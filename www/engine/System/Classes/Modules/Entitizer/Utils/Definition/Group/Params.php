@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils\Definition\Group {
 
 	use Modules\Entitizer\Utils\Definition;
@@ -15,7 +22,9 @@ namespace Modules\Entitizer\Utils\Definition\Group {
 			'textual' => 'Modules\Entitizer\Utils\Definition\Item\Param\Type\Textual'
 		];
 
-		# Add param
+		/**
+		 * Add a param
+		 */
 
 		private function add(string $type, string $name, array $args) {
 
@@ -26,7 +35,9 @@ namespace Modules\Entitizer\Utils\Definition\Group {
 			if (($type !== 'textual') || $this->list[$name]->short) $this->secure[] = $name;
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(Definition $definition, bool $auto_increment) {
 
@@ -37,30 +48,38 @@ namespace Modules\Entitizer\Utils\Definition\Group {
 			$this->secure[] = 'id';
 		}
 
-		# Add boolean param
+		/**
+		 * Add a boolean param
+		 */
 
-		public function boolean(string $name, bool $default = false) {
+		public function addBoolean(string $name, bool $default = false) {
 
 			$this->add('boolean', $name, func_get_args());
 		}
 
-		# Add integer param
+		/**
+		 * Add an integer param
+		 */
 
-		public function integer(string $name, bool $short = false, int $length = 0, bool $unsigned = false, int $default = 0) {
+		public function addInteger(string $name, bool $short = false, int $length = 0, bool $unsigned = false, int $default = 0) {
 
 			$this->add('integer', $name, func_get_args());
 		}
 
-		# Add textual param
+		/**
+		 * Add a textual param
+		 */
 
-		public function textual(string $name, bool $short = true, int $length = 0, bool $binary = false, string $default = '') {
+		public function addTextual(string $name, bool $short = true, int $length = 0, bool $binary = false, string $default = '') {
 
 			$this->add('textual', $name, func_get_args());
 		}
 
-		# Return secure params list
+		/**
+		 * Get the secure params list (includes every param except of long textuals)
+		 */
 
-		public function secure() {
+		public function getSecure() : array {
 
 			return $this->secure;
 		}
