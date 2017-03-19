@@ -1,10 +1,10 @@
-<div class="ui stackable menu">
+<div class="ui basic segment">
 
-	<a class="item" href="$install_path$/admin/content/variables/create"><i class="add icon"></i> %VARIABLES_ITEM_CREATE%</a>
+	<a class="section" onclick="Main.VariablesLoader.load(0);">%TITLE_CONTENT_VARIABLES%</a>
 
 </div>
 
-<table class="ui table segment" id="variables-list">
+<table class="ui table">
 
 	<thead>
 
@@ -33,5 +33,3 @@
 	</tbody>
 
 </table>
-
-{ block:pagination / }

@@ -1,6 +1,6 @@
 <tr class="$class$" data-id="$id$" data-text="$text$">
 
-	<td><i class="$icon$ icon"></i> <a href="#" onclick="Main.MenuitemsLoader.load($id$);">$text$</a></td>
+	<td><i class="$icon$ icon"></i> <a onclick="Main.MenuitemsLoader.load($id$);">$text$</a></td>
 
 	<td># $position$</td>
 
@@ -8,7 +8,7 @@
 
 		{ block:browse }
 
-		<a class="ui mini $class$ icon button" href="$link$" target="_blank" title="%MENUITEMS_ITEM_BROWSE%" ><i class="external icon"></i></a>
+		<a class="ui mini $class$ icon browse button" href="$link$" target="_blank" title="%MENUITEMS_ITEM_BROWSE%" ><i class="external icon"></i></a>
 
 		{ / block:browse }
 

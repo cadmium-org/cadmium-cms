@@ -128,11 +128,9 @@ return [
 	'VARIABLES_ITEM_CREATE'                     => 'Создать переменную',
 	'VARIABLES_ITEM_NEW'                        => 'Новая переменная',
 	'VARIABLES_ITEM_EDIT'                       => 'Редактировать',
-	'VARIABLES_ITEM_INFO'                       => 'Информация',
 	'VARIABLES_ITEM_REMOVE'                     => 'Удалить',
 
 	'VARIABLES_ITEM_CONFIRM_REMOVE'             => 'Вы действительно хотите удалить выбранную переменную?',
-	'VARIABLES_ITEM_INFO_TEXT'                  => 'Используйте следующий код для вставки переменной на страницу, в шаблон или виджет:',
 
 	# Widgets
 
@@ -143,11 +141,9 @@ return [
 	'WIDGETS_ITEM_CREATE'                       => 'Создать виджет',
 	'WIDGETS_ITEM_NEW'                          => 'Новый виджет',
 	'WIDGETS_ITEM_EDIT'                         => 'Редактировать',
-	'WIDGETS_ITEM_INFO'                         => 'Информация',
 	'WIDGETS_ITEM_REMOVE'                       => 'Удалить',
 
 	'WIDGETS_ITEM_CONFIRM_REMOVE'               => 'Вы действительно хотите удалить выбранный виджет?',
-	'WIDGETS_ITEM_INFO_TEXT'                    => 'Используйте следующий код для вставки виджета на страницу или в шаблон:',
 
 	# Filemanager
 

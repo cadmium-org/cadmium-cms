@@ -128,11 +128,9 @@ return [
 	'VARIABLES_ITEM_CREATE'                     => 'Створити змінну',
 	'VARIABLES_ITEM_NEW'                        => 'Нова змінна',
 	'VARIABLES_ITEM_EDIT'                       => 'Редагувати',
-	'VARIABLES_ITEM_INFO'                       => 'Інформація',
 	'VARIABLES_ITEM_REMOVE'                     => 'Видалити',
 
 	'VARIABLES_ITEM_CONFIRM_REMOVE'             => 'Ви дійсно бажаєте видалити обрану змінну?',
-	'VARIABLES_ITEM_INFO_TEXT'                  => 'Використовуйте наступний код для вставки змінної на сторінку, в шаблон або віджет:',
 
 	# Widgets
 
@@ -143,11 +141,9 @@ return [
 	'WIDGETS_ITEM_CREATE'                       => 'Створити віджет',
 	'WIDGETS_ITEM_NEW'                          => 'Новий віджет',
 	'WIDGETS_ITEM_EDIT'                         => 'Редагувати',
-	'WIDGETS_ITEM_INFO'                         => 'Інформація',
 	'WIDGETS_ITEM_REMOVE'                       => 'Видалити',
 
 	'WIDGETS_ITEM_CONFIRM_REMOVE'               => 'Ви дійсно бажаєте видалити обраний віджет?',
-	'WIDGETS_ITEM_INFO_TEXT'                    => 'Використовуйте наступний код для вставки віджета на сторінку або в шаблон:',
 
 	# Filemanager
 
