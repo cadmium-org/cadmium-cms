@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Controller {
 
 	use Modules\Entitizer;
@@ -8,14 +15,20 @@ namespace Modules\Entitizer\Controller {
 
 		private $menuitem = null;
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(Entitizer\Entity\Menuitem $menuitem) {
 
 			$this->menuitem = $menuitem;
 		}
 
-		# Invoker
+		/**
+		 * Invoker
+		 *
+		 * @return true|string : true on success or an error code on failure
+		 */
 
 		public function __invoke(array $post) {
 

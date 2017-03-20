@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Dataset {
 
 	use Modules\Entitizer;
@@ -8,16 +15,18 @@ namespace Modules\Entitizer\Dataset {
 
 		use Entitizer\Common\User;
 
-		# Init dataset
+		/**
+		 * Initialize the dataset
+		 */
 
 		protected function init() {
 
-			$this->addWorker('gravatar', function (array $data) {
+			$this->addVirtual('gravatar', function (array $data) {
 
 				return md5(strtolower($data['email']));
 			});
 
-			$this->addWorker('full_name', function (array $data) {
+			$this->addVirtual('full_name', function (array $data) {
 
 				return trim($data['first_name'] . ' ' . $data['last_name']);
 			});

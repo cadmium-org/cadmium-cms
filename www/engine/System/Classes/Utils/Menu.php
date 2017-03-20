@@ -42,7 +42,7 @@ namespace Utils {
 
 		public function __construct() {
 
-			$menu = Entitizer::treeview(TABLE_MENU)->subtree(0, ['active' => true]);
+			$menu = Entitizer::getTreeview(TABLE_MENU)->getSubtree(0, ['active' => true]);
 
 			if (false !== $menu) $this->menu = $menu;
 		}

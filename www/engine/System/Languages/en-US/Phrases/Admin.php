@@ -128,11 +128,9 @@ return [
 	'VARIABLES_ITEM_CREATE'                     => 'Create variable',
 	'VARIABLES_ITEM_NEW'                        => 'New variable',
 	'VARIABLES_ITEM_EDIT'                       => 'Edit',
-	'VARIABLES_ITEM_INFO'                       => 'Information',
 	'VARIABLES_ITEM_REMOVE'                     => 'Remove',
 
 	'VARIABLES_ITEM_CONFIRM_REMOVE'             => 'Are you sure you want to remove selected variable?',
-	'VARIABLES_ITEM_INFO_TEXT'                  => 'Use following code to insert variable into page, template or widget:',
 
 	# Widgets
 
@@ -143,11 +141,9 @@ return [
 	'WIDGETS_ITEM_CREATE'                       => 'Create widget',
 	'WIDGETS_ITEM_NEW'                          => 'New widget',
 	'WIDGETS_ITEM_EDIT'                         => 'Edit',
-	'WIDGETS_ITEM_INFO'                         => 'Information',
 	'WIDGETS_ITEM_REMOVE'                       => 'Remove',
 
 	'WIDGETS_ITEM_CONFIRM_REMOVE'               => 'Are you sure you want to remove selected widget?',
-	'WIDGETS_ITEM_INFO_TEXT'                    => 'Use following code to insert widget into page or template:',
 
 	# Filemanager
 

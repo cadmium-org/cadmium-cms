@@ -35,33 +35,3 @@
 </table>
 
 { block:pagination / }
-
-<div class="ui small modal" id="variables-modal">
-
-	<i class="close icon"></i>
-
-	<div class="header">%MODAL_HEADER_INFO%</div>
-
-	<div class="content">
-
-		<p>%VARIABLES_ITEM_INFO_TEXT%</p>
-
-		<div class="ui fluid action input">
-
-			<input type="text" id="variable-shortcode" readonly="readonly" value="" />
-
-			<button class="ui icon button" id="variable-shortcode-button" data-clipboard-target="#variable-shortcode"
-
-				data-content="%COPIED%"><i class="copy icon"></i></button>
-
-		</div>
-
-	</div>
-
-	<div class="actions">
-
-		<div class="ui black deny button">%CLOSE%</div>
-
-	</div>
-
-</div>

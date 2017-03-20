@@ -92,7 +92,7 @@
 
 					<input type="text" value="$title$" placeholder="%NONE%" readonly="readonly" />
 
-					<a class="ui teal icon button" id="pages-selector-load" onclick="Main.PagesLoader.load();"><i class="search icon"></i></a>
+					<a class="ui teal icon button" id="pages-selector-load" onclick="Main.PagesLoader.open();"><i class="search icon"></i></a>
 
 					<a class="ui teal icon button" id="pages-selector-reset" onclick="Main.PagesSelector.submit(0);"><i class="close icon"></i></a>
 

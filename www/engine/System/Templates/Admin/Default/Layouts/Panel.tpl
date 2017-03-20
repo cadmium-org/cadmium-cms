@@ -48,7 +48,7 @@
 
 	</nav>
 
-	<div class="ui page grid">
+	<div class="ui page grid wrapper">
 
 		<div class="column">
 

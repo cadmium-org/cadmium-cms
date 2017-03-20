@@ -1,53 +1,72 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Modules\Entitizer;
 
 	abstract class Dataset {
 
-		protected $params = null, $workers = [], $data = [];
+		protected $params = null, $virtuals = [], $data = [];
 
-		# Add worker
+		/**
+		 * Add a virtual param
+		 */
 
-		protected function addWorker(string $name, callable $worker) {
+		protected function addVirtual(string $name, callable $virtual) {
 
-			if (isset($this->params[$name]) || isset($this->workers[$name])) return;
+			if (isset($this->params[$name]) || isset($this->virtuals[$name])) return;
 
-			$this->workers[$name] = $worker;
+			$this->virtuals[$name] = $virtual;
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
-			$this->params = Entitizer::definition(static::$table)->params();
+			$this->params = Entitizer::getDefinition(static::$table)->getParams();
 
 			if (static::$nesting) $this->params['parent_id'] = $this->params['id'];
 
 			$this->init(); $this->reset();
 		}
 
-		# Reset data
+		/**
+		 * Reset all the params to their default values
+		 *
+		 * @return Modules\Entitizer\Utils\Dataset : the current dataset object
+		 */
 
-		public function reset() {
+		public function reset() : Dataset {
 
 			# Reset params
 
 			foreach ($this->params as $name => $param) $this->data[$name] = $param->cast(null);
 
-			# Reset extras
+			# Reset virtuals
 
-			foreach ($this->workers as $name => $worker) $this->data[$name] = $worker($this->data);
+			foreach ($this->virtuals as $name => $virtual) $this->data[$name] = $virtual($this->data);
 
 			# ------------------------
 
 			return $this;
 		}
 
-		# Update data
+		/**
+		 * Update the params with the values given in the data array
+		 *
+		 * @return Modules\Entitizer\Utils\Dataset : the current dataset object
+		 */
 
-		public function update(array $data) {
+		public function update(array $data) : Dataset {
 
 			# Update params
 
@@ -58,16 +77,18 @@ namespace Modules\Entitizer\Utils {
 
 			# Update extras
 
-			foreach ($this->workers as $name => $worker) $this->data[$name] = $worker($this->data);
+			foreach ($this->virtuals as $name => $virtual) $this->data[$name] = $virtual($this->data);
 
 			# ------------------------
 
 			return $this;
 		}
 
-		# Cast data
+		/**
+		 * Validate and return the data array without affecting the dataset
+		 */
 
-		public function cast(array $data) {
+		public function cast(array $data) : array {
 
 			$cast = [];
 
@@ -81,25 +102,42 @@ namespace Modules\Entitizer\Utils {
 			return $cast;
 		}
 
-		# Return data
-
-		public function data() {
-
-			return $this->data;
-		}
-
-		# Return param value
+		/**
+		 * Get a param value
+		 *
+		 * @return mixed|null : the value or null if the param does not exist
+		 */
 
 		public function get(string $name) {
 
 			return ($this->data[$name] ?? null);
 		}
 
-		# Getter
+		/**
+		 * Get the array of params and their values
+		 */
+
+		public function getData() : array {
+
+			return $this->data;
+		}
+
+		/**
+		 * An alias for the get method
+		 */
 
 		public function __get(string $name) {
 
 			return ($this->data[$name] ?? null);
 		}
+
+		/**
+		 * Check if a param exists
+		 */
+
+		 public function __isset(string $name) : bool {
+
+ 			return isset($this->data[$name]);
+ 		}
 	}
 }

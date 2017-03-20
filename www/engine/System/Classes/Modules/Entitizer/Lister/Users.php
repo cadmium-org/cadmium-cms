@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Lister {
 
 	use Modules\Auth, Modules\Entitizer, Utils\Range, Template;
@@ -12,8 +19,6 @@ namespace Modules\Entitizer\Lister {
 
 		# Lister configuration
 
-		protected static $link = '/admin/system/users';
-
 		protected static $naming = 'name';
 
 		protected static $view_main = 'Blocks/Entitizer/Users/Lister/Main';
@@ -24,11 +29,15 @@ namespace Modules\Entitizer\Lister {
 
 		protected static $view_ajax_item = '';
 
+		protected static $link = '/admin/system/users';
+
 		# Add additional data for specific entity
 
 		protected function processEntity() {}
 
-		# Add item additional data
+		/**
+		 * Add item's additional data
+		 */
 
 		protected function processItem(Template\Block $view, Entitizer\Dataset\User $user) {
 

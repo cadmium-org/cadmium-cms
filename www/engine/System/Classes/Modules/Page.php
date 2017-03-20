@@ -62,7 +62,7 @@ namespace Modules {
 
 			# Get path
 
-			if (false !== ($path = $this->page->path())) $this->path = $path;
+			if (false !== ($path = $this->page->getPath())) $this->path = $path;
 
 			# Set data
 

@@ -23,19 +23,19 @@ namespace Modules\Install\Utils {
 
 			$definitions = [];
 
-			$definitions[] = Entitizer::definition(TABLE_PAGES);
+			$definitions[] = Entitizer::getDefinition(TABLE_PAGES);
 
-			$definitions[] = Entitizer::definition(TABLE_MENU);
+			$definitions[] = Entitizer::getDefinition(TABLE_MENU);
 
-			$definitions[] = Entitizer::definition(TABLE_VARIABLES);
+			$definitions[] = Entitizer::getDefinition(TABLE_VARIABLES);
 
-			$definitions[] = Entitizer::definition(TABLE_WIDGETS);
+			$definitions[] = Entitizer::getDefinition(TABLE_WIDGETS);
 
-			$definitions[] = Entitizer::definition(TABLE_USERS);
+			$definitions[] = Entitizer::getDefinition(TABLE_USERS);
 
-			$definitions[] = Entitizer::definition(TABLE_USERS_SECRETS);
+			$definitions[] = Entitizer::getDefinition(TABLE_USERS_SECRETS);
 
-			$definitions[] = Entitizer::definition(TABLE_USERS_SESSIONS);
+			$definitions[] = Entitizer::getDefinition(TABLE_USERS_SESSIONS);
 
 			# ------------------------
 

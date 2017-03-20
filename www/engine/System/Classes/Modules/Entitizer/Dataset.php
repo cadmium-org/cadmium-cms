@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer {
 
 	abstract class Dataset extends Utils\Factory {
 
-		protected static $error_message = 'Dataset class for given table does not exist';
+		protected static $error_message = 'The dataset class for the given table does not exist';
 
 		# Objects cache
 
@@ -23,7 +30,9 @@ namespace Modules\Entitizer {
 			TABLE_USERS_SESSIONS    => 'Modules\Entitizer\Dataset\User\Session'
 		];
 
-		# Get dataset
+		/**
+		 * Get a dataset object with a custom data
+		 */
 
 		public static function get(string $table, array $data = []) {
 

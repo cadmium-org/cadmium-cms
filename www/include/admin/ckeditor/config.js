@@ -23,7 +23,9 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 		{ name: 'styles' },
 		{ name: 'colors' },
-		{ name: 'about' }
+		{ name: 'about' },
+		'/',
+		{ name: 'cadmium' }
 	];
 
 	// Remove some buttons provided by the standard plugins, which are
@@ -36,8 +38,10 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
+	config.baseFloatZIndex = 900;
+
 	// Configure extra plugins
-	config.extraPlugins = 'uploadimage';
+	config.extraPlugins = 'uploadimage,cadmium';
 	config.uploadUrl = (install_path + '/admin/content/filemanager/upload');
 	config.imageUploadUrl = (install_path + '/admin/content/filemanager/upload?type=image');
 };

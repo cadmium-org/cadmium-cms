@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Dataset {
 
 	use Modules\Entitizer, Modules\Settings;
@@ -8,23 +15,25 @@ namespace Modules\Entitizer\Dataset {
 
 		use Entitizer\Common\Page;
 
-		# Init dataset
+		/**
+		 * Initialize the dataset
+		 */
 
 		protected function init() {
 
-			$this->addWorker('active', function (array $data) {
+			$this->addVirtual('active', function (array $data) {
 
 				return (($data['visibility'] === VISIBILITY_PUBLISHED) && !$data['locked']);
 			});
 
-			$this->addWorker('link', function (array $data) {
+			$this->addVirtual('link', function (array $data) {
 
 				if ('' === $data['slug']) return '';
 
 				return (INSTALL_PATH . '/' . $data['slug']);
 			});
 
-			$this->addWorker('canonical', function (array $data) {
+			$this->addVirtual('canonical', function (array $data) {
 
 				if ('' === $data['slug']) return '';
 

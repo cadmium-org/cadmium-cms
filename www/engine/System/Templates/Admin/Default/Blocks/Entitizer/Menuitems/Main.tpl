@@ -86,7 +86,7 @@
 
 					<input type="text" value="$text$" placeholder="%NONE%" readonly="readonly" />
 
-					<a class="ui teal icon button" id="menuitems-selector-load" onclick="Main.MenuitemsLoader.load();"><i class="search icon"></i></a>
+					<a class="ui teal icon button" id="menuitems-selector-load" onclick="Main.MenuitemsLoader.open();"><i class="search icon"></i></a>
 
 					<a class="ui teal icon button" id="menuitems-selector-reset" onclick="Main.MenuitemsSelector.submit(0);"><i class="close icon"></i></a>
 
@@ -104,7 +104,7 @@
 
 					{ block:field_menuitem_text / }
 
-					<a class="ui teal icon button" onclick="Main.PagesLoader.load();"><i class="file text outline icon"></i></a>
+					<a class="ui teal icon button" onclick="Main.PagesLoader.open();"><i class="file text outline icon"></i></a>
 
 				</div>
 

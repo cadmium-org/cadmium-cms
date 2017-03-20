@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Lister {
 
 	use Modules\Entitizer, Utils\Range, Template;
@@ -12,8 +19,6 @@ namespace Modules\Entitizer\Lister {
 
 		# Lister configuration
 
-		protected static $link = '/admin/content/pages';
-
 		protected static $naming = 'title';
 
 		protected static $view_main = 'Blocks/Entitizer/Pages/Lister/Main';
@@ -24,7 +29,11 @@ namespace Modules\Entitizer\Lister {
 
 		protected static $view_ajax_item = 'Blocks/Entitizer/Pages/Ajax/Item';
 
-		# Add parent additional data
+		protected static $link = '/admin/content/pages';
+
+		/**
+		 * Add parent's additional data
+		 */
 
 		protected function processEntityParent(Template\Block $parent) {
 
@@ -33,7 +42,9 @@ namespace Modules\Entitizer\Lister {
 			else { $parent->getBlock('browse')->disable(); $parent->getBlock('browse_disabled')->enable(); }
 		}
 
-		# Add item additional data
+		/**
+		 * Add item's additional data
+		 */
 
 		protected function processItem(Template\Block $view, Entitizer\Dataset\Page $page, int $children = 0) {
 

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Entitizer
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Entitizer\Utils {
 
 	use Frames, Modules\Entitizer, Utils\Popup, Utils\View, Ajax, Language, Number, Request, Template;
@@ -8,7 +15,9 @@ namespace Modules\Entitizer\Utils {
 
 		protected $create = false, $entity = null, $parent = null, $path = [], $form = null;
 
-		# Process parent block
+		/**
+		 * Process the parent block
+		 */
 
 		private function processParent(Template\Block $parent) {
 
@@ -41,7 +50,9 @@ namespace Modules\Entitizer\Utils {
 			$this->processEntityParent($parent);
 		}
 
-		# Process selector block
+		/**
+		 * Process the selector block
+		 */
 
 		private function processSelector(Template\Block $selector) {
 
@@ -56,9 +67,11 @@ namespace Modules\Entitizer\Utils {
 			$selector->set(static::$naming, $parent->get(static::$naming));
 		}
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get(static::$view);
 
@@ -101,9 +114,11 @@ namespace Modules\Entitizer\Utils {
 			return $contents;
 		}
 
-		# Handle ajax request
+		/**
+		 * Handle the ajax request
+		 */
 
-		private function handleAjax() {
+		private function handleAjax() : Ajax\Response {
 
 			$ajax = Ajax::createResponse();
 
@@ -131,7 +146,11 @@ namespace Modules\Entitizer\Utils {
 			return $ajax;
 		}
 
-		# Handle request
+		/**
+		 * Handle the request
+		 *
+		 * @return Template\Block|Ajax\Response | a block object if the ajax param was set to false, otherwise an ajax response
+		 */
 
 		protected function handle(bool $ajax = false) {
 
@@ -151,7 +170,7 @@ namespace Modules\Entitizer\Utils {
 
 			# Get path
 
-			if (false !== ($path = $this->parent->path())) $this->path = $path;
+			if (false !== ($path = $this->parent->getPath())) $this->path = $path;
 
 			# Create form
 
@@ -159,7 +178,7 @@ namespace Modules\Entitizer\Utils {
 
 			# Handle form
 
-			if ($this->form->handle(new static::$controller($this->entity), true)) {
+			if ($this->form->handle(new static::$controller_class($this->entity), true)) {
 
 				if ($this->create && (0 !== $this->parent->id)) $this->entity->move($this->parent->id);
 
