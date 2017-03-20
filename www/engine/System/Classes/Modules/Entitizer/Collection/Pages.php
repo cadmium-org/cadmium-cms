@@ -33,16 +33,6 @@ namespace Modules\Entitizer\Collection {
 				return ((null !== $rank) ? ("ent.access <= " . $rank) : '');
 			});
 
-			$this->config->addParam('slug', '', function (string $slug) {
-
-				return (('' !== $slug) ? ("ent.slug = '" . addslashes($slug) . "'") : '');
-			});
-
-			$this->config->addParam('name', '', function (string $name) {
-
-				return (('' !== $name) ? ("ent.name = '" . addslashes($name) . "'") : '');
-			});
-
 			$this->config->addParam('time_created >=', '', function (int $time) {
 
 				return ((0 < $time) ? ("ent.time_created >= " . $time) : '');
