@@ -34,7 +34,7 @@ namespace Frames\Tools {
 		/**
 		 * The interface for a handler method
 		 *
-		 * @return Tools\Captcha|null : the captcha object on success or null on failure
+		 * @return Frames\Tools\Captcha|null : the captcha object on success or null on failure
 		 */
 
 		abstract protected function handle();
