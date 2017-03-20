@@ -8,5 +8,7 @@
 /www/engine/System/Data/System.json
 /www/engine/System/Templates/Site/Cadmium
 /www/include/site/templates/cadmium
+/www/include/admin/templates/default/scripts/src
 /www/demo
+/www/tools
 /www/uploads
