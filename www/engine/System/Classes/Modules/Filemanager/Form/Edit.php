@@ -11,9 +11,9 @@ namespace Modules\Filemanager\Form {
 
 	use Modules\Filemanager, Utils\Form, Language;
 
-	class Rename extends Form {
+	class Edit extends Form {
 
-		protected $name = 'rename';
+		protected $name = 'edit';
 
 		/**
 		 * Constructor
@@ -21,9 +21,9 @@ namespace Modules\Filemanager\Form {
 
 		public function __construct(Filemanager\Utils\Entity $entity, bool $enabled = true) {
 
-			$this->addText('name', $entity->getName(), FORM_FIELD_TEXT, CONFIG_FILEMANAGER_NAME_MAX_LENGTH,
+			$this->addText('contents', $entity->getContents(), FORM_FIELD_TEXTAREA, 0,
 
-				['placeholder' => Language::get('FILEMANAGER_FIELD_NAME'), 'required' => true, 'disabled' => !$enabled]);
+				['multiline' => true, 'codestyle' => true, 'disabled' => !$enabled]);
 		}
 	}
 }

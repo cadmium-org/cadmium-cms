@@ -147,32 +147,35 @@ return [
 
 	# Filemanager
 
+	'FILEMANAGER_ORIGIN_ADDONS'                 => 'Аддони',
+	'FILEMANAGER_ORIGIN_LANGUAGES'              => 'Мови',
+	'FILEMANAGER_ORIGIN_TEMPLATES'              => 'Шаблони',
+	'FILEMANAGER_ORIGIN_UPLOADS'                => 'Завантаження',
+
 	'FILEMANAGER_UPLOAD_SELECT'                 => 'Обрати файл...',
 
-	'FILEMANAGER_DIR'                           => 'Директорія',
+	'FILEMANAGER_LABEL_CREATE'                  => 'Нова директорія',
+
+	'FILEMANAGER_ACTION_CREATE'                 => 'Створити',
+	'FILEMANAGER_ACTION_RELOAD'                 => 'Оновити',
 
 	'FILEMANAGER_DIR_NAME'                      => 'Назва директорії',
-	'FILEMANAGER_DIR_INFO'                      => 'Інформація про директорію',
+	'FILEMANAGER_DIR_INFO'                      => 'Відомості про директорію',
 
 	'FILEMANAGER_DIR_ROW_TIME_CREATED'          => 'Час створення',
 	'FILEMANAGER_DIR_ROW_TIME_MODIFIED'         => 'Час змінення',
 	'FILEMANAGER_DIR_ROW_PERMISSIONS'           => 'Права доступу',
 
-	'FILEMANAGER_FILE'                          => 'Файл',
-
 	'FILEMANAGER_FILE_NAME'                     => 'Назва файла',
-	'FILEMANAGER_FILE_INFO'                     => 'Інформація про файл',
+	'FILEMANAGER_FILE_INFO'                     => 'Відомості про файл',
 
+	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Розмір',
+	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME-тип',
 	'FILEMANAGER_FILE_ROW_TIME_CREATED'         => 'Час створення',
 	'FILEMANAGER_FILE_ROW_TIME_MODIFIED'        => 'Час змінення',
 	'FILEMANAGER_FILE_ROW_PERMISSIONS'          => 'Права доступу',
-	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Розмір',
-	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME-тип',
 
 	'FILEMANAGER_ITEMS_NOT_FOUND'               => 'Директорія пуста',
-
-	'FILEMANAGER_ACTION_CREATE'                 => 'Створити...',
-	'FILEMANAGER_ACTION_RELOAD'                 => 'Оновити',
 
 	'FILEMANAGER_COLUMN_NAME'                   => 'Назва файла',
 	'FILEMANAGER_COLUMN_SIZE'                   => 'Розмір',
@@ -180,23 +183,29 @@ return [
 	'FILEMANAGER_ITEM_EDIT'                     => 'Редагувати',
 	'FILEMANAGER_ITEM_REMOVE'                   => 'Видалити',
 
-	'FILEMANAGER_ITEM_CONFIRM_REMOVE'           => 'Ви дійсно бажаєте видалити обраний елемент?',
+	'FILEMANAGER_ITEM_INSERT_AS_MEDIA'          => 'Вставити як медіа',
+	'FILEMANAGER_ITEM_INSERT_AS_LINK'           => 'Вставити як посилання',
 
 	'FILEMANAGER_FIELD_NAME'                    => 'Введіть назву...',
 
+	'FILEMANAGER_SUCCESS_UPLOAD'                => 'Файл був успішно завантажений!',
+
+	'FILEMANAGER_SUCCESS_DIR_CREATE'            => 'Директорія була успішно створена!',
 	'FILEMANAGER_SUCCESS_DIR_RENAME'            => 'Директорія була успішно перейменована!',
+
 	'FILEMANAGER_SUCCESS_FILE_RENAME'           => 'Файл був успішно перейменований!',
+	'FILEMANAGER_SUCCESS_FILE_EDIT'             => 'Файл був успішно збережений!',
 
 	'FILEMANAGER_ERROR_NAME_INVALID'            => 'Назва не може містити наступні символи: \\ / ? % * : | &quot; &lt; &gt;',
+	'FILEMANAGER_ERROR_HIDDEN'                  => 'Назва не може починатися з крапки',
 	'FILEMANAGER_ERROR_EXISTS'                  => 'Директорія або файл з вказаною назвою вже існує',
 
 	'FILEMANAGER_ERROR_DIR_CREATE'              => 'Помилка створення директорії',
-	'FILEMANAGER_ERROR_FILE_CREATE'             => 'Помилка создания файла',
-
 	'FILEMANAGER_ERROR_DIR_RENAME'              => 'Помилка перейменування директорії',
-	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Помилка перейменування файла',
-
 	'FILEMANAGER_ERROR_DIR_REMOVE'              => 'Помилка видалення директорії',
+
+	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Помилка перейменування файла',
+	'FILEMANAGER_ERROR_FILE_EDIT'               => 'Помилка збереження файла',
 	'FILEMANAGER_ERROR_FILE_REMOVE'             => 'Помилка видалення файла',
 
 	'FILEMANAGER_CONFIRM_DIR_REMOVE'            => 'Ви дійсно бажаєте видалити обрану директорію і весь її вміст?',

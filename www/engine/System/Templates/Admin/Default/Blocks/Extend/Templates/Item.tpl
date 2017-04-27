@@ -1,6 +1,8 @@
 <tr data-name="$name$">
 
-	<td class="twelve wide"><i class="theme icon"></i> $title$</td>
+	<td class="twelve wide"><i class="theme icon"></i>
+
+		<a href="$install_path$/admin/content/filemanager/templates?parent=$name$">$title$</a></td>
 
 	<td class="right aligned">
 

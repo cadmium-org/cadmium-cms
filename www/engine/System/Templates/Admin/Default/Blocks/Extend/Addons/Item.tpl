@@ -2,7 +2,7 @@
 
 	<td class="twelve wide">
 
-		<p><i class="plug icon"></i> $title$</p>
+		<p><i class="plug icon"></i> <a href="$install_path$/admin/content/filemanager/addons?parent=$name$">$title$</a></p>
 
 		<p style="font-size:0.9rem; color:#666;">$description$</p>
 

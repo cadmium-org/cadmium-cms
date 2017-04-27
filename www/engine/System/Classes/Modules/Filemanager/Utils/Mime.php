@@ -1,16 +1,38 @@
 <?php
 
-namespace Modules\Filemanager\Utils {
+/**
+ * @package Cadmium\System\Modules\Filemanager
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
 
-	use Explorer;
+namespace Modules\Filemanager\Utils {
 
 	abstract class Mime extends \Mime {
 
-		# Get file type by name
+		/**
+		 * Get an editor mode
+		 *
+		 * @return string|false : one of the following values: 'php', 'html', 'javascript', 'json', 'css',
+		 *         or false if the extension is not supported by the editor
+		 */
 
-		public static function type(string $file_name) {
+		public static function getMode(string $extension) {
 
-			$extension = strtolower(Explorer::getExtension($file_name, false));
+			$modes = ['php' => 'php', 'tpl' => 'html', 'js' => 'javascript', 'json' => 'json', 'css' => 'css'];
+
+			return ($modes[$extension] ?? false);
+		}
+
+		/**
+		 * Get a file format
+		 *
+		 * @return string|false : one of the following values: 'image', 'audio', 'video', 'word', 'excel', 'powerpoint', 'pdf',
+		 *         or false if the extension does not exist in the MIME types list
+		 */
+
+		public static function getFormat(string $extension) {
 
 			if (self::isImage($extension)) return 'image';
 
@@ -28,7 +50,7 @@ namespace Modules\Filemanager\Utils {
 
 			# ------------------------
 
-			return '';
+			return false;
 		}
 	}
 }

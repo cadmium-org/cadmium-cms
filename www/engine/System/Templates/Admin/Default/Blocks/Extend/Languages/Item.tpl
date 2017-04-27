@@ -1,6 +1,8 @@
 <tr data-name="$name$">
 
-	<td class="twelve wide"><i class="$country$ flag"></i> $title$</td>
+	<td class="twelve wide"><i class="$country$ flag"></i>
+
+		<a href="$install_path$/admin/content/filemanager/languages?parent=$name$/Phrases">$title$</a></td>
 
 	<td class="right aligned">
 

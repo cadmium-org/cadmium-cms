@@ -4,13 +4,13 @@
 
 	<div class="ui breadcrumb">
 
-		<a class="section" href="$install_path$/admin/content/filemanager">Uploads</a>
+		<a class="section" href="$install_path$/admin/content/filemanager/$origin$">$title$</a>
 
 		<i class="divider"> / </i>
 
 		{ for:breadcrumbs }
 
-		<a class="section" href="$install_path$/admin/content/filemanager?parent=$path$">$name$</a>
+		<a class="section" href="$install_path$/admin/content/filemanager/$origin$?parent=$path$">$name$</a>
 
 		<i class="divider"> / </i>
 
@@ -20,71 +20,45 @@
 
 </div>
 
-<div class="ui uploader segment">
+{ block:bar }
 
-	<form id="filemanager-upload-form" method="post" action="$link$" enctype="multipart/form-data" accept-charset="utf-8">
-
-		<input type="file" name="upload" />
-
-	</form>
+<div class="ui managebar segment">
 
 	<div class="ui two column stackable grid">
 
-		<div class="left aligned column">
+		<form class="left aligned upload column" method="post" action="$link$" enctype="multipart/form-data" accept-charset="utf-8">
 
-			<div class="ui buttons" id="filemanager-upload">
+			<input type="file" name="upload" value="" />
 
-				<a class="ui grey button" id="filemanager-upload-select">%FILEMANAGER_UPLOAD_SELECT%</a>
+			<div class="ui buttons">
 
-				<a class="ui teal icon button" id="filemanager-upload-submit"><i class="upload icon"></i></a>
+				<a class="ui grey select button">%FILEMANAGER_UPLOAD_SELECT%</a>
 
-			</div>
-
-		</div>
-
-		<div class="right aligned column">
-
-			<div class="ui basic buttons">
-
-				<a class="ui icon button" id="filemanager-button-create" title="%FILEMANAGER_ACTION_CREATE%"><i class="add icon"></i></a>
-
-				<a class="ui icon button" id="filemanager-button-reload" title="%FILEMANAGER_ACTION_RELOAD%"><i class="refresh icon"></i></a>
+				<a class="ui teal disabled icon submit button"><i class="upload icon"></i></a>
 
 			</div>
 
-		</div>
+		</form>
 
-	</div>
+		<form class="right aligned create column" method="post" action="$link$" autocomplete="off">
 
-</div>
+			<div class="ui action input field">
 
-<div class="ui small modal" id="filemanager-modal-create">
+				{ block:field_create_name / }
 
-	<i class="close icon"></i>
+				<a class="ui icon create button" title="%FILEMANAGER_ACTION_CREATE%"><i class="add icon"></i></a>
 
-	<div class="header">%FILEMANAGER_ACTION_CREATE%</div>
+				<a class="ui icon reload button" title="%FILEMANAGER_ACTION_RELOAD%"><i class="refresh icon"></i></a>
 
-	<div class="content">
-
-		<form class="ui form" method="post" action="$link$" autocomplete="off">
-
-			<div class="field">{ block:field_create_type / }</div>
-
-			<div class="field">{ block:field_create_name / }</div>
+			</div>
 
 		</form>
 
 	</div>
 
-	<div class="actions">
-
-		<a class="ui black deny button">%CANCEL%</a>
-
-		<a class="ui positive right labeled icon approve button"><i class="checkmark icon"></i>%CREATE%</a>
-
-	</div>
-
 </div>
+
+{ / block:bar }
 
 <table class="ui table segment" id="filemanager-list">
 

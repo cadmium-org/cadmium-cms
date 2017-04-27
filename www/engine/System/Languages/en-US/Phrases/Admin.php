@@ -147,9 +147,17 @@ return [
 
 	# Filemanager
 
+	'FILEMANAGER_ORIGIN_ADDONS'                 => 'Addons',
+	'FILEMANAGER_ORIGIN_LANGUAGES'              => 'Languages',
+	'FILEMANAGER_ORIGIN_TEMPLATES'              => 'Templates',
+	'FILEMANAGER_ORIGIN_UPLOADS'                => 'Uploads',
+
 	'FILEMANAGER_UPLOAD_SELECT'                 => 'Select file...',
 
-	'FILEMANAGER_DIR'                           => 'Directory',
+	'FILEMANAGER_LABEL_CREATE'                  => 'New directory...',
+
+	'FILEMANAGER_ACTION_CREATE'                 => 'Create',
+	'FILEMANAGER_ACTION_RELOAD'                 => 'Refresh',
 
 	'FILEMANAGER_DIR_NAME'                      => 'Directory name',
 	'FILEMANAGER_DIR_INFO'                      => 'Directory info',
@@ -158,21 +166,16 @@ return [
 	'FILEMANAGER_DIR_ROW_TIME_MODIFIED'         => 'Modification time',
 	'FILEMANAGER_DIR_ROW_PERMISSIONS'           => 'Permissions',
 
-	'FILEMANAGER_FILE'                          => 'File',
-
 	'FILEMANAGER_FILE_NAME'                     => 'File name',
 	'FILEMANAGER_FILE_INFO'                     => 'File info',
 
+	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Size',
+	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME type',
 	'FILEMANAGER_FILE_ROW_TIME_CREATED'         => 'Creation time',
 	'FILEMANAGER_FILE_ROW_TIME_MODIFIED'        => 'Modification time',
 	'FILEMANAGER_FILE_ROW_PERMISSIONS'          => 'Permissions',
-	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Size',
-	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME type',
 
 	'FILEMANAGER_ITEMS_NOT_FOUND'               => 'Directory is empty',
-
-	'FILEMANAGER_ACTION_CREATE'                 => 'Create...',
-	'FILEMANAGER_ACTION_RELOAD'                 => 'Refresh',
 
 	'FILEMANAGER_COLUMN_NAME'                   => 'File name',
 	'FILEMANAGER_COLUMN_SIZE'                   => 'Size',
@@ -180,23 +183,29 @@ return [
 	'FILEMANAGER_ITEM_EDIT'                     => 'Edit',
 	'FILEMANAGER_ITEM_REMOVE'                   => 'Remove',
 
-	'FILEMANAGER_ITEM_CONFIRM_REMOVE'           => 'Are you sure you want to remove selected item?',
+	'FILEMANAGER_ITEM_INSERT_AS_MEDIA'          => 'Insert as media',
+	'FILEMANAGER_ITEM_INSERT_AS_LINK'           => 'Insert as link',
 
 	'FILEMANAGER_FIELD_NAME'                    => 'Enter name...',
 
+	'FILEMANAGER_SUCCESS_UPLOAD'                => 'File has been successfully uploaded!',
+
+	'FILEMANAGER_SUCCESS_DIR_CREATE'            => 'Directory has been successfully created!',
 	'FILEMANAGER_SUCCESS_DIR_RENAME'            => 'Directory has been successfully renamed!',
+
 	'FILEMANAGER_SUCCESS_FILE_RENAME'           => 'File has been successfully renamed!',
+	'FILEMANAGER_SUCCESS_FILE_EDIT'             => 'File has been successfully saved!',
 
 	'FILEMANAGER_ERROR_NAME_INVALID'            => 'Name cannot contain any of the following characters: \\ / ? % * : | &quot; &lt; &gt;',
+	'FILEMANAGER_ERROR_HIDDEN'                  => 'Name cannot start from a dot',
 	'FILEMANAGER_ERROR_EXISTS'                  => 'Directory or file with specified name already exists',
 
 	'FILEMANAGER_ERROR_DIR_CREATE'              => 'Error creating directory',
-	'FILEMANAGER_ERROR_FILE_CREATE'             => 'Error creating file',
-
 	'FILEMANAGER_ERROR_DIR_RENAME'              => 'Error renaming directory',
-	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Error renaming file',
-
 	'FILEMANAGER_ERROR_DIR_REMOVE'              => 'Error removing directory',
+
+	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Error renaming file',
+	'FILEMANAGER_ERROR_FILE_EDIT'               => 'Error saving file',
 	'FILEMANAGER_ERROR_FILE_REMOVE'             => 'Error removing file',
 
 	'FILEMANAGER_CONFIRM_DIR_REMOVE'            => 'Are you sure you want to remove selected directory and all its contents?',

@@ -26,11 +26,6 @@ define('CKEDITOR_VERSION',                          '4.6.2');
 define('SECTION_SITE',                              'site');
 define('SECTION_ADMIN',                             'admin');
 
-# Filemanager types
-
-define('FILEMANAGER_TYPE_DIR',                      'dir');
-define('FILEMANAGER_TYPE_FILE',                     'file');
-
 # Access
 
 define('ACCESS_PUBLIC',                             0);

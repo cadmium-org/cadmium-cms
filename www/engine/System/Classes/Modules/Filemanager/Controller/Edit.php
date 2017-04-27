@@ -9,19 +9,19 @@
 
 namespace Modules\Filemanager\Controller {
 
-	use Modules\Filemanager, Utils\Validate;
+	use Modules\Filemanager;
 
-	class Create {
+	class Edit {
 
-		protected $parent = null;
+		protected $parent = null, $entity = null;
 
 		/**
 		 * Constructor
 		 */
 
-		public function __construct(Filemanager\Utils\Container $parent) {
+		public function __construct(Filemanager\Utils\Entity $entity) {
 
-			$this->parent = $parent;
+			$this->parent = $entity->getParent(); $this->entity = $entity;
 		}
 
 		/**
@@ -36,29 +36,15 @@ namespace Modules\Filemanager\Controller {
 
 			# Declare variables
 
-			$name = '';
+			$contents = '';
 
 			# Extract post array
 
 			extract($post);
 
-			# Validate name
+			# Rename item
 
-			if (false === ($name = Validate::fileName($name))) return ['name', 'FILEMANAGER_ERROR_NAME_INVALID'];
-
-			if ($this->parent->isIgnoreHidden() && preg_match('/^\./', $name)) return ['name', 'FILEMANAGER_ERROR_HIDDEN'];
-
-			# Get entity
-
-			$entity = Filemanager::get($this->parent);
-
-			# Check if name is used
-
-			if (!$entity->check($name)) return ['name', 'FILEMANAGER_ERROR_EXISTS'];
-
-			# Create entity
-
-			if (!$entity->create($name, 'dir')) return 'FILEMANAGER_ERROR_DIR_CREATE';
+			if (false === $this->entity->putContents($contents)) return 'FILEMANAGER_ERROR_FILE_EDIT';
 
 			# ------------------------
 

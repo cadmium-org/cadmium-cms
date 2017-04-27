@@ -147,32 +147,35 @@ return [
 
 	# Filemanager
 
+	'FILEMANAGER_ORIGIN_ADDONS'                 => 'Аддоны',
+	'FILEMANAGER_ORIGIN_LANGUAGES'              => 'Языки',
+	'FILEMANAGER_ORIGIN_TEMPLATES'              => 'Шаблоны',
+	'FILEMANAGER_ORIGIN_UPLOADS'                => 'Загрузки',
+
 	'FILEMANAGER_UPLOAD_SELECT'                 => 'Выбрать файл...',
 
-	'FILEMANAGER_DIR'                           => 'Директория',
+	'FILEMANAGER_LABEL_CREATE'                  => 'Новая директория...',
+
+	'FILEMANAGER_ACTION_CREATE'                 => 'Создать',
+	'FILEMANAGER_ACTION_RELOAD'                 => 'Обновить',
 
 	'FILEMANAGER_DIR_NAME'                      => 'Название директории',
-	'FILEMANAGER_DIR_INFO'                      => 'Информация о директории',
+	'FILEMANAGER_DIR_INFO'                      => 'Сведения о директории',
 
 	'FILEMANAGER_DIR_ROW_TIME_CREATED'          => 'Время создания',
 	'FILEMANAGER_DIR_ROW_TIME_MODIFIED'         => 'Время изменения',
 	'FILEMANAGER_DIR_ROW_PERMISSIONS'           => 'Права доступа',
 
-	'FILEMANAGER_FILE'                          => 'Файл',
-
 	'FILEMANAGER_FILE_NAME'                     => 'Название файла',
-	'FILEMANAGER_FILE_INFO'                     => 'Информация о файле',
+	'FILEMANAGER_FILE_INFO'                     => 'Сведения о файле',
 
+	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Размер',
+	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME-тип',
 	'FILEMANAGER_FILE_ROW_TIME_CREATED'         => 'Время создания',
 	'FILEMANAGER_FILE_ROW_TIME_MODIFIED'        => 'Время изменения',
 	'FILEMANAGER_FILE_ROW_PERMISSIONS'          => 'Права доступа',
-	'FILEMANAGER_FILE_ROW_SIZE'                 => 'Размер',
-	'FILEMANAGER_FILE_ROW_MIME'                 => 'MIME-тип',
 
 	'FILEMANAGER_ITEMS_NOT_FOUND'               => 'Директория пуста',
-
-	'FILEMANAGER_ACTION_CREATE'                 => 'Создать...',
-	'FILEMANAGER_ACTION_RELOAD'                 => 'Обновить',
 
 	'FILEMANAGER_COLUMN_NAME'                   => 'Название файла',
 	'FILEMANAGER_COLUMN_SIZE'                   => 'Размер',
@@ -180,23 +183,29 @@ return [
 	'FILEMANAGER_ITEM_EDIT'                     => 'Редактировать',
 	'FILEMANAGER_ITEM_REMOVE'                   => 'Удалить',
 
-	'FILEMANAGER_ITEM_CONFIRM_REMOVE'           => 'Вы действительно хотите удалить выбранный элемент?',
+	'FILEMANAGER_ITEM_INSERT_AS_MEDIA'          => 'Вставить как медиа',
+	'FILEMANAGER_ITEM_INSERT_AS_LINK'           => 'Вставить как ссылку',
 
 	'FILEMANAGER_FIELD_NAME'                    => 'Введите название...',
 
-	'FILEMANAGER_SUCCESS_DIR_RENAME'            => 'Директория была успешно переименована!',
-	'FILEMANAGER_SUCCESS_FILE_RENAME'           => 'Файл был успешно переименован!',
+	'FILEMANAGER_SUCCESS_UPLOAD'                => 'Файл был успешно загружен!',
 
-	'FILEMANAGER_ERROR_NAME_INVALID'            => 'Название не может содержать следующих символов: \\ / ? % * : | &quot; &lt; &gt;',
+	'FILEMANAGER_SUCCESS_DIR_CREATE'            => 'Директория была успешно создана!',
+	'FILEMANAGER_SUCCESS_DIR_RENAME'            => 'Директория была успешно переименована!',
+
+	'FILEMANAGER_SUCCESS_FILE_RENAME'           => 'Файл был успешно переименован!',
+	'FILEMANAGER_SUCCESS_FILE_EDIT'             => 'Файл был успешно сохранен!',
+
+	'FILEMANAGER_ERROR_NAME_INVALID'            => 'Название не может содержать следующие символы: \\ / ? % * : | &quot; &lt; &gt;',
+	'FILEMANAGER_ERROR_HIDDEN'                  => 'Название не может начинаться с точки',
 	'FILEMANAGER_ERROR_EXISTS'                  => 'Директория или файл с указанным названием уже существует',
 
 	'FILEMANAGER_ERROR_DIR_CREATE'              => 'Ошибка создания директории',
-	'FILEMANAGER_ERROR_FILE_CREATE'             => 'Ошибка создания файла',
-
 	'FILEMANAGER_ERROR_DIR_RENAME'              => 'Ошибка переименования директории',
-	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Ошибка переименования файла',
-
 	'FILEMANAGER_ERROR_DIR_REMOVE'              => 'Ошибка удаления директории',
+
+	'FILEMANAGER_ERROR_FILE_RENAME'             => 'Ошибка переименования файла',
+	'FILEMANAGER_ERROR_FILE_EDIT'               => 'Ошибка сохранения файла',
 	'FILEMANAGER_ERROR_FILE_REMOVE'             => 'Ошибка удаления файла',
 
 	'FILEMANAGER_CONFIRM_DIR_REMOVE'            => 'Вы действительно хотите удалить выбранную директорию и все ее содержимое?',
