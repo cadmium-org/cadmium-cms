@@ -165,13 +165,13 @@ namespace Template {
 		 * @return Template\Block : the current block object
 		 */
 
-		public function set(string $name, $value) : Block {
+		public function set(string $name, $component) : Block {
 
-			if ($value instanceof Block) $this->setBlock($name, $value);
+			if ($component instanceof Block) $this->setBlock($name, $component);
 
-			else if (is_array($value)) $this->setLoop($name, $value);
+			else if (is_array($component)) $this->setLoop($name, $component);
 
-			else if (is_scalar($value)) $this->setVar($name, $value);
+			else if (is_scalar($component)) $this->setVar($name, $component);
 
 			# ------------------------
 
@@ -365,9 +365,9 @@ namespace Template {
 		 * An alias for the set method
 		 */
 
-		public function __set(string $name, $value) : Block {
+		public function __set(string $name, $component) : Block {
 
-			return $this->set($name, $value);
+			return $this->set($name, $component);
 		}
 
 		/**
