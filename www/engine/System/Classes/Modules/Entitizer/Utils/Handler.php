@@ -149,7 +149,7 @@ namespace Modules\Entitizer\Utils {
 		/**
 		 * Handle the request
 		 *
-		 * @return Template\Block|Ajax\Response | a block object if the ajax param was set to false, otherwise an ajax response
+		 * @return Template\Block|Ajax\Response : a block object if the ajax param was set to false, otherwise an ajax response
 		 */
 
 		protected function handle(bool $ajax = false) {
