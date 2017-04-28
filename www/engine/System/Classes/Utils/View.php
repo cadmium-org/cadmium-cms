@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
 	use Exception, Modules\Extend, Explorer, Template;
@@ -8,16 +15,20 @@ namespace Utils {
 
 		private static $cache = [];
 
-		# Init view
+		/**
+		 * Initialize the class
+		 */
 
 		public static function init() {
 
 			self::$cache = [];
 		}
 
-		# Get view
+		/**
+		 * Get a view block
+		 */
 
-		public static function get(string $name) {
+		public static function get(string $name) : Template\Block {
 
 			if (false === ($path = Extend\Templates::path())) throw new Exception\View;
 
