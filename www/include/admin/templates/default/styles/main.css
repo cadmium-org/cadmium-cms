@@ -66,13 +66,13 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 .breadcrumb .divider:last-child { display:none; }
 
-/* Uploader */
+/* Filemanager */
 
-.uploader > form input { position:absolute; width:0; height:0; opacity:0; overflow:hidden; z-index:-1; }
+.managebar .column.upload input { position:absolute; width:0; height:0; opacity:0; overflow:hidden; z-index:-1; }
 
 @media only screen and (max-width:767px) {
 
-	.uploader .column > * { width:100%; }
+	.managebar .column > div { width:100%; }
 }
 
 /* Tables */
@@ -111,7 +111,9 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 /* Ace Editor */
 
-.ace_editor { border:1px solid rgba(34, 36, 38, 0.15); border-radius:4px; }
+#ace-container { display:none; margin-top:1em; }
+
+#ace-container .ace_editor { border:1px solid rgba(34, 36, 38, 0.15); border-radius:4px; }
 
 /* CKEditor */
 

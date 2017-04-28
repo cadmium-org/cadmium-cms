@@ -42,13 +42,15 @@ var Main = {
 
 			var form = $(this), action = form.attr('action');
 
-			$(this).find('input[type=submit]').click(function(event) {
+			$(this).submit(function(event) {
 
 				event.preventDefault();
 
 				if (Main.CKEditor.editor) Main.CKEditor.editor.updateElement();
 
-				Main.goto(action, form.serialize(), true);
+				var data = (window.FormData ? new FormData(form[0]) : form.serialize);
+
+				Main.goto(action, data, true);
 			});
 		});
 	},
@@ -62,9 +64,13 @@ var Main = {
 
 		var state_id = this.state_id;
 
-		$.ajax({ 'type' : 'POST', 'contentType' : 'application/x-www-form-urlencoded; charset=UTF-8',
+		if (data instanceof FormData) var contentType = false, processData = false;
 
-			'cache' : false, 'url' : url, 'data' : data, 'dataType' : 'json', 'headers' : headers,
+		else var contentType = 'application/x-www-form-urlencoded; charset=UTF-8', processData = true;
+
+		$.ajax({ 'type' : 'POST', 'contentType' : contentType, 'cache' : false, 'url' : url,
+
+			'data' : data, 'dataType' : 'json', 'processData' : processData, 'headers' : headers,
 
 			'success' : function(data, status) {
 
@@ -791,60 +797,41 @@ Main.WidgetsLoader = {
 
 Main.Filemanager = {
 
-	'locked' : false, 'sender' : null, 'list' : [], 'parent' : '', 'link' : '',
+	'locked' : false, 'sender' : null, 'list' : [], 'parent' : '',
 
-	'upload_form' : null, 'upload_select' : null, 'upload_submit' : null,
+	'upload_form' : null, 'upload_input' : null, 'upload_select' : null, 'upload_submit' : null,
 
-	'button_create' : null, 'button_reload' : null, 'modal_create' : null, 'submitted' : false,
+	'create_form' : null, 'create_input' : null, 'button_create' : null, 'button_reload' : null,
 
 	'init' : function() {
 
-		this.locked = false; this.sender = null; this.list = []; this.submitted = false;
+		this.locked = false; this.sender = null; this.list = [];
 
 		var handler = this;
 
 		this.parent = $('input:hidden#filemanager-parent[name=parent]').val();
 
-		this.link = (install_path + '/admin/content/filemanager' + (this.parent ? ('?parent=' + this.parent) : ''));
+		// Process upload form
 
-		this.upload_form = $('#filemanager-upload-form');
+		this.upload_form = $('.managebar form.upload').submit(function() { handler.upload_submit.addClass('loading'); });
 
-		this.upload_select = $('#filemanager-upload-select').click(function() { handler.uploadSelect() });
+		this.upload_input = this.upload_form.find('input').change(function() { handler.upload_submit.removeClass('disabled'); });
 
-		this.upload_submit = $('#filemanager-upload-submit').click(function() { handler.uploadSubmit() });
+		this.upload_select = this.upload_form.find('.select.button').click(function() { handler.upload_input.click(); });
 
-		this.button_create = $('#filemanager-button-create').click(function() { handler.create(); });
+		this.upload_submit = this.upload_form.find('.submit.button').click(function() { handler.upload_form.submit(); });
 
-		this.button_reload = $('#filemanager-button-reload').click(function() { handler.reload(); });
+		// Process create form
 
-		this.upload_form.submit(function() { handler.upload_submit.addClass('loading'); });
+		this.create_form = $('.managebar form.create');
 
-		this.modal_create = $('#filemanager-modal-create').each(function() {
+		this.create_input = this.create_form.find('input').change(function() { $(this).val($(this).val().trim()); });
 
-			var form = $(this).find('form'), deny = $(this).find('.deny'), approve = $(this).find('.approve');
+		this.button_create = this.create_form.find('.create.button').click(function() { handler.create(); });
 
-			var select = form.find('select#create-type'), input = form.find('input#create-name');
+		this.button_reload = this.create_form.find('.reload.button').click(function() { handler.reload(); });
 
-			input.change(function() { $(this).val($(this).val().trim()); });
-
-			form.submit(function() {
-
-				if (input.change().val() != '') handler.submitted = true; else return false;
-
-				select.blur().parent().addClass('disabled'); input.blur().parent().addClass('disabled');
-
-				deny.addClass('disabled'); approve.addClass('disabled').addClass('loading');
-			});
-
-			$(this).modal('setting', 'onShow', function() {
-
-				form.trigger('reset'); select.parent().dropdown({ 'duration' : 0 });
-			});
-
-			$(this).modal('setting', 'onHide', function() { if (!handler.submitted) handler.enableControls(); });
-
-			$(this).modal('setting', 'onApprove', function() { form.submit(); return false; });
-		});
+		// Process items
 
 		$('table#filemanager-list tbody tr').each(function() {
 
@@ -865,42 +852,14 @@ Main.Filemanager = {
 		});
 	},
 
-	'disableControls' : function() {
-
-		this.locked = true;
-
-		this.upload_select.addClass('disabled'); this.upload_submit.addClass('disabled');
-
-		this.button_create.addClass('disabled'); this.button_reload.addClass('disabled');
-	},
-
-	'enableControls' : function() {
-
-		this.locked = false;
-
-		this.upload_select.removeClass('disabled'); this.upload_submit.removeClass('disabled');
-
-		this.button_create.removeClass('disabled'); this.button_reload.removeClass('disabled');
-	},
-
-	'uploadSelect' : function() {
-
-		if (!Main.locked && !this.locked) { this.upload_form.find('input[type=file]').click(); }
-	},
-
-	'uploadSubmit' : function() {
-
-		if (!Main.locked && !this.locked) { this.disableControls(); this.upload_form.submit(); }
-	},
-
 	'create' : function() {
 
-		if (!Main.locked && !this.locked) { this.disableControls(); this.modal_create.modal('show'); }
+		if (this.create_input.change().val() != '') this.create_form.submit();
 	},
 
 	'reload' : function() {
 
-		if (!Main.locked && !this.locked) { this.disableControls(); window.location.replace(this.link); }
+		Main.goto(install_path + '/admin/content/filemanager/uploads' + (this.parent ? ('?parent=' + this.parent) : ''));
 	},
 
 	'remove' : function(index, button) {
@@ -909,9 +868,9 @@ Main.Filemanager = {
 
 		var item = this.list[index]; if (!item.remove.is(button)) return;
 
-		this.disableControls(); this.sender = index; button.addClass('loading');
+		this.locked = true; this.sender = index; button.addClass('loading');
 
-		var path = (install_path + '/admin/content/filemanager/' + item.type);
+		var path = (install_path + '/admin/content/filemanager/uploads/' + item.type);
 
 		var query = ('?parent=' + this.parent + '&name=' + item.name);
 
@@ -927,7 +886,63 @@ Main.Filemanager = {
 			if (data.status) this.list[this.sender].row.remove();
 		}
 
-		this.sender = null; this.enableControls(); return null;
+		this.sender = null; this.locked = false; return null;
+	}
+};
+
+Main.FilesLoader = {
+
+	'locked' : false, 'callback' : null, 'modal' : null,
+
+	'init' : function() {
+
+		this.locked = false; this.callback = null; this.modal = $('#modal-lister');
+	},
+
+	'open' : function(parent, callback) {
+
+		if (Main.locked || this.locked) return;
+
+		this.locked = true; this.callback = callback;
+
+		this.modal.children('.segment').addClass('loading');
+
+		Main.ajax(this, (install_path + '/admin/content/filemanager/uploads?parent=' + parent), {});
+	},
+
+	'load' : function(parent) {
+
+		if (Main.locked || this.locked) return;
+
+		this.locked = true; this.modal.children('.segment').addClass('loading');
+
+		Main.ajax(this, (install_path + '/admin/content/filemanager/uploads?parent=' + parent), {});
+	},
+
+	'handle' : function(data) {
+
+		if (data.status && (typeof data.contents != 'undefined')) {
+
+			var handler = this, content = this.modal.children('.segment');
+
+			content.html(data.contents).find('table tbody tr').each(function() {
+
+				var row = $(this), name = row.data('name'), path = row.data('path');
+
+				var format = row.data('format'), mime = row.data('mime');
+
+				var button_media = row.find('.media.button'), button_link = row.find('.link.button');
+
+				button_media.click(function() { handler.callback(name, path, format, mime); handler.modal.modal('hide'); });
+
+				button_link.click(function() { handler.callback(name, path); handler.modal.modal('hide'); });
+
+			}).find('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
+
+			content.removeClass('loading'); this.modal.modal('show');
+		}
+
+		this.locked = false; return null;
 	}
 };
 
@@ -1199,11 +1214,15 @@ Main.Ace = {
 
 		var textarea = container.find('textarea').hide(), holder = container.find('.holder');
 
+		if (!textarea.length || !holder.length) return;
+
 		var mode = holder.data('mode'), minLines = holder.data('min-lines'), maxLines = holder.data('max-lines');
 
 		this.editor = ace.edit(holder.attr('id'));
 
-		this.editor.setTheme('ace/theme/clouds'); this.editor.session.setMode('ace/mode/' + mode);
+		this.editor.setTheme('ace/theme/clouds');
+
+		if (mode) this.editor.session.setMode('ace/mode/' + mode);
 
 		this.editor.setOptions({ 'minLines' : minLines, 'maxLines' : maxLines });
 
