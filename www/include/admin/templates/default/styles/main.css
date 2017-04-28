@@ -117,11 +117,15 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 /* CKEditor */
 
-.cke_button__addpage_label { display:inline !important; }
+#ckeditor-container .cke_button__addpage_label { display:inline !important; }
 
-.cke_button__addvariable_label { display:inline !important; }
+#ckeditor-container .cke_button__addvariable_label { display:inline !important; }
 
-.cke_button__addwidget_label { display:inline !important; }
+#ckeditor-container .cke_button__addwidget_label { display:inline !important; }
+
+#ckeditor-container .cke_button__addfile_label { display:inline !important; }
+
+#ckeditor-container .cke_button_disabled .cke_button_label { color:#BBB !important; }
 
 /* Footer */
 
