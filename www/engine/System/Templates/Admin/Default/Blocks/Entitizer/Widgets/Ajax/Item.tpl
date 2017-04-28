@@ -1,6 +1,6 @@
 <tr class="$class$" data-id="$id$" data-title="$title$" data-name="$name$">
 
-	<td><i class="write icon"></i> $title$</td>
+	<td><i class="code icon"></i> $title$</td>
 
 	<td class="right aligned">
 

@@ -30,7 +30,7 @@ var View = {
 
 		/* Modals */
 
-		$('.ui.modal').modal('setting', 'transition', 'fade down');
+		$('.ui.page.modals > .modal').modal({ 'transition' : 'fade down' });
 
 		/* Init dynamic components */
 

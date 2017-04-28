@@ -26,7 +26,6 @@ return [
 	'WIDGET_FIELD_TITLE'                            => 'Назва віджета',
 	'WIDGET_FIELD_NAME'                             => 'Унікальний ключ',
 	'WIDGET_FIELD_ACTIVE'                           => 'Відображати на сайті',
-	'WIDGET_FIELD_CONTENTS'                         => 'Вміст',
 
 	# Other
 

@@ -92,6 +92,10 @@
 
 	</div>
 
+</div>
+
+<div class="ui page dimmer modals">
+
 	<div class="ui large modal" id="modal-lister">
 
 		<i class="close icon"></i>

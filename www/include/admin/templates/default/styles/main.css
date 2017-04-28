@@ -79,7 +79,7 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 .table tr.inactive td { color:rgba(40, 40, 40, 0.3); }
 
-.table td { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.table td:not(.right.aligned) { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 .table a:hover { cursor:pointer; }
 
@@ -97,7 +97,7 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 /* Forms */
 
-.form select { height:38px !important; color:#FFF !important; }
+.form select { height:38px !important; }
 
 .form textarea { height:6em !important; min-height:6em !important; }
 

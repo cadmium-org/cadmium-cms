@@ -50,11 +50,7 @@
 
 		</div>
 
-		<div class="ui hidden divider"></div>
-
-		<div id="ace-container" style="display:none;">
-
-			<h5 class="ui header">%WIDGET_FIELD_CONTENTS%</h5>
+		<div id="ace-container">
 
 			{ block:field_widget_contents / }
 

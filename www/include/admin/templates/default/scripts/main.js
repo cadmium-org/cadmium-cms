@@ -408,7 +408,7 @@ Main.PagesLoader = {
 					handler.modal.modal('hide');
 				});
 
-			}).find('.icon.button').popup({ 'position': 'bottom left', 'variation': 'inverted' });
+			}).find('.icon.button').popup({ 'position': 'bottom center', 'variation': 'inverted' });
 
 			content.removeClass('loading'); this.modal.modal('show');
 		}
@@ -656,7 +656,7 @@ Main.VariablesLoader = {
 		Main.ajax(this, (install_path + '/admin/content/variables'));
 	},
 
-	'load' : function(parent_id) {
+	'load' : function() {
 
 		if (Main.locked || this.locked) return;
 
@@ -763,7 +763,7 @@ Main.WidgetsLoader = {
 		Main.ajax(this, (install_path + '/admin/content/widgets'));
 	},
 
-	'load' : function(parent_id) {
+	'load' : function() {
 
 		if (Main.locked || this.locked) return;
 
