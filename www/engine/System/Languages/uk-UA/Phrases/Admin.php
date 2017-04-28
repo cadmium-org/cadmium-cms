@@ -333,6 +333,7 @@ return [
 	'INFORMATION_ROW_JQUERY_VERSION'            => 'Версія jQuery',
 	'INFORMATION_ROW_SEMANTIC_UI_VERSION'       => 'Версія Semantic UI',
 	'INFORMATION_ROW_CKEDITOR_VERSION'          => 'Версія CKEditor',
+	'INFORMATION_ROW_ACE_VERSION'               => 'Версія Ace Editor',
 
 	'INFORMATION_ROW_EXTENSION_MYSQLI'          => 'MySQLi',
 	'INFORMATION_ROW_EXTENSION_MBSTRING'        => 'Multibyte String',

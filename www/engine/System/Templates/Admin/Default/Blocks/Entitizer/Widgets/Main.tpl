@@ -54,7 +54,7 @@
 
 			{ block:field_widget_contents / }
 
-			<div class="holder" id="ace-holder" data-mode="html" data-min-lines="5" data-max-lines="20"></div>
+			<div class="holder" id="ace-holder" data-mode="html" data-min-lines="10" data-max-lines="20"></div>
 
 		</div>
 

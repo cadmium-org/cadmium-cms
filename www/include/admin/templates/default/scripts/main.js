@@ -1222,20 +1222,20 @@ Main.Ace = {
 
 		this.editor.setTheme('ace/theme/clouds');
 
-		if (mode) this.editor.session.setMode('ace/mode/' + mode);
-
-		this.editor.setOptions({ 'minLines' : minLines, 'maxLines' : maxLines });
-
-		this.editor.setOptions({ 'showPrintMargin' : false, 'useWorker' : false });
+		this.editor.renderer.setOptions({ 'minLines' : minLines, 'maxLines' : maxLines, 'showPrintMargin' : false });
 
 		this.editor.renderer.setScrollMargin(5, 5, 0, 0);
+
+		this.editor.session.setOption('useWorker', false);
+
+		if (mode) this.editor.session.setMode('ace/mode/' + mode);
 
 		this.editor.setValue(textarea.val()); this.editor.gotoLine(1, 0);
 
 		this.editor.session.on('change', function() { textarea.val(handler.editor.getValue()); });
 
 		container.show();
-	},
+	}
 };
 
 Main.CKEditor = {

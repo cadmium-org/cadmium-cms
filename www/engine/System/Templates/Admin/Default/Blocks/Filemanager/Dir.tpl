@@ -20,11 +20,11 @@
 
 </div>
 
-<div class="ui form segment">
+<div class="ui segment">
 
 	<h4 class="ui dividing header">%FILEMANAGER_DIR_NAME%</h4>
 
-	<form method="post" action="$install_path$/admin/content/filemanager/$origin$/dir?parent=$parent$&name=$name$" autocomplete="off">
+	<form class="ui form" method="post" action="$install_path$/admin/content/filemanager/$origin$/dir?parent=$parent$&name=$name$" autocomplete="off">
 
 		<div class="ui fluid action input field">
 
