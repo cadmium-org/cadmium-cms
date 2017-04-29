@@ -196,5 +196,14 @@ return [
 	'ppt'           => 'application/vnd.ms-powerpoint',
 	'pptx'          => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 
-	'pdf'           => 'application/pdf'
+	'pdf'           => 'application/pdf',
+
+	# Other types
+
+	'css'           => 'text/css',
+	'html'          => 'text/html',
+	'js'            => 'application/javascript',
+	'json'          => 'application/json',
+	'php'           => 'application/x-php',
+	'tpl'           => 'text/x-cadmium-template'
 ];
