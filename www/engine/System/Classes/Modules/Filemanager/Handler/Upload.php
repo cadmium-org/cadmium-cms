@@ -1,16 +1,27 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Filemanager
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Filemanager\Handler {
 
 	use Frames, Utils\Uploader, Ajax, Language, Request;
 
 	class Upload extends Frames\Admin\Area\Panel {
 
-		# Handle request
+		/**
+		 * Handle the request
+		 *
+		 * @return Ajax\Response|false : an ajax response if the ajax param was set to true, otherwise false
+		 */
 
-		protected function handle() {
+		protected function handle(bool $ajax = false) {
 
-			if (!Request::isAjax()) return false;
+			if (!$ajax) return false;
 
 			# Create response
 

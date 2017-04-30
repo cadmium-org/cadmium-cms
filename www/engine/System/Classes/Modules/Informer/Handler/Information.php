@@ -44,6 +44,8 @@ namespace Modules\Informer\Handler {
 			$contents->semantic_ui_version  = SEMANTIC_UI_VERSION;
 
 			$contents->ckeditor_version     = CKEDITOR_VERSION;
+
+			$contents->ace_version          = ACE_VERSION;
 		}
 
 		/**

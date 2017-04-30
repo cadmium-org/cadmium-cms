@@ -135,7 +135,7 @@ namespace Modules\Entitizer\Utils {
 
 		/**
 		 * Check whether another entity with a given unique param value exists.
-		 * The method helps you to find out the possibility of changing the entity's unique param value to the given one
+		 * This method is useful to find out is it possible to change the entity's unique param value to the given one
 		 *
 		 * @return int|false : the number of entities found (0 or 1) or false on error
 		 */
@@ -161,6 +161,15 @@ namespace Modules\Entitizer\Utils {
 			# ------------------------
 
 			return ((DB::getLast() && DB::getLast()->status) ? DB::getLast()->rows : false);
+		}
+
+		/**
+		 * Check if the entity has been successfully initialized
+		 */
+
+		public function isInited() : bool {
+
+			return (0 !== $this->id);
 		}
 
 		/**

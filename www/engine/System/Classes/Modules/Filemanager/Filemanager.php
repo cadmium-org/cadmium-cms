@@ -1,43 +1,68 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Filemanager
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules {
 
 	abstract class Filemanager {
 
-		private static $classes = [
+		/**
+		 * Get a container object for a path located within the addons directory
+		 */
 
-			FILEMANAGER_TYPE_DIR            => 'Modules\Filemanager\Entity\Dir',
-			FILEMANAGER_TYPE_FILE           => 'Modules\Filemanager\Entity\File'
-		];
+		public static function openAddons(string $path = '') : Filemanager\Container\Addons {
 
-		# Open container
-
-		public static function open(string $path = '') {
-
-			return new Filemanager\Utils\Container($path);
+			return new Filemanager\Container\Addons($path);
 		}
 
-		# Get entity
+		/**
+		 * Get a container object for a path located within the languages directory
+		 */
 
-		public static function get(string $type, Filemanager\Utils\Container $parent, string $name = '') {
+		public static function openLanguages(string $path = '') : Filemanager\Container\Languages {
 
-			$class = (($type === FILEMANAGER_TYPE_DIR) ? FILEMANAGER_TYPE_DIR : FILEMANAGER_TYPE_FILE);
-
-			return new self::$classes[$class]($parent, $name);
+			return new Filemanager\Container\Languages($path);
 		}
 
-		# Get directory entity
+		/**
+		 * Get a container object for a path located within the templates directory
+		 */
 
-		public static function dir(Filemanager\Utils\Container $parent, string $name = '') {
+		public static function openTemplates(string $path = '') : Filemanager\Container\Templates {
 
-			return self::get(FILEMANAGER_TYPE_DIR, $parent, $name);
+			return new Filemanager\Container\Templates($path);
 		}
 
-		# Get file entity
+		/**
+		 * Get a container object for a path located within the uploads directory
+		 */
 
-		public static function file(Filemanager\Utils\Container $parent, string $name = '') {
+		public static function openUploads(string $path = '') : Filemanager\Container\Uploads {
 
-			return self::get(FILEMANAGER_TYPE_FILE, $parent, $name);
+			return new Filemanager\Container\Uploads($path);
+		}
+
+		/**
+		 * Get a directory/file entity object
+		 */
+
+		public static function get(Filemanager\Utils\Container $parent, string $name = '') : Filemanager\Utils\Entity {
+
+			return new Filemanager\Utils\Entity($parent, $name);
+		}
+
+		/**
+		 * Get a loader object for a given parent
+		 */
+
+		public static function getLoader(Filemanager\Utils\Container $parent) : Filemanager\Utils\Loader {
+
+			return new Filemanager\Utils\Loader($parent);
 		}
 	}
 }

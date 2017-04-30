@@ -13,7 +13,7 @@ namespace Modules\Entitizer\Utils {
 
 	abstract class Lister extends Frames\Admin\Area\Panel {
 
-		protected $index = 0, $parent = null, $entity = null, $path = [], $depth = 0;
+		protected $parent = null, $entity = null, $path = [], $depth = 0, $index = 0;
 
 		protected $items = ['list' => [], 'total' => 0];
 
@@ -178,14 +178,12 @@ namespace Modules\Entitizer\Utils {
 		/**
 		 * Handle the request
 		 *
-		 * @return Template\Block|Ajax\Response | a block object if the ajax param was set to false, otherwise an ajax response
+		 * @return Template\Block|Ajax\Response : a block object if the ajax param was set to false, otherwise an ajax response
 		 */
 
 		protected function handle(bool $ajax = false) {
 
 			if ($ajax) return $this->handleAjax();
-
-			$this->index = Number::forceInt(Request::get('index'), 1, 999999);
 
 			# Create parent entity
 
@@ -196,6 +194,10 @@ namespace Modules\Entitizer\Utils {
 			# Get path
 
 			if (false !== ($path = $this->parent->getPath())) $this->path = $path;
+
+			# Get index
+
+			$this->index = Number::forceInt(Request::get('index'), 1, 999999);
 
 			# Get items list
 

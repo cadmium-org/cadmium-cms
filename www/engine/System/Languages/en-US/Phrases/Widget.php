@@ -26,7 +26,6 @@ return [
 	'WIDGET_FIELD_TITLE'                            => 'Widget title',
 	'WIDGET_FIELD_NAME'                             => 'Unique key',
 	'WIDGET_FIELD_ACTIVE'                           => 'Display on site',
-	'WIDGET_FIELD_CONTENTS'                         => 'Contents',
 
 	# Other
 

@@ -30,7 +30,7 @@ namespace Frames {
 
 			$languages = [Extend\Languages::pathPrimary(), Extend\Languages::path()];
 
-			$phrases = (static::PHRASES + array_keys(Extend\Addons::items() ?? []));
+			$phrases = array_merge(static::PHRASES, array_keys(Extend\Addons::items() ?? []));
 
 			foreach (array_unique($languages) as $path) foreach ($phrases as $name) {
 

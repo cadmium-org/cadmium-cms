@@ -25,12 +25,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'colors' },
 		{ name: 'about' },
 		'/',
-		{ name: 'cadmium' }
+		{ name: 'cadmium',     groups: [ 'page', 'variable', 'widget', 'file' ] }
 	];
-
-	// Remove some buttons provided by the standard plugins, which are
-	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Underline,Subscript,Superscript';
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
@@ -38,10 +34,11 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
+	// Set base float z-index to make possible a semantic ui modal appearance.
 	config.baseFloatZIndex = 900;
 
-	// Configure extra plugins
-	config.extraPlugins = 'uploadimage,cadmium';
+	// Configure extra plugins.
+	config.extraPlugins = 'cadmium';
 	config.uploadUrl = (install_path + '/admin/content/filemanager/upload');
 	config.imageUploadUrl = (install_path + '/admin/content/filemanager/upload?type=image');
 };

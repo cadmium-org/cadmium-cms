@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Filemanager
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Filemanager\Controller {
 
 	use Modules\Filemanager, Utils\Validate;
@@ -8,20 +15,28 @@ namespace Modules\Filemanager\Controller {
 
 		protected $parent = null;
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(Filemanager\Utils\Container $parent) {
 
 			$this->parent = $parent;
 		}
 
-		# Invoker
+		/**
+		 * Invoker
+		 *
+		 * @return true|string|array : true on success, otherwise an error code, or an array of type [$param_name, $error_code],
+		 *         where $param_name is a name of param that has triggered the error,
+		 *         and $error_code is a language phrase related to the error
+		 */
 
 		public function __invoke(array $post) {
 
 			# Declare variables
 
-			$type = ''; $name = '';
+			$name = '';
 
 			# Extract post array
 
@@ -31,17 +46,19 @@ namespace Modules\Filemanager\Controller {
 
 			if (false === ($name = Validate::fileName($name))) return ['name', 'FILEMANAGER_ERROR_NAME_INVALID'];
 
-			# Check if item exists
+			if ($this->parent->isIgnoreHidden() && preg_match('/^\./', $name)) return ['name', 'FILEMANAGER_ERROR_HIDDEN'];
 
-			if (@file_exists($this->parent->pathFull() . $name)) return ['name', 'FILEMANAGER_ERROR_EXISTS'];
+			# Get entity
 
-			# Create item
+			$entity = Filemanager::get($this->parent);
 
-			$entity = Filemanager::get($type, $this->parent);
+			# Check if name is used
 
-			if (!$entity->create($name)) return (($entity->type() === FILEMANAGER_TYPE_DIR) ?
+			if (!$entity->check($name)) return ['name', 'FILEMANAGER_ERROR_EXISTS'];
 
-				'FILEMANAGER_ERROR_DIR_CREATE' : 'FILEMANAGER_ERROR_FILE_CREATE');
+			# Create entity
+
+			if (!$entity->create($name, 'dir')) return 'FILEMANAGER_ERROR_DIR_CREATE';
 
 			# ------------------------
 

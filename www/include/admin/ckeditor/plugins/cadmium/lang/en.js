@@ -3,5 +3,6 @@ CKEDITOR.plugins.setLang('cadmium', 'en', {
 
 	'page' : 'Page',
 	'variable' : 'Variable',
-	'widget' : 'Widget'
+	'widget' : 'Widget',
+	'file' : 'File'
 });

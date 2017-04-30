@@ -66,20 +66,20 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 .breadcrumb .divider:last-child { display:none; }
 
-/* Uploader */
+/* Filemanager */
 
-.uploader > form input { position:absolute; width:0; height:0; opacity:0; overflow:hidden; z-index:-1; }
+.managebar .column.upload input { position:absolute; width:0; height:0; opacity:0; overflow:hidden; z-index:-1; }
 
 @media only screen and (max-width:767px) {
 
-	.uploader .column > * { width:100%; }
+	.managebar .column > div { width:100%; }
 }
 
 /* Tables */
 
 .table tr.inactive td { color:rgba(40, 40, 40, 0.3); }
 
-.table td { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.table td:not(.right.aligned) { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 .table a:hover { cursor:pointer; }
 
@@ -97,7 +97,7 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 /* Forms */
 
-.form select { height:38px !important; color:#FFF !important; }
+.form select { height:38px !important; }
 
 .form textarea { height:6em !important; min-height:6em !important; }
 
@@ -111,15 +111,21 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 
 /* Ace Editor */
 
-.ace_editor { border:1px solid rgba(34, 36, 38, 0.15); border-radius:4px; }
+#ace-container { display:none; margin-top:1em; }
+
+#ace-container .ace_editor { border:1px solid rgba(34, 36, 38, 0.15); border-radius:4px; }
 
 /* CKEditor */
 
-.cke_button__addpage_label { display:inline !important; }
+#ckeditor-container .cke_button__addpage_label { display:inline !important; }
 
-.cke_button__addvariable_label { display:inline !important; }
+#ckeditor-container .cke_button__addvariable_label { display:inline !important; }
 
-.cke_button__addwidget_label { display:inline !important; }
+#ckeditor-container .cke_button__addwidget_label { display:inline !important; }
+
+#ckeditor-container .cke_button__addfile_label { display:inline !important; }
+
+#ckeditor-container .cke_button_disabled .cke_button_label { color:#BBB !important; }
 
 /* Footer */
 

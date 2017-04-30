@@ -41,7 +41,7 @@ namespace Modules {
 		/**
 		 * Handle the request
 		 *
-		 * @return Template\Block|false : a block object on success or false if page was not found
+		 * @return Template\Block|false : a block object on success or false if a page was not found
 		 */
 
 		protected function handle() {

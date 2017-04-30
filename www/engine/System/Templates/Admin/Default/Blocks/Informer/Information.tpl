@@ -126,6 +126,14 @@
 
 				</tr>
 
+				<tr>
+
+					<td><i class="puzzle icon"></i> %INFORMATION_ROW_ACE_VERSION%</td>
+
+					<td>$ace_version$</td>
+
+				</tr>
+
 			</tbody>
 
 		</table>

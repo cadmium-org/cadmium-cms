@@ -12,7 +12,7 @@ namespace Modules\Extend\Utils {
 
 		protected function getItem(string $name) {
 
-			$file_name = ($this->dir_name . $name . '/Config.json');
+			$file_name = ($this->dir_name . $name . '/.Config.json');
 
 			if (null === ($data = JSON::load($file_name))) return null;
 

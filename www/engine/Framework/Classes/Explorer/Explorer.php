@@ -15,7 +15,7 @@ namespace {
 		 * Get list of directory items
 		 */
 
-		private static function getList(string $dir_name, callable $checker) : Generator {
+		private static function getList(string $dir_name, string $type = null) : Generator {
 
 			if (false !== ($handler = @opendir($dir_name))) {
 
@@ -23,7 +23,7 @@ namespace {
 
 					if (($name === '.') || ($name === '..')) continue;
 
-					if (@$checker($dir_name . $name)) yield $name;
+					if ((null === $type) || (@filetype($dir_name . $name) === $type)) yield $name;
 				}
 
 				closedir($handler);
@@ -41,6 +41,15 @@ namespace {
 			if ($check_exists && !self::isFile($file_name)) return false;
 
 			return pathinfo($file_name, $param);
+		}
+
+		/**
+		 * Check if a file (or a directory) exists
+		 */
+
+		public static function exists(string $file_name) : bool {
+
+			return @file_exists($file_name);
 		}
 
 		/**
@@ -84,6 +93,17 @@ namespace {
 		}
 
 		/**
+		 * Rename a file (or a directory)
+		 *
+		 * @return bool : true on success or false on failure
+		 */
+
+		 public static function rename(string $file_name, string $new_file_name) {
+
+			 return @rename($file_name, $new_file_name);
+		 }
+
+		/**
 		 * Remove a directory
 		 *
 		 * @return bool : true on success or false on failure
@@ -120,12 +140,21 @@ namespace {
 		}
 
 		/**
+		 * Iterate over files and directories within a given directory
+		 */
+
+		public static function iterate(string $dir_name) : Generator {
+
+ 			foreach (self::getList($dir_name) as $name) yield $name;
+ 		}
+
+		/**
 		 * Iterate over directories within a given directory
 		 */
 
 		public static function iterateDirs(string $dir_name) : Generator {
 
-			foreach (self::getList($dir_name, 'is_dir') as $name) yield $name;
+			foreach (self::getList($dir_name, 'dir') as $name) yield $name;
 		}
 
 		/**
@@ -134,7 +163,16 @@ namespace {
 
 		public static function iterateFiles(string $dir_name) : Generator {
 
-			foreach (self::getList($dir_name, 'is_file') as $name) yield $name;
+			foreach (self::getList($dir_name, 'file') as $name) yield $name;
+		}
+
+		/**
+		 * Get a list of files and directories within a given directory
+		 */
+
+		public static function list(string $dir_name) : array {
+
+			return iterator_to_array(self::getList($dir_name));
 		}
 
 		/**
@@ -143,7 +181,7 @@ namespace {
 
 		public static function listDirs(string $dir_name) : array {
 
-			return iterator_to_array(self::getList($dir_name, 'is_dir'));
+			return iterator_to_array(self::getList($dir_name, 'dir'));
 		}
 
 		/**
@@ -152,13 +190,13 @@ namespace {
 
 		public static function listFiles(string $dir_name) : array {
 
-			return iterator_to_array(self::getList($dir_name, 'is_file'));
+			return iterator_to_array(self::getList($dir_name, 'file'));
 		}
 
 		/**
 		 * Get a parent directory name
 		 *
-		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
+		 * @return string|false : the name or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getDirname(string $file_name, bool $check_exists = true) {
@@ -169,7 +207,7 @@ namespace {
 		/**
 		 * Get a basename of a file
 		 *
-		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
+		 * @return string|false : the basename or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getBasename(string $file_name, bool $check_exists = true) {
@@ -180,7 +218,7 @@ namespace {
 		/**
 		 * Get a filename of a file
 		 *
-		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
+		 * @return string|false : the filename or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getFilename(string $file_name, bool $check_exists = true) {
@@ -191,7 +229,7 @@ namespace {
 		/**
 		 * Get an extnesion of a file
 		 *
-		 * @return string|false : the string or false if $check_exists is true and the file does not actually exists
+		 * @return string|false : the extension or false if $check_exists is true and the file does not actually exists
 		 */
 
 		public static function getExtension(string $file_name, bool $check_exists = true) {
@@ -200,7 +238,41 @@ namespace {
 		}
 
 		/**
-		 * Get file (or directory) modification time
+		 * Get a file type
+		 *
+		 * @return string|false : one of the following values: 'dir', 'file', 'fifo', 'char', 'block', 'link', 'socket', 'unknown',
+		 *         or false on failure
+		 */
+
+		public static function getType(string $file_name) {
+
+			return @filetype($file_name);
+		}
+
+		/**
+		 * Get a file (or a directory) creation time
+		 *
+		 * @return int|false : the time or false on failure
+		 */
+
+		public static function getCreated(string $file_name) {
+
+			return @filectime($file_name);
+		}
+
+		/**
+		 * Get a file (or a directory) access time
+		 *
+		 * @return int|false : the time or false on failure
+		 */
+
+		public static function getAccessed(string $file_name) {
+
+			return @fileatime($file_name);
+		}
+
+		/**
+		 * Get a file (or a directory) modification time
 		 *
 		 * @return int|false : the time or false on failure
 		 */
@@ -208,6 +280,28 @@ namespace {
 		public static function getModified(string $file_name) {
 
 			return @filemtime($file_name);
+		}
+
+		/**
+		 * Get a file (or a directory) permissions
+		 *
+		 * @return int|false : the permissions or false on failure
+		 */
+
+		public static function getPermissions(string $file_name) {
+
+			return @fileperms($file_name);
+		}
+
+		/**
+		 * Get a file (or a directory) size
+		 *
+		 * @return int|false : the size or false on failure
+		 */
+
+		public static function getSize(string $file_name) {
+
+			return @filesize($file_name);
 		}
 
 		/**

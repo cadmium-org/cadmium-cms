@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/fe3196a26056145d7455b1d6bc695ea0
+ * (2) http://ckeditor.com/builder/d0a1a055cc0805cfb61f4b2856c3eda2
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/fe3196a26056145d7455b1d6bc695ea0
+ * (3) http://ckeditor.com/builder/download/d0a1a055cc0805cfb61f4b2856c3eda2
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -28,31 +28,33 @@ var CKBUILDER_CONFIG = {
 	skin: 'moono-lisa',
 	preset: 'standard',
 	ignore: [
-		'.bender',
-		'bender.js',
-		'bender-err.log',
-		'bender-out.log',
-		'dev',
 		'.DS_Store',
+		'.bender',
 		'.editorconfig',
 		'.gitattributes',
 		'.gitignore',
-		'gruntfile.js',
 		'.idea',
 		'.jscsrc',
 		'.jshintignore',
 		'.jshintrc',
-		'less',
 		'.mailmap',
+		'README.md',
+		'bender-err.log',
+		'bender-out.log',
+		'bender.js',
+		'dev',
+		'gruntfile.js',
+		'less',
 		'node_modules',
 		'package.json',
-		'README.md',
 		'tests'
 	],
 	plugins : {
+		'autogrow' : 1,
 		'basicstyles' : 1,
 		'blockquote' : 1,
 		'clipboard' : 1,
+		'codesnippet' : 1,
 		'contextmenu' : 1,
 		'copyformatting' : 1,
 		'elementspath' : 1,
@@ -60,11 +62,15 @@ var CKBUILDER_CONFIG = {
 		'entities' : 1,
 		'filebrowser' : 1,
 		'filetools' : 1,
+		'find' : 1,
 		'floatingspace' : 1,
 		'format' : 1,
 		'horizontalrule' : 1,
+		'html5audio' : 1,
+		'html5video' : 1,
 		'htmlwriter' : 1,
 		'image' : 1,
+		'image2' : 1,
 		'indentlist' : 1,
 		'link' : 1,
 		'list' : 1,
@@ -81,13 +87,15 @@ var CKBUILDER_CONFIG = {
 		'specialchar' : 1,
 		'tab' : 1,
 		'table' : 1,
+		'tableresize' : 1,
 		'tabletools' : 1,
 		'toolbar' : 1,
 		'undo' : 1,
 		'uploadfile' : 1,
 		'uploadimage' : 1,
 		'wsc' : 1,
-		'wysiwygarea' : 1
+		'wysiwygarea' : 1,
+		'youtube' : 1
 	},
 	languages : {
 		'en' : 1,
