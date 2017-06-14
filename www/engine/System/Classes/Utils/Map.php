@@ -93,7 +93,7 @@ namespace Utils {
 
 		public static function __autoload() {
 
-			foreach (Extend\Addons::items() as $item) self::parseItem($item);
+			foreach (Extend\Addons::getItems() as $item) self::parseItem($item);
 		}
 
 		# Get handler by url

@@ -34,7 +34,7 @@ namespace Frames\Admin {
 
 			# Set language
 
-			$view->language = Extend\Languages::data('iso');
+			$view->language = Extend\Languages::get('iso');
 
 			# Set title
 
@@ -59,7 +59,7 @@ namespace Frames\Admin {
 
 			# Set language
 
-			$response->language = Extend\Languages::data('iso');
+			$response->language = Extend\Languages::get('iso');
 
 			# Set title
 

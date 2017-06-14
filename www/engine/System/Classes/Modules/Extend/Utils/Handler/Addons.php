@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Extend
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Extend\Utils\Handler {
 
-	use Modules\Extend, Modules\Informer, Ajax, Arr, Language, Request, Template;
+	use Modules\Extend, Ajax, Language, Request, Template;
 
 	abstract class Addons extends Extend\Utils\Handler {
 
-		# Process item
+		/**
+		 * Process the item block
+		 */
 
 		protected function processItem(Template\Block $item, array $data) {
 
@@ -19,13 +28,17 @@ namespace Modules\Extend\Utils\Handler {
 			$item->getBlock($data['installed'] ? 'install' : 'uninstall')->disable();
 		}
 
-		# Process contents
+		/**
+		 * Process the contents block
+		 */
 
 		protected function processContents(Template\Block $contents) {}
 
-		# Handle ajax request
+		/**
+		 * Handle the ajax request
+		 */
 
-		protected function handleAjax() {
+		protected function handleAjax() : Ajax\Response {
 
 			$ajax = Ajax::createResponse();
 
@@ -49,7 +62,11 @@ namespace Modules\Extend\Utils\Handler {
 			return $ajax;
 		}
 
-		# Handle common request
+		/**
+		 * Handle the request
+		 *
+		 * @return Template\Block|Ajax\Response : a block object if the ajax param was set to false, otherwise an ajax response
+		 */
 
 		public function handle(bool $ajax = false) {
 

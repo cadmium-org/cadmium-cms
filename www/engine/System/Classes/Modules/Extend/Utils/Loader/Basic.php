@@ -1,43 +1,44 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Extend
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Extend\Utils\Loader {
 
-	use Modules\Extend, Modules\Settings, Arr, Explorer;
+	use Modules\Extend, Modules\Settings, Explorer;
 
 	abstract class Basic extends Extend\Utils\Loader {
 
 		protected $section = '', $loaded = false, $primary = null, $active = null;
 
-		# Get section
+		/**
+		 * Load an item data
+		 *
+		 * @return array|null : the data or null on failure
+		 */
 
-		protected function getSection(string $section) {
+		protected function loadItem(string $name) {
 
-			return (($section === SECTION_ADMIN) ? SECTION_ADMIN : SECTION_SITE);
+			return ($this->loaded ? ($this->items[$name] ?? null) : parent::loadItem($name));
 		}
 
-		# Get directory name
+		/**
+		 * Load a first item data
+		 *
+		 * @return array|null : the data or null on failure
+		 */
 
-		protected function getDirName() {
-
-			return static::$root_dir[$this->section];
-		}
-
-		# Get item
-
-		protected function getItem(string $name) {
-
-			return ($this->loaded ? ($this->items[$name] ?? null) : parent::getItem($name));
-		}
-
-		# Get first item
-
-		protected function getFirst() {
+		protected function loadFirst() {
 
 			if ($this->loaded) return ($this->items[key($this->items)] ?? null);
 
 			foreach (Explorer::iterateDirs($this->dir_name) as $name) {
 
-				if (null !== ($data = $this->getItem($name))) return $data;
+				if (null !== ($data = $this->loadItem($name))) return $data;
 			}
 
 			# ------------------------
@@ -45,56 +46,60 @@ namespace Modules\Extend\Utils\Loader {
 			return null;
 		}
 
-		# Get items
+		/**
+		 * Load a primary item data
+		 *
+		 * @return array|null : the data or null on failure
+		 */
 
-		protected function getItems() {
-
-			$items = [];
-
-			foreach (Explorer::iterateDirs($this->dir_name) as $name) {
-
-				if (null !== ($data = $this->getItem($name))) $items[$name] = $data;
-			}
-
-			# ------------------------
-
-			return Arr::sortby($items, 'title');
-		}
-
-		# Get primary item
-
-		protected function getPrimary() {
+		protected function loadPrimary() {
 
 			$primary = static::$default[$this->section];
 
-			return ($this->getItem($primary) ?? null);
+			return ($this->loadItem($primary) ?? null);
 		}
 
-		# Get active item
+		/**
+		 * Load an active item data
+		 *
+		 * @return array|null : the data or null on failure
+		 */
 
-		protected function getActive() {
+		protected function loadActive() {
 
 			$active = Settings::get(static::$param[$this->section]);
 
-			return ($this->getItem($active) ?? $this->primary ?? $this->getFirst());
+			return ($this->loadItem($active) ?? $this->primary ?? $this->loadFirst());
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(string $section, bool $load_all = true) {
 
-			$this->section = $this->getSection($section); $this->dir_name = $this->getDirName();
+			$this->section = (($section === SECTION_ADMIN) ? SECTION_ADMIN : SECTION_SITE);
 
-			if ($load_all) { $this->items = $this->getItems(); $this->loaded = true; }
+			$this->dir_name = static::$root_dir[$this->section];
 
-			$this->primary = $this->getPrimary(); $this->active = $this->getActive();
+			if ($load_all) { $this->items = $this->loadItems(); $this->loaded = true; }
+
+			$this->primary = $this->loadPrimary(); $this->active = $this->loadActive();
 		}
 
-		# Activate item
+		/**
+		 * Activate an item
+		 *
+		 * @param $save : tells to save the new value in the global settings
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function activate(string $name) {
+		public function activate(string $name, bool $save = false) : bool {
 
-			if (null === ($data = $this->getItem($name))) return false;
+			if (null === ($data = $this->loadItem($name))) return false;
+
+			if ($save && ((!Settings::set(static::$param[$this->section], $name)) || !Settings::save())) return false;
 
 			$this->active = $data;
 
@@ -103,52 +108,39 @@ namespace Modules\Extend\Utils\Loader {
 			return true;
 		}
 
-		# Return active section
+		/**
+		 * Get the active section
+		 */
 
-		public function section() {
+		public function getSection() : string {
 
 			return $this->section;
 		}
 
-		# Return primary extension name
+		/**
+		 * Get the primary item data or a specific param value
+		 *
+		 * @return array|mixed|false : the data array, the param value, or false if the primary item was not loaded
+		 */
 
-		public function primary() {
+		public function getPrimary(string $param = null) {
 
-			return ($this->primary['name'] ?? false);
+			if (null !== $param) return ($this->primary[$param] ?? false);
+
+			return ($this->primary ?? false);
 		}
 
-		# Return active extension name
+		/**
+		 * Get the active item data or a specific param value
+		 *
+		 * @return array|mixed|false : the data array, the param value, or false if the active item was not loaded
+		 */
 
-		public function active() {
+		public function get(string $param = null) {
 
-			return ($this->active['name'] ?? false);
-		}
+			if (null !== $param) return ($this->active[$param] ?? false);
 
-		# Get primary extension path
-
-		public function pathPrimary() {
-
-			if (null === $this->primary) return false;
-
-			return ($this->dir_name . $this->primary['name'] . '/');
-		}
-
-		# Get active extension path
-
-		public function path() {
-
-			if (null === $this->active) return false;
-
-			return ($this->dir_name . $this->active['name'] . '/');
-		}
-
-		# Get active extension data
-
-		public function data(string $name = null) {
-
-			if (null === $name) return ($this->active ?? false);
-
-			return ($this->active[$name] ?? false);
+			return ($this->active ?? false);
 		}
 	}
 }

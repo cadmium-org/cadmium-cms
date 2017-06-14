@@ -9,6 +9,7 @@
 
 return [
 
+	'AUTHOR'                                    => 'Author',
 	'BROWSE'                                    => 'Browse',
 	'CANCEL'									=> 'Cancel',
 	'CLOSE'                                     => 'Close',
@@ -32,6 +33,7 @@ return [
 	'SAVE'                                      => 'Save',
 	'SUBMIT'                                    => 'Submit',
 	'UNINSTALL'                                 => 'Uninstall',
+	'VERSION'                                   => 'Version',
 	'YES'                                       => 'Yes',
 
 	'PAGES_1'                                   => 'page',

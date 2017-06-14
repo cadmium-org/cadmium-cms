@@ -64,7 +64,7 @@ namespace Frames\Site {
 
 			# Set language
 
-			$page->language = Extend\Languages::data('iso');
+			$page->language = Extend\Languages::get('iso');
 
 			# Set SEO data
 

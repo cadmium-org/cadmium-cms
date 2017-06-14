@@ -28,9 +28,9 @@ namespace Frames {
 
 		private function loadPhrases() {
 
-			$languages = [Extend\Languages::pathPrimary(), Extend\Languages::path()];
+			$languages = [Extend\Languages::getPrimary('path'), Extend\Languages::get('path')];
 
-			$phrases = array_merge(static::PHRASES, array_keys(Extend\Addons::items() ?? []));
+			$phrases = array_merge(static::PHRASES, array_keys(Extend\Addons::getItems() ?? []));
 
 			foreach (array_unique($languages) as $path) foreach ($phrases as $name) {
 
@@ -49,7 +49,7 @@ namespace Frames {
 			Template::setGlobal('cadmium_name',         CADMIUM_NAME);
 			Template::setGlobal('cadmium_version',      CADMIUM_VERSION);
 
-			Template::setGlobal('template_name',        strtolower(Extend\Templates::active()));
+			Template::setGlobal('template_name',        strtolower(Extend\Templates::get('name')));
 
 			Template::setGlobal('site_title',           Settings::get('site_title'));
 			Template::setGlobal('site_slogan',          Settings::get('site_slogan'));

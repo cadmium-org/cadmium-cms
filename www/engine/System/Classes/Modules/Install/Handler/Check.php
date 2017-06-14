@@ -49,11 +49,11 @@ namespace Modules\Install\Handler {
 
 			# Set language
 
-			$contents->getBlock('language')->country = Extend\Languages::data('country');
+			$contents->getBlock('language')->country = Extend\Languages::get('country');
 
-			$contents->getBlock('language')->title = Extend\Languages::data('title');
+			$contents->getBlock('language')->title = Extend\Languages::get('title');
 
-			$contents->getBlock('language')->items = $this->languages->items();
+			$contents->getBlock('language')->items = $this->languages->getItems();
 
 			# Set requirements
 
@@ -80,7 +80,7 @@ namespace Modules\Install\Handler {
 
 			# Load languages
 
-			$this->languages = Extend\Languages::loader(SECTION_ADMIN);
+			$this->languages = Extend\Languages::getLoader(SECTION_ADMIN);
 
 			# ------------------------
 

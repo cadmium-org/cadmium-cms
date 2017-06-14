@@ -54,9 +54,9 @@ namespace Frames\Admin\View {
 
 			 # Set language
 
-			 $layout->getBlock('language')->country = Extend\Languages::data('country');
+			 $layout->getBlock('language')->country = Extend\Languages::get('country');
 
-			 $layout->getBlock('language')->title = Extend\Languages::data('title');
+			 $layout->getBlock('language')->title = Extend\Languages::get('title');
 
 			 # Set report
 

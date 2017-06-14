@@ -245,7 +245,6 @@ return [
 	'LANGUAGES_ERROR_ACTIVATE'                  => 'Error setting default language',
 	'LANGUAGES_ERROR_INSTALL'                   => 'Error installing language',
 	'LANGUAGES_ERROR_REMOVE'                    => 'Error removing language',
-	'LANGUAGES_ERROR_SAVE'                      => 'Error saving settings',
 
 	# Templates
 
@@ -254,7 +253,6 @@ return [
 	'TEMPLATES_ERROR_ACTIVATE'                  => 'Error setting default template',
 	'TEMPLATES_ERROR_INSTALL'                   => 'Error installing template',
 	'TEMPLATES_ERROR_REMOVE'                    => 'Error removing template',
-	'TEMPLATES_ERROR_SAVE'                      => 'Error saving settings',
 
 	# Users
 
