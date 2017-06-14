@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils\Template {
 
 	use DB, Template;
 
 	abstract class Widgets {
 
-		# Generate widgets list
+		/**
+		 * Generate the widgets list
+		 */
 
-		public static function generate() {
+		public static function generate() : \Generator {
 
 			# Process selection
 
