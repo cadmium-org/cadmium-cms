@@ -86,7 +86,7 @@ namespace Frames\Site {
 
 			# Set layout
 
-			$page->layout = $this->getLayout($contents->setBlock('messages', Messages::block()));
+			$page->layout = $this->getLayout($contents->setBlock('messages', Messages::getBlock()));
 
 			# Set global components
 
