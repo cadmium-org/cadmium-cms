@@ -9,7 +9,7 @@
 
 namespace {
 
-	use Modules\Extend, Utils\Map, Utils\Schema;
+	use Modules\Extend, Utils\Router, Utils\Schema;
 
 	class Dispatcher {
 
@@ -33,7 +33,7 @@ namespace {
 
 			# Get handler class by requested url
 
-			$handler = Map::handler($url = new Url(Request::get('url')));
+			$handler = Router::getHandler($url = new Url(Request::get('url')));
 
 			$class = ((false !== $handler) ? $handler : 'Modules\Page');
 

@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
 	use Modules\Extend, Url;
 
-	abstract class Map {
+	abstract class Router {
 
 		private static $routes = [
 
@@ -58,7 +65,11 @@ namespace Utils {
 			'/sitemap.xml'                                  => 'Modules\Tools\Handler\Sitemap'
 		];
 
-		# Parse string
+		/**
+		 * Parse a path/handler
+		 *
+		 * @return string : the parsed path/handler
+		 */
 
 		private static function parseString(string $string, string $regex) {
 
@@ -71,7 +82,9 @@ namespace Utils {
 			return $parts;
 		}
 
-		# Parse route
+		/**
+		 * Parse a route
+		 */
 
 		private static function parseRoute(string $name, array $route) {
 
@@ -82,23 +95,25 @@ namespace Utils {
 			self::$routes['/' . implode('/', $path)] = ('Addons\\' . $name . '\\' . implode('\\', $handler));
 		}
 
-		# Parse item
-
-		private static function parseItem(array $item) {
-
-			foreach ($item['routes'] as $route) self::parseRoute($item['name'], $route);
-		}
-
-		# Autoloader
+		/**
+		 * Autoloader
+		 */
 
 		public static function __autoload() {
 
-			foreach (Extend\Addons::getItems() as $item) self::parseItem($item);
+			foreach (Extend\Addons::getItems() as $item) {
+
+				foreach ($item['routes'] as $route) self::parseRoute($item['name'], $route);
+			}
 		}
 
-		# Get handler by url
+		/**
+		 * Get a handler class by a url
+		 *
+		 * @return string : a class name or false if a handler for the given url is not set
+		 */
 
-		public static function handler(Url $url) {
+		public static function getHandler(Url $url) {
 
 			return (self::$routes[$url->getPath()] ?? false);
 		}
