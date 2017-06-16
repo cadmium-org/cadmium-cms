@@ -51,7 +51,7 @@ namespace Modules\Filemanager\Utils {
 
 			# ------------------------
 
-			return Pagination::block($this->loader->getIndex(), $this->loader->getDisplay(), $this->loader->getTotal(), $url);
+			return Pagination::getBlock($this->loader->getIndex(), $this->loader->getDisplay(), $this->loader->getTotal(), $url);
 		}
 
 		/**

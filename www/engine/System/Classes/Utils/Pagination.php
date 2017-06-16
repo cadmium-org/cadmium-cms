@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
 	use Template, Url;
 
 	abstract class Pagination {
 
-		# Set items
+		/**
+		 * Set pagination items
+		 */
 
 		private static function setItems(Template\Block $pagination, int $active, int $count, Url $url) {
 
@@ -24,7 +33,9 @@ namespace Utils {
 			}
 		}
 
-		# Set first & last button
+		/**
+		 * Set first/last buttons
+		 */
 
 		private static function setExtremeButtons(Template\Block $pagination, int $active, int $count, Url $url) {
 
@@ -45,7 +56,9 @@ namespace Utils {
 			}
 		}
 
-		# Set previous & next buttons
+		/**
+		 * Set prev/next buttons
+		 */
 
 		private static function setStepButtons(Template\Block $pagination, int $active, int $count, Url $url) {
 
@@ -64,9 +77,18 @@ namespace Utils {
 			}
 		}
 
-		# Get block
+		/**
+		 * Get a pagination block
+		 *
+		 * @param $index        an active page index
+		 * @param $display      a number of entries per page
+		 * @param $total        a total number of entries
+		 * @param $url          a url object
+		 *
+		 * @return : a block object or false if incorrect values given
+		 */
 
-		public static function block(int $index, int $display, int $total, Url $url) {
+		public static function getBlock(int $index, int $display, int $total, Url $url) {
 
 			if (($index <= 0) || ($display <= 0) || ($total <= 0)) return false;
 
