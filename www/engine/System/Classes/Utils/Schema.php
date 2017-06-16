@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
 	abstract class Schema {
 
 		private static $cache = [];
 
-		# Get schema
+		/**
+		 * Get a schema object
+		 */
 
-		public static function get(string $name) {
+		public static function get(string $name) : Schema\_Object {
 
 			$class_name = ('Schemas\\' . $name);
 
