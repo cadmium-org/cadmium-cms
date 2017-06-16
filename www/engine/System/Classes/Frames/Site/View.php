@@ -26,7 +26,7 @@ namespace Frames\Site {
 
 			# Set menu
 
-			$layout->menu = (new Menu)->block();
+			$layout->menu = (new Menu)->getBlock();
 
 			# Set auth
 
