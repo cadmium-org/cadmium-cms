@@ -61,7 +61,7 @@ namespace {
 
 			# Load template
 
-			$file_name = (DIR_TEMPLATES . 'Exception.tpl');
+			$file_name = (DIR_TEMPLATES . 'Exception.ctp');
 
 			if (false === ($contents = @file_get_contents($file_name))) $output = nl2br($exc);
 

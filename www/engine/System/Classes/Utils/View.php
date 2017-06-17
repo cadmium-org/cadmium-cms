@@ -32,7 +32,7 @@ namespace Utils {
 
 			if (false === ($path = Extend\Templates::get('path'))) throw new Exception\View;
 
-			if (!isset(self::$cache[$file_name = ($path . $name . '.tpl')])) {
+			if (!isset(self::$cache[$file_name = ($path . $name . '.ctp')])) {
 
 				if (false === ($contents = Explorer::getContents($file_name))) throw new Exception\ViewFile($file_name);
 

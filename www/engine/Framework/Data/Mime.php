@@ -205,5 +205,5 @@ return [
 	'js'            => 'application/javascript',
 	'json'          => 'application/json',
 	'php'           => 'application/x-php',
-	'tpl'           => 'text/x-cadmium-template'
+	'ctp'           => 'text/x-cadmium-template'
 ];

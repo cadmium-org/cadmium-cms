@@ -20,7 +20,7 @@ namespace Modules\Filemanager\Utils {
 
 		public static function getMode(string $extension) {
 
-			$modes = ['php' => 'php', 'html' => 'html', 'tpl' => 'html', 'js' => 'javascript', 'json' => 'json', 'css' => 'css'];
+			$modes = ['php' => 'php', 'html' => 'html', 'ctp' => 'html', 'js' => 'javascript', 'json' => 'json', 'css' => 'css'];
 
 			return ($modes[$extension] ?? false);
 		}
