@@ -85,7 +85,7 @@ namespace Utils {
 		 * @param $total        a total number of entries
 		 * @param $url          a url object
 		 *
-		 * @return : a block object or false if incorrect values given
+		 * @return Template\Block|false : a block object or false if incorrect values given
 		 */
 
 		public static function getBlock(int $index, int $display, int $total, Url $url) {
