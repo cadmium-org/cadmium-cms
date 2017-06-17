@@ -12,7 +12,7 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.4.6');
+define('CADMIUM_VERSION',                           '0.4.7');
 define('CADMIUM_COPY',                              '2017');
 
 # Third-party
