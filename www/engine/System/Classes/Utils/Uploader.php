@@ -1,16 +1,25 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
-	use Utils\Popup, Explorer, Language, Request;
+	use Utils\Messages, Utils\Popup, Explorer, Language, Request;
 
 	abstract class Uploader {
 
 		private static $base_name = null, $file_name = null;
 
-		# Translate error code
+		/**
+		 * Convert a PHP upload error to a usable error code
+		 */
 
-		private static function translateError(int $error) {
+		private static function getErrorCode(int $error) : string {
 
 			if ($error === UPLOAD_ERR_INI_SIZE)         return 'UPLOADER_ERROR_INI_SIZE';
 
@@ -31,7 +40,28 @@ namespace Utils {
 			return 'UPLOADER_ERROR_UNKNOWN';
 		}
 
-		# Save uploaded file
+		/**
+		 * Display an error message
+		 *
+		 * @return false : the method always returns false
+		 */
+
+		private static function displayError(string $phrase, bool $popup) : bool {
+
+			$text = Language::get($phrase);
+
+			if (!$popup) Messages::set('error', $text); else Popup::set('negative', $text);
+
+			# ------------------------
+
+			return false;
+		}
+
+		/**
+		 * Save an uploaded file
+		 *
+		 * @return true|string|false : true on success, an error code on failure, or false if there are no uploaded files
+		 */
 
 		public static function save(string $name, string $dir_name) {
 
@@ -39,7 +69,7 @@ namespace Utils {
 
 			# Check for upload errors
 
-			if ($file['error'] !== UPLOAD_ERR_OK) return self::translateError($file['error']);
+			if ($file['error'] !== UPLOAD_ERR_OK) return self::getErrorCode($file['error']);
 
 			# Check for secure upload
 
@@ -80,29 +110,39 @@ namespace Utils {
 			return true;
 		}
 
-		# Submit uploaded file
+		/**
+		 * Save an uploaded file and display an error if appeared
+		 *
+		 * @param $popup : tells to display a popup error message instead of a regular message
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public static function submit(string $name, string $dir_name) {
+		public static function handle(string $name, string $dir_name, bool $popup = false) : bool {
 
 			$result = self::save($name, $dir_name);
 
-			if (is_string($result)) { Popup::set('negative', Language::get($result)); return false; }
+			if (is_string($result)) return self::displayError($result, $popup);
 
 			# ------------------------
 
 			return $result;
 		}
 
-		# Get last upload base name
+		/**
+		 * Get a basename of a last successfully uploaded file
+		 */
 
-		public static function baseName() {
+		public static function getBasename() : string {
 
 			return self::$base_name;
 		}
 
-		# Get last upload file name
+		/**
+		 * Get a filename of a last successfully uploaded file
+		 */
 
-		public static function fileName() {
+		public static function getFilename() : string {
 
 			return self::$file_name;
 		}
