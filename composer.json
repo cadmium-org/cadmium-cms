@@ -1,0 +1,21 @@
+{
+    "name": "cadmium-org/cadmium-cms",
+    "description": "Сontent management system for PHP7",
+	"version": "0.4.7",
+	"type": "project",
+    "keywords": ["cms", "cadmium", "cadmium cms"],
+    "homepage": "http://cadmium-cms.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Romanov"
+        }
+    ],
+	"support": {
+        "issues": "https://github.com/cadmium-org/cadmium-cms/issues",
+        "source": "https://github.com/cadmium-org/cadmium-cms"
+    },
+    "require": {
+        "php": ">=7.0.0"
+    }
+}
