@@ -1,77 +1,66 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
+
+	use Dataset;
 
 	abstract class SEO {
 
-		private static $data = [];
+		private static $dataset = null;
 
-		# Init SEO data
+		/**
+		 * Initialize the SEO data
+		 */
 
 		public static function init() {
 
-			self::$data = [];
+			self::$dataset = new Dataset(['title' => '', 'description' => '', 'keywords' => '',
+
+				'robots_index' => false, 'robots_follow' => false, 'canonical' => '']);
 		}
 
-		# Get/set title
+		/**
+		 * Set a param value
+		 *
+		 * @return bool : true on success or false on error
+		 */
 
-		public static function title(string $value = null) {
+		public static function set(string $name, $value) : bool {
 
-			if (null === $value) return (self::$data['title'] ?? false);
+			if (null === self::$dataset) self::init();
 
-			self::$data['title'] = $value;
+			return (self::$dataset->set($name, $value) ?? false);
 		}
 
-		# Get/set description
+		/**
+		 * Get a param value
+		 *
+		 * @return mixed|false : the value or false if the param does not exist
+		 */
 
-		public static function description(string $value = null) {
+		public static function get(string $name) {
 
-			if (null === $value) return (self::$data['description'] ?? false);
+			if (null === self::$dataset) self::init();
 
-			self::$data['description'] = $value;
+			return (self::$dataset->get($name) ?? false);
 		}
 
-		# Get/set keywords
+		/**
+		 * Get a robots string
+		 */
 
-		public static function keywords(string $value = null) {
+		public static function getRobots() {
 
-			if (null === $value) return (self::$data['keywords'] ?? false);
+			if (null === self::$dataset) self::init();
 
-			self::$data['keywords'] = $value;
-		}
-
-		# Get/set robots index
-
-		public static function robotsIndex(bool $value = null) {
-
-			if (null === $value) return (self::$data['robots_index'] ?? false);
-
-			self::$data['robots_index'] = $value;
-		}
-
-		# Get/set robots follow
-
-		public static function robotsFollow(bool $value = null) {
-
-			if (null === $value) return (self::$data['robots_follow'] ?? false);
-
-			self::$data['robots_follow'] = $value;
-		}
-
-		# Get/set canonical
-
-		public static function canonical(string $value = null) {
-
-			if (null === $value) return (self::$data['canonical'] ?? false);
-
-			self::$data['canonical'] = $value;
-		}
-
-		# Get robots string
-
-		public static function robots() {
-
-			return ((self::robotsIndex() ? 'INDEX' : 'NOINDEX') . ',' . (self::robotsFollow() ? 'FOLLOW' : 'NOFOLLOW'));
+			return ((self::get('robots_index') ? 'INDEX' : 'NOINDEX') . ',' . (self::get('robots_follow') ? 'FOLLOW' : 'NOFOLLOW'));
 		}
 	}
 }

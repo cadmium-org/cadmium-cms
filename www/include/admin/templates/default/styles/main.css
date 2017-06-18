@@ -88,6 +88,10 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
     .table:not(.unstackable) td.right.aligned { text-align:left !important; }
 }
 
+.table p.desc { font-size:0.9rem; color:#666; }
+
+.table p.meta { font-size:0.8rem; color:#666; }
+
 /* Pagination */
 
 @media only screen and (max-width:767px) {
@@ -146,3 +150,9 @@ body.form .segment { box-shadow:0 6px 0 0 rgba(34, 36, 38, 0.12) !important; }
 .ui.modal .actions > .button { margin-left:0; }
 
 #modal-lister { top:0; margin-top:3.5rem !important; }
+
+/* Custom icons */
+
+i.icon.positive:before { content: "\f00c"; }
+
+i.icon.negative:before { content: "\f12a"; }

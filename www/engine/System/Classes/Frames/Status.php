@@ -23,7 +23,7 @@ namespace Frames {
 
 			# Set data
 
-			$screen->language = Extend\Languages::data('iso');
+			$screen->language = Extend\Languages::get('iso');
 
 			$screen->title = Language::get($title);
 

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils\Schema {
 
 	use Explorer, JSON;
@@ -14,42 +21,56 @@ namespace Utils\Schema {
 
 		protected $properties = [];
 
-		# Add array property
+		/**
+		 * Add an array property
+		 */
 
 		protected function addArray(string $name) {
 
 			if ('' !== $name) return $this->properties[$name] = new _Array;
 		}
 
-		# Add boolean property
+		/**
+		 * Add a boolean property
+		 */
 
 		protected function addBoolean(string $name) {
 
 			if ('' !== $name) return $this->properties[$name] = new _Boolean;
 		}
 
-		# Add integer property
+		/**
+		 * Add an integer property
+		 */
 
 		protected function addInteger(string $name) {
 
 			if ('' !== $name) return $this->properties[$name] = new _Integer;
 		}
 
-		# Add object property
+		/**
+		 * Add an object property
+		 */
 
 		protected function addObject(string $name) {
 
 			if ('' !== $name) return $this->properties[$name] = new _Object;
 		}
 
-		# Add string property
+		/**
+		 * Add a string property
+		 */
 
 		protected function addString(string $name) {
 
 			if ('' !== $name) return $this->properties[$name] = new _String;
 		}
 
-		# Validate data
+		/**
+		 * Validate data
+		 *
+		 * @return array|null : the validated data or null on failure
+		 */
 
 		public function validate($data) {
 
@@ -69,7 +90,11 @@ namespace Utils\Schema {
 			return $result;
 		}
 
-		# Load JSON file
+		/**
+		 * Load the JSON file
+		 *
+		 * @return array|null : the validated data or null on failure
+		 */
 
 		public function load() {
 
@@ -86,9 +111,13 @@ namespace Utils\Schema {
 			return $data;
 		}
 
-		# Save JSON file
+		/**
+		 * Save the JSON file
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function save(array $data) {
+		public function save(array $data) : bool {
 
 			if ('' === static::$file_name) return false;
 
@@ -103,9 +132,13 @@ namespace Utils\Schema {
 			return true;
 		}
 
-		# Remove JSON file
+		/**
+		 * Remove the JSON file
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function remove() {
+		public function remove() : bool {
 
 			if ('' === static::$file_name) return false;
 

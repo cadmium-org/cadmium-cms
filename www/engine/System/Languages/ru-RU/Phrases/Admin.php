@@ -245,7 +245,6 @@ return [
 	'LANGUAGES_ERROR_ACTIVATE'                  => 'Ошибка установки языка по умолчанию',
 	'LANGUAGES_ERROR_INSTALL'                   => 'Ошибка инсталляции языка',
 	'LANGUAGES_ERROR_REMOVE'                    => 'Ошибка удаления языка',
-	'LANGUAGES_ERROR_SAVE'                      => 'Ошибка сохранения настроек',
 
 	# Templates
 
@@ -254,7 +253,6 @@ return [
 	'TEMPLATES_ERROR_ACTIVATE'                  => 'Ошибка установки шаблона по умолчанию',
 	'TEMPLATES_ERROR_INSTALL'                   => 'Ошибка инсталляции шаблона',
 	'TEMPLATES_ERROR_REMOVE'                    => 'Ошибка удаления шаблона',
-	'TEMPLATES_ERROR_SAVE'                      => 'Ошибка сохранения настроек',
 
 	# Users
 

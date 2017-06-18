@@ -4,9 +4,9 @@
 
 		<p><i class="plug icon"></i> <a href="$install_path$/admin/content/filemanager/addons?parent=$name$">$title$</a></p>
 
-		<p style="font-size:0.9rem; color:#666;">$description$</p>
+		<p class="desc">$description$</p>
 
-		<p style="font-size:0.8rem; color:#999;">Version: $version$ | Author: <a href="$website$" target="_blank">$author$</a></p>
+		<p class="meta">%VERSION%: $version$ | %AUTHOR%: <a href="$website$" target="_blank">$author$</a></p>
 
 	</td>
 
@@ -14,7 +14,9 @@
 
 		{ block:browse }
 
-		<a class="ui mini $class$ icon browse button" href="$install_path$$link$" target="_blank" title="%BROWSE%"><i class="external icon"></i></a>
+		<a class="ui mini $class$ icon browse button" href="$install_path$$link$" target="_blank"
+
+			title="%BROWSE%"><i class="external icon"></i></a>
 
 		{ / block:browse }
 

@@ -26,7 +26,7 @@ namespace Frames\Site {
 
 			# Set menu
 
-			$layout->menu = (new Menu)->block();
+			$layout->menu = (new Menu)->getBlock();
 
 			# Set auth
 
@@ -43,7 +43,7 @@ namespace Frames\Site {
 
 			# Set title
 
-			$layout->title = (SEO::title() ?: Language::get($this->title) ?: Settings::get('site_title'));
+			$layout->title = (SEO::get('title') ?: Language::get($this->title) ?: Settings::get('site_title'));
 
 			# Set contents
 
@@ -64,29 +64,29 @@ namespace Frames\Site {
 
 			# Set language
 
-			$page->language = Extend\Languages::data('iso');
+			$page->language = Extend\Languages::get('iso');
 
 			# Set SEO data
 
-			$page->description = (SEO::description() ?: Settings::get('site_description'));
+			$page->description = (SEO::get('description') ?: Settings::get('site_description'));
 
-			$page->keywords = (SEO::keywords() ?: Settings::get('site_keywords'));
+			$page->keywords = (SEO::get('keywords') ?: Settings::get('site_keywords'));
 
-			$page->robots = SEO::robots();
+			$page->robots = SEO::getRobots();
 
 			# Set title
 
-			$title = (SEO::title() ?: Language::get($this->title) ?: '');
+			$title = (SEO::get('title') ?: Language::get($this->title) ?: '');
 
 			$page->title = ((('' !== $title) ? ($title . ' | ') : '') . Settings::get('site_title'));
 
 			# Set canonical
 
-			if (false !== SEO::canonical()) $page->getBlock('canonical')->enable()->link = SEO::canonical();
+			if (false !== SEO::get('canonical')) $page->getBlock('canonical')->enable()->link = SEO::get('canonical');
 
 			# Set layout
 
-			$page->layout = $this->getLayout($contents->setBlock('messages', Messages::block()));
+			$page->layout = $this->getLayout($contents->setBlock('messages', Messages::getBlock()));
 
 			# Set global components
 

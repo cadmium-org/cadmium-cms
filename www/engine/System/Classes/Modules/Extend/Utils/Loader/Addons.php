@@ -1,24 +1,25 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Extend
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Extend\Utils\Loader {
 
-	use Modules\Extend, Utils\Schema, Arr, Explorer;
+	use Modules\Extend, Utils\Schema;
 
 	abstract class Addons extends Extend\Utils\Loader {
 
-		# Get items
+		/**
+		 * Load the list of all items
+		 */
 
-		protected function getItems() {
+		protected function loadItemsAll() : array {
 
-			$items = [];
-
-			foreach (Explorer::iterateDirs($this->dir_name) as $name) {
-
-				if (null !== ($data = $this->getItem($name))) {
-
-					$items[$name] = $data; $items[$name]['installed'] = false;
-				}
-			}
+			$items = $this->loadItems(['installed' => false]);
 
 			foreach ((Schema::get(static::$schema)->load() ?? []) as $item) {
 
@@ -27,18 +28,20 @@ namespace Modules\Extend\Utils\Loader {
 
 			# ------------------------
 
-			return Arr::sortby($items, 'title');
+			return $items;
 		}
 
-		# Get installed items
+		/**
+		 * Load the list of installed items
+		 */
 
-		protected function getItemsInstalled() {
+		protected function loadItemsInstalled() : array {
 
 			$items = [];
 
 			foreach ((Schema::get(static::$schema)->load() ?? []) as $item) {
 
-				if (static::$extension_class::valid($item['name'])) $items[$item['name']] = $item;
+				if (static::$extension_class::isValid($item['name'])) $items[$item['name']] = $item;
 			}
 
 			# ------------------------
@@ -46,18 +49,26 @@ namespace Modules\Extend\Utils\Loader {
 			return $items;
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct(bool $load_all = true) {
 
 			$this->dir_name = static::$root_dir;
 
-			$this->items = ($load_all ? $this->getItems() : $this->getItemsInstalled());
+			$this->items = ($load_all ? $this->loadItemsAll() : $this->loadItemsInstalled());
 		}
 
-		# Install/uninstall item
+		/**
+		 * Install or uninstall an item
+		 *
+		 * @param $value : if set to true the item will be installed, otherwise uninstalled
+		 *
+		 * @return bool : true on success or false on failure
+		 */
 
-		public function install(string $name, bool $value = true) {
+		public function install(string $name, bool $value = true) : bool {
 
 			if (!isset($this->items[$name])) return false;
 

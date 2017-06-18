@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
 	use Modules\Entitizer, Template;
@@ -8,9 +15,11 @@ namespace Utils {
 
 		private $menu = [0 => ['children' => []]];
 
-		# Parse item
+		/**
+		 * Parse a menu item
+		 */
 
-		private function parseItem(int $id) {
+		private function parseItem(int $id) : Template\Block {
 
 			if ([] !== $this->menu[$id]['children']) {
 
@@ -38,7 +47,9 @@ namespace Utils {
 			return $item;
 		}
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
@@ -47,9 +58,11 @@ namespace Utils {
 			if (false !== $menu) $this->menu = $menu;
 		}
 
-		# Get block
+		/**
+		 * Get a menu block
+		 */
 
-		public function block() {
+		public function getBlock() : Template\Block {
 
 			$menu = Template::createBlock();
 

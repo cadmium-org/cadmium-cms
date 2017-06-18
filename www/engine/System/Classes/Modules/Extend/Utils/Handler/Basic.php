@@ -1,28 +1,41 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Extend
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Extend\Utils\Handler {
 
-	use Modules\Extend, Modules\Settings, Ajax, Arr, Language, Request, Template, JSON;
+	use Modules\Extend, Ajax, Language, Request, Template;
 
 	abstract class Basic extends Extend\Utils\Handler {
 
-		# Process item
+		/**
+		 * Process the item block
+		 */
 
 		protected function processItem(Template\Block $item, array $data) {
 
-			$item->class = (($data['name'] === $this->loader->data('name')) ? 'positive' : 'grey');
+			$item->class = (($data['name'] === $this->loader->get('name')) ? 'positive' : 'grey');
 		}
 
-		# Process contents
+		/**
+		 * Process the contents block
+		 */
 
 		protected function processContents(Template\Block $contents) {
 
-			$contents->section = $this->loader->section();
+			$contents->section = $this->loader->getSection();
 		}
 
-		# Handle ajax request
+		/**
+		 * Handle the ajax request
+		 */
 
-		protected function handleAjax() {
+		protected function handleAjax() : Ajax\Response {
 
 			$ajax = Ajax::createResponse();
 
@@ -30,15 +43,13 @@ namespace Modules\Extend\Utils\Handler {
 
 			if (Request::post('action') === 'activate') {
 
-				$param = static::$param[$this->loader->section()]; $name = Request::post('name');
+				$name = Request::post('name');
 
-				if (false === Settings::set($param, $name)) return $ajax->setError(Language::get(static::$error_activate));
-
-				if (false === Settings::save()) return $ajax->setError(Language::get(static::$error_save));
+				if (!$this->loader->activate($name, true)) return $ajax->setError(Language::get(static::$error_activate));
 
 			} else if (Request::post('action') === 'list') {
 
-				$ajax->set('items', $this->loader->items());
+				$ajax->set('items', $this->loader->getItems());
 			}
 
 			# ------------------------
@@ -46,7 +57,11 @@ namespace Modules\Extend\Utils\Handler {
 			return $ajax;
 		}
 
-		# Handle common request
+		/**
+		 * Handle the request
+		 *
+		 * @return Template\Block|Ajax\Response : a block object if the ajax param was set to false, otherwise an ajax response
+		 */
 
 		public function handle(bool $ajax = false) {
 

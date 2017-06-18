@@ -1,49 +1,88 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Extend
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Extend\Utils {
 
-	use Modules\Extend, Utils\Schema, Arr, JSON;
+	use Utils\Schema, Arr, JSON, Explorer;
 
 	abstract class Loader {
 
 		protected $dir_name = '', $items = [];
 
-		# Get item
+		/**
+		 * Load items
+		 */
 
-		protected function getItem(string $name) {
+		protected function loadItems(array $pattern = []) : array {
 
-			$file_name = ($this->dir_name . $name . '/.Config.json');
+			$items = [];
 
-			if (null === ($data = JSON::load($file_name))) return null;
+			foreach (Explorer::iterateDirs($this->dir_name) as $name) {
 
-			if (null === ($data = Schema::get(static::$schema_prototype)->validate($data))) return null;
-
-			if (!(static::$extension_class::valid($data['name']) && ($data['name'] === $name))) return null;
+				if (null !== ($data = $this->loadItem($name))) $items[$name] = ($pattern + $data);
+			}
 
 			# ------------------------
 
-			return $data;
+			return Arr::sortby($items, 'title');
 		}
 
-		# Return directory name
+		/**
+		 * Load an item data
+		 *
+		 * @return array|null : the data or null on failure
+		 */
 
-		public function dirName() {
+		protected function loadItem(string $name) {
+
+			$path = ($this->dir_name . $name . '/');
+
+			if (null === ($data = JSON::load($path . '.Config.json'))) return null;
+
+			if (null === ($data = Schema::get(static::$schema_prototype)->validate($data))) return null;
+
+			if (!(static::$extension_class::isValid($data['name']) && ($data['name'] === $name))) return null;
+
+			# ------------------------
+
+			return (['path' => $path] + $data);
+		}
+
+		/**
+		 * Get the directory name
+		 */
+
+		public function getDirName() : string {
 
 			return $this->dir_name;
 		}
 
-		# Return items
+		/**
+		 * Get an item
+		 *
+		 * @return array|false : the item or false if the item does not exist
+		 */
 
-		public function items(bool $plain = false) {
+		public function getItem(string $name) {
 
-			return ($plain ? array_column($this->items, 'title', 'name') : $this->items);
+			return ($this->items[$name] ?? false);
 		}
 
-		# Check if item exists
+		/**
+		 * Get the items list
+		 *
+		 * @param $plain : tells to return the array in simplified format ([$name => $title])
+		 */
 
-		public function exists(string $name) {
+		public function getItems(bool $plain = false) : array {
 
-			return isset($this->items[$name]);
+			return ($plain ? array_column($this->items, 'title', 'name') : $this->items);
 		}
 	}
 }

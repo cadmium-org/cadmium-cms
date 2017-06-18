@@ -23,15 +23,15 @@ namespace Modules\Settings\Form {
 
 			# Admin language
 
-			$languages = Extend\Languages::loader(SECTION_ADMIN);
+			$languages = Extend\Languages::getLoader(SECTION_ADMIN);
 
-			$this->addSelect('admin_language', $languages->active(), $languages->items(true));
+			$this->addSelect('admin_language', $languages->get('name'), $languages->getItems(true));
 
 			# Admin template
 
-			$templates = Extend\Templates::loader(SECTION_ADMIN);
+			$templates = Extend\Templates::getLoader(SECTION_ADMIN);
 
-			$this->addSelect('admin_template', $templates->active(), $templates->items(true));
+			$this->addSelect('admin_template', $templates->get('name'), $templates->getItems(true));
 
 			# Admin display entities
 

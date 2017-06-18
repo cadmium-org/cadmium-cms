@@ -66,13 +66,13 @@ namespace Modules {
 
 			# Set data
 
-			if ($this->page->id !== 1) SEO::title($this->page->title); else $this->_layout = 'Index';
+			if ($this->page->id !== 1) SEO::set('title', $this->page->title); else $this->_layout = 'Index';
 
-			SEO::description        ($this->page->description);
-			SEO::keywords           ($this->page->keywords);
-			SEO::robotsIndex        ($this->page->robots_index);
-			SEO::robotsFollow       ($this->page->robots_follow);
-			SEO::canonical          ($this->page->canonical);
+			SEO::set('description',         $this->page->description);
+			SEO::set('keywords',            $this->page->keywords);
+			SEO::set('robots_index',        $this->page->robots_index);
+			SEO::set('robots_follow',       $this->page->robots_follow);
+			SEO::set('canonical',           $this->page->canonical);
 
 			# ------------------------
 

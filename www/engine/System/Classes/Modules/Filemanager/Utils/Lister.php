@@ -51,7 +51,7 @@ namespace Modules\Filemanager\Utils {
 
 			# ------------------------
 
-			return Pagination::block($this->loader->getIndex(), $this->loader->getDisplay(), $this->loader->getTotal(), $url);
+			return Pagination::getBlock($this->loader->getIndex(), $this->loader->getDisplay(), $this->loader->getTotal(), $url);
 		}
 
 		/**
@@ -141,7 +141,7 @@ namespace Modules\Filemanager\Utils {
 
 			if (static::$permissions['manage']) {
 
-				if (Uploader::submit('upload', $this->parent->getPathFull())) $submitted = 'upload';
+				if (Uploader::handle('upload', $this->parent->getPathFull(), true)) $submitted = 'upload';
 
 				else if ($this->form->handle(new Filemanager\Controller\Create($this->parent), true)) $submitted = 'create';
 			}

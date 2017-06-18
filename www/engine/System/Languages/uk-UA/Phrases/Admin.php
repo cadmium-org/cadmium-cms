@@ -245,7 +245,6 @@ return [
 	'LANGUAGES_ERROR_ACTIVATE'                  => 'Помилка встановлення мови за промовчанням',
 	'LANGUAGES_ERROR_INSTALL'                   => 'Помилка інсталяції мови',
 	'LANGUAGES_ERROR_REMOVE'                    => 'Помилка видалення мови',
-	'LANGUAGES_ERROR_SAVE'                      => 'Помилка збереження налаштувань',
 
 	# Templates
 
@@ -254,7 +253,6 @@ return [
 	'TEMPLATES_ERROR_ACTIVATE'                  => 'Помилка встановлення шаблона за промовчанням',
 	'TEMPLATES_ERROR_INSTALL'                   => 'Помилка інсталяції шаблона',
 	'TEMPLATES_ERROR_REMOVE'                    => 'Помилка видалення шаблона',
-	'TEMPLATES_ERROR_SAVE'                      => 'Помилка збереження налаштувань',
 
 	# Users
 

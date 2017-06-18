@@ -108,7 +108,7 @@ namespace Modules\Entitizer\Utils {
 
 			# ------------------------
 
-			return Pagination::block($this->index, Settings::get('admin_display_entities'), $this->items['total'], $url);
+			return Pagination::getBlock($this->index, Settings::get('admin_display_entities'), $this->items['total'], $url);
 		}
 
 		/**

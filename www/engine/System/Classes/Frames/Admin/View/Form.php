@@ -29,7 +29,7 @@ namespace Frames\Admin\View {
 
 			# Set messages
 
-			$layout->messages = Messages::block();
+			$layout->messages = Messages::getBlock();
 
 			# Set contents
 

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Modules\Extend
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Modules\Extend\Common {
 
 	trait Languages {
@@ -22,7 +29,7 @@ namespace Modules\Extend\Common {
 
 		protected static $cookie_expires = CONFIG_LANGUAGE_COOKIE_EXPIRES;
 
-		protected static $error_activate = 'LANGUAGES_ERROR_ACTIVATE', $errors_save = 'LANGUAGES_ERROR_SAVE';
+		protected static $error_activate = 'LANGUAGES_ERROR_ACTIVATE';
 
 		protected static $view_main = 'Blocks/Extend/Languages/Main', $view_item = 'Blocks/Extend/Languages/Item';
 	}

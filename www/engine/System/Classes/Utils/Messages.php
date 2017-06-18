@@ -1,23 +1,36 @@
 <?php
 
+/**
+ * @package Cadmium\System\Utils
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Utils {
 
 	use Template;
 
 	abstract class Messages {
 
+		protected static $view = 'Blocks/Utils/Message';
+
 		protected static $types = ['info', 'warning', 'error', 'success'];
 
 		protected static $items = [];
 
-		# Init messages
+		/**
+		 * Initialize the messages list
+		 */
 
 		public static function init() {
 
 			static::$items = [];
 		}
 
-		# Set message
+		/**
+		 * Set a message
+		 */
 
 		public static function set(string $type, string $text, string $title = null) {
 
@@ -26,26 +39,32 @@ namespace Utils {
 			static::$items[$type] = ['text' => $text, 'title' => (('' !== $title) ? $title : null)];
 		}
 
-		# Get message
+		/**
+		 * Get a message
+		 *
+		 * @return array|false : the message data or false if the message was not set
+		 */
 
 		public static function get(string $type) {
 
 			return (static::$items[$type] ?? false);
 		}
 
-		# Get block
+		/**
+		 * Get a messages block
+		 */
 
-		public static function block() {
+		public static function getBlock() : Template\Block {
 
 			$messages = Template::createBlock();
 
 			foreach (static::$items as $type => $item) {
 
-				$messages->addItem($block = View::get('Blocks/Utils/Message'));
+				$messages->addItem($message = View::get(static::$view));
 
-				$block->type = $type; $block->text = Template::createBlock($item['text']);
+				$message->type = $type; $message->text = Template::createBlock($item['text']);
 
-				if (isset($item['title'])) $block->getBlock('title')->set('text', $item['title'])->enable();
+				if (isset($item['title'])) $message->getBlock('title')->set('text', $item['title'])->enable();
 			}
 
 			# ------------------------

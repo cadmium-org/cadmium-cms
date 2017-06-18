@@ -42,11 +42,11 @@ namespace Frames\Admin\View {
 
 			 # Set messages
 
-			 $layout->messages = Messages::block();
+			 $layout->messages = Messages::getBlock();
 
 			 # Set popup
 
-			 $layout->popup = Popup::block();
+			 $layout->popup = Popup::getBlock();
 
 			 # Set contents
 
@@ -54,9 +54,9 @@ namespace Frames\Admin\View {
 
 			 # Set language
 
-			 $layout->getBlock('language')->country = Extend\Languages::data('country');
+			 $layout->getBlock('language')->country = Extend\Languages::get('country');
 
-			 $layout->getBlock('language')->title = Extend\Languages::data('title');
+			 $layout->getBlock('language')->title = Extend\Languages::get('title');
 
 			 # Set report
 
@@ -83,11 +83,11 @@ namespace Frames\Admin\View {
 
 			 # Set messages
 
-			 $layout['messages'] = Messages::block()->getContents();
+			 $layout['messages'] = Messages::getBlock()->getContents();
 
 			 # Set popup
 
-			 $layout['popup'] = Popup::block()->getContents();
+			 $layout['popup'] = Popup::getBlock()->getContents();
 
 			 # Set contents
 

@@ -35,7 +35,7 @@ namespace Modules\Filemanager\Handler {
 
 			if (true === ($upload = (Uploader::save('upload', (DIR_UPLOADS . $target_dir))))) {
 
-				$name = Uploader::baseName(); $url = (INSTALL_PATH . '/uploads/' . $target_dir . $name);
+				$name = Uploader::getBasename(); $url = (INSTALL_PATH . '/uploads/' . $target_dir . $name);
 
 				$ajax->set('name', $name)->set('url', $url);
 
