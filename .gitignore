@@ -1,6 +1,8 @@
 /node_modules
 /semantic
 /semantic.json
+/vendor
+
 /www/engine/System/Data/.debug
 /www/engine/System/Data/Addons.json
 /www/engine/System/Data/Settings.json
@@ -12,3 +14,6 @@
 /www/demo
 /www/tools
 /www/uploads
+
+composer.lock
+composer.phar
