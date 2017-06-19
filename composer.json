@@ -1,7 +1,7 @@
 {
     "name": "cadmium-org/cadmium-cms",
     "description": "Сontent management system for PHP7",
-	"version": "0.4.7",
+	"version": "0.4.8",
 	"type": "project",
     "keywords": ["cms", "cadmium", "cadmium cms"],
     "homepage": "http://cadmium-cms.com/",
