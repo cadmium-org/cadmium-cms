@@ -39,7 +39,7 @@ namespace DB {
 
 		protected function getRange(array $value) : string {
 
-			$parser = function($value) { if (is_scalar($value)) return $this->getValue($value); };
+			$parser = function ($value) { if (is_scalar($value)) return $this->getValue($value); };
 
 			return ('(' . implode(', ', array_filter(array_map($parser, $value))) . ')');
 		}
