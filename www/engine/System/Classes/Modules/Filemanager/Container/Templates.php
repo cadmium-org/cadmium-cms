@@ -15,6 +15,6 @@ namespace Modules\Filemanager\Container {
 
 		use Filemanager\Common\Templates;
 
-		protected $path_full = (DIR_SYSTEM_TEMPLATES . SECTION_SITE . '/');
+		protected $path_full = (DIR_SYSTEM_TEMPLATES . 'Site/');
 	}
 }
