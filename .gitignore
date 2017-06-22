@@ -1,6 +1,5 @@
 /node_modules
 /semantic
-/semantic.json
 /vendor
 
 /www/engine/System/Data/.debug
@@ -8,12 +7,11 @@
 /www/engine/System/Data/Settings.json
 /www/engine/System/Data/Sitemap.xml
 /www/engine/System/Data/System.json
-/www/engine/System/Templates/Site/Cadmium
-/www/include/site/templates/cadmium
-/www/include/admin/templates/default/scripts/src
+
 /www/demo
 /www/tools
 /www/uploads
 
-composer.lock
-composer.phar
+/composer.lock
+/composer.phar
+/semantic.json
