@@ -40,10 +40,41 @@ Cadmium CMS is PHP-based content management system for creating shiny and respon
  1. Download the [latest version](https://github.com/cadmium-org/cadmium-cms/releases) of Cadmium CMS and unzip it.
  2. Upload contents of the *www* directory into the root directory of your web server.
  3. CHMOD following directories to 755 (or 777):
+  - */engine/System/Classes/Addons*
   - */engine/System/Data*
+  - */engine/System/Languages*
+  - */engine/System/Templates*
   - */uploads*
  4. Create a MySQL database.
  5. Go to *your-site.com/install.php* and follow installation instructions.
+
+### Installing via Composer
+
+You can also install Cadmium CMS with Composer.
+
+Run the following command:
+
+```
+composer create-project cadmium-org/cadmium-cms -s dev
+```
+
+or create the *composer.json* file:
+
+```json
+{
+	"require": {
+		"cadmium-org/cadmium-cms": "dev-master"
+	}
+}
+```
+
+and then run:
+
+```
+composer install
+```
+
+----------
 
 Official website: http://cadmium-cms.com
 
