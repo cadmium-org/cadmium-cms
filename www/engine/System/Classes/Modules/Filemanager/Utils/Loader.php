@@ -50,7 +50,7 @@ namespace Modules\Filemanager\Utils {
 
 			# Sort arrays
 
-			$sort = function(Entity $a, Entity $b) {
+			$sort = function (Entity $a, Entity $b) {
 
 				return strcmp(Str::toLower($a->getName()), Str::toLower($b->getName()));
 			};
