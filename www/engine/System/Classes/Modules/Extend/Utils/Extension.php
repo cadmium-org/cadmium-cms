@@ -34,6 +34,15 @@ namespace Modules\Extend\Utils {
 		}
 
 		/**
+		 * Check if the extension is inited
+		 */
+
+		public static function isInited() {
+
+			return (null !== static::$loader);
+		}
+
+		/**
 		 * Static overloader
 		 */
 
