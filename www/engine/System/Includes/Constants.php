@@ -12,14 +12,14 @@
 define('CADMIUM_NAME',                              'Cadmium CMS');
 define('CADMIUM_HOME',                              'http://cadmium-cms.com');
 
-define('CADMIUM_VERSION',                           '0.4.8');
+define('CADMIUM_VERSION',                           '0.4.9');
 define('CADMIUM_COPY',                              '2017');
 
 # Third-party
 
 define('JQUERY_VERSION',                            '3.2.1');
-define('SEMANTIC_UI_VERSION',                       '2.2.10');
-define('CKEDITOR_VERSION',                          '4.6.2');
+define('SEMANTIC_UI_VERSION',                       '2.2.13');
+define('CKEDITOR_VERSION',                          '4.7.3');
 define('ACE_VERSION',                               '1.2.6');
 
 # Sections

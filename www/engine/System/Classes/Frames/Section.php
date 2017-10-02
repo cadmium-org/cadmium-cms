@@ -28,9 +28,9 @@ namespace Frames {
 
 		private function loadPhrases() {
 
-			$languages = [Extend\Languages::getPrimary('path'), Extend\Languages::get('path')];
+			$languages = [Extend\Languages::getPrimary('path'), Extend\Languages::get('path')]; $phrases = static::PHRASES;
 
-			$phrases = array_merge(static::PHRASES, array_keys(Extend\Addons::getItems() ?? []));
+			if (Extend\Addons::isInited()) $phrases = array_merge($phrases, array_keys(Extend\Addons::getItems()));
 
 			foreach (array_unique($languages) as $path) foreach ($phrases as $name) {
 
