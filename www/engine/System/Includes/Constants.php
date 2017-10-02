@@ -19,7 +19,7 @@ define('CADMIUM_COPY',                              '2017');
 
 define('JQUERY_VERSION',                            '3.2.1');
 define('SEMANTIC_UI_VERSION',                       '2.2.13');
-define('CKEDITOR_VERSION',                          '4.6.2');
+define('CKEDITOR_VERSION',                          '4.7.3');
 define('ACE_VERSION',                               '1.2.6');
 
 # Sections
