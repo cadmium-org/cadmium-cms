@@ -6,7 +6,7 @@
 
 		<a class="brand item" href="$index_page$">
 
-			<img src="$install_path$/include/site/templates/$template_name$/images/brand.png" />
+			<img src="$install_path$/assets/$template_name$/images/brand.png" />
 
 		</a>
 

@@ -6,7 +6,7 @@
 
 			<a href="$install_path$/admin"><img class="image"
 
-				src="$install_path$/include/admin/templates/$template_name$/images/logo.png" /></a>
+				src="$install_path$/admin/assets/$template_name$/images/logo.png" /></a>
 
 		</h1>
 

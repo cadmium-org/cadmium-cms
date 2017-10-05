@@ -49,7 +49,7 @@ namespace Frames {
 			Template::setGlobal('cadmium_name',         CADMIUM_NAME);
 			Template::setGlobal('cadmium_version',      CADMIUM_VERSION);
 
-			Template::setGlobal('template_name',        strtolower(Extend\Templates::get('name')));
+			Template::setGlobal('template_name',        Extend\Templates::get('name'));
 
 			Template::setGlobal('site_title',           Settings::get('site_title'));
 			Template::setGlobal('site_slogan',          Settings::get('site_slogan'));

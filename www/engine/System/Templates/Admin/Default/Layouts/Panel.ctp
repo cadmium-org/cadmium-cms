@@ -12,7 +12,7 @@
 
 		<a class="brand item" href="$install_path$/admin">
 
-			<img src="$install_path$/include/admin/templates/$template_name$/images/brand.png" />
+			<img src="$install_path$/admin/assets/$template_name$/images/brand.png" />
 
 		</a>
 
