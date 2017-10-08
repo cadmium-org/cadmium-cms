@@ -1,12 +1,25 @@
 <?php
 
+/**
+ * @package Cadmium\System\Addons\Contact
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Addons\Contact {
 
-	use Modules\Auth, Modules\Settings, Utils\Security, Utils\Validate, Mailer;
+	use Modules\Settings, Utils\Security, Utils\Validate, Mailer;
 
 	class Controller {
 
-		# Invoker
+		/**
+		 * Invoker
+		 *
+		 * @return true|string|array : true on success, otherwise an error code, or an array of type [$param_name, $error_code],
+		 *         where $param_name is a name of param that has triggered the error,
+		 *         and $error_code is a language phrase related to the error
+		 */
 
 		public function __invoke(array $post) {
 

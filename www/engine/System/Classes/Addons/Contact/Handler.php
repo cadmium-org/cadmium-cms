@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * @package Cadmium\System\Addons\Contact
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Addons\Contact {
 
-	use Frames, Modules\Auth, Utils\Messages, Utils\View, Language, Request;
+	use Frames, Modules\Auth, Utils\Messages, Utils\View, Language, Request, Template;
 
 	class Handler extends Frames\Site\Area\Common {
 
@@ -10,9 +17,11 @@ namespace Addons\Contact {
 
 		private $form = null;
 
-		# Get contents
+		/**
+		 * Get the contents block
+		 */
 
-		private function getContents() {
+		private function getContents() : Template\Block {
 
 			$contents = View::get('Blocks/Contact/Contact');
 
@@ -25,9 +34,11 @@ namespace Addons\Contact {
 			return $contents;
 		}
 
-		# Handle request
+		/**
+		 * Handle the request
+		 */
 
-		protected function handle() {
+		protected function handle() : Template\Block {
 
 			# Create form
 

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package Cadmium\System\Addons\Contact
+ * @author Anton Romanov
+ * @copyright Copyright (c) 2015-2017, Anton Romanov
+ * @link http://cadmium-cms.com
+ */
+
 namespace Addons\Contact {
 
 	use Addons, Modules\Auth, Utils;
@@ -8,7 +15,9 @@ namespace Addons\Contact {
 
 		protected $name = 'contact';
 
-		# Constructor
+		/**
+		 * Constructor
+		 */
 
 		public function __construct() {
 
